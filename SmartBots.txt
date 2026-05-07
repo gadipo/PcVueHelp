@@ -1,0 +1,9736 @@
+========================================
+TOPIC: smartbots_blueprint.htm
+========================================
+Smart Bots blueprint
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Smart Bots blueprint
+ 
+When adding a new Smart Bot, or opening an existing one, the following page is displayed. It allows a user to define the bot states and transitions between these states, to define operations to execute in each state, and configure properties for all items. Show picture
+ 
+The main panel represents all bot states and the transitions between them. The same objects are displayed in the tree view in the left panel. The properties of the selected item are displayed in the Properties Panel.
+ 
+Tools
+ 
+ 
+
+ 
+General tool panel - Allows a user to create a new Smart Bot, print the selected blueprint, open existing Smart Bots, save the current bot or save all opened bots.
+ 
+ 
+
+ 
+Deployment tool panel - Tools to deploy the currently opened Smart Bot to the connected Instant Messaging Server, and to remove it from the server. These tools only work when the Instant Messaging Server is accessible, otherwise an error message appears.
+ 
+ 
+
+ 
+Bot States tool panel - Each bot state is associated with a set of operations executed by the bot agent when entering the state. After executing the operations, the bot agent verifies all outgoing transitions to move to the next state. The Bot States tool panel contains tools to add a new bot state, add a new trigger, create a transition from the selected state, add an operation to the selected state and add conditions to the selected transition or trigger. The Enable all and Disable all tools allow a user to activate / deactivate all operations in the selected state and activate / deactivate all conditions in the selected operation, transition or trigger respectively. Every bot has an initial state.
+ 
+ 
+
+ 
+Debugging tool panel - Tools to start and stop bot debugging. When debugging mode is activated, a special tool panel appears on the screen allowing a user to check the current state and values of variables for all deployed bot agents. The Debugging tool panel also contains tools to add a break-point, Continue the process, and move the process step by step.
+ 
+ 
+
+ 
+Clipboard tool panel - Tools to cut, copy, paste and delete the selected object on the blueprint.
+ 
+ 
+
+ 
+Organize tool panel - Allows a user to arrange bot states and transitions in a visually attractive way. The states and transitions display order has no effect at run-time.
+ 
+ 
+ 
+Bot properties
+ 
+Each bot has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Bot name
+ String
+ Name of the bot, which can be referenced in the InviteUserToChat and RemoveUserFromChat operations. This name must be unique within a set of all deployed bots and all users in the project. If a user with the given name already exists in the project, the bot will not be loaded.
+ 
+ 
+
+ Bot description
+ String
+ Displayed name of the bot. This name appears in the chat.
+ 
+ 
+
+ Branch
+ String
+ Branch name applied to all PcVue variables in a bot�s operation and conditions.
+ 
+ 
+
+ Profile level
+ [0...9]
+ Level of the bot profile. If this level is less than the profile level of all chat participants, then the bot automatically gets access to the chat with ReadOnly rights.
+ 
+ 
+
+ Initial state
+ State
+ State in which the bot agent starts.
+ 
+ 
+
+ Bot type
+ String
+ 
+ 
+The type of bot selected from either Smart bot, Template, System or Assistant.
+ 
+See the topic Smart Bot types for further information.
+ 
+ 
+ 
+ 
+ 
+Bot states
+ 
+Each bot state has a single property. This value is referenced in transitions and can be used as the Initial state of the bot.
+ 
+Bot triggers
+ 
+As with bot states, triggers have a Description property. This value is referenced in transitions and can be used as the Initial state of the bot.
+ 
+A trigger contains a set of conditions that are verified on bot agent idle, that is after verifying all outgoing transitions from the current state. Note that, if there is no outgoing transition from the current state, this state is considered as final and the bot therefore proceeds to the completion behavior which is, by default, Return to the end of the last state. This completion behavior may be overridden after the bot entering the trigger state according to the corresponding parameter of the trigger.
+ 
+The following completion behaviors are supported.
+ 
+ 
+
+ 
+Stop procedure. Bot process stops and returns to a caller context if such exists.
+ 
+ 
+
+ 
+Restart from the initial state. Bot restarts the procedure from the initial state keeping the existing memory.
+ 
+ 
+
+ 
+Return to the last state. Bot returns to the last state before trigger has been fired.
+ 
+ 
+
+ 
+Return to the end of the last state. Bot returns to the last state before the trigger has been fired, but not re-executing operations in that state.
+ 
+ 
+ 
+The trigger conditions are verified before checking all other conditions of the current state. Thus if the state has a transition with a satisfied condition, the thread will not continue immediately to the following state, but verifies the triggers first. If a trigger also has a satisfied condition, then thread goes to the trigger branch.
+ 
+When a bot enters a trigger branch, it stops verifying other trigger conditions until the trigger branch execution is completed. Giving priority to the execution of a trigger branch avoid uncontrollably switching between two trigger branches when both have satisfied conditions. A trigger branch execution is considered complete when the bot ends up in a final state (a state without any transition out).
+
+
+========================================
+TOPIC: smartbots_conditions.htm
+========================================
+Conditions
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Conditions
+ 
+The bot supports the following types of conditions:
+ 
+ 
+
+ 
+Local database changed
+ 
+ 
+
+ 
+Expression
+ 
+ 
+
+ 
+User information changed
+ 
+ 
+
+ 
+Schedule
+ 
+ 
+
+ 
+Memory
+ 
+ 
+
+ 
+Message
+ 
+ 
+
+ 
+Register variable
+ 
+ 
+
+ 
+Text variable
+ 
+ 
+
+ 
+Bit variable
+ 
+ 
+
+ 
+Delay
+ 
+ 
+
+ 
+Webhooks
+ 
+ 
+
+ 
+Event changed
+ 
+ 
+ 
+To create a new condition, first select the transition or trigger to which the condition will be added. Then right click to open the context menu, or use the New condition button in the tool bar. Select the required operation from the drop-down menu.
+ 
+Local database changed
+ 
+Monitors changes in the specified local database property. Note that the monitoring is starting only when the smart bot�s process starts to verify the condition. Thus, if the condition is in the trigger, then all database changes are captured. If the condition is in the transition, smart bot will verify only those changes that happened after entering the corresponding state.
+ 
+If the condition is in the trigger, corresponding database changes are monitored and collected in a queue for one hour. Thus if the smart bot detected an appropriate change and started to handle it, and meanwhile the second change has happened, it will be buffered and stored until the smart bot re-verifies the condition again or one hour passes.
+ 
+This condition has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Database name
+ String
+ Name of the database table. This property supports usage of internal bot variables.
+ 
+ 
+
+ Change types
+ Enum
+ 
+ 
+Type of database changes to monitor. The following values are available.
+ 
+ 
+
+ 
+Any change
+ 
+ 
+
+ 
+Insert
+ 
+ 
+
+ 
+Update
+ 
+ 
+
+ 
+Delete
+ 
+ 
+ 
+ 
+ 
+
+ Condition
+ C# lambda expression
+ 
+ 
+C# lambda expression � function taking the database rows as an input and filtering which rows to verify. This property supports usage of internal bot variables.
+ 
+As an example, the following string can be used to monitor all rows having the value of ABC property less than 30. x => x.ABC < 30
+ 
+The following string can be used to monitor all rows having the value of ABCD property equals to "test". x => x["ABCD"] == "test"
+ 
+ 
+ 
+ 
+ 
+User information changed
+ 
+Monitors changes in the specified user property. Condition can be satisfied only on the second read of the user information or later. The first read initializes the last known value, then subsequent reads are matched with the last known value. This condition has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ User name
+ String	
+ 
+ 
+Name of the user whose information needs to be monitored. This property supports usage of internal bot variables.
+If value is left empty, all users will be monitored. Once the corresponding property is changed for one of them, the user name, the previous value and the new value are set as the current context and can be received by the Save to memory operation.
+ 
+ 
+ 
+
+ Information to retrieve
+ Enum
+ 
+ 
+The property of a given user to monitor. The following values are available.
+ 
+ 
+
+ 
+	Display name
+ 
+ 
+
+ 
+Description
+ 
+ 
+
+ 
+E-mail
+ 
+ 
+
+ 
+Phone number
+ 
+ 
+
+ 
+Title
+ 
+ 
+
+ 
+First name
+ 
+ 
+
+ 
+Last name
+ 
+ 
+
+ 
+Profile level
+ 
+ 
+
+ 
+Permission level � access level of the user in the current chat
+ 
+ 
+
+ 
+Occupation
+ 
+ 
+
+ 
+Availability � free/busy status of the user
+ 
+ 
+ 
+Runtime property initialized by the scheduler. Note that connected MS Graph plug-in is required to receive this property.
+ 
+ 
+
+ 
+Mobile connectivity � specifies if the user is currently connected via Mobile application
+ 
+ 
+
+ 
+Latitude
+ 
+ 
+
+ 
+Longitude
+ 
+ 
+
+ 
+Name of the current zone
+ 
+ 
+
+ 
+Description of the current zone
+
+ 
+ 
+ 
+The tracking feature is required to receive the position and location related properties.
+ 
+ 
+ 
+ 
+ 
+Message
+ 
+Verifies the last message in the given chat. Condition will be satisfied when all the condition properties match the corresponding properties of the last message in the Chat. This condition has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Display name
+ String
+ Sender of the message. This property supports usage of internal bot variables.
+ 
+ 
+
+ Message type
+ String	
+ Type of the message or extension of the attachment. This property supports usage of internal bot variables.
+ 
+ 
+
+ Media type
+ 
+ 
+Text, Audio, Photo, Video, Document
+ 
+ Media type of the message. This property is used to specify which kind of messages is expected. E.g. Photo media type corresponds to all message types related to the Photo attachment.
+ 
+ 
+ 
+ 
+For the Text media type, more properties are available which appear when the media type is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Text function
+ Functions
+ 
+ 
+A function that will be applied to compare the actual text content of the message and the value of the Text property. The following functions are available.
+ 
+ 
+
+ 
+Any � any message text is accepted.
+ 
+ 
+
+ 
+Equals � the exact text matching is required.
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options.
+ 
+ 
+
+ 
+Contains � the text content of the message must contain the specified value.
+ 
+ 
+
+ 
+Contains any of the following strings � the text content of the message must contain any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Starts with � the text content of the message must start with the specified value.
+ 
+ 
+
+ 
+Starts with any of the following strings � the text content of the message must start with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Ends with � the text content of the message must end with the specified value.
+ 
+ 
+
+ 
+Ends with any of the following strings � the text content of the message must end with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Not equals � the text content of the message must not match the specified value.
+ 
+ 
+
+ 
+Not contains � the text content of the message must not contain the specified value.
+ 
+ 
+
+ 
+Not starts with � the text content of the message must not start with the specified value.
+ 
+ 
+
+ 
+Not ends with � the text content of the message must not end with the specified value.
+ 
+ 
+
+ 
+Match regular expression � the text content of the message must match the specified regular expression.
+ 
+ 
+ 
+ 
+ 
+
+ Text
+ String
+ Text or regular expression verified using the text function.
+ 
+ 
+
+ Ignore case
+ Boolean
+ Indicates whether the text casing need to be taken into account or not.
+ 
+ 
+ 
+ 
+Delay
+ 
+Verifies the time delay after the bot agent entered the state. This condition has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Delay
+ String
+ Time delay. Text near the value is reformatted automatically after validating the input
+ 
+ 
+ 
+ 
+Schedule
+ 
+Verifies the current time after the bot agent entered the state. Condition is satisfied when the current time falls into the specified time range. This condition has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Start time
+ Hours, Minutes, Seconds
+ Lower threshold for the time range. The current time must be greater than the specified value to satisfy the condition.
+ 
+ 
+
+ Limit the latest time
+ Boolean
+ If true, the time range must be bounded above.
+ 
+ 
+ 
+ 
+Bit variable
+ 
+Verifies the bit variable value. Value is checked every 500 milliseconds. This condition has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Variable name
+ String
+ Full name of the variable to check. The variable name is prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+ 
+
+ Value
+ Boolean
+ 
+ 
+The value of the Bit variable to satisfy the condition. The following options are available.
+ 
+ 
+
+ 
+1 � the variable value equals to 1.
+ 
+ 
+
+ 
+0 � the variable value equals to 0.
+ 
+ 
+
+ 
+Not set � the variable value is not set or has bad quality.
+ 
+ 
+
+ 
+Value changed � the variable value changed while bot was in the state.
+ 
+ 
+
+ 
+Value changed from 0 to 1.
+ 
+ 
+
+ 
+Value changed from 0 to NS.
+ 
+ 
+
+ 
+Value changed from 0 to any.
+ 
+ 
+
+ 
+Value changed from 1 to 0.
+ 
+ 
+
+ 
+Value changed from 1 to NS.
+ 
+ 
+
+ 
+Value changed from 1 to any.
+ 
+ 
+
+ 
+Value changed from NS to 0.
+ 
+ 
+
+ 
+Value changed from NS to 1.
+ 
+ 
+
+ 
+Value changed from NS to any.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Register variable
+ 
+Verifies the register variable value. The value is checked every 500 milliseconds. This condition has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Variable name
+ String
+ Full name of the variable to check. The variable name is prefixed with the current bot�s branch unless the �@� symbol is used.
+ 
+ 
+
+ Function
+ Function
+ 
+ 
+A function that will be applied to compare the actual variable value and the specified values. The following functions are available.
+ 
+ 
+
+ 
+Equals � The value is equal.
+ 
+ 
+
+ 
+Not equals � The value is not equal.
+ 
+ 
+
+ 
+Value is in range � The value is within the given range.
+ 
+ 
+
+ 
+Value is not in range � The value is outside of the given range.
+ 
+ 
+
+ 
+Value changed � Any change in value.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Text variable
+ 
+Verifies the text variable value. Value is checked every 500 milliseconds. This condition has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Variable name
+ String
+ Full name of the variable to check. The variable name is prefixed with the current bot�s branch unless the �@� symbol is used.
+ 
+ 
+
+ Text function
+ Functions
+ 
+ 
+A function that will be applied to compare the actual variable value and the specified value. The following functions are available.
+ 
+ 
+
+ 
+Any value � the exact text matching is required.
+
+ 
+ 
+
+ 
+Value changed � the variable value changed while bot was in the state.
+
+ 
+ 
+
+ 
+Equals � the exact text matching is required.
+
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options.
+
+ 
+ 
+
+ 
+Contains � the variable value must contain the specified value.
+
+ 
+ 
+
+ 
+Contains any of the following strings � the variable value must contain any of the specified values. Use one string per line to separate values.
+
+ 
+ 
+
+ 
+Starts with � the variable value must start with the specified value.
+
+ 
+ 
+
+ 
+Starts with any of the following strings � the variable value must start with any of the specified values. Use one string per line to separate values.
+
+ 
+ 
+
+ 
+Ends with � variable value must end with the specified value.
+
+ 
+ 
+
+ 
+Ends with any of the following strings � the variable value must end with any of the specified values. Use one string per line to separate values.
+
+ 
+ 
+
+ 
+Not equals � the variable value must not match the specified value.
+
+ 
+ 
+
+ 
+Not contains � the variable value must not contain the specified value.
+
+ 
+ 
+
+ 
+Not starts with � the variable value must not start with the specified value.
+
+ 
+ 
+
+ 
+Not ends with � the variable value must not end with the specified value.
+
+ 
+ 
+
+ 
+Match regular expression � the variable value must match the specified regular expression.
+ 
+ 
+ 
+ 
+ 
+
+ Value
+ String
+ Text or regular expression verified using the text function.
+ 
+ 
+
+ Ignore case
+ Boolean
+ Indicates whether the text casing need to be taken into account or not.
+ 
+ 
+ 
+ 
+Memory
+ 
+Verifies the value stored in the bot agent�s internal memory. Condition will be satisfied when all the condition properties match the corresponding properties of the value. This condition has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ 
+ 
+Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Type
+ 
+ 
+Any, String, Numeric, Boolean
+ 
+ Type of the expected value. Other properties depend on the selected type. If type is Any, then only the value existence is verified.
+ 
+ 
+ 
+ 
+For the String type, the following functions are available.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Function
+ Function
+ 
+ 
+A function that will be applied to compare the actual bot variable in memory and the specified text. The following functions are available.
+ 
+ 
+
+ 
+Any value � the internal variable is defined.
+ 
+ 
+
+ 
+Equals � the exact text matching is required.
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options.
+ 
+ 
+
+ 
+Contains � the variable value must contain the specified value.
+ 
+ 
+
+ 
+Contains any of the following strings � the variable value must contain any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Starts with � the variable value must start with the specified value.
+ 
+ 
+
+ 
+Starts with any of the following strings � the variable value must start with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Ends with � variable value must end with the specified value.
+ 
+ 
+
+ 
+Ends with any of the following strings � the variable value must end with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Not equals � the variable value must not match the specified value.
+ 
+ 
+
+ 
+Not contains � the variable value must not contain the specified value.
+ 
+ 
+
+ 
+Not starts with � the variable value must not start with the specified value.
+ 
+ 
+
+ 
+Not ends with � the variable value must not end with the specified value.
+ 
+ 
+
+ 
+Match regular expression � the variable value must match the specified regular expression.
+ 
+ 
+ 
+ 
+ 
+
+ Text
+ String
+ Text or regular expression verified using the text Function.
+ 
+ 
+
+ Ignore case
+ Boolean
+ Indicates whether the text casing need to be taken into account or not.
+ 
+ 
+ 
+ 
+For the Numeric type, the following functions are available.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Function
+ Function
+ 
+ 
+A function that will be applied to compare the actual bot variable in memory and the specified values. The following functions are available.
+ 
+ 
+
+ 
+Equals � The value is equal.
+ 
+ 
+
+ 
+Not equals � The value is not equal.
+ 
+ 
+
+ 
+Value is in range � The value is within the given range.
+ 
+ 
+
+ 
+Value is not in range � The value is outside of the given range.
+ 
+ 
+
+ 
+Value changed � Any change in value.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+For the Boolean type, the following functions are available.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Function
+ Function
+ 
+ 
+A function that will be applied to compare the actual bot variable in memory and the specified value. The following functions are available.
+ 
+ 
+
+ 
+1 � the variable value equals to 1.
+ 
+ 
+
+ 
+0 � the variable value equals to 0.
+ 
+ 
+
+ 
+Not set � the variable value is not set or has bad quality.
+ 
+ 
+
+ 
+Value changed � the variable value changed while bot was in the state.
+ 
+ 
+
+ 
+Value changed from 0 to 1.
+ 
+ 
+
+ 
+Value changed from 0 to NS.
+ 
+ 
+
+ 
+Value changed from 0 to any.
+ 
+ 
+
+ 
+Value changed from 1 to 0.
+ 
+ 
+
+ 
+Value changed from 1 to NS.
+ 
+ 
+
+ 
+Value changed from 1 to any.
+ 
+ 
+
+ 
+Value changed from NS to 0.
+ 
+ 
+
+ 
+Value changed from NS to 1.
+ 
+ 
+
+ 
+Value changed from NS to any.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Expression
+ 
+Verifies the result of an expression. Condition will be satisfied when all the condition properties match the corresponding properties of the value. This condition has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Input value
+ C# lambda expression
+ 
+ 
+C# lambda expression � function taking the current bot agent context as an input and returning the value to verify. This property supports usage of internal bot variables. The initial part of the expression (i.e. �x => �) is automatically added if necessary.
+ 
+ 
+ 
+
+ Type
+ Any, String, Numeric, Boolean
+ Type of the expected value. Other properties depend on the selected type. If type is �Any�, then only the value existence is verified. 
+ 
+ 
+
+ Function
+ Function
+ See Memory (above) for an explanation of Function.
+ 
+ 
+ 
+ 
+About regular expressions
+ 
+For the case where a variable value must match the specified regular expression. For more information about regular expressions visit the Microsoft Docs website and search for Regex Class.
+ 
+Webhook
+ 
+A Webhook condition allows bots to catch and handle external webhooks.
+ 
+The Webhook format is not standard, with each 3rd party system using webhooks defining their own API and payload for the webhook. Therefore there is a set of supported webhook definitions and types. When calling a webhook, a 3rd party system must specify a security code in the Webhook request. The Messaging Web Service ignores all requests without a code or with a wrong code. The correct code is defined in the Messaging Web Service configuration file. Show picture
+ 
+
+ 
+ 
+ 
+When catching a webhook, the Bot saves its payload to a context that can be extracted using the SaveToMemory operation.
+ 
+The Webhook condition has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ 
+ 
+Description
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+ 
+
+ 
+ 
+Type
+ 
+ 
+ 
+String
+ 
+ 
+ 
+The type of the webhook to catch. The following values are available.
+ 
+ 
+
+ 
+Custom JSON webhook
+ 
+ 
+
+ 
+Generic JSON webhook
+ 
+ 
+
+ 
+Azure Alert
+ 
+ 
+
+ 
+Kudu notification - Stripe
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Condition
+ 
+ 
+ 
+C# lambda expression
+ 
+ 
+ 
+Function taking the webhook payload as an input and filtering which webhooks to catch. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Custom JSON webhook - For Custom JSON webhooks, the Messaging Web Service accepts ordinary get/post HTTP(s) requests on the following endpoint.
+https://<host>/Messaging/v2/Webhook?code=<securitycode>&<other query arguments> 
+For GET methods query parameters are used as webhook payload. For POST methods the body is expected to be in JSON format which is used as the webhook payload.
+ 
+ 
+
+ 
+Generic JSON webhook - For Generic JSON webhooks the Messaging Web Service accepts post HTTP(s) requests on the following endpoint.
+https://<host>/api/webhooks/incoming/genericJson
+ 
+ 
+
+ 
+Azure Alert - For Azure Alert webhooks the Messaging Web Service accepts post HTTP(s) requests on the following endpoint.
+https://<host>/api/webhooks/incoming/azurealert
+ 
+ 
+
+ 
+Kudu notification - For Kudu notifications the Messaging Web Service accepts post HTTP(s) requests on the following endpoint.
+https://<host>/api/webhooks/incoming/kudu
+ 
+ 
+
+ 
+Stripe - For Stripe webhooks the Messaging Web Service accepts Post HTTP(s) requests on the following endpoint.
+https://<host>/api/webhooks/incoming/stripe
+ 
+ 
+ 
+Event changed
+ 
+Monitors changes in the specified Scheduler. Note that the monitoring is starting only when the Smart bot�s process starts to verify the condition. Thus, if the condition is in a Trigger, then all changes are captured. If the condition is in a transition, the Smart bot will verify only those changes that happened after entering the corresponding state.
+ 
+If the condition is in a Trigger, corresponding database changes are monitored and collected in a queue during one hour. Thus if the Smart Bot detected an appropriate change and started to handle it and meanwhile the second change has happened, it will be buffered and stored until the Smart Bot re-verifies the condition again or one hour passes.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ 
+ 
+Description
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+ 
+
+ Schedule names
+ String
+ Names of the deployed schedules in which the event should be searched. Multiple ranges are separated with commas. This property supports Wildcard symbols:
+�?� is a replacement for any single character
+�*� is a replacement for any amount of characters.
+This property supports usage of internal bot variables.
+ 
+ 
+
+ Change types
+ Enum
+ 
+ 
+Type of event changes to monitor. The following values are available:
+ 
+ 
+
+ 
+Event added
+ 
+ 
+
+ 
+Event modified
+ 
+ 
+
+ 
+Event removed
+ 
+ 
+
+ 
+Event started
+ 
+ 
+
+ 
+Event stopped
+ 
+ 
+
+ 
+Event added, modified or removed
+ 
+ 
+
+ 
+Event started or stopped
+ 
+ 
+
+ 
+Any change
+ 
+ 
+ 
+ 
+ 
+
+ Filter by attendees
+ String
+ Selects only events with the specified attendees. If the field is empty, corresponding filter is not applied.
+ 
+ 
+
+ Filter by name
+ Function
+ 
+ 
+A function that will be applied to compare the actual event name and the value of the Name property. The following functions are available:
+ 
+ 
+
+ 
+Any value � any text is accepted
+ 
+ 
+
+ 
+Equals � the exact text matching is required
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options
+ 
+ 
+
+ 
+Contains � the occupation string must contain the specified value
+ 
+ 
+
+ 
+Contains any of the following strings � the occupation string must contain any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Starts with � the occupation string must start with the specified value
+ 
+ 
+
+ 
+Starts with any of the following strings � the occupation string must start with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Ends with � the occupation string must end with the specified value
+ 
+ 
+
+ 
+Ends with any of the following strings � the occupation string must end with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Not equals � the occupation string must not match the specified value -	Not contains � the occupation string must not contain the specified value
+ 
+ 
+
+ 
+Not starts with � the occupation string must not start with the specified value
+ 
+ 
+
+ 
+Not ends with � the occupation string must not end with the specified value
+ 
+ 
+
+ 
+Match regular expression � the occupation string must match the specified regular expression
+ 
+ 
+ 
+ 
+ 
+
+ Name
+ String
+ Text or Regular expression verified using the Filter by name function. This property supports usage of internal bot variables.
+ 
+ 
+
+ Filter by summary
+ Function
+ 
+ 
+A function that will be applied to compare the actual event summary and the value of the Summary property. The following functions are available:
+ 
+ 
+
+ 
+Any value � any text is accepted
+ 
+ 
+
+ 
+Equals � the exact text matching is required
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options
+ 
+ 
+
+ 
+Contains � the occupation string must contain the specified value
+ 
+ 
+
+ 
+Contains any of the following strings � the occupation string must contain any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Starts with � the occupation string must start with the specified value
+ 
+ 
+
+ 
+Starts with any of the following strings � the occupation string must start with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Ends with � the occupation string must end with the specified value
+ 
+ 
+
+ 
+Ends with any of the following strings � the occupation string must end with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Not equals � the occupation string must not match the specified value
+ 
+ 
+
+ 
+Not contains � the occupation string must not contain the specified value
+ 
+ 
+
+ 
+Not starts with � the occupation string must not start with the specified value
+ 
+ 
+
+ 
+Not ends with � the occupation string must not end with the specified value
+ 
+ 
+
+ 
+Match regular expression � the occupation string must match the specified regular expression
+ 
+ 
+ 
+ 
+ 
+
+ Summary
+ String
+ Text or Regular expression verified using the Filter by summary function. This property supports usage of internal bot variables.
+ 
+ 
+
+ Filter by location
+ Function
+ 
+ 
+A function that will be applied to compare the actual event location and the value of the Location property. The following functions are available:
+ 
+ 
+
+ 
+Any value � any text is accepted
+ 
+ 
+
+ 
+Equals � the exact text matching is required
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options
+ 
+ 
+
+ 
+Contains � the occupation string must contain the specified value
+ 
+ 
+
+ 
+Contains any of the following strings � the occupation string must contain any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Starts with � the occupation string must start with the specified value
+ 
+ 
+
+ 
+Starts with any of the following strings � the occupation string must start with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Ends with � the occupation string must end with the specified value
+ 
+ 
+
+ 
+Ends with any of the following strings � the occupation string must end with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Not equals � the occupation string must not match the specified value
+ 
+ 
+
+ 
+Not contains � the occupation string must not contain the specified value
+ 
+ 
+
+ 
+Not starts with � the occupation string must not start with the specified value
+ 
+ 
+
+ 
+Not ends with � the occupation string must not end with the specified value
+ 
+ 
+
+ 
+Match regular expression � the occupation string must match the specified regular expression
+ 
+ 
+ 
+ 
+ 
+
+ Location
+ String
+ Text or Regular expression verified using the Filter by location function. This property supports usage of internal bot variables.
+ 
+ 
+
+ Filter events creating a chat
+ Enum
+ Filter events creating of modifying a chat.
+ 
+ 
+
+ Filter by chat name
+ Function
+ 
+ 
+A function that will be applied to compare the actual event chat and the value of the Chat name property. The following functions are available:
+ 
+ 
+
+ 
+Any value � any text is accepted
+ 
+ 
+
+ 
+Equals � the exact text matching is required
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options
+ 
+ 
+
+ 
+Contains � the occupation string must contain the specified value
+ 
+ 
+
+ 
+Contains any of the following strings � the occupation string must contain any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Starts with � the occupation string must start with the specified value
+ 
+ 
+
+ 
+Starts with any of the following strings � the occupation string must start with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Ends with � the occupation string must end with the specified value
+ 
+ 
+
+ 
+Ends with any of the following strings � the occupation string must end with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Not equals � the occupation string must not match the specified value
+ 
+ 
+
+ 
+Not contains � the occupation string must not contain the specified value
+ 
+ 
+
+ 
+Not starts with � the occupation string must not start with the specified value
+ 
+ 
+
+ 
+Not ends with � the occupation string must not end with the specified value
+ 
+ 
+
+ 
+Match regular expression � the occupation string must match the specified regular expression
+ 
+ 
+ 
+ 
+ 
+
+ Chat name
+ String
+ Text or Regular expression verified using the Filter by chat name function. This property supports usage of internal bot variables.
+ 
+ 
+
+ Filter events by entry procedure
+ Enum
+ Filter events having Entry action specified.
+ 
+ 
+
+ Filter by Entry bot name
+ Function
+ 
+ 
+A function that will be applied to compare the actual event Entry bot name and the value of the Entry Bot name property. The following functions are available:
+ 
+ 
+
+ 
+Any value � any text is accepted
+ 
+ 
+
+ 
+Equals � the exact text matching is required
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options
+ 
+ 
+
+ 
+Contains � the occupation string must contain the specified value
+ 
+ 
+
+ 
+Contains any of the following strings � the occupation string must contain any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Starts with � the occupation string must start with the specified value
+ 
+ 
+
+ 
+Starts with any of the following strings � the occupation string must start with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Ends with � the occupation string must end with the specified value
+ 
+ 
+
+ 
+Ends with any of the following strings � the occupation string must end with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Not equals � the occupation string must not match the specified value
+ 
+ 
+
+ 
+Not contains � the occupation string must not contain the specified value
+ 
+ 
+
+ 
+Not starts with � the occupation string must not start with the specified value
+ 
+ 
+
+ 
+Not ends with � the occupation string must not end with the specified value
+ 
+ 
+
+ 
+Match regular expression � the occupation string must match the specified regular expression
+ 
+ 
+ 
+ 
+ 
+
+ Entry Bot name
+ String
+ Text or Regular expression verified using the Filter by Entry bot name function. This property supports usage of internal bot variables.
+ 
+ 
+
+ Filter events by exit procedure
+ Enum
+ Filter events having Entry action specified.
+ 
+ 
+
+ Filter by Exit bot name
+ Function
+ 
+ 
+A function that will be applied to compare the actual event Exit Bot name and the value of the Exit bot name property. The following functions are available:
+ 
+ 
+
+ 
+Any value � any text is accepted
+ 
+ 
+
+ 
+Equals � the exact text matching is required
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options
+ 
+ 
+
+ 
+Contains � the occupation string must contain the specified value
+ 
+ 
+
+ 
+Contains any of the following strings � the occupation string must contain any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Starts with � the occupation string must start with the specified value
+ 
+ 
+
+ 
+Starts with any of the following strings � the occupation string must start with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Ends with � the occupation string must end with the specified value
+ 
+ 
+
+ 
+Ends with any of the following strings � the occupation string must end with any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Not equals � the occupation string must not match the specified value
+ 
+ 
+
+ 
+Not contains � the occupation string must not contain the specified value
+ 
+ 
+
+ 
+Not starts with � the occupation string must not start with the specified value
+ 
+ 
+
+ 
+Not ends with � the occupation string must not end with the specified value
+ 
+ 
+
+ 
+Match regular expression � the occupation string must match the specified regular expression
+ 
+ 
+ 
+ 
+ 
+
+ Exit Bot name
+ String
+ Text or Regular expression verified using the Filter by Exit bot name function. This property supports usage of internal bot variables.
+
+
+========================================
+TOPIC: smartbots_expression_ref.htm
+========================================
+Smart Bots expression reference
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Smart Bots expression reference
+ 
+An expression in a bot is specified using a C# lambda expression � a function taking the current bot agent context as an input and returning the value to store in memory. Note that a custom C# script can be used in the Value expression property. This allows a user to easily and flexibly define a value to save in memory depending on the current bot context.
+ 
+This section describes the methods and properties available to a user in the expression, except the existing base .Net framework types. Please refer Microsoft help for more information about the .Net framework base types.
+ 
+The operation Save to Memory puts a result of the given expression in the bot agent�s memory. The operation Write to Worksheet also accepts the expressions.
+ 
+The value of a DateTime property can be expressed in Ticks.
+ 
+Bot context
+ 
+The current Bot Agent context.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ x => x
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ BotName
+ String
+ Name of the current Smart Bot
+ 
+ 
+
+ Chat
+ Chat
+ Current chat object
+ 
+ 
+
+ LastMessage
+ InstantMessage
+ Last message object in the current chat
+ 
+ 
+
+ Methods
+ 
+ 
+
+ Name
+ Arguments
+ Type
+ Description
+ 
+ 
+
+ Variable
+ -
+ bool, double, string
+ Returns the real-time value of the given variable.
+Object of type bool is returned for bit variables.
+Object of type double is returned for register variables.
+Object of type string is returned for text variables
+ 
+ 
+
+ &#160;
+ variableName
+ String
+ Full name of the variable e.g., Branch.Bit01
+The variable name is prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+ 
+
+ HistoricalAt
+ -
+ HisDataPoint
+ Returns the information about the variable at the given date and time from the specified archive unit.
+ 
+ 
+
+ &#160;
+ variableName
+ String
+ Full name of the variable, e.g., Branch.Bit01. The variable name is prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+ 
+
+ &#160;
+ unitName
+ String
+ 
+ 
+ Name of the archive unit where the variable information will be searched. 
+ 
+
+ 
+Smart bots can receive data from any supported archive unit type.
+ 
+ 
+ 
+ 
+
+ &#160;
+ Date
+ DateTime
+ Date and time at which the variable information will be searched.
+ 
+ 
+
+ Historical
+ -
+ HisDataCollection	
+ Returns a collection of the variable data points at the specified time range from the given archive unit.
+ 
+ 
+
+ &#160;
+ variableName
+ String
+ Full name of the variable, e.g. Branch.Bit01. The variable name is prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+ 
+
+ &#160;
+ unitName
+ String
+ Name of the archive unit where the variable information will be searched.
+ 
+
+Smart bots can receive data from any supported archive unit type.
+ 
+ 
+
+ &#160;
+ range
+ DateRange
+ DateTime range defined either by start and end dates or by a number of specified intervals before the real-time variable value.
+e.g. use number = 5 and interval = Intervals.Seconds to get information about the variable during last 5 seconds.
+ 
+ 
+ 
+ 
+Chat
+ 
+Information about the current chat.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ x => x.Chat
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ ChatId
+ String
+ Surrogate Identifier of the chat room.
+ 
+ 
+
+ ChatName
+ String
+ 
+ Displayed Identifier of the chat room. Can be used in SCADA Basic scripting.
+ 
+ 
+
+ Description
+ String
+ Displayed Title of the chat room.
+ 
+ 
+
+ ColorString
+ String
+ HEX code of the color assigned to a chat.
+ 
+ 
+ 
+
+ ChatAccess
+ List<ChatAccess>
+ Accessibility of the chat room. All usual properties and methods of generic lists can be applied.
+ 
+ 
+
+ StorageTimeOfMessage
+ Int
+ Maximum time an old message can remain in the chat, in minutes, null for infinite.
+ 
+ 
+ 
+ 
+ChatAccess
+ 
+Accessibility of the given participant in the chat room.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ x => x.Chat.ChatAccess[0]
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ UserId
+ String
+ 
+ Unique identifier of the first participant in the chat room.
+ 
+ 
+
+ ChatId
+ String
+ Surrogate Identifier of the chat room.
+ 
+ 
+
+ CreationDate
+ DateTime
+ Entry date of the second participant in the chat room.
+ 
+ 
+
+ Access
+ Int
+ Access level of the second participant in the chat room.
+ 
+ 
+ 
+ 
+InstantMessage
+ 
+Information about a chat message.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ x => x.LastMessage
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ MessageId
+ System.Guid
+ Unique identifier of the message.
+ 
+ 
+
+ DeviceId
+ String
+ Unique identifier of the device/station used to send the message.
+ 
+ 
+
+ DeviceDisplayName
+ String
+ Displayed name of the device/station used to send the message.
+ 
+ 
+
+ ZoneId
+ String
+ Sender�s location when the message was sent.
+ 
+ 
+
+ Sender
+ String
+ User name of the message sender.
+ 
+ 
+
+ DateOffset
+ 
+ DateTimeOffset
+ Local timestamp of the message.
+ 
+ 
+
+ Date
+ DateTime
+ 
+ UTC timestamp of the message.
+ 
+ 
+
+ Type
+ String
+ Type of the message.
+ 
+ 
+
+ Text
+ String
+ Content of the text messages or file name for attachments.
+ 
+ 
+
+ TotalBytes
+ Long
+ Size of the message attachments in bytes.
+ 
+ 
+
+ Extra
+ XElement
+ Extensions of the message, such as auto-response options. XML.
+ 
+ 
+
+ FilePath
+ String
+ 
+ 
+The full path of the attachment file.
+ 
+The specific path for attachments stored in the database as binary blocks.
+ 
+
+ 
+You can configure the location and format under which the IM server stores message attachments by modifying the following setting in the file svInstantMessagingHost.exe.config located in the Bin folder:
+ 
+StoreFilesInDatabase - Indicates where to store the message attachments. This setting allows you to configure the IM server so as to store all message attachments as binary blocks in the database, instead of storing them as files.
+ 
+ 
+ 
+ 
+ 
+ 
+HisDataPoint
+ 
+Information about the specified variable at a given date and time
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ x => x.HistoricalAt(�Branch.Register01�, �Unit01�, System.DateTime.Now.AddSeconds(-5))
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ Value
+ Double
+ 
+ Value of the variable at the given time.
+ 
+ 
+
+ Quality
+ Uint
+ Quality of the variable value at the given time.
+ 
+ 
+
+ IsGood
+ Bool
+ Returns true if the Quality is good, otherwise returns false.
+ 
+ 
+
+ Timestamp
+ DateTime
+ Time-stamp of the variable data point.
+ 
+ 
+ 
+ 
+DateRange
+ 
+Range defined either by start and end dates or by a number of specified intervals before the real-time variable value.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ new DateRange (DateTime start, DateTime end) or 
+new DateRange (double number, Intervals interval)
+ 
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ Start
+ DateTime
+ Beginning of the date time range.
+ 
+ 
+
+ End
+ DateTime
+ Ending of the date time range.
+ 
+ 
+ 
+ 
+HisDataCollection
+ 
+A collection of the variable data points at the specified time range from the given archive Unit
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ x => x.Historical(�Branch .Register01�, �Unit01�, new DateRange(10, Intervals.Seconds))
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ Range
+ DateRange
+ Requested date and time range
+ 
+ 
+
+ Variable
+ String
+ Full name of the variable e.g. Branch.Bit01. The variable name is prefixed with the current bot�s branch unless the �@� symbol is used.
+ 
+ 
+
+ Unit
+ String
+ 
+ 
+Name of the archive unit where the variable information will be searched.
+ 
+
+ 
+Smart bots can receive data from any supported archiving unit type.
+ 
+ 
+ 
+ 
+
+ Methods
+ 
+ 
+
+ Name
+ Arguments
+ Type
+ Description
+ 
+ 
+
+ Padding
+ -
+ PaddedHisDataCollection
+ Returns a collection of the variable data points at the specified time range from the given archive Unit using the given padding: i.e. data is spread over the specified time range with one data point every padding interval.
+ 
+ 
+
+ &#160;
+ Double
+ Number
+ Number of specified intervals.
+e.g. use number = 5 and interval = Intervals.Seconds in order to get information about the variable for every 5 seconds.
+ 
+ 
+
+ &#160;
+ Intervals
+ Interval
+ Scale of the time intervals used for padding.
+e.g. use number = 5 and interval = Intervals.Minutes in order to get the information about the variable for every 5 minutes.
+Allowed enumeration values.
+Seconds,	Minutes,	Hours,	Days,	Weeks,	Months,	Years
+ 
+ 
+
+ ExcludeNS
+ -
+ IEnumerable of HisDataPoint
+ Returns a collection of the variable data points only with good quality.
+ 
+ 
+ 
+ 
+PaddedHisDataCollection
+ 
+A collection of the variable data points at the specified time range from the given archive unit spread over the range with the given padding (e.g. 1 data point every second).
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ x => x.Historical(�Branch .Register01�, �Unit01�, new DateRange(10, Intervals.Seconds)).Padding(1, Intervals.Seconds)
+x => x.Historical(�Branch .Register01�, �Unit01�, new DateRange(10, Intervals.Seconds)).Padding(1, Intervals.Seconds).Filter(�Bit01�)
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ Variable
+ String
+ Full name of the variable e.g. Branch.Bit01
+The variable name is prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+ 
+
+ Unit
+ String
+ 
+ 
+Name of the archive unit where the variable information will be searched.
+ 
+
+ 
+Smart bots can receive data from any supported archiving unit type.
+ 
+ 
+ 
+ 
+
+ Number
+ 
+ Double
+ Number of specified intervals used for padding.
+e.g. use number = 5 and interval = Intervals.Seconds in order to get information about the variable for every 5 seconds.
+ 
+ 
+
+ Interval
+ Intervals
+ Scale of the time intervals used for padding.
+e.g. use number = 5 and interval = Intervals.Minutes in order to get the information about the variable for every 5 minutes.
+Allowed enumeration values.
+Seconds,	Minutes,	Hours,	Days,	Weeks,	Months,	Years
+ 
+ 
+
+ Methods
+ 
+ 
+
+ Name
+ Arguments
+ Type
+ Description
+ 
+ 
+
+ Filter
+ -
+ PaddedHisDataCollection
+ Returns a collection of the variable data points at the specified time range from the given archive unit using the given padding, where the specified filter variable was true (like a machine status signal).
+ 
+ 
+
+ &#160;
+ String
+ bitVariable
+ Full name of the bit variable used to filter the received data set by using an additional filter variable check. 
+Returns only those data points when the specified filter variable was true (like a machine status signal).
+ 
+ 
+
+ ExcludeNS
+ -
+ PaddedHisDataCollection
+ Returns a collection of the variable data points only with good quality at the specified time range from the given archive unit using the given padding.
+ 
+ 
+ 
+ 
+EventItemOccurence
+ 
+Information about the occurrence of the event.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ x => x.Context (in case where the smart bot is started by the event as its Entry or Exit action)
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ PeriodStart
+ DateTimeOffset
+ 
+ 
+	Beginning of the event occurrence.
+ 
+ 
+ 
+
+ PeriodEnd
+ DateTimeOffset
+ 
+ 
+	Ending of the event occurrence.
+ 
+ 
+ 
+
+ CalendarName
+ String
+ Name of the schedule with corresponding event.
+ 
+ 
+
+ Duration
+ TimeSpan
+ 
+ 
+	Duration of the event occurrence.
+ 
+ 
+ 
+
+ Event
+ EventItem
+ Corresponding event object.
+ 
+ 
+ 
+ 
+EventItem
+ 
+Information about the event.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ x => x.Context.Event (in case where the smart bot is started by the event as its Entry or Exit action)
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ Id
+ String
+ 
+ 
+ Unique id of the event.
+ 
+ 
+ 
+
+ Name
+ String
+ 
+ 
+Summary of the event.
+ 
+ 
+ 
+
+ Description
+ String
+ Event body.
+ 
+ 
+
+ s
+ String
+ Branch name assigned to the executed smart bot as entry or exit action. Branch name applied to all SCADA variables in bot�s operation and conditions.
+ 
+ 
+
+ BotUri
+ String
+ Path to the smart bot blueprint file. The specified path is relative to the following directory: <projectFolder>\MsgData\Bots.
+ 
+ 
+
+ BotName
+ String
+ Name of the bot, which can be referenced in the InviteUserToChat and RemoveUserFromChat operations. This name is unique within a set of all deployed bots and all users in the project.
+ 
+ 
+
+ ChatId
+ String
+ 
+ 
+Unique identifier of the chat in which the smart bot will be added.
+ 
+ 
+ 
+
+ ChatColor
+ String
+ HEX code of the chat color. This property is set only if the chat is created or modified.
+ 
+ 
+
+ ZoneId
+ String
+ Name of the zone associated to the given chat. This property is set only if the chat is created or modified.
+ 
+ 
+
+ Location
+ String
+ Location of the event (e.g. Teams meeting). This parameter is not related to the Geolocation Zones.
+ 
+ 
+
+ ActionExecuteBot
+ Boolean
+ Specifies whether to deploy a smart bot procedure when the Event starts.
+ 
+ 
+
+ ActionExitExecuteBot
+ Boolean
+ Specifies whether to deploy a smart bot procedure when the event ends or is removed.
+ 
+ 
+
+ ActionCreateChat
+ Boolean
+ 
+ 
+Specifies whether the chat with the given name should be created / modified or not. When the event starts, the bot searches for the chat with the given name. If True and the chat was not found, a new chat will be created. If true and the chat was found, it will be modified.
+ 
+If false and entry or exit actions are specified, the corresponding SmartBot procedures will still be invited to the chat.
+ 
+ 
+ 
+
+ IsReccurent
+ Boolean
+ Specifies whether the event has recurrence settings.
+ 
+ 
+
+ CanEntry
+ Boolean
+ True if the event is enabled and it has some entry actions, that is calling a procedure or modifying the chat. False otherwise.
+ 
+ 
+
+ CanExit
+ Boolean
+ True if the event is enabled and it has some exit actions, i.e. calling a procedure. False otherwise.
+ 
+ 
+
+ 
+ 
+StartedAtDate
+ 
+ DateTime
+ Date when the event is planned to start.
+ 
+ 
+
+ StartingAtDate
+ DateTime
+ 
+ 
+	Date when the event has started.
+ 
+ 
+ 
+
+ EndingAtDate
+ DateTime
+ 
+ 
+	Date when the event is planned to end.
+ 
+ 
+ 
+
+ LastDate
+ DateTime
+ Last date for recurrent events or the planned end date for ordinary events.
+ 
+ 
+
+ IsRunning	
+ Boolean
+ True if the event has been started. False otherwise.
+ 
+ 
+
+ Frequency
+ Integer
+ 
+ 
+	Event recurrence frequency according to the following enumeration.
+ 
+0 = None
+ 
+1 = Secondly
+ 
+2 = Minutely
+ 
+3 = Hourly
+ 
+4 = Daily
+ 
+5 = Weekly
+ 
+6 = Monthly
+ 
+7 = Yearly
+ 
+ 
+ 
+
+ Interval
+ Integer
+ Specifies how often the recurrent event should occur. E.g. if the Frequency is set to �Secondly� and Interval is 5, then the event will occur every 5 seconds. This property is set only for recurrent events.
+ 
+ 
+
+ Duration
+ Long
+ Duration of the event in milliseconds.
+ 
+ 
+
+ HumanReadableDuration
+ String
+ Human readable representation of the event duration.
+ 
+ 
+
+ IsAllDay
+ Boolean
+ Specifies whether the event is a full day event.
+ 
+ 
+
+ RecurOnMondays
+ Boolean
+ Specifies whether the recurrent event should occur on Mondays. This property is set only for recurrent events with the �Weekly� frequency.
+ 
+ 
+
+ RecurOnTuesdays
+ Boolean
+ Specifies whether the recurrent event should occur on Tuesdays. This property is set only for recurrent events with the �Weekly� frequency.
+ 
+ 
+
+ RecurOnWednesdays
+ Boolean
+ Specifies whether the recurrent event should occur on Wednesdays. This property is set only for recurrent events with the �Weekly� frequency.
+ 
+ 
+
+ RecurOnThursdays
+ Boolean
+ Specifies whether the recurrent event should occur on Thursdays. This property is set only for recurrent events with the �Weekly� frequency.
+ 
+ 
+
+ RecurOnFridays
+ Boolean
+ Specifies whether the recurrent event should occur on Fridays. This property is set only for recurrent events with the �Weekly� frequency.
+ 
+ 
+
+ RecurOnSaturdays
+ Boolean
+ Specifies whether the recurrent event should occur on Saturdays. This property is set only for recurrent events with the �Weekly� frequency.
+ 
+ 
+
+ RecurOnSundays
+ Boolean
+ Specifies whether the recurrent event should occur on Sundays. This property is set only for recurrent events with the �Weekly� frequency.
+ 
+ 
+
+ Attendees
+ ICollection<ChatAttendee>
+ 
+ 
+List of event attendees.
+ 
+ 
+ 
+
+ BotParameters
+ ICollection<BotParameter>
+ List of internal variables and corresponding values that will be predefined in the executed smart bot.
+ 
+ 
+
+ ExitBotParameters
+ ICollection<BotParameter>
+ List of internal variables and corresponding values that will be predefined in the executed smart bot.
+ 
+ 
+
+ Parent
+ CalendarConfiguration
+ Schedule object with the current event.
+ 
+ 
+ 
+ 
+ChatAttendee
+ 
+Information about the attendee of an event.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ x => x.Context.Event.Attendees[0] (in case where the smart bot is started by the event as its Entry or Exit action)
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ UserId
+ String
+ Unique identifier of the user.
+ 
+ 
+
+ AccessLevel
+ Integer
+ Access level of the user in the chat room.
+ 
+ 
+
+ CommonName
+ String
+ Display name of the user.
+ 
+ 
+
+ Email
+ String
+ Email of the user.
+ 
+ 
+
+ DisplayText
+ String
+ First non-empty string of the following values in the specified order. CommonName, UserId or Email.
+ 
+ 
+ 
+ 
+BotParameter
+ 
+Internal variable and the corresponding value that will be predefined in the executed smart bot.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ 
+ 
+x => x.Context.Event.BotParameters[0] (in case where the smart bot is started by the event as its entry action)
+ 
+x => x.Context.Event.ExitBotParameters[0] (in case where the smart bot is started by the event as its exit action)
+ 
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ Key
+ String
+ Unique reference to the value in memory.
+ 
+ 
+
+ Value
+ String
+ Value of the corresponding internal variable in memory specified by the �Key� reference.
+ 
+ 
+ 
+ 
+CalendarConfiguration
+ 
+Information about the schedule with the current event.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Access expression sample
+ 
+ 
+x => x.Context.Event.Parent (in case where the smart bot is started by the event as its Entry or Exit action)
+ 
+ 
+ 
+
+ Properties
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ Name
+ String
+ Unique name of the schedule.
+ 
+ 
+
+ Source
+ String
+ Path to the deployed schedule file.
+ 
+ 
+
+ OriginalSource
+ String
+ Path to the original schedule file used when deploying.
+ 
+ 
+
+ Events
+ ICollection<>
+ List of schedule events.
+ 
+ 
+
+ Synchonization
+ String
+ Synchronization mode. This property is set when the schedule is synchronized with a third-party calendar.
+ 
+ 
+
+ IsSynchronized
+ Boolean
+ Specifies whether the schedule is synchronized with a third-party calendar or not.
+ 
+ 
+ 
+ 
+Working with data sets
+ 
+Some methods and properties available to a user in the expression return a collection of items. This section describes some methods that can be used to extract a value from the collection as well as calculate some statistical values on the collection.
+ 
+The current Bot Agent context has a method called Historical in order to receive a collection of the variable data points at the specified time range.
+ 
+Returned type of this method is HisDataCollection. After applying Padding method, the collection becomes PaddedHisDataCollection. Both of these types are inherited from IList<HisDataPoint>. This means we can iterate through all data points and compute some function on each data point.
+ 
+In order to pass through all items in the collection and to compute the required value, a LINQ expression can be used. Please refer the Microsoft Help to receive the information about .Net Language Integrated Queries (LINQ).
+ 
+The following list demonstrates some examples of getting the Historical data set.
+ 
+ 
+
+ 
+Historical data points during the last 1 day.
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days))
+ 
+ 
+
+ 
+Historical data points during the last 4 hours.
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(4, Intervals.Hours))
+ 
+ 
+
+ 
+Historical data points between 01/01/2019 and 31/01/2019.
+ 
+x => x.Historical(�Branch .Register01�, �Unit01�, new DateRange(new DateTime(2019, 1, 1), new DateTime(2019, 1, 31)))
+ 
+ 
+ 
+The following list demonstrates some examples of getting the padded historical data set.
+ 
+ 
+
+ 
+Historical data points with padding of 1 second (1 data point every second).
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Padding(1, Intervals.Seconds)
+ 
+ 
+
+ 
+Historical data points with padding of 1 minute (1 data point every minute).
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Padding(1, Intervals.Minutes)
+ 
+ 
+
+ 
+Historical data points with 1 minute padding, when Bit01 was activated.
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Padding(1, Intervals.Minutes).Filter(�Bit01�)
+ 
+ 
+
+ 
+Historical data points with 1 minute padding, when both Bit01 and Bit02 were activated.
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Padding(1, Intervals.Minutes).Filter(�Bit01�) .Filter(�Bit02�)
+ 
+ 
+
+ 
+Historical data points with Good quality and with 1 minute padding, when both Bit01 and Bit02 were activated.
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Padding(1, Intervals.Minutes).Filter(�Bit01�) .Filter(�Bit02�).ExcludeNS()
+ 
+ 
+ 
+The following list demonstrates some examples of LINQ functions applied.
+ 
+ 
+
+ 
+Minimum value in the last 1 day:
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Min(q => q.Value)
+ 
+ 
+
+ 
+Minimum value with Good quality in the last 1 day when Bit01 was activated, with 1 minute padding:
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Padding(1, Intervals.Minutes).Filter(�Bit01�) .ExcludeNS().Min(q => q.Value)
+ 
+ 
+
+ 
+Maximum value in the last 1 day:
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Padding(1, Intervals.Minutes).ExcludeNS().Max(q => q.Value)
+ 
+ 
+
+ 
+Average value in the last 1 day:
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Average(q => q.Value)
+ 
+ 
+
+ 
+Sum of all values in the last 1 day:
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Sum(q => q.Value)
+ 
+ 
+
+ 
+The first value in the last 1 day:
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).First().Value
+ 
+ 
+
+ 
+The first value with a Good quality in the last 1 day:
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).First(q => q.IsGood).Value
+ 
+ 
+
+ 
+The last value in the last 1 day.
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Last().Value
+ 
+ 
+
+ 
+Excel VAR.P function (returns the variance in an entire population).
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).VarP(q => q.Value)
+ 
+ 
+
+ 
+Excel VAR.S function (returns the variance of a sample).
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).VarS(q => q.Value)
+ 
+ 
+
+ 
+Excel VAR function (the same as VAR.S function).
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Var(q => q.Value)
+ 
+ 
+
+ 
+Excel STDEV.P function (calculates the standard deviation for an entire population).
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).StDevP(q => q.Value)
+ 
+ 
+
+ 
+Excel STDEV.S function (calculates the standard deviation for a sample set of data).
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).StDevS(q => q.Value)
+ 
+ 
+
+ 
+Excel STDEV function (the same as STDEV.S function).
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).StDev(q => q.Value)
+ 
+ 
+
+ 
+Excel PERCENTILE.EXC function, calculates the 95-th percentile for a set of data.
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).PercentileExc(q => q.Value, 0.95)
+ 
+ 
+
+ 
+Excel PERCENTILE.INC function, calculates the 80-th percentile for a set of data, inclusive.
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).PercentileInc(q => q.Value, 0.8)
+ 
+ 
+
+ 
+Excel PERCENTILE function (the same as PERCENTILE.INC function).
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Percentile(q => q.Value, 0.7)
+ 
+ 
+ 
+
+ 
+Other properties of HisDataPoint can be used in the right part expression as well.
+ 
+ 
+ 
+
+ 
+Quality of the first value in the last 1 day.
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).First(q => q.Quality)
+ 
+ 
+ 
+All other features of LINQ are also available. Some examples are following.
+ 
+ 
+
+ 
+Average value of data points whose value was greater than 10 in the last 1 day.
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).Where(q => q.Value > 10).Average(q => q.Value)
+ 
+ 
+
+ 
+Data points in the last 1 day are ordered by Value, then the first data point with a Good quality is retrieved, then its Value is returned.
+ 
+x => x.Historical("Register01", "Unit01", new DateRange(1, Intervals.Days)).OrderBy(q => q.Value).First(q => q.IsGood).Value
+
+
+========================================
+TOPIC: smartbots_manager.htm
+========================================
+Smart Bots Manager
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Smart Bots Manager
+ 
+To start working with Smart Bots, the process blueprint must be formalized and designed by using the Smart Bots Manager. This tool provides a HMI for the user to create and dynamically deploy the Smart Bots to the connected Instant Messaging Server. Show picture
+ 
+ 
+The Home page
+ 
+The Home page is displayed when the Smart Bots Manager is opened and it can also be displayed at any time during its use by clicking the Home tool . The Home page contains shortcuts to access recently used Smart Bot (.bot) files and tools to create new Smart Bots, new Schedules and open existing files.
+ 
+
+ 
+The Welcome page also provides access to the Preferences from where the language for the Smart Bots Manager can be changed from the default of Match System Language.
+ 
+ 
+The Tools menu
+ 
+The Tools menu provides access to Connection Settings and the Configuration Settings.
+ 
+The Connection Settings dialog is used to configure the HostName and Port for the Messaging Server Back-end where the Smart Bots plug-in is deployed. Show picture
+ 
+
+ 
+ 
+ 
+The Configuration Settings dialog is used configure common settings for the various APIs and protocols, such as SMTP. Show picture
+
+
+========================================
+TOPIC: smartbots_memory.htm
+========================================
+Bot agent memory
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bot agent memory
+ 
+Every bot agent has an internal memory with a set of key-value pairs. The operation SaveInMemory can be used to add or replace an item in the memory.
+ 
+Almost every text property of bot conditions and operations support substitution of values stored in memory, called internal bot variables.
+ 
+In order to reference such value, the following notation is used: {key}. In this case, the {key} string will be replaced with the value stored in memory before verifying a condition or executing an operation.
+ 
+In the following example, State1 is associated with a set of operations as follows. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+The first operation creates a text internal bot variable with the value of the last written text message
+ 
+ 
+
+ 
+The second operation puts the Sender of the last message to the variable send
+ 
+ 
+
+ 
+The last operation sends a text message to the current chat. Note that the text is defined as Hi, {send}, where the {send} will be substituted with the value of the send variable, that is the Sender of the last message. For example, Hi, Ope1 will be sent to the chat in response to the message from Ope1.
+
+
+========================================
+TOPIC: smartbots_ops_data_local.htm
+========================================
+Data local operations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data local operations
+ 
+This category contains all operations related to local database functionality that can be used in a bot.
+ 
+Insert to database
+ 
+Inserts a new row in the given database. Creates the database if it does not exist. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Database name
+ String
+ Name of the database table. This property supports usage of internal bot variables.
+ 
+ 
+
+ Result key
+ String
+ Unique reference to the new row in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory specified by the result key reference. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Properties
+ Set
+ A set of table columns to create and corresponding row values to insert to the database.
+ 
+ 
+ 
+ 
+Update in database
+ 
+Updates the given row in the database. Adds the row if it does not exist. Adds new columns to the database if necessary. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Database name
+ 
+ String
+ Name of the database table. This property supports usage of internal bot variables.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the row in memory to update. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory specified by the Result Key reference. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Properties
+ Set
+ A set of table columns to modify and corresponding row values to update. Other row values remain unchanged. If specified column does not exist it will be added to the database.
+ 
+ 
+ 
+ 
+Delete from database
+ 
+Deletes the given row from the database or Deletes all rows corresponding to a given condition. If no row remains in the database, the database file is also removed. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Database name
+ 
+ String
+ Name of the database table. This property supports usage of internal bot variables.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the row in memory to update. This property supports usage of internal bot variables.
+ 
+ 
+
+ Condition
+ C# lambda expression
+ 
+ 
+C# lambda expression � function taking the database rows as an input and filtering which rows to delete. This property supports usage of internal bot variables. As an example, the following string can be used to delete all rows having the value of ABC property less than 30.
+ 
+x => x.ABC < 30. The following string can be used to delete all rows having the value of ABCD property equals to "test".
+x => x["ABCD"] == "test"
+ 
+ 
+ 
+ 
+ 
+Find in database
+ 
+Applies the specified filter on the database rows and saves the selected row in Bot agent�s memory along with the total amount of rows satisfying the given filtering criteria. This operation has the following parameters:
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Database name
+ String
+ Name of the database table. This property supports usage of internal bot variables.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the row in memory to update. This property supports usage of internal bot variables.
+ 
+ 
+
+ Key for count
+ String
+ Unique reference to the value in memory. This property supports usage of internal bot variables. Key for count is used to enumerate between multiple rows that satisfy the given filter. Total amount of selected rows is written to the corresponding variable. Further selection can be done by using the index property of the operation.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory specified by the Key reference. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Index
+ Integer
+ 1 - based index of the row in the list of rows corresponding to the specified filters. This property supports usage of internal bot variables.
+ 
+ 
+
+ Condition
+ C# lambda expression
+ 
+ 
+C# lambda expression � function taking the database rows as an input and filtering which rows to select. This property supports usage of internal bot variables. As an example, the following string can be used to select all rows having the value of ABC property less than 30.
+ 
+x => x.ABC < 30
+ 
+The following string can be used to select all rows having the value of ABCD property equals to "test".
+ 
+x => x["ABCD"] == "test"
+ 
+ 
+ 
+ 
+ 
+Convert Excel file to database
+ 
+Converts the Excel file to the local database. The retrieved data types are parsed according to that of the Excel cells. The following types are supported.
+ 
+ 
+
+ 
+String - Text
+ 
+ 
+
+ 
+Double - Number, Currency, Accounting, Percentage, Fraction, Scientific�
+ 
+ 
+
+ 
+DateTime - Short date, Long date, Time�
+ 
+ 
+ 
+This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Database name
+ String
+ Name of the database table. This property supports usage of internal bot variables.
+ 
+ 
+
+ Source file path
+ String
+ Path to the input Excel file. This property supports usage of internal bot variables. The specified path is relative to the following directory. <projectFolder>\MsgData\Bots
+ 
+ 
+
+ Worksheet name
+ String
+ Name of the worksheet to open. This property supports usage of internal bot variables.
+ 
+ 
+
+ Column name with row unique ids
+ String
+ Name of the column storing the primary keys, i.e. values that uniquely specify a row in a table.
+ 
+ 
+
+ Columns to convert
+ String
+ List of Excel type column ranges that will be converted to the database. Every column range contains a column name (e.g. A) or the first and the last columns (e.g. C:F). Multiple ranges are separated with commas.
+ 
+ 
+
+ Header row
+ Boolean
+ Indicates whether the Excel spreadsheet contains a specific row with column headers. If true, the operation will skip all empty rows until the first row with data and consider this first row as having column headers. If false, all rows will be considered as the raw data.
+ 
+ 
+
+ Drop existing database
+ Boolean
+ Indicates whether the operation should remove the existing database before converting. If true, the existing database file will be removed before conversion. Otherwise, the converted rows will be updated (if the row with same ID exists already) or inserted in the existing database.
+ 
+ 
+ 
+ 
+Copy database
+ 
+Creates a copy of the entire database or part of it. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Source database name
+ String
+ Name of the source database table to be copied. This property supports usage of internal bot variables.
+ 
+ 
+
+ Destination database name
+ String
+ Name of the destination database table. This property supports usage of internal bot variables
+ 
+ 
+
+ Overwrite file
+ Boolean
+ Indicates whether the operation should remove the existing destination database before copying. If true, the existing database file will be removed before copying. Otherwise, the copied rows will be updated (if the row with same id exists already) or inserted in the destination database.
+ 
+ 
+
+ Condition
+ C# lambda expression
+ C# lambda expression � function taking the database rows as an input and filtering which rows to copy. This property supports usage of internal bot variables. 
+As an example, the following string can be used to copy all rows having the value of ABC property less than 30. x => x.ABC < 30
+The following string can be used to copy all rows having the value of ABCD property equals to "test". x => x["ABCD"] == "test"
+ 
+ 
+ 
+ 
+Find files
+ 
+Applies the specified filter on the list of files and saves the selected file path in the bot agent�s memory along with the total amount of files matching the filtering criteria. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ 
+ 
+Description
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+ 
+
+ 
+ 
+Search directory
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Full Uri path to the search directory. This property supports usage of internal bot variables. The specified path is relative to the following directory: <projectFolder>\MsgData\Bots
+ 
+ 
+ 
+
+ 
+ 
+Search pattern
+ 
+ 
+ 
+String
+ 
+ 
+ 
+The search string to match against the names of files in path. This parameter can contain a combination of valid literal path and wildcard (* and ?) characters, but does not support regular expressions.
+ 
+ 
+ 
+
+ 
+ 
+Order by date
+ 
+ 
+ 
+Enum
+ 
+ 
+ 
+Order the list of selected files by their modified date. The following values are available.
+ 
+ 
+
+ 
+Do not order by date � Order of files is not modified
+ 
+ 
+
+ 
+Oldest first � Order the list of files according to their modified date from the oldest to the newest.
+ 
+ 
+
+ 
+Newest first � Order the list of files according to their modified date from the newest to the oldest
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Index
+ 
+ 
+ 
+Integer
+ 
+ 
+ 
+1-based index of the file in the list of selected files, i.e. corresponding to the specified filters. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ 
+ 
+Key for file path
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Unique reference in memory to the full path of the file. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ 
+ 
+Key for file name
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Unique reference in memory to the name of the file. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ 
+ 
+Key for count
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Unique reference to the value in memory. This property supports usage of internal bot variables. Key for count is used to enumerate between several files that match the given filter. Total amount of selected files is written to the corresponding variable. Further selection can be done by using the index property of the operation.
+ 
+ 
+ 
+
+ 
+ 
+Scope
+ 
+ 
+ 
+Enum
+ 
+ 
+ 
+Accessibility scope of value in memory specified by the Key for file path, the Key for file name, or by the Key for count reference. The following values are available:
+ 
+ 
+
+ 
+Private � Value is available only for the current bot
+ 
+ 
+
+ 
+Internal � Value is available for the current thread, i.e. for parent bots, for the current bot and for all child executed bots.
+ 
+ 
+
+ 
+	Shared � Value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Generate QR code
+ 
+The Generate QR Code operation allows a user to encode the given text in a QR code image and save it in a file. The image can then be inserted in a report or displayed to a user in SnapVue or PcVue.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ 
+ 
+Description
+ 
+ 
+ 
+String
+ 
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ QR code content
+ String
+ Text to encode in a QR code. A unique GUID is generated if the field is empty. This property supports usage of internal bot variables.
+ 
+ 
+
+ Result file path
+ String
+ Full Uri path to the file for storing the generated QR code. This property supports usage of internal bot variables. If the Overwrite property is not set and a file with the given name already exists, then a new file name is generated. The specified path is relative to the following directory: <projectFolder>\MsgData\Bots
+ 
+ 
+
+ Overwrite
+ Boolean
+ True to always replace the destination file. False to keep the existing files and generate a unique name for the result file.
+ 
+ 
+
+ Key for payload
+ String
+ Unique reference in memory to the generated QR code payload. This property supports usage of internal bot variables.
+ 
+ 
+
+ Key for file path
+ String
+ Unique reference in memory to the generated QR code file path. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory specified by the �Key fo ***� reference. The following values are available:
+ 
+ 
+
+ 
+Private � value is available only for the current bot
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots
+ 
+ 
+
+ 
+Shared � value is available for all bots
+
+
+========================================
+TOPIC: smartbots_ops_data_prediction.htm
+========================================
+Data prediction operations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data prediction operations
+ 
+This category contains all operations related to the Data prediction feature.
+ 
+Regression
+ 
+Creates and trains the Linear Regression Model on the specified database. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Database name
+ String
+ Name of the database table. This property supports usage of internal bot variables.
+ 
+ 
+
+ Model name
+ String
+ Name of the ML model file. This property supports usage of internal bot variables.
+ 
+ 
+
+ Key for accuracy
+ String
+ Unique reference in memory to the trained model accuracy. This property supports usage of internal bot variables.
+ 
+ 
+
+ Column to predict
+ String
+ Name of the database column containing the expected result for training the ML model. This property supports usage of internal bot variables.
+ 
+ 
+
+ Columns to parse
+ Set
+ Names of database columns containing the input features for training the ML model. Only specified columns and the �column to predict� will be used in model training. Column names support usage of internal bot variables.
+ 
+ 
+
+ Condition for rows to parse
+ C# lambda expression
+ 
+ 
+C# lambda expression � function taking the database rows as an input and filtering which rows to use in training. This property supports usage of internal bot variables.
+ 
+As an example, the following string can be used to train the model on all rows having the value of ABC property less than 30. x => x.ABC < 30
+ 
+The following string can be used to train the model on all rows having the value of ABCD property equals to "test". x => x["ABCD"] == "test"
+ 
+ 
+ 
+
+ Algorithm
+ Enum
+ Algorithm used for model training.
+ 
+ 
+
+ Optimization metric
+ Enum
+ Algorithm metric to be optimized during the model training. The result metric value (accuracy) will be saved in the bot�s internal variable defined by the �Key for accuracy� key.
+ 
+ 
+ 
+ 
+Predict
+ 
+Apply the previously trained ML model on the specified data row. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Model name
+ String
+ Name of the ML model file. This property supports usage of internal bot variables.
+ 
+ 
+
+ Result key
+ String
+ Unique reference in memory to store the prediction result. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of the result in memory specified by the "Result key" reference. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Row�s key
+ String
+ Unique reference in memory to database row to apply the model on. This property supports usage of internal bot variables.
+ 
+ 
+
+ Sample properties
+ Set
+ A set of table columns and corresponding values to use as the ML model input. If some column was not used in the model training, it will be ignored. Both properties and values supports usage of internal bot variables.
+
+
+========================================
+TOPIC: smartbots_ops_data_remote.htm
+========================================
+Data remote operations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data remote operations
+ 
+This category contains all operations related to remote data exchange APIs that can be used in a bot.
+ 
+Read variable value
+ 
+Reads the value of a variable. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Variable name
+ String
+ The full variable name, including branch. The variable name is prefixed with the current bot's branch unless the @ symbol is used. This property supports usage of internal bot variables
+ 
+ 
+ 
+ 
+Send recipe
+ 
+Sends a recipe to write one or several variables. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Variables list
+ Set
+ 
+ 
+List of variables and corresponding values to command. Note that all variable values within a recipe will be modified with the same timestamp. Both variable name and value properties support usage of internal bot variables. In the Name column, use the full variable name, including branch. The variable name is prefixed with the current bot's branch unless the @ symbol is used. The list can have a maximum of 100 variables.
+ 
+ 
+ 
+ 
+ 
+Historical data request
+ 
+Sends a request to the archived data base of a variable. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Variable name
+ String
+ The full variable name, including branch. The variable name is prefixed with the current bot's branch unless the @ symbol is used. This property supports usage of internal bot variables
+ 
+ 
+
+ Unit name
+ String
+ Name of the archive Unit to be searched for the variable information. Smart bots access historical data using a unified API, so they can receive data from any supported archive Unit type.
+ 
+ 
+ 
+
+ Specify interval for the latest data
+ Boolean
+ Tick to specify the requested date range as the given time from now, e.g. latest 15 minutes, last 1 day, etc. False to specify the start and end dates explicitly.
+ 
+ 
+
+ Start date
+ String
+ A string representation of a date and time value for the start of the requested data period.
+ 
+ 
+
+ End date
+ 
+ String
+ A string representation of a date and time value for the end of the requested data period.
+ 
+ 
+
+ Padding interval
+ 
+ String
+ Human readable time interval. Text near the value is reformatted automatically after validating the input. Specify the padding interval to get a collection of the variable data points at the specified time range from the given archive unit using the given padding: i.e. data is spread over the specified time range with one data point every padding interval (e.g. one value every minute).
+ 
+ 
+
+ Exclude NS data
+ 
+ Boolean
+ Tick to return a collection of the variable data points only with good quality.
+ 
+ 
+
+ Filtering bit name
+ String
+ The full variable name, including branch. The variable name is prefixed with the current bot�s branch unless the @ symbol is used. This property supports use of internal bot variables. Specify the variable name to get a collection of the variable data points at the specified time range from the given archive unit using the given padding, where the specified filter bit was ON (like a machine status signal). Values at the time when the filtering bit was OFF are ignored. Property is available only when padding interval is specified.
+ 
+ 
+
+ Custom filtering expression
+ C# lambda expression
+ C# lambda expression � function taking the resulting collection as an input and returning the filtered collection. This property supports usage of internal bot variables. As an example, the following string can be used to filter only the values are lower than 30.
+x.Where(d => d.Value < 30)
+ 
+ 
+
+ Aggregate function
+ Function
+ 
+ 
+A function that will be applied to the resulting list of data points to aggregate them in a single value. The following functions are available.
+ 
+ 
+
+ 
+Maximum � returns the maximum variable value with good quality.
+ 
+ 
+
+ 
+Minimum � returns the minimum variable value with good quality.
+ 
+ 
+
+ 
+First � returns the first variable value.
+ 
+ 
+
+ 
+Last � returns the last variable value.
+ 
+ 
+
+ 
+Average � returns the simple average of variable values with the good quality.
+ 
+ 
+
+ 
+Sum � calculates the sum of all variable values with the good quality.
+ 
+ 
+
+ 
+Standard deviation � calculates the standard deviation of variable values with the good quality.
+ 
+ 
+
+ 
+Standard deviation in an entire population.
+ 
+ 
+
+ 
+Excel STDEV.P function, calculates the standard deviation of variable values with the Good quality for an entire population.
+ 
+ 
+
+ 
+Variance � calculates the variance of a sample with the good quality.
+ 
+ 
+
+ 
+Variance in an entire population - Excel VAR.P function, returns the variance in an entire population.
+ 
+ 
+
+ 
+Custom � uses the custom aggregate function.
+ 
+ 
+ 
+ 
+ 
+
+ Custom aggregate function
+ C# lambda expression
+ C# lambda expression � function taking the resulting collection as an input and returning the value to store in memory. This property supports usage of internal bot variables. As an example, the following string can be used to calculate the 80th percentile for a set of data, inclusive (Excel PERCENTILE.INC function).
+x => x.PercentileInc(q => q.Value, 0.8)
+ 
+ 
+ 
+ 
+Create database from historical data
+ 
+Sends a request to the archived database of a variable. Result table is then saved to a database. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Variable name
+ String
+ 
+ 
+The full variable name, including branch. The variable name is prefixed with the current bot�s branch unless the �@� symbol is used. This property supports usage of internal bot variables.
+ 
+From version 16.2 onwards the Variable Name property is superseded by the Variables List property. 
+For backwards compatibility Variable Name is still supported at run-time but can no longer be configured.
+ 
+ 
+ 
+
+ Variables list
+ &#160;
+ 
+ 
+An array of the variable names in the request comprising the following fields.
+ 
+ 
+
+ 
+Archive unit name. Type string. The name of the archive unit where the variable information will be searched. Smart bots can receive data from any supported archive unit type.
+ 
+ 
+
+ 
+Variable name. Type string. The full variable name, including branch. The variable name is prefixed with the current bot�s branch unless the @ symbol is used. This property supports usage of internal bot variables.
+ 
+ 
+
+ 
+Column name. Type string. The name of the database column to be inserted for storing the corresponding variable property. This property supports usage of internal bot variables.
+ 
+ 
+
+ 
+Property. Type enum. The property to retrieve from the variable object. The following values are available.
+ 
+ 
+
+ 
+Value � Value of the variable
+ 
+ 
+
+ 
+Quality � Quality of the variable.
+ 
+ 
+
+ 
+Is good quality � Boolean value indicating if the quality is good.
+ 
+ 
+
+ 
+Timestamp � Timestamp of the variable change.
+ 
+ 
+
+ 
+Timestamp � Timestamp of the variable change in the local time zone.
+ 
+ 
+
+ 
+Timestamp � Timestamp of the variable change in ticks format.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Archive unit name
+ String
+ Name of the archive Unit where the variable information will be searched. Smart bots access Historical data using a unified API, so they can receive data from any supported archive Unit type.
+ 
+ 
+
+ Specify interval for the latest data
+ Boolean
+ True to specify the requested date range as the given time from now, e.g. latest 15 minutes, last 1 day, etc. False to specify the start and end dates explicitly.
+ 
+ 
+
+ Interval
+ String
+ Human readable time interval. Text near the value is reformatted automatically after validating the input.
+ 
+ 
+
+ Start date
+ String
+ A string representation of a date and time value for the start of the requested data period.
+ 
+ 
+
+ End date
+ String
+ A string representation of a date and time value for the end of the requested data period.
+ 
+ 
+
+ Sampling rate
+ String
+ Human readable time interval. Text near the value is reformatted automatically after validating the input. Specify the padding interval to get a collection of the variable data points at the specified time range from the given archive unit using the given padding: i.e. data is spread over the specified time range with one data point every padding interval. For example one value every minute.
+ 
+ 
+
+ Exclude NS data
+ Boolean
+ True to return a collection of the variable data points only with the good quality.
+ 
+ 
+
+ Custom filtering expression
+ C# lambda expression
+ 
+ 
+C# lambda expression � function taking the resulting collection as an input and returning the filtered collection. This property supports usage of internal bot variables. As an example, the following string can be used to filter only the values are lower than 30.
+ 
+x.Where(d => d.Value < 30)
+ 
+ 
+ 
+
+ Database name
+ String
+ Name of the database. This property supports usage of internal bot variables.
+ 
+ 
+
+ Drop existing database
+ Boolean
+ True to drop the specified database if exists before refilling it with the variable values. False to append the variable values to an existing database.
+ 
+ 
+
+ Column name for Timestamp (DateTime object)
+ String
+ Name of the column for storing the timestamps of variable changes as objects. If value is empty, the corresponding column is not created. Storing timestamps as DataTime objects can be useful for further date and time related calculations. This property supports usage of internal bot variables.
+ 
+ 
+
+ Column name for Timestamp (Amount of Ticks)
+ String
+ Name of the column for storing the timestamps of variable changes as ticks (the number of ticks that represent the corresponding date and time). If value is empty, the corresponding column is not created. Storing timestamps as numbers (ticks) can be useful for training AI models. This property supports usage of internal bot variables.
+ 
+ 
+
+ Column name for Value
+ String
+ 
+ 
+Name of the column for storing the variable values. If value is empty, the corresponding column is not created. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Column name for Quality
+ String
+ Name of the column for storing the variable values quality. If value is empty, the corresponding column is not created. This property supports usage of internal bot variables.
+ 
+ 
+
+ Column name for Quality goodness
+ String
+ Name of the column for storing the variable values quality as Boolean. True is stored for Good quality values, False is stored for Bad quality values (NS, NS COM, etc). If value is empty, the corresponding column is not created. This property supports usage of internal bot variables.
+
+
+========================================
+TOPIC: smartbots_ops_data_web.htm
+========================================
+Data web operations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data web operations
+ 
+This category contains all operations related to Web API functionality.
+ 
+HTTP request
+ 
+Initiates a generic HTTP request with specified parameters, parses the result if necessary and saves it in Bot agent�s memory. This operation can be used to access third-party web APIs (e.g. Telegram, Line, Twitter, REST API, CMMS API, etc). This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Method
+ String
+ HTTP method used by the HTTP request message. This property supports usage of internal bot variables.
+ 
+ 
+
+ Url
+ String
+ Uri address used for the HTTP request. This property supports usage of internal bot variables.
+ 
+ 
+
+ Query parameters
+ Set
+ List of query parameters and corresponding values for the HTTP request. Both key and value properties support usage of internal bot variables.
+ 
+ 
+
+ Headers
+ Set
+ List of HTTP request headers. Both key and value properties support usage of internal bot variables.
+ 
+ 
+
+ Body type
+ Enum
+ 
+ 
+Contents of the HTTP message. The following values are available.
+ 
+ 
+
+ 
+None � HTTP message without content
+ 
+ 
+
+ 
+x-www-form-urlencoded � HTTP content of name/value tuples encoded using application/x-www-form-urlencoded MIME type
+ 
+ 
+
+ 
+Raw � HTTP content based on a string.
+ 
+ 
+
+ 
+Binary � HTTP content based on a byte array (typically a file).
+ 
+ 
+
+ 
+File � HTTP content containing a file. Received files are downloaded to <projectFolder>/MsgData/Bots/Downloads.
+ 
+ 
+
+ 
+Image � HTTP content containing an image. Received files are downloaded to <projectFolder>/MsgData/Bots/Downloads.
+ 
+ 
+
+ 
+JSON � HTTP content with a JSON format. The request�s Content Type is automatically changed to application/json.
+ 
+ 
+ 
+ 
+ 
+
+ Body (x-www-form-urlencoded)
+ Set
+ List of name/value tuples for the HTTP message content. Both key and value properties support usage of internal bot variables. This property is only available for �www-form-urlencoded� body type.
+ 
+ 
+
+ Body (Raw)
+ String
+ String used as the HTTP message content. This property supports usage of internal bot variables. This property is only available for �Raw� body type.
+ 
+ 
+
+ File path (Binary)
+ String
+ Path to the input file to send as the HTTP message content. This property supports usage of internal bot variables. This property is only available for �Binary� body type.
+ 
+ 
+
+ Response status key
+ String
+ Unique reference in memory to the status of the HTTP response. This property supports usage of internal bot variables.
+ 
+ 
+
+ Result type
+ Enum
+ 
+ 
+Specifies a format of the HTTP response. The following values are available.
+ 
+ 
+
+ 
+None � HTTP response is ignored
+ 
+ 
+
+ 
+String � HTTP response stream is decoded to a string
+ 
+ 
+
+ 
+JSON parsed object � HTTP response stream is decoded to a string and then de-serialized to a JSON dynamic object. Fields of this JSON object could then be read directly from the internal bot variable, e.g. {resultKeyVar}.access_token
+ 
+ 
+ 
+ 
+ 
+
+ Result key
+ String
+ Unique reference to the HTTP response in memory. This property supports usage of internal bot variables. This property is only available when the Result type is not �None�.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of HTTP response in memory specified by the �Result Key� reference. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Publish
+ 
+Publish operation � Provides access to a specific file via the Messaging Web Service.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ 
+ 
+Description
+ 
+ 
+ 
+String
+ 
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ 
+ 
+File path
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Full Uri path to the file for sharing. This property supports usage of internal bot variables. The specified path is relative to the directory: <projectFolder>\MsgData\Bots.
+ 
+ 
+ 
+
+ 
+ 
+Overwrite file
+ 
+ 
+ 
+Boolean
+ 
+ 
+ 
+True to always replace the destination file. False to skip already published files.
+ 
+ 
+ 
+
+ 
+ 
+Web server hostname
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Hostname of the Web server where the Messaging Web service is deployed.
+ 
+ 
+ 
+
+ 
+ 
+Retention period
+ 
+ 
+ 
+Interval
+ 
+ 
+ 
+Interval for storing the file. After the specified time the access to the file is automatically removed. This property supports use of internal bot variables.
+ 
+ 
+ 
+
+ 
+ 
+Protect file
+ 
+ 
+ 
+Boolean
+ 
+ 
+ 
+True to encrypt the file contents. False to copy the file unchanged. An encrypted file is automatically decrypted before returning it to the client.
+ 
+ 
+ 
+
+ 
+ 
+Key for Url
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Unique reference in memory to the Url to get the file. This property supports usage of internal bot variables. The returned Url contains a secret code required to access the file.
+ 
+ 
+ 
+ 
+ 
+Unpublish
+ 
+Unpublish operation � Removes a file from the list of accessible files.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ 
+ 
+Description
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+ 
+
+ 
+ 
+File path
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Name of the file to be unpublished. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ 
+ 
+Url
+ 
+ 
+ 
+String
+ 
+ 
+ 
+Url used to access the file. This property supports usage of internal bot variables.
+
+
+========================================
+TOPIC: smartbots_ops_display.htm
+========================================
+Display operations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Display operations
+ 
+This category contains operations that can be used in a bot to allow a user to control the mobile app�s user interface.
+ 
+Usually, the chat page displays a list of exchanged messages from chat attendees. Operations of the Display type all send a message of type Display to the chat. This message activates the UI mode of the messaging page in the mobile app, which overlays the usual messaging page with corresponding HMI. The most recent message of the Display type in the chat takes the priority.
+ 
+If the chat is associated with a zone (i.e. Local chat), then the HMI is also displayed on that zone�s page (home page). In this case, the display Tiles operation extends a set of action tiles available in the zone. Other display operations activate the mixed HMI, so that both action tiles and the operation�s HMI are displayed.
+ 
+
+ 
+The UI mode will not be displayed in the historical mode, i.e. when user is searching for messages.
+ 
+ 
+Display message
+ 
+Writes a text message to the given chat and displays it full screen in the chat�s page, and in the home page (for currently visible local chats). This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Message text
+ String
+ Content of the message to send. This property supports usage of internal bot variables.
+ 
+ 
+
+ Image name
+ String
+ Name of the image from the project or a library that will be displayed along with the Message text.
+ 
+ 
+
+ Display only to users
+ String
+ Space separated user names that will have the rights to see this message HMI.
+ 
+ 
+ 
+ 
+Display question
+ 
+Displays a full screen text message with an optional image and some UI elements depending on the expected response. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Message text
+ String
+ Content of the message to send. This property supports usage of internal bot variables.
+ 
+ 
+
+ Image name
+ String
+ Name of the image from the project or a library that will be displayed along with the Message text.
+ 
+ 
+
+ Response options
+ Enum
+ User Interface to display in the Mobile app. The following values are available.
+
+Buttons � Shows the given set of auto response buttons
+
+Buttons From File � Shows a set of auto-response buttons loaded from the given text file
+
+Text input � Shows a text entry. Text input is expected.
+
+Numeric input � Shows a set of controls to specify a numeric value.
+
+Audio � Shows a set of controls to record an audio message.
+
+Photo � Shows a set of controls to take a photo or to select an existing one from a library.
+
+Video � Shows a set of controls to take a video or to select an existing one from a library
+
+Signature � Shows a signature pad where a user can manually draw a digital signature.
+ 
+ 
+
+ File path
+ String
+ Absolute or relative Uri path to the file with all available responses in separate lines. This property supports usage of internal bot variables. The specified path is relative to the following directory.
+<projectFolder>\MsgData\Bots
+This property is only available for the Buttons From File response option.
+ 
+ 
+
+ Number of decimal digits
+ Enum
+ Amount of decimal digits for the expected number. This property affects the format of input values in the Mobile app. 
+Values from 0 to 8 are available.
+This property is only available for the numeric input response option.
+ 
+ 
+
+ Limit the minimum
+ Boolean
+ True if the value range must be limited with a minimum value. 
+If both minimum and maximum limits are defined, a slider will be available in the Mobile app UI. 
+This property is only available for numeric input response option.
+ 
+ 
+
+ Limit the maximum
+ Boolean
+ True if the value range must be limited with a maximum value. 
+If both minimum and maximum limits are defined, a slider will be available in the Mobile app UI. 
+This property is only available for numeric input response option.
+ 
+ 
+
+ Minimum
+ Double
+ Minimum value for the variable value. This property supports usage of internal bot variables. 
+This property is only available for the numeric input response option.
+ 
+ 
+
+ Maximum
+ Double
+ Maximum value for the variable value. This property supports usage of internal bot variables.
+This property is only available for the numeric input response option.
+ 
+ 
+
+ Display only to users
+ String
+ Space separated list of user names that have the right to see this message HMI.
+ 
+ 
+ 
+ 
+Display list of alarms
+ 
+Display a full-featured alarm list from the chat (same page as a classical SnapVue action � Show alarms). Note that this operation does not open an embedded view, but a new page.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Content description
+ String
+ Displayed text on the chat page after opening the Alarms page. This property supports usage of internal bot variables.
+ 
+ 
+
+ Branch
+ String
+ Branch filter for displayed list of alarms. This property supports usage of internal bot variables.
+ 
+ 
+
+ Domain
+ String
+ Domain filter for displayed list of alarms. This property supports usage of internal bot variables.
+ 
+ 
+
+ Nature
+ String
+ Nature filter for displayed list of alarms. This property supports usage of internal bot variables
+ 
+ 
+
+ Events
+ Set
+ Events filter for displayed list of alarms.
+ 
+ 
+
+ Minimum alarm priority
+ 0 - 29
+ Minimum priority of displayed alarms.
+ 
+ 
+
+ Maximum alarm priority
+ 0 - 29
+ Maximum priority of displayed alarms.
+ 
+ 
+ 
+ 
+Display file
+ 
+Sends an attachment to the given chat, and display the UI to download and open it using the default app for the corresponding file type. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ File path
+ String
+ Full Uri path to the file for sending. This property supports usage of internal bot variables. The specified path is relative to the following directory. <projectFolder>\MsgData\Bots
+ 
+ 
+
+ File type
+ String
+ Extension of the file for sending. This extension is used to determine which app can open the corresponding file on the mobile device or in the PC. By default, the extension of the selected file is used. This property supports usage of internal bot variables.
+ 
+ 
+
+ Content description
+ String
+ Title to display along with the button to open the file. This property supports usage of internal bot variables.
+ 
+ 
+
+ Send value when opened	
+ String
+ Text message to send to the chat when File is opened on the client device. This property supports usage of internal bot variables.
+ 
+ 
+
+ Back button value
+ String
+ Text message to send to the chat when a user returns to the Mobile app after opening the File in a Default viewer. This property supports usage of internal bot variables.
+ 
+ 
+
+ Display only to users
+ String
+ 
+ 
+	Space separated User Names what will have a right to see this message HMI.
+ 
+ 
+ 
+ 
+ 
+Display Url
+ 
+Displays a native web view component navigated to the given Url with specified HTTP request headers. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ URL
+ String
+ Url to open. This property supports usage of internal bot variables.
+ 
+ 
+
+ Request headers
+ Set
+ A set of HTTP headers to be included in the GET request. Both keys and values support usage of internal bot variables.
+ 
+ 
+
+ Display only to users
+ String
+ Space separated user names that will have the rights to see this message HMI.
+ 
+ 
+ 
+ 
+Display phone number
+ 
+Displays a Default app for calling the specified phone number. Note that only the Phone number field is prefilled, the call itself is not initiated by this operation. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Mobile phone number
+ String
+ Phone number to prefill in the Default Dial app. This property supports usage of internal bot variables.
+ 
+ 
+
+ Image name
+ String
+ 
+ 
+Name of the image from the project or a library that will be displayed along with the phone number.
+ 
+ 
+ 
+
+ Back button value
+ String
+ Text message to send to the chat when a user returns to the mobile app after opening the default dial app. This property supports usage of internal bot variables.
+ 
+ 
+
+ Display only to users
+ String
+ Space separated user names what will have a right to see this message HMI.
+ 
+ 
+ 
+ 
+Display SMS
+ 
+Displays a default app for sending the specified SMS text. Note that only the text and recipients fields are pre-filled, the SMS itself is not sent by this operation. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ SMS text
+ String
+ SMS text to pre-fill in the Default SMS app. This property supports usage of internal bot variables.
+ 
+ 
+
+ Image name
+ String
+ Name of the image from the project or a library that will be displayed along with the phone number.
+ 
+ 
+
+ Recipients list
+ Set
+ List of phone numbers to use as the SMS recipients.
+ 
+ 
+
+ Back button value
+ String
+ Text message to send to the chat when a user returns to the mobile app after opening the default dial app. This property supports usage of internal bot variables.
+ 
+ 
+
+ Display only to users
+ String
+ Space separated User Names what will have a right to see this message HMI.
+ 
+ 
+ 
+ 
+Display trend
+ 
+Displays a trend viewer on the client device. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Content Description
+ String
+ Title to display along with the button to open the Trend Viewer. This property supports usage of internal bot variables.
+ 
+ 
+
+ Curves
+ Set
+ A collection of trend lines to display. �Description� and �Variable� properties support usage of internal bot variables.
+ 
+ 
+
+ Back button value
+ String
+ Text message to send to the chat when a user returns to the Mobile app after opening the Trend Viewer page. This property supports usage of internal bot variables.
+ 
+ 
+
+ Display only to users
+ String
+ Space separated User Names what will have a right to see this message HMI.
+ 
+ 
+ 
+ 
+Display tiles
+ 
+Displays a set of tiles on the chat�s page. If the chat is associated with a zone (Local chat), then the HMI is also displayed on that zone�s page (home page). In this case, the Display Tiles operation extends a set of action tiles available in the zone.
+ 
+
+ 
+The chat�s page accumulates unique tiles from multiple subsequent Display Tiles operations. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Display only to users	
+ String
+ Space separated user names that will have the rights to see this message HMI.
+ 
+ 
+ 
+ 
+A Configure button allows a user to configure the displayed tiles. The following properties are common to all tiles.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Title of the tile. This property supports usage of internal bot variables.
+ 
+ 
+
+ Value
+ String	
+ Text that is sent to the Chat when user taps on the tile.
+ 
+ 
+
+ Display title
+ Enum
+ 
+ 
+	Alignment and Visibility of the tile�s title. The following values are available. 
+
+ 
+ 
+
+ 
+On the left
+ 
+ 
+
+ 
+On the center
+ 
+ 
+
+ 
+On the right
+ 
+ 
+
+ 
+Do not display
+ 
+ 
+ 
+ 
+ 
+
+ Text color
+ String
+ HEX code of the color for the text on the tile.
+ 
+ 
+
+ Background color
+ String
+ HEX code of the tile�s background color.
+ 
+ 
+
+ Bottom background color
+ String
+ HEX code of the tile�s second background color. Two background colors make the Gradient background for the tile.
+ 
+ 
+
+ Tile size
+ Enum
+ Size of the tile in the grid. Numbers specify how many rows and columns the tile will occupy. Grid usually has 4 columns on Phone devices. Amount of grid columns depends on the device�s screen size.
+ 
+ 
+
+ Priority
+ Integer
+ A number used for ordering the tiles. Tiles with a higher priority are arranged first and appear higher on the screen.
+ 
+ 
+ 
+ 
+
+ 
+Other tile properties depend on the type of the tile.
+ 
+ 
+Image
+ 
+Displays a static image on the tile. This tile has the following specific properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Image name
+ String
+ Name of the Image in the project library. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+	Variable value
+ 
+Displays a value of the given variable and an image depending on the variable�s value. This tile has the following specific properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Variable name
+ String
+ The full variable name, including branch. The variable name is prefixed with the current bot�s branch unless the @ symbol is used. This property supports usage of internal bot variables.
+ 
+ 
+
+ Default image name
+ String
+ Name of an Image from the project library, to display by default (when the variable value is not NS and does not match any specified option). This property supports usage of internal bot variables.
+ 
+ 
+
+ Image on NS
+ String	
+ Name of an Image from the project library, to display when the variable value is NS. This property supports usage of internal bot variables.
+ 
+ 
+
+ Images on values
+ Set
+ Values and associated names of images, from the project library, to display when the variable has the corresponding value. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+Image on bit
+ 
+Displays an image on the tile depending on the bit variable value. This tile has the following specific properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Variable name
+ String
+ The full variable name, including branch. The variable name is prefixed with the current bot�s branch unless the @ symbol is used. This property supports usage of internal bot variables.
+ 
+ 
+
+ Image on 1
+ String
+ Name of the Image, from the project library, to display when the given bit variable has the value of 1. This property supports usage of internal bot variables.
+ 
+ 
+
+ Image on 0
+ String
+ Name of the Image, from the project library, to display when the given bit variable has the value of 0. This property supports usage of internal bot variables.
+ 
+ 
+
+ Image on NS
+ String
+ Name of the Image, from the project library, to display when the given bit variable is NS. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+Image on register
+ 
+Displays an image on the tile depending on the register variable value. This tile has the following specific properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Variable name
+ String
+ The full variable name, including branch. The variable name is prefixed with the current bot�s branch unless the @ symbol is used. This property supports usage of internal bot variables.
+ 
+ 
+
+ Default image name
+ String
+ Name of the image, from the project library, to display by default (when the variable value is not NS and does not match to any specified option). This property supports usage of internal bot variables
+ 
+ 
+
+ Image on NS
+ String
+ Name of the Image, from the project library, to display when the variable�s value is NS. This property supports usage of internal bot variables
+ 
+ 
+
+ Images on values
+ Set
+ Set of values and associated names of images, from the project library, to display when the variable has the corresponding value or less. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+Option picker
+ 
+Displays a static image on the tile. A tap on the tile allows the mobile app�s user to change the Image to the next in the options list. After the last option in the list, it starts all over from the first one. This tile has the following specific parameters:
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Initial index
+ Int
+ Index of the initial option in the list of Images. This property supports usage of internal bot variables.
+ 
+ 
+
+ Images on values
+ Set
+ Set of values and associated names of Images, from the project library, to display. When the user taps on the tile the image is changed to the next in the list and the corresponding value is sent to the chat.
+ 
+ 
+ 
+ 
+Remove tiles
+ 
+Removes tiles with the specified names from the screen. If no tile remains on the screen, the messaging page exits the UI mode and switches back to the normal mode where a list of chat messages is displayed. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Tile names
+ String
+ A space separated list of tile names to hide. If the value is empty, then all tiles are removed and the messaging page switches from the UI mode back to the normal mode. This property supports usage of internal bot variables.
+ 
+ 
+
+ Display only to users
+ String
+ Space separated list of user names that will have the right to see this message HMI.
+
+
+========================================
+TOPIC: smartbots_ops_messaging.htm
+========================================
+Instant Messaging operations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Instant Messaging operations
+ 
+This category contains operations related to instant messaging functionality that can be used in a bot.
+ 
+Send message
+ 
+Writes a text message to the given chat. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Message text
+ String
+ Content of the message to send. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+Send question
+ 
+Writes a text message to the given chat and defines a set of available auto-response buttons. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Message text
+ String
+ Content of the message to send. This property supports usage of internal bot variables.
+ 
+ 
+
+ Response options
+ String[]
+ 
+ 
+Set of available auto-responses specified manually or loaded from a text file. A button is displayed for each auto-response in the runtime chat room UI. Note that responding using such a button is not mandatory, a user can write any other text in the chat.
+ 
+ 
+ 
+ 
+ 
+Send file
+ 
+Sends an attachment to the given chat. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ File path
+ String
+ 
+ 
+Full URI path to the file for sending. This property supports usage of internal bot variables. The specified path is relative to the following directory.
+<projectFolder>\MsgData\Bots
+ 
+ 
+ 
+
+ File type
+ String
+ Extension of the file for sending. This extension is used to determine which app can open the corresponding file on the mobile device or in the PC. By default, the extension of the selected file is used. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+Send email
+ 
+Sends an email to the configured SMTP server. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Subject
+ String
+ Subject of the email to send. This property supports usage of internal bot variables.
+ 
+ 
+
+ Body
+ String
+ 
+ 
+Content of the email in the Text or HTML format. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Priority	
+ Enum
+ 
+ 
+	Priority assigned to the email
+ 
+ 
+ 
+
+ Recipient list
+ Set
+ 
+ 
+List of email addresses where the email should be sent. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Cc	
+ Set
+ 
+ 
+List of email addresses that will receive a copy of the email. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Bcc
+ Set
+ 
+ 
+List of email addresses that will receive a hidden copy of the email. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Attachments
+ Set
+ 
+ 
+List of absolute or relative Uri paths to attachment files for sending. This property supports usage of internal bot variables. The specified paths are relative to the following directory.
+<projectFolder>\MsgData\Bots
+ 
+ 
+ 
+ 
+ 
+
+ 
+For email to be sent, an outgoing SMTP server must be configured.
+
+
+========================================
+TOPIC: smartbots_ops_overview.htm
+========================================
+Smart Bots operations overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Smart Bots operations overview
+ 
+The following categories of operations can be used in a bot.
+ 
+ 
+
+ 
+Process
+ 
+ 
+ 
+
+ 
+Data - Remote, Local, Web and Prediction
+ 
+ 
+
+ 
+Reporting
+ 
+ 
+ 
+
+ 
+Messaging
+ 
+ 
+ 
+
+ 
+Display
+ 
+ 
+ 
+
+ 
+Access rights
+ 
+ 
+ 
+
+ 
+Schedule
+ 
+ 
+ 
+ 
+To create a new operation, select the bot state to which the operation will be added. Then right click to open the context menu, or use the New operation tool in the tool bar. Select the required operation in the drop-down menu. Show picture
+
+ 
+Operations are executed sequentially. The order of operation can be changed using the tools Move up (Alt+Up arrow) and Move down (Alt+Down arrow).
+ 
+An operation can be associated with one or several conditions that must be satisfied for the operation to be executed. Conditions are verified only once before deciding whether the operation will be executed or not. This means that Value Changed conditions will never be satisfied and thus an operation containing such conditions will not be executed.
+
+
+========================================
+TOPIC: smartbots_ops_process.htm
+========================================
+Process operations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Process operations
+ 
+This topic provides information on the process operations that can be used in a bot.
+ 
+Counter
+ 
+Counts the numbers starting with the Initial Value using the specified step. The current number is saved in bot agent�s memory. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Initial value
+ Double
+ The initial value used when the specified variable is not defined. This property supports usage of internal bot variables.
+ 
+ 
+
+ Direction
+ Enum
+ Specifies whether to increase or decrease the current value.
+ 
+ 
+
+ Step
+ Double
+ The value added or subtracted from the current value on every call of the operation. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+Option picker
+ 
+Switch between several options and put the current one in the bot agent�s memory. The current item could then be used via substitution mechanism. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Values
+ Set
+ List of values to enumerate. Each time the operation is executed, the next value is written to the Bot�s agent memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Convert value
+ 
+Compare the result of an expression with specified cases and put the corresponding value in the bot agent�s memory. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Input values
+ C# lambda expression
+ C# lambda expression � function taking the current bot agent context as an input and returning the value compared after with specified cases. This property supports usage of internal bot variables.
+The initial part of the expression (i.e. �x => �) is automatically added if necessary.
+ 
+ 
+
+ Cases
+ Set
+ List of values to compare with, and corresponding values to save in bot�s memory. Both Case and Value properties support usage of internal bot variables.
+ 
+ 
+ 
+ 
+Save to memory
+ 
+Saves a result of the given expression in the bot agent�s memory. The saved items could then be used via substitution mechanism. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Value expression
+ C# lambda expression
+ C# lambda expression � function taking the current bot agent context as an input and returning the value compared after with specified cases. This property supports usage of internal bot variables.
+The initial part of the expression (i.e. �x => �) is automatically added if necessary.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+A custom C# script can be used in the Value expression property. This allows a user to easily and flexibly define a value to save in memory depending on the current bot context.
+ 
+Refer to the following table for examples of what kind of expressions can be used in this operation. See the topic Smart Bot expression reference for the full description of the scripting API.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Expression
+ Description
+ 
+ 
+
+ x => x.BotName x => 
+ Name of the current Smart Bot.
+ 
+ 
+ 
+
+ x.Chat.ChatId x => 
+ Surrogate Identifier of the chat room.
+ 
+ 
+
+ x.Chat.ChatNamex => 
+ Displayed Identifier of the chat room.
+ 
+ 
+ 
+
+ x.Chat.Descriptionx => 
+ 
+ Displayed Title of the chat room.
+ 
+ 
+ 
+
+ x.Chat.ColorString x =>
+ HEX code of the color assigned to a chat.
+ 
+ 
+ 
+
+ x.Chat.ChatAccess
+ Accessibility of the chat room.
+Type: List<ChatAccess>.
+All usual properties and methods of generic lists can be applied.
+ 
+ 
+ 
+
+ x => x.Chat.ChatAccess[0]
+ 
+ Accessibility of the first participant in the chat room.
+Type: ChatAccess
+ 
+ 
+ 
+
+ x => x.Chat.ChatAccess[0].UserId
+ Unique identifier of the first participant in the chat room.
+ 
+ 
+
+ x => x.Chat.ChatAccess[1].CreationDate
+ Entry date of the second participant in the chat room.
+ 
+ 
+
+ x => x.Chat.ChatAccess[1].Access
+ 
+ Access level of the second participant in the chat room.
+ 
+ 
+ 
+
+ x => x.Chat.StorageTimeOfMessages
+ Maximum time an old message can remain in the chat, in minutes, null for infinite.
+ 
+ 
+
+ x => x.LastMessage.MessageId
+ Unique identifier of the message. Type: System.Guid.
+ 
+ 
+
+ x => x.LastMessage.DeviceId
+ Unique name of the device/station used to send the message.
+ 
+ 
+
+ x => x.LastMessage.DeviceDisplayName
+ 
+ Displayed identifier of the device/station used to send the message.
+ 
+ 
+
+ x => x.LastMessage.ZoneId
+ 
+ Sender�s location when the message was sent.
+ 
+ 
+
+ x => x.LastMessage.Sender
+ 
+ User name of the message sender.
+ 
+ 
+
+ x => x.LastMessage.DateOffset
+ 
+ Local timestamp of the message.
+ 
+ 
+
+ x => x.LastMessage.Date
+ 
+ UTC timestamp of the message.
+ 
+ 
+ 
+
+ x => x.LastMessage.Type
+ 
+ Type of the message.
+ 
+ 
+
+ x => x.LastMessage.Text
+ 
+ Content of the text messages or filename for attachments.
+ 
+ 
+
+ x => x.LastMessage.FilePath
+ 
+ Full path to the attachment file.
+ 
+ 
+
+ x => x.LastMessage.TotalBytes
+ Size of the message attachments in bytes.
+ 
+ 
+
+ x => x.LastMessage.Extra
+ 
+ Extensions of the message, such as auto-response options. XML format.
+ 
+ 
+
+ x => System.DateTime.Now
+ The current date and time.
+ 
+ 
+
+ x => System.DateTime.Now.ToStrint(�d�)
+ The current date and time formatted to the current culture. Refer to Standard date and time format strings Microsoft documentation for more formatting options.
+
+ 
+ 
+
+ x => x.Context.User
+ 
+ The username of the user in the current context of a �User information changed� condition.
+ 
+ 
+
+ x => x.Context.LastValue
+ The previous value of the specified property in the current context of a �property changed� type of condition.
+ 
+ 
+
+ x => x.Context.NewValue
+ 
+ 
+ 
+The new value of the specified property in the current context of a �property changed� or �multiple choice� types of condition. Examples:
+ 
+ 
+
+ 
+Message condition has �Equals to Any" text function and 3 options for the text. Context.NewValue will have the corresponding option which triggered the condition.
+ 
+ 
+
+ 
+User information changed condition has the user�s zone Id as the Information to retrieve. After condition was triggered, Context.NewValue will contain the id of the new user�s zone.
+ 
+ 
+ 
+ 
+ 
+
+ x => x.Variable(�@Branch .Bit01�)
+ Value of the variable named Branch.Bit01. The variable name is prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+ 
+ 
+
+ x => x.HistoricalAt(�@Branch .Register01�, �Unit01�, new DateTime(2019, 1, 1))
+ 
+ 
+Value of the variable named Branch.Register01 at the specified date. The variable name is prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+Note that Smart Bots access Historical data using a unified API, so they can receive data from ANY archiving supported Unit type.
+ 
+ 
+ 
+
+ x => x.Historical(�Branch .Register01�, �Unit01�, new DateRange(10, Intervals.Seconds))
+ 
+ List of data points of the variable named Branch.Register01 during the last 10 seconds including values having a bad quality or NS. The variable name is prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+ 
+
+ x => x.Historical(�Branch .Register01�, �Unit01�, new DateRange(10, Intervals.Hours)).Padding(1, Intervals.Minutes)
+ 
+ List of all data points of the variable named Branch.Register01 during the last 10 hours with Padding of 1 minute applied: i.e. data is spread over the last 10 hours with 1 data point every minute. The variable name is prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+ 
+
+ x => x.Historical(�Branch .Register01�, �Unit01�, new DateRange(new DateTime(2019, 1, 1), new DateTime(2019, 1, 31)))
+ 
+ List of data points of the variable named Branch.Register01 during the period from 1 January 2019 to 31 January 2019 including values having a bad quality or NS. The variable name is prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+ 
+ 
+ 
+Call procedure
+ 
+Executes another Smart Bot procedure. Result of the procedure call is saved in the bot agent�s memory. The saved items could then be used via substitution mechanism. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Branch
+ String
+ Branch name assigned to the executed Smart Bot. The branch will be prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+ 
+
+ Procedure path
+ String
+ Path to the Smart Bot blueprint file to be executed. This property supports usage of internal bot variables. The specified path is relative to the following directory: <projectFolder>\MsgData\Bots
+ 
+ 
+
+ Result key
+ String
+ Unique reference to the procedure result in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Parameters list
+ Set
+ List of internal variables and corresponding values that will be predefined in the executed Smart Bot. Both variable name and value properties support usage of internal bot variables. List of internal variables is automatically prefilled with the unset internal variables of the executed Smart Bot. Feel free to modify the list, if necessary.
+ 
+ 
+ 
+ 
+
+ 
+The calling Smart Bot waits until the executing procedure is completed. To run the Smart Bot in parallel use the Invite User to Chat operation.
+ 
+ 
+Stop procedure
+ 
+Stops the current Smart Bot procedure and the current bot agent. Specified result can be returned to the calling Smart Bot in case where the Call operation was used. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Result
+ String
+ Value to return to the calling Smart Bot in case where Call operation was used. This property supports usage of internal bot variables.
+
+
+========================================
+TOPIC: smartbots_ops_reporting.htm
+========================================
+Reporting operations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Reporting operations
+ 
+This category contains all operations related to reporting that can be used in a bot.
+ 
+Generate report
+ 
+Creates a report based on the selected source template file by substituting cells that contain a reference to a variable by the value of the corresponding internal bot variable. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time. 
+ 
+ 
+
+ Report type
+ Excel or Word
+ 
+ 
+ Indicates for which app the report must be generated.
+ 
+ 
+ 
+
+ Source template path
+ String
+ Path to an initial report template file. This property supports usage of internal bot variables. The specified path is relative to the following directory.
+<projectFolder>\MsgData\Bots
+ 
+ 
+
+ Result file path
+ String
+ 
+ 
+Path to the output report file. File will be created if it does not exist. This property supports usage of internal bot variables. The specified path is relative to the following directory.
+<projectFolder>\MsgData\Bots
+ 
+ 
+ 
+
+ Overwrite file
+ Boolean
+ True to always use the Result report file path. False to generate a new file for each report.
+ 
+ 
+ 
+ 
+To prepare a source template file open it in Microsoft Excel or Microsoft Word, and use internal bot variables in the fields need to be filled out by the values. In this example, the internal bot variables eqname, pressure, temp and vol are used. In order to create them, use the SaveToMemory operation with the corresponding keys. Show picture
+
+ 
+Open worksheet
+ 
+Opens a Microsoft Excel worksheet in bot agent�s memory. The worksheet can then be referenced in other operations of the Excel category using the specified Key. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the report in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory specified by the Key reference. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Shared
+ Boolean
+ True to make this worksheet available for all running Smart Bots. False to make it available to the current Smart Bot only.
+ 
+ 
+
+ Worksheet name
+ String
+ Name of the worksheet to open. This property supports usage of internal bot variables.
+ 
+ 
+
+ Source template path
+ String
+ 
+ 
+Path to an initial report template file. This property supports usage of internal bot variables. The specified path is relative to the following directory.
+<projectFolder>\MsgData\Bots
+ 
+ 
+ 
+
+ Result file path
+ String
+ 
+ 
+Path to the output report file. File will be created if not exists when the first write operation is called. This property supports usage of internal bot variables. The specified path is relative to the following directory.
+<projectFolder>\MsgData\Bots
+ 
+ 
+ 
+
+ Overwrite file
+ Boolean
+ 
+ 
+True to always use the Result report file path. False to generate a new file for each report.
+ 
+ 
+ 
+
+ Prefill report
+ Boolean
+ 
+ 
+True to prefill the result report file by substituting the internal bot variables into cells that contain a reference to the variable.
+ 
+ 
+ 
+
+ Column
+ String
+ 
+ 
+Column name in the Excel worksheet to which the cursor will be moved.
+ 
+ 
+ 
+
+ Row
+ Integer
+ Row number in the Excel worksheet to which the cursor will be moved.
+ 
+ 
+ 
+ 
+Close worksheet
+ 
+Closes a previously opened Microsoft Excel report and removes the corresponding Bot Agent�s memory reference. This operation has the following parameters:
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the report in memory. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+Move cursor
+ 
+Moves the cursor in a previously opened Microsoft Excel worksheet. Cursor is then used to write data in the worksheet using �Write to Worksheet� operation. This operation has the following parameters:
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the report in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Column
+ String
+ Column name in the Excel worksheet to which the cursor will be moved.
+ 
+ 
+
+ Row
+ Integer
+ Row number in the Excel worksheet to which the cursor will be moved.
+ 
+ 
+ 
+ 
+Write to worksheet
+ 
+Writes the specified set of values to a previously opened Microsoft Excel worksheet. If the file does not exist, this operation creates it. The current cursor position is used to write data in the worksheet. Each consecutive value is written to the next cell of the same row. After all values are written the cursor can be moved to the next row. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the report in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Move to next line
+ Boolean
+ True to move the cursor position on the next line after writing all values. False to leave the cursor in the same position.
+ 
+ 
+
+ Values
+ Set
+ 
+ 
+List of values to write. Each next value is written in the next cell of the same row. Empty values at the end of the list are ignored. Value properties support usage of internal bot variables.
+Value properties support usage of expressions. 
+If the value starts with x =>, the corresponding expression is computed and the result is written to the cell.
+If a value starts with the equal sign ("="), then the value will be inserted as the Microsoft Excel formula.
+If a value starts with �PICTURE:�, then the corresponding image will be inserted to the cell. e.g. "PICTURE:filepath/filename.jpg"
+ 
+ 
+ 
+ 
+ 
+A custom C# script can be used in the values list. This allows a user to easily and flexibly define a value to write to the report without creating an internal variable. Refer to the following table for examples of what kind of expressions can be used in this operation. See topic Expression scripting reference for the full description of the scripting API.
+ 
+ 
+ 
+ 
+ 
+
+ Expression
+ Description
+ 
+ 
+
+ x => x.BotName
+ 
+ 
+Name of the current Smart Bot.
+ 
+ 
+ 
+
+ x => x.Chat.Description
+ 
+ 
+Displayed Title of the chat room
+ 
+ 
+ 
+
+ x => x.LastMessage.DeviceId
+ 
+ 
+Unique name of the device/station used to send the message
+ 
+ 
+ 
+
+ x => x.LastMessage.DeviceDisplayName
+ 
+ 
+Displayed name of the device/station used to send the message
+ 
+ 
+ 
+
+ x => x.LastMessage.ZoneId
+ 
+ 
+Sender�s location when the message was sent
+ 
+ 
+ 
+
+ x => x.LastMessage.Sender
+ 
+ 
+User name of the message sender
+ 
+ 
+ 
+
+ x => x.LastMessage.DateOffset
+ Local timestamp of the message
+ 
+ 
+
+ x => x.LastMessage.Text
+ 
+ 
+Content of the text messages or filename for attachments
+ 
+ 
+ 
+
+ x => System.DateTime.Now
+ 
+ 
+The current date and time
+ 
+ 
+ 
+
+ x => System.DateTime.Now.ToStrint(�d�)
+ 
+ 
+The current date and time formatted to the current culture. Refer to Standard date and time format strings topic from Microsoft documentation for more formatting options.
+ 
+ 
+ 
+
+ x => x.Variable(�@Branch .Bit01�)
+ 
+ 
+Value of the variable named Branch.Bit01. The variable name is prefixed with the current bot�s branch unless the @ symbol is used.
+ 
+ 
+ 
+ 
+ 
+Insert an image in a worksheet
+ 
+Inserts the specified image in a previously opened Microsoft Excel report. If the file does not exist, this operation creates it. The current cursor position is used to write data in the worksheet. After this operation cursor can be moved to the next row. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the report in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Move to next line
+ Boolean
+ True to move the cursor position on the next line after inserting the image. False to leave the cursor in the same position.
+ 
+ 
+
+ File path
+ String
+ 
+ 
+Absolute or relative Uri path to the image file to be inserted. This property supports usage of internal bot variables. The specified path is relative to the following directory.
+<projectFolder>\MsgData\Bots
+
+
+========================================
+TOPIC: smartbots_ops_rights.htm
+========================================
+Access rights operations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Access rights operations
+ 
+This category consists of operations related to chat access management that can be used in a bot.
+ 
+Invite a user to a chat
+ 
+Invites a user with the given name to the current chat. Note that bot agent must have sufficient rights in the chat to be able to invite others. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ User name
+ String
+ 
+ 
+Name of the user or Smart Bot to invite. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Access level
+ String
+ 
+ 
+Access level for the invited user in this chat. Note that bot agent must have sufficient rights in the chat to be able to configure the access level.
+ 
+ 
+ 
+ 
+ 
+Remove a user from a chat
+ 
+Removes a user with the given user name from the current chat. Note that bot agent must have sufficient rights in the chat to be able to remove others. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ User name
+ String
+ 
+ 
+Name of the user or Smart Bot to remove. Use the current Bot name in order to quit the chat. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+ 
+Set user occupation
+ 
+Associates a given occupation string to the user. The occupation string is a run-time property and is not persistent on the disk. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ User name
+ String
+ 
+ 
+Name of the user whose occupation is to be changed. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Occupation
+ String
+ 
+ 
+Arbitrary string that can be used to find the right user in the list. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+ 
+Find the right user
+ 
+Applies the specified filter on the list of chat users and saves the selected user name in Bot agent�s memory along with the total amount of users satisfying the given filtering criteria. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ 
+ 
+Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Key for count
+ String
+ 
+ 
+Unique reference to the value in memory. This property supports usage of internal bot variables.
+Key for count is used to enumerate between several users that satisfies the given filter. Total amount of selected users is written to the corresponding variable. Further selection can be made by using the Index property of the operation.
+ 
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory specified by the Key reference. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Index of the user
+ Integer
+ 
+ 
+1-based index of the user in the list of selected users, i.e. corresponding to the specified filters. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Connected
+ Boolean
+ 
+ 
+True to select only the users currently connected via a mobile application.
+ 
+ 
+ 
+
+ Order by profile level
+ Enum
+ 
+ 
+Order the list of selected users by their profile level. The following values are available.
+ 
+ 
+
+ 
+Do not order by profile level � order of users is not modified.
+ 
+ 
+
+ 
+With the highest profile level (Closer to 0) � order the list of users according to their profile level: 0,1,2, etc.
+ 
+ 
+
+ 
+With the lowest profile level (Closer to 9) � order the list of users according to their profile level: 9,8,7, etc.
+ 
+ 
+ 
+ 
+ 
+
+ Minimum profile level
+ Integer
+ 
+ 
+Selects only users with the profile level greater or equal to that specified.
+ 
+ 
+ 
+
+ Maximum profile level
+ Integer
+ 
+ 
+Selects only users with the profile level lower or equal to that specified.
+ 
+ 
+ 
+
+ Filter by availability
+ Options
+ 
+ 
+Selects only users with the checked availability in the chat. Availability is a run-time property of users initialized by the Scheduler from Microsoft Office 365 when it is connected.
+ 
+ 
+ 
+
+ Filter by occupation
+ Function
+ 
+ 
+	A function that will be applied to compare the actual user occupation string and the value of the Occupation property. The following functions are available.
+ 
+ 
+
+ 
+Any value � any text is accepted.
+ 
+ 
+
+ 
+Equals � the exact text matching is required.
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options.
+ 
+ 
+
+ 
+Contains � the occupation string must contain the specified value.
+ 
+ 
+
+ 
+Contains any of the following strings � the occupation string must contain any of the specified values. Use one string per line to separate values
+ 
+ 
+
+ 
+Starts with � the occupation string must start with the specified value.
+ 
+ 
+
+ 
+Starts with any of the following strings � the occupation string must start with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Ends with � the occupation string must end with the specified value.
+ 
+ 
+
+ 
+Ends with any of the following strings � the occupation string must end with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Not equals � the occupation string must not match the specified value.
+ 
+ 
+
+ 
+Not contains � the occupation string must not contain the specified value.
+ 
+ 
+
+ 
+Not starts with � the occupation string must not start with the specified value.
+ 
+ 
+
+ 
+Not ends with � the occupation string must not end with the specified value.
+ 
+ 
+
+ 
+Match regular expression � the occupation string must match the specified regular expression. See this Microsoft article about the Regex Class for further details.
+ 
+ 
+ 
+ 
+ 
+
+ Occupation
+ String
+ 
+ 
+Text or regular expression verified using the Filter by occupation function. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Filter by access level
+ Options
+ 
+ 
+Selects only users with the checked access level in the chat.
+ 
+ 
+ 
+
+ Order by distance
+ Enum
+ 
+ 
+ 
+
+ 
+Order the list of selected users by their distance to the position defined in the Latitude and Longitude properties. The following values are available.
+ 
+ 
+
+ 
+Do not order by distance � order of users is not modified.
+ 
+ 
+
+ 
+Closest � start with users closest to the specified position.
+ 
+ 
+
+ 
+Farthest � start with users farthest from the specified position.
+ 
+ 
+ 
+ 
+ 
+
+ Latitude
+ Double
+ 
+ 
+GPS Latitude (in WGS84) coordinate used for filtering and ordering by distance. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Longitude
+ Double
+ 
+ 
+GPS Longitude (in WGS84) coordinate used for filtering and ordering by distance. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Minimum distance in meters
+ Double
+ 
+ 
+	Selects only users with a known position and whose distance to the specified position is greater or equal to the given distance in meters.
+ 
+ 
+ 
+
+ Maximum distance in meters	
+ Double
+ Selects only users with a known position and whose distance to the specified position is less or equal to the given distance in meters
+ 
+ 
+ 
+ 
+Get information about the user
+ 
+Saves a specified property of the user in Bot agent�s memory. Only current chat users are available. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ 
+ 
+Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of value in memory specified by the Key reference. The following values are available.
+
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ User name
+ String
+ 
+ 
+Name of the user whose information needs to be read. This property supports usage of internal bot variables.
+ 
+ 
+ 
+
+ Information to retrieve
+ Enum
+ 
+ 
+The property of a given user to read. The following values are available.
+ 
+ 
+
+ 
+Display.
+ 
+ 
+
+ 
+E-mail.
+ 
+ 
+
+ 
+Phone number.
+ 
+ 
+
+ 
+Title.
+ 
+ 
+
+ 
+Last name.
+ 
+ 
+
+ 
+Profile level.
+ 
+ 
+
+ 
+Occupation.
+ 
+ 
+
+ 
+Availability � free/busy status of the user.
+ 
+Runtime property initialized by Scheduler. Note that connected MS Graph plug-in is required to receive this property.
+ 
+ 
+ 
+ 
+
+ 
+Mobile connectivity � specifies if the user is currently connected via Mobile application.
+ 
+ 
+
+ 
+Latitude.
+ 
+ 
+
+ 
+Longitude
+ 
+ 
+
+ 
+Name of the current zone.
+ 
+ 
+
+ 
+Description of the current zone.
+ 
+ 
+ 
+The Tracking feature is required to receive the position and location related properties.
+
+
+========================================
+TOPIC: smartbots_ops_schedule.htm
+========================================
+Schedule operations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Schedule operations
+ 
+This category contains operations allowing a user to control the bot�s schedules. Deployed schedules and events are managed by the bot and synchronized with third-party calendars, for example Microsoft Office 365, when they are connected
+ 
+Connect schedule
+ 
+Creates and deploys a new schedule to the bot scheduler. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Schedule name
+ String
+ Unique name of the schedule to deploy. This property supports usage of internal bot variables.
+ 
+ 
+
+ Overwrite file
+ Boolean
+ If a schedule with the same name already exists, this parameter specifies the action. True to dismiss the existing schedule before deploying a new one. False to leave the existing Schedule and do nothing.
+ 
+ 
+ 
+ 
+Disconnect schedule
+ 
+	Dismiss the Schedule with the given name from the bot scheduler. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Schedule name
+ String
+ Unique name of the schedule to dismiss. This property supports usage of internal bot variables.
+ 
+ 
+ 
+ 
+Deploy event
+ 
+Deploy an event to the given Schedule. This operation has large number of properties displayed in a number of tabs in the configuration dialog.
+ 
+In the General tab.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Schedule name
+ String
+ Unique name of the event to deploy. This property supports usage of internal bot variables.
+ 
+ 
+
+ Name
+ String
+ A unique identifier of the event. If the field is empty the identifier will be generated automatically. Otherwise, if the event with the same name exists, it will be replaced.
+ 
+ 
+
+ Summary
+ String
+ Summary of the event. This property supports the usage of internal bot variables.
+ 
+ 
+
+ Location
+ String
+ This property is not related to geolocation zones. This property supports the usage of internal bot variables.
+ 
+ 
+
+ Description
+ String
+ Description of the event. This property supports the usage of internal bot variables.
+ 
+ 
+
+ Status bit variable
+ String
+ The name of a remote but variable. The bit will be set to 1 when the event is started and 0 when it is stopped. If at startup, the event was already started (the start date is passed) and not yet finished (the end date is later in future), the variable will still be set to 1.
+ 
+ 
+ 
+ 
+In the Entry Action tab.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Call procedure when event is triggered
+ Boolean
+ Specifies whether to deploy a smart bot procedure when the Event starts.
+ 
+ 
+
+ Chat name
+ String
+ Name of the chat in which the smart bot will be added.
+ 
+ 
+
+ Branch
+ String
+ Branch name applied to all SCADA variables in bot�s operation and conditions. This property supports usage of internal bot variables.
+ 
+ 
+
+ Bot path
+ String
+ Path to the Smart Bot blueprint file to be executed. This property supports usage of internal bot variables. The specified path is relative to the following directory: <projectFolder>\MsgData\Bots.
+ 
+ 
+
+ Parameters list
+ Set
+ List of internal variables and corresponding values that will be predefined in the executed Smart Bot. Both variable name and value properties support usage of internal bot variables.
+ 
+ 
+
+ At the end of the event
+ Enum
+ 
+ 
+Specifies an action to perform when event is finished or removed. The following values are available.
+ 
+ 
+
+ 
+Do nothing.
+ 
+ 
+
+ 
+Pause the procedure.
+ 
+ 
+
+ 
+Dismiss the procedure.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+In the Exit Action tab.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Call procedure when event is finished
+ Boolean
+ Specifies whether to deploy a smart bot procedure when the Event starts.
+ 
+ 
+
+ Chat name
+ String
+ Name of the chat in which the smart bot will be added.
+ 
+ 
+
+ Branch
+ String
+ Branch name applied to all SCADA variables in bot�s operation and conditions. This property supports usage of internal bot variables.
+ 
+ 
+
+ Bot path
+ String
+ Path to the Smart Bot blueprint file to be executed. This property supports usage of internal bot variables. The specified path is relative to the following directory: <projectFolder>\MsgData\Bots.
+ 
+ 
+
+ Parameters list
+ Set
+ List of internal variables and corresponding values that will be predefined in the executed Smart Bot. Both variable name and value properties support usage of internal bot variables.
+ 
+ 
+ 
+ 
+In the Chat tab.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Create or modify chat if necessary
+ Boolean
+ Specifies whether the chat with the given name should be created / modified or not. When the event starts, the bot searches for the chat with the given name. If True and the chat was not found, a new chat will be created. If True and the chat was found, it will be modified. If False and entry or exit actions are specified, the corresponding SmartBot procedures will still be invited to the chat.
+ 
+ 
+
+ Chat name
+ String
+ Name of the Chat in which the Entry or Exit Smart Bots procedures will be added. Use combo box to select the existing chats. This property supports usage of internal bot variables.
+ 
+ 
+
+ Associate Chat to a zone
+ String	
+ Name of the zone associated to the given chat. This property is used only if the chat is created or modified. This property supports usage of internal bot variables.
+ 
+ 
+
+ Chat color
+ String
+ HEX code of the color to apply. This property is used only if the chat is created or modified. This property supports usage of internal bot variables.
+ 
+ 
+
+ Attendees Set
+ List of event attendees
+ If the existing Chat is selected, this list is pre-filled with all the chat users. Both the user name and email properties support usage of internal bot variables.
+ 
+ 
+ 
+ 
+In the Trigger tab.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Trigger event
+ Enum
+ 
+ 
+	Specifies triggers starting and finishing the event. The following values are available.
+ 
+ 
+
+ 
+Once deployed � event is started as soon as it is deployed. Event is finished after the given duration.
+ 
+ 
+
+ 
+At the given date and time � event is started at the given date and time. Event is finished after the given duration.
+ 
+ 
+
+ 
+During specified period � event is started and finished at the given date and time.
+ 
+ 
+ 
+ 
+ 
+
+ Start date
+ String
+ Date and time when the event has to be started. This property supports usage of internal bot variables. This property supports the local date and time format defined by the selected culture in the bot manager preferences. This property is only available for �At the given date and time� trigger.
+ 
+ 
+
+ End date
+ String
+ Date and Time when the event has to be finished. This property supports usage of internal bot variables. This property supports the local date and time format defined by the selected culture in the bot manager preferences. This property is only available for �During specified period� trigger.
+ 
+ 
+
+ Duration
+ String
+ Duration of the event. Text near the value is reformatted automatically after validating the input. This property supports usage of internal bot variables. This property is only available for �Once deployed� and �At the given date and time� triggers.
+ 
+ 
+
+ Frequency
+ Enum
+ 
+ 
+Specifies how often the recurrent event should occur. The following values are available.
+ 
+ 
+
+ 
+One time � for non-recurrent events
+ 
+ 
+
+ 
+Secondly
+ 
+ 
+
+ 
+Minutely
+ 
+ 
+
+ 
+Hourly
+ 
+ 
+
+ 
+Daily
+ 
+ 
+
+ 
+Weekly
+ 
+ 
+
+ 
+Monthly
+ 
+ 
+
+ 
+Yearly
+ 
+ 
+ 
+ 
+ 
+
+ Interval
+ Int
+ Specifies how often the recurrent event should occur. E.g. if the Frequency is set to �Secondly� and Interval is 5, then the event will occur every 5 seconds. This property is used only for recurrent events. This property supports usage of internal bot variables.
+ 
+ 
+
+ End date
+ String
+ Specifies when to finish the event or when to stop the event�s recurrence. This property is used only for recurrent events or events with the �During specified period� trigger. This property supports the local date and time format defined by the selected culture in the bot manager preferences. This property supports usage of internal bot variables.
+ 
+ 
+
+ Recur on
+ Set
+ Specifies days of week on which the Event should occur. This property is used only for �Weekly� event frequency.
+ 
+ 
+ 
+ 
+Dismiss event
+ 
+Dismiss event from the schedule with the given name. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Schedule name
+ String
+ Unique name of the schedule with the event to dismiss. This property supports usage of internal bot variables.
+ 
+ 
+
+ Name
+ String
+ Unique name of the event to dismiss.
+ 
+ 
+ 
+ 
+Find event
+ 
+Applies the specified filter on the list of events and saves the selected event object in the bot agent�s memory. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key
+ String
+ Unique reference to the found event object in memory. This property supports usage of internal bot variables.
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+Accessibility scope of event object in memory specified by the �Key� reference. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Index
+ Integer
+ 1-based index of the user in the list of selected events, i.e. corresponding to the specified filters. This property supports usage of internal bot variables.
+ 
+ 
+
+ Schedule names
+ String
+ Names of the deployed schedules, in which the event should be searched. Multiple ranges are separated with commas. This property supports wildcard symbols. �?� is a replacement for any single character. �*� is a replacement for any amount of characters. This property supports usage of internal bot variables.
+ 
+ 
+
+ Filter by attendees
+ String
+ Selects only events with the specified attendees. If the field is empty, corresponding filter is not applied.
+ 
+ 
+
+ Filter by name
+ String
+ Filter events by the unique name of the event.
+ 
+ 
+
+ Filter by summary
+ Function
+ 
+ 
+A function that will be applied to compare the actual event summary and the value of the summary property. The following functions are available.
+ 
+ 
+
+ 
+Any value � any text is accepted.
+ 
+ 
+
+ 
+Equals � the exact text matching is required.
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options.
+ 
+ 
+
+ 
+Contains � the summary must contain the specified value.
+ 
+ 
+
+ 
+Contains any of the following strings � the summary must contain any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Starts with � the summary must start with the specified value.
+ 
+ 
+
+ 
+Starts with any of the following strings � the summary must start with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Ends with � the summary must end with the specified value.
+ 
+ 
+
+ 
+Ends with any of the following strings � the summary must end with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Not equals � the summary must not match the specified value.
+ 
+ 
+
+ 
+Not contains � the summary must not contain the specified value.
+ 
+ 
+
+ 
+Not starts with � the summary must not start with the specified value.
+ 
+ 
+
+ 
+Not ends with � the summary must not end with the specified value.
+ 
+ 
+
+ 
+Match regular expression � the summary must match the specified regular expression. See this Microsoft article about the Regex Class for further details.
+ 
+ 
+ 
+ 
+ 
+
+ Summary
+ String
+ Text or Regular expression verified using the �Filter by summary� function. This property supports usage of internal bot variables.
+ 
+ 
+
+ Filter by location
+ Function
+ 
+ 
+	A function that will be applied to compare the actual event location and the value of the location property. The following functions are available.
+ 
+ 
+
+ 
+Any value � any text is accepted.
+ 
+ 
+
+ 
+Equals � the exact text matching is required.
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options.
+ 
+ 
+
+ 
+Contains � the location must contain the specified value.
+ 
+ 
+
+ 
+Contains any of the following strings � the location must contain any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Starts with � the location must start with the specified value.
+ 
+ 
+
+ 
+Starts with any of the following strings � the location must start with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Ends with � the location must end with the specified value.
+ 
+ 
+
+ 
+Ends with any of the following strings � the location must end with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Not equals � the location must not match the specified value.
+ 
+ 
+
+ 
+Not contains � the location must not contain the specified value.
+ 
+ 
+
+ 
+Not starts with � the location must not start with the specified value.
+ 
+ 
+
+ 
+Not ends with � the location must not end with the specified value.
+ 
+ 
+
+ 
+Match regular expression � the location must match the specified regular expression. See this Microsoft article about the Regex Class for further details.
+ 
+ 
+ 
+ 
+ 
+
+ Location
+ String
+ Text or Regular expression verified using the �Filter by location� function. This property supports usage of internal bot variables.
+ 
+ 
+
+ Filter events creating a chat
+ Enum
+ Filter events creating or modifying a chat.
+ 
+ 
+
+ Filter by chat name
+ Function
+ 
+ 
+	A function that will be applied to compare the actual event chat and the value of the Chat name property. The following functions are available.
+ 
+ 
+
+ 
+Any value � any text is accepted.
+ 
+ 
+
+ 
+Equals � the exact text matching is required.
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options.
+ 
+ 
+
+ 
+Contains � the chat name must contain the specified value.
+ 
+ 
+
+ 
+Contains any of the following strings � the chat name must contain any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Starts with � the chat name must start with the specified value.
+ 
+ 
+
+ 
+Starts with any of the following strings � the chat must start with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Ends with � the chat name must end with the specified value.
+ 
+ 
+
+ 
+Ends with any of the following strings � the chat name must end with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Not equals � the chat name must not match the specified value.
+ 
+ 
+
+ 
+Not contains � the chat name must not contain the specified value.
+ 
+ 
+
+ 
+Not starts with � the chat name must not start with the specified value.
+ 
+ 
+
+ 
+Not ends with � the chat name must not end with the specified value.
+ 
+ 
+
+ 
+Match regular expression � the chat name must match the specified regular expression. See this Microsoft article about the Regex Class for further details.
+ 
+ 
+ 
+ 
+ 
+
+ Chat name
+ String
+ Text or Regular expression verified using the �Filter by chat name� function. This property supports usage of internal bot variables.
+ 
+ 
+
+ Filter events by entry procedure
+ Enum
+ Filter events having entry action specified.
+ 
+ 
+
+ Filter by entry bot name
+ Function
+ 
+ 
+	A function that will be applied to compare the actual event entry bot name and the value of the entry bot name property. The following functions are available.
+ 
+ 
+
+ 
+Any value � any text is accepted.
+ 
+ 
+
+ 
+Equals � the exact text matching is required.
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options.
+ 
+ 
+
+ 
+Contains � the bot name must contain the specified value.
+ 
+ 
+
+ 
+Contains any of the following strings � the bot name must contain any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Starts with � the bot name string must start with the specified value.
+ 
+ 
+
+ 
+Starts with any of the following strings � the bot name must start with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Ends with � the bot name must end with the specified value.
+ 
+ 
+
+ 
+Ends with any of the following strings � the bot name must end with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Not equals � the bot name must not match the specified value.
+ 
+ 
+
+ 
+Not contains � the bot name must not contain the specified value.
+ 
+ 
+
+ 
+Not starts with � the bot name must not start with the specified value.
+ 
+ 
+
+ 
+Not ends with � the bot name must not end with the specified value.
+ 
+ 
+
+ 
+Match regular expression � the bot name must match the specified regular expression. See this Microsoft article about the Regex Class for further details.
+ 
+ 
+ 
+ 
+ 
+
+ Entry bot name
+ String
+ Text or Regular expression verified using the �Filter by Entry bot name� function. This property supports usage of internal bot variables.
+ 
+ 
+
+ Filter events by exit procedure
+ Enum
+ Filter events having exit action specified.
+ 
+ 
+
+ Filter by exit bot name
+ Function
+ 
+ 
+A function that will be applied to compare the actual event exit bot name and the value of the exit bot name property. The following functions are available.
+ 
+ 
+
+ 
+Any value � any text is accepted.
+ 
+ 
+
+ 
+Equals � the exact text matching is required.
+ 
+ 
+
+ 
+Equals to any of the following strings � the exact text matching is required. Use one string per line to separate options.
+ 
+ 
+
+ 
+Contains � the bot name must contain the specified value.
+ 
+ 
+
+ 
+Contains any of the following strings � the bot name must contain any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Starts with � the bot name must start with the specified value.
+ 
+ 
+
+ 
+Starts with any of the following strings � the bot name must start with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Ends with � the bot name must end with the specified value.
+ 
+ 
+
+ 
+Ends with any of the following strings � the bot name must end with any of the specified values. Use one string per line to separate values.
+ 
+ 
+
+ 
+Not equals � the bot name must not match the specified value.
+ 
+ 
+
+ 
+Not contains � the bot name must not contain the specified value.
+ 
+ 
+
+ 
+Not starts with � the bot name must not start with the specified value.
+ 
+ 
+
+ 
+Not ends with � the bot name must not end with the specified value.
+ 
+ 
+
+ 
+Match regular expression � the bot name must match the specified regular expression. See this Microsoft article about the Regex Class for further details.
+ 
+ 
+ 
+ 
+ 
+
+ Exit Bot name
+ String
+ Text or Regular expression verified using the �Filter by Exit bot name� function. This property supports usage of internal bot variables.
+ 
+ 
+
+ Start date
+ String
+ Beginning of the time period in which to search for an event. This property supports usage of internal bot variables. This property supports the local date and time format defined by the selected culture in the bot manager preferences.
+ 
+ 
+
+ End date
+ String
+ End of the time period in which to search for an event. This property supports usage of internal bot variables. This property supports the local date and time format defined by the selected culture in the bot manager preferences.
+ 
+ 
+ 
+ 
+Find the right time for a user
+ 
+Applies the specified filter on the list of users, searches a free time slot in the specified schedules for a first available user in the list and saves the selected schedule name, user name and selected date in bot agent�s memory. This operation has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Description
+ String
+ Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.
+ 
+ 
+
+ Key for result date
+ String
+ 
+ 
+Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+Date and time object for the selected time slot satisfying the given filter is written to the corresponding variable.
+ 
+ 
+ 
+
+ Key for result user
+ String
+ 
+ 
+	Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+Available user for the selected time slot satisfying the given filter is written to the corresponding variable.
+ 
+ 
+ 
+
+ Key for result schedule
+ String
+ 
+ 
+	Unique reference to the value in memory. This property supports usage of internal bot variables.
+ 
+Schedule name for the selected time slot satisfying the given filter is written to the corresponding variable.
+ 
+ 
+ 
+
+ Scope
+ Enum
+ 
+ 
+ Accessibility scope of value in memory specified by the �Key for result date�, �Key for result user� and �Key for result schedule� references. The following values are available.
+ 
+ 
+
+ 
+Private � value is available only for the current bot.
+ 
+ 
+
+ 
+Internal � value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.
+ 
+ 
+
+ 
+Shared � value is available for all bots.
+ 
+ 
+ 
+ 
+ 
+
+ Index
+ Integer
+ 1-based index of the time slot and a user in the list of selected options, i.e. corresponding to the specified filters. This property supports usage of internal bot variables.
+ 
+ 
+
+ Schedule names	
+ String
+ 
+ 
+Names of the deployed schedules, in which the events should be verified. Multiple ranges are separated with commas. This property supports Wildcard symbols. �?� is a replacement for any single character. �*� is a replacement for any amount of characters. This property supports usage of internal bot variables.
+ 
+&#160;
+ 
+ 
+ 
+
+ Users
+ String
+ Verifies only events with the specified attendees. Multiple user names are separated with commas. If the field is empty, corresponding filter is not applied. This property supports usage of internal bot variables.
+ 
+ 
+
+ Duration
+ String
+ Duration of the time slot to fit into the planning. Text near the value is reformatted automatically after validating the input. This property supports usage of internal bot variables.
+ 
+ 
+
+ Start date
+ String
+ Beginning of the time period in which to search for a free time slot. This property supports usage of internal bot variables. This property supports the local date and time format defined by the selected culture in the bot manager preferences.
+ 
+ 
+
+ End date
+ String
+ End of the time period in which to search for a free time slot. This property supports usage of internal bot variables. This property supports the local date and time format defined by the selected culture in the bot manager preferences.
+
+
+========================================
+TOPIC: smartbots_overview.htm
+========================================
+Smart Bots overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Smart Bots overview
+ 
+Smart Bots is a plug-in for the Instant Messaging Server. It allows the application designer to create and run automated programs, called bots, which execute a set of operations in response to fulfillment of conditions. Examples of the use of Smart Bots includes the following.
+ 
+ 
+
+ 
+Application forms.
+ 
+ 
+
+ 
+Job orders.
+ 
+ 
+
+ 
+Field Service Management.
+ 
+ 
+
+ 
+On-site inspections work flow.
+ 
+ 
+
+ 
+Smart Assistants.
+ 
+ 
+ 
+Smart Bots are designed to automate recurrent daily tasks, currently executed by operators and administrators manually. Describing and formalizing the process in terms of parametrized states and transitions between them allows defining flexibly nearly any existing process.
+ 
+Deployment
+ 
+The Smart Bots plug-in is available as part of PcVue's installation. To install it select the Custom installation and select the Smart Bot feature.
+ 
+ 
+
+ 
+Bots are loaded from the folder <projectFolder>/MsgData/Bots. Plugin and bots are started along with the Instant Messaging Server.
+ 
+ 
+
+ 
+Bots store the local data in the folder <projectFolder>/MsgData/Bots/Data.
+ 
+ 
+
+ 
+Schedules are loaded from the folder <projectFolder>/MsgData/Schedulers. Scheduler is started along with the Instant Messaging Server.
+ 
+ 
+
+ 
+The bots configuration file is loaded from the folder <projectFolder>/MsgData/C. This configuration is used by Smart Bots at run-time for corresponding operations.
+ 
+ 
+ 
+Smart Bots nomenclature
+ 
+ 
+
+ 
+Smart Bot - A process blueprint described by a finite-state machine with a set of operations in each state and conditions defined for every transition. Sometimes abbreviated to just Bot.
+ 
+ 
+
+ 
+Bot agent - A thread running the given Smart Bot in the given chat. An instance of Bot agent is created for every chat where this Smart Bot has access to. A bot agent runs a finite state machine with defined states and transitions between states. Every Smart Bot has an initial state. When the bot agent arrives to a defined state, a corresponding set of operations is executed. After that, a set of conditions is continuously verified. If a certain condition is met, the bot will pass to the next state following the transition.
+ 
+ 
+
+ 
+Trigger - A special state containing conditions instead of operations. Triggers are only verified when the bot agent is idle, that is when it is running but cannot move forward on any transition. If all conditions of a trigger are met, the bot will pass to the trigger state. After the triggered scenario is finished, that is when bot agent arrives to the final state in the trigger branch, the bot will stop, return to the last state or reset from the initial state depending on the specified behavior.
+ 
+ 
+
+ 
+Scheduler - A thread running at the Instant Messaging Server process. It monitors the loaded schedules and execute Bot agents at the planned time.
+ 
+ 
+ 
+Bot permissions
+ 
+An independent bot agent is started for each chat that the bot has access to. This implies two cases:
+ 
+ 
+
+ 
+The bot agent is started in a chat when the bot is invited to the chat.
+ 
+ 
+
+ 
+The bot agent is started in a chat if the bot belongs to a super profile (with a profile level greater than the level of all chat participants).
+ 
+ 
+ 
+Each bot agent has permissions according to its role in the chat. For example, if the bot agent is invited as a guest, it will be able to send and read messages, but will not be able to invite other users to the chat. See Instant Messaging book for further details on user permissions.
+ 
+The bot has the same set of permissions as any other user with the same role.
+
+
+========================================
+TOPIC: smartbots_transitions.htm
+========================================
+Transitions
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Transitions
+ 
+The following are all ways to create a new transition in a bot.
+ 
+Context menu
+ 
+On the State item in the tree view, click right mouse button to open the context menu and select New transition. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+A new transition from the selected State to the Initial state will be created. You can then modify the destination of the transition in the Properties panel.
+ 
+New transition button
+ 
+Select the source state for the transition and use the New transition button in the tool bar. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+A new transition from the selected state to the Initial state will be created. You can then modify the destination of the transition in the properties panel.
+ 
+Mouse over
+ 
+ 
+
+ 
+Put the mouse over the source state for the transition on the Blueprint. Small squares appear around the state element. Show picture
+
+ 
+ 
+
+ 
+Hold the Left mouse button on one of the squares and drag the mouse to the destination State. Once the mouse will be over the destination State, similar squares appear around the destination state element. Show picture
+
+ 
+ 
+
+ 
+Drop the mouse button over one of the squares to create a transition. Show picture
+
+ 
+ 
+ 
+Transition properties
+ 
+Each transition state has the following properties.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property name
+ Type
+ Description
+ 
+ 
+
+ Name
+ String
+ Name of the transition. Name must be unique among all bot transitions
+ 
+ 
+
+ Next state
+ State
+ Destination state for the transition
+ 
+ 
+ 
+ 
+If the bot agent is in the source transition state, it will move to the destination state once all associated conditions are satisfied. Note that conditions need to be satisfied at least once, which can happen at different times for each conditions. Once a condition is satisfied, it will be marked as such and will not be tested further.
+
+
+========================================
+TOPIC: smartbots_types.htm
+========================================
+Smart Bots types
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Smart Bots types
+ 
+The smart bots property Bot Type defines how the bot is handled on start-up and during development.
+ 
+Smart bots
+ 
+Bots of type Smart Bot are bots designed to interact in a chat room. These bots are loaded from the �<projectFolder>/MsgData/Bots� folder at the Instant Messaging Server start-up. Bots of this type must be added to the chat room in order to be started.
+ 
+System bots
+ 
+System Bots are designed to work in the background without any user interaction. When deploying a System Bot, the Instant Messaging Server automatically creates a chat room for it. The following values are used for the chat properties.
+ 
+ 
+
+ 
+Id - The bot�s Id.
+ 
+ 
+
+ 
+	Name - The bot�s name.
+ 
+ 
+
+ 
+Description - The bot�s description.
+ 
+ 
+
+ 
+Color - A random color from the list of available colors.
+ 
+ 
+
+ 
+Storage time - One day.
+ 
+ 
+
+ 
+Associated Zone - None.
+ 
+ 
+ 
+The deployed bot is automatically invited to this chat room as the owner and therefore gets started.
+ 
+Assistant Bots
+ 
+Assistant Bots are designed to work one to one with a user. The configuration specifies which users, profiles and profile roles it will serve. Usually these bots are used to provide a specific HMI to mobile users. An assistant bot may be associated with the following sets of users:
+ 
+ 
+
+ 
+A set of users. 
+ 
+ 
+
+ 
+A set of user profiles.
+ 
+ 
+
+ 
+A	set of profile roles.
+ 
+ 
+ 
+Multiple users / profiles / profile roles can be defined by separating them with a comma or semicolon. Multiple users / profiles / profile roles can also be defined using wild-card notation with * corresponding to any amount of any characters and ? corresponding to any single character.
+ 
+When deploying an assistant bot, the Instant Messaging Server automatically creates a chat room for every associated user. If the profile is specified, the chat room is created for each user with the given profile.
+ 
+The following values are used for the chat properties.
+ 
+ 
+
+ 
+Id - The bot�s Id.
+ 
+ 
+
+ 
+Name - The bot�s name.
+ 
+ 
+
+ 
+Description - The bot�s description.
+ 
+ 
+
+ 
+Color - A random color from the list of available colors.
+ 
+ 
+
+ 
+Storage time - One day.
+ 
+ 
+
+ 
+Associated Zone - None.
+ 
+ 
+ 
+The deployed bot is automatically invited to these chat rooms as the owner and therefore gets started.
+ 
+Template Bots
+ 
+Template bots are custom parametrized operations for use by other bots. A template bot is not visible in the chat interface and therefore cannot be added to a chat room. A template bot has a set of argument / parameter definitions. When a bot calls a template, the specified argument values are written to internal bot variables and thus can be used in the template bot. Show picture
+ 
+
+ 
+ 
+ 
+The following table enumerates the possible parameter types.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Parameter type
+ Expected value
+ Type
+ Remarks
+ 
+ 
+
+ String
+ Text
+ String
+ Arbitrary string, can be used as a parameter for most operations.
+ 
+ 
+
+ Number
+ Number
+ Double
+ &#160;
+ 
+ 
+
+ Datetime
+ Date and Time
+ DateTime
+ &#160;
+ 
+ 
+
+ Database name
+ Internal variable name (Key) containing the Database context
+ String
+ To be used in local database related operations.
+ 
+ 
+
+ Report name
+ Internal variable name (Key) containing the Report context
+ String
+ To be used in reporting related operations.
+ 
+ 
+
+ Function
+ Expression
+ Expression
+ &#160;
+ 
+ 
+
+ File path
+ Path to the file or folder
+ String
+ &#160;
+ 
+ 
+
+ Variable name
+ &#160;PcVuevariable name
+ String
+ &#160;
+ 
+ 
+
+ Branch
+ Branch name
+ String
+ &#160;
+ 
+ 
+
+ Result
+ Internal variable name (Key)
+ String
+ This type is used to define output results of the template. When the template process is completed, the resulting value is written to the internal variable specified in parameter value.
+ 
+ 
+ 
+ 
+All parameters support the use of internal bot variables. The following properties must be specified for each parameter.
+ 
+ 
+
+ 
+Key � The internal variable name that will contain the input parameter value.
+ 
+ 
+
+ 
+Description � The label of the input parameter field.
+ 
+ 
+
+ 
+Parameter type � The type of the input parameter.
+ 
+ 
+
+ 
+Default value � The input parameter value that will be used by default. That is, if the Input field remains empty.
+ 
+ 
+
+ 
+Required � A flag indicating if the parameter value is mandatory.
+ 
+ 
+ 
+When deploying a template bot, the Instant Messaging Server saves it in the <projectFolder>/MsgData/Bots folder. The deployed templates appear in the Smart Bots Manager UI along with other operations. Show picture
+ 
+
+ 
+ 
+ 
+When adding a template to a bot, the user sets properties according to the template input parameter definitions.
+
+

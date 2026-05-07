@@ -1,0 +1,1857 @@
+========================================
+TOPIC: Deploy_gateway_server_role.htm
+========================================
+Role of the Gateway Server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Role of the Gateway Server
+ 
+Using PcVue as a gateway server brings a higher level of isolation between trusted and un-trusted networks. All connections and messages between PcVue stations in the un-trusted zone and those in the trusted zone go through this single access point (can be redundant if necessary), making it easier to filter, control and monitor the traffic.
+ 
+Such a gateway can be used in several architectures where there is the need for network segregation based on a DMZ.
+ 
+ 
+As a gateway node in client/server systems. It can serve data to clients in the un-trusted zone (such as Remote Desktop clients).
+ 
+As a data concentrator node in distributed systems. It can serve data to upper level central servers in a separate zone (multiple geographically dispersed systems and one central system).
+ 
+As the Web Server for WebVue, TouchVue, SnapVue or the Web Services Toolkit. PcVue web capabilities are used to serve remote clients.
+ 
+ 
+
+ 
+In computer security, a DMZ (De-Militarized Zone) is a physical or logical sub-network that contains and exposes an organization's external-facing services to a larger and un-trusted network such as the Internet or a Corporate network.
+ 
+ 
+Summary of benefits
+ 
+ 
+Simplified connection and traffic control
+ 
+Isolation between trusted and un-trusted networks
+ 
+Easier monitoring of data flows
+ 
+ 
+Suggested operating system: One of the supported Windows Server OS.
+
+
+========================================
+TOPIC: Deploy_Licensing_SV_on_WTS_with_network_dongle.htm
+========================================
+Licensing PcVue using a network dongle
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Licensing PcVue Using a Network Dongle
+ 
+The network dongle (protection key) was originally conceived for multi-station 
+ systems where the project requirements meant all the license information 
+ had to be located in one dongle. The network dongle is physically the 
+ same as a normal dongle but contains more than one license. Each additional license 
+ is held in one of two slots along with other licenses of the same configuration. 
+ 
+The network dongle is plugged into a PC running an instance of PcVue known as the dongle owner. This PcVue station is responsible 
+ for distributing the licenses to other instances of PcVue as they 
+ start, and therefore must be started first.
+ 
+When starting another instance of PcVue - either on another PC, a virtual machine, or in a Remote Desktop Session - PcVue is instructed by the command line, or configuration option, to retrieve its license from the network dongle. The license is acquired 
+ each time PcVue is started.
+ 
+How the licensing works in a network dongle
+ 
+In a standard dongle, if you were able to view its properties 
+ it might look something like this. 
+ 
+
+ 
+ 
+ 
+You can see properties representing the dongle number, the number of allowed 
+ tags, its type etc.
+ 
+In a network dongle, two additional sets of properties 
+ appear. If you were able to view its properties, it might look something 
+ like this.
+ 
+
+ 
+ 
+ 
+The BASE contains the license and properties for PcVue running on the PC to which the dongle is physically connected. 
+ SLOT1 and SLOT2 contain licenses that may be accessed over a network.
+ 
+SLOT1 and SLOT2 contain not only license properties 
+ but also the number of licenses. In the picture above the dongle has the 
+ capability to run 7 instances of PcVue.
+ 
+ 
+1 x 5,000 tag complete 
+ with networking (BASE)
+ 
+2 x 2,000 tag run-time 
+ client (SLOT1)
+ 
+4 x 1,000 tag run-time 
+ client (SLOT2)
+ 
+ 
+
+ 
+A network dongle has only one number property and one 
+ version property hence all instances of PcVue that are licensed 
+ from the dongle will appear to have the same dongle number and must be 
+ the same version.
+ 
+ 
+Using a network dongle when running PcVue 
+ on RD Session Host server
+ 
+When running PcVue on a RD Session Host server it is likely that there will be several instances of PcVue running concurrently 
+ on the same server. In such an architecture, a network 
+ dongle containing multiple licenses must be used.
+ 
+The network dongle will be located on another PC running another installation of PcVue, configured as a license owner, connected to the RD Session Host server via a local area network.
+ 
+
+ 
+
+ &#160;PcVue periodically checks for the presence of 
+ a license. If the PcVue station distributing the license is shutdown, after 
+ a period of time the other instances of PcVue will be unable to 
+ find their license and will also shutdown.
+
+
+========================================
+TOPIC: Deploy_mobile_apps_installation.htm
+========================================
+Deploying the mobile applications
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Deploying the mobile applications
+ 
+TouchVue and SnapVue are only available on, and must be installed from, either Google Play� or the App Store. Show picture
+
+ 
+In all situations, we recommend downloading and installing mobile applications from trusted sources.
+
+
+========================================
+TOPIC: Deploy_Overview.htm
+========================================
+Deployment overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Deployment Overview
+ 
+This book explains the options for deploying PcVue.
+ 
+Deployment is the process of allocating roles to workstations and servers, setting-up a web server and client applications (web or desktop apps) to fulfill the system requirements in a given physical network architecture.
+ 
+For the purpose of this topic, we will consider that PcVue has the following main functions.
+ 
+ 
+Data acquisition - The collection of real-time data, representing process or calculated values, using a communication protocol such as Modbus, OPC... 
+ 
+Historical data recording - The recording of real-time data so that it can be accessed at a later time by either PcVue itself or a third party application.
+ 
+Alarms - Alarm generation and management.
+ 
+HMI - Human Machine Interface. The graphical interface that is the presentation layer and enables operators to interact with the monitored system.
+ 
+Inter-station networking - The mechanism by which PcVue distributes real-time and historical data between stations in networked architectures.
+ 
+Web server - Comprising components used to interface PcVue core architecture with web and mobile clients. 
+ 
+Interface to 3rd party systems - Such as CMMS, GIS, ERP, MES...
+ 
+ 
+Functions and roles allocation cannot be achieved independently from the licenses. For more information about licensing, see the book about Licensing in the Installation section.
+ 
+Further information in the help
+ 
+Multi-station in general - The Application Explorer.Communication.Networked applications
+ 
+Multi-station redundant and high availability - The Application Explorer.Communication.Networked applications.Using redundant configurations
+ 
+Multi-station historical server - The Application Explorer.Archives.Using client-server archive units
+ 
+Multi-station RDS - Deploying PcVue using an RDS host.
+ 
+Web server - Role of the web server & web back end, Web Deployment Console Overview, Deploying the WebVue client and Deploying the mobile applications.
+ 
+Other related topics:
+ 
+ 
+Operating System and PC Requirements,
+ 
+Operating System Related Considerations,
+ 
+Microsoft SQL Server Related Considerations,
+ 
+How to manage project and library versions,
+ 
+Overview of running PcVue as a Windows service.
+ 
+ 
+ 
+Architectures
+ 
+The typical architectures are as follows:
+ 
+ 
+Standalone - All SCADA functions are incorporated into a single station.
+ 
+Multi-station architecture - The SCADA functions span across two or more stations in a client/server architecture. 
+ 
+High availability architecture - The SCADA functions and roles are distributed to offer better resilience and scalability. Multi-station deployment includes the following particular scenarios.
+Data acquisition redundancy - Two or more stations are configured as redundant (hot standby).
+Historical data redundancy - Two or more stations are configured as redundant (hot standby).
+Mutualized servers.
+ 
+Three-level architecture - Using one or more stations as a gateway
+ 
+Engineering station with version management
+ 
+Web based - All-in-one deployment or Network isolation and DMZ.
+ 
+ 
+Roles
+ 
+The architectures above require allocation of the following roles:
+ 
+ 
+Data acquisition
+Communication with field devices,
+Real time data and alarm production,
+Serves real time data and alarms to other stations.
+ 
+Historical data
+Consume real time data and alarms produced by other stations,
+Handles data storage, the recording and replay of historical data,
+Manages connections to RDBMS,
+Serves historical data to other stations.
+ 
+Web & Mobile back end
+Act as a gateway to provide data to the web server.
+ 
+Web server
+Runs Microsoft Internet Information Server,
+Hosts PcVue web services required to serve the web & mobile applications,
+Consume real time data, alarms and historical data provided by the web & Mobile back end station,
+Serves Web and mobile clients including WebVue clients, TouchVue & SnapVue mobile applications, the WebScheduler and the Web Services Toolkit clients.
+ 
+Gateway 
+ 
+ 
+For the secure transfer of data between 2 networks
+ 
+Consume real time data, alarms and historical data produced by other stations on one network,
+ 
+ Serves real time data, alarms and historical data to stations on another network.
+ 
+ 
+HMI
+Display mimics, graphics, alarm viewer, log viewer, trend viewer... to the user.
+ 
+ 
+
+ 
+Depending on the combination of roles, PcVue stations are better deployed on a desktop operating system or a server operating system. See the table below for more information.
+ 
+ 
+Architecture Building Blocks
+ 
+
+ &#160;PcVue is available as the following building blocks.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Building block
+ Typical roles
+ Typical deployment mode
+ 
+ 
+
+ 
+ 
+Standalone station
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+Data Acquisition
+ 
+Historical data
+ 
+HMI
+ 
+Does not have the capability to exchange data with other stations
+ 
+ 
+ 
+ 
+ 
+As a Desktop Application
+ 
+Under a desktop OS
+ 
+ 
+ 
+ 
+
+ 
+ 
+SCADA station
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+Data Acquisition
+ 
+Historical data
+ 
+ HMI
+ 
+ 
+ 
+ 
+ 
+As a Desktop Application if it requires an HMI
+ 
+Under a desktop OS
+ 
+ 
+Or
+ 
+ 
+As a Windows Service if an HMI is not required
+ 
+Under a server OS
+ 
+ 
+ 
+ 
+
+ 
+ 
+Data acquisition server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+Data Acquisition
+ 
+ 
+ 
+ 
+ 
+As a Windows Service
+ 
+Under a server OS
+ 
+ 
+ 
+ 
+
+ 
+ 
+Client station
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+HMI
+ 
+ 
+ 
+ 
+ 
+As a Desktop Application 
+ 
+Under a desktop OS
+ 
+Or with a server OS hosting Remote Desktop Services combined with lightweight terminals used as operator workstations
+ 
+ 
+ 
+ 
+
+ 
+ 
+Historical data server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+Historical data
+ 
+ 
+ 
+ 
+ 
+As a Windows Service
+ 
+Under a server OS
+ 
+ 
+ 
+ 
+
+ 
+ 
+Web & Mobile back end
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+Web & Mobile back end
+ 
+ 
+ 
+ 
+ 
+As a Windows Service
+ 
+Under a server OS
+ 
+ 
+ 
+ 
+
+ 
+ 
+Web server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+Web server
+ 
+ 
+ 
+ 
+ 
+Requires Microsoft IIS
+ 
+Under a server OS
+ 
+ 
+ 
+ 
+
+ 
+ 
+Web clients
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+Remote monitoring and control over the Internet or Intranet.
+ 
+WebVue clients and TouchVue & SnapVue mobile applications.
+ 
+ 
+ 
+ 
+ 
+Using a Web browser or a Mobile App
+ 
+On a desktop PC or a mobile device
+ 
+ 
+ 
+ 
+
+ 
+ 
+Engineering station
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+Depending on the architecture and project design, an engineering station can have very different roles, ranging from those of a data acquisition server (for testing communication with field devices), to archive server or just an HMI workstation (to design mimics).
+ 
+Project development and maintenance.
+ 
+Project and libraries version management.
+ 
+Interoperability with third-party generation tools.
+ 
+ 
+ 
+ 
+ 
+As a Desktop Application
+ 
+Under a desktop OS
+
+
+========================================
+TOPIC: Deploy_Overview_desktop_applications.htm
+========================================
+Overview of deploying PcVue as a Desktop application
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of deploying PcVue as a Desktop application
+ 
+There are 2 options for installation and deployment of the operator workstations running PcVue in order to access the runtime HMI:
+ 
+ 
+
+ &#160;PcVue may be installed on each PC,
+ 
+
+ &#160;PcVue may be installed on a Remote Desktop Server host and run remotely from lightweight terminals used as operator workstations.
+ 
+ 
+In both cases, PcVue will be running as a Desktop Application (in an interactive user session).
+ 
+
+ 
+Suggested operating system: One of the supported Windows workstation OS, or one of the supported Windows Server OS if deployment includes a Remote Desktop Server.
+
+
+========================================
+TOPIC: Deploy_tools.htm
+========================================
+Summary of PcVue Tools
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Summary of PcVue Tools
+ 
+Several tools are installed as part of PcVue installation. Some of the tools require PcVue to be running whereas others are standalone. All can be accessed from the Tools folder in the PcVue Program Group.
+ 
+The following list contains a brief description of the tools available and where to find help about them.
+ 
+Tools for administrators
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Tool
+ Help book or topic
+ Description
+ 
+ 
+
+ Component Registration
+ Operating system related considerations
+ 
+ 
+ 
+A tool used to register the PcVue components with Windows. If you have more than one version of PcVue installed on the same PC, you must run this tool manually to register the components of a version before launching it.
+ 
+This tool can only be used when PcVue is stopped.
+ 
+ 
+ 
+
+ Core Management Console
+ Overview of running PcVue as a Windows service
+ 
+ 
+ 
+A tool used to manage PcVue deployment. It enables you to switch from deployment as a Desktop Application to deployment as a Windows Service. It includes dialogs for configuring the startup arguments and other settings related to the deployment mode, as well as the ability to monitor PcVue running processes.
+ 
+This tool can be used with or without PcVue running. If running, only the monitoring tools can be used.
+ 
+ 
+ 
+
+ Web Deployment Console
+ Web Deployment Console overview
+ 
+ A tool used to manage the deployment of the PcVue web services hosted in Microsoft IIS.
+ 
+ 
+
+ View Effective Permissions
+ Operating system related considerations
+ 
+ 
+ 
+A tool to display the effective Windows' permissions of the current user on files and folders (ACL). It is useful to troubleshoot file and folder access issues.
+ 
+This tool can be used with or without PcVue running.
+ 
+ 
+ 
+ 
+ 
+
+ 
+The use of these tools requires Administrator privileges except the View Effective Permission utility, designed to be run under the identity for whom you need to test permissions.
+ 
+ 
+
+ 
+Running the Component Registration Utility resets all system settings associated with PcVue processes to their installation defaults. This includes:
+ 
+ 
+
+ 
+Settings associated to the SV Core Daemon, SV DbConnect and SV Core Session Host services: Startup type, Recovery mode, Service account, Service dependencies.
+ 
+ 
+
+ 
+Configuration of the 3 DCOM applications associated to PcVue.
+ 
+ 
+ 
+We recommend you to document these settings as part of your project documentation so that you are able to set them again each time you update the PcVue version, replace a computer or in any other situation requiring that you run the Component Registration Utility.
+ 
+ 
+Tools for configuration and diagnosis
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Tool
+ Help book or topic
+ Description
+ 
+ 
+
+ Application Architect
+ Application Architect
+ 
+ 
+ 
+A tool used to configure the PcVue application (project) by defining and instantiating templates (application modeling) representing real world objects from the process to be supervised.
+ 
+This tool can only be used with PcVue running.
+ 
+ 
+ 
+
+ Application Explorer
+ Application Explorer
+ 
+ 
+A tool used to configure and troubleshoot the PcVue application. It is a Windows Explorer style configuration tool.
+ 
+This tool can only be used with PcVue running.
+ 
+ 
+ 
+
+ License Utility
+ None
+ 
+ 
+A tool to manage the PcVue license: Get detailed information about the license, manage updates and upgrades.
+ 
+This tool can be used on a standalone PC where PcVue is not installed.
+ 
+ 
+ 
+
+ Map Cache Creator
+ Using the map cache creator
+ 
+ 
+A tool used to download maps from the Internet and store them locally for use by the Map Control.
+ 
+This tool can be used with or without PcVue running.
+ 
+ 
+ 
+
+ Smart Generator
+ Smart Generator
+ 
+ 
+ 
+A tool for generating the PcVue project configuration importing configuration elements in mass according to configuration repositories from third party software such as PLC programming packages or generic XML files.
+ 
+This tool can only be used with PcVue running
+ 
+ 
+ 
+
+ Log Monitor
+ Log Monitor
+ 
+ 
+ 
+A tool to display logged messages from PcVue. It enables users to monitor PcVue activity and identify normal and erroneous operation.
+ 
+This tool can be used with or without PcVue running.
+ 
+ 
+ 
+
+ Smart bots manager
+ Smart bots manager
+ 
+ 
+A tool to configure Smart bots blueprints.
+ 
+This tool can be only be used with PcVue running.
+ 
+ 
+ 
+ 
+ 
+Other tools
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Tool
+ Help book or topic
+ Description
+ 
+ 
+
+ Database Import
+ Database Import tool
+ 
+ 
+A tool used to import data in mass to HDS databases.
+ 
+This tool can be used with or without PcVue running.
+ 
+ 
+ 
+
+ Database Manager
+ Database Manager tool
+ 
+ 
+A tool used to view SQL Server database and table. It allows the configuration of the HDS replication.
+ 
+This tool can be used with or without PcVue running.
+
+
+========================================
+TOPIC: Deploy_web_all_in_one.htm
+========================================
+All-in-one deployment
+ 
+ 
+ 
+All-in-one Deployment
+ 
+See the topic Web based architecture examples for a schematic.
+ 
+Requirements
+ 
+ 
+The deployment of this architecture requires a minimum level of network expertise.
+ 
+Requires all computers and mobile devices to be on the same subnet, typically the industrial network, including web and mobile clients, the web server and the PcVue web back end station.
+ 
+Web clients on this network are supposed to trust the Web Server machine without reservation as they are on the same, and by definition, private network.
+ 
+This architecture works with minimum requirements towards the trustworthiness of the web server certificate. A certificate from a public certification authority is not mandatory to establish trust with the Web Server.
+ 
+ 
+Benefits
+ 
+ 
+Only a single computer is necessary to host both the PcVue web back end station and the web server. 
+ 
+The computer only requires a single network interface card.
+ 
+Works out of the box when using the IP address of the web server computer to connect web and mobile clients.
+A DNS is not required for name resolution on Windows platforms. The web server computer may be addressed by its hostname from any Windows-based web clients.
+Can work with a Windows desktop operating system such as Windows 10 on the web server computer if serving a limited number of users, although a server operating system is still recommended.
+When using non-Windows client devices, Android, iOS, Linux etc., the presence of a DNS server is necessary for name resolution. This can be achieved by using a Windows Server operating system for the web back end station and the activation of the DNS server role.
+ 
+While this cannot be recommended in production, usage of a self-signed certificate works out-of-box, with the need to add a security exception on the client's web browser or to enable the option Ignore Certificate Errors on mobile applications. If there is an Active Directory server accessible from the network, a domain certificate can be issued from the Active Directory server and trusted by all the clients of the domain (by domain policy or via a corporate MDM system).
+ 
+ 
+Limitations
+ 
+ 
+Expect limitations when hosting the web server on a Windows desktop operating system. In particular, the maximum number of client connections that IIS can handle is limited.
+ 
+Microsoft� Edge does not allow storing cookies if the hostname is not a FQDN. This causes troubles with web components. It can be overcome by setting the web site binding to:
+https://<hostname>.local
+ 
+Limited performance may be experienced, particularly during WebVue client loading, when using untrusted certificates because, in such circumstances, files are not cached by web browsers, and therefore re-downloaded at each connection.
+ 
+ 
+Web Deployment Console
+ 
+The WDC must be installed on the same computer as the web back end station and the web server. The architecture is easily deployed using the Quick Setup wizard of the WDC, with all settings at their default value.
+ 
+Firewall settings
+ 
+The following table describes the allowances required for this architecture to be operational. It is recommended that all other non-essential network traffic be denied. The port numbers listed here correspond to the default settings. It must be verified that these ports are not in use by 3rd party applications.
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Web Server
+ 
+ 
+ 
+
+ Name
+ HTTPS
+ 
+ 
+
+ Type
+ INBOUND
+ 
+ 
+
+ Source IP
+ ANY
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web Server IP address
+ 
+ 
+
+ Destination Port
+ Port	443
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+ 
+ 
+Communication between the web back end and the web server can use the local loopback and requires no further configuration. However, it is advisable to check that the following ports are not open to incoming connections from other IP addresses:
+ 
+ 
+TCP 8090 & TCP 8091
+ 
+TCP 8810 (Instant Messaging back end)
+ 
+TCP 8811 (Geolocation back end)
+ 
+ 
+Name resolution FAQ
+ 
+ 
+Hostnames
+Can be used if a means is available for name resolution.
+NetBIOS will work if available and supported by web clients (Windows only, not a solution for mobile apps on Android and iOS).
+DNS is not essential but is highly recommended.
+ 
+IP address
+For TouchVue and SnapVue. Works when addressing the web server computer by its IP address as for mobile apps authorization, no redirection between the authorization server and the app is required.
+For non-Windows WebVue web clients. Works when addressing the server by its IP address, given that the redirection between the authorization server and the WebVue app is also configured to be based on IP addresses.
+For WebVue web clients on mixed platforms i.e. Windows plus at least one other type of operating system. Use the WDC to create two different web sites on the web server, one with a binding for access by hostname and one with a binding for access by IP address.
+
+
+========================================
+TOPIC: Deploy_web_dmz.htm
+========================================
+Network Isolation and DMZ deployment
+ 
+ 
+ 
+Network Isolation and DMZ
+ 
+See the topic Web based architecture examples for a schematic.
+ 
+Requirements
+ 
+ 
+
+ 
+The level of network and IT expertise required to deploy this architecture is intermediate to high.
+ 
+ 
+A suitable network infrastructure planning and set-up to segregate the private network from the lesser protected network. This includes a router and at least one firewall. Both common DMZ architectures, single firewall setup and dual firewall setup, can be used. 
+
+ 
+
+ 
+Support of the end user�s IT department is likely to be required, to properly set up network segregation and name resolution. This includes the proper configuration of:
+ 
+ 
+ DNS server
+ 
+Active Directory
+ 
+ Routing 
+ 
+NAT or Port Forwarding if necessary
+ 
+ 
+ 
+In order to validate the identity of the web server computer on the lesser trusted network and to prevent Man-in-the-middle attacks, usage of a fully trusted certificate is essential. This certificate can be issued:
+ By the IT department with their office network Active Directory server. 
+By the IT department with a public CA, if accessed from external Web/Mobile Clients (Internet access). 
+ 
+A DNS server is required on the lesser trusted network
+ 
+A Windows Server operating system on the web server computer, and ideally also on the web back end station
+ 
+The web back end station must be accessible from the web server computer at least by its IP address. Access via hostname is also possible, given that a mean of name resolution is present from within the DMZ:
+A dedicated entry in the hosts file of the web server computer.
+A DNS server within the industrial automation network that is accessible from the DMZ. If not already available, the activation of the DNS-Server role on the Windows Server operating system of the web back end station can be a solution.
+ 
+ 
+
+ 
+Allowing access from a computer within a DMZ into the private network can contradicts security policies. For technical reasons however, the following ports need to be opened in that direction:
+ 
+ 
+
+ 
+TCP port 8090
+ 
+ 
+
+ 
+TCP 8810 (if requiring the Instant Messaging back end)
+ 
+ 
+
+ 
+TCP 8811 (if requiring the Geolocation back end)
+ 
+ 
+ 
+These ports are configurable.
+ 
+ 
+Benefits
+ 
+ 
+This architecture allows for convenient access from less trusted networks, typically the Internet or Intranet, by exposing the web and mobile services and applications of the Web Server under a Fully Qualified Domain Name.
+ 
+It allows maximum control over network traffic, in line with IT network segregation practices, making sure that there are no un-controlled direct incoming connection requests from outside networks into the industrial network.
+ 
+ 
+Limitations
+ 
+ 
+Connecting web / mobile clients also from within the Industrial Automation network to the web server machine requires further configuration and routing and is outside of the scope of this chapter.
+ 
+WINS cannot be used for name resolution as it cannot be used across a router.
+ 
+ 
+Web Deployment Console
+ 
+This architecture can be deployed by using either of the WDC setup wizards. However, the default settings of the Quick Setup wizard will not be suitable in all situations. The WDC must be installed on the Web Server computer.
+ 
+Firewall Settings
+ 
+The following tables describe the allowances required for this architecture to be operational. It is recommended that all other non-essential network traffic be denied. The port numbers listed here correspond to the default settings. It must be verified that these ports are not in use by 3rd party applications.
+ 
+ 
+ 
+ 
+ 
+
+ Firewall #1 - WAN side of the DMZ
+ 
+ 
+
+ Name
+ HTTPS
+ 
+ 
+
+ Type
+ N/A
+ 
+ 
+
+ Source IP
+ ANY
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Router WAN IP address
+ 
+ 
+
+ Destination Port
+ 443
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Web Server - On the DMZ network
+ 
+ 
+
+ Name
+ HTTPS
+ 
+ 
+
+ Type
+ INBOUND
+ 
+ 
+
+ Source IP
+ ANY
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web Server IP address
+ 
+ 
+
+ Destination Port
+ 443
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ INBOUND
+ 
+ 
+
+ Source IP
+ Web back end IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web Server IP address
+ 
+ 
+
+ Destination Port
+ 8091
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ OUTBOUND
+ 
+ 
+
+ Source IP
+ Web Server IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web back end IP address
+ 
+ 
+
+ Destination Port
+ 8090
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ OUTBOUND
+ 
+ 
+
+ Source IP
+ Web Server IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web back end IP address
+ 
+ 
+
+ Destination Port
+ 8810 (if requiring the Instant Messaging back end)
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ OUTBOUND
+ 
+ 
+
+ Source IP
+ Web Server IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web back end IP address
+ 
+ 
+
+ Destination Port
+ 8811 (if requiring the Geolocation back end)
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Firewall #2 - LAN side of the DMZ
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ N/A
+ 
+ 
+
+ Source IP
+ Web Server IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web back end IP address
+ 
+ 
+
+ Destination Port
+ 8090
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ N/A
+ 
+ 
+
+ Source IP
+ Web back end IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web Server IP address
+ 
+ 
+
+ Destination Port
+ 8091
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ N/A
+ 
+ 
+
+ Source IP
+ Web Server IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web back end IP address
+ 
+ 
+
+ Destination Port
+ 8810 (if requiring the Instant Messaging back end)
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ N/A
+ 
+ 
+
+ Source IP
+ Web Server IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web back end IP address
+ 
+ 
+
+ Destination Port
+ 8811 (if requiring the Geolocation back end)
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Web back end - On the LAN
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ INBOUND
+ 
+ 
+
+ Source IP
+ Web Server IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web back end IP address
+ 
+ 
+
+ Destination Port
+ 8090
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ OUTBOUND
+ 
+ 
+
+ Source IP
+ Web back end IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web Server IP address
+ 
+ 
+
+ Destination Port
+ 8091
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ INBOUND
+ 
+ 
+
+ Source IP
+ Web Server IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web back end IP address
+ 
+ 
+
+ Destination Port
+ 8810 (if requiring the Instant Messaging back end)
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+
+ Name
+ &#160;
+ 
+ 
+
+ Type
+ INBOUND
+ 
+ 
+
+ Source IP
+ Web Server IP address
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web back end IP address
+ 
+ 
+
+ Destination Port
+ 8811 (if requiring the Geolocation back end)
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+ 
+ 
+
+ 
+Rules for Firewall #1 and Firewall #2 can be on the same device if a single firewall DMZ setup is used.
+
+
+========================================
+TOPIC: Deploy_web_server_role.htm
+========================================
+Role of the Web server and Web & Mobile back end
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Role of the Web Server and Web & Mobile Back End
+ 
+Role of the web server
+ 
+The web server hosts the PcVue web apps and web services, and is based on Microsoft's Internet Information Services. The web server can be on the same, or a different, computer to the Web & Mobile back end station.
+ 
+The web server role is mandatory if your application uses any of the following components.
+ 
+ 
+WebVue
+ 
+TouchVue
+ 
+SnapVue
+ 
+The WebScheduler
+ 
+Web Services Toolkit clients - Including 3rd party tools and Add-ons based on the Web Services Toolkit
+ 
+ 
+The Web Deployment Console (WDC), the tool designed for PcVue web server deployment, must be installed on the web server computer.
+ 
+
+ 
+ 
+ 
+Role of the Web & Mobile back end
+ 
+The Web & Mobile back end is a station running PcVue, its role is to act as a gateway to provide data to the web server. Deploying a Web & Mobile back end is required when a web server is necessary:
+ 
+
+ &#160;PcVue must be installed on the computer that is the Web & Mobile back end, and the application must include the back end configuration. The web back end may, or may not, be on the same computer as the web server.
+ 
+In the previous versions of PcVue, the web back end was known as the Web Services Toolkit Server or the Property Server.
+
+
+========================================
+TOPIC: Deploy_web_simplified_nat.htm
+========================================
+Simplified NAT deployment
+ 
+ 
+ 
+Simplified NAT Deployment
+ 
+See the topic Web based architecture examples for a schematic.
+ 
+Requirements
+ 
+ 
+The level of network and IT expertise required to deploy this architecture is low to intermediate.
+ 
+It is assumed that the connection between the private network and the Internet is with a typical ISP-provided set-top-box.
+ 
+Network Address Translation (NAT), or Port Forwarding, configured on the network boundary.
+ 
+To validate the identity of the Web Server computer on the lesser trusted network and to prevent Man-in-the-Middle attacks, usage of a fully trusted certificate is necessary.
+This certificate can be issued by the IT department via a public CA. Necessary if the Web Server is accessed by external Web and Mobile clients (typical access from the Internet by client devices / computers not in a trusted relationship with the corporate network infrastructure).
+ 
+The web server computer must be accessible by the Web and Mobile clients from both network segments.
+This can be achieved if the web server is well known on both network segments under the same FQDN.
+If this is not the case the possibility for the Web and Mobile clients to directly connect to the web server computer by using its FQDN without the Https requests having to leave the private network is better. Usage of NAT Loopback / Hairpinning is suggested in this case.
+If none of these options is possible, it is recommended to create two different sites via the WDC, which both connect to the same web back end station.
+ 
+ 
+Benefits
+ 
+ 
+This architecture allows for convenient access for Web and Mobile clients located on the industrial network and on the internet.
+ 
+This architecture is a first step in a migration process of legacy WebVue systems offering remote web access.
+ 
+ 
+Limitations
+ 
+This deployment scenario offers limited network security if a specific device is not added to control the network perimeter:
+ 
+ 
+You are relying on a set-top-box owned by an ISP to control the network perimeter and remote connection.
+ 
+Consequently, a computer that is part of the Industrial Control System should be considered directly exposed to the Internet.
+ 
+ 
+In a worst-case scenario, potential security vulnerabilities on several levels could be exploited by an attacker to gain access to the Industrial Control System.
+ 
+
+ 
+Because you do not operate the ISP-owned device, you should have limited trust in it, and add your own network security appliance between the set-top-box and the web server. This appliance will act as a router/firewall and VPN server, and will de-facto be the actual boundary of the network you control. 
+ 
+ 
+Web Deployment Console
+ 
+This architecture can be deployed by using either of the WDC setup wizards. The WDC needs to be installed on the Web Server computer.
+ 
+Firewall settings
+ 
+The following table describes the allowances required for this architecture to be operational. It is recommended that all other non-essential network traffic be denied. The port numbers listed here correspond to the default settings. It must be verified that these ports are not in use by 3rd party applications.
+ 
+ 
+ 
+ 
+ 
+
+ Firewall
+ 
+ 
+
+ Name
+ HTTPS
+ 
+ 
+
+ Type
+ N/A
+ 
+ 
+
+ Source IP
+ ANY
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Router WAN or DynDNS IP address
+ 
+ 
+
+ Destination Port
+ 443
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Web Server Station
+ 
+ 
+
+ Name
+ HTTPS
+ 
+ 
+
+ Type
+ INBOUND
+ 
+ 
+
+ Source IP
+ ANY
+ 
+ 
+
+ Source Port
+ ANY
+ 
+ 
+
+ Destination IP
+ Web Server IP address
+ 
+ 
+
+ Destination Port
+ 443
+ 
+ 
+
+ Protocol
+ TCP
+ 
+ 
+ 
+ 
+Communication between the web back end and the web server can use the local loopback and requires no further configuration. However, it is advisable to check that the following ports are not open to incoming connections from other IP addresses:
+ 
+ 
+TCP 8090 & TCP 8091
+ 
+TCP 8810 (Instant Messaging back end)
+ 
+TCP 8811 (Geolocation back end)
+
+
+========================================
+TOPIC: Deploy_webvue.htm
+========================================
+Deploying the WebVue client
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Deploying the WebVue Client
+ 
+The WebVue app is distributed and deployed on the web server side with the Web Deployment Console.
+ 
+It runs in a web browser and does not require any installation or deployment step on the web client side.
+ 
+See the WebVue overview topic for an overview of WebVue.
+ 
+See the Using WebVue book for information on starting, logging in to and logging out of WebVue.
+ 
+See the What is, and Why do I Need, a Certificate? book for information on certificate management.
+ 
+Keep in mind that WebVue content will be delivered over the internet or intranet which will almost certainly not be as fast as a dedicated network. Mimic content must be optimized, in particular minimizing the use of large images and the number of graphic elements.
+ 
+
+ 
+When the web server is updated and re-deployed, it is of prime importance to make sure WebVue users empty the cache of their web browser. This ensure that they are using up-to-date resources and JavaScript modules.
+
+

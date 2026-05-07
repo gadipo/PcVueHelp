@@ -1,0 +1,563 @@
+========================================
+TOPIC: Configuring_SQL_server_memory_options.htm
+========================================
+Configuring SQL server memory options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Memory Usage of the SQL Server
+ 
+If you have issues with memory usage on your PC, you 
+ may be advised by your support center to change the memory settings for 
+ the SQL server.
+ 
+How to connect to the SQL Server
+ 
+Before you can change the memory settings, you must first 
+ connect to the SQL server.
+ 
+ 
+In the left pane 
+ of the Database Manager, select the node Microsoft SQL Server Databases.
+ 
+From the Action menu, 
+ select Configure Server to display the Server Options dialog. Show picture
+
+ 
+Using the Server 
+ combo box to select the server.
+ 
+Select the authentication 
+ type. For more details on the available options, see the topic How 
+ to browse SQL Server databases.
+ 
+Click Connect to 
+ connect to the SQL Server. This may take a few seconds.
+ 
+ 
+How to change the memory settings
+ 
+ 
+Select the Server 
+ Configuration tab. Show picture
+
+ 
+Use the slider controls 
+ to change the memory settings as advised by your support center.
+ 
+The sliders are moved 
+ to show the changed settings. Click OK to confirm the settings followed 
+ by Cancel to close the dialog.
+ 
+ 
+Dynamic and fixed memory settings
+ 
+ 
+When you are using 
+ dynamic memory for SQL Server, the minimum and maximum server memory settings 
+ are individually configurable. 
+ 
+The default setting 
+ for the maximum memory usage is the amount of RAM physically available 
+ to the PC.
+ 
+When you are using 
+ fixed memory for SQL Server, the minimum and maximum sizes of server memory 
+ have the same value.
+
+
+========================================
+TOPIC: Configuring_the_archives.htm
+========================================
+Configuring the archives of the PcVue project when using the Database Import Tool
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the archives of the PcVue project when using the Database Import Tool
+ 
+The Database Import Tool imports data into a specific database and table selected either by the wizard or, if using express mode, the configuration file. If the data is imported into a database and table that is also being used by PcVueto record real-time data there are issues that must be considered.
+ 
+ 
+The accidental creation of doubloons. A doubloon occurs when there are two or more records for the same variable with an identical timestamp. 
+ 
+The import process has the option to purge all records before the import process starts. If used in error it could delete all existing records in the table without any way to recover them.
+ 
+Over-filling the database thereby stopping recording and/or triggering an unexpected purge (emergency purge).
+ 
+ 
+To overcome these issues it is recommended that you import the data into a table specifically configured for that purpose. 
+ 
+How to configure the archives when importing Trend data
+ 
+The following explanation assumes that you have already made the minimum configuration to record trend data. That is:
+ 
+ 
+A database with a trend table.
+ 
+An archive unit.
+ 
+Variables have been added to the archive unit's Trends folder with the Primary option selected. Show picture.
+ 
+ 
+
+ 
+The Primary option determines from which table a Trend Viewer will get its data by default. You can force a Trend Viewer to get its data from an alternative table using the SCADA Basic instruction, HISTORY.
+ 
+ 
+
+ 
+ 
+ 
+To configure archives when importing Trend data:
+ 
+ 
+Add a trend table to the database. This table will be used as the destination for the Database Import Tool. Do not select the Set as default property. 
+ 
+Add an archive unit to the Archive Units folder and select the Read only property. This will inhibit recording via this unit.
+ 
+Add the variables, which are to have imported trend records, to the Trends folder of the archive unit you have just created. Configure each entry so that it uses the trend table you have set up for imported records and do not select the Primary option. Each variable should now appear in two Trend folders, one that is attached to the Archive unit in which PcVue is recording, and the other in the Archive unit that is configured as read only. Show picture
+ 
+ 
+
+ 
+ 
+ 
+How to configure archives when importing Log data
+ 
+The following explanation assumes that you have already made the minimum configuration to record log data. That is:
+ 
+ 
+A database with a log table.
+ 
+An archive unit and log list with its destination pointing to the log table.
+ 
+ 
+To configure archives when importing Log data:
+ 
+ 
+Add a Log Table to the database. This table will be used as the destination for the Log List that will be used for the Database Import Tool. Do not select the Set as default property.
+ 
+Add an archive unit to the Archive Units folder and select the Read only property. This will inhibit recording via this unit. If you have already added an archive unit with the Read only property set for importing trend data you can use this.
+ 
+Add a log list to the Log Lists folder of the archive unit you have just created. The log list should have the same name as the log list that was the source of the records to be imported but with a suffix (_IMP is suggested). For example if you want to import records previously exported from the log list LOGLIST1 you should create a Log List called LOGLIST1_IMP. Configure the Destination tab for the Log List so that it points to the Log Table you have just created.
+ 
+ 
+
+ 
+The name of the Log List is included in each log data record.
+ 
+ 
+In order to differentiate imported data, when log data is imported the Log List name can be automatically changed by adding a suffix. The imported data can then be accessed from a Log Viewer by associating it with a Log List of that name.
+ 
+How to display imported trend records
+ 
+By default, a Trend Viewer will display records from the trend table that has been selected as Primary. In order to force a Trend Viewer to display records from another table (in this case the one into which records have been imported) you must develop and run a small SCADA Basic program using the instruction HISTORY, mode TREND, sub-mode SETPRIMARY_UNIT. See the SCADA Basic help for detailed information.
+ 
+How to display imported log data
+ 
+To display imported log records, create a Log Viewer that is attached to the log list that was created for the imported records, for example LOGLIST1_IMP. You can dynamically change the Log List used by a Log Viewer using the SCADA Basic instruction LOGDISPLAY, mode LOGLIST.
+ 
+
+ 
+There is the possibility of over-filling the database when importing records thereby stopping recording and/or triggering an emergency purge. To avoid this a separate database should be created, containing only the Trend Table and Log Tables used for import.
+
+
+========================================
+TOPIC: Configuring_the_Import_Export_Tool.htm
+========================================
+Configuring the Import/Export Tool
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Import/Export Tool
+ 
+Before any import or export takes place, you must configure 
+ the path for the export/import files and the languages that are to be 
+ used.
+ 
+
+ 
+If you use the Import/Export Tool on a single item (mimic, mimic template or symbol), the dialog is not displayed and the process will use the settings you make here.
+ 
+If you use the Import/Export Tool on an entire library, the dialog is displayed and you can change the settings at the time of use. 
+ 
+ 
+How to configure the import/export file paths
+ 
+ 
+Open the Translation 
+ Import/Export Tool from the command Display.Translation import/export 
+ on the menu. Show picture
+
+ 
+Select or enter a file name for each of the types of file that you wish to use. 
+ 
+ The tool to the right 
+ of each file name field opens a standard Windows Explorer dialog 
+ to aid file selection. If no path is specified, the location of the files 
+ defaults to the project's TP folder.
+ 
+Enable each of the 
+ types of file (mimic, mimic template and symbol) that are required by 
+ ticking the appropriate tick box.
+ 
+
+ 
+
+ Using the drop-down 
+ list boxes, select the base and alternative languages.
+ 
+ 
+ 
+Tick 
+ the box Display Confirmation Message... if you want a message to appear 
+ when the process ends.
+ 
+Click the Save button 
+ to save the configuration.
+ 
+ 
+
+ 
+You can use the same file for all three import/export 
+ types (mimics, mimic templates and symbols) if required.
+ 
+ 
+If you do not require the Import/Export Tool to operate 
+ for either the base language or the alternative language you can select 
+ the entry NONE at the top of the language drop-down list.
+ 
+Processing status and message
+ 
+Each import/export process displays a scrolling list of its actions in the Status pane. You can also request a message to confirm its completion.
+ 
+ 
+Tick the option Display confirmation message... to display a message when the process is complete.
+
+
+========================================
+TOPIC: Configuring_the_replication.htm
+========================================
+Filtering and scheduling
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Replication
+ 
+If at any interim stage you wish to change your choices, 
+ select the Back button and repeat the previous steps.
+ 
+In this topic, the databases you select to take part 
+ in replication are referred to Database 1 and Database 2 to reflect the 
+ order of selection.
+ 
+Creating a new replication process
+ 
+To create a replication process, you start with one database:
+ 
+ 
+In 
+ the Database Manager's tree structure, right-click on Replication and 
+ click on Add in the context menu to open the Replication Setup Wizard. 
+ Show picture
+
+ 
+Click 
+ on Next to open the next step. Enter a name for this replication process 
+ in the Name box. It is not modifiable. Click Next.
+ 
+ 
+
+ 
+The Replication Name must be unique. This name will be 
+ reused whenever the replication is run. It is limited to alphanumeric characters (A to Z and 0 
+ to 9 only). It is not case sensitive.
+ 
+ 
+Creating or selecting the connection to database 1
+ 
+ 
+In 
+ the next dialog (select the first Database) either:
+ 
+ 
+Enter or select 
+ a database name in the combo box.
+ 
+Select the option 
+ to configure a new database connection.
+ 
+ 
+Click on Next.
+ 
+ 
+The next dialog depends on your choice in step 3 above.
+ 
+Forbidden connections
+ 
+
+ 
+Some connections options are forbidden. The Database combo 
+ box in the dialogs described below will not permit connection using them.
+ 
+ 
+The SQL Server name must be fully qualified in the context 
+ in which the replication process is run. The following errors can occur 
+ if there is a mismatch:
+ 
+ 
+No '.' shortcut. 
+ 
+ 
+No '(local)' shortcut. 
+ 
+ 
+No IP address shortcut. 
+ 
+ 
+No Windows authentication. 
+ 
+ 
+ 
+For instance, access to a server or a database may be 
+ blocked by a firewall on the same PC as SQL Server or elsewhere on 
+ the network. For advice on the local case, see the topic Replication 
+ across a Firewall.
+ 
+Configuring a new database connection
+ 
+If you selected this option, a dialog Database 1 opens 
+ for Database Connection. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+In the upper combo 
+ box, select or enter the name for the SQL Server.
+ 
+Select the option 
+ Use SQL Server Authentication. Enter the user name then either enter a 
+ password or tick the Blank Password box.
+ 
+Tick Encrypt connection if you want to ensure confidentiality and integrity
+ 
+In the lower drop-down 
+ box, select or enter a database name. 
+ 
+To test the connection, click on the Test Connection button. If that is successful, a dialog confirms it. Click on Close to return to the wizard.
+ 
+ 
+
+ 
+To take advantage of an encrypted communication channel, SQL Server must be setup to work with TLS and digital certificates.
+For more information, refer to https://learn.microsoft.com/sql/database-engine/configure-windows/certificate-overview
+ 
+ 
+Selecting tables of Database 
+ 1 
+ 
+If you selected this option, 
+ a Database dialog Database 1 opens 
+ for selecting tables in the first database for the replication process 
+ Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Tick the boxes of the tables to be replicated then Click on Next
+ 
+ 
+ 
+In 
+ the dialog Select a Second Database, select a database as Database 2, 
+ as described for Database 1 above. Only databases not already selected 
+ for replication are shown. Click on Next.
+ 
+Select 
+ the tables to be replicated from Database 2, as described for Database 
+ 1 above.
+ 
+ 
+Configuring the table linking
+ 
+Whether you chose to select or to configure a database, 
+ the Table Link dialog appears next. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+It shows one database 
+ on each side. In the Tables section, select one corresponding table in 
+ each database. 
+ 
+Click on the Add 
+ button to list that pair of tables in the bottom pane of the dialog.
+ 
+Repeat step 2 for 
+ each pair of tables that is to be replicated.
+ 
+To remove a table 
+ pair from the process, select it and click on Delete. That action will 
+ not affect the tables, but only exclude them from replication. 
+ 
+Click on Next to 
+ open the dialog Direction of the Replication. Show picture
+
+ 
+ 
+Configuring the direction of replication
+ 
+ 
+Either select Unidirectional 
+ to copy data only in one direction or the other, or select Bidirectional 
+ replication.
+ 
+Click on Next to 
+ open the Running Options dialog, as described in the topic Filtering 
+ and Scheduling.
+
+
+========================================
+TOPIC: Configuring_the_station_number.htm
+========================================
+How the station number and name is allocated to a physical PC
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How the Station Number and Name is Allocated to a Physical PC
+ 
+Why is the Station Number and Name important?
+ 
+The station number (and name) is the identity of a station within a network system based on PcVue. It is the base to distribute roles within the client/server system, which station produces and which station consumes data acquisition flows, variables, archives...
+The station number and name are also used in the construct of the names of the many system variables that provide status information about the station. For example SYSTEM.<StationName>.OK_NUMBER.
+ 
+Automatic allocation
+ 
+By default, the station number is allocated automatically based on the project configuration.
+ 
+When PcVue starts, it looks up the project's network configuration for either the computer host name or IP address (depending on which you have used in the project configuration). If the host name or IP address can be matched to that of a configured station, PcVue allocates the corresponding station number.
+
+ 
+In the following picture, if PcVue finds that the host computer has the IP address 192.168.2.3 the station number is set to 3 and the station name to STATION3. Show picture
+ 
+
+ 
+ 
+ 
+Allocation fallback with INI.DAT settings
+ 
+If the host computer network interfaces cannot be looked up, PcVue takes the station number you have defined
+ in the file ETC\INI.DAT. This may occur when the network interface cards is deactivated or a network cable is unplugged for example.
+The same goes if the look up for automatic allocation does not find a match because neither the host name nor the IP address of the host computer can be found in the configuration of any station in the project.
+ 
+You can edit the ETC\INI.DAT text file with an editor such as Notepad. PcVue must be shut down before you edit this file. 
+ 
+The parameter that must be changed is the first after 
+ the keyword PINI. By default, it is set to 1. In the extract below, it has been set to 7.
+ 
+PINI,7,,1,1,256000,1,0,0x0,21,0,0,0
+ 
+POS,64,80,580,360
+ 
+
+ 
+The allocation based on the INI.DAT is an important fallback mechanism in case the automatic allocation cannot find a match at startup. For this reason, it is important that you configure the INI.DAT properly on all PcVue host computers.
+ 
+ 
+
+ 
+On an RDS host computer, the INI.DAT is used as fallback only for the allocation of a station number to the PcVue instance running on the RDS host session. It is ignored for instances running in remote desktop sessions.
+ 
+ 
+Allocation using the -station_number 
+ command line argument
+ 
+The station number can be forced via a command line argument.
+This capability is only useful in specific cases when you want to bypass both the automatic allocation and the fallback mechanism, for example on an engineering station for the purpose of a specific one-time test.
+ 
+If the command line used to start PcVue has the -station_number argument followed by a value, the value passed will be used as the station number. When defining the station number on the command line, the automatic allocation is bypassed and the default in INI.DAT is ignored.
+ 
+For example, the following command line allocates the station number 99.
+ 
+C:\Program Files\SCADA\PcVue\bin\sv32.exe -s -station_number 99
+ 
+
+ 
+We recommend you to be extra careful when allocating the station number via the command line to avoid duplicated station numbers on the network. As for IP addresses, duplicated station numbers for stations running at the same time on a network lead to unexpected behaviors that can affect operation safety and security.
+
+

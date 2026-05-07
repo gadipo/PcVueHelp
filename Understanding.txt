@@ -1,0 +1,593 @@
+========================================
+TOPIC: Understanding_Euler_XYZ_and_XYZ_Axis_angles.htm
+========================================
+Understanding Euler XYZ and XYZ Axis angles
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Understanding Euler XYZ and XYZ Axis Angles
+ 
+The HMI supports two different methods for specifying 
+ the orientation of 3D models and frames
+ 
+ 
+Euler XYZ angles 
+ 
+ 
+Rotational vectors 
+ 
+ 
+ 
+About Euler XYZ angles
+ 
+This method is the easiest to understand but has major 
+ limitations and is not contiguous. It is described by a sequence of three 
+ rotations in the X, Y and Z axes. The axes are sometimes referred to as 
+ yaw, pitch and roll. The Euler method has the following disadvantages.
+ 
+ 
+The order in which 
+ the rotations are executed affects the final orientation. In the HMI, 
+ the order in which rotations are executed is XYZ.
+ 
+If angles of more 
+ than 90 degrees are used the object may suddenly flip because an axis 
+ becomes switched.
+ 
+It is possible for 
+ two axis to temporarily line up creating a condition known as Gimbal Lock. 
+ As a result, some combinations of angle are impossible to resolve.
+ 
+ 
+About rotational vectors (XYZ Axis Angle)
+ 
+This is the most universal and best representation of 
+ a 3D angle although sometimes difficult to visualize. The orientation 
+ is represented by an axis described as a 3D vector (X, Y and Z) and an 
+ angle about that axis. 
+ 
+Changing from Euler XYZ angles to rotational vectors 
+ (XYZ Axis Angle)
+ 
+Changing from the Euler representation to XYZ Axis Angle 
+ in the 3D Properties dialog always works, but the opposite is not true 
+ and may lead to some approximation errors.
+
+
+========================================
+TOPIC: Understanding_IP_addressing.htm
+========================================
+Understanding IP addressing
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Understanding IP Addressing
+ 
+This topic provides useful background information for 
+ someone intending to configure a networked application using TCP/IP.
+ 
+Each connection point (node) on an IP network has a unique 
+ IP address. For example, a PC with two network cards would have two connection 
+ points and hence two IP addresses.
+ 
+IP addresses can either be static, allocated by a configuration 
+ tool on the equipment in which the node resides, or dynamic and allocated 
+ by a network administration tool each time the node connects to the network. 
+ For a PC running Microsoft Windows, static addresses are entered as part of Windows 
+ network configuration. If you are using a dynamic address then it is allocated 
+ by a device on the network known as DHCP (Dynamic Host Configuration Protocol) 
+ server. For use with PcVue�s networking, it is recommended that 
+ you use static addressing.
+ 
+The IP address structure
+ 
+IP currently uses a 32 bit address allowing for a theoretical 
+ maximum of 232 
+ addresses (approximately 4.3 billion). The address is represented 
+ as four bytes written as four decimal values separated by full stops, for example 
+ 192.168.2.2. The address is divided into two parts, the network number 
+ (often known as the subnet) and the host (or machine) number. All hosts 
+ on the same IP network must share the same network number but have a unique 
+ host number. The address split can be done in 
+ one of three ways resulting in what is known as the A, B and C address 
+ classes. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Class
+ 
+ 
+ 
+Mask
+ 
+ 
+ 
+1st 
+ byte
+ 
+ 
+ 
+2nd 
+ byte
+ 
+ 
+ 
+3rd 
+ byte 
+ 
+ 
+ 
+4th 
+ byte
+ 
+ 
+ 
+
+ 
+ 
+A
+ 
+ 
+ 
+255.0.0.0
+ 
+ 
+ 
+Subnet number
+1 to 127
+ 
+ 
+ 
+Host number
+0 to 255
+ 
+ 
+ 
+Host number
+0 to 255
+ 
+ 
+ 
+Host number
+0 to 255
+ 
+ 
+ 
+
+ 
+ 
+B
+ 
+ 
+ 
+255.255.0.0
+ 
+ 
+ 
+Subnet number
+128 to 191
+ 
+ 
+ 
+Subnet number
+0 to 255
+ 
+ 
+ 
+Host number
+0 to 255
+ 
+ 
+ 
+Host number
+0 to 255
+ 
+ 
+ 
+
+ 
+ 
+C
+ 
+ 
+ 
+255.255.255.0
+ 
+ 
+ 
+Subnet number
+192 to 223
+ 
+ 
+ 
+Subnet number
+0 to 255
+ 
+ 
+ 
+Subnet number
+0 to 255
+ 
+ 
+ 
+Host number
+0 to 255
+ 
+ 
+ 
+ 
+Allocating IP addresses
+ 
+Blocks of IP addresses are allocated by an international 
+ organization known as the NIC. This ensures that each node has a unique 
+ address worldwide thereby eliminating problems that would occur with 
+ two identical addresses on the same network. All class A addresses and 
+ most class B addresses are already allocated.
+ 
+The exception to this is a range of IP addresses known 
+ as Private Addresses. These can be used for any nodes that are 
+ NOT exposed to the outside world, for example the Local Area Network (LAN) 
+ in a factory. There are three private address ranges, one in each of the 
+ address classes. For small LANs of under 255 machines the Class C range 
+ is generally used. The table below illustrates the three private address ranges.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Class
+ 
+ 
+ 
+Start of range
+ 
+ 
+ 
+End of range
+ 
+ 
+ 
+Mask
+ 
+ 
+ 
+
+ 
+ 
+A
+ 
+ 
+ 
+10.0.0.0
+ 
+ 
+ 
+10.255.255.255
+ 
+ 
+ 
+255.0.0.0
+ 
+ 
+ 
+
+ 
+ 
+B
+ 
+ 
+ 
+172.16.0.0
+ 
+ 
+ 
+171.31.255.255
+ 
+ 
+ 
+255.255.0.0
+ 
+ 
+ 
+
+ 
+ 
+C
+ 
+ 
+ 
+192.168.0.0
+ 
+ 
+ 
+192.168.255.255
+ 
+ 
+ 
+255.355.255.0
+ 
+ 
+ 
+ 
+
+ 
+.0 and .255 host addresses have special use and are not 
+ used by normal nodes hence the practical limit to the number of addresses 
+ is 254.
+ 
+ 
+Examples of class C IP addressing
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Computer
+ 
+ 
+ 
+IP address
+ 
+ 
+ 
+Subnet mask
+ 
+ 
+ 
+Network number
+ 
+ 
+ 
+Machine number
+ 
+ 
+ 
+
+ 
+ 
+Pippin
+ 
+ 
+ 
+192.168.2.3
+ 
+ 
+ 
+255.255.255.0
+ 
+ 
+ 
+192.168.2
+ 
+ 
+ 
+3
+ 
+ 
+ 
+
+ 
+ 
+Frodo
+ 
+ 
+ 
+192.168.2.4
+ 
+ 
+ 
+255.255.255.0
+ 
+ 
+ 
+192.168.2
+ 
+ 
+ 
+4
+ 
+ 
+ 
+
+ 
+ 
+Gandalf
+ 
+ 
+ 
+192.168.22.3
+ 
+ 
+ 
+255.255.255.0
+ 
+ 
+ 
+192.168.22
+ 
+ 
+ 
+3
+ 
+ 
+ 
+
+ 
+ 
+Aragorn
+ 
+ 
+ 
+192.168.22.4
+ 
+ 
+ 
+255.255.255.0
+ 
+ 
+ 
+192.168.22
+ 
+ 
+ 
+4
+ 
+ 
+ 
+ 
+In the above example, Pippin and Frodo are on one subnet 
+ whilst Gandalf and Aragorn are on another. Therefore, Pippin and Frodo 
+ will be able to exchange information with one another but not with Gandalf 
+ and Aragorn.
+ 
+Important note about using more than one node on a 
+ computer running Windows
+ 
+If you use more than one node on a computer running Windows, for example to make use of PcVue�s dual network capability, 
+ then each node must match a different subnet.
+
+
+========================================
+TOPIC: Understanding_Obj_Prop_Meth_Events.htm
+========================================
+Understanding Objects, Properties, Methods and Events
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Understanding Objects, Properties, Methods and Events
+ 
+Objects are the building blocks of VBA-style scripting languages. Almost everything you do involves modifying objects. Most of the elements of the HMI, the project, and the variables are represented as objects in VBA.
+ 
+Objects and Collections
+ 
+An object represents an element such as a window or a drawing element.
+A collection is an object that contains several other objects, all of the same type. Using properties and methods, you can modify an object or an entire collection of objects.
+Most objects are obtained by returning a single object from a collection. For example, the Windows collection contains the open windows, objects of type Window. You use the Windows property of the ActiveProject object to return the Windows collection.
+After you have accessed the collection, you can return a single object by using an index value in parentheses (similar to the way you work with arrays).
+The index value is usually a number or a name.
+ 
+The following example displays the position properties of the first window opened in a message box:
+ 
+Dim objWindows As Object
+ 
+Dim sTitle As String
+ 
+Const IconInformation = 64
+ 
+sTitle = "Position of Window 1"
+ 
+Set objWindows = ThisProject.Windows
+ 
+MsgBox "Left = " & objWindows.Item(1).Left & " Top = " & _
+ 
+ &#160;&#160;&#160;&#160;&#160;&#160;objWindows.Item(1).Top, IconInformation, sTitle
+ 
+Note the use of the underscore as a line continuation character.
+ 
+You can loop through the elements of a collection in different ways. However, the recommended method for looping on a collection is to use the For Each...Next loop.
+In this structure, the script repeats a block of statements for each object in the collection.
+ 
+The following example displays the Name property of each mimic in the Mimics collection:
+ 
+Dim objMimic As Object
+ 
+Dim sTitle As String
+ 
+Const IconInformation = 64
+ 
+sTitle = "Opened mimics"
+ 
+For Each objMimic In ThisProject.Mimics
+ 
+MsgBox objMimic.Name & " " & objMimic.Caption, IconInformation, sTitle
+ 
+Next
+ 
+Properties
+ 
+A property is an attribute of an object or an aspect of its behavior. For example, properties of a window include its name, size and position. To change the characteristics of an object, you change the values of its properties.
+ 
+The following example changes the color of the drawing element 'Shape_Red'.
+ 
+Shape_Red.BackColorPrimary = RGB(255, 0, 0)
+ 
+You can also retrieve information about an object by returning the value of one of its properties. The following example returns the height of a drawing object.
+ 
+ObjHeight = Object_Truck.Height
+ 
+In this example, Object_Truck refers to a drawing element. The height of that drawing element is assigned to the variable ObjHeight.
+ 
+
+ 
+Not all properties can be set � some are read-only.
+ 
+ 
+Methods
+ 
+A method is an action that an object can perform. For example, a drawing element can be moved by using its Move method. Methods normally have arguments that qualify how the action is performed. The following example moves the image Bitmap1 to a new location within its window.
+ 
+Bitmap1.Move NewXPos, NewYPos
+ 
+In most cases, methods are actions and properties are qualities. Using a method causes something to happen to an object, whereas using a property returns information about the object or it causes a quality of the object to change.
+ 
+Events
+ 
+An event is an action recognized by an object, such as clicking the mouse or pressing a key, for which you can write code to respond. Events can occur for a number of reasons:
+ 
+ 
+A user action such as clicking a mouse or pressing a key
+ 
+A subscribed variable changing value
+ 
+Because of other program code
+ 
+Something happening in the system
+
+

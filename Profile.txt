@@ -1,0 +1,600 @@
+========================================
+TOPIC: Profile_conf.htm
+========================================
+How to configure a profile
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure a Profile
+ 
+ 
+Configuring a profile.
+ 
+Select the Profiles folder in the Application Explorer configuration tree and, from the task list, select Add a profile. A dialog to configure a new profile will open. Show picture
+
+Enter the name for the profile. Profile names are limited to 40 alphanumeric characters and are not case sensitive.
+Enter a description of the profile. The description appears in the contents pane when the Profiles folder is selected. The description is optional.
+Enter a role for the profile. The role is optional.
+ 
+Selecting the profile access rights.
+Use the other tabs of the Profile dialog to select the profile's access rights. See the Profile Properties book for a full description of all of the rights.
+ 
+Click OK to create the profile and close the dialog.
+ 
+ 
+Profile default settings
+ 
+When you create a new profile, some access rights are enabled by default. This is done purposely to prevent a User from accidentally locking themselves and/or other users completely out of PcVue. See warning below.
+ 
+ 
+Administration
+Profile rights
+Exit
+Desktop
+Development
+Diagnostic tasks
+Profiles and user management
+Change profile rights
+Administration
+Command, acknowledgment and masking
+Window and layers
+Recipe
+WebVue
+Application Architect
+Data analysis
+ 
+ 
+
+ 
+You must have at least one Profile/User that has either the following rights.
+ 
+ 
+Change profile rights - Administration
+OR
+ 
+Create profiles and Create profile associations
+ 
+ 
+If you do not do this, you will have the situation where you cannot change the profile of a user, nor can you create a new profile and associate it with a user. You will be permanently prevented from changing anything associated with User Accounts.
+
+
+========================================
+TOPIC: Profile_overview.htm
+========================================
+What is a profile?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+What is a Profile?
+ 
+A profile is a set of access rights selected from a number 
+ of categories. Each user that you create is attached to a profile 
+ to determine the user's access rights. The combination of the user and profile is known as a User Account. A profile may be attached to one 
+ or several users.
+ 
+For networked applications, you can optionally attach 
+ more than one profile to each user. The profile that is active 
+ depends on which station the user is logged in at.
+ 
+Access right categories
+ 
+The access rights for a profile are selected from the 
+ following categories each contained within its own tab in the profile 
+ configuration dialog.
+ 
+ 
+Administration - 
+ Access to the configuration menus and operating system, password configuration, user configuration rights.
+ 
+Programs - Selection 
+ of SCADA BASIC programs to run when a user logs on and/or off.
+ 
+Mimics - Selection 
+ of the window (mimic) that opens when a user logs in, Selection of menu 
+ windows (mimics).
+ 
+Command - Selection 
+ of command level rights.
+ 
+Browsing - Selection of variable browsing rights.
+ 
+Alarm acknowledgement 
+ - Selection of acknowledgment rights by alarm level.
+ 
+Alarm masking - 
+ Selection of alarm masking rights.
+ 
+Alarm maintenance - Selection of alarm maintenance rights.
+ 
+Window - Selection 
+ of window level rights.
+ 
+Layer - Selection 
+ of display layer rights.
+ 
+Recipe - Selection 
+ of recipe rights.
+ 
+Web - Selection 
+ of options for when a user logs in from a Web browser including initial mimic, language, alarm filter etc.
+ 
+Application Architect - User access (generation and access) to the Application Architect.
+ 
+Data analysis - User access (generation and configuration) to Data Export
+ 
+Advanced - Automatic logoff and password life span.
+ 
+ 
+
+ 
+You must have at least one Profile/User that has either the following rights.
+ 
+ 
+Change profile rights - Administration
+OR
+ 
+Create profiles and Create profile associations
+ 
+ 
+If you do not do this, you will have the situation where you cannot change the profile of a user, nor can you create a new profile and associate it with a user. You will be permanently prevented from changing anything associated with User Accounts.
+
+
+========================================
+TOPIC: Profile_properties_affect_system_access.htm
+========================================
+Profile properties that affect operating system and deveopment access
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Profile Properties that Affect Operating System and Development Access
+ 
+Administration tab
+ 
+ 
+Help � Allows a user to display the on-line help.
+ 
+Exit � Allows a user to shut down PcVue using the keyboard function key F10.
+ 
+Desktop - Allows the user access to the operating system.
+ 
+Development � Allows a user to display and use the development menu and toolbars and have access to the operating system.
+ 
+Diagnostic tasks - Allows user to access diagnostic tasks
+ 
+Security administration - Allows user to access configuration elements and tasks affecting the system security. It includes certificate handling and security altering settings among others.
+ 
+Preferences � Allows a user to display the Preferences menu.
+ 
+Cryptography - Allows the user to encrypt SCADA basic programs. Also requires a special dongle.
+ 
+ 
+
+ 
+The Desktop property was designed to deny user access to the operating system by disabling a number of system keyboard shortcuts (such as Alt+Tab...). However, due to security improvement on recent versions of Windows (Vista onwards), it is no longer possible to fully deny access, and this feature of PcVue is no longer effective.
+ 
+It is recommended to follow the Microsoft guidelines to achieve the best possible level of control, by customizing system settings and hardening Group policies.
+ 
+ 
+Application architect tab
+ 
+Access to the Application Architect.
+ 
+ 
+Instance rights - Create, modify and delete access for template instantiation plus the capability to manage exceptions.
+ 
+Template rights - Create, modify and delete access for template configuration.
+ 
+Parameters rights - Create, modify and delete access for parameters configuration.
+
+
+========================================
+TOPIC: Profile_properties_opc_access.htm
+========================================
+Profile Properties that Affect Access by Third Party Applications
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Profile Properties that Affect Access by Third Party Applications
+ 
+The properties in the Browsing tab control which variables a client application (including third party applications) can see when browsing variables exposed by PcVue. In order for an application to access a variable, the user authenticated on the API of PcVue, must have the corresponding browsing level right in its profile. Show picture. 
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+At the time of writing, browsing level rights are applied by the following interfaces:
+ 
+ 
+OPC clients browsing or accessing OPC items corresponding to variables via PcVue�s OPC server when OPC-Security is enforced.
+ 
+Mobile apps: TouchVue and SnapVue.
+ 
+Third-party applications using the Web Services Toolkit interface.
+ 
+ 
+In particular, it is a way to control what variables a user can browse when using Dream Report as either an OPC client or a Web Services Toolkit client.
+ 
+
+ 
+This feature is intended to encourage more secure practices. Interfaces used to access the variables of PcVue are system boundaries, which it is advisable to secure.
+
+
+========================================
+TOPIC: Profile_properties_operation_at_run_time.htm
+========================================
+Profile properties that affect run time access
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Profile Properties that Affect Run-time Access
+ 
+Administration tab
+ 
+ 
+Timetable: standard 
+ � Allow the user to change the standard week of a Scheduler timetable 
+ using the Time table animation.
+ 
+Timetable: exceptions 
+ � Allow the user to change the exception periods of a Scheduler timetable 
+ using the Timetable animation.
+ 
+Timetable: save � 
+ Allow the user to save changes made to a Scheduler timetable using the 
+ Timetable animation.
+ 
+Zoom � Allow the 
+ user to zoom in and out of the mimics.
+ 
+Modify date and time � Allow the user the change the system date and time 
+ from the Logon (F2) dialog.
+ 
+Modify password 
+ � Allow the user the change his/her own password.
+ 
+ 
+Command tab
+ 
+The Command tab contains 30 properties called Level 0 
+ to Level 29. When a variable is configured so that a user may 
+ change it, it is given a command access level from 0 to 29. To change 
+ the value of the variable at run time the user must have the corresponding 
+ command level.
+ 
+The command levels are also used in the Run � program, 
+ Run � Macro and Run � Application animations.
+ 
+Window tab
+ 
+The Window tab controls a user's window access and printing rights. 
+ 
+ 
+When each window is created, it is given an access level 
+ between 0 and 29 (default 0). To open a window a user must have the corresponding 
+ window access level.
+ 
+To be able to print a window using the Windows' print shortcut, Ctrl + P, a user must have the Printing setting selected.
+ 
+ 
+Layer tab
+ 
+The Layer tab contains 16 properties called Layer 
+ 0 to Layer 15. These determine which of the mimic display layers a user 
+ is able to see.
+ 
+Alarm acknowledge tab
+ 
+The Alarm acknowledge tab contains 30 properties called Level 
+ 0 to Level 29. When an alarm is defined it is given an acknowledge level from 0 to 
+ 29. To acknowledge the alarm the user must have the corresponding alarm 
+ acknowledge level.
+ 
+Alarm masking tab
+ 
+The Alarm masking tab contains 30 properties called Level 0 
+ to Level 29. When an alarm is defined, it is given a masking level from 0 to 29. 
+ To mask the alarm the user must have the corresponding alarm masking level. 
+ 
+The option Use acknowledgement level rights as masking level rights allows you to configure the masking level rights so that they are the same as the acknowledgment level rights. This option is selected by default for backwards compatibility.
+ 
+Alarm maintenance tab
+ 
+The Alarm masking tab contains 30 properties called Level 0 
+ to Level 29. When an alarm is defined, it is given a maintenance level from 0 to 29. 
+ To set an alarm to maintenance the user must have the corresponding alarm maintenance level.
+ 
+The option Use acknowledgement level rights as maintenance level rights allows you to configure the maintenance level rights so that they are the same as the acknowledgment level rights. This option is selected by default for backwards compatibility.
+ 
+Recipe tab
+ 
+The recipe rights determine the users' ability to create, 
+ modify and save recipes created using the recipe system.
+ 
+ 
+Manager � Allow the 
+ user to create recipes using the menu command Configure.Station.Recipe.
+ 
+Save � The user can 
+ modify and save a recipe using the Send Recipe animation.
+ 
+Creation � The user 
+ can change the number and label of an existing recipe using the Send Recipe 
+ animation, so creating a second recipe based on the first. The value of 
+ variables in the recipe may be changed. The list of variables may not 
+ be changed.
+ 
+List modification 
+ � The user can change a recipe's list of variables and values using the 
+ Send Recipe animation (prior to being sent), but NOT save it.
+ 
+Value modification 
+ � The user can change values for variables in a recipe using the Send 
+ Recipe animation (prior to being sent), but NOT save it.
+ 
+Real time � The user 
+ may recall the real-time values of the recipe variables, using the Send 
+ Recipe animation.
+ 
+Access - Enable access to the recipe system in general. Without this selected the user has no access to the recipe system at all and all other recipe rights are meaningless.
+ 
+Send � The user may 
+ send a recipe at run-time using the Send Recipe animation.
+ 
+Delete � The user 
+ may delete a recipe.
+ 
+ 
+Data analysis tab
+ 
+Access to the Data Export facility.
+ 
+ 
+Create - Allow the user to create new Data Exports.
+ 
+Modify - Allow the user to modify existing Data Exports.
+ 
+Delete - Allow the user to delete Data Exports.
+ 
+Execute manually - Allow the user to manually initiate a Data Export.
+ 
+ 
+
+ 
+ Access to Data Export in general is license-protected.
+
+
+========================================
+TOPIC: Profile_properties_User_s_ability.htm
+========================================
+Profile properties that affect profile and user management
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Profile Properties That Affect Profile and User Management
+ 
+
+ 
+You must create at least one Profile and User with the ability to change profile rights.
+ 
+ 
+In the Administration tab
+ 
+ 
+Profile and user management
+Create and modify 
+ users � The user is allowed to create new users and modify existing users. 
+ Existing profiles may be associated with users.
+Delete users and/or 
+ associations � The user is allowed to remove the association between a 
+ user and profile and delete users.
+Create profile associations � On a multi-station system the user is allowed to 
+ associate a station list with a profile attached to a user.
+Create and modify 
+ profiles � The user is allowed to create and modify profiles. The extent 
+ to which the profile may be changed is controlled by the Access, Command 
+ and ack, Window and layer access and Recipe properties.
+Delete profiles � 
+ The user is allowed to delete profiles.
+Change profile rights - The user is allowed to change the configuration of profiles. The tabs of the Profile Configuration Dialog, to which the user has access, is configured using the following properties.
+Administration � Administration, Programs and Mimics tabs. 
+Command, acknowledgement and masking 
+ � Command, Acknowledgement and Masking tabs.
+Window and layers 
+ access � Window access and Layer access tabs.
+Recipe � Recipe tab.
+Web � Web tab.
+Application Architect - Application Architect tab.
+Data analysis - Data analysis tab.
+
+
+========================================
+TOPIC: Profile_properties_User_s_behaviour.htm
+========================================
+Profile Properties that Affect Behavior When Logging On and Off
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Profile Properties that Affect Behavior When Logging On and Off
+ 
+In the Advanced tab
+ 
+ 
+Enable automatic 
+ logoff - If enabled a user may be automatically logged off after the selected 
+ period of inactivity. The period must be between 1 and 3600 seconds. 
+ 
+Enable password lifetime 
+ - If enabled a user must change his password the next time they log in 
+ after the selected lifetime. Lifetime is the period (in days) since the 
+ password was last changed.
+ 
+ 
+In the Mimics tab
+ 
+ 
+Initial window - 
+ Selection of a window that opens automatically when a user logs in. The 
+ window may also be opened using the substitution #U in a Link-Open animation.
+ 
+Menu - Selection 
+ of up to ten windows to provide user dependent window opening. When using 
+ the Link-Open animation the substitutionstrings #M11 to #M20 are used 
+ instead of a window name. The window that is opened is the matching one 
+ in the user's profile. If a label is supplied, and the Link-Open animation 
+ is supported by a text drawing element, the label will be substituted 
+ for the text at run time. Show picture
+
+ 
+ 
+In the Programs tab
+ 
+The Programs tab allows the selection of one program 
+ that will run when a user logs on and another that runs when a user logs 
+ off. Both programs are optional. Any programs selected here must be pre-loaded 
+ using another program or in the project start-up configuration.
+ 
+For each program, you can select an optional function, branch and arguments. If you do not select a function, the Main function will run.
+
+
+========================================
+TOPIC: Profile_properties_webvue.htm
+========================================
+Properties that affect access to Web Apps and Web Services 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Properties That Affect Access to Web Apps and Web Services 
+ 
+The account for a user intending to use one of the Web app is configured in the same way as any other 
+ user account. Specific privileges are defined in the Web tab of the Profile Properties dialog. They affect user access to WebVue, Mobile Apps, the Web Services Toolkit, and all services relying on the Web back end. 
+ Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Set the ability to login via a Web App.
+Enable access 
+ - You must tick the box so that users associated to this profile can log in via Web Apps or the Web Services Toolkit.
+ 
+Configure the first window to be opened.
+First window - Mimic - 
+ You can select the name of the mimic that is to be displayed when a
+ user associated to this profile connects via WebVue. If you do not specify a 
+ window, then the one selected on the Web back end configuration 
+ will be used.
+Branch - Specifies the branch to be used.
+ 
+Configure the languages to use.
+Project language 
+ - For bilingual projects only. Specifies the language in which the localized texts will be displayed to the user. This property affects WebVue mimics, but also any localized label in Mobile apps and Web Services Toolkit. By default, the configuration is taken from the Web back end properties.
+ 
+Set the options specific to WebVue.
+Allow Beep mode of MULTIMEDIA SCADA Basic verb - Enable use of the MULTIMEDIA mode of the SCADA Basic instruction WEBVUE for the WebVue Client on which the user is logged in.
+Beep on new alarm in 
+ alarm display - If this is ticked, WebVue will give an audible indication each time 
+ there is an alarm transition to On - Not Acknowledged in an Alarm 
+ Viewer.
+Only one session per user - If ticked, a user having this profile will be limited to one WebVue session at a time. One will not be able to login in more than one web browser instances on a given client device or from several devices at the same time.
+
+

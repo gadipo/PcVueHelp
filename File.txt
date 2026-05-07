@@ -1,0 +1,586 @@
+========================================
+TOPIC: File_format_overview.htm
+========================================
+File format overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+File Format Overview
+ 
+The Import/Export Tool produces text files in CSV format (character separated value, where the separator is a comma or a semicolon throughout a file) or in TSV (tab separated value) format. 
+ 
+All files have the same basic structure with three
+ groups of information. Each of these is made up of one or
+ more lines, each line representing a specific item.
+ The three groups of information always appear in the same order.
+ 
+
+ 
+The tool saves an existing file using the original delimiter. However, it can only create a comma delimited text file.
+ 
+ 
+ 
+Language information
+ - An index of the languages used including standard language codes. Language
+ information lines start with the identifier LANG.
+ 
+Style information
+ - An index of the font style used in the strings. Style information lines
+ start with the identifier FONT.
+ 
+String information
+ - Details of each text string, in one or more languages. String information
+ lines start with the identifier MIMIC, TEMPLATE or SYMBOL.
+ 
+ 
+The following extract shows comma as the delimiter.
+ 
+
+LANG,1,"ENG-GBR",2057,0
+LANG,2,"FRA-",12,0
+
+FONT,1,-21,0,400,0,0,"Arial",0,1,37
+FONT,2,-21,0,400,0,0,"Arial",0,1,36
+
+MIMIC,"mimic embedded",title,0,"Mimic2",1,0,0,"",1,0,0
+MIMIC,"mimic embedded",link(1),0,"",1,0,0,"",1,0,0
+MIMIC,"mimic embedded",link(2),0,"",1,0,0,"",1,0,0
+
+
+========================================
+TOPIC: File_Mgmt.htm
+========================================
+File Management instructions
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+File Management Instructions
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Instruction
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 
+ 
+FCLOSE
+ 
+ 
+ 
+ 
+Close the specified file.
+ 
+ 
+ 
+
+ 
+ 
+FCOPY
+ 
+ 
+ 
+ 
+Copy a file from source to destination.
+ 
+ 
+ 
+
+ 
+ 
+FEOF
+ 
+ 
+ 
+ 
+Determine whether the end of a file has been reached.
+ 
+ 
+ 
+
+ 
+ 
+FGETC
+ 
+ 
+ 
+ 
+Read a character from a file.
+ 
+ 
+ 
+
+ 
+ 
+FGETS
+ 
+ 
+ 
+ 
+Read a character string from a file.
+ 
+ 
+ 
+
+ 
+ 
+FMOVE
+ 
+ 
+ 
+ 
+Move a file from source to destination.
+ 
+ 
+ 
+
+ 
+ 
+FOPEN
+ 
+ 
+ 
+ 
+Open the specified file in accordance with the specified 
+ access mode.
+ 
+ 
+ 
+
+ 
+ 
+FPUTC
+ 
+ 
+ 
+ 
+Write a character to a file.
+ 
+ 
+ 
+
+ 
+ 
+FPUTS
+ 
+ 
+ 
+ 
+Write a character string to a file.
+ 
+ 
+ 
+
+ 
+ 
+FREAD
+ 
+ 
+ 
+ 
+Read N data items of the same type from a file and store 
+ them in a buffer allocated by ALLOC_BUFFER.
+ 
+ 
+ 
+
+ 
+ 
+FSEEK
+ 
+ 
+ 
+ 
+Move the file pointer to a new position.
+ 
+ 
+ 
+
+ 
+ 
+FSTAT
+ 
+ 
+ 
+ 
+Enable size and date information on a file to be obtained.
+ 
+ 
+ 
+
+ 
+ 
+FWRITE
+ 
+ 
+ 
+ 
+Write N data items of the same type to a file from data 
+ stored in a buffer allocated by ALLOC_BUFFER.
+ 
+ 
+ 
+
+ 
+ 
+RENAME
+ 
+ 
+ 
+ 
+Rename a file.
+ 
+ 
+ 
+
+ 
+ 
+UNLINK
+ 
+ 
+ 
+ 
+Delete a file. 
+ 
+ 
+ 
+ 
+
+ 
+Before using any of the file management instructions, except FSTAT, RENAME, UNLINK, FILETOBUF or BUFTOFILE, you must first open the file using an FOPEN instruction.
+ 
+Before any program including the FOPEN instruction ends, it must execute an FCLOSE instruction.
+
+
+========================================
+TOPIC: File_references.htm
+========================================
+File references
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+File References
+ 
+File references are used to configure a reference to a third party file that is to be used in PcVue's project. Creating a reference to a file speeds up access by allowing it to be pre-loaded, as one of the project's resources, on start-up. It also ensures a uniform way of managing a file across all the features that have access, including an alias, a unique name shorter name than the actual filename.
+ 
+Where can file references be used
+ 
+ 
+ 
+ 
+ 
+ 
+
+ File type
+ Supported formats
+ Available for use in
+ 
+ 
+
+ Microsoft� Excel
+ XLS, XLSX, XLSM
+ Excel functions in Expression engine. See Expression functions for Referencing an Excel File for more information.
+ 
+ 
+
+ Xml
+ &#160;
+ Xml functions in Expression engine. See Expression functions for Referencing an Xml File for more information.
+ 
+ 
+ 
+ 
+How to configure a File Reference?
+ 
+File reference configuration is found under the General node of the Application Explorer. 
+ 
+ 
+Select the File reference node and, from the task list, select Add a file reference. A dialog to configure the new file reference will open. Show picture
+
+ 
+Enter the Name for the file reference. The name is the identity by which it will be referenced in PcVue. You can also enter an optional description.
+ 
+Select the File type, either Microsoft� Excel or Xml.
+ 
+Select or enter the File path. The following syntaxes are supported.
+
+File name only. The file is assumed to be in the project's TP folder. For example FILE.XLSX.
+
+A path relative to the project. For example ..\..\MyFiles\FILE.XLSX.
+
+An absolute path. For example E:\MyFiles\FILE.XLSX.
+ 
+Select the Advanced tab to change any of the other properties.
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+When an Xml file is selected in the Application Explorer, the task Xml viewer is available to preview the Xml file content.
+ 
+The Xml viewer allows you to visualize the Xml file content and test XPath queries. Show picture
+ 
+
+ 
+ 
+ 
+Advanced properties
+ 
+Show picture
+ 
+ 
+
+ 
+ 
+ 
+ 
+Data interpretation
+Default substitution characters for empty cells. The characters that are returned by default if a referenced cell is empty.
+Empty string - Returns "" for any empty cell.
+"Null" string - Returns "NULL" for any empty cell.
+Customized string - Returns the configured string for ant empty cell.
+ 
+Output formatting - Excel files only
+Default column separator - The default character used to separate the cells of a column when using functions such as the GetCol and GetRange in expressions. 
+Default row separator - The default character used to separate the cells of a row when using functions such as the GetRow and GetRange in expressions.
+ 
+Allow usage - The features that are permitted use of the file.
+Expressions - Allow use by the Excel functions in the Expression Engine.
+Time of loading
+At start-up - The file is loaded at startup. 
+On call - the file is loaded only when it is used for the first time.
+Time of unloading
+On exit - The file is unloaded only when shutting down.
+After a delay - The file is unloaded, after a delay, after it was last used.
+
+
+========================================
+TOPIC: File_Syntax_VARIABLE.htm
+========================================
+File syntax for VARIABLE mode IMPORTFILE and IMPORTBUFFER
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+File syntax for VARIABLE mode IMPORTFILE and IMPORTBUFFER
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ Applies to
+ 
+ 
+The instruction VARIABLE, modes IMPORTFILE or IMPORTBUFFER, are used to add, modify or delete configuration items from associated with variables. The changes are imported from a file or buffer. 
+ 
+
+ 
+This method is no longer recommended for configuration import. Instead, it is preferable to use the Smart Generator and the Generic XML Import.
+ 
+ 
+Adding or modifying items
+ 
+The following items can be added or modified. The syntax of the entry in the file or buffer must comply with the syntax used in the item's project configuration file. 
+ 
+
+ 
+The configuration files are found in the project's C folder.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Configuration item
+ Project configuration file for syntax
+ 
+ 
+
+ Variables 
+ VAREXP.DAT
+ 
+ 
+
+ Expression on variable 
+ EXPRV.DAT
+ 
+ 
+
+ Expression template 
+ EXPRM.DAT
+ 
+ 
+
+ Proprietary trend 
+ HISTO.DAT
+ 
+ 
+
+ HDS trend 
+ HDSTREND.DAT
+ 
+ 
+ 
+ 
+Deleting items
+ 
+The following items can be deleted. The syntax of the entry in the file or buffer is as follows.
+ 
+ 
+ 
+ 
+ 
+
+ Configuration item
+ Syntax
+ 
+ 
+
+ Variable 
+ DNVAR,VariableName
+ 
+ 
+
+ Proprietary trend 
+ DTR,VariableName,UnitName
+ 
+ 
+
+ HDS trend 
+ DTR_HDS,VariableName,LogicalGroupName
+ 
+ 
+
+ Expression on variable 
+ DEXPRESSIONONVAR,ExpressionName
+ 
+ 
+
+ Expression template 
+ DEXPRM,ExpressionName
+ 
+ 
+ 
+ 
+Import report format
+ 
+The mode IMPORTFILE or IMPORTBUFFER of the VARIABLE instruction generate an optional report file. Each line in the report file takes the following format.
+ 
+ 
+ 
+ 
+ 
+
+ No
+ Description
+ 
+ 
+
+ 1
+ The station name.
+ 
+ 
+
+ 2
+ Number of objects imported.
+ 
+ 
+
+ 3
+ Number of variables added.
+ 
+ 
+
+ 4
+ Number of variables modified.
+ 
+ 
+
+ 5
+ Number of variables deleted.
+ 
+ 
+
+ 6
+ Number of variables unchanged.
+ 
+ 
+
+ 7
+ Number of objects for which the modification is not defined.
+ 
+ 
+
+ 8
+ Number of failures.
+ 
+ 
+ 
+ 
+Example:
+ 
+SERVER_1,116,0,20,0,0,96,0
+CLIENT_1,116,0,20,0,0,96,0
+
+

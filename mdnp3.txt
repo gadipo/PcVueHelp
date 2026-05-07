@@ -1,0 +1,765 @@
+========================================
+TOPIC: mdnp3_adding_devices.htm
+========================================
+Adding Devices to a DNP3 network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding Devices to a DNP3 Network
+ 
+A DNP3 device object in PcVue configuration represents, and provides access to, a DNP3 device. 
+ 
+A DNP3 device is identified by its IP Address and its Link address. In PcVue, it is known by the Name that you give it during the configuration.
+ 
+Adding a Device
+ 
+ 
+Select a DNP3 network in the Application Explorer. From the task pane, select New Device to open the Device dialog. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+In the Name box, enter a name for the DNP3 device. You can either accept the default or enter one of your own.
+ 
+Enter the optional descriptive text in the Description box. The description is only used in the Application Explorer.
+ 
+In the IP Address box, enter the device's unique IP address.
+ 
+In the Link address box, enter the device's unique link address.
+ 
+Click on OK to confirm the configuration and close the dialog.
+ 
+ 
+The Advanced tab
+ 
+See the topic DNP3 Device advanced properties.
+ 
+The Traces tab
+ 
+The Traces tab is used to enable debugging traces in the event of any problems with the device. Only use this if advised to do so by your support agency.
+
+
+========================================
+TOPIC: mdnp3_device_advanced.htm
+========================================
+DNP3 Device advanced properties
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DNP3 Device Advanced Properties
+ 
+The DNP3 Device advanced properties are accessed for the DNP3 Device configuration dialog, Advanced tab. Show picture
+ 
+
+ 
+In the following explanation, PcVue is the master.
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Connection parameters
+TCP/IP parameters
+Local port - The port number for communication with the device. Default 20000.
+Remote port - The port number used by the device. Default 20001.
+TCP Mode
+Initiating end mode - Only the master can initiate the connection. This mode is supported by all devices and is the default.
+Dual end mode - The master or the slave (device) can initiate connection. This mode is not supported by all devices.
+DNP3 parameters
+Local link address - The link address for the master.
+Link confirmation mode - The link confirmation mode required by the device. The default is Never.
+Link offline retry period - The period at which the master will attempt to reestablish communication if the device goes off-line. This includes attempting to
+ open/reopen a channel and/or issuing request status messages as
+ appropriate for the current configuration. Default 10 seconds.
+Application layer
+Response timeout - The period for which the master will wait for an answer from the device before generating a timeout. Default 3 seconds.
+Enable unsolicited messages - Enable unsolicited messages from the device. This is the normal mode of operation and ticked by default.
+ 
+Data exchange mechanisms - The response of the master to certain device conditions. IIN is an acronym for Internal INdication.
+Upon reception of NEED TIME IIN (IIN1.4)
+Request a time synchronization - The master sends a Request Time Synchronization message.
+Upon reception of LOCAL IIN on-then-off (IIN1.5)
+Integrity poll - The master sends an integrity poll.
+Upon reception of RESTART IIN (IIN1.7)
+Integrity poll - The master sends an integrity poll.
+Upon reception of BUFFER OVERFLOW IIN (IIN2.3)
+Integrity poll - The master sends an integrity poll.
+When a device comes online
+Execute an integrity poll - The master sends an integrity poll.
+Execute a time synchronization - The master sends a Request Time Synchronization message.
+Clear RESTART IIN (IIN1.7) - The master sends a request to clear IIN1.7
+Refresh Attributes - The master sends a request to refresh the value of all Device attributes.
+ 
+Periodic requests
+Integrity poll - Enable a periodic integrity poll. The default is ticked.
+Polling period - The polling period in milliseconds. Default 60000 (every minute).
+Interrogation of classes - Enable the periodic polling of the device items according to their class.
+Class 0 - Enable class 0 polling.
+Polling period - The polling period in milliseconds.
+Class 1 - Enable class 1 polling.
+Polling period - The polling period in milliseconds.
+Class 2 - Enable class 2 polling.
+Polling period - The polling period in milliseconds.
+Class 3 - Enable class 3 polling.
+Polling period - The polling period in milliseconds.
+Time synchronization - Enable a periodic Request Time Synchronization message.
+Polling period - The polling period in milliseconds. Default 3600000 (every hour).
+Synchronization type - Defines if time synch messages should be formatted as defined in the DNP3 Serial base specification, or as defined in the DNP3 LAN specification.
+
+
+========================================
+TOPIC: mdnp3_in_the_ae.htm
+========================================
+Managing DNP3 in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing DNP3 in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks applicable to DNP3
+ 
+When the DNP3 folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Settings
+ Display the general DNP3 settings dialog.
+ 
+ 
+
+ 
+ 
+ 
+ New network
+ Configure a connection to a DNP3 network.
+ 
+ 
+ 
+ 
+When a DNP3 network is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ New device
+ Add a device to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Start network
+ Start the connection to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Stop network
+ Stop the connection to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the connection to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Mapping
+ Open the mapping dialog used to link variables to DNP3 items.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the network connection.
+ 
+ 
+ 
+ 
+When a DNP3 device is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start device
+ Start the connection to the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Stop device
+ Stop the connection to the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Activate device
+ Activate the device. Only of use when a main and standby device have been configured.
+ 
+ 
+
+ 
+ 
+ 
+ File transfer helper...
+ Open the dialog to handle ad-hoc file transfer.
+ 
+ 
+
+ 
+ 
+ 
+ Ping
+ Send a Ping to the device to check its status. A command dialog opens during the Ping process displaying the results.
+ 
+ 
+
+ 
+ 
+ 
+ Time synchro command
+ Send a DNP3 Time Synchronize command to the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Reset command
+ Send a Cold Reset command to the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Details
+ Displays the device manufacturer's details in a dialog. Show picture
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the selected device.
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+You must check that there are no process or safety issues before sending a Cold Reset or Time Synchronize command to a device.
+ 
+ 
+Rules and behavior of cut, copy and paste
+ 
+The following table describes the rules and behavior, and in particular any restrictions, when using cut or copy and paste on configuration objects in the DNP3 folder.
+ 
+ 
+ 
+ 
+ 
+
+ DNP3 object
+ Behavior
+ 
+ 
+
+ Network
+ The pasted Network is given a unique name.
+Any subordinate Devices are duplicated using the original name.
+The mapping of any variables is not duplicated.
+ 
+ 
+
+ Device
+ 
+ 
+The pasted Device is given a unique name.
+
+
+========================================
+TOPIC: mdnp3_mapping.htm
+========================================
+DNP3 inputs and outputs to variable mapping
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DNP3 Inputs and Outputs to Variable Mapping
+ 
+The DNP3 Mapping dialog is used to map (link) DNP3 inputs and outputs to PcVue variables. It can be opened from the Application Explorer when a DNP3 network is selected by using the Mapping task.
+ 
+The left pane contains a tree display of the devices of the selected network. Under each device is a list of all input and output groups supported by PcVue. The right pane contains a table of all inputs or outputs for the selected device and group, together with any variables to which they are linked. An icon adjacent to each address indicates the type of variable with which it corresponds. Show picture
+
+ 
+Right clicking anywhere in the right pane displays a context menu with the following commands.
+ 
+ 
+Variable selector - Opens the Variable Selector dialog. 
+ 
+Create variable - See below.
+ 
+Unmap item - Un-maps (removes the link) between the selected variables and the corresponding information object. 
+ 
+ 
+How to map an information object to a variable
+ 
+ 
+Right click in the right pane of the DNP3 Mapping dialog and, from the pop-up menu, select the Variable Selector command. The Variable Selector dialog opens. Drag it to a convenient location so you can see both it and the DNP3 Mapping dialog. Show picture
+
+ 
+Click in the DNP3 Mapping dialog and select the input or output to be mapped. 
+ 
+Click in the Variable Selector dialog and select the variable to be mapped. Click the Apply button and the link between the input or output and variable is made. 
+ 
+Repeat steps 2 and 3 for all the variables to be mapped. 
+ 
+ 
+
+ 
+You can also open the Variable Selector by double clicking on an input or output.
+ 
+ 
+How to un-map a variable
+ 
+ 
+Open the DNP3 Mapping dialog and select the variable to be un-mapped. 
+ 
+Right click on the selected variables and, from the context menu, select the command Unmap item.
+ 
+A dialog will appear asking for confirmation. Click OK to confirm the operation. 
+ 
+ 
+How to automatically create a variable
+ 
+You can automatically create a variable and simultaneously link it to an input or output using the following method.
+ 
+ 
+Right click on any un-mapped input or output and, from the context menu, select Create variable. A variable with default properties and the correct type to match the item is automatically created and linked to the item. The variable name is constructed using the following syntax <Network>.<Device>.<Type>.<Address> Show picture
+
+
+========================================
+TOPIC: mdnp3_network_config.htm
+========================================
+Configuring a DNP3 network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a DNP3 Network
+ 
+A DNP3 Network object in PcVue configuration represents and provides access to, the physical connection to a DNP3 network. The configuration is accessed from the Application Explorer - Project.Communication.Data acquisition.DNP3.
+ 
+Adding a network
+ 
+ 
+Select the DNP3 folder in the Application Explorer and, from the task list, select New Network. The DNP3 Network dialog opens. Show picture
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+In the Name text box, enter the name of the network. You can accept the suggested default or enter one of your own.
+ 
+Enter a description of the network. The description appears in the contents pane of the Application Explorer and can be useful to identify the network later. The description is optional.
+ 
+To activate the network connection at startup, tick Activate at start-up.
+ 
+If you are configuring a multi-station application, select the Advanced tab and select the Servers list. The network will only be activated on those stations named in that list.
+ 
+Click on OK to confirm the configuration and close the dialog. 
+ 
+ 
+The Traces tab
+ 
+The Traces tab is used to enable debugging traces in the event of any problems with the network. Only use this if advised to do so by your support agency.
+
+
+========================================
+TOPIC: mdnp3_network_settings.htm
+========================================
+DNP3 General Settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DNP3 general settings
+ 
+The DNP3 General Settings are accessed from the Application Explorer by selecting Project.Communication.Data acquisition.DNP3 and choosing the Settings command from the task list. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Monitoring
+Use the local timestamp upon device reconnection - Use PcVue�s timestamp for the first value received after a device is re-connected.
+Binary Input, Counter, Analog Input, Analog Output
+Status for... - Define how the status of variables should be set in the event that certain flags are associated to the values received from devices. You can choose either that the quality remains unchanged or be set to invalid. The configuration set here affects all variables that have a DNP3 source. It is not possible to change the configuration of individual variables.
+Time tagging - The default setting for the time tagging of all variables with a DNP3 source. The default setting is applied when a variable is created but can be changed from each variable's advanced properties.
+
+Not time tagged - Use PcVue's time for the timestamp of variables.
+Time tagged - Use the time tag from the DNP3 event for the timestamp of variables.
+ 
+Control
+Control relay output block (CROB)
+Default method - The default method, either Direct operate, Direct operate no ack or Select before operate, used for CROB commands.
+Analog output control block (AOB)
+Default method - The default method, either Direct operate, Direct operate no ack or Select before operate, used for AOB commands.
+
+
+========================================
+TOPIC: mdnp3_objects_and_the Supervisor.htm
+========================================
+DNP3 Inputs and Outputs, Object Groups and Variations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+DNP3 Inputs and Outputs, Object Groups and Variations
+ 
+The following table lists the DNP3 input and output types that are supported by PcVue. An input or output can correspond to a physical input or output or it can be calculated by the device. In addition to the inputs and outputs, there two other data types known as Internal Indications and Device Attributes that provide information about the device itself.
+ 
+The Object Groups define how the inputs and outputs are read and written. The actual messaging in DNP3 is quite complex but a highly simplified explanation of the groups is that, for each input and output type there are two groups, one that is used for polled messages and the other for event (exception driven) messages. For binary and analog outputs there is an additional group used for the write process.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Type
+ Group
+ Description
+ Variables tree
+ 
+ 
+
+ Binary input
+ 1
+ A two state value such as a simple on off switch.
+ Bit
+ 
+ 
+
+ Binary input (event)
+ 2
+ 
+ 
+
+ Binary output
+ 10
+ A two state output such as the open and close control for a circuit breaker.
+ Bit
+ 
+ 
+
+ Binary output (event)
+ 11
+ 
+ 
+
+ Binary output (CROB)
+ 12
+ Control Relay Output Block. The mechanism used to write a binary output.
+ 
+ 
+
+ Running counters
+ 20
+ A value that counts the number of occurrences of an event. For example the number of times a circuit breaker has tripped.
+ Register
+ 
+ 
+
+ Running counters (event)
+ 22
+ 
+ 
+
+ Frozen counters
+ 21
+ A value that counts the number of occurrences of an event at a particular point in time.
+ Register
+ 
+ 
+
+ Frozen counters (event)
+ 23
+ 
+ 
+
+ Analog input
+ 30
+ A single analog input such as a phase voltage.
+ Register
+ 
+ 
+
+ Analog input (event)
+ 32
+ 
+ 
+
+ Analog output
+ 40
+ A single analog output such as a set-point.
+ Register
+ 
+ 
+
+ Analog output (event)
+ 42
+ 
+ 
+
+ Analog output (AOB)
+ 41
+ Analog Output Block. The mechanism used to write an analog output.
+ 
+ 
+
+ Internal indications
+ 80
+ A two state value that indicate the operational status of the device.
+ Bit
+ 
+ 
+
+ Device attributes
+ 0
+ String values representing static properties, and analog values representing configuration attributes, of the device. For example the manufacturer's name or the quantity of analog inputs.
+ Register or text as appropriate
+ 
+ 
+ 
+ 
+
+ 
+The double bit binary input is not currently supported.
+ 
+ 
+Variations
+ 
+Variations are a specific range of formats in which the data can be presented in each Group. For example, analog inputs can be a 32 bit integer with flag, a 16 bit integer with no flags, etc. For a full list of the supported variations, see the topic DNP3 implementation table.
+ 
+
+ 
+For more information on the operation of the Variable Selector, see the book The Variable Selector.
+
+
+========================================
+TOPIC: mdnp3_overview.htm
+========================================
+Overview of DNP3
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of DNP3
+ 
+DNP3 is a communication standard used mainly by the electricity and water utilities. DNP3 is a client/server protocol operating over a number of different communication media. It supports both polling and unsolicited data exchange.
+ 
+A DNP3 network has Devices, Object Groups and Variations.
+ 
+ 
+A Device is physical field device such as an RTU (Remote Telemetry Unit) or IED (Intelligent Electronic Device). A Device is identified on a network by its IP Address and its Link Address.
+ 
+Each Device has one or more Object Groups. An Object Group (also referred to as a Group or Object) is an array of data points of similar types, for example analog inputs. The Group types are listed in the DNP3 specification. Each Group is referenced by a unique group number that is specific to the data type. For example, Group 1 is Binary Inputs (BI).
+ 
+Variations are a specific range of formats in which the data can be presented in each Group. For example, analog inputs can be a 32 bit integer with flag, a 16 bit integer with no flags, etc.
+ 
+ 
+&#160;PcVue's DNP3 configuration is accessed from the Application Explorer - Project.Communication.Data acquisition.DNP3.
+ 
+&#160;PcVue communicates with a DNP3 network using TCP/IP. It is the client and the field devices are servers. By default, polling is used only to collect the initial state of servers, and for a background integrity check. Normal data collection uses unsolicited data exchange.
+ 
+The supported Groups and Variations are listed in the topic DNP3 implementation table.
+ 
+
+ 
+Additional support for DNP3 is provided in SCADA Basic with the instruction MDNP3. The instruction supports some of the more complex features of DNP3 such as Select Before Operate (SBO).
+
+

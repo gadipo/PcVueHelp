@@ -1,0 +1,1326 @@
+========================================
+TOPIC: Overview.htm
+========================================
+Archives Overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Archives Overview
+ 
+The Archives is the name given to PcVue data recording. It supports two distinct systems.
+ 
+ 
+Native - records 
+ in, and display from, PcVue own native data storage system.
+ 
+Historical Data Server (HDS) - records in, 
+ and display from, an industry standard database such as Access or Microsoft 
+ SQL Server. The HDS system is available from version 
+ 8.10 of PcVue onwards. 
+ 
+ 
+Whilst the technology used in the two systems is quite 
+ different, the functionality provided is similar and both systems are configured from the Archives folder of the Application Explorer.
+ 
+Comparison of the Native and HDS data recording systems
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+Native
+ 
+ 
+ 
+HDS
+ 
+ 
+ 
+
+ 
+ 
+Availability
+ 
+ 
+ 
+All versions
+ 
+ 
+ 
+Version 8.10 onwards
+ 
+ 
+ 
+
+ 
+ 
+Data sources
+ 
+ 
+ 
+Trend data from variables included in the Trends folder, 
+ log data from the Log Lists and report data.
+ 
+ 
+ 
+Trend data from variables added to the Trends folder, 
+ log data from the Log Lists.
+ 
+ 
+ 
+
+ 
+ 
+Data retrieval
+ 
+ 
+ 
+Through the HMI using a historic Trend Viewer.
+Through the HMI using a Log Viewer.
+Through the HMI using mimics configured as reports.
+Programmatically using SCADA Basic.
+ 
+ 
+ 
+Through the HMI using a historic Trend Viewer.
+Through the HMI using a Log Viewer.
+A 3rd party program with connectivity to the selected database or a VBA 
+ script.
+ 
+ 
+ 
+
+ 
+ 
+Storage system
+ 
+ 
+ 
+File based archive units.
+ 
+ 
+ 
+Database based.
+ 
+ 
+ 
+
+ 
+ 
+Recording format
+ 
+ 
+ 
+Proprietary. The recording format is partially 
+ configurable.
+ 
+ 
+ 
+Database format in configurable tables. 
+ 
+ 
+ 
+
+ 
+ 
+Main advantage
+ 
+ 
+ 
+Highly optimized data recording for maximum performance.
+ 
+ 
+ 
+Industry standard (database) recording format with easy 
+ access from 3rd party products.
+ 
+ 
+ 
+
+ 
+ 
+Main disadvantage
+ 
+ 
+ 
+Access from 3rd party products limited.
+ 
+ 
+ 
+Requires a more powerful PC (CPU, RAM & hard disk) 
+ to achieve a similar performance to a proprietary format archive unit.
+ 
+ 
+ 
+ 
+
+ 
+If you need to archive data timestamped at the device level, it is recommended to use Database archiving (HDS). In general, the native recording system (proprietary archive unit) does not provide a reliable data sequence.
+ 
+The total number of all archive units in a project is limited to 512.
+
+
+========================================
+TOPIC: Overview_adding communication.htm
+========================================
+Adding communication to a template
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding Communication to a Template
+ 
+The following communication elements can be configured in a template. They match the corresponding data acquisition driver�s configuration elements.
+ 
+ 
+SNMP Manager
+Network
+Unmanaged device
+SNMP device
+Polling group
+ 
+OPC Client
+OPC server
+OPC group
+OPC XML-DA server
+OPC XML-DA group
+ 
+IEC 60870-5 Client
+Network
+Device
+Sector
+ 
+DNP3 Client
+Network
+Device
+ 
+IEC 61850 Client
+Device
+Monitoring object
+ 
+BACnet Client
+Device
+Log object
+Notification class
+Calendar
+Schedule
+ 
+Equipment
+Network
+Device
+Frame
+ 
+ 
+How to add communication to a template
+ 
+The principle to add any data acquisition channel is the same. You add the element representing the Network (or Server in the case of OPC), followed by the sub-ordinate elements, Device, OPC Group etc. For detailed information about specific communication properties, see the Data Acquisition book in the Application Explorer help (Application Explorer.Communication.Data Acquisition). The following explanation is for SNMP communications - the others are similar.
+ 
+ 
+Navigate to the supporting template and select the Communication Elements folder.
+In the right pane of the Application Architect, select the Templates tab.
+Using the templates configuration tree select the template to which the communication is to be added.
+Using the secondary navigation tree select the Configuration elements folder.
+ 
+Create a new SNMP Network. Show picture
+
+Select Add a communication object > SNMP > Add a network. A new SNMP Network with a default name is created.
+Edit the name to one appropriate to your application. You can only edit the name directly by clicking on it in the configuration tree. 
+Configure the SNMP Network properties. Select the network in the secondary navigation tree and its properties appear in the properties grid. The properties that are available are the same as those if you were configuring the network using the traditional configuration tools.
+ 
+Add an SNMP device to the template. Show picture
+
+Using the secondary navigation tree select an existing SNMP Network within the Configuration elements folder.
+Select Add an SNMP device. A new SNMP Device with a default name is created.
+Edit the name to one appropriate to your application. You can only edit the name directly by clicking on it in the configuration tree.
+Configure the SNMP Device properties. Select the device in the secondary navigation tree and its properties appear in the properties grid. The properties that are available are the same as those if you were configuring the device using the traditional configuration tools.
+ 
+Create a new SNMP Polling Group. Show picture
+
+Select Add a communication object > SNMP > Add a polling group. A new Polling Group with a default name is created.
+Edit the name to one appropriate to your application. You can only edit the name directly by clicking on it in the configuration tree.
+Configure the Polling Group. Select the network in the secondary navigation tree and its properties appear in the properties grid. The properties that are available are the same as those if you were configuring the network using the traditional configuration tools.
+ 
+ 
+
+ 
+An SNMP Device is always sub-ordinate to an SNMP Network. However, to allow for the possibility where an SNMP Network has been configured outside of the Application Architect (using the Application Explorer), an SNMP Device can be positioned so that it is not sub-ordinate to an SNMP Network and instead the name of the previously configured SNMP Network is entered in its Network Name property. The Network Name property is not displayed if a device is positioned sub-ordinate to a network.
+ 
+ 
+
+ 
+Polling Groups are independent of, and not sub-ordinate to, an SNMP Network.
+
+
+========================================
+TOPIC: Overview_adding_graphics.htm
+========================================
+Using graphics with templates
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using Graphics with Templates
+ 
+Graphic elements can be added to a template so that when the application is generated instantiations of a template produce not only the variables tree, but also the corresponding graphic elements. 
+ 
+You can add both mimics and symbols to a template. For example, a template representing a light may require a symbol representing the light. However, a template representing an entire office, at the next level up in the configuration tree, may require just a mimic representing the office, which would then be populated with instantiations of the light symbol.
+ 
+When you add a mimic to a template, one mimic is generated for each instantiation of the template. The mimics are created using default settings although you can optionally select a mimic template and some other properties such as the mimic title. 
+ 
+When you add a symbol to a template, the symbol must already exist in PcVue libraries. The variables used in the symbol should match those of the template. Each instantiation of a template containing a symbol will generate an instance of the symbol in one more mimic generated from a template higher up or equal in the instances tree. As you may not want a symbol to appear in all mimics, a simple filter system can be used to control symbol instantiation. See the topic Controlling Instantiation Using Tagging.
+ 
+
+ 
+When using mimics and symbols in the Application Architect the mimic and symbol file formats, in the HMI Options dialog, must be set to Ascii format.
+
+
+========================================
+TOPIC: Overview_differentiation.htm
+========================================
+Differentiation overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Differentiation Overview
+ 
+By default the value for each property of an element is defined at the template level and is fixed - all instances will have the same value for that property. In practice, some properties will require a different value on a per-instance basis - a variable's Description for example. 
+ 
+Differentiation is a general name given to the various mechanisms by which the value of a property can be different for each instantiation of a template.
+ 
+There are several ways in which properties can be differentiated.
+ 
+ 
+Input - The property is defined as an Input and no value is given at the template level. The value must be entered each time the template is instantiated. A typical use of an input parameter is for the range (Min and Max) of a register variable. A property defined in this manner is marked with a small red icon .
+ 
+Expression - The property value is defined by an expression that is evaluated each time the template is instantiated. An expression can include fixed values and context sensitive operands such as Template.Name. A typical use is to calculate a variable's Description property. A property defined in this manner is marked with a small green icon .
+ 
+Parameter - The property value is defined by the value of a parameter. The same parameter can be used any number of times in one or more templates. A property defined in this manner is marked with a small blue icon . A named parameter can be one of two types. 
+Input - The parameter behaves as a container for a value. It can have different values for each instance of the template to which the parameter is attached.
+Evaluated - The parameter contains an expression that is evaluated for each instance of the template to which the parameter is attached.
+ 
+Global parameter - Similar to a parameter except that a global parameter has a one to one link with a specific type of property. For example, you could create a global parameter called gServerList that is used, as a default, to generate the value whenever an object containing the property Server Station List is instantiated. As with parameters, a global parameter can be of Input or Evaluated type.
+
+ 
+ 
+
+ 
+The value of an input parameter that is associated with a template is to be entered for each instance of this template and propagated to any sub-ordinate instances. It can however be overwritten at any level by declaring it again and entering a different value. The value of an Expression parameter is re-evaluated for each property in which it is used.
+
+
+========================================
+TOPIC: Overview_Example.htm
+========================================
+Overview of the examples
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the Examples
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ See also
+ 
+ 
+There are these kinds of example in the online help for 
+ SCADA Basic:
+ 
+ 
+Small examples of code 
+ embedded in the Instruction topics.
+ 
+Larger examples of code 
+ that are held as separate examples in this book.
+ 
+ 
+Some of the larger examples were extracted from application projects that provided the context for running them.
+ 
+Purpose and limits of use
+ 
+The examples of all three kinds of project are designed to 
+ illustrate the SCADA BASIC commands. The larger examples may show the modes and syntaxes of a particular command. 
+ 
+Some examples provide reminders about practical application 
+ of the commands. However, they are not intended for running or to illustrate best practice 
+ for SCADA/HMI development or for programming. They may require particular 
+ contexts to be configured before execution can occur. For these reasons, 
+ they should only be used for understanding, not as ready-made components for 
+ incorporating into applications.
+ 
+How to find the examples
+ 
+You can find examples by navigating or by searching the Help contents.
+ 
+ 
+Refer to any small examples that are in the topic for an instruction, usually at the end of that topic.
+ 
+Look up an instruction's name in this Help book or via the See Also link in the topic for the instruction. 
+ 
+Use the help's 
+ Search tab to locate all examples of a SCADA BASIC instruction in the command topics 
+ and in the separate example topics. Include the word 'Example' and tick the option 
+ 
+ 
+Navigation is more precise, but searching has advantages. You can list all topics that mention a particular instruction (even where the example given is mainly about another instruction). You can also search for a combination of instructions, for example: 
+ 
+SendList NEAR ComboBox
+ 
+Searching techniques are explained in the main Help book on How to Search the Help.
+
+
+========================================
+TOPIC: Overview_exceptions.htm
+========================================
+Creating exceptions
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Creating Exceptions
+ 
+When you are modeling your application, unless you are very fortunate, you will find some equipment that does not conform to the rules.
+ 
+For example, you have a building with four offices. You would like to represent all the offices with the same template that has four lights, an air conditioner and a fire detector. But one office has a different air conditioner with an extra variable, and another does not have an air conditioner at all. You can either create three different templates or use one template, creating exceptions when it is instantiated.
+ 
+There are a number of exceptions that you can create for an instance.
+ 
+ 
+Add an element. You can add an individual element such as a variable, a mimic, or a symbol directly to an instance. You can add individual behaviors to a variable (trend, event, alarm synthesis etc.).
+ 
+Deselect an element. A deselected element is not generated. You can deselect a topology element, a template instance, or any of the following elements of a template instance.
+Variable
+Variable behavior (trend, event, alarm synthesis etc.)
+Mimic
+Symbol
+Included template 
+If you deselect a topology element or template instance, all subordinate elements are also deselected.
+ 
+You can change the value of a property defined by an input or input parameter.
+ 
+ 
+By combining exceptions you can, for example, replace one element with another, or remove a complete sub-assembly of a physical component by deselecting the corresponding included template.
+ 
+Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+How to create an exception by adding an element to an instance
+ 
+ 
+In the right pane, select the Instances tab.
+ 
+Expand the instances tree and select the instance to which the element is to be added.
+ 
+Expand the secondary configuration tree and select the included template or element to which the element is to be added.
+ 
+Select the appropriate task to add the element (Add variable, Add mimic or Add symbol if you are adding to an instance, Add trend, Add event or Add alarm synthesis if you are adding to a variable). The added element is marked by a small green addition sign. 
+ 
+Select the new element and the properties grid in the lower right of the instances tab will be updated to display the available properties. 
+ 
+ Configure the element using the properties list. Show picture
+
+ 
+ 
+How to create an exception by deselecting an element from an instance
+
+ 
+ 
+In the right pane, select the Instances tab.
+ 
+Expand the instances tree and select the instance from which the element is to be deselected.
+ 
+Expand the secondary configuration tree and select the element to be deselected. 
+ 
+Select Deselect. The deselected element is marked with a small red subtraction sign. Show picture Next time the application is generated the element will be excluded.
+ 
+
+ 
+ 
+
+ 
+As well as deselecting an instance�s element, you can also deselect an instance as a whole. This can be useful when designing and tuning your templates.
+ 
+ 
+
+ 
+You can also Deselect in the template tab to deselect an element from a template, deselecting the element from all instances when the application is generated.
+
+
+========================================
+TOPIC: Overview_instantiation.htm
+========================================
+About instantiation
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+About Instantiation
+ 
+Instantiation is the process of defining the instances tree from which your application will be generated. During the instantiation process, you will do some or all of the following.
+ 
+ 
+Add and name template instances
+ 
+Add and name multiple template instance
+ 
+Create and name topology elements
+ 
+Enter input values
+ 
+Create exceptions (after instantiation)
+ 
+ 
+The instances tree
+ 
+The instances tree has the same name as that of the project. You can change its properties from the properties grid. Show picture
+
+ 
+ 
+Description - A description of the root of the instances tree. Only used within the Application Architect and has no effect on the application itself. Optional
+ 
+Branch - If configured, the Branch is added as a branch to the root of all configuration elements. Unless you have a specific requirement (such as merging two or more applications), this should be left at the default which is an empty string.
+ 
+ 
+
+ 
+If the root node has a non-empty branch, it creates an explicit branch in the variables tree. If a Description is entered, it is used as the branch description.
+
+
+========================================
+TOPIC: Overview_Instruct_Cat.htm
+========================================
+Overview of the Categories of Instructions
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the Categories of Instructions
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ See also
+ 
+ 
+This topic explains how to access topics through categories 
+ of related instructions plus 'See Also' links for themes that associate 
+ the instructions, concepts and reference material. 
+ 
+
+ 
+The instructions are specified in the next book, 'Instruction 
+ reference A to Z' with one topic per instruction.
+ 
+ 
+Some instructions have multiple syntaxes and modes of 
+ operation. The final section below describes how to access Help on the 
+ syntaxes and modes of such an instruction.
+ 
+Lists of instructions
+ 
+This Help book provides one-sentence summaries of what 
+ the instructions do. The instructions are arranged into these categories: 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+Buffer 
+ management
+ 
+ 
+Communication
+ 
+ 
+Debug
+ 
+ 
+Declaration
+ 
+ 
+File 
+ management
+ 
+ 
+Historic 
+ data
+ 
+ 
+HMI
+ 
+ 
+Input/Output
+ 
+ 
+ 
+ 
+ 
+ 
+Mathematical 
+ functions
+ 
+ 
+Miscellaneous
+ 
+ 
+Program 
+ Execution
+ 
+ 
+Program 
+ Structure
+ 
+ 
+String 
+ manipulation
+ 
+ 
+Type 
+ conversion
+ 
+ 
+Time 
+ and date
+ 
+ 
+Variables tree
+ 
+ 
+Window
+ 
+ 
+ 
+ 
+ 
+ 
+You can use the 'See Also' link at the top of each list 
+ to access the topics of instructions in that category.
+ 
+Links in the instruction topics
+ 
+In the book 'Instruction Reference A to Z', the individual 
+ topic for each instruction also has a 'See Also' link. It provides access 
+ through a pop-up window to the index of other instructions in the same 
+ category (or several indexes for different categories) and to individual topics that relate closely to its topic. 
+ 
+Syntaxes and modes
+ 
+An instruction's topic specifies the syntax formats 
+ for the instruction. If there is more than one syntax to allow for different 
+ parameters, the topic has a section for each syntax. Show example
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+An instruction may have several modes with which to achieve 
+ different effects. If so, the instruction's topic starts with an index 
+ of which syntax to use for each mode. The Syntax column of the index provides 
+ links to the syntax sections. The effects of each mode are defined in 
+ the syntax section concerned. 
+ 
+
+ 
+With instructions that use a MODE argument, the argument can be passed either as a numeric Id (1, 2, 3 etc.), or as a name under the form of a string within quotation marks (e.g. "OPEN", "CLOSE"). For the purpose of readability of your scripts, it is strongly recommended to use the mode name instead of the corresponding numeric value.
+
+
+========================================
+TOPIC: Overview_programming_languages.htm
+========================================
+About the programming languages
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+About the Programming Languages
+ 
+&#160;PcVue supports two programming languages.
+ 
+SCADA Basic
+ 
+SCADA Basic is a block structured, interpreted language, with a syntax closely related to industry standard Basic. SCADA Basic is proprietary to PcVue.
+ 
+VBA
+ 
+VBA (Visual Basic for Applications) is a programming language created by Microsoft. It is a subset of the Visual Basic (VB) language, designed for automation of applications � originally the Office 97 suite - now in hundreds of third-party software. PcVue provides VBA access to the project environment, mimics, drawing elements, symbols, graphic controls and the real time value of variables (known collectively as PcVue objects).
+ 
+
+ 
+Cypress Enable is no longer supported since version 11 of PcVue. However, it is possible to adapt Enable scripts developed with earlier versions of PcVue so that they can run in the VBA environment. Please contact technical support for further information.
+
+
+========================================
+TOPIC: Overview_SCADABasic.htm
+========================================
+Overview of SCADA Basic
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Overview of SCADA Basic
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ See also
+ 
+ 
+User programs can be written in a scripting language 
+ known as SCADA Basic. This is a block structured, interpreted language 
+ with a syntax closely related to industry standard Basic.
+ 
+A project may be configured to run programs on various 
+ occasions: 
+ 
+ 
+At start-up of PcVue.
+ 
+On change of a variable 
+ in the database.
+ 
+Cyclically. 
+ 
+From the keyboard.
+ 
+From control zones 
+ on the screen. 
+ 
+When called from 
+ other programs.
+ 
+ 
+In this book, the instructions are arranged into categories 
+ (by type of instruction) and alphabetically (as individual topics, e.g. ACOS) 
+ 
+ 
+You can also locate topics in these ways:
+ 
+ 
+See Also: click on a 'See Also' 
+ link in a topic to open a related topic.
+ 
+Index: double-click on a keyword 
+ or phrase in the Index, or select then click on the Display button.
+ 
+Search: type a word or phrase 
+ into the Search tab and select List Topics, then double-click on a line 
+ or select a line and click on Display.
+
+
+========================================
+TOPIC: Overview_templates.htm
+========================================
+Templates overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Templates Overview
+ 
+Templates are the building blocks of the Application Architect. The mechanism of identifying the necessary templates for an application is known as modeling. Templates can be saved in PcVue libraries so that they can be re-used in further applications. 
+ 
+What is a template?
+ 
+A template is a model of a real world object (for example a pump or a HVAC unit) made up of PcVue configuration elements.
+ 
+A template can contain the following configuration elements:
+ 
+ 
+Parameters - Named parameters, containing either an expression or a value
+ 
+Included templates
+ 
+Configuration elements
+Variables - Only the final part (leaf) of the variable name is specified, the remaining branches come from the topology of the template instantiation. Variables can include trends, events, thresholds, alarm synthesis etc.
+Cyclics - Cyclic actions
+File references - References to third party files
+File objects - Files, File items and Attributes
+Associated labels
+Archive units
+Log lists
+Geographical data - Geo-tags, Zones and Actions
+Data analysis - Data export, Log page and Trend page
+Communication - SNMP, BACnet, OPC, IEC 60870-5, IEC 61850 and DNP3
+ 
+Graphic elements:
+Mimics - The name of the mimic that will contain any symbols that are instantiated.
+Symbols - Representing the template, and requiring instantiation in a mimic of higher level.
+ 
+ 
+
+ 
+For detailed information about the configuration properties available for each element see the Application Explorer help:
+ 
+ 
+Variables - Variables
+ 
+Cyclics - Actions > Cyclic actions
+ 
+File references > General > File references
+ 
+Associated labels - How to configure Labels
+ 
+Archive units - Archives > Configuring archive units
+ 
+Log lists - Archives > Configuring archive units > Proprietary archive units > Configuring log data recording
+ 
+Geographical data > Geographical data
+ 
+Data analysis > Data Analysis
+ 
+Communication - Communication > Data Acquisition
+ 
+ 
+ 
+
+ 
+Template configuration includes a Documentation tab from where the developer can add a textual explanation of its intended use, and where its dependencies are displayed.
+ 
+ 
+Inherited template
+ 
+An inherited template is one that has another template as its parent. The same parent template can have any number of inherited templates. That is, there is a one to many relationship between parent and inherited templates. When the inherited template is instantiated, the instance will contain both its elements, and those of the parent template (if the parent template is instantiated it contains only its own elements).
+ 
+Example - The LIGHT template has one variable called STATUS. The DIMMER LIGHT template has one variable called LUX and is inherited from the LIGHT template. When the DIMMER LIGHT template is instantiated, the instance will have both the STATUS and LUX variables.
+ 
+
+ 
+The concept of inheritance allows the definition of one or more specialized templates sharing a common base.
+ 
+ 
+Included template
+ 
+An included template is an instance of a template that is embedded in another template. You can have one or more templates embedded in the same template. That is, there is a many to one relationship between the included and container templates. When the container template is instantiated, it has both its own elements plus those of its embedded templates (if the embedded template is instantiated it contains only its own elements).
+ 
+
+ 
+The concept of inclusion can produce complex templates by aggregating much simpler ones (like building bricks).
+ 
+ 
+Example - The OFFICE template has one variable called TEMPERATURE. The LIGHT template has one variable called STATUS. The OFFICE template includes four (embedded) instantiations of the LIGHT template (LIGHT_1, LIGHT_2 etc.). When the OFFICE template is instantiated, it will contain one TEMPERATURE variable plus four instances of the STATUS variable (LIGHT_1.STATUS, LIGHT_2.STATUS etc.).
+
+
+========================================
+TOPIC: Overview_VBA.htm
+========================================
+Overview of VBA scripting
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of VBA scripting
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ See also
+ 
+ 
+Welcome to the Help for using Visual Basic for Applications with PcVue. It provides the language reference for scripting the application objects. 
+ 
+It includes:
+ 
+ 
+Introduction to VBA in PcVue&#160;
+ 
+ 
+The HMI object model reference
+ 
+ 
+The Graphic controls object model reference
+ 
+ 
+The HDS object model reference
+ 
+ 
+ 
+If you are unfamiliar with VBA, you will benefit from learning more about it:
+ 
+ 
+By working through one of the many available resources on VBA, with examples of code
+ 
+By contacting your distributor for details about training courses
+ 
+ 
+
+ 
+The VBA reference documentation can be found in a help file opened from the Help entry in the VBA editor menu. Documentation for objects specific to PcVue is available in this section. 
+ 
+Except introduction topics, these sections of the help are only available in the English language.
+ 
+ 
+Accessing the VBA environment
+ 
+The VBA development environment can be accessed in several ways:
+ 
+ 
+From the keyboard using Alt + F11
+ 
+Using the following button in the toolbar
+ 
+In Design mode using the shortcut View script from the context menu displayed by right-clicking on any graphic element. This turns on the VBA control attribute for the element
+ 
+ 
+Content of this help
+ 
+You can use this Help to find information on an Object or a Collection of objects, or on an object's Properties, Methods and Events. You can also find examples of code.
+ 
+The help for VBA is displayed by clicking F1 when in the VBA development environment.
+ 
+Searching this help
+ 
+You can find information in several ways:
+ 
+ 
+
+ 
+Use the table of contents in the left pane to navigate through the books and topics
+ 
+ 
+
+ 
+Use the Index tab to list all topics assigned to a keyword
+ 
+ 
+
+ 
+Use the Search feature to list all topics that contain the word or phrase that you enter. You can include logical search expressions, using the operators AND, OR, NOT and NEAR, plus nesting of them inside parentheses '(...)'.
+ 
+ 
+ 
+For further guidance, see About this documentation topic. 
+ 
+Below the title of each topic, there are 'See Also' links to closely related topics:
+ 
+ 
+
+ 
+Each Object or Collection topic provides links to its Properties, Methods, Events and Examples.
+ 
+ 
+
+ 
+Each Property, Method or Event topic provide links to the object(s) to which it applies.
+ 
+ 
+
+ 
+Any of these topics may have links to relevant Example topics.
+ 
+ 
+ 
+
+ 
+The examples illustrate the syntax to be used, rather than best practice for scripting.
+ 
+ 
+Style conventions used in this help
+ 
+It follows the styling of Microsoft Visual Basic help (see Visual Basic Language Reference.Miscellaneous.Document Conventions). In particular:
+ 
+ 
+Words that you are instructed to type appear in bold.
+ 
+Placeholders for information you supply appear in italic.
+ 
+A bulleted list is used for items that have no particular order.
+ 
+ 
+ 
+A numbered list is used for a list with a sequence, for example giving the steps of a task.
+ 
+etc.
+ 
+ 
+File contents and data lists are shown by text in a mono-spaced font. 
+ 
+'Show ...' indicates a link within a topic. Click on it to display a picture, list or table.
+ 
+The links below the title of a topic give you access to other topics that are related to the one you are on. The selection of links depends on the kind of topic:
+ 
+ 
+See Also, Example, Properties, Methods, Events, Applies To and Specifics 
+ 
+ 
+When you click on such a link, it either displays a list of relevant topics or directly opens the one relevant topic.
+
+
+========================================
+TOPIC: Overview_VBA_GraphicControls.htm
+========================================
+Overview of VBA for Graphic controls
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of VBA for Graphic controls
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ See also
+ 
+ 
+This book is the VBA Language Reference to script graphic controls, including the Grid control, the Alarm viewer, the Log viewer, the Trend viewer and the Map control.
+ 
+To manipulate graphic control objects, you must know the relationships among them. The highest level object is Application. All other objects are subordinate to it, so you can use the Application object's properties and methods to access the subordinate objects. The graphic control objects are members of the Graphics collection for a mimic.
+ 
+The object tree is shown below. You can click on an object's name to open its Help topic.
+ 
+
+ 
+ 
+ 
+Graphic Objects is a generic term referring to all drawing object classes (Shape, Text etc.).
+ 
+The Form control objects are also visible in the VBA Object Browser along with their properties, methods and events AIComboBox, AIListBox, AICheckBoxList, AIOptionButtonList, and AITreeView.
+
+
+========================================
+TOPIC: Overview_VBA_HDS.htm
+========================================
+Overview of VBA for HDS
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of VBA for HDS
+ 
+This book is the VBA Language Reference to manage the HDS (Historical Data Server) by script.
+ 
+The HDS management object tree
+ 
+To manipulate HDS management objects, you must know the relationships among them. The highest level object here is HDSMgt. All other objects are subordinate to it, so you can use the HDSMgt object's properties and methods to access the subordinate objects.
+ 
+The object tree is shown below. You can click on an object's name to open its Help topic.
+ 
+
+ 
+ 
+ 
+ 
+Referencing the Historical Data Server Management Library
+ 
+Show picture
+ 
+ 
+
+ 
+ 
+ 
+ 
+To manage the Historical Data Server from VBA, you must manually include a reference to the HDS Management Library in your project:
+ 
+ 
+Select Tools.References from the main menu to open the References dialog.
+ 
+
+ 
+Tick the box for HDS Management Library and click Close to close the dialog.
+ 
+ 
+ 
+For more information about setting references to object libraries, see the topic References Dialog Box in Microsoft VBA Help.
+
+
+========================================
+TOPIC: Overview_VBA_HMI.htm
+========================================
+Overview of VBA for the HMI
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of VBA for the HMI
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ See also
+ 
+ 
+This book is the VBA Language Reference to script mimics and graphical elements of the HMI.
+ 
+HMI object tree
+ 
+To manipulate HMI objects, you must know the relationships among them. The highest level object is Application. All other objects are subordinate to it, so you can use the Application object's properties and methods to access the subordinate objects.
+ 
+The object tree is shown below. You can click on an object's name to open its Help topic. 
+ 
+
+ 
+ 
+ 
+ 
+MapControl objects tree
+ 
+The MapControl is sub-ordinate to the Graphics collection but because it has a complex structure it is shown as a separate tree for the purpose of this topic.
+ 
+
+ 
+ 
+ 
+ 
+Graphic Objects is a generic term referring to all drawing object classes (Shape,Text etc.).
+ 
+Animation Objects is a generic term referring to all animation object classes.
+There is also a collection known as TemplateGraphics that is identical to Graphics except that it refers to the graphics in a mimic template.
+
+

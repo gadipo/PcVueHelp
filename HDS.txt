@@ -1,0 +1,1076 @@
+========================================
+TOPIC: HDS_CONFDAT_file.htm
+========================================
+The HDSCONF.DAT file
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The HDSCONF.DAT File
+ 
+The HDSCONF.DAT file is located in the project's C folder 
+ and only affects the operation of the HDS for that project. The following 
+ properties are not available through the configuration dialogs and must 
+ be changed directly by editing the HDSCONF.DAT file directly with a text 
+ editor.
+ 
+
+ 
+You should only change HDSCONF.DAT under the supervision 
+ of technical support.
+ 
+ 
+In the [GENERAL] section
+ 
+UseUnicode
+ 
+Specifies how the HDS stores string data when using an 
+ SQL Server database.
+ 
+ 
+UseUnicode=0 - Strings 
+ are saved using Multi-Byte Character Set (MBCS) encoding. MBCS is a method 
+ of character encoding where characters are composed of 1 or 2 bytes, which 
+ can provide considerable space saving compared to unicode. However, in 
+ general, MBCS is only suitable for characters found in western languages. 
+ This is the default value.
+ 
+UseUnicode=1 - Strings 
+ are saved using unicode encoding. Unicode treats all characters as having 
+ a fixed width of 2 bytes and therefore requires more space than MBCS encoding. 
+ However, unicode is designed to support all languages and it should always 
+ be used for projects designed for international use particularly those 
+ using non-western character sets.
+ 
+ 
+QuickStop
+ 
+When PcVue is shut down, it can take a considerable 
+ amount of time for the HDS to stop, as it has to flush all the data in 
+ its memory buffers to the databases. It is possible to force the HDS to 
+ shut down without flushing the data to the databases by setting this parameter 
+ to 1. This option can be very useful during the project development phase 
+ where the loss of data is not important. 
+ 
+ 
+QuickStop=0 - The 
+ HDS is shut down normally after flushing all the data in its memory buffers 
+ to the databases. This is the default value.
+ 
+QuickStop=1 - The 
+ HDS is shut down quickly without flushing all the data in its memory buffers 
+ to the databases. If you use this option during the project development, 
+ remember to remove it before the project is commissioned.
+ 
+ 
+EnableUI
+ 
+Controls access to the HDS user interface. The HDS user 
+ interface is displayed by double clicking on the HDS icon in the Window's 
+ System Tray.
+ 
+ 
+EnableUI=0 - The 
+ HDS user interface is disabled.
+ 
+EnableUI=1 - The 
+ HDS user interface is enabled (default).
+ 
+ 
+EnableTraceWindow
+ 
+Controls access to the Trace window in the HDS user interface. 
+ The Trace window enables some debug facilities in the HDS.
+ 
+ 
+EnableTraceWindow=0 
+ - The Trace window in the HDS user interface is disabled.
+ 
+EnableTraceWindow=1 
+ - The Trace window in the HDS user interface is enabled (default).
+ 
+ 
+MaxBufferedEvents
+ 
+Specifies the maximum number of incoming events in the 
+ HDS buffer. If the number of events is exceeded the HDS temporarily stops 
+ accepting new events. If this property is not defined then the default 
+ value of DefaultMaxBufferedEvents configured in HDS.INI is used.
+ 
+MaxPurgedRecords
+ 
+Specifies how the HDS manages the mechanism for database 
+ size limitation based on age of data and emergency purge. This property 
+ is used only for SQL Server databases.
+ 
+When purging a database, SQL Server records all the transactions 
+ in the database log file (.ldf). If purging a large number of records 
+ this can generate a very large file. There are two ways in which purging 
+ may be managed, controlled by this property.
+ 
+ 
+MaxPurgedRecords=0 
+ - Uses the SQL Server built in purge mechanism. The SQL server handles 
+ the purge itself with no limitation on the number of records purged. This 
+ has the potential to create problems if a very large log file is created.
+ 
+MaxPurgedRecords=Any 
+ value other than 0 - Uses the HDS to purge records a block at a time. 
+ The size of the log file is limited by the number of records in each block, 
+ which is in turn defined by the value of MaxPurgedRecords. 
+ 
+ 
+If this property is not defined then the default value 
+ of DefaultMaxPurgedRecords configured in HDS.INI is used.
+ 
+In the [PERFORMANCE] section
+ 
+TimeSortingPeriod
+ 
+Defines the period of time for which data is stored and sorted in a temporary buffer before being written to the database. This helps to reduce database fragmentation. If not defined a default value of 0 is used (no sorting).
+
+
+========================================
+TOPIC: HDS_configuration_files_overview.htm
+========================================
+About the HDS configuration files
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The HDS Configuration Files
+ 
+The configuration of the HDS is saved in two files.
+ 
+ 
+The HDS.INI file 
+ is located in the Bin folder of PcVue and affects the 
+ operation of the HDS for all projects.
+ 
+The HDSCONF.DAT file 
+ is located in the project's C folder and only affects the operation of 
+ the HDS for that project.
+ 
+ 
+Most of the properties in the configuration files are 
+ generated as a result of configuring the HDS as seen from the Archives node in the Application Explorer. 
+ However, there are some properties, used for fine tuning of the HDS, that 
+ can only be changed by directly editing the configuration files using 
+ a text editor such as notepad. 
+ 
+Before changing any of the properties in the HDS file, 
+ both PcVue and the HDS must be shutdown. The best way to ensure 
+ this is to restart the operating system and edit the files before PcVue is started.
+ 
+
+ 
+You should only change HDSCONF.DAT or HDS.INI under the 
+ supervision of technical support.
+
+
+========================================
+TOPIC: HDS_debug_facility.htm
+========================================
+Using the Debug Facility in the HDS
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Debug Facility in the HDS
+ 
+To enable the Debug Facility in the HDS you must first 
+ shut down PcVue and modify the HDS initialization file HDSCONF.DAT 
+ located in the project's C folder. Open this file with a text editor and 
+ add or modify the following lines.
+ 
+EnableUI=1
+EnableTraceWindow=1
+ 
+
+ 
+Do not modify anything else in this file.
+ 
+ 
+After application restart, double clicking on the HDS icon in the system tray will now open a debug window. To display the transactions taking place select Debug then Trace from the menu.
+ 
+Show picture
+ 
+ 
+
+ 
+ 
+ 
+You can select the type of transactions that are displayed 
+ using the dialog opened from the menu command Debug.General 
+ parameters. You should only change the settings in this dialog 
+ if you are asked to do so by the support agency.
+ 
+Once you have finished using the HDS in debug mode, shut 
+ down PcVue and return the HDS initialization file to its original 
+ configuration.
+ 
+EnableUI=0
+EnableTraceWindow=0
+
+
+========================================
+TOPIC: HDS_INI_file.htm
+========================================
+The HDS.INI file
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The HDS.INI File
+ 
+The HDS.INI file is located in the Bin folder and affects the operation of the HDS for all projects. 
+ The following properties are not available through the project configuration 
+ and must be changed directly by editing the HDS.INI file directly with 
+ a text editor.
+ 
+
+ 
+You should only change HDS.INI under the supervision of 
+ technical support.
+ 
+ 
+DefaultMaxBufferedEvents
+ 
+Specifies the default value for MaxBufferedEvents parameter 
+ defined in the HDSCONF.DAT project configuration file. See the topic The HDSCONF.DAT file topic for more information. The default value is 
+ 20000.
+ 
+DefaultMaxPurgedRecords
+ 
+Specifies the default value for MaxPurgedRecords parameter 
+ defined in the HDSCONF.DAT project configuration file. See the topic The HDSCONF.DAT file topic for more information. The default value is 
+ 30000.
+ 
+DefaultLocalDatabasesDir
+ 
+Specifies the default location in which the HDS creates 
+ all the databases. If the first character is a dot then the directory 
+ is considered to be relative to the Bin folder. In all other 
+ cases, the location is absolute. The default value is ..\Databases\.
+
+
+========================================
+TOPIC: HDS_Migration_Database_Backup.htm
+========================================
+How to backup your database
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to backup your database
+ 
+You can save the database in 2 ways:
+ 
+ 
+Copy database files, or
+ 
+Make an SQL Server backup.
+ 
+ 
+Copy database files
+ 
+The easier way to preserve your database is to copy the database files to another storage device.
+ 
+ 
+Using the SSMS tool, detach the database: Show picture
+ 
+
+ 
+ 
+ 
+Right-click on the name of the database to be backed up and then Tasks &#8594; Detach...
+ 
+Copy the .mdf and .ldf files to the other storage.
+ 
+
+ 
+By default, these files are saved in the PcVue installation subfolder named Databases.
+ 
+ 
+Again with the SSMS tool, re-attach the original database. Show picture
+ 
+
+ 
+ 
+ 
+Right-click on Databases &#8594; Attach.... Show picture
+ 
+
+ 
+ 
+ 
+Click the Add button and select the original .mdf file of the database.
+ 
+Click the OK button.
+ 
+ 
+Your original database files are saved on another storage device and the database is ready for the migration.
+ 
+SQL Server: Full Backup
+ 
+
+ 
+A full backup can potentially interfere with regular backup that may be in place on your system.
+ 
+Contact your database administrator before proceeding.
+
+
+========================================
+TOPIC: HDS_Migration_Database_Migrate.htm
+========================================
+How to migrate the database structure manually
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to migrate the database structure manually
+ 
+This topic explains how to migrate your HDS databases for a newer version of PcVue without losing data in the case where the migration is not done automatically at startup.
+ 
+
+Depending on the amount of data in your databases, this migration can take a long time.
+ 
+
+If your PcVue application takes advantage of multiple HDS databases and/or multiple SQL Server hosts, it is required to apply the following instructions to HDS database on each SQL Server host. 
+ 
+
+ 
+It is strongly recommended that you take a full backup of your databases before launching your application with a new version of PcVue.
+ 
+ 
+
+Software required
+ 
+The manual migration requires:
+ 
+ 
+
+ 
+The SSMS tool installed on your computer
+ 
+ 
+
+ 
+The T-SQL template file named UpgradeDatabase.sql for migrating tables structures
+ 
+ 
+ 
+
+ 
+The T-SQL template file can be found in the following folder:
+ 
+<SVInstallDir>\Bin\
+ 
+
+Where <SVInstallDir> is the installation directory of PcVue.
+
+ 
+ 
+You will have to run the script separately for each HDS database you may have in your project. All Log tables and Trend tables of a particular database are migrated at once when running the provided T-SQL script. The database name is passed as a parameter to the script.
+ 
+
+ 
+&#160;PcVue must not be running while the migration scripts are being executed.
+ 
+ 
+How to migrate tables
+ 
+ 
+Launch the SSMS and connect to your database as explained in How to use the SQL Server Management Studio: Show picture
+ 
+
+ 
+ 
+ 
+Expand the Object Explorer tree view and take note of the database name you need to migrate.
+ 
+
+ 
+Click on File &#8594; Open &#8594; File�
+ 
+ 
+Open the T-SQL script file named UpgradeDatabase.sql. Show picture
+ 
+
+ 
+ 
+ 
+
+ 
+Click on Query &#8594; Specify values for template parameters. Show picture
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+Enter the DatabaseName value for the first database you need to migrate and then click the OK button.
+ 
+ 
+
+ 
+Click on Query &#8594; Execute and wait for the script execution to complete. Show picture
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+Check that all the steps succeeded and the migration script completed successfully. In particular, check that all Log and Trend Tables have been processed without error.
+ 
+ 
+
+ 
+Re-iterate for the other databases you need to migrate.
+ 
+ 
+ 
+
+ 
+If the disk space used by the database has increased significantly, it is recommended that you shrink the database to avoid activating a contingent purge at the next startup of PcVue.
+
+
+========================================
+TOPIC: HDS_Migration_Database_Restore.htm
+========================================
+How to restore your database
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to restore your database
+ 
+The procedure described below will help you restoring the original database if something went wrong during the migration.
+ 
+Copy database files
+ 
+
+ 
+This procedure can only be used if a backup was done using the �Copy database files� method.
+ 
+ 
+ 
+Using the SSMS tool, detach the corrupted database: Show picture
+ 
+
+ 
+ 
+ 
+Right-click on the name of the database to be deleted and then Tasks &#8594; Detach...
+ 
+Replace the .mdf and .ldf files with the previously saved files.
+ 
+Attach the restored database: Right-click on Databases &#8594; Attach... Show picture
+ 
+
+ 
+ 
+ 
+Click the Add button and select the .mdf files of the saved database.
+ 
+Click the OK button.
+ 
+ 
+SQL Server: Restore
+ 
+
+ 
+A full restore can potentially interfere with regular backup that may be in place on your system.
+ 
+Contact your database administrator before proceeding.
+
+
+========================================
+TOPIC: HDS_migration_Overview.htm
+========================================
+Overview of Database migration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Database migration
+ 
+Depending on changes brought to the archiving features, migrating to a newer version of PcVue can require changes to the HDSdatabase schema for each of your databases.
+ 
+2 mechanisms are available to ensure a smooth migration:
+ 
+ 
+If the database size is less than 10 Gb, the conversion will happen automatically the first time that the project is started with the new version of PcVue. This may take several minutes during which time you must not restart the computer.
+ 
+If the database size is greater than 10 Gb, the HDS will not start and you must use a T-SQL migration script to manually convert the historic data. The script is found in Bin folder and must be run using SQL Server Management Studio. If you are unsure about how to do that then please contact your Technical Support provider. 
+ 
+ 
+
+ 
+Before initiating either the automatic or manual conversion, you should ensure that the historic data files are backed up.
+ 
+ 
+The following topics explain how HDS database structures and data can be migrated when starting PcVue with an application that used to be run with an earlier version:
+ 
+ 
+ 
+
+ 
+How to use the SQL Server Management Studio - A note for prime users of SSMS,
+ 
+ 
+
+ 
+How to backup and restore a database,
+ 
+ 
+
+ 
+The first PcVue start up and the automatic migration,
+ 
+ 
+
+ 
+How to manually migrate HDS tables.
+ 
+ 
+ 
+ 
+These instructions are applicable in the following context:
+ 
+ 
+ 
+
+ 
+
+ &#160;PcVue version 10.0 or upper using the Historical Data Server to archive data in a Microsoft SQL Server database.
+ 
+ 
+ 
+ 
+
+ 
+Microsoft SQL Server: All editions, including SQL Server Express.
+ 
+ 
+ 
+ 
+These instructions are not applicable if:
+ 
+ 
+ 
+
+ 
+You intend to discard HDS archived data prior to the upgrade of an existing application.
+ 
+ 
+
+ 
+You are working on a new application, without HDS archived data to preserve during the version upgrade phase.
+ 
+ 
+ 
+ 
+In the following topics:
+ 
+ 
+ 
+
+ 
+The Historical Data Server is referred to as HDS,
+ 
+ 
+
+ 
+Microsoft SQL Server Management Studio is referred to as SSMS,
+ 
+ 
+
+ 
+Transact-SQL script is referred to as T-SQL.
+ 
+ 
+ 
+ 
+
+ 
+If your PcVue application takes advantage of multiple HDS databases and/or multiple SQL Server hosts, it is required to apply the following instructions to each HDS database on each SQL Server host.
+ 
+ 
+Migration of Historic Data to Version 12
+ 
+The HDS database table structures changed in version 12 as follows:
+ 
+ 
+In the Log Table, the size of the LogList column increased to 100 characters.
+ 
+ 
+If you have a project developed in a version earlier than 12, historic data has to be converted before it is compatible.
+ 
+Migration of Historic Data to Version 11.2 (or later)
+ 
+The HDS database table structures changed in version 11.2 as follows:
+ 
+ 
+In the Log Table, the size of the AssocLabel column increased from 12 to 255 characters and the EvtTitle column increased from 24 to 255 characters.
+ 
+In the Trend Table, the size of the AssocLabel column increased from 12 to 255 characters.
+ 
+ 
+If you have a project developed in a version earlier than 11.2, historic data has to be converted before it is compatible.
+ 
+Migration of Historic Data from Version 9.0 (or earlier) to Version 10.0 (or later)
+ 
+Enhancement to the operation of the HDS means that the table structures used in version 9.0 and earlier are not compatible with those in version 10.0 and later. If you have a project developed in version 9.0 or earlier that is using the HDS, historic data has to be converted before it is compatible with version 10.0 or later.
+
+
+========================================
+TOPIC: HDS_Migration_SQL_Server.htm
+========================================
+How to use the SQL Server Management Studio
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to use the SQL Server Management Studio
+ 
+The SSMS will be the place for some of the actions you will have to lead in order to safely migrate your HDS databases. Here are the instructions to connect to a particular SQL Server instance.
+ 
+ 
+Launch the SSMS tool via the Start &#8594; All programs &#8594; Microsoft SQL Server &#8594; SQL Server Management Studio program folder
+ 
+Or press Windows key and then type ssms.
+ 
+	Click on File &#8594; Connect Object Explorer� Show picture
+ 
+
+ 
+ 
+ 
+Select the SQL Server name hosting your HDS database, enter your Login & Password and click on the Connect button. Show picture
+ 
+
+ 
+ 
+ 
+ 
+You are now connected to a particular SQL Server instance and can access all databases it hosts.
+
+
+========================================
+TOPIC: HDS_migration_Startup.htm
+========================================
+Automatic migration at PcVue startup
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Automatic migration at PcVue startup
+ 
+
+ 
+It is strongly recommended that you take a full backup of your databases before launching your application with a new version of PcVue.
+ 
+ 
+During startup, the HDS checks its databases� structures.
+ 
+The migration process consists in:
+ 
+ 
+Changing the log and trend table structures
+ 
+Re-building the indexes of these tables
+ 
+ 
+As these operations can take some time, the HDS will convert them automatically during the first start-up of your application if the total size of all your databases is less than 10 GB.
+ 
+In such a case, you will see the following message in the event viewer indicating that the database structures and data are being migrated. Show picture
+ 
+
+ 
+ 
+ 
+
+ 
+This operation can take a few minutes. Interrupting this process by stopping or killing the PcVue or HDS processes or hard-stopping the computer can lead to corrupted and unrecoverable data.
+ 
+ 
+Typical durations as seen during internal qualification and beta testing are as follow:
+ 
+ 
+ 
+ 
+ 
+
+ Database size
+ Migration duration
+ 
+ 
+
+ 1 GB
+ 1 mn 30 sec
+ 
+ 
+
+ 10 GB
+ 30 mn
+ 
+ 
+
+ On a computer with 4 GB of RAM and a Core2Duo E6750@2,66GHz CPU
+ 
+ 
+ 
+ 
+If the total size of all your databases is over 10 GB, the migration will not be processed automatically and the HDS will refuse to start.
+ 
+In such a case, you will see the following message in the event viewer indicating that the HDS failed to start:
+ 
+Event viewer message: HDS didn't start normally. Please read HDS log file
+ 
+HDS.log file message: Unable to run HDS compatibility treatment on databases (files are too big): use manual scripts
+ 
+Show picture
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+The HDS.log file can be found in the following folder:
+ 
+
+	SVInstallDir\Bin\Log files\HDS.log
+ 
+
+Where SVInstallDir is the installation directory of PcVue.
+
+ 
+ 
+In this situation, you have to run the Transact-SQL migration script yourself using the Microsoft SQL Server Management Studio.
+ 
+See the next topic for more information.
+
+
+========================================
+TOPIC: HDS_overview.htm
+========================================
+Overview of HDS data recording
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of HDS Data Recording
+ 
+The HDS collects and records real time data from PcVue variables in an industry standard database such 
+ as SQL Server. The recorded data can be displayed using 
+ the Trend or Log Viewers or by a 3rd party product compatible with the 
+ selected database.
+ 
+This version of the software has been qualified for use 
+ with the following database standards.
+ 
+ 
+Access 2000 (using Jet 4.0)
+ 
+Microsoft SQL Server
+ 
+ 
+
+ 
+See the Installation book for more information about supported SQLServer versions.
+ 
+ 
+Data is recorded in configurable tables of which there 
+ are two types.
+ 
+ 
+Trend tables - Used 
+ for the periodic recording of register and bit variables. You can configure 
+ one or more trend tables in each database. Recorded data may be played 
+ back through a Trend Viewer. When a variable is selected for trend recording, 
+ you select the database, the table within that database and the period 
+ at which the variable becomes eligible to be recorded.
+ 
+Log tables - Used 
+ for the event recording of bit and alarm changes of state and user actions. 
+ You can configure one or more log tables in each database. The configuration 
+ of a log table selects which properties are recorded from each eligible 
+ variable. The variables that are eligible are selected by the configuration 
+ of a particular log list. Recorded data may be played back through a Log Viewer.
+ 
+ 
+
+ 
+The maximum number of tables that can be loaded by the HDS is 500.
+ 
+ 
+Simplified schematic of data recording in the HDS.
+
+
+========================================
+TOPIC: HDS_set_as_default_property.htm
+========================================
+Using the Set as default property
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Set as Default Property
+ 
+The Set 
+ as default property occurs in the HDS in the following items.
+ 
+ 
+Log tables
+ 
+Trend tables
+ 
+Trend groups
+ 
+Database
+ 
+ 
+The Set as default property has two main uses.
+ 
+ 
+To reduce configuration 
+ time by pre-selecting which of the several instances that have been configured 
+ are to be used by default. For example, you might create a database with 
+ two log tables, one of which will have the Set 
+ as default property selected. When you create a log list, its output 
+ will automatically be directed to the log table set as default, unless 
+ you specify otherwise.
+ 
+To simplify configuration 
+ changes. This is best explained by a simple example. If you have two databases 
+ Database1 and Database2. Database1 has the Set 
+ as default property selected. Any data being recorded will be sent 
+ to Database1 unless you specify otherwise. If you then change the configuration 
+ so that Database2 is the default, all data will be sent to Database2 without 
+ having to change any other configuration properties.
+ 
+ 
+
+ 
+If you use the HDS for data recording the following configuration 
+ is mandatory.
+ 
+ 
+
+ 
+One database set 
+ to default.
+ 
+ 
+
+ 
+One trend group set 
+ to default.
+ 
+ 
+
+ 
+For each database 
+ (the default plus any additional databases).
+ 
+ - One trend table 
+ set as default.
+ 
+- One log table 
+ set as default.
+
+
+========================================
+TOPIC: HDS_system_overflow_variable.htm
+========================================
+Using the System.HDS.Overflow Variable
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the System.HDS.Overflow Variable
+ 
+This variable is set to 1 if the HDS has stopped recording 
+ information because the number of buffered events has exceeded the configured 
+ limit. There are several ways to resolve this.
+ 
+ 
+Increase the value 
+ of MaxBufferedEvents. This is configured in the HDS initialization file 
+ HDS.ini, in the Bin folder. You should only change it if 
+ instructed by the Technical Support team as changing this value may affect 
+ PcVue's 
+ general operation.
+ 
+Reduce the number 
+ of events by increasing the period and/or deadband used for trend recording.
+ 
+Use a more powerful 
+ PC.
+
+
+========================================
+TOPIC: HDS_tracing_problems_overview.htm
+========================================
+Overview of tracing problems with the HDS
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Tracing Problems with the HDS
+ 
+If at any time, you are experiencing problems with historic 
+ data recording it can be useful to see the transactions occurring between 
+ the HDS and the database. To do this you can run the HDS in debug mode.
+ 
+
+ 
+You should only use these tools if asked to do so by the 
+ Technical Support desk.
+
+

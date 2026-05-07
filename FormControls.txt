@@ -1,0 +1,1059 @@
+========================================
+TOPIC: FormControls_Configuring_a_FormControl_content_Content_tab.htm
+========================================
+Configuring a Form Control's content
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a Form Control's Contents
+ 
+The list of items that you see in a Form Control at run-time is configured using the Content tab. This provides the option of storing the list contents locally (as part of the form control's configuration in the mimic file) or in a named text file.
+ 
+ 
+The Content tabs of the Check-box list, Option-button list, Combo-box and List box are almost identical and are dealt with here in a single Help topic. 
+ 
+The Tree-view and Text-box are different and have dedicated topics.
+
+
+========================================
+TOPIC: FormControls_Configuring_a_FormControl_content_from_a_file.htm
+========================================
+Configuring a Form Control's contents from a file
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a Form Control's Content from a File
+ 
+A Form Control's contents can be configured from an external text file. The file and hence the contents of the Form Control are loaded when the containing mimic is opened. You can also manually (in design mode) force the contents of a Form Control to be saved in, or loaded from, a file.
+ 
+Configuring a Form Control's contents from a file has a number of uses.
+ 
+ 
+You can use the same file for any number of instances of a Form Control. This ensures consistency and is particularly useful when a Form Control's content is large or complex.
+ 
+You can manage the file and hence the contents of the Form Control by using a third party application.
+ 
+ 
+Selecting the file
+ 
+The file name is entered in the File name field of the Contents tab. The file name can be entered in a number of ways.
+ 
+ 
+You can type it directly into the field.
+ 
+You can use the file select tool to open a standard Windows file selection dialog.
+ 
+You can use the variable selection tool to select a text variable. The file name is supplied by the contents of the text variable.
+ 
+ 
+You can enter a file name only or the complete file path. If you enter the file name only, PcVue assumes that the file is located in the project's TP folder.
+ 
+Automatically loading a Form Control's content from a file
+ 
+In run-time mode when the mimic is opened, you can cause a Form Control's contents to be loaded automatically from a file. For that, the Source must be set to File.
+ 
+
+ 
+The default selection field Sel is not loaded from the file. It is saved locally in the mimic. 
+ 
+If you choose to automatically load the contents of a form control from a file, and then manually edit the content using the table in the Content tab, you must manually save the changes using the Save in file button. 
+ 
+ 
+Manually loading a Form Control's content from a file
+ 
+To load the contents of a Form Control from a file manually (in design mode), use the Load from file button. A file must be specified before this button is enabled.
+ 
+
+ 
+The default selection field Sel is loaded from the file. 
+ 
+ 
+Manually saving a Form Control's content to a file
+ 
+To save the contents of a Form Control to a file manually (in design mode), use the Save in file button. If a file name has not been selected you will be prompted to select one.
+ 
+File format (Check-box, Option-box, Combo-box and List-box)
+ 
+The Check-box list, Option-button list, Combo-box list and List-box have the same file format. Show example
+ 
+
+ 
+ASCII32,23,12,2010,11:47,12
+ 
+CI,BEGIN,0,"","Apple","",0
+ 
+CI,END
+ 
+CI,BEGIN,0,"","Pear","",0
+ 
+CI,END
+ 
+CI,BEGIN,0,"","Pineapple","",0
+ 
+CI,END
+ 
+CI,BEGIN,0,"","Peach","",0
+ 
+CI,END
+ 
+ 
+ 
+The first line indicates the format and the date and time when the file was last modified.
+ 
+Each item in the list is defined by two lines with the following syntax. Note that the third parameter is unused.
+CI,BEGIN, , UserData, Item text in language 1, Item text in language 2, Default selection (0 or 1)
+CI, END
+ 
+The index is implicit in the order of the items.
+ 
+ 
+
+ 
+Take care when modifying the contents of a file manually. Incorrect syntax or invalid entries may cause faulty operation.
+ 
+ 
+File Format (Tree view)
+ 
+The Tree-view has a similar file format to that of the other controls but with the following additions. 
+ Show example
+ 
+
+ 
+ASCII32,23,12,2010,12:16,57
+ 
+CI,BEGIN,0,"","Breakfast","",0
+ 
+CI,BEGIN,0,"","Full English","",0
+ 
+A,BEGIN,LO,"",0,0,"",""
+ 
+PP,"Menu_FullEnglish","",1,0,1,0,"","",0
+ 
+A,END
+ 
+CI,END
+ 
+CI,BEGIN,0,"","Continental","",0
+ 
+A,BEGIN,LO,"",0,0,"",""
+ 
+PP,"Menu_Continental","",1,0,1,0,"","",0
+ 
+A,END
+ 
+CI,END
+ 
+CI,END
+ 
+CI,BEGIN,0,"","Lunch","",0
+ 
+CI,BEGIN,0,"","Sandwich","",0
+ 
+A,BEGIN,LO,"",0,0,"",""
+ 
+PP,"Menu_Sandwich","",1,0,1,0,"","",0
+ 
+A,END
+ 
+CI,END
+ 
+CI,BEGIN,0,"","Salad","",0
+ 
+A,BEGIN,LO,"",0,0,"",""
+ 
+PP,"Menu_Salad","",1,0,1,0,"","",0
+ 
+A,END
+ 
+CI,END
+ 
+CI,END
+ 
+ 
+ 
+Items are nested to form the tree structure.
+ 
+Items may include an animation to provide an action. The example above includes a Link-Open animation.
+
+
+========================================
+TOPIC: FormControls_Configuring_content_combobox_etc.htm
+========================================
+Configuring the contents of a Check-box, Option-box, Combo-box or List-box
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Content of a Check-box list, Option-button list, Combo-box or List-box
+ 
+The contents of a Check-box list, Option-button list, Combo-box or List-box are defined in a similar manner using a table in the control's Content tab. Show picture 
+
+ 
+Each row in the table represents an item in the form control's list. The table has the following columns.
+ 
+ 
+Sel. - The initial state of the item. See the explanation below.
+ 
+Index - A sequential numeric index for the item that can be linked to a variable. It is also available to a SCADA Basic program or variable. See the topic Running a SCADA Basic Program from a Form Control. The value for each item is automatically generated during the configuration and cannot be manually changed.
+ 
+Text - The text representing the item, as displayed at run-time. If PcVue's bilingual option is selected, you can enter a text string for each of the two languages.
+ 
+User Data - Text that is available to a SCADA Basic program or a variable. The User Data field is NOT bilingual. See the topic Linking Variables to a Form Control.
+ 
+ 
+To add an item to the table, click anywhere in the row marked New Item.
+ 
+Editing an item in the table
+ 
+To edit an item in the table, right click on it and select one of the following commands from the pop-up menu.
+ 
+ 
+ 
+ 
+ 
+
+ Command
+ Meaning
+ 
+ 
+ 
+ 
+
+ New
+ Create a new item in the selected position by moving the rest of the entries downward.
+ 
+ 
+
+ Cut
+ Cut the selected item to the Windows Clipboard. 
+ 
+ 
+
+ Copy
+ Copy the selected item to the Windows Clipboard. 
+ 
+ 
+
+ Paste
+ Paste the current content of the Windows Clipboard to replace the selected item (disabled if the Clipboard is empty).
+ 
+ 
+
+ Delete
+ Delete the selected item.
+ 
+ 
+
+ Move up
+ Exchange the selected item with the one before it in the list.
+ 
+ 
+
+ Move down
+ Exchange the selected item with the one after it in the list.
+ 
+ 
+ 
+ 
+Using the column Sel column 
+ 
+The Sel. (Selected) column defines if an item is already selected (or not) when the mimic containing the form control is opened. The behavior of this column is slightly different for each of the controls. The status of each item in the Sel. column is represented by a tick box (tick = selected, un-ticked = not selected), except for the option-button list where it is represented by an option button.
+ 
+ 
+For a check-box list - Each item can be selected, unselected or undetermined. Undetermined is represented by a ticked but dimmed tick box. The default is unselected.
+ 
+For an option-button list - Zero or one item only can be selected. If zero items are selected then at run-time the first item on the list is selected. The default is that zero items are selected.
+ 
+For a combo-box - Zero or one item only can be selected. If zero items are selected then at run-time the first item on the list is selected. The default is that zero items are selected.
+ 
+For a list-box - Zero or one item only can be selected. If zero items are selected then at run-time the first item on the list is selected. The default is that zero items are selected.
+ 
+ 
+Saving the Form Control's contents
+ 
+The Form Control's content is saved and the configuration dialog is closed by clicking the OK button. By default, the content is saved with the Form Control's configuration in the mimic. To save (or load) the contents to (or from) a file see the topic Configuring a Form Control's contents from a file.
+
+
+========================================
+TOPIC: FormControls_Configuring_content_text-box.htm
+========================================
+Configuring the content of a Text-box
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Content of a Text-box
+ 
+The initial content and behavior of a Text-box is defined in the Content tab. Show picture 
+
+ 
+Properties and commands
+ 
+ 
+Initialization
+Text - The text that is displayed in the text-box when the container mimic is opened at run-time. It can be hard-coded at design time or be the value of a text variable.
+Lines - The line configuration, either Multiline or Single Line. Multiline allows text to be displayed on one or more lines with the Enter keystroke starting a new line. Single Line forces the text to be displayed on one line only. The Return keystroke has no effect.
+Case - Force all text to be lower case, upper case or allow both upper and lower case (default)
+ 
+Properties
+Scrollbars - Select which scroll bars are displayed at run-time. Scroll bars are not displayed in Single Line mode.
+Text alignment - Select the text alignment from Left (default) Right or Center.
+Text max length - The maximum number of characters that can be entered. The default of 0 means no limit.
+Read only - Contents is read only. The User is unable to change the text at run-time.
+Enable shortcuts - Enable the use of keyboard shortcuts such as Ctrl+c, Ctrl+v etc.
+Password style (single line only). Actual characters are hidden. Enable this property if the text box is used as a password entry field.
+Use soft keypad - If enable, the soft keypad will be displayed at run-time for user inputs.
+ 
+ 
+Restricting the allowed characters
+ 
+You can restrict the characters that can be typed into a Text-box using the advanced properties displayed by clicking the down arrow at the bottom of the tab. In the following screen shot, only alphanumeric, underscore, full stop (Dot), and the @ characters are permitted. Show picture
+
+
+========================================
+TOPIC: FormControls_Configuring_content_tree-view.htm
+========================================
+Configuring the content of a Tree-view
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Content of a Tree-view
+ 
+The content of a Tree-view control is defined using a table in the control's Content tab. Show picture 
+
+ 
+Each row in the table represents a node in the form control. In a Tree-View the items are known as nodes. The table has the following columns.
+ 
+ 
+Items - A representation of where the node will appear in Tree-view control at run time. 
+ 
+Text - The text representing the node that is displayed at run time. The Text field is bilingual.
+ 
+User Data - Text that can be linked to a variable. It is also available to a SCADA Basic program. See the topic Running a SCADA Basic Program from a Form Control.
+ 
+Animation - The animation that is activated when a node is clicked at run time. The animation is optional.
+ 
+Collapsed icon - The icon displayed when a node is collapsed. Optional.
+ 
+Expanded icon - The icon displayed when a node is expanded. Optional.
+ 
+ 
+Editing a node in the table
+ 
+To edit, add or delete a node, right-click in the table and select one of the following commands from the context menu.
+ 
+ 
+ 
+ 
+ 
+
+ Command
+ Meaning
+ 
+ 
+ 
+ 
+
+ Add root
+ Add a new node at the top level (from any level).
+ 
+ 
+
+ Add child
+ Add a new node beneath the selected node.
+ 
+ 
+
+ Remove
+ Delete the selected node and any sub-nodes.
+ 
+ 
+
+ Move up
+ Exchange the selected item with the one before it in the list.
+ 
+ 
+
+ Move down
+ Exchange the selected item with the one after it in the list.
+ 
+ 
+
+ Use default collapsed icon
+ 
+ Replace the selected icon with the default one as configured in the Aspect tab.
+ 
+ 
+
+ Use default expanded icon
+ Replace the selected icon with the default one as configured in the Aspect tab.
+ 
+ 
+ 
+ 
+When you add a new node, it is created with default text in the Text field. This can be edited by first selecting the node and then double-clicking in the Text field. The User Data field is edited in the same manner.
+ 
+Adding an animation to a node
+ 
+The animations that can be added to a node are limited to those that result in a user action (Send, Run, Link and Security).
+ 
+To add an animation to a node, select the node and then click the down arrow button next to the Animation field. Select the appropriate animation from the list that is displayed. Show picture 
+ 
+A dialog appropriate to that animation opens so that it can be configured. You can access the configuration dialog for an animation that has already been added using the <Edit....> option from the animation list.
+
+ 
+How to customize node icons
+ 
+Icons can be added to nodes, one displayed when the node is collapsed, another one when it is expanded. A default icon set can be configured using the Aspect tab. Icons for individual nodes can be customized using the Content tab.
+ 
+The selected icons are displayed in the Content tab. Icons that display a small square adjacent to them are indexed icons. If an icon is selected for either the collapsed or expanded state and no icon is selected for the other state, at run-time the same icon is used for both states.
+ 
+
+ 
+If you have customized an icon but want to return to the default you can right click the node and select Use default collapsed icon or Use default expanded icon from the context menu as appropriate.
+ 
+ 
+Saving the Form Control's contents
+ 
+The Form Control's content is saved and the configuration dialog is closed by clicking the OK button. By default, the content is saved with the Form Control's configuration in the mimic. To save (or load) the contents to (or from) a file see the topic Configuring a Form Control's contents from a file.
+
+
+========================================
+TOPIC: FormControls_icon_selector.htm
+========================================
+The icons selector
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Icons Selector
+ 
+The Icons Selector is used to generate and select icons that can be used within the Form Controls. Currently only the Tree Control supports icons. The Icons Selector uses images from the libraries to generate the corresponding icons. The images are scaled by the Icons Selector to generate icons of 16x16 pixels.
+ 
+As for colors in the color palette, icons can be used in 2 ways:
+ 
+ 
+Non-indexed icons - When a non-index icon is used, a copy of the icon is saved in the control. Changing the icon in the Icon Selector does not affect previously configured form controls. You can configure up to 120 non-indexed icons.
+ 
+Indexed icons - When an indexed icon is used, the icon index is used and saved in the control. Changing the icon in the Icon Selector affect all form controls using it. You can configure up to 120 indexed items.
+ 
+ 
+The Icon Selector can be opened either from the Main Menu (Display.Icon Selector) or from with from controls where it is supported.
+ 
+How to add an icon to the Icons Selector
+ 
+ 
+Open the Icons Selector.
+ 
+Choose the position of the icon to generate and click the exclamation mark to open the Image Browser dialog.
+ 
+Select the library.
+ 
+Select the image by double clicking it. Show picture
+
+
+========================================
+TOPIC: FormControls_Initialization.htm
+========================================
+Initializing a Form Control
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Initializing a Form Control
+ 
+A Form Control's initialization defines how it appears when the mimic containing it is opened.
+ 
+ 
+The Option-button, List box and Combo-box controls can have one item pre-selected, as defined by the Sel column in the Content tab or by the value of a variable. 
+ 
+The Check-box list control can have one or several items ticked, as defined by the Sel column in the Content tab.
+ 
+The Tree-view control does not have the option of pre-selection but you can choose whether it appears with the nodes expanded.
+ 
+ 
+ The parameters that control initialization are in the Operations tab. Show picture
+ 
+
+ 
+ 
+ 
+Option-button, List-box and Combo-box
+ 
+The initialization pre-selection is defined by the Option drop-down list.
+ 
+ 
+ 
+ 
+ 
+
+ Command
+ Meaning
+ 
+ 
+ 
+ 
+
+ 
+ 
+Default item selection
+ 
+ 
+ 
+The default selection as specified in the Content tab.
+ 
+ 
+ 
+
+ 
+ 
+Index variable value
+ 
+ The item whose index equals the value of the Index variable. 
+ 
+ 
+
+ 
+ 
+User data variable value
+ 
+ 
+ 
+The item whose user data equals the value of the User data variable. 
+ 
+ 
+ 
+ 
+ 
+
+ 
+If the variable or its value is not usable, the default is used instead. 
+ 
+ 
+Tree-view list
+ 
+The initialization is defined by the Expand drop-down list.
+ 
+ 
+ 
+ 
+ 
+
+ Command
+ Meaning
+ 
+ 
+ 
+ 
+
+ 
+ 
+None
+ 
+ No nodes are expanded.
+ 
+ 
+
+ 
+ 
+Roots
+ 
+ Only the root nodes are expanded.
+ 
+ 
+
+ 
+ 
+All
+ 
+ Root nodes and all sub-nodes are expanded.
+
+
+========================================
+TOPIC: FormControls_Inserting_in_a_Mimic.htm
+========================================
+Inserting a form control in a mimic
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Inserting a Form Control in a Mimic
+ 
+You insert a form control in a mimic as follows.
+ 
+ 
+Insert the form control.
+Open the mimic in which the form control is to be inserted and select Design mode.
+From the Insert menu, select one of the form controls: Combo-box, List-box, Check-box list, Option-button list, Tree View, or Text-box. An empty rectangular drawing element appears in the mimic to represent the form control and its properties dialog opens. Show picture
+
+ 
+Configuring the form controls appearance.
+Use the Border and Appearance properties to configure the style of the form controls' border. These are almost identical to those used when configuring a solid drawing element such as a rectangle.
+Use the Position and Size properties to fine-tune the form control's position and size. 
+Use the Font and colors properties to change the background color and the font used for any text displayed by the form control. Note that you must first tick the corresponding boxes to enable these properties.
+ 
+ 
+
+ 
+You can specify more properties to control the graphical element visibility. From the Aspect tab, behind the down arrow at the bottom of the Properties dialog box:
+ 
+ 
+
+ 
+Specify zoom visibility bounds so that the graphic control is only visible for predefined zoom levels.
+ 
+ 
+
+ 
+Specify layers so that the graphic control is only visible if one of the selected layers is displayed.
+ 
+ 
+ 
+These are even more useful when combined with user permissions and decluttering templates.
+ 
+ 
+How to configure the default icons
+ 
+The default icons are selected from the Aspect tab. At the time of writing, only the Tree-view control supports icons. Show picture
+
+ 
+To select the icons you first choose the root number and child level and then the Collapsed node icon or Expanded node icon button as appropriate. The Icons Selector dialog is displayed from where the icons are selected.
+See the topic The icons selector for information on how to use the Icons Selector.
+ 
+The icons you choose will be used as a default for all node instances. For example, in the picture above, the blue arrows would be used by default for all instances of Root 1, Level 1 nodes. To select an icon for just the root number, leave the Child level blank.
+ 
+The button Reset default icons deletes all the default icon configuration.
+ 
+
+ 
+The icons, for each node instance, can be changed from their default using the Content tab. See Configuring the content of a Tree-view for more information.
+
+
+========================================
+TOPIC: FormControls_Linking_Variables.htm
+========================================
+Linking variables to a form control
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking Variables to a Form Control
+ 
+You can configure a Form Control so that the current selection and/or latest change of state is linked to one or more variables. The variables are selected using the Operations tab. Show picture
+ 
+
+ 
+ 
+ 
+Changes in variable values operate in both directions.
+ 
+ 
+If you change the control's selection the variable value changes.
+ 
+If you change the variable's value outside of the control, the selection in the control changes to follow it (assuming that the value is within a valid range).
+ 
+ 
+
+ 
+The variable must have the Command property set for its value to change when you change the control's selection. 
+The Command property must also be set if you to change the selection by using a Send register animation to change the variable value.
+ 
+ 
+Option tab properties used for selecting variables
+ 
+ 
+Index - Returns the index of the most recently selected or changed item (register variable).
+ 
+State - Returns the state of the most recently changed item. Check-box list only. A register variable that can have the following possible values.
+0 - The selected item is not ticked.
+1 - The selected item is ticked.
+-1 - The selected item is undetermined.
+ 
+User Data - Returns the user data of the most recently selected or changed item (text variable). 
+ 
+ 
+Enforcing variables command level
+ 
+Command level and related user permissions for variables you reference for operations of the control can be enforced or ignored depending on the HMI setting called Apply command level in graphic controls. You can override the global setting individually for each control instance using the Command level properties in the Operations tab. This applies to all the form control types except the Text box which does not reference any variables. The following properties apply.
+ 
+ 
+
+ 
+Apply command level - Defines how variables' command level properties and the corresponding user rights levels are enforced.
+ 
+ 
+
+ 
+Default - Apply the default behavior as set in the HMI settings. This is the default setting.
+ 
+ 
+
+ 
+Yes - Enforce the variables' command levels and the corresponding user rights levels. Only users having the required Command level permissions are able to operate the control. The Level property must then be set.
+ 
+ 
+
+ 
+No - Ignore the variables' command levels and the corresponding user rights levels. Any user having access to the mimic is able to operate the control, even if he does not have the required Command level permissions.
+ 
+ 
+ 
+ 
+
+ 
+Level - The command level required for users to operate the control.
+ 
+ 
+
+ 
+Auto - Use the command level as defined in each variable's configuration.
+ 
+ 
+
+ 
+
+ - Enter a fixed value for the command level.
+ 
+ 
+
+ 
+
+ - Define the command level by the value of a selected variable. Clicking the button displays the variable browser to allow selection of the variable name.
+
+
+========================================
+TOPIC: FormControls_Overview.htm
+========================================
+Form Controls overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Form Controls Overview
+ 
+The form controls are animations integrated in PcVue's HMI. The tools to insert them in a mimic are 
+ on the Insert menu. A form control is created and the basic configuration applied to it in the same manner as for other drawing elements. 
+ 
+The following form controls are available.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Form Control
+ Purpose
+ Appearance
+ 
+ 
+ 
+ 
+
+ Combo-box
+ To select one item from a drop-down list. The selected item is displayed in a text box at the top.
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ List-box
+ To select one item only from a list. The selected item is indicated by changing the background color.
+ 
+ 
+ 
+ 
+ 
+
+ Check-box list
+ To choose zero, one or more items from a list. The selected items are indicated by a tick in the corresponding box.
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ Option-button list
+ To choose one item only from a list. The selected item is indicated by a filled circle.
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ Tree view
+ To choose one item (node) from a tree-structured list.
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ Text-box
+ To enter, edit, select, search and display text. The Text-box can be used in conjunction with SCADA Basic.
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+&#160;PcVue's Form Controls are similar in behavior to those in Microsoft Visual Basic (fm20.dll). The Form Control's Properties, Methods and Events are exposed to PcVue's VBA environment. Form Controls have a corresponding SCADA Basic instruction. In addition, the Form Controls, other than the Text-box, can be linked to variables, thus avoiding the need for programming in most cases.
+ 
+Important notes about behavior
+ 
+The behavior of the Form Controls is generally as you would expect. However, if you have never dealt with such a control before there are some important points that you should take into account in the design of your application.
+ 
+ 
+Both the Check-box list and Option-button list differentiate between the action of selecting an item and changing its state.
+Clicking on the text of an item selects it (changes the background color) - but does not change its state. If it is configured so, it will also cause the associated SCADA Basic function to run.
+Clicking on the item itself (check box or radio button) selects it and toggles its state. If it is configured so, it will also cause the associated SCADA Basic function to run.
+ 
+The items in a check box have three possible states.
+ Selected (box is ticked ) 
+Unselected (box is not ticked )
+Undetermined (box contains a filled square )
+
+
+========================================
+TOPIC: FormControls_Running_a_SCADA_Basic_Program .htm
+========================================
+Running a SCADA Basic program from a form control
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Running a SCADA Basic Program from a Form Control
+ 
+You can configure a Form Control so that it runs a SCADA Basic program. The program can be triggered each time the selection changes and, for most Form Controls, when the mimic containing the Form Control is opened. The parameters to run a program are in the Operations tab. Show picture
+ 
+
+ 
+ 
+ 
+Typically, the program would use the SCADA Basic instruction that is specific to the type of Form Control.
+ 
+ 
+ 
+ 
+ 
+
+ Instruction
+ Use with
+ 
+ 
+ 
+ 
+
+ COMBOBOX
+ Combo-box
+ 
+ 
+
+ LISTBOX
+ List-box
+ 
+ 
+
+ CHECKLIST
+ Check-box
+ 
+ 
+
+ OPTIONLIST
+ Option-box
+ 
+ 
+
+ TREEVIEW
+ Tree-view
+ 
+ 
+
+ TEXTBOX
+ Text-box
+ 
+ 
+ 
+ 
+See the Help for SCADA Basic for more information.
+ 
+Option tab properties used when running a SCADA Basic program
+ 
+ 
+Program - The name of the program to run.
+ 
+Branch - The variable branch to be used with the program.
+ 
+Function - The function to run. If no function is specified the MAIN function will run.
+ 
+Arguments - A list of comma-separated arguments to be passed to the program. They must be retrieved using the GETARG instruction.
+ 
+Initialization notification - Run the program when the mimic containing the Form Control is opened. (Check-box list, Option-button list, Combo-box list, List-box only)
+ 
+Trigger on - The condition on which the program is to be run. Selected from Option changes only, Selection changes only or Option or selection changes. Check-box list and Option-button list only.
+ 
+ 
+Properties specific to the Text-Box
+ 
+ 
+Event trigger
+ 
+ 
+Trigger - The program trigger.
+ 
+ 
+ 
+ 
+Keyboard Input - Define the SCADA Basic program to execute when a particular key combination specified by the Key property is entered.
+ 
+Text Changed - Define the SCADA Basic program to execute when a change to the text occurs.
+ 
+ 
+ 
+ 
+Key - The key combination to trigger the program. To configure, click into the field and enter the key combination. It can be any single keyboard key or a key plus any combination of Ctrl, Shift and Alt.
+ 
+ 
+ 
+
+ 
+ The default configuration executes a SCADA Basic program upon validation of a text input, by running the script when the Enter key is pressed (Keyboard input).
+
+

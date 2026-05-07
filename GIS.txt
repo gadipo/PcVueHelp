@@ -1,0 +1,1568 @@
+========================================
+TOPIC: map_animation.htm
+========================================
+Map Position animation
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Map Positioning Animation
+ 
+The Map Positioning animation is used to create one or more control zones from where the User can interact with a Map Control. 
+ 
+Specifically, you can pan the map centering it on a particular map marker or latitude and longitude, and/or zoom the map to a particular zoom level. The properties that control the map position can either be fixed, or be the name of a variable when the value of the variable is used. Show picture
+
+ 
+The animation can be applied to any drawing elements, symbol or image.
+ 
+How to create a Map Positioning animation
+ 
+ 
+Open the mimic containing the support drawing element and select Design mode.
+ 
+Select the drawing element and choose the Map Positioning animation from either the right-click pop-up menu or the Animation toolbar. The Map Positioning animation is found under the Positioning animations.
+ 
+Configure the properties as required.
+ 
+Click OK to confirm the animation.
+ 
+ 
+Position Animation properties
+ 
+ 
+Map control ID - The identity of the Map Control to be affected. A combo-box displays a list of the map controls in the selected mimic. You can either choose one of these or manually enter the identity. By default, if there is only one Map Control in a mimic, its ID will be MapControl1. If the name has been changed from the default, or there is more than one Map Control in a mimic you can find the name using the Graphic Explorer.
+ 
+Comment - An optional comment about the animation. If the text is preceded by the @ character it will appear in a tooltip at run-time.
+ 
+Position - The new position about which the map will be centered.
+Position mode - Selection of the position mode, either by Latitude & Longitude, Zoom, or (map) Marker.
+Layer - The layer in which the marker resides. A combo-box displays the available layers of the selected Map Control. From the Map Control's selected map markers file. You can either select the name of one of the available layers, enter the layer name manually, or choose the name of a text variable containing the layer name. This property is only available if the Position mode is set to marker.
+Marker - The name of the marker about which to position the map. A combo-box displays the available markers of the selected layer. From the Map Control's selected map markers file. You can either select the name of one of the available markers, enter the marker name manually, or choose the name of a text variable containing the marker name. This property is only available if the Position mode is set to marker.
+Latitude and Longitude - The new co-ordinates about which to position the map. You can enter the values manually or choose the names of register variables containing the co-ordinates. These properties are only available if the Position mode is set to Latitude & Longitude.
+Zoom level - The new zoom level for the map.
+ 
+Mimic - The mimic in which the Map Control resides.
+Mimic and Branch - The name of the mimic and its branch in the case that the Map Control is in a different mimic to the map position animation. Leave empty for the current mimic.
+Region - In the case of a multi-region application, the region in which the mimic containing the Map Control is opened selected from the following.
+Command region - Region for the mimic in which the animation is located. This is the default.
+Current region -The pre-selected region set by either the Region animation or a script.
+Region 1, Region 2 ... - One of the available regions.
+ 
+Accelerator and Disable mouse click - Common to all control zone animations, the optional keyboard shortcut for the animation. If a shortcut is chosen, Disable mouse click can optionally be selected to disable access to the animation from the mouse.
+ 
+Interlock condition - Common to all control zone animations, an optional interlock bit to enable or disable the animation.
+ 
+ 
+Error messages
+ 
+Error and/or warning messages and/or icons are displayed if the animation is not configured correctly and/or cannot be executed properly.
+ 
+ 
+On Initialization - If the referenced mimic is open and the Map Control does not exist. No checks are made if the mimic is not open.
+ 
+At run-time
+The mimic, as identified by the Mimic, Branch and Region properties, is not open.
+The Map Control does not exist in the referenced mimic.
+The layer or marker selected, or provided by variable value, does not exist.
+The latitude and/or longitude entered values, or provided by variable value, are outside of the range of the displayed map or are outside of the latitude and/or longitude value limits.
+
+
+========================================
+TOPIC: map_binding.htm
+========================================
+Binding marker properties to variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Binding Marker Properties to Variables
+ 
+Many of the properties configured in the Map Markers Editor can be bound to variables. The property then takes its value from the variable. You can bind to a variable's real-time value or one of the extended attributes. When a property can be bound to a variable, the Variable Mode button appears adjacent to the property.
+ 
+How to bind a property to a variable
+ 
+ 
+Click the Variable Mode button adjacent to the property. The Variable Selector button appears.
+ 
+Enter the name of the variable. You can either type it in directly or use the Variable Selector to select it. Show picture If a Branch has been configured the variable name is relative to that branch unless it is preceded by the direct reference character (@).
+
+ 
+ 
+What variables and variable properties can I use?
+ 
+You can bind a property to either a variable's real-time value or one of its extended attributes. To bind to an extended attribute the variable name is appended with the attribute reference. For example, UK.INFORMATION.TATT3#, references the third text attribute of the variable UK.INFORMATION.
+ 
+You must respect the property type. That is, a numerical property (for example Latitude) must be bound to a register variable, and a text property (for example Mimic) to a text variable or a text attribute. The one exception to this is the color swab, which can be bound to a register variable or text variable. If you use a text variable, you can use any standard HTML color name. The standard HTML color names are widely available on the Internet.
+ 
+
+ 
+To minimize the system resources required to display a map, markers that have been visible, but are no longer, are temporarily unbound from any variables. You can prevent this by selecting the property Keep invisible markers in memory in the Map Control's configuration dialog.
+
+
+========================================
+TOPIC: map_cache_creator.htm
+========================================
+Using the map cache creator
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Map Cache Creator
+ 
+The Map Cache Creator is used to download maps from the Internet and store them locally for use by the Map Control. The advantage of locally cached maps is that the target PC does not need a connection to the Internet to display the maps. The disadvantage is that a complete set of tiles for a map of the entire world requires considerable storage space. However, the Map Cache Creator allows you to select the zoom levels and range of latitude and longitude that the cached map is to cover thereby limiting the number of map tiles and storage space that is required.
+ 
+The Map Cache Creator takes the form of an executable file (MapCacheCreator.exe) located in PcVue's BIN folder.
+ 
+
+ 
+The ability to incorporate map data from third party map suppliers into the PcVue software is provided as a convenience. 
+ 
+Content, as well as terms and conditions applying to map data are not within the control and responsibility of PcVue supplier. 
+ 
+Any expressed or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed.
+
+ 
+ 
+Map data is subject to copyright notice and license agreement. By downloading map data, you are agreeing to be bound to the selected map data suppliers' Terms and conditions.
+
+ 
+The terms and conditions of map data use are available from the applicable map supplier's web site.
+ 
+ 
+How to create a local map using the Map Cache Creator
+ 
+ 
+Start the Map Cache Creator by running the executable file. Show picture
+
+ 
+Select the Tiles Provider using the drop down list box.
+ 
+Select the Cache folder path. The Map Control defaults to PcVue's GIS folder when selecting a local map. It is good practice to create a sub-folder with a name relevant to the specific map cache to be created. For example, Google_UK_1-10. The sub-folder names appear in the Local Map field when configuring the Map Control.
+ 
+Select the map view and zoom levels to be cached.
+Zoom (zoom control in the lower right corner) and pan (using click and drag) the map, so that it displays approximately the area that you want the map cache to support.
+Select the precise area by right clicking and dragging in the map view. The resulting shaded area is that which will be cached.
+Select the Zoom Levels that are to be supported by clicking and dragging the double slider control.
+Check that your selection has resulted in a realistic Estimated Database Size. If not, repeat steps a, b & c until it does. Show picture
+
+ 
+Click Start to start the download of the tiles. The Map Cache Creator will start fetching the tiles for each of the zoom levels. During the process, the number of tiles required, and the estimated time to load them, is displayed. The download can be stopped anytime by clicking the Cancel button. The map cache will still be created but only with those tiles downloaded at the time the Cancel button was clicked.
+ 
+ 
+
+ 
+It is essential to be selective with the zoom levels and map area to minimize the size of the cache. As an extreme example, a Google Map with zoom levels 1 to 20 and covering the entire world would require 32000 terra bytes.
+ 
+ 
+
+ 
+The estimated database size is based on an average tile size for a typical road/street navigation map and is given for information only. The actual cache size may be significantly different, lower if the geographical data are scarce (ocean or desert), or higher for a urban area with a great deal of details.
+
+
+========================================
+TOPIC: map_Creating.htm
+========================================
+Creating and Configuring a Map Control
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Creating and Configuring a Map Control
+ 
+How to add a Map Control to a mimic
+ 
+ 
+Open the mimic in 
+ which the Map will be inserted and select Edit mode.
+ 
+Select Insert.Map from the menu.
+ 
+A Map will be created and its properties dialog automatically opened. Show picture
+ 
+
+ 
+ 
+ 
+Click OK to close the dialog and create a Map with default settings.
+ 
+ 
+Once you have created a Map, 
+ and closed its properties dialog, it can be moved, sized and copied the same 
+ as any other drawing element. By default, a map is created with the zoom level set to two which requires an area of approximately 1025 by 1025 pixels to display a complete world map from longitude -180 to + 180 and latitude -85 to +85.
+ 
+The Map configuration dialog contains three further tabs to configure the map, and enter the run-time user constraints.
+ 
+The Map Configuration tab Show picture
+ 
+
+ 
+ 
+ 
+ 
+Map provider
+Local map - Select a locally stored map file. The map can be selected from a local map file previously created using PcVue's Map Cache Creator tool (MapCacheCreator.exe). By default, maps are saved in the GIS folder in PcVue's root. The drop down list box provides a list of what is available. The Ellipsis button allows the selection of an alternative folder.
+Online map - Select a map from one of the on-line map providers. The providers supported by the Map Control, and the map variations that they provide, are listed in the drop-down list box. An Internet connection is required when first displaying the maps.
+Cache map files - If selected, map tiles that are viewed at run-time are saved locally so that they can viewed later without an Internet connection.
+ 
+Map markers source - The name of the file that contains the map markers. By default, the map markers files are saved in the GIS folder in PcVue's root. The Ellipsis button allows the selection of an alternative folder.
+Edit - Open the Map markers Edit dialog. See the topic Map Markers Editor.
+ 
+ 
+
+ 
+Map cache files, either as a result of downloading tiles at run-time or using the Map Cache Creation tool, can be very large. The higher the zoom level you allow to be used and the greater the panning limits, the larger the number of tiles that are required. If you allow the use of the maximum zoom and no panning limits the map tiles may require terabytes of storage space.
+ 
+ 
+
+ 
+You cannot use a local map cache if the mimic containing the Map control is to be displayed in WebVue. Only a selection of online providers are supported.
+ 
+ 
+Configuring the map run mode properties
+ 
+The run mode properties of the map are configured using the Execution tab.Show picture
+
+ 
+ 
+Opening properties - The map properties when the mimic is opened in run mode.
+Map center - The latitude and longitude of the center point of the map. 
+Zoom level - The zoom level of the map.
+Persist properties - Automatically save any changes to the Map center and Zoom level properties made interactively in run mode. The next time the containing mimic is opened the map will use these properties.
+ 
+Map constraints within which a map can be used at run-time. The map constraints can also be set interactively using the Visual editor dialog (see below).
+Allow panning - Allow the map to be panned in run mode.
+Panning area bounds - The limits between which the map can be dragged and moved by the user in run mode, configured by entering the latitude and longitude of the top left and bottom right corners.
+Allow zooming - Allow the map zoom level to be changed in run mode.
+Zoom limits - The limits between which a user can zoom the map in run mode. 
+ 
+ 
+
+ 
+It is essential to enter carefully considered map constraints as the Map Control only loads those tiles required to render the current view.
+ 
+ 
+
+ 
+If using an online map this minimizes the total number of map tiles that must be downloaded. 
+ 
+ 
+
+ 
+If using a local map, it is likely that you will only have map tiles for a limited area and zoom levels. If you allow the map to be moved or zoomed outside of what is available, blank map tiles will be displayed.
+ 
+ 
+ 
+ 
+Using the map Visual Editor dialog
+ 
+The Visual Editor dialog allows the developer to configure the map constraints interactively. Show picture
+
+ 
+ 
+The center initial position can be changing by left clicking and dragging the map.
+ 
+The panning bounds can be changed by right clicking and dragging the mouse.
+ 
+The zoom level can be changed using the mouse wheel, the zoom control located at the bottom right corner of the map, or the Zoom property in the top panel.
+ 
+ 
+When the constraints have been configured, the dialog is closed using the OK button and the properties are automatically copied to the Execution tab of the Map Configuration dialog.
+ 
+Advanced properties
+ 
+The Map Control advanced properties are found in the Advanced tab. Show picture
+
+ 
+ 
+
+ 
+Native markers - Select the actions that the user is allowed to perform when clicking on the native map markers at run-time. Native markers are those generated by the Map Control itself - not a symbol or bitmap from a library.
+ 
+ 
+Allow mimic open - Allow markers to directly open a mimic (if configured to do so).
+ 
+Allow popup open - Allow markers to directly open a popup mimic (if configured to do so).
+ 
+Highlight markers that can be clicked - Display control zone highlight when the pointer is positioned over a marker that can be clicked.
+ 
+ 
+ 
+
+ 
+Keep invisible markers in memory - By default, markers that are not visible due to the maps current zoom level and pan position, are deleted from memory. Map markers can consume considerable resources and so this minimizes the requirement. However, it does mean that the markers have to be loaded again when they become visible which takes longer than if they remained in memory.
+ 
+ 
+User input � Customize the behavior for certain user actions at runtime
+Zoom mode � Define how zoom is handled. Options are to zoom about the cursor which at the same time is used as the new center for the map (Cursor and center), about the cursor position (Cursor) or about the center of the map (Center).
+
+
+========================================
+TOPIC: map_layers.htm
+========================================
+Managing map layers
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing Map Layers
+ 
+Map layers are managed using the Map Objects Tree and Layers Toolbar of the Map Markers Editor. Information about the operation of the Map Objects tree can be found in a topic of the same name here.
+ 
+The Map Layers toolbar
+ 
+The Map Layers toolbar contains two tools.
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a new layer. The Layer properties are displayed with a default configuration for the new layer.
+ 
+ 
+
+ 
+ 
+ 
+ Delete the selected layers and selected markers (if any).
+ 
+ 
+ 
+ 
+
+ 
+The default layer, displayed at the top of the Map Objects Tree, is mandatory and cannot be deleted.
+ 
+ 
+The Map Layers properties
+ 
+The map layers properties are displayed whenever a layer is selected. Show picture
+
+ 
+ 
+Name - The name of the layer as displayed in the Map Objects tree.
+ 
+Description - An optional description of the layer. The description is displayed in a tool-tip when the mouse hovers over the layer in the Map Object tree.
+ 
+Zoom levels - The minimum and maximum zoom levels for which the layer is visible, at run time, in a map. The minimum and maximum can be set to the same level. In the above example, the minimum is 4 and the maximum 6.
+
+
+========================================
+TOPIC: map_Markers.htm
+========================================
+Map Markers Editor
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Map Markers Editor
+ 
+The purpose of the Map Markers Editor is to create a map marker file. You can create any number of map marker files but only one file can be used per Map Control instance. Map marker files are created in a globally recognized standard known as Global Positioning eXchange, or GPX. 
+ 
+The Map Markers Editor can be opened using either of the following methods.
+ 
+ 
+From PcVue's Main Menu using the command Display.Map Markers Editor.
+ 
+From the Map Configuration dialog of the Map Control dialog.
+ 
+ 
+Map Markers Editor main features Show picture
+
+ 
+ 
+Map pane. The actual map view can be zoomed and dragged as required. You can change the area occupied by the map pane by clicking and dragging the vertical line that separates it from the properties pane. Shown on the screen shot by the dashed vertical red line.
+ 
+Markers toolbar.
+ 
+Currently selected marker. The selected markers are indicated with a translucent green highlight. The marker selected in the screen shot is a polygon.
+ 
+Properties pane. At the top of the properties pane is the Map Provider selector. 
+ 
+Layers toolbar. Using this toolbar, you can add a new layer, a new service layer, and/or remove selected objects.
+ 
+Map objects (layers and markers) configuration tree. You can change the area occupied by the map objects tree by clicking and dragging the horizontal line that separates it from the marker properties. Shown on the screen shot by the dashed horizontal red line.
+ 
+Properties for the selected map marker.
+ 
+Save and Open command buttons.
+ 
+Map zoom control.
+ 
+ 
+The map
+ 
+ The selected map can be panned, using click and drag, and zoomed, using the map zoom control, in a similar manner to the Map Control. Note that the map is only used as an aid to position the markers and has no link to the actual map that to be used at run time. The selected map is not saved in the map markers file and therefore the default map is always displayed when the Map Markers Editor is opened.
+ 
+The map layers
+ 
+Map layers are a way of grouping together the map markers. The map layers themselves do not appear on map but when they are configured, they are allocated to a specific zoom range so that, at run-time, the map markers they contain appear or disappear according to the map zoom level.
+ 
+The map markers
+ 
+The map markers that you configure appear at run time in any Map Control in which a map markers file has been selected. Each map marker is attached to a map layer that controls its visibility. The following Map marker types are supported.
+ 
+ 
+Shape - A solid shape selected from the following forms - circle, square, rounded square, triangle, inverted triangle and rhombus. 
+ 
+Text - A bilingual text string. 
+ 
+Image - An image from a library.
+ 
+Symbol - A symbol from a library.
+ 
+Track - A multi-segmented line. Similar to the polyline drawing element.
+ 
+Polygon - A polygon. Similar to the polygon drawing element
+ 
+ 
+Many of the map marker's properties can be bound to the value of a variable. 
+ 
+All map markers types, except symbol, have a property that allows you to select a mimic that can be directly opened by clicking on the marker in run mode (like a Link-Open animation). Symbols do not have this property as the symbol could include a Link-open animation itself.
+ 
+Supplementary information, known as User Data, can be associated with a marker. The information is displayed in a pop-up window when the marker is right clicked at run-time. User data can include fixed text, variable's real-time values, and variable's extended attributes.
+ 
+
+ 
+It is recommended to not exceed a maximum of 500 markers visible at the same time. Displaying more markers on a map can affect responsiveness of the user interface.
+ 
+ 
+The command buttons
+ 
+When you open the Map Markers Editor from the menu, you must use the command buttons to open or save a specific map markers file.
+
+
+========================================
+TOPIC: map_markers_general.htm
+========================================
+Managing map markers in general
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing Map Markers in General
+ 
+This topic is for managing map markers in general. There are also topics for each type of marker (shape, text, image, symbol, track and polygon) which contain more specific information.
+ 
+The Map Markers toolbar
+ 
+The toolbar selects the mode in which the cursor operates.
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Map - Select to zoom and/or pan the map. This is the default mode.
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+Select - Select and optionally move one or more markers on the map.
+ 
+ 
+Click on a single marker to select it. Click again anywhere else in the map deselects it. 
+ 
+Click on the stroke (not a node) to select a track or polygon.
+ 
+Ctrl and click selects multiple markers. 
+ 
+Click (not over a marker) and drag anywhere to select all markers within a frame.
+ 
+Click and drag a marker to move it.
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Shape marker - Click anywhere within the map to create a new shape marker.
+ 
+ 
+
+ 
+ 
+ 
+ Text marker - Click anywhere within the map to create a new text marker.
+ 
+ 
+
+ 
+ 
+ 
+ Image marker - Click anywhere within the map to create a new image marker.
+ 
+ 
+
+ 
+ 
+ 
+ Symbol marker - Click anywhere within the map to create a new symbol marker.
+ 
+ 
+
+ 
+ 
+ 
+ Track - Click anywhere within the map to create the start of a new track marker.
+ 
+ 
+
+ 
+ 
+ 
+ Polygon - Click anywhere within the map to create the start of a new polygon marker.
+ 
+ 
+
+ 
+ 
+ 
+ Delete - Delete all selected markers.
+ 
+ 
+ 
+ 
+How to create a single marker
+ 
+The process to create a marker is generally the same for all marker types.
+ 
+ 
+Zoom and pan the map so that it is at a convenient position to add the marker.
+ 
+Using the map objects tree, select the layer to which the marker is to be added.
+ 
+Select the tool corresponding to the marker to be created. The marker properties are displayed.
+ 
+Click in the map at the required position. A new marker with default properties is created. The toolbar automatically returns to the default Map Mode.
+ 
+Configure the properties as required.
+ 
+ 
+
+ 
+Be careful not to click & drag. Click & drag pans the map without adding a marker.
+ 
+ 
+How to create multiple markers with similar properties
+ 
+ 
+Zoom and pan the map so that it is at a convenient position to add the marker.
+ 
+Select the tool corresponding to the markers to be created. The default marker properties are displayed.
+ 
+In the marker properties, select Modify properties of a new marker.
+ 
+Select the layer under which the marker is to appear using the Layer drop down list box, or the map objects tree.
+ 
+Configure the marker properties. These properties are then used as default until you select a different tool.
+ 
+Click one or more times in the map. As many markers as you have clicked will be created, all with the properties that you entered in the previous step (except the position and the name that must be unique within the layer). 
+ 
+Select the Select objects tool. Select and configure any markers that require different properties to the default that you entered.
+ 
+ 
+
+ 
+The Map Editor also supports clipboard operations on the markers. You can copy and paste them using the Ctrl+C and Ctrl+V keyboard shortcuts.
+ 
+ 
+How to delete one or more markers
+ 
+ 
+Zoom and pan the map so that it is at a convenient position to select the markers.
+ 
+Select the markers.
+ 
+Use the Delete tool (Layer or Markers toolbar) to delete the selected markers.
+ 
+ 
+Marker properties
+ 
+To display and change a marker's properties choose the Select tool and select the marker. Show picture
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Description
+ 
+ 
+
+ Name
+ Y
+ Y
+ Y
+ Y
+ Y
+ Y
+ An identifier for the marker, which must be unique within the layer. The identifier appears in the Objects Tree of the Map Markers Editor and also at run-time in the User Data pop-up. Displayed at run-time only if there is no Description. The name can contain a maximum of 255 alphanumeric characters plus the underscore.
+ 
+ 
+
+ Description
+ Y
+ Y
+ Y
+ Y
+ Y
+ Y
+ A description of the marker. Displayed at run-time in the User Data pop-up.
+ 
+ 
+
+ Layer
+ Y
+ Y
+ Y
+ Y
+ Y
+ Y
+ The layer to which the marker is attached. The layer can be selected from a drop down list box.
+ 
+ 
+
+ Fill
+ Y
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ Y
+ The color of the fill. Entered either as a hexadecimal number (#FF000000 etc.), an index reference (I:1 etc.), a standard color (Red, gold, blue etc.) or by clicking on the color swab and using the Color palette.
+ 
+ 
+
+ Stroke
+ Y
+ &#160;
+ &#160;
+ &#160;
+ Y
+ Y
+ The color of the stroke. Entered in the same manner as for the Fill.
+ 
+ 
+
+ Stroke thickness
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ Y
+ Y
+ The width of the line when rendering a track or polygon.
+ 
+ 
+
+ Stroke Dash
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ Y
+ Y
+ The style of the line when rendering a track or polygon.
+ 
+ 
+
+ Latitude
+ Y
+ Y
+ Y
+ Y
+ Y
+ Y
+ Used in conjunction with the longitude to define the location of the marker. Can be configured by dragging the marker, or by entering a numeric value.
+ 
+ 
+
+ Longitude
+ Y
+ Y
+ Y
+ Y
+ Y
+ Y
+ Used in conjunction with the latitude to define the location of the marker. Can be configured by dragging the marker, or by entering a numeric value.
+ 
+ 
+
+ Width
+ Y
+ Y
+ Y
+ Y
+ &#160;
+ &#160;
+ 
+ 
+The width of the marker in pixels irrespective of the map zoom level. A value of zero has special meaning.
+ 
+For text, it means automatically adjust the size according to the font and number of characters. All characters will be on a single line. 
+ 
+For symbols and images, it means display at their native size (no scaling).
+ 
+ 
+ 
+
+ Height
+ Y
+ Y
+ Y
+ Y
+ &#160;
+ &#160;
+ The height of the marker in pixels irrespective of the map zoom level. A value of zero has special meaning (see Width).
+ 
+ 
+
+ 
+ 
+Mimic
+ 
+ Y
+ Y
+ Y
+ &#160;
+ Y
+ Y
+ The name of a mimic that is opened when clicking on the marker at run-time (similar to a Link-Open animation).
+ 
+ 
+
+ 
+ 
+Tooltip
+ 
+ Y
+ Y
+ Y
+ &#160;
+ Y
+ Y
+ Text that will be displayed in a tool tip at run-time when the mouse hovers over the marker.
+ 
+ 
+
+ 
+ 
+Branch
+ 
+ Y
+ Y
+ Y
+ Y
+ Y
+ Y
+ Variables branch that is applied to the mimic, the symbol (if a symbol marker), properties that are bound to a variable and User Data.
+ 
+ 
+
+ 
+ 
+User data
+ 
+ Y
+ Y
+ Y
+ &#160;
+ Y
+ Y
+ Opens the User Data configuration dialog.
+ 
+ 
+ 
+ 
+
+ 
+The color palette's solid and gradient colors can be used. If you use an indexed color, a small rectangle is displayed in the lower right corner of the color swab.
+ 
+Text properties with an Ellipsis button adjacent to them are multilingual. Clicking the button opens the Translation dialog in which strings can be entered for the various languages.
+ 
+Properties with the Variable Mode symbol adjacent to them can be bound to the real-time value, or an extended attribute, of a variable.
+
+
+========================================
+TOPIC: map_multilingual.htm
+========================================
+Configuring multilingual strings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring Multilingual Strings
+ 
+Many of the text properties configured in the Map Markers Editor are multilingual. That is you can configure different strings for different languages. When a text property is multilingual, an Ellipsis button is displayed adjacent to the property. Clicking the Ellipsis button opens the Manage Translations dialog where you can enter the strings for the various languages. Show picture
+
+ 
+At run time, the strings that are displayed are selected by matching PcVue's Project Language, with the language in the Manage Translations dialog. If there is no match, the string for the default language is used.
+ 
+How to add a language string
+ 
+ 
+Open the Manage Translations dialog by clicking the Ellipsis button adjacent to the text field.
+ 
+Click the Add Text tool, select the required language and enter the corresponding string. The languages that are available are the same as in the Project Languages in Languages settings.
+ 
+Click OK to confirm the configuration and close the dialog.
+
+
+========================================
+TOPIC: map_Overview.htm
+========================================
+Map overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Map Overview
+ 
+
+ 
+The ability to incorporate map data from third party map suppliers into PcVue is provided as a convenience. 
+ 
+Content, as well as terms and conditions applying to map data are not within the control and responsibility of PcVue supplier. 
+ 
+Any expressed or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed.
+
+ 
+ 
+Map data is subject to copyright notice and license agreement. By downloading map data you are agreeing to be bound to the selected map data suppliers' Terms and conditions.
+
+ 
+The terms and conditions of map data use are available from the applicable map supplier's web site.
+ 
+ 
+Map Control displays interactive geographic maps, with an overlay of animated symbols representing real world objects, in mimics. This type of system is often referred to as a Geographical Information System (or GIS). Show picture
+
+ 
+The geographic maps are provided by third party services such as OpenStreetMap and are generated using a set of graphic images known as tiles. There are normally several sets of tiles, each covering a range of zoom levels. The higher the zoom level the more detailed are the tiles and the more tiles you need for a particular view. The tiles can either be downloaded on demand from the Internet, or they can be loaded from local storage.
+ 
+The map is overlaid with configurable symbols known as markers. Markers are attached to layers and each layer is assigned to a range of zoom levels. The layers, and hence the markers, are hidden and revealed according to the map zoom level.
+ 
+
+ 
+The Map Control layers and zoom are unrelated to a mimic's layers and zoom.
+ 
+ 
+The Main Map Components
+ 
+The Map facility has three main components.
+ 
+ 
+Map Control - The special animation that enables maps can be embedded in any mimic. Maps are rendered using the World Geodetic System (WGS 84) standard. Using the Map Control the developer can configure the following features.
+The space that the map occupies within the mimic.
+The provider of the map tiles and if they are to be downloaded from the Internet or come from a local cache.
+The initial position and zoom level.
+The bounds between which the map panned and zoomed.
+The name of the file that provides the map markers overlay.
+In addition, the Map Control supports a programmatic interface permitting manipulation by both SCADA Basic and VBA.
+ 
+Map Markers Editor - A tool to configure the map marker overlays. Each overlay contains one or more layers to which markers are attached. The visibility of each layer (and hence the map markers) is controlled by selecting a zoom minimum and maximum. The map marker overlays are saved in a modified version of a format known as GPX. 
+Map markers - A map marker is a symbolic representation of a real world object.
+Each map marker is attached to a layer in a map markers overlay.
+Appearance can be selected from a shape, text, track (polyline), polygon, or a symbol.
+Several properties of a marker can be bound to the value of a variable.
+Can be configured so that, at run time, a left click opens a mimic. 
+Can be associated with the value of one or more other variables that are then displayed in a pop-up at run time (right click).
+ 
+Map positioning animation - A position type animation that allows the user to position and zoom the map using a pre-configured (by the developer) set of co-ordinates.
+ 
+ 
+In addition, to these three main components, a standalone tool is provided to download map tiles from the Internet and save them in a map cache for use offline (with no Internet access).
+ 
+Map Storage
+ 
+By default, local maps, map marker files and the map cache are saved in the GIS folder located in PcVue's root. Map files can be very large (many terabytes) and by locating them here, the same maps can be accessed by several projects minimizing storage requirements.
+ 
+Map Providers
+ 
+The following are the map providers supported by PcVue at the time of writing.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Provider
+ Url
+ Copyright
+ 
+ 
+
+ ARCgis
+ www.arcgis.com/features/map
+ �2013 ESRI - Map data �2013 ArcGIS
+ 
+ 
+
+ Baidu
+ map.baidu.com
+ See web site
+ 
+ 
+
+ Bing
+ www.bing.com/maps
+ �2013 Microsoft Corporation, �2013 NAVTEQ, �2013 Image courtesy of NASA
+ 
+ 
+
+ Google
+ 
+ 
+maps.google.com ditu.google.cn
+ 
+ �2013 Google - Map data �2013 Tele Atlas, Imagery �2013 TerraMetrics
+ 
+ 
+
+ OpenStreetMap
+ www.openstreetmap.org/
+ � MapQuest - Map data �2013 MapQuest, OpenStreetMap
+ 
+ 
+
+ OVI Nokia
+ maps.ovi.com
+ �2013 OVI Nokia - Map data �2013 NAVTEQ, Imagery �2013 DigitalGlobe
+ 
+ 
+
+ Sogou
+ map.sogou.com
+ See web site
+ 
+ 
+
+ Tencent
+ map.qq.com
+ See web site
+ 
+ 
+
+ Wiki
+ wikimapia.org
+ � WikiMapia.org - Map data �2013 WikiMapia
+ 
+ 
+
+ Yahoo! Inc.
+ maps.yahoo.com
+ � Yahoo! Inc. - Map data & Imagery �2013 NAVTEQ
+ 
+ 
+
+ Yandex
+ maps.yandex.com
+ � Yandex
+ 
+ 
+ 
+ 
+Scripting
+ 
+The Map Control can be manipulated programmatically by both SCADA Basic and VBA.
+ 
+A specific instruction, MAPDISPLAY, is provided in SCADA Basic. See the help for SCADA Basic for information on its use.
+
+
+========================================
+TOPIC: map_runtime.htm
+========================================
+Using the Map Control at run-time
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Map Control at Run-time
+ 
+When a mimic containing a Map Control is opened at run-time, the map appears centered at the configured location and zoomed at the configured zoom level. The center of the map is indicated with a small red cross. Show Picture
+
+ 
+The Map Control supports the following run-time actions.
+ 
+ 
+For the map itself
+Click and drag - Move the map by changing the map center within the panning bounds.
+Mouse wheel - Zoom the map within the configured zoom bounds.
+Zoom control (lower right corner) - Click the + and - tools, or enter a number in the text box, to zoom the map within the configured zoom bounds.
+Keyboard shortcuts
+Ctrl and + - Zoom in.
+Ctrl and - - Zoom out.
+Ctrl and 0 - Zoom out to the minimum allowable zoom level.
+ 
+For a map marker
+Mouse over - Displays the marker's tooltip (if configured).
+Click - Opens the mimic (window) associated with the marker (if configured).
+Right click - Opens the User Data pop-up associated with the marker (if configured).
+ 
+ 
+Why are some of the map tiles not displayed?
+ 
+If the Map Control was configured so that it allows zooming and/or panning for which map tiles do not exist, or the connection to the map tiles location has been lost, it is possible that part or all of the map will not be displayed. Instead, the unavailable map tiles are replaced by blanks.
+
+
+========================================
+TOPIC: map_shape.htm
+========================================
+Shape, text, symbol and image markers
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Map Shape, Text, Image and Symbol Marker
+ 
+This topic explains properties and behavior specific to each type of marker. The track and polygon is covered in a separate topic, as the behavior of these markers is quite different. See the topic Managing Map Markers in General for general information about map marker properties and behavior.
+ 
+The shape marker
+ 
+The shape marker is used to place a solid shape on the map. The only property specific to the shape marker is its form, which can be selected from the following options.
+ 
+ 
+ 
+ 
+ 
+
+ Shape
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Circle (Ellipse)
+ 
+ 
+
+ 
+ 
+ 
+ Square (Rectangle)
+ 
+ 
+
+ 
+ 
+ 
+ Rounded square (Rounded rectangle)
+ 
+ 
+
+ 
+ 
+ 
+ Triangle
+ 
+ 
+
+ 
+ 
+ 
+ Inverted triangle
+ 
+ 
+
+ 
+ 
+ 
+ Rhombus
+ 
+ 
+ 
+ 
+The text marker
+ 
+The text marker is used to place a multi-lingual string on a map. The following properties are specific to the text marker.
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ Description
+ 
+ 
+
+ Text
+ The string to be displayed on the map. Multi-lingual.
+ 
+ 
+
+ Text color
+ The color in which the text will be rendered. Entered either as a hexadecimal number or by clicking on the color swab and using the Color palette.
+ 
+ 
+
+ Font
+ The font used to display the text, for example Arial. 
+ 
+ 
+
+ Font size
+ The size of the text in pixels.
+ 
+ 
+
+ Font weight
+ The weight of the font, for example Bold. The font weights that are available will depend on the font that has been selected.
+ 
+ 
+
+ Font style
+ The style of the font, for example Oblique. The styles that are available will depend on the font family that has been selected.
+ 
+ 
+ 
+ 
+
+ 
+An When choosing a font and style you must make sure that it is available on the target PC.note. 
+ 
+ 
+The image marker
+ 
+The image marker is used to place an image, from a library, on a map. The following properties are specific to the image marker.
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ Description
+ 
+ 
+
+ Image
+ The image to be displayed on the map. Clicking the adjacent down-arrow button opens the image selector from where the image can be selected from a library.
+ 
+ 
+ 
+ 
+
+ 
+If the height and width are both set to zero the image will be displayed full size, otherwise the image will be scaled to the given dimensions.
+ 
+ 
+The symbol marker
+ 
+The symbol marker is used to place a symbol, from a library, on a map. The following properties are specific to the symbol marker.
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ Description
+ 
+ 
+
+ Symbol
+ The symbol to be displayed on the map. Clicking the adjacent down-arrow button opens the symbol selector from where the symbol can be selected from a library. The symbol is instantiated with the selected branch.
+ 
+ 
+ 
+ 
+
+ 
+The ability to open a mimic from the symbol marker is disallowed as the symbol itself can contain a Link-open animation.
+
+
+========================================
+TOPIC: map_track.htm
+========================================
+Track and polygon markers
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Track and Polygon Markers
+ 
+This topic explains the properties and behavior of the track and polygon markers. The track and polygon are very similar except that the track is an open shape (like the polyline drawing element) and the polygon is a closed shape. See the topic Managing Map Markers in General for general information about map marker properties and behavior.
+ 
+
+ 
+There is a significant difference in the way that a track or polygon is rendered compared to the other markers. When a map is zoomed, any track or polygon zooms with it. All other markers stay the same size as defined when they were configured.
+ 
+ 
+How to create a track or polygon
+ 
+The process to create a track or polygon marker is similar to that of the other shapes except you left click several times, each click creating a node. You complete the marker by a single right click. Show picture
+
+ 
+How to move a node
+ 
+ 
+Using the Marker toolbox, select Select mode.
+ 
+Click a single node. The selected node is highlighted. Show picture
+
+ 
+Drag the node to its new location.
+ 
+ 
+How to delete or add a node
+ 
+ 
+Using the Marker toolbox, select Select mode.
+ 
+Right click a single node. A context menu is displayed offering the choice of adding or deleting a node.
+ 
+Choose Add or Delete as appropriate.
+ 
+ 
+Changing the stroke (line) style using the StrokeDashArray property
+ 
+The StrokeDashArray property allows you to draw a broken line by entering two or more numbers separated by commas. The value of each number configures the relative size of the mark and space. This can be illustrated by some examples.
+ 
+ 
+ 
+ 
+ 
+
+ StrokeDashArray
+ &#160;
+ 
+ 
+
+ 1, 1
+ 
+ 
+ 
+ 
+ 
+
+ 2, 2
+ 
+ 
+ 
+ 
+ 
+
+ 2, 2, 4, 2
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Changing the stroke (line) style using the StrokeDashCap property
+ 
+The StrokeDashCap property defines the end shape of each segment of the stroke.
+ 
+ 
+ 
+ 
+ 
+
+ StrokeDashStroke
+ &#160;
+ 
+ 
+
+ Flat
+ 
+ 
+ 
+ 
+ 
+
+ Triangle
+ 
+ 
+ 
+ 
+ 
+
+ Rounded
+
+
+========================================
+TOPIC: map_Tree.htm
+========================================
+The Map Objects Tree
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Map Objects Tree
+ 
+The Map Objects Tree supports the following features and actions to manage the layers and markers. Show picture
+
+ 
+ 
+Map Items tab - Tree display of map layers and map markers. The map markers sorted according to which layer they are attached.
+The branch that represents each layer, displays the layer name, the number of markers it contains in round brackets, and the zoom range in square brackets.
+For example,: Countries (5) [1;20].
+Clicking the Triangle icon expands or contracts the branch displaying or hiding the markers.
+Clicking the Eye icon toggles the visibility of the layer's markers both in the Map Markers Editor and at run-time in any associated map.
+Clicking a layer name selects it and displays the layer properties.
+Clicking a marker name highlights the marker on the map and displays the marker's properties. All other objects are de-selected.
+Double clicking a marker name centers the map on the marker, highlights the marker on the map and displays the markers properties.
+Double clicking a layer name, computes the bounding box of all markers in the layer and locates the map on it. If necessary, it also adjusts the zoom level so the layer is visible.
+Shift & click allows the selection of multiple markers. Ctrl & click adds a marker to the selection. Alt & click removes a maker from the selection.
+ 
+Markers tab - List of all map markers irrespective of which layer they are attached to. The markers behave in the same manner as described above.
+ 
+ 
+
+ 
+The default layer, displayed at the top of the Map Items Tree, is mandatory.
+
+
+========================================
+TOPIC: map_user_data.htm
+========================================
+Configuring user data
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring User Data
+ 
+User Data is supplementary information that can be associated with a marker. The information is displayed in a pop-up window when the marker is right clicked at run-time. User data can include fixed text, variable's real-time values, and variable's extended attributes. Show picture
+
+ 
+How to configure user data
+ 
+ 
+In the Map Markers Editor, select the marker to which the User Data is to be added.
+ 
+Click the Ellipsis button adjacent to the User Data field. The User Data Management dialog opens. Show picture
+
+ 
+Select the + tool to add a new item.
+Enter the Label. This appears in the left hand column of the run-time window.
+Enter the name of a variable or variable's extended attribute in the Variable field, or enter a fixed string in Value. See the topic Binding marker properties to variables for information about how to reference a variable's extended attributes.
+Repeat a and b until the user data is complete.
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+
+ 
+The Name field must be unique although it does not appear in the User Data window at run-time. It is only used when managing user data programmatically.
+ 
+If a label is not defined, the user data will not appear in the pop-up window.
+ 
+If the Variable and Value are both configured, when the marker is displayed in run mode, the variable is forced to the value even if the variable is not configured with the Command property set.
+ 
+ 
+About the Label field
+ 
+The Label field is a multi-lingual string. Clicking the Ellipsis button opens the Configuring Multilingual Strings dialog where you can enter strings for the various languages. The Label field supports the standard substitution strings. For example:
+ 
+ 
+#V - Substitutes the variable name
+ 
+#T - Substitutes the variable's Description property.
+
+

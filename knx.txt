@@ -1,0 +1,479 @@
+========================================
+TOPIC: knx_installation.htm
+========================================
+KNX Data Acquisition Driver Add-on Installation and Configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Installation and Configuration of the KNX Data Acquisition Driver Add-on
+ 
+The KNX Data Acquisition Driver Add-on of PcVue comprises of a single dll file that must be copied to the \Bin folder. The file is named:
+ 
+ 
+usrmgrFalconKNX.dll
+ 
+ 
+The file named usrmgrFalconKNX.dll was developed using the SV Manager Toolkit. In order for PcVue to load the Add-on at startup, a text file USRMGR.DAT must also be added to the BIN folder. The file must contain the following lines.
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[USRMGR\usrmgrfalcon]DLL=usrmgrFalconKNX.dll
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[USRMGR\usrmgrfalcon]
+ 
+DLL=usrmgrFalconKNX.dll
+ 
+KNX Data Acquisition Driver Add-on configuration file
+ 
+The KNX Data Acquisition Driver Add-on is configured using a file called KNXInterfaces.ini which must be created in the PER folder of the PcVue project. The file has the following structure:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[TaskParameters]
+ 
+ 
+ 
+
+ 
+AttributeNumber = 16
+ 
+ 
+ 
+
+ 
+AssociationName =
+ 
+ 
+ 
+
+ 
+NbInterfaces = 1
+ 
+ 
+ 
+
+ 
+TimeOutInSec = 10
+ 
+ 
+ 
+
+ 
+ReconnectionPeriod = 60
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[Interface1]
+ 
+ 
+ 
+
+ 
+IpAddress&#160;&#160;&#160;&#160;= 192.168.1.1
+ 
+ 
+ 
+
+ 
+Port&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 3671
+ 
+ 
+ 
+
+ 
+NATmode&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= off
+ 
+ 
+ 
+
+ 
+UseUSB&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 0
+ 
+ 
+ 
+
+ 
+SleepInterval = 200
+ 
+ 
+ 
+
+ 
+MaxQueueWrite = 10
+ 
+ 
+ 
+
+ 
+InitialReadItemsNumber = 200
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[TaskParameters]
+AttributeNumber - A variable's extended text attribute that is used to identify the corresponding variable as being acquired from a KNX interface. A number from 3 to 16. Defaults to 16.
+AssociationName - The name of the data acquisition server's association if used in a redundant architecture. The task is only activated on the active server. A string. Defaults to an empty string (no association).
+NbInterfaces - The number of interfaces the task must communicate with. A number from 1 to 16. Defaults to 0.
+TimeOutInSec - The delay in seconds before a read or write request is timed out. A number. Defaults to 5 (seconds).
+ReconnectionPeriod - The period in seconds after which the driver will attempt to reconnect to a failed, or in error, interface. A number. Defaults to 30 (seconds).
+InitialReadItemsNumber - Specify the maximum number of items that are refresh at a given time on project start-up. The driver refreshes all the items flagged as R at the rate of TimeOutInSec*30 seconds until all the items are read. A number. If omitted. Defaults to 200.
+DisableSetOrWriteOnSimulatedVariable - If set to True, the KNX Add-on does not force a variable on the KNX interface if it is simulated. Defaults to False.
+ 
+[InterfaceN] - The properties for interface number N. N is a number from 1 to NbInterfaces. The values must be contiguous.
+ 
+Name - The interface name for the KNX /IP interface. A string. If omitted the default is InterfaceN as defined in [InterfaceN].
+IpAddress - The IP address of the KNX/IP interface. A string. If omitted 127.0.0.1 is used.
+Port - The port number used to communicate with the interface. A number. If omitted 3671 is used.
+NATmode - Specify if the interface supports NAT mode. A string with only two possible values, ON or OFF. Defaults to OFF.
+UseUSB - Specify if a USB connection is to be used to connect to the interface. A number, 0 = USB is not used, 1 = USB is used. Defaults to 0.
+SleepInterval - The silence in milliseconds between consecutive requests to a device. A number. Defaults to 100.
+MaxQueueWrite - The maximum number of write requests that can be queued for all KNX points. Defaults to 5.
+VarStatus - The name of a register variable that holds the status of the KNX interface:
+0: Interface connected
+1: Interface not connected
+2: Interface error. It is likely to be necessary to shut down PcVue and kill the Falcon task to recover.
+ 
+[InterfaceUSB] - The definition of the USB interface if required.
+ConnectionString - The connection string used for the USB interface. Please refer to the manufacturer's documentation. Defaults to an empty string.
+ 
+ 
+
+ 
+In addition to IP interfaces, the KNX Add-on also supports USB interfaces. Please contact your technical support for more information about the required USB configuration.
+
+
+========================================
+TOPIC: knx_overview.htm
+========================================
+KNX Data Acquisition Driver Add-on Overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+KNX Data Acquisition Driver Add-on Overview
+ 
+The KNX Add-on is a data acquisition driver designed to communicate with KNX devices via up to 16 KNX/IP interfaces using group data access.
+ 
+The KNX Add-on is only supported on the following operating systems, with the exclusion of any virtual environment:
+ 
+ 
+Windows 7 SP1 (x64),
+ 
+Windows Server 2008 R2 SP1 (x64).
+ 
+ 
+The KNX Add-on can:
+ 
+ 
+Receive unsolicited data changes
+ 
+Send commands
+ 
+Poll data
+ 
+ 
+There are no configuration dialog's specific to the KNX Data Acquisition Driver. At the time of writing, it uses a combination of dedicated text files (.dat) and regular configuration features.
+ 
+
+ 
+The Falcon Runtime v2.2 must be installed, following the manufacturer's instructions, on the host PC. It is available free of charge from the KNX web site https://my.knx.org/en/downloads/falcon. You will need to register to have access to the Falcon API download page.
+
+
+========================================
+TOPIC: knx_trace.htm
+========================================
+KNX Data Acquisition Driver Add-on Traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+KNX Data Acquisition Driver Add-on Traces
+ 
+Information regarding the KNX Add-on are logged in the traces and displayed in the Event Viewer with lines starting with usrmgrFalconKNX.
+ 
+Additional traces can be triggered using the SCADA Basic instruction TRACE as follows.
+ 
+TRACE(Mode, ManagerID, HexFlag);
+ 
+ 
+Mode - Turn the additional trace on or off
+ 1 - On
+0 - Off
+ 
+ManagerID - The identifier of the KNX Add-on task. Set to 11 if KNX is the only Add-on in use.
+ 
+HexFlag	- Hexadecimal combination flag
+001	- To trace unsolicited traffic
+400 -	To trace read request
+800 -	To trace write request
+ 
+ 
+Example of use of SCADA Basic TRACE instruction 
+ 
+TRACE(1,11,�C00�); �Turn on additional trace for read and write
+ 
+TRACE(0,11,�C01�); �Turn off all traces.
+
+
+========================================
+TOPIC: knx_variables.htm
+========================================
+Configuration of the PcVue Variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuration of the PcVue Variables for the KNX Data Acquisition Driver Add-on
+ 
+To define a variable as having a KNX source you have to enter its KNX address in the extended attribute, as specified in the KNXInterfaces.ini file. It takes the form of a string with the following syntax.
+ 
+KNX#InterfaceName#GroupAddress#Format#Access
+ 
+ 
+KNX - The key that indicates it is a variable with a KNX source.
+ 
+InterfaceName - The name of the KNX/IP interface from which the KNX point is accessible as defined in the KNXInterfaces.ini file, Name parameter.
+ 
+GroupAddress - The KNX group address. All three possible addressing types available within KNX are supported.
+3 level addressing format: x/y/z
+2 level addressing format: x/y
+Free addressing format: x
+ 
+Format - The KNX DPT format of the point. See table below.
+ 
+Access - The access method. Specifies if the variable need to be read at start up, or cyclically, and / or if the variable can be written. In all cases, the variable is also refreshed when it changes.
+W - The variable can be written/controlled. If used this must be the first character in the string.
+R - The variable is initialized at start-up.
+Rx - The variable is read cyclically every x seconds.
+See examples below.
+ 
+ 
+Format table
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Format
+ Scaling possible
+ Notes
+ 
+ 
+
+ B1
+ No
+ Configuring a variable min and max does not trigger any scaling.
+ 
+ 
+
+ B2
+ No
+ Configuring a register 0 to 3 value
+0 - No control (00)
+1 - No control (01)
+2 - Control function value 0 (10)
+3 - Control function value 1 (11).
+ 
+ 
+
+ F16
+ No
+ Configuring a variable min and max does not trigger any scaling.
+ 
+ 
+
+ xF16_index
+ No
+ 
+ 
+x corresponds to the number of F16 words needed e.g. 3F16 for KNX ID 222.100
+ 
+index corresponds to the offset of the word within the structure. Its value should be between 0 and (x-1). Configuring a variable min and max does not trigger any scaling.
+ 
+ 
+ 
+
+ F32
+ No
+ Configuring a variable min and max does not trigger any scaling.
+ 
+ 
+
+ N2
+ No
+ Configuring a variable min and max does not trigger any scaling.
+ 
+ 
+
+ N8
+ No
+ Configuring a variable min and max does not trigger any scaling.
+ 
+ 
+
+ U8
+ Yes
+ To enable scaling, the DPT range defined in the KNX document must be entered in the min & max of the variable definition.
+For example:
+DPT_Scaling - variable min = 0, variable max = 100
+If you do not want to apply scaling then the variable min and max should be 0 and 255 respectively
+ 
+ 
+
+ U16
+ Yes
+ To enable scaling, the DPT range defined in the KNX document must be entered in the min & max of the variable definition.
+For example:
+DPT_TimePeriod10Msec - variable min = 0, variable max = 655,35
+If you do not want to apply scaling then the variable min and max should be 0 and 65535 respectively
+ 
+ 
+
+ U32
+ Yes
+ To enable scaling, the DPT range defined in the KNX document must be entered in the min & max of the variable definition.
+At present there is no DPT of U32 format that perform scaling but you could put variable min = 0, variable max = 200
+If you do not want to apply scaling then the variable min and max should be 0 and 4294967295 respectively.
+ 
+ 
+
+ V8
+ No
+ Variable min and max specify does not trigger any scaling
+ 
+ 
+
+ V16
+ Yes
+ To enable scaling, the DPT range defined in the KNX document must be entered in the min & max of the variable definition.
+For example:
+DPT_Percent_V16 - variable min -327,68, variable max 327,67
+If you do not want to apply scaling then the variable min and max should be -32768 and 32768 respectively.
+ 
+ 
+
+ xV16_index
+ Yes
+ 
+ 
+x corresponds to the number of V16 words needed e.g. 3V16 for KND ID 212.100
+ 
+index corresponds to the offset of the word within the structure. Its value should be between 0 and (x-1).
+ 
+As for V16 format, the DPT range defined in the KNX document must be entered in the min and max of the variable definition.
+For example:
+ 
+DPT_Percent_V16: variable min = -327,68 variable max = 327,67
+ 
+If you do not want to apply any scaling, then the variable min and max should be: variable min = -32768 variable max = 32767
+ 
+ 
+ 
+
+ V32
+ No
+ Configuring a variable min and max does not trigger any scaling.
+ 
+ 
+
+ r2U6
+ No
+ Configuring a variable min and max does not trigger any scaling.
+ 
+ 
+ 
+ 
+Access method examples
+ 
+#WR - The variable can be written from PcVue and is read once at start-up. The variable is also refreshed on change.
+ 
+#R60 - The variable cannot be written but is read every minute. The variable is also refreshed on change.
+ 
+# - The variable is only refreshed on change.
+ 
+#R60W - Invalid syntax. The W must be placed first. The correct syntax would be #WR60.
+ 
+
+ 
+The syntax KNX#InterfaceName#Disable can be used to map a bit variable for controlling the communication on the specified interface:
+ 
+ 
+
+ 
+Bit variable at 0 - Communication on the interface is enabled
+ 
+ 
+
+ 
+Bit variable at 1 - Communication on the interface is disabled
+
+

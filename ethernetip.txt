@@ -1,0 +1,679 @@
+========================================
+TOPIC: ethernetip_example.htm
+========================================
+Ethernet/IP Example
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ethernet/IP Example
+ 
+This example explains how to access the variable ANA_IN_00 which is UINT format and in the global definition of a Control logic PLC. Show picture
+
+ 
+Configuration file
+ 
+ 
+The CPU is in slot 1 and the EtherNET/IP coupler is in slot 2.
+ 
+The cable on the coupler is plugged into the physical port 1.
+ 
+The IP address of the EtherNet/IP coupler is 192.168.0.31.
+ 
+The IP address of the PcVue host PC is 192.168.0.10.
+ 
+ 
+This requires the following settings in the EthernetIP.ini configuration file:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[TaskParameters]
+ 
+ 
+ 
+
+ 
+AttributeNumber = 4
+ 
+ 
+ 
+
+ 
+LocalIpAddress = 192.168.0.10
+ 
+ 
+ 
+
+ 
+nbEquipments = 1
+ 
+ 
+ 
+
+ 
+nbPollingGroups = 1
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[PollingGroup1]
+ 
+ 
+ 
+
+ 
+Name = Fast
+ 
+ 
+ 
+
+ 
+RefreshRateInSec = 1
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[Equipment1]
+ 
+ 
+ 
+
+ 
+Name = EqtTest
+ 
+ 
+ 
+
+ 
+IpAddress1 = 192.168.0.31
+ 
+ 
+ 
+
+ 
+Port1 = 1
+ 
+ 
+ 
+
+ 
+Slot1 = 1
+ 
+ 
+ 
+
+ 
+TimeOutInSec = 2
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Variable definition
+ 
+To access the variable ANA_IN_00, which is UINT format, you must use a register variable. The variable is configured with the following string in its extended attribute 4 (as specified in the .ini file AttributeNumber = 4). Show picture
+
+
+========================================
+TOPIC: ethernetip_installation.htm
+========================================
+Ethernet/IP Data Acquisition Driver Add-on Installation and Configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Installation and Configuration of the Ethernet/IP Data Acquisition Driver Add-on
+ 
+The Ethernet/IP Data Acquisition Driver Add-on of PcVue comprises of two dll files that are installed in the \Bin folder as part of the installation. The files are:
+ 
+ 
+
+ 
+svmgrEIP.dll - The PcVue Ethernet/IP driver.
+ 
+ 
+
+ 
+EIP_Driver.dll - The Ethernet/IP communication stack.
+ 
+ 
+ 
+The driver, svmgrEIP.dll, was developed using the SV Manager Toolkit. In order for PcVue to load the Add-on at startup, a text file USRMGR.DAT must also be added to the BIN folder. The file must contain the following lines:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[USRMGR\usrmgrEIP]
+ 
+ 
+ 
+
+ 
+DLL=svmgrEIP.dll
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ethernet/IP Data Acquisition Driver Add-on configuration file
+ 
+The Ethernet/IP Data Acquisition Driver Add-on is configured using a file called EtherNetIP.ini which must be created in the PER folder of the PcVue project. The file has the following structure.
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[TaskParameters]
+ 
+ 
+ 
+
+ 
+AttributeNumber = 16
+ 
+ 
+ 
+
+ 
+LocalIpAddress = 192.168.56.1
+ 
+ 
+ 
+
+ 
+nbEquipments = 1
+ 
+ 
+ 
+
+ 
+nbPollingGroups&#160;&#160;&#160;&#160;= 1
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[PollingGroup1]
+ 
+ 
+ 
+
+ 
+Name = Fast
+ 
+ 
+ 
+
+ 
+RefreshRateInSec = 1
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[Equipment1]
+ 
+ 
+ 
+
+ 
+Name = EqtTest
+ 
+ 
+ 
+
+ 
+IpAddress1&#160;&#160;&#160;&#160;= 192.168.56.11
+ 
+ 
+ 
+
+ 
+Port1 = 0
+ 
+ 
+ 
+
+ 
+Slot1 = 0
+ 
+ 
+ 
+
+ 
+TimeOutInSec = 10
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[TaskParameters]
+AttributeNumber - The variable's text extended attribute that is used to configure the mapped EIP/ CIP variable. A number from 3 to 16. Defaults to 16.
+
+LocalIpAddress - The IP Address of the PC on which the task runs. A string.
+AssociationName - The association name in a redundant architecture. The task will only be active on the active server. A string. If omitted there is no association.
+NbEquipments - The number of equipments to which the driver is to connect. A number. If omitted the default is 0.
+nbPollingGroups - The number of polling groups to be used. A number. If omitted the default is 0 polling groups.
+ 
+[PollingGroupN] - The definition of the polling group N. N is a number from 1 to nbPollingGroups as specified above. The values must be contiguous.
+Name - The name of the polling group. A string. If omitted the default is PollingGroupN as defined in [PollingGroupN].
+RefreshRateInSec - The polling rate for the group in seconds. A number. If omitted the default is Normal.
+ 
+[EquipmentN]
+Name - The name of the equipment. A string. If omitted the default is EquipmentN as defined in [EquipmentN].
+IpAddress1 - The first IP Address of the equipment. A string formatted x.x.x.x. The default is an empty string.
+Port1 - Specify the physical port on which the Ethernet cable is plugged in. A number. If omitted the default is 0.
+Slot1 - Specify the CPU equipment slot. A number. If omitted the default is 0.
+IpAddress2 - The second IP Address of the equipment. A string formatted x.x.x.x. The default is an empty string.
+Port2 - Specify the second physical port on which the Ethernet cable is plugged in. A number. If omitted the default is 0.
+Slot2 - Specify the second CPU equipment slot. A number. If omitted the default is 0.
+NbRetry - The number of retries prior to assuming a communication failure and setting any variables to NS COM. A number. If omitted the default is 2.
+TimeOutInSec - The timeout in seconds for a read or write request before considering the request has timed out. A number. If omitted the default is 10 (seconds).
+
+DeviceType - The type of the equipment. A string either LogixAccess or CIPAccess. If omitted LogixAccess is used.
+
+MultipleServiceSupport - Specify if the equipment supports Service 0x0a meaning that several requests can be concatenated within one. A string either Yes or No. If omitted Yes is used.
+
+CompactBitArray - Specify if the equipment supports the compact bit array. If Yes an entire array is coded within a double word, else each bit of the array is coded within a single byte. A string either Yes or No. If omitted Yes is used.
+
+
+========================================
+TOPIC: ethernetip_overview.htm
+========================================
+Ethernet/IP Data Acquisition Driver Overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ethernet/IP Data Acquisition Driver Overview
+ 
+The Ethernet/IP Add-on enables communication with PLCs supporting the Ethernet/IP standard. This driver supports communication with:
+ 
+ 
+
+ 
+Rockwell Automation ControlLogix and CompactLogix PLCs.
+ 
+ 
+
+ 
+Allen Bradley SLC500 PLCs.
+ 
+ 
+
+ 
+Any other PLC supporting CIP explicit messaging (Common Industrial Protocol), with addressing based on symbolic elements.
+ 
+ 
+ 
+There are no configuration dialog's specific to the Ethernet/IP Data Acquisition Driver. At the time of writing, it uses a combination of dedicated text files (.dat) and regular configuration features.
+ 
+This driver supports access to atomic tags in:
+ 
+ 
+
+ 
+Tags.
+ 
+ 
+
+ 
+User Defined Data Types (UDT).
+ 
+ 
+
+ 
+Arrays (atomic and UDT).
+ 
+ 
+ 
+
+ 
+The Ethernet/IP Data Acquisition Driver Add-on is licensed and available on order. Contact your local reseller for more information.
+
+
+========================================
+TOPIC: ethernetip_trace.htm
+========================================
+Ethernet/IP Data Acquisition Driver Add-on Traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Ethernet/IP Data Acquisition Driver Add-on Traces
+ 
+Information regarding the Ethernet/IP Add-on activity is logged in the traces and displayed in the Event Viewer with messages starting with EtherNet/IP. The following messages can be displayed.
+ 
+ 
+ 
+ 
+ 
+
+ Message
+ Cause
+ 
+ 
+
+ EtherNet/IP - Unable to read dongle. Error 12.
+ 
+ &#160;PcVue has been unable to detect a dongle and is running in demonstration mode. The driver will run for one hour.
+ 
+ 
+
+ 
+ EtherNet/IP � No license found on the protection key
+ 
+ The Ethernet/IP option is not coded in the dongle. The driver will run for one hour (as in demonstration mode).
+ 
+ 
+
+ 
+ EtherNet/IP � Failed to initialize the stack. Error 66
+ 
+ Invalid local IP address
+ 
+ 
+
+ EtherNet/IP � <DeviceName> (<IP> <Slot> <Port>) Error <Value> on request
+ Device connection error.
+33 = Time out on the request.
+74 = Length of response message too long. Greater than 511 bytes.
+58 = TCP network error. Cannot connect to <DeviceName>. Check connectivity using ping.
+ 
+ 
+
+ 
+ EtherNet/IP - <DeviceName> ArrayTagName[index_min..Index_max] Error <Value>
+ OR
+ EtherNet/IP - <DeviceName> TagName Response Error <Value. [VarName]
+ 
+ 
+ Tagname error.
+0x4 = Invalid TagName. A syntax error was detected decoding the Request Path.
+0x5 = Invalid TagName. Request Path destination unknown. Probably instance number is missing in the addressing.
+0x6 = Insufficient Packet Space. Not enough room in the response buffer for all the data.
+0x13 = Insufficient Request Data. Data too short for expected parameters.
+0x26 = The Request Path Size received was shorter or longer than expected.
+0xFF = General Error. Access beyond end of the object.
+
+ 
+ 
+ 
+ 
+Additional traces can be triggered using the SCADA Basic instruction TRACE as follows.
+ 
+TRACE(Mode, ManagerId, HexFlag);
+ 
+ 
+Mode - Turn the additional trace on or off
+ 1 - On
+0 - Off
+ 
+ManagerId - The identifier of the Ethernet/IP Add-on manager. Set to 11 if it is the only Add-on in use.
+ 
+HexFlag	- Hexadecimal combination flag
+001	- To view cyclic errors.
+ 
+ 
+Example of use of SCADA Basic TRACE instruction 
+ 
+TRACE(1,11,�001�); �Turn on all additional trace
+ 
+TRACE(0,11,�001�); �Turn off all traces.
+
+
+========================================
+TOPIC: ethernetip_variables.htm
+========================================
+Ethernet/IP Data Acquisition Driver Add-on Configuration of the PcVue Variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuration of the PcVue Variables for the Ethernet/IP Data Acquisition Driver Add-on
+ 
+To define a variable as having an Ethernet/IP source you have to enter its address in the extended attribute as defined in EtherNetIP.ini. It takes the form of a string with the following syntax.
+ 
+EIP#EquipmentName#TagName#Type#PollingGroup#Access#Scaled
+ 
+ 
+EIP - The key that indicates it is a variable with an Ethernet/IP source.
+ 
+
+ 
+EquipmentName - The name of the equipment, as defined in EtherNetIP.ini, from which the variable gets its value.
+ 
+ 
+TagName - The identifier of the variable within the equipment. See below.
+ 
+Type - The variable type. See below.
+ 
+PollingGroup - The name of the polling group, as defined in EtherNetIP.ini, which defines the variable scan rate.
+ 
+Access - Use W if you want PcVue to write to the tag.
+ 
+Scaled - Use S if you want PcVue to apply scaling between the minimum and maximum of the data type and the minimum and maximum defined in the variable. If omitted the variable is not scaled.
+ 
+ 
+TagName syntax for ControlLogix access
+ 
+The tag name refers to the tag name in the equipment.
+ 
+ 
+If the tag is part of a program, named MyProg, the syntax is Program:MyProg.MyTag.
+ 
+If the tag is part of a UDT structure TemplateStructA, named Mystruct, the syntax is MyStruct.MyTag.
+ 
+If MyStruct is instantiated with the program MyProg, the syntax is Program:MyProg.MyStruct.MyTag.
+ 
+If the tag is an array, the syntax is MyArray[x] where x is the array index of the specific element to access.
+ 
+If the tag is a string, the syntax is MyString[x] where x is the string size you want to access.
+ 
+ 
+Example:
+EIP#EqtTest#TEST2_ARR[29]#INT#Fast#W
+ 
+Connect the variable to the device called EqtTest and access the index 29 of the table called TEST2_ARR at the frequency define by the polling group Fast and the value can be written. The device named EqtTest and the polling group named Fast must be defined in the .ini file.
+ 
+TagName syntax for CIP generic device
+ 
+The tag name refer to a specific explicit message within the CIP device. The syntax is CIP:S:C:N:I:[x].
+ 
+ 
+S - The service expressed in hexadecimal. For example:
+01 - Get Attributes all
+0e - Get Attribute single
+ 
+C - Class in hexadecimal
+ 
+I - Instance number in decimal
+ 
+N - Attribute number
+ 
+[x] - The offset, in bytes, of the response buffer from which to extract the variable value.
+ 
+ 
+Variable type
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Format
+ Scaling support
+ Range
+ 
+ 
+
+ BOOL
+ No
+ &#160;
+ 
+ 
+
+ SINT
+ Yes
+ -127..128
+ 
+ 
+
+ INT
+ Yes
+ -32767..32768
+ 
+ 
+
+ DINT
+ Yes
+ -2147483647..2147483648
+ 
+ 
+
+ USINT
+ Yes
+ 0..255
+ 
+ 
+
+ UINT
+ Yes
+ 0..65535
+ 
+ 
+
+ UDINT
+ Yes
+ 0..4294967295
+ 
+ 
+
+ REAL
+ No
+ &#160;
+ 
+ 
+
+ STRING
+ No
+ &#160;
+ 
+ 
+ 
+ 
+Control tag for redundant equipment
+ 
+If the equipment is configured with two IP addresses, PcVue is able to control / display the active connection using a variable. To configure such a variable in PcVue you use the following syntax, specified in the extended attribute.
+ 
+EIP#EquipmentName#ConnectionIndex
+ 
+ 
+EIP - The key that indicates it is a variable with an Ethernet/IP source.
+ 
+EquipmentName - The equipment name from which the variable gets its value as defined in the EtherNetIP.ini
+ 
+ConnectionIndex - The connection index. 
+0 - Use IpAddress1
+1 - Use IpAddress2
+ 
+ 
+The variable value reflects which connection is in use and can be used to force the use of one connection or the other.
+
+

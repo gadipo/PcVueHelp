@@ -1,0 +1,476 @@
+========================================
+TOPIC: multitech_gateway_config.htm
+========================================
+MultiTech gateway configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+MultiTech gateway configuration
+ 
+To connect your MultiTech Gateway using this Add-on, you need to log in on the interface of its Node-Red application.
+ 
+ 
+
+ 
+Type the IP address of the gateway in a web browser and enter your username and password. Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Click on the Apps tab and launch Node-Red. Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Drag a function node from the left hand side and fill it with the following code: Show picture
+ 
+var ret = {}
+ 
+ret.payload = JSON.stringify(msg);
+ 
+return ret;
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Finally, pick a TCP Request node and fill it as in the picture below. Connect the nodes and click Deploy. Show picture
+
+
+========================================
+TOPIC: multitech_installation.htm
+========================================
+Installation and configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Installation and Configuration
+ 
+The MultiTech LoRaWAN gateway Add-on of PcVue comprises of a single dll file that must be copied to the \Bin folder. The file is named:
+ 
+ 
+
+ 
+svmgrMultiTechLoRa.dll
+ 
+ 
+ 
+The Add on was developed using the SV Manager Toolkit. In order for PcVue to load the Add-on at startup, a text file USRMGR.DAT must also be added to the \Bin folder. The file must contain the following lines.
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[USRMGR\svmgrMultiTechLoRa]&#160;
+ 
+ 
+ 
+
+ 
+DLL=svmgrMultiTechLoRa.dll
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+MultiTech Add-on configuration file
+ 
+The Add-on is configured using a file called svmgrMultiTechLoRa.ini that must be created in the C folder of the project. The file has the following structure.
+ 
+Please note that if an entry is omitted, then its default value will be applied by the task. The file format is:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[ConfigParameters]
+ 
+ 
+ 
+
+ 
+AttributeNumber = 10
+ 
+ 
+ 
+
+ 
+ListeningPort = 2055
+ 
+ 
+ 
+
+ 
+NumberOfGateways = 2
+ 
+ 
+ 
+
+ 
+AssociationName =
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[Gateway_1]
+ 
+ 
+ 
+
+ 
+IpAddress = 192.168.38.100
+ 
+ 
+ 
+
+ 
+Name = GW1
+ 
+ 
+ 
+
+ 
+[Gateway_2]
+ 
+ 
+ 
+
+ 
+IpAddress = 192.168.38.101
+ 
+ 
+ 
+
+ 
+Name = GW2
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[ConfigParameters]
+AttributeNumber: Specify the extended attribute used for the configuration of a MultiTech variable. 
+Type: Integer from 3 to 16. If omitted, default value is 10.
+ListeningPort: The port on which PcVue listens for incoming connections and messages.
+Type: Integer.
+
+NumberOfGateways: The number of gateways included in the configuration file.
+Type: Integer. MANDATORY, no default value.
+
+AssociationName: The Association Name if the Add-on is used in a redundant architecture. The task is only active on the active server of the configured association.
+Type: String. If omitted it is assumed that there is no association.
+ 
+
+ 
+[Gateway_X]: Defines the parameters of each gateway X. 
+X: Integer.
+
+ 
+ 
+
+ 
+Name: The name for the gateway. Used as an alias for its IP address.
+Type: String. If omitted from the file, the name is Gateway_X.
+ 
+ 
+
+ 
+IpAddress: The IP address for the gateway. The value must match the [0-255].[0-255].[0-255].[0-255] pattern or it will be considered invalid.
+If omitted or invalid, the gateway is not recognized.
+
+
+========================================
+TOPIC: multitech_overview.htm
+========================================
+Overview of the MultiTech LoRaWAN gateway Add-on
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the MultiTech LoRaWAN gateway Add-on
+ 
+The MultiTech LoRaWAN gateway Add-on supports TCP/IP communication with MultiTech AEP Conduit gateways to retrieve information collected from LoRaWAN devices.
+ 
+There are no configuration dialog's specific to the LoRaWAN gateway Add-on. At the time of writing, it uses a dedicated .ini file and regular configuration features.
+
+
+========================================
+TOPIC: multitech_traces.htm
+========================================
+MultiTech Add-on traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+MultiTech Add-on traces
+ 
+Information regarding the MultiTech Add-on are logged in the traces and displayed in the Event Viewer with lines starting with '[svmgrMultiTechLoRa.dll]'.
+ 
+Additional traces can be triggered using the SCADA Basic instruction TRACE as follows.
+ 
+TRACE(Mode, ManagerID, HexFlag);
+ 
+ 
+Mode - Turn the additional trace on or off
+ 1 - On
+0 - Off
+ 
+ManagerID - The identifier of the MultiTech Add-on task. Set to 11 if it is the only Add-on in use.
+ 
+HexFlag	- Hexadecimal combination flag.
+001 The Add-on writes traces only for the flag BIT0.
+
+
+========================================
+TOPIC: multitech_variables.htm
+========================================
+Configuration of the variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuration of the Variables
+ 
+To define a variable as having a MultiTech LoRaWAN mapping, you can add the mapping definition in the variable's extended attribute, as configured in the svmgrMultiTechLoRa.ini file.
+ 
+The mapping takes the form of a string using the following syntax, where [] denotes optional parameters:
+ 
+LORA#GatewayName#DeviceEui#JsonKey[#Filter][#X:Y|#X.Z][#V:W]
+ 
+
+ 
+The configuration and mapping definitions are case sensitive.
+ 
+ 
+ 
+LORA: The key that defines the variable as having a LoRaWAN mapping.
+ 
+GatewayName: The name of the Gateway as defined in the svmgrMultiTechLoRa.ini file. Please refer to the parameter Name in the [Gateway_X] section).
+ 
+DeviceEui: The EUI identifier of the device for which you want to extract data. Every LoRaWAN device has a unique EUI identifier of 8 hexadecimal bytes separated by hyphens.
+Example: 00-18-b2-00-00-00-15-aa
+If the format is invalid, a message is displayed in the Event Viewer.
+ 
+JsonKey: The key of the Json Object which value is to be retrieved.
+If omitted, the entire Json object is retrieved if the PcVue variable is of type text.
+ 
+Filter: Optional parameter used to filter messages that have to be processed and their payload extracted. If a message does not match the filter, it is ignored and not processed.
+Example: xx-yy-zz The payload must start with either xx, yy or zz for the payload to be processed.
+ 
+ 
+Json objects
+ 
+A Json object is a dictionary of key and value pairs separated with a character ':' (semicolon). The MultiTech Gateway sends messages wrapped in a Json object. The purpose of this Add-on is to extract values from the Json object by specifying the corresponding key.
+ 
+Example: Using the following Json object and variable text extended attributes.
+ 
+{ "ack": false, "payload": [ 64, 96, 0, 7, 0, 0, 0, 0, 0, 1, 2 ], �freq�: �868.9� "eui": "00-18-b2-00-00-00-15-aa", "_msgid": "ee21c939.11de38" }
+ 
+ 
+LORA#GW1#00-18-b2-00-00-00-15-aa#eui
+Extract the value "00-18-b2-00-00-00-15-aa" if the message is received from GW1.
+ 
+LORA#GW1#00-18-b2-00-00-00-15-aa#payload
+Extract the value [ 64, 96, 0, 7, 0, 0, 0, 0, 0, 1, 2 ].
+ 
+LORA#GW1#00-18-b2-00-00-00-15-aa#freq
+Extract the value 868.90.
+ 
+ 
+Optional parameters if the Json value is an integer
+ 
+LORA#GatewayName#DeviceEui#JsonKey[#Filter]#X:Y
+ 
+ 
+X: If the Json value is an integer (decimal or hexadecimal) and you want to apply a byte mask to the value, this parameter is the offset in bytes for the mask.
+ 
+Y: If the Json value is an integer (decimal or hexadecimal), size in bits of the mask to apply to the integer value. The Json value you want to retrieve should match the type of the PcVue variable. However, in some cases, conversions are possible.
+ 
+ 
+Example: The value �ffa0� is retrieved from key �freq�.
+ 
+ 
+To extract value "a":
+Use LORA#GW1#00-18-b2-00-00-00-15-aa#freq#1:4
+Starting at the 2nd byte (offset X=1), extract the next 4 bits (size Y=4).
+ 
+
+ 
+To extract value �ff�: offset X=0, size Y=8
+Use LORA#GW1#00-18-b2-00-00-00-15-aa#freq#0:8
+ 
+ 
+ 
+Optional parameters if the Json value is an array
+ 
+LORA#GatewayName#DeviceEui#JsonKey[#Filter]#X:Y
+ 
+LORA#GatewayName#DeviceEui#JsonKey[#Filter]#X.Z
+ 
+ 
+X: If the Json value is an array, the index of the first element to extract from the array (starts at 0).
+ 
+Y: If the Json value is an array, the number of elements to extract starting from the array index X.
+ 
+Z: If the Json value is an array, offset of the bit to extract.
+ 
+ 
+If the array contains numerical values, you can extract them using the index of the first element and number of elements to extract (X:Y).
+ 
+Examples:
+0:1 extracts the first element of the array.
+4:1 extracts the fifth element of the array.
+ 
+If the array contains numerical values, you can extract a bit using the index of the element to extract and offset of the bit (X.Z). Implicitly, the number of elements to extract Y is 1.
+ 
+Example.
+2.5 extracts the 6th bit of the 3rd element of the array.
+ 
+
+ 
+If the number of elements to extract is greater than 1 (ex: 0:3), the Add-on will consider each value to be a byte and will aggregate them together as bytes.
+ 
+ 
+Examples: Using the same Json object as above.
+ 
+ 
+Using LORA#GW1#00-18-b2-00-00-00-15-aa#payload#3:1
+Extract a numerical value of �7�.
+ 
+Using LORA#GW1#00-18-b2-00-00-00-15-aa#payload#0:2
+Extract a numerical value of 64*28 + 96= 16480
+ 
+Using LORA#GW1#00-18-b2-00-00-00-15-aa#payload#1.2
+Extract the 3rd bit of 96 (hexa) or 1001 0110 = 1.
+ 
+ 
+Tips when extracting integer values or arrays
+ 
+ 
+If the Json value type is unknown, you can use a text variable to receive a string representation of the Json value corresponding to the specified key. Increase the text size (more than 1000 characters).
+ 
+If a Json string contains a numerical value, the conversion is possible. You can use a register variable to receive the value. If the value is an integer, you can also apply a bit mask using index and number of elements.
+ 
+If the Json value is a Boolean (true or false).
+You should always use a bit variable to receive the value. Use the X.Z format.
+ 
+ 
+Additional parameters to filter the message according to the payload content
+ 
+Normally when a new message is received, the variable value is updated. But an IoT end-device can send different types of payload (data frame, configuration frame, status frame, alarm frame, etc.).
+ 
+In this case, you can use the format #V:W as a filter for not updating the mapped variable based on the payload value.
+ 
+ 
+V: Index of the element to test.
+ 
+W: Value in hexadecimal (0x) to test.
+ 
+ 
+If the filter matches the Json payload, then the message is taken into account and the value of the variable is updated based on the received payload. Otherwise, the message is ignored and there is no update of the variable.
+ 
+Example: Using the same Json object as above.
+ 
+{ "ack": false, "payload": [ 64, 96, 0, 7, 0, 0, 0, 0, 0, 1, 2 ], �freq�: �868.9� "eui": "00-18-b2-00-00-00-15-aa", "_msgid": "ee21c939.11de38" }
+ 
+ 
+Using LORA#GW1#00-18-b2-00-00-00-15-aa#payload#2:3#0:0x40
+You want to test the value of the 1st byte (index 0) and compare it against the value 0x40 = 64. The test is positive, the variable value will be updated.
+ 
+Using LORA#GW1#00-18-b2-00-00-00-15-aa#payload#2:3#4:0x53
+You want to test the value of the 5th byte (index 4) and test it against 0x53 = 83. The test is negative, the variable value will not be updated.
+ 
+ 
+Variable status
+ 
+ 
+Invalid � NS COM
+The variable is properly configured but the desired Json value could not be retrieved from the device. This could be either if no Json object was received or if the desired key was not found.
+Check the traces and event viewer for further information.
+ 
+Invalid � NS FMT
+The extended attribute format for mapping is incorrect. It can be either that the gateway was not found in usrmgrLoRaTCP.ini, or the device EUI has an invalid format.
+This can also happen if the mapping parameters do not match the type of variable.
+Check the traces and event viewer for further information.
+
+

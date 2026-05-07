@@ -1,0 +1,349 @@
+========================================
+TOPIC: Ex_1_for_many_redundant_servers_with_2_clients.htm
+========================================
+Architecture Examples - 1 for Many Redundant Servers 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Architecture Examples - 1 for Many Redundant Servers 
+ and 2 Clients
+ 
+
+ 
+ 
+ 
+Project requirements
+ 
+ 
+Station1 can communicate 
+ with PLCA and produce the value of variables.
+ 
+Station2 can communicate 
+ with PLCB and produce the value of variables.
+ 
+Station3 can communicate with both PLCA and PLCB and produce the value of variables.
+ 
+ Station3 
+is in two separate associations, one with Station1 and the other with Station2, providing redundancy for both stations.
+ 
+Station4 consumes 
+ the value of variables from Association10 and Association20 and displays mimics.
+ 
+Station5 consumes the value of variables from Association10 and Association20 and displays mimics.
+ 
+ 
+The project configuration is identical on all stations.
+ 
+License requirements
+ 
+ 
+Station1 requires 
+ a server license.
+ 
+Station2 requires 
+ a server license.
+ 
+Station3 requires 
+ a server license.
+ 
+Station4 requires a client license.
+ 
+Station5 requires a client license.
+ 
+ 
+Network configuration
+ 
+ 
+The default network 
+ configuration is used with all stations, configured as both client and 
+ server and with all links between all stations made.
+ 
+An association, Association10, containing Station1 and Station3 is configured.
+ 
+An association, Association20, containing Station2 and Station3 is configured.
+ 
+Three station lists 
+ are required.
+LASSOC10 � a server list containing the name Association10
+
+LASSOC20 � a server list containing the name Association20
+LCLIENT45 � a client list containing the names Station4 and Station5.
+ 
+ 
+Variables tree configuration
+ 
+ 
+Variables produced by Station1 or Station3 and consumed by Station4 and Station5 are allocated to the server list LASSOC10 and the client list LCLIENT45.
+ 
+Variables produced by Station2 or Station3 and consumed by Station4 and Station5 are allocated to the server list LASSOC20 and the client list LCLIENT45.
+ 
+ 
+How do the stations behave?
+ 
+For the purpose of this explanation, it is assumed that Station1 and Station2 were started before Station3. 
+ 
+ 
+Station1 is active and produces the value of variables for Association10.
+Station2 is active and produces the value of variables for Association20.
+Station4 and Station5 consume the value of variables from both Association10 and Association20.
+ 
+Station3 is entirely passive.
+Station3 variables that are attached to server list LASSOC10 will consume values.
+Station3 variables that are attached to server list LASSOC20 will consume values.
+ 
+One of the active stations, for example Station1, fails. The variables in Station3 that are attached to LASSOC10 become active and produce values. The variables that are attached to LASSSOC20 remain passive and continue to consume values. Station3 is then the active partner in Association10 but remains the passive partner in Association20. When Station1 is restarted, it is passive, its variables consuming values. Station1 remains passive unless forced to active (by SCADA Basic for example), or Station3 fails.
+ 
+ 
+Further notes about the single station used to provide redundancy
+ 
+ 
+A single station can be used to provide redundancy in any number of associations as long as the license can accommodate the number of variables and the PC itself has sufficient resources (memory, CPU speed, network capacity, etc.) to manage the load.
+ 
+The status of the station within each association is managed separately. The station can be active in some associations and passive in others, or active in all associations or passive in all associations.
+ 
+The physical connection to the equipment must be taken into account. That is, two different associations cannot use the same physical connection (for example COM1) as the station can be active in both associations at the same time and there would be a conflict.
+
+
+========================================
+TOPIC: Ex_1_server_station_and_2_client_stations.htm
+========================================
+Architecture Examples - 1 Server Station and 2 Client 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Architecture Examples - 1 Server Station and 2 Client 
+ Station
+ 
+
+ 
+ 
+ 
+Project requirements
+ 
+ 
+Station1 communicates 
+ with equipment and produces the value of variables.
+ 
+Station2 consumes 
+ the value of all variables and displays mimics.
+ 
+Station3 consumes 
+ the value of all variables and displays mimics.
+ 
+ 
+The project configuration is identical on all stations.
+ 
+License requirements
+ 
+ 
+Station1 requires 
+ a server license.
+ 
+Station2 requires 
+ a client license.
+ 
+Station3 requires 
+ a client license.
+ 
+ 
+Network configuration
+ 
+ 
+The default network 
+ configuration is used with all stations configured as both client and 
+ server and with all links between all stations made.
+ 
+Two station lists 
+ are required.
+	A server list LSERVER containing the name Station1.
+	A client list LCLIENT containing the names Station2 and Station3.
+ 
+ 
+Variables tree configuration
+ 
+ 
+All user defined 
+ variables are attached to the server list LSERVER and the client list 
+ LCLIENT.
+
+
+========================================
+TOPIC: Ex_2_red_server_stations_and_1_client_station.htm
+========================================
+Architecture Examples - 2 Redundant Server Stations 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Architecture Examples - 2 Redundant Server Stations 
+ and 1 Client Station
+ 
+
+ 
+ 
+ 
+Project requirements
+ 
+ 
+Station1 communicates 
+ with equipment and produces the value of variables.
+ 
+Station2 communicates 
+ with equipment and produces the value of the same variables as Station1.
+ 
+Station1 and Station2 
+ are to behave as redundant servers.
+ 
+Station3 consumes 
+ the value of variables from Association1 and displays mimics.
+ 
+ 
+The project configuration is identical on all stations.
+ 
+License requirements
+ 
+ 
+Station1 requires 
+ a server license.
+ 
+Station2 requires 
+ a server license.
+ 
+Station3 requires 
+ a client license.
+ 
+ 
+Network configuration
+ 
+ 
+The default network 
+ configuration is used with all stations configured as both client and 
+ server and with all links between all stations made.
+ 
+A single association, 
+ called Association11, which contains Station1 and Station2 is configured.
+ 
+Two station lists 
+ are required.
+	LASSOC11, a server list containing the name Association11.
+	LCLIENT3, a client list containing the name Station3.
+ 
+ 
+Variables tree configuration
+ 
+ 
+Variables with values 
+ produced by Station1 and Station2 are allocated to server list LASSOC11 
+ and client list LCLIENT3.
+
+
+========================================
+TOPIC: Ex_2_SCADA_stations_and_1_client_station.htm
+========================================
+Architecture Examples - 2 SCADA Station and 1 Client 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Architecture Examples - 2 SCADA Station and 1 Client 
+ Station
+ 
+
+ 
+ 
+ 
+Project requirements
+ 
+ 
+Station1 communicates 
+ with equipment and produces the value of variables. It also consumes the 
+ value of variables from Station2 and displays mimics.
+ 
+Station2 communicates 
+ with equipment and produces the value of variables. It also consumes the 
+ value of variables from Station1 and displays mimics.
+ 
+Station3 consumes 
+ the value of variables from both Station1 and Station2 and displays mimics.
+ 
+ 
+The project configuration is identical on all stations.
+ 
+License requirements
+ 
+ 
+Station1 requires 
+ a SCADA license (it produces and consumes variables and displays mimics).
+ 
+Station2 requires 
+ a SCADA license (it produces and consumes variables and displays mimics).
+ 
+Station3 requires 
+ a client license.
+ 
+ 
+Network configuration
+ 
+ 
+The default network 
+ configuration is used with all stations configured as both client and 
+ server and with all links between all stations made.
+ 
+Four station lists 
+ are required.
+LSERVER1, a server list containing the name Station1.
+LSERVER2, a server list containing the name Station2.
+LCLIENT1_3 a client list containing the name Station1 and Station3.
+LCLIENT2_3 a client list containing the name Station2 and Station3.
+ 
+ 
+Variables tree configuration
+ 
+ 
+Variables with values 
+ produced by Station1 and consumed by Station2 and Station3 are allocated 
+ to server list LSERVER1 and client list LCLIENT2_3.
+ 
+Variables with values 
+ produced by Station2 and consumed by Station1 and Station3 are allocated 
+ to server list LSERVER2 and client list LCLIENT1_3.
+
+

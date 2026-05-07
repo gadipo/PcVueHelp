@@ -1,0 +1,1465 @@
+========================================
+TOPIC: AIGrid_appearance.htm
+========================================
+Configuring the Grid's general appearance
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Grid's General Appearance
+ 
+The Grid's configuration allows selection of 
+ the size of the grid, the number of rows and columns of cells. An empty grid might look like this. Show picture
+
+ 
+The size and general appearance is set by the properties 
+ in the Aspect tab, which is similar to those of other drawing elements used 
+ in PcVue. For details, see the Drawing book in the main help. 
+ 
+ 
+Configuring the cells
+ 
+The cells are configured from the General tab. Show picture
+
+ 
+You can 
+ configure the number of rows and columns, the color and font used in 
+ the cells, and the color of the grid used to separate the cells.
+ 
+ 
+Rows/columns - The 
+ total number of rows and columns of cells respectively, including any header rows and columns. For example, if wanted a grid of 10 x 3 cells and both row and column headers the number of rows/columns would be 11 x 4. When referenced programmatically the top left hand cell, excluding any headers, has an index of 0,0. There is no coded limit 
+ for the maximum number of cells but it is recommended that the total number 
+ of cells is kept below 100,000.
+ 
+Fixed row/col - The number of header rows and columns. When referenced programmatically, the cells of the header rows and columns are indexed negatively. A value of zero means that no row or column header is displayed.
+ 
+Background - Sets 
+ the background color of the cells.
+ 
+Gridline color - 
+ Sets the color of the grid displayed between the cells.
+ 
+Text color - Sets 
+ the color of any text displayed in the grid.
+ 
+Font - Displays a 
+ dialog from where you can set the font for all the cells including the 
+ headers.
+ 
+ 
+
+ 
+You can only use solid, non-blinking colors in the Grid.
+ 
+For information on how to configure the column widths 
+ and row heights, see the topic Using 
+ the Grid at run-time.
+ 
+ 
+About the header row and/or column
+ 
+The header row and column appear at the top and left 
+ of the grid respectively. The cells that make up the headers 
+ behave differently compared to the other cells.
+ 
+ 
+You cannot change 
+ their color from the configuration dialog.
+ 
+They always have 
+ a button style.
+ 
+They cannot be selected 
+ and hence you cannot type text into them (although you can enter text 
+ using a script).
+ 
+The cells behave 
+ differently at run-time.
+ 
+ 
+
+ 
+You must have a header row and column if you want to allow 
+ the user to resize the columns and rows at run time.
+ 
+ 
+Enabling the scroll bars
+ 
+The scrollbars can be used to navigate through the cells 
+ at run-time if the number of cells is greater than can be physically displayed. 
+ Display of the scroll bars is controlled using the Scrollbar 
+ drop down list box and can be selected from the following.
+ 
+ 
+None - Never display 
+ any scroll bars.
+ 
+Horizontal - Always 
+ display a horizontal scroll bar.
+ 
+Vertical - Always 
+ display vertical scroll bar.
+ 
+Both - Always display 
+ both scroll bars.
+ 
+Auto - Display scroll 
+ bars automatically whenever there are more cells than can be displayed.
+
+
+========================================
+TOPIC: AIGrid_histo_vars.htm
+========================================
+Selecting the variables when using the Grid in historical mode
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Selecting the Variables When Using the Grid in Historical Mode
+ 
+The trended variables displayed by the Grid when in historical mode are selected and configured from a dialog opened from the Data button in the Historical tab of the Grid configuration dialog. The dialog allows you to select and configure the display of up to 128 variables. Show picture
+ 
+
+ 
+ 
+ 
+Selecting variables
+ 
+Variables are selected for display using Add new trend in the left pane of the dialog. Double clicking opens the Trend Selector dialog with a list of archive units and their trended variables. One or more variables can be added at a time for display by using click, Ctrl & click or Shift & click, and then selecting the Add button. Once a variable is added its position within the list (and therefore within the grid control at run-time) can be changed using the Up or Down buttons at the bottom of the dialog.
+ 
+Configuring the variable header
+ 
+The header displayed at the top of each column identifies the variables. By default, the header displays the variable description (or name if there is no description) but this can be changed using the properties in the Header group.
+ 
+Configuring the variable threshold
+ 
+The color of both the background and text of each cell can be changed at run-time to highlight that the value in a cell has exceeded one of the thresholds. The threshold colors default to those of the general color preferences but can be customized for each variable if required. Show picture
+ 
+
+ 
+ 
+ 
+ 
+System - Selects the threshold system to be used, if any. Once this is selected, you can enter the threshold value, cell and text color for each of the four thresholds.
+ 
+Seek - Populates the threshold system using the configuration of the variable thresholds and the colors from the color preferences. The choice is saved in the grid control's configuration. Colors can be changed without being affected by subsequent changes to the general color preferences.
+ 
+Automatic - Uses the configuration of the variable thresholds and colors from the color preferences similar to using Seek, except the configuration is not saved in the grid control. Instead, it is read each time the mimic containing the Grid is opened meaning that it is dynamic following any changes to the variable thresholds and general color preferences.
+
+
+========================================
+TOPIC: AIGrid_Inserting_in_a_mimic.htm
+========================================
+How to add a Grid
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Add a Grid
+ 
+ 
+Open the mimic into which the Grid is to be inserted and select Design mode.
+ 
+From the menu, select the command Insert.Grid.
+ 
+The control will appear in the mimic and its Drawing Properties dialog opens. Show picture
+
+ 
+ 
+The Grid is now ready to configure.
+ 
+
+ 
+You can specify more properties to control the graphical element visibility. From the Aspect tab, behind the down arrow at the bottom of the Properties dialog box:
+ 
+ 
+
+ 
+Specify zoom visibility bounds so that the graphic control is only visible for predefined zoom levels.
+ 
+ 
+
+ 
+Specify layers so that the graphic control is only visible if one of the selected layers is displayed.
+ 
+ 
+ 
+These are even more useful when combined with user permissions and decluttering templates.
+
+
+========================================
+TOPIC: AIGrid_Overview.htm
+========================================
+Grid overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Grid Overview
+ 
+The Grid control provides a tabular display of text cells. It can be used in one of three modes.
+ 
+ 
+General use mode - The cells must be populated programmatically using a VBA script or a SCADA Basic script (SELECTOR instruction). Show picture
+
+ 
+Variable tracking mode - The cells are populated with a list of variables and real-time values - A filter can be applied to select the variables that are displayed. Show picture
+
+ 
+Historical mode - The cells are populated with a list of variables and their historical or statistical values. The variables are selected, and the historical or statistical behavior configured, at design time. Show picture
+
+ 
+ 
+Feature summary
+ 
+ 
+Overall size only limited by the size of the container mimic.
+ 
+Configurable number of rows and columns limited only by system resources.
+ 
+Optional row and column headers.
+ 
+Configurable cell color.
+ 
+Configurable font.
+ 
+Optional vertical and horizontal scrollbars.
+ 
+Optional run-time features including cell selection, sort on header click etc. See Configuring the run-time behavior for a comprehensive list. The available run-time features depend on the mode in which the grid control is used.
+ 
+ 
+
+ 
+The Grid Display supplied with version 8.0 of PcVue and earlier, is not fully compatible with the current version and is no longer supplied. 
+ 
+ If you are upgrading a project from version 8.0 or earlier, that uses the old style Grid Display, please contact technical support before proceeding with the upgrade.
+
+
+========================================
+TOPIC: AIGrid_period.htm
+========================================
+Configuring the data request when using the Grid in historical mode
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Data Request When Using the Grid in Historical Mode
+ 
+The configuration of the Data Request is very similar to that of the Data Export Wizard. The main difference is the way in which the period is selected. 
+ 
+ 
+In the Data Export Wizard, the time range can be selected either by period or by entering start and end date and times.
+ 
+In the Data Export Wizard, the time range can also be selected either by period or by entering start and end date and times. However, the period configuration has more options and the start and end date and times can be configured using variables, as for the pre-configured Data Export (Application Explorer). 
+ 
+ 
+How to configure the Data Request
+ 
+ 
+Select the data request type from either Raw Data, Sampled Data, Statistics or Aggregated Statistics.
+ 
+Configure the period. See below.
+ 
+Configure the sampling. See the Export Wizard Sampling topic.
+ 
+If using the Statistics or Aggregated Statistics data request, select which statistics you require. See the Export Wizard Statistics topic.
+ 
+Configure the output format. See below.
+ 
+ 
+Configuring a predefined period
+ 
+A predefined period is defined by using a quantity and type of time units. Show picture
+ 
+
+ 
+ 
+ 
+The time units you can select are as follows.
+ 
+ 
+Minutes 
+ 
+Hours 
+ 
+Days 
+ 
+Weeks - See note below about the first day of the week. 
+ 
+Months 
+ 
+Years 
+ 
+ 
+For example, you could select 2 hours, or 4 weeks, or 1 year etc.
+ 
+The period is relative to when the request to the archive unit is made. Typically, when the mimic containing the Grid is opened, or when a user requests data manually, and can either be the Completed period or the Current period.
+ 
+ 
+Completed period - The period is the time unit before to the request time. For example, if you selected 24 hours and the request was made at 22/05/2013 16:08:00, the completed period would be 21/05/2013 16:00:00 to 22/05/2013 16:00:00 (actually 22/05/2013 15:59:59.999). The incomplete 1 hour time period corresponding to the time of the request (from 16:00:00 to 17:00:00) is not included in the 24 hours time period that is requested. 
+ 
+Current period - The period is the time unit that includes the request time. For example, if you selected 24 hours and the request was made at 22/05/2013 16:08:00, the request would display data for the period from 21/05/2013 17:00:00 to 22/05/2013 16:08:00. The current 1 hour time period corresponding to the time of the request (from 16:00:00 to 17:00:00) is included in the 24 hours time period asked for.
+ 
+ 
+Requesting data for 1 day does not yield the same result as requesting data for 24 hours as the time unit is not the same. The same example with a request for 2 days would behave as follows.
+ 
+ 
+ Completed period - If you selected 2 days and the request was made at 22/05/2013 16:08:00, the request would display data for the period from 20/05/2013 00:00:00 to 21/05/2013 24:00:00 (actually 21/05/2013 23:59:59.999). That is the last completed 2 days period. The incomplete day and time period corresponding to the time of the request (22/05/2013) is not included in the time period requested.
+ 
+Current period - If you selected 2 days and the request was made at 22/05/2013 16:08:00, the request would display data for the period from 21/05/2013 00:00:00 to 22/05/2013 16:08:00. The current day and time period corresponding to the time of the request (22/05/2013) is included in the time period requested.
+ 
+This time period definition is very versatile when requiring sliding time windows.
+ 
+ 
+
+ 
+The first day of the week is configured by the property First day of week in the Languages. Parameters section in the main Application Explorer Settings dialog
+ 
+ 
+Configuring the period by variable
+ 
+The period start and end times defined by two register variables. Show picture
+ 
+
+ 
+ 
+ 
+The variable must be of type DOUBLE and the time must be in a number of milliseconds since 01/01/1970. For example, a suitable value is provided by the SCADA Basic instruction DATETIMEVALUE. A register variable's default maximum value of 65535 must be changed to accommodate this (suggested 9999999999999).
+ 
+Configuring the output format
+ 
+ 
+Number of decimal digits - The number of digits displayed to the right of the decimal point.
+ 
+Date format - The time and date type selected from Date Only, Time Only, or Date and Time. The format in which the time and date stamp is displayed is selected by the project's Languages Settings. See the topic Using the Grid to Display Historical Data.
+
+
+========================================
+TOPIC: AIGrid_run-time_behaviour.htm
+========================================
+Configuring the Grid's run-time behavior
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Grid's Run-time Behavior
+ 
+This topic explains how to configure options that effect the user's ability to interact with a Grid at run-time. The properties are all found in the General and Execution tabs. Show picture
+
+ 
+
+ 
+Not all behaviors are available in all modes. For example, Editable and Drag & Drop have no useful function when a Grid is used in variable tracking or historical modes.
+ 
+ 
+Cell selection
+ 
+One or more cells may be selected at run-time by pointing 
+ and clicking. Cells that are selected change color so that the background 
+ is blue and the any text is white. These colors are not configurable. 
+ The following properties effect cell selection.
+ 
+ 
+Selectable - Enables 
+ the selection of cells by pointing and clicking.
+ 
+Frame selection - 
+ Display a black frame around each selected cell.
+ 
+Track selection - 
+ Causes the headers to indicate the cell that is currently selected by adopting 
+ a relief appearance.
+ 
+Multiselection - 
+ Allow more than one cell to be selected at once. For information on how 
+ to select multiple cells, see the topic Using 
+ the Grid at run-time.
+ 
+ 
+Text entry
+ 
+A user can enter text into a Grid's cell by double 
+ clicking it. The following properties effect the ability to enter text.
+ 
+ 
+Editable - Allow 
+ text to be entered into cells by the user.
+ 
+Enable drag and drop 
+ - Allow the contents of one cell to be dragged and dropped to another.
+ 
+ 
+
+ 
+Text entered at run-time is not persisted when the mimic 
+ containing the grid is closed. If necessary, it can be saved by script.
+ 
+ 
+Other run-time behaviors
+ 
+ 
+Sort on header click - Enables 
+ sorting of the contents of the entire grid at run-time, using to the content of a single column. 
+ 
+ 
+Autosize - The width 
+ and height of each cell is automatically adjusted to fit the available 
+ space. All rows will have the same height and all columns will have the 
+ same width. The effect of any previous resizing is lost.
+ 
+ 
+Other run-time behaviors in the Execution Tab
+ 
+ 
+Size of Columns - 
+ If selected, the User can change the width of columns and height of rows at run-time by clicking 
+ and dragging with the mouse on the headers.
+ 
+*Toolbar position 
+ � Allows the User to change the location of the toolbar.
+ 
+*Toolbar modification 
+ � Allows the User to select the tools that appear on the toolbar.
+ 
+ 
+* Normally these options would be disabled when the project has been completed to prevent the end-user from changing the toolbar.
+
+
+========================================
+TOPIC: AIGrid_toolbar.htm
+========================================
+Using the Grid in historical mode at run-time
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Grid in Historical Mode at Run-time
+ 
+Show picture
+ 
+ 
+
+ 
+ 
+ 
+The runtime toolbar
+ 
+A toolbar is provided for the user to interact with the Grid, at run-time, when used in historical mode. The position and contents of the toolbar is configurable. See the topic Configuring an Alarm Viewer, Log Viewer, Trend Viewer or Grid toolbar. The following tools are available.
+ 
+ 
+Historical request - Configure and initiate a new historical request. See below.
+ 
+Last request - Repeat the previous historical request.
+ 
+Initial request - Repeat the initial (as configured at design time) historical request.
+ 
+Cancel historical request - Cancel the historical request. Typically used if the historical request is taking too long or if the time period is wrong.
+ 
+Export data to file - Open the Data Export Wizard. See the book The Data Export Wizard.
+ 
+ 
+Configuring and initiating a new historical request
+ 
+A new historical request can be made at run time using the Historical Request dialog displayed using the Historical Request tool. The dialog will initially show the properties of the previous historical request. The Historical Request can be made in one of two ways. 
+ 
+ 
+Using a start and end time and date - Select the Date tab and enter a new Begin Time and End Time. 
+ 
+Using a period - Select the Period tab and enter the new Period and select either Completed Period or Current Period.
+ 
+ 
+In either case, clicking the Apply button will initiate the request and leave the dialog open. Clicking the OK button will initiate the request and close the dialog.
+ 
+
+ 
+When the mimic containing the Grid is opened in run mode, a request is made to the archive units for the relevant data. The request is performed asynchronously so as not to interfere with the rest of the HMI's functions. During the request, an hourglass symbol is displayed indicating that a data request is taking place. The request may take several seconds depending on how it is configured, how busy the PcVue process is etc. If the request fails, a warning triangle is displayed instead of the data. The most likely reason is that too much data has been requested.
+
+
+========================================
+TOPIC: AIGrid_Using_a_regular_expression_to_filter_the_list_of_variables.htm
+========================================
+Using a regular expression to filter the list of variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using a Regular Expression to Filter the List of Variables
+ 
+The regular expressions used in the Grid are derived 
+ from the notation used in automata theory to describe formal languages 
+ and finite state machines. Regular expressions consist of characters (operands), 
+ such as "a", "O", and ", " and meta-characters 
+ (operators), such as "+", "|", and "[". 
+ 
+ 
+A regular expression, which is similar to the familiar 
+ arithmetic expressions, can be either a basic expression or a complex 
+ expression that is formed by applying operators to several basic expressions. 
+ The regular expression meta-characters and their uses are as follows.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Character
+ 
+ 
+ 
+Usage
+ 
+ 
+ 
+
+ 
+ 
+\
+ 
+ 
+ 
+The escape character is used in escape sequences to specify 
+ characters that would otherwise have no representation. These are similar 
+ to those used in the C language.
+ 
+ 
+ 
+
+ 
+ 
+\b
+ 
+ 
+ 
+Backspace.
+ 
+ 
+ 
+
+ 
+ 
+\t
+ 
+ 
+ 
+Horizontal tab.
+ 
+ 
+ 
+
+ 
+ 
+\n
+ 
+ 
+ 
+New line or line feed.
+ 
+ 
+ 
+
+ 
+ 
+\f
+ 
+ 
+ 
+New page or form feed.
+ 
+ 
+ 
+
+ 
+ 
+\r
+ 
+ 
+ 
+Carriage return.
+ 
+ 
+ 
+
+ 
+ 
+\ddd
+ 
+ 
+ 
+Octal value.
+ 
+ 
+ 
+
+ 
+ 
+\c
+ 
+ 
+ 
+Where c represents any character string that is taken literally.
+ 
+ 
+ 
+
+ 
+ 
+^
+ 
+ 
+ 
+The character matches the beginning of a string. For example, 
+ "^abc" matches only those strings which start with "abc". 
+ 
+ 
+When used as the first character of a character class 
+ it denotes a negated class (exclusion) - See example below.
+ 
+ 
+ 
+
+ 
+ 
+$
+ 
+ 
+ 
+Matches the end of a string. For example, "z$" 
+ will only match strings with "z" as the last character.
+ 
+ 
+ 
+
+ 
+ 
+.
+ 
+ 
+ 
+Period/full stop matches any single character. Be careful 
+ as ".*" will match everything.
+ 
+ 
+ 
+
+ 
+ 
+[
+ 
+ 
+ 
+Denotes the start of a character class.
+ 
+ 
+ 
+
+ 
+ 
+]
+ 
+ 
+ 
+Denotes the end of a character class.
+ 
+ 
+ 
+
+ 
+ 
+|
+ 
+ 
+ 
+The pipe character is the alternation operator, so that 
+ "a|b" will match either "a" or "b".
+ 
+ 
+ 
+
+ 
+ 
+()
+ 
+ 
+ 
+Parentheses are used to group expressions in much the 
+ same way as with arithmetic expressions.
+ 
+ 
+ 
+
+ 
+ 
+*
+ 
+ 
+ 
+The closure operator matches 0 or more instances of the 
+ specified string.
+ 
+ 
+ 
+
+ 
+ 
++
+ 
+ 
+ 
+Indicates positive closure and matches 1 or more instances 
+ of the specified expression. For example, "+z" matches a string 
+ of 1 or more "z"s.
+ 
+ 
+ 
+
+ 
+ 
+?
+ 
+ 
+ 
+Matches 0 or 1 instances of the specified expression. 
+ For example, "9?" matches either the null string or "9".
+ 
+ 
+ 
+ 
+About character classes
+ 
+Character classes are shorthand for matching one of several 
+ characters. For example, [AaBb] is the same as (A|a|B|b) and matches "A", 
+ "a", "B", and "b". There are also character 
+ ranges, such as [A-Z] that matches any uppercase character.
+ 
+Negated character 
+ classes specify characters that should not be matched. For example, [^A-Z] 
+ matches everything except upper case alpha characters.
+ 
+Examples of regular expressions
+ 
+ 
+ 
+ 
+
+ 
+ 
+Filter
+ 
+ 
+ 
+Results
+ 
+ 
+ 
+
+ \System. \.*
+ 
+ 
+All variable names that contain "System" as the first branch name.
+ 
+ 
+ 
+
+ *$[0-9]
+ All variable names that end in a number.
+ 
+ 
+ 
+Consider a Variables Tree containing these variable names:
+ 
+API175.M75R05.XRR_SP
+API175.M75R08.XRR_SP
+API175.M75R09.XRR_SP
+API175.M76R05.XRR_SP
+API175.M80R05.XRR_SP
+API175.MA.XRR_SP
+ 
+
+ 
+The following filters would pass only the following variable names.
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+Filter
+ 
+ 
+ 
+Results
+ 
+ 
+ 
+
+ API75.M75R0[^5]
+ API75.M75R08.XRR_SP
+API75.M75R09.XRR_SP
+ 
+ 
+
+ API75.M75R0[^5|9]
+ API75.M75R08.XRR_SP
+ 
+ 
+
+ API75.M7[^5]
+ API75.M76R05.XRR_SP
+ 
+ 
+
+ API75.M[^7]
+ API75.M80R05.XRR_SP
+API75.MA.XRR_SP
+ 
+ 
+
+ API75.M7[^5]R05
+ API75.M76R05.XRR_SP
+
+
+========================================
+TOPIC: AIGrid_Using_AIGrid_to_display_historical_data.htm
+========================================
+Using the Grid to display historical data
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Grid to Display Historical Data
+ 
+In historical mode, the cells are populated with a list of trended variables and their historical values generated using a similar mechanism to that of the Data Export Wizard. The raw values are retrieved from the archive units and the selected variables must have Trend Behavior configured. 
+ Show picture
+ 
+
+ 
+ 
+ 
+Main features
+ 
+ 
+The data displayed can be selected from: Raw, sampled, statistics or aggregated statistics the same as for the Data Export Wizard.
+ 
+In raw or sampled mode, a threshold system can be used to color the cells when the value goes outside of configurable limits.
+ 
+A toolbar is available for the user at run-time.
+ 
+Data can be exported. 
+ 
+ 
+Configuring the Grid to display historical data
+ 
+To use the Grid to display historical data you must select Historical mode, in the Historical tab, and then select and Configure the data request. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Default header - The default header for each column of data, selected from either <none>, variable description or variable name.
+ 
+Request data at mimic open - Request data when the mimic containing the Grid is opened. If not ticked then the user will have to make the request manually, at run-time, using the toolbar, or the initialization will be done by script.
+ 
+Display toolbar - Display the Grid historical toolbar. The toolbar contents and position can be changed at run-time. See the topic Configuring an Alarm Viewer, Log Viewer, Trend Viewer or Grid Control toolbar.
+ 
+Use global threshold NS colors - Use the colors configured in Preferences.Colors.Thresholds to color any cell displaying an invalid value. Show picture
+
+ 
+Auto-resize columns after data refresh - Automatically re-size the grid columns to accommodate length of the strings used to display the data. If not ticked the column sizes remain as configured.
+ 
+Descending (new data on top) - Forces a sort order to display the most recent data on top.
+ 
+ 
+Configuring the date and time format used
+ 
+The date and time format is taken from the project languages settings, either Configuration 1 or Configuration 2 depending on the current run-time language. Show picture
+
+
+========================================
+TOPIC: AIGrid_Using_in_run_mode.htm
+========================================
+Using the Grid at run-time
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Grid at Run-time
+ 
+This topic describes the basic capabilities of the Grid in the HMI at run-time, without any programmatically added behavior. Many of the capabilities can be enabled or disable as described in the topic Configuring 
+the Grid Control's run-time behavior.
+ 
+Resizing a column or row
+ 
+Rows and columns can be re-sized by clicking and dragging 
+ the border between adjacent columns or rows on the header. The new widths 
+and heights will be saved when the mimic is saved as long as the property 
+Autosize 
+in the General tab is not selected.
+ 
+If you want to resize the columns or rows, and then prevent 
+further resizing by the user, the headers must be turned off (number of headers set to 0) when the mimic is saved. 
+ 
+If the user does not have development rights, although they may be able to resize the columns, they will return to their design size once the mimic is closed and re-opened.
+ 
+Selecting cells
+ 
+
+ 
+Cell selection is only possible if Selectable 
+has been ticked in the General tab of the Grid's Drawing Properties 
+ dialog. 
+ 
+ 
+The background of the cells changes color to blue while they are selected.
+ 
+ 
+ 
+ 
+
+ 
+ 
+To select
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 
+ 
+A single cell
+ 
+ 
+ 
+Click on it. Clicking again will de-select it.
+ 
+ 
+ 
+
+ 
+ 
+Several cells
+ 
+ 
+ 
+Hold down the Ctrl key while clicking on cells in succession.
+ 
+ 
+ 
+
+ 
+ 
+A block of cells
+ 
+ 
+ 
+Click and drag the pointer across adjacent cells.
+ Or
+Select a cell for one end or corner of the block, then hold down the Shift key and click on the cell in the opposite end or corner.
+ 
+ 
+ 
+
+ 
+ 
+All cells in a column
+ 
+ 
+ 
+Click on the corresponding cell in the column header.
+ 
+ 
+ 
+
+ 
+ 
+All cells in a row
+ 
+ 
+ 
+Click on the corresponding cell in the row header.
+ 
+ 
+ 
+
+ 
+ 
+All cells 
+ 
+ 
+ 
+Use the keyboard shortcut Ctrl+A.
+ 
+ 
+ 
+ 
+Inputting text
+ 
+ 
+ 
+ 
+
+ 
+ 
+To do this
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 
+ 
+Select a cell for input (text entry)
+ 
+ 
+ 
+Double click it or select the cell and then press the 
+Enter key on the keyboard.
+ 
+ 
+ 
+
+ 
+ 
+Delete the contents of a cell
+ 
+ 
+ 
+Select it and press the Delete key. This can also be used 
+ with multiple cells.
+ 
+ 
+ 
+
+ 
+ 
+Copy and paste text in cells
+ 
+ 
+ 
+Use the keyboard shortcuts Ctrl+C and Ctrl+V respectively. 
+ This can also be used with multiple cells.
+ 
+ 
+ 
+
+ 
+ 
+Drag and drop the contents of a cell
+ 
+ 
+ 
+Click on it then drag its contents to the other cell.
+ 
+ 
+ 
+ 
+Navigating
+ 
+The Grid supports similar control of navigation to 
+ that of Microsoft Excel. The most commonly used keys are as follows.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Shortcut
+ 
+ 
+ 
+Effect
+ 
+ 
+ 
+
+ 
+ 
+Tab 
+ 
+ 
+ 
+Selects the next cell in the same row (or if at the end 
+of the row: the first cell in the next row).
+ 
+ 
+ 
+
+ 
+ 
+Shift+Tab
+ 
+ 
+ 
+Selects the previous cell in the same row (or if at the 
+start of the row: the last cell in the previous row).
+ 
+ 
+ 
+
+ 
+ 
+Arrow keys
+ 
+ 
+ 
+Moves the selection according to the key pressed (up, 
+down left and right).
+ 
+ 
+ 
+
+ 
+ 
+Home 
+ 
+ 
+ 
+Selects the first cell in a row.
+ 
+ 
+ 
+
+ 
+ 
+End 
+ 
+ 
+ 
+Selects the last cell in a row.
+ 
+ 
+ 
+
+ 
+ 
+Ctrl+Home 
+ 
+ 
+ 
+Selects the first cell in the grid.
+ 
+ 
+ 
+
+ 
+ 
+Ctrl+End
+ 
+ 
+ 
+Selects the last cell in the grid.
+ 
+ 
+ 
+
+ 
+ 
+Page up 
+ 
+ 
+ 
+Scrolls the display vertically so that the previous page 
+is displayed. A page is the visible area in Grid; the grid itself is 
+continuous.
+ 
+ 
+ 
+
+ 
+ 
+Page down
+ 
+ 
+ 
+Scrolls the display vertically so that the next page is displayed.
+ 
+ 
+ 
+ 
+Sorting cells
+ 
+ 
+ 
+ 
+
+ 
+ 
+To sort the whole grid...
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 
+ 
+ Alphabetically 
+ 
+ 
+ 
+Click on a cell in the top header (a second click reverses the sort order). The sort order is according to the corresponding column's 
+contents.
+ 
+ 
+ 
+ 
+
+ 
+The cells content is text and will be sorted alphabetically. 
+Sorting a column that only contains numbers may produce unexpected results. 
+For example,:
+ 
+1,2,3,4,5,6,7,8,9,11,12 will be sorted as 1,11,12,2,3,4,5,6,7,8,9
+
+
+========================================
+TOPIC: AIGrid_Using_to_display_a_list.htm
+========================================
+Using the Grid to Display a List of Variables 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Grid to Display a List of Variables 
+ and Values
+ 
+The Grid can be used to display a list of variables and values. Variables are displayed one per row with each row displaying the variable's name and/or label and the real-time value. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+If a variable has the Control property set, its value can be changed by clicking on the cell displaying it.
+ 
+You can select the variables that are displayed according 
+to their type (bit, register, text and alarm) and by using a filter based on a regular expression or an SQL expression.
+ 
+Configuring the Grid to display a list of variables
+ 
+The properties required to configure the Grid so that it displays a list of variables are found in the configuration dialog's Variables tab. Show picture.
+ 
+ 
+To display a list of variables tick the Variable tracking box.
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+The Grid will need two, three or more columns depending on what information you choose to display.
+ 
+Selecting columns
+ 
+You can choose what is displayed for each variable using the properties in the Display and Variable value groups.
+ 
+ 
+Variable name - Display either the variable's Name, its description (Label) or both its name and description (Name and label). You can configure the columns in which the name and label are displayed.
+ 
+Variable value - Display the value of bit and / or alarm variables as either a Value or using its Associated label. You can configure the column in which the value is displayed.
+ 
+Domain, Nature, Extended attributes and Simulated properties - Click the Configure button to select more variable properties. Set Display properties to Yes and select a column number for each property you want to display in a column at runtime.
+ 
+ 
+
+ 
+You can display simulated variables in the grid. This allows you to directly manage simulation properties such as the expiration time, fallback value, and simulation status. Refer to the topic Properties Common to all Variable types for more information.
+ 
+ 
+
+ 
+If you have customized the labels for extended attributes, these customized labels are used in column headers. Refer to the topic How to configure labels to learn more.
+ 
+ 
+Filtering what variables are displayed
+ 
+You can filter the variables that are displayed as follows.
+ 
+ 
+By variable type 
+-register, bit, alarm or text.
+ 
+Using a regular expression 
+ applied only to the variable name. For more information, see the topic 
+ Using 
+ a regular expression to filter the list of variables.
+ 
+Using an SQL style 
+ expression applied to one or more variable properties. For more information, 
+ see the topic Using a SQL expression to filter variables. 
+ 
+ 
+Options
+ 
+ 
+Disable cell modification by program - Disable modification of the cell contents by either a SCADA Basic script or a VBA script.
+ 
+Automatic adjustment of number of lines - Automatically adjusts the number of rows to match the number of displayed variables.
+ 
+ 
+Send commands
+ 
+The Send commands property drives the possibility for the run-time user to send commands directly from the Grid control.
+ 
+ 
+By clicking on name or value cell -Enables display of the dialog used to change the real-time value of a 
+ variable when clicking on the cells with the variable's name and value.
+ 
+By clicking on value cell only -
+ Enables display of the dialog used to change the real-time value of a 
+variable when clicking on the cells with the variable's value only. Clicking on the cell with the variable's name has no effect in this case.
+ 
+Disable sending commands -Disables the possibility for the run-time user to send commands from the Grid control.
+ 
+ 
+Forcing the value of a variable
+ 
+If a variable has the Control property set in its configuration, you can change its value directly from the Grid. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+If extended attributes are displayed, they can also be modified by the user at runtime.
+
+

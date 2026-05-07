@@ -1,0 +1,3006 @@
+========================================
+TOPIC: data_acquisition_file_transfer.htm
+========================================
+File transfer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+File Transfer
+ 
+By file transfer, we mean the transfer of a file from a communication object to the PcVue machine. At the time of writing, file transfer is supported for the following data acquisition drivers:
+ 
+ 
+IEC 61850 - Transfer of files from an IEC 61850 device,
+ 
+DNP3 - Transfer of files from DNP3 device.
+ 
+ 
+File transfer can be implemented in three ways.
+ 
+ 
+Mirroring - Automatic, periodic, transfer of files in background (without user interaction). Only supported for IEC 61850 devices.
+ 
+File transfer helper - Transfer on demand, by a user, of one or more files and / or folders using the File Transfer Helper. The user must have the rights to access the Application Explorer.
+ 
+SCADA Basic - Transfer of one or more files and / or folders by script.
+ 
+ 
+File transfer settings
+ 
+The Data acquisition settings dialog box contains those settings defining the default behavior of the file transfer feature
+ 
+ 
+
+ 
+Backup file before download - When using file transfer, if this setting is activated, a backup copy of any file that already exists on the PcVue machine is made before downloading it again. The existing file is renamed using a .bak extension.
+ 
+ 
+
+ 
+Mirroring
+ 
+ 
+
+ 
+Default destination folder - Defines the default storage folder for the File transfer feature.
+ 
+ 
+
+ 
+Default synchronization period - Defines the default synchronization period for the File transfer feature. Default is 10 minutes.
+ 
+ 
+ 
+ 
+
+ 
+Type - Type of action to perform as part of the file transfer:
+ 
+ 
+
+ 
+Download all - Download all files from the folder Source folder and store them in the Destination folder. Any file already present in the Destination folder is overwritten.
+ 
+ 
+
+ 
+Update - Download from the folder Source folder any file not yet in the Destination folder.
+ 
+ 
+
+ 
+Synchronization - Download from the folder Source folder any file already present in Destination folder but updated in the IED since the download.
+ 
+ 
+
+ 
+Mirror - Download from the folder Source folder any file already present in Destination folder but updated in the IED since the download (same as Synchronization), and delete from the Destination folder any file no longer available in the Source folder (.bak files are not deleted).
+ 
+ 
+ 
+The Source folder is defined as part of the Device configuration.
+ 
+ 
+ 
+Using mirroring with the IEC 61850 driver
+ 
+Mirroring is enabled and configured at the IEC 61850 device level using the following advanced properties. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+File transfer
+Mirroring
+Use mirroring - Enable automatic, periodic, file transfer from the device to the PcVue machine in background.
+Type
+Default - Use the default mirroring method as configured in File transfer settings
+Custom - Use a mirroring method specific to the device.
+Source - The name of the folder to monitor on the device's filesystem. Any file in the folder will be transferred. If empty, the device root folder is monitored.
+Destination - The destination folder for the transferred files on the PcVue machine's filesystem.
+Default - Use the default folder as configured in File transfer settings. 
+Custom - Use a folder specific to the device. The folder location can be a full path like "C:\\MyFiles" or a relative path like "..\\..\\MyFiles". If the folder location is empty, the Project's TP folder is used.
+Synchronization period - The period at which the transfer takes place if new files are available.
+Default - Use the default period as configured in File transfer settings. 
+Custom - Use a specific period specified in minutes.
+ 
+ 
+Using the File transfer helper
+ 
+The File transfer helper can be opened from the Application Explorer when a data acquisition device supporting File transfer is selected in the configuration tree. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+On opening the Helper, PcVue will browse for, and display the list of available files in the device. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Individual files can be downloaded or deleted using the tools on the toolbar or by clicking the File menu and selecting the appropriate command. By default, files are downloaded to the project's TP folder but this can be changed during the download process if required. 
+ 
+Using File transfer in SCADA Basic
+ 
+See the topic FILETRANSFER for more information about performing file transfers via a SCADA Basic script.
+
+
+========================================
+TOPIC: data_acquisition_settings.htm
+========================================
+Data acquistion settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data Acquisition Settings
+ 
+The Data Acquisition Settings dialog is accessed from the Application Explorer by using the Settings task when the Data Acquisition folder is selected in the Application Explorer's configuration tree.
+ 
+
+ 
+Prior to version 10, the overflow tolerance settings were only applied to values with an equipment source. They now apply to all data acquisition sources.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ Description
+ 
+ 
+
+ Overflow tolerance
+ 
+ 
+By default, if the source value goes outside of the configured maximum and minimum the corresponding register value becomes invalid. To prevent this happening it is possible to add a tolerance to the configured limits using the following options.
+ 
+ 
+None - No overflow tolerance. If the value in the equipment goes outside of the specified range, the register variable becomes invalid.
+ 
+On physical value - A tolerance is applied to the value of the register. The register value is allowed to go outside of its range by a percentage specified by the tolerance minimum and maximum values. If a register has a deadband applied to it, this is also taken into account.
+ 
+ 
+ 
+On physical value with clamping - A tolerance is applied to the value of the register. The register remains valid within its range plus the value specified by the tolerance. However, the value of the register is clamped to its maximum or minimum value. The register deadband is also taken into account.
+ 
+ 
+ 
+On device value - A tolerance is applied to the raw value before scaling. The value is allowed to go outside of its range by a percentage specified by the tolerance minimum and maximum values. 
+ 
+On device value with clamping - A tolerance is applied to the raw value before scaling. The value remains valid within its range plus the value specified by the tolerance. However, the value is clamped to the range specified by minimum and maximum parameters.
+ 
+ 
+Should the value be forced outside of the range of the above properties, the register will become invalid.
+ 
+ 
+ 
+
+ Minimum
+ The tolerance for when a value is at the minimum of its range. Specified in 1/1000ths of the range.
+ 
+ 
+
+ Maximum
+ The tolerance for when a value is at the maximum of its range. Specified in 1/1000ths of the range.
+ 
+ 
+
+ File transfer
+ Settings applicable to the File transfer feature. See the File transfer topic.
+ 
+ 
+
+ BACnet
+ Settings applicable to the BACnet communication driver. See the BACnet settings topic in the BACnet book.
+ 
+ 
+
+ Equipment
+ Settings applicable to the Equipment communication drivers. See the Equipment setting topic in the Equipment book.
+ 
+ 
+
+ DDE
+ Settings applicable to the DDE client. See the DDE settings topic in the DDE book.
+ 
+ 
+
+ DNP3
+ Settings applicable to the DNP3 communication driver. See the DNP3 general settings topic in the DNP3 book.
+ 
+ 
+
+ IEC 60870-5
+ Settings applicable to the IEC 60870-5 communication driver. See IEC 60870-5 client general settings topic in the IEC 60870-5 book.
+ 
+ 
+
+ IEC 61850
+ Settings applicable to the IEC 61850 communication driver. See the IEC 61850 settings topic in the IEC 61850 book.
+ 
+ 
+
+ OPC 
+ Settings applicable to the OPC client. See the OPC setting topic in the OPC book.
+ 
+ 
+
+ OPC UA
+ Settings applicable to the OPC UA client. See the OPC UA settings topic in the OPC UA book.
+ 
+ 
+
+ SNMP
+ Settings applicable to the SNMP Manager communication driver. See the SNMP general settings topic in the SNMP book.
+
+
+========================================
+TOPIC: data_acquistion_in_the_ae.htm
+========================================
+Managing data acquisition in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing Data Acquisition in the Application Explorer
+ 
+
+ 
+ 
+ 
+The Data acquisition folder includes BACnet, Equipment, DDE, DNP3, IEC 60870-5, IEC 61850, LonWorks, OPC, OPC UA, SNMP Manager and Security devices. 
+ 
+Tasks available when the Data Acquisition folder is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Settings
+ Display the general data acquisition settings dialog that includes all settings for folders subordinate to it.
+
+
+========================================
+TOPIC: Dataexport_in_the_ae.htm
+========================================
+Managing Data Export in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing Data Export in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks applicable to Data Export
+ 
+When the Data Exports folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Setting
+ Display the Data Export Settings dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Add export
+ Add a data export.
+ 
+ 
+ 
+ 
+When a data export is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a log page
+ Add a log page to the selected data export.
+ 
+ 
+
+ 
+ 
+ 
+ Add a trend page
+ Add a trend page to the selected data export.
+ 
+ 
+
+ 
+ 
+ 
+ Generate full export
+ Manually generate a full export for the selected data export (e.g. all pages at once).
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Properties dialog for the selected data export.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected data export.
+ 
+ 
+
+ 
+ 
+ 
+ Copy
+ Copy the selected data export. The copied data export is then available to be pasted when the Data Exports folder is selected.
+ 
+ 
+
+ 
+ 
+ 
+ Cut
+ Cut the selected data export. The cut data export is then available to be pasted when the Data Exports folder is selected.
+ 
+ 
+ 
+ 
+When a trend page is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add trend
+ Add a trended variable to the selected trend page.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Properties dialog for the selected trend page.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected trend page.
+ 
+ 
+
+ 
+ 
+ 
+ Generate trend page
+ Generate the selected trend page.
+ 
+ 
+ 
+ 
+When a trend item associated to a page is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add trend
+ Add a trended variable to the selected trend page.
+ 
+ 
+
+ 
+ 
+ 
+ Move up
+ Move the selected variable's position up in the trend list.
+ 
+ 
+
+ 
+ 
+ 
+ Move down
+ Move the selected variable's position down in the trend list.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected variable from the trend page.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Properties dialog for the selected trend variable.
+ 
+ 
+ 
+ 
+When a log page is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ <Log list name>
+ 
+ 
+Add a log list filter to the selected log page.
+ 
+Because only one log list filter can be associated to a given log page, these tasks are not displayed once a log list filter has been added.
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Properties dialog for the selected log page.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected log page.
+ 
+ 
+
+ 
+ 
+ 
+ Generate log page
+ Generate the selected log page.
+ 
+ 
+ 
+ 
+When the log list filter associated to a page is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Properties dialog for the selected log list filter.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected log list filter.
+ 
+ 
+ 
+ 
+Rules and behavior of cut, copy and paste
+ 
+You can cut, copy and paste data exports. The pasted data export must have a unique name. The pasted data export will contain the same pages as the source.
+
+
+========================================
+TOPIC: EXPORT_Example.htm
+========================================
+EXPORT example
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+EXPORT Examples
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ Applies to
+ 
+ 
+Example
+ 
+'-------- Generate the export "Trends" using default settings
+ 
+Sub Generation()
+ 
+&#160;&#160;Export("GENERATE", "Trends");
+ 
+End Sub
+ 
+&#160;
+ 
+'-------- Generate the export "Trends" between specific dates
+ 
+Sub GenerationDates()
+ 
+&#160;&#160;Dim StartDate as Double;
+ 
+&#160;&#160;Dim EndDate as Double;
+ 
+&#160;&#160;StartDate = DateTimeValue(8,1,2014,0,0,0);
+ 
+&#160;&#160;EndDate = DateTimeValue(9,1,2014,0,0,0);
+ 
+&#160;&#160;Export("GENERATE_DATES", "Trends", "", "", StartDate, EndDate, "");
+ 
+End Sub
+ 
+&#160;
+ 
+'-------- Generate the export "Trends" for a specific period
+ 
+Sub GenerationPeriod()
+ 
+&#160;&#160;Dim ReferenceDate as Double;
+ 
+&#160;&#160;ReferenceDate = DateTimeValue();
+ 
+&#160;&#160;Export("GENERATE_PERIOD", "Trends", "", "", ReferenceDate, 1, 1, 2, "");
+ 
+End Sub
+ 
+&#160;
+ 
+'-------- Generate the export "Tendance" for a period derived from a Trend Viewer
+ 
+Sub ExportTrend()
+ 
+&#160;&#160;Dim StartDate as double;
+ 
+&#160;&#160;Dim EndDate as double;
+ 
+&#160;&#160;StartDate = Trend("GETDATETIME", "Trends Export mimic", "", "Trend1", 1, 1);
+ 
+&#160;&#160;EndDate = Trend("GETDATETIME", "Trends Export mimic", "", "Trend1", 1, 2);
+ 
+&#160;&#160;Export("GENERATE_DATES", "Tendance", "", "", StartDate, EndDate, "");
+ 
+End Sub
+
+
+========================================
+TOPIC: EXPORT_LOG.htm
+========================================
+EXPORT_LOG
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+EXPORT_LOG
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ See also 
+
+Example
+ 
+Generate historic log data using the functionality provided by Data Export. See the main Data Export help for details (the Application Explorer.Data Export). See also the important Operational Notes below.
+ 
+WebVue support - Yes.
+ 
+
+ 
+The use of the verbs EXPORT, EXPORT_LOG and EXPORT_TREND is preferred to verbs SVLOG and SVTREND. The latter are kept for compatibility only.
+ 
+The Data Export module is protected by a license option in PcVue's protection key. If you do not have this option then Data Export will only operate in demonstration mode. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Mode
+ Mnemonic
+ Syntax
+ 
+ 
+
+ 1
+ GETRECORD
+ 1
+ 
+ 
+ 
+
+ 2
+ GETSTATISTIC
+ 2
+ 
+ 
+ 
+
+ 3
+ READBUFFER
+ 3
+ 
+ 
+ 
+
+ 4
+ CANCEL
+ 4
+ 
+ 
+ 
+
+ 5
+ DISPOSE
+ 4
+ 
+ 
+ 
+ 
+ 
+Common Arguments
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ LogListName
+ 
+ 
+ 
+The name of the log list from which to get the data. Type STR.
+ 
+ 
+ 
+
+ StartTime
+ 
+ The start time for the historic request. The start time must be earlier than the end time. Type DOUBLE.
+ 
+ 
+
+ EndTime
+ 
+ The end time for the historic request. The end time must be later than the start time. Type DOUBLE.
+ 
+ 
+
+ Events
+ 
+ 
+ 
+A number calculated using binary weighted values, representing the events to retrieve (decimal values in brackets). Type DOUBLE.
+0x0000 0001 = Alarm on (1)
+0x0000 0002 = Alarm off (2)
+0x0000 0004 = Alarm on not ack (4)
+0x0000 0008 = Alarm off not ack (8)
+0x0000 0010 = Alarm on ack (16)
+0x0000 0020 = Alarm off ack (32)
+0x0000 0040 = Alarm not accessible (64)
+0x0000 0080 = Alarm inhibited (128)
+0x0000 0100 = Alarm program masked (256)
+0x0000 0200 = Alarm variable masked (512)
+0x0000 0400 = Alarm user masked (1024)
+0x0000 0800 = Alarm expression masked (2048)
+0x0000 1000 = Alarm taken into account (4096) 
+0x0000 2000 = Bit to 0 (8192)
+0x0000 4000 = Bit to 1 (16384)
+0x0000 8000 = Bit to NS (32768)
+0x0001 0000 = User action command (65536)
+0x0002 0000 = User action acknowledge (131 072)
+0x0004 0000 = User action logon/logoff (262 144)
+0x0008 0000 = User action execute program (524 288)
+0x0010 0000 = User action mask alarm (1 048 576)
+
+ 
+ 
+ 
+
+ AlarmLevelMin
+ 
+ Minimum alarm level (0 to 29). Type INTEGER.
+ 
+ 
+
+ AlarmLevelMax
+ 
+ Maximum alarm level (0 to 29). Type INTEGER.
+ 
+ 
+
+ ExpressionFilter
+ 
+ 
+ 
+Attributes expression filter.
+ 
+See the topic:
+The Application Explorer.Archives.Configuring archive units.Proprietary archive unit.Configuring log data recording.Using an attributes filter expression.
+ 
+ 
+ 
+
+ StatusVariable
+ 
+ The name of a register variable in which the status of the export is reported. Type STR.
+ 
+ 
+
+ LineSeparator
+ 
+ A single character that is to be used as a line separator in the request output. Type STR.
+Using "\n" (carriage return) is recommended to avoid parsing errors due to regional settings or field values (those may have commas, semi-columns or dots).
+ 
+ 
+
+ ColumnSeparator
+ 
+ A single character that is to be used as a column separator in the request output. Type STR.
+Using "\t" (tab) is recommended to avoid parsing errors due to regional settings or field values (those may have commas, semi-columns or dots).
+ 
+ 
+
+ MaxRetLines
+ 
+ The maximum number of lines that the request returns (overrides the global setting Max count for generated data). 0 = no maximum. Type INTEGER.
+ 
+ 
+
+ MaxValuesToProcess
+ 
+ The maximum number of raw values that are to be processed (overrides the global setting Max count for raw data). 0 = no maximum. Type INTEGER.
+ 
+ 
+ 
+Syntax 1
+ 
+IntVal = EXPORT_LOG(Mode, LogListName, StartTime, EndTime, Events, AlarmLevelMin, AlarmLevelMax, ExpressionFilter, StatusVariable, LineSeparator, ColumnSeparator, MaxRetLines, DataFormat, DataHeader)
+ 
+Return type: INTEGER.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 
+ 
+DataFormat
+ 
+ 
+ 
+ 
+Data format for columns. The format for each column is separated by a pipe symbol. Type STR.
+Example: #D/#M/#Y|#h:#m:#s|#E|#T
+ 
+ 
+ 
+
+ DataHeader
+ 
+ Header text. Each column header is separated by a pipe symbol. Type STR.
+Example: Date|Time|Event|Title
+
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 1
+ GETRECORD
+ 
+ 
+Generate a historic request to return the log records from the Log List.
+Return: See the Operational Notes below. 
+ 
+ 
+ 
+ 
+Syntax 2
+ 
+IntVal = EXPORT_LOG(Mode, LogListName, StartTime, EndTime, Events, AlarmLevelMin, AlarmLevelMax, ExpressionFilter, StatusVariable, LineSeparator, ColumnSeparator, MaxValuesToProcess, MaxRetLines, StatFlag, StatSortOrder, StatCountersFormat, StatRounded)
+ 
+Return type: INTEGER.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ StatFlag
+ 
+ 
+ 
+A number calculated using binary weighted values, representing the statistics to generate (decimal values in brackets). Type LONGLONG.
+0x0000 0000 0001 = Total transition count (1)
+0x0000 0000 0002 = Bit to 0 (occurrences) (2)
+0x0000 0000 0004 = Bit to 1 (occurrences) (4)
+0x0000 0000 0008 = Bit NS (occurrences) (8)
+0x0000 0000 0010 = Bit to 0 (duration) (16)
+0x0000 0000 0020 = Bit to 1 (duration) (32)
+0x0000 0000 0040 = Bit NS (duration) (64)
+0x0000 0000 0080 = Alarm off (occurrences) (128)
+0x0000 0000 0100 = Alarm on (occurrences) (256)
+0x0000 0000 0200 = Alarm off ack (occurrences) (512)
+0x0000 0000 0400 = Alarm off not ack (occurrences) (1024)
+0x0000 0000 0800 = Alarm on ack (occurrences) (2048)
+0x0000 0000 1000 = Alarm on not ack (occurrences) (4096)
+0x0000 0000 2000 = Alarm unavailable (occurrences) (8192)
+0x0000 0000 4000 = Alarm masked by expression (occurrences) (16384)
+0x0000 0000 8000 = Alarm inhibited (occurrences) (32768)
+0x0000 0001 0000 = Alarm not accessible (occurrences) (65536)
+0x0000 0002 0000 = Alarm masked by program (occurrences) (131 072)
+0x0000 0004 0000 = Alarm masked by user (occurrences) (262 144)
+0x0000 0008 0000 = Alarm masked by variable (occurrences) (524 288)
+0x0000 0010 0000 = Alarm off (duration) (1 048 576)
+0x0000 0020 0000 = Alarm on (duration) (2 097 152)
+0x0000 0040 0000 = Alarm off ack (duration) (4 194 304)
+0x0000 0080 0000 = Alarm off noack (duration) (8 388 608)
+0x0000 0100 0000 = Alarm on ack (duration) (16 777 216)
+0x0000 0200 0000 = Alarm on not ack (duration) (33 554 432)
+0x0000 0400 0000 = Alarm unavailable (duration) (67 108 864)
+0x0000 0800 0000 = Alarm masked by expression (duration) (134 217 728)
+0x0000 1000 0000 = Alarm inhibited (duration) (268 435 456)
+0x0000 2000 0000 = Alarm not accessible (duration) (536 870 912)
+0x0000 4000 0000 = Alarm masked by program (duration) (1 073 741 824)
+0x0000 8000 0000 = Alarm masked by user (duration) (2 147 483 648)
+0x0001 0000 0000 = Alarm masked by variable (duration) (4 294 967 296)
+ 
+ 
+ 
+
+ StatSortOrder
+ 
+ The statistic used to sort the results. Selected using one of the values used for StatFlag. 0 = no sorting. Type LONGLONG.
+ 
+ 
+
+ StatCountersFormat
+ 
+ A number indicating the unit for the duration counters. Type INTEGER.
+0 = None
+1 = Seconds
+2 = Minutes
+3 = Hours
+4 = Days
+ 
+ 
+
+ StatRounded
+ 
+ Type INTEGER.
+0 = Not rounded
+1 = Rounded
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 2
+ GETSTATISTIC
+ 
+ 
+Generate a historic request to return statistical values from the log list.
+ 
+Return: See the Operational Notes below.
+ 
+ 
+ 
+ 
+Syntax 3
+ 
+IntVal = EXPORT_LOG(Mode, BufferHandle);
+ 
+Return type: INTEGER.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ BufferHandle
+ 
+ 
+ 
+The handle of a buffer previously created using ALLOC_BUFFER. Type LONG.
+ 
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 5
+ READBUFFER
+ 
+ 
+Read the buffer of data after either a GETRECORD or GETSTATISTIC. 
+The status variable must be either 0 (completed), 4 (completed but the maximum number of points has been reached) or 5 (completed but the maximum number of processed values has been reached).
+Return: The number of lines retrieved or if less than 1:
+0 = End of buffer
+-1 = Invalid buffer handle
+-2 = No previous historic request has been sent.
+-3 = No answer received.
+-4 = Nothing to read.
+-5 = Buffer too small.
+
+ 
+ 
+ 
+ 
+Syntax 4
+ 
+IntVal = EXPORT_LOG(Mode);
+ 
+Return type: INTEGER.
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 6
+ CANCEL
+ 
+ 
+Cancel the current historic request. A CANCEL should always be followed by a DISPOSE.
+Return: Always 0
+
+ 
+ 
+ 
+
+ 7
+ DISPOSE
+ Release internal buffer used in a historical request. Must always be called before making a further historic request or after a CANCEL.
+Return: Always 0.
+ 
+ 
+ 
+Operational Notes
+ 
+The EXPORT_LOG instruction operates asynchronously. That is once a historical request has been generated by either modes GETRECORD or GETSTATISTIC, the script continues without waiting for the historical data to be generated. The instruction's return value indicates if the historic request was successfully sent, or not.
+ 
+When the historical request is complete (successfully or otherwise) the value of the Status Variable is changed accordingly. On this change, if the Status Variable's value indicates a success, READBUFFER mode must be used to retrieve the data into a memory buffer from where further processing can be done (for example exporting to Excel using BUFTOEXCEL).
+ 
+ It will normally be necessary to use READBUFFER more than once until the number of lines it returns is 0 indicating that all data has been processed.
+ 
+
+ 
+If you use a loop including READBUFFER, you must respect the 30 seconds limit that is allowed for a continuous SCADA Basic thread. If you exceed this (which is possible if you are processing large amounts of data), the thread will abort with an error.
+ 
+ 
+After completion, a DISPOSE mode must be executed to release the internal buffer used in the historical request.
+ 
+Return values
+ 
+All return values other than zero indicate an error. In particular, -30 indicates a previous request is still running and should be accommodated in the script.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Value
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 0
+ Request sent
+ 
+ 
+
+ -1
+ LogListName is not a STR
+ 
+ 
+
+ -2
+ LogList doesn�t exist
+ 
+ 
+
+ -3
+ Start time undefined or invalid
+ 
+ 
+
+ -4
+ End time undefined or invalid
+ 
+ 
+
+ -5
+ Event code cannot be read
+ 
+ 
+
+ -6
+ Event code smaller or equal to 0
+ 
+ 
+
+ -7
+ AlarmLevelMin cannot be read
+ 
+ 
+
+ -8
+ AlarmLevelMin between 0 and 29
+ 
+ 
+
+ -9
+ AlarmLevelMax cannot be read
+ 
+ 
+
+ -10
+ AlarmLevelMax between 0 and 29
+ 
+ 
+
+ -11
+ AlarmLevelMin smaller than AlarmLevelMax
+ 
+ 
+
+ -12
+ ExpressionFilter is not a STR
+ 
+ 
+
+ -13
+ StatusVariable is not a STR
+ 
+ 
+
+ -14
+ StatusVariable is not a register
+ 
+ 
+
+ -15
+ LineSeparator cannot be read
+ 
+ 
+
+ -16
+ ColumnSeparator cannot be read
+ 
+ 
+
+ -20
+ DataFormat is not a STR
+ 
+ 
+
+ -21
+ DataHeader is not a STR
+ 
+ 
+
+ -22
+ Format and header have different column count 
+ 
+ 
+
+ -23
+ StatFlag cannot be read
+ 
+ 
+
+ -24
+ StatFlag smaller or equal to 0
+ 
+ 
+
+ -25
+ StatSortingOrder cannot be read
+ 
+ 
+
+ -26
+ StatSortingOrder is smaller than 0
+ 
+ 
+
+ -27
+ StatCountersFormat cannot be read
+ 
+ 
+
+ -28
+ StatCountersFormat between 0 and 4
+ 
+ 
+
+ -29
+ StatRoundedToRequest cannot be read
+ 
+ 
+
+ -30
+ A previous request is still running
+ 
+ 
+ 
+Status variable values
+ 
+The status of the latest historical request.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Value
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 0
+ Completed successfully.
+ 
+ 
+
+ 1
+ Running.
+ 
+ 
+
+ 3
+ Canceled.
+ 
+ 
+
+ 4
+ Completed but the maximum number of points has been reached.
+ 
+ 
+
+ 5
+ Completed but the maximum number of processed values has been reached.
+ 
+ 
+
+ 10
+ Failed.
+ 
+ 
+
+ 11
+ Failed due to an incorrect configuration.
+ 
+ 
+
+ 12
+ Failed due to a failed historical request.
+ 
+ 
+ 
+Examples
+ 
+ See the Examples link at the top of the topic.
+
+
+========================================
+TOPIC: EXPORT_LOG_Example.htm
+========================================
+EXPORT_LOG example
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+EXPORT_LOG Example
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ Applies to
+ 
+ 
+This example exercises modes of the EXPORT_LOG command.
+ 
+Const ALARM_ON = 1, ALARM_OFF = 2, ALARM_ON_NACK = 4, ALARM_OFF_NOTACK = 8;
+ 
+ 
+Const ALARM_ON_ACK = 16, ALARM_OFF_ACK = 32, ALARM_NOT_ACCESSIBLE = 64, ALARM_INHIBITED = 128;
+ 
+ 
+Const ALARM_PROGRAM_MASKED = 256, ALARM_VARAIBLE_MASKED = 512, ALARM_USER_MASKED = 1024, ALARM_EXPRESSION_MASKED = 2048;
+ 
+ 
+Const ALARM_TAKEN_INTO_ACCOUNT = 4096, BIT_TO_0 = 8192, BIT_TO_1 = 16384, BIT_UNAVAILABLE = 32768;
+ 
+ 
+Const ACTION_COMMAND = 65536, ACTION_ACKNOWLEDGE = 131072, ACTION_LOGONOFF = 262144, ACTION_EXECUTE_PROGRAM = 524288;
+ 
+ 
+Const ACTION_MASK = 1048576;
+ 
+ 
+&#160;
+ 
+Const NONE = 0, TOTAL_TRANSITION_COUNT = 1, COUNT_AT_0 = 2, COUNT_AT_1 = 4;
+ 
+ 
+Const COUNT_AT_NS = 8, DUR_AT_0 = 16, DUR_AT_1 = 32, DUR_AT_NS = 64;
+ 
+ 
+&#160;
+ 
+Const COUNT_AT_ALARM_OFF = 128, COUNT_AT_ALARM_ON = 256, COUNT_AT_ALARM_OFFACK = 512, COUNT_AT_ALARM_OFFNOACK = 1024;
+ 
+ 
+Const COUNT_AT_ALARM_ONACK = 2048, COUNT_AT_ALARM_ONNOACK = 4096, COUNT_AT_ALARM_UNAVAILABLE = 8192, COUNT_AT_ALARM_MASKEDBYEXPRESSION = 16384;
+ 
+ 
+Const COUNT_AT_ALARM_INHIBITED = 32768, COUNT_AT_ALARM_NOT_ACCESSIBLE = 65536, COUNT_AT_ALARM_MASKEDBYPROGRAM = 131072, COUNT_AT_ALARM_MASKEDBYUSER = 262144;
+ 
+ 
+Const COUNT_AT_ALARM_MASKEDBYVARIABLE = 524288;
+ 
+ 
+&#160;
+ 
+Const DUR_AT_ALARM_OFF = 1048576, DUR_AT_ALARM_ON = 2097152, DUR_AT_ALARM_OFFACK = 4194304, DUR_AT_ALARM_OFFNOACK = 8388608;
+ 
+ 
+Const DUR_AT_ALARM_ONACK = 16777216, DUR_AT_ALARM_ONNOACK = 33554432, DUR_AT_ALARM_UNAVAILABLE = 67108864, DUR_AT_ALARM_MASKEDBYEXPRESSION = 134217728;
+ 
+ 
+Const DUR_AT_ALARM_INHIBITED = 268435456, DUR_AT_ALARM_NOT_ACCESSIBLE = 536870912, DUR_AT_ALARM_MASKEDBYPROGRAM = 1073741824, DUR_AT_ALARM_MASKEDBYUSER = 2147483648;
+ 
+ 
+Const DURATION_AT_ALARM_MASKEDBYVARIABLE = 4294967296;
+ 
+ 
+&#160;
+ 
+Sub Main ()
+ 
+ 
+'-------- Set up event that is triggered when Export_trend is complete
+ 
+ 
+ Event("ADDPROG", "SVB.ExportLogStatus", "S>S", "E.svb", "", "OnChangeOfStatus");
+ 
+End Sub
+ 
+ 
+&#160;
+ 
+'-------- Export_Log of records
+ 
+ 
+Sub Export_Log_EX1()
+ 
+ 
+ Dim dStartTime As Double, dEndTime As Double;
+ 
+ 
+Dim iResult As Integer;
+ 
+ 
+Dim llEvents As LongLong;
+ 
+ 
+&#160;
+ 
+dEndTime = DateTimeValue();
+ 
+ 
+dStartTime = dEndtime - 3600000; ' Current time less 1 hour
+ 
+ 
+llEvents = ALARM_ON + ALARM_OFF + BIT_TO_0 + BIT_TO_1;
+ 
+ 
+iResult = Export_Log("GETRECORD", "Loglist01", dStartTime, dEndTime, llEvents, 0, 29, "", "@SVB.ExportLogStatus", "\n", "\t", 0, "#D/#M/#Y|#h:#m:#s|#E|#T", "Date|Time|Event|Title");
+ 
+ 
+&#160;
+ 
+'-------- Check return and, if a previous request is still running, cancel it and clear buffer
+ 
+ 
+If(iResult != 0) Then
+ 
+ 
+Print("Result != 0, historic request not sent");
+ 
+ 
+If(iResult == -30) Then 
+ 
+ 
+Export_Log("CANCEL"); 
+ 
+ 
+Export_Log("DISPOSE"); 
+ 
+ 
+End If
+ 
+ 
+End If 
+ 
+ 
+End Sub
+ 
+ 
+&#160;
+ 
+'-------- Export_Log of statistics
+ 
+ 
+Sub Export_Log_EX2()
+ 
+ 
+Dim dStartTime As Double, dEndTime As Double;
+ 
+ 
+Dim iResult As Integer;
+ 
+ 
+Dim llEvents As LongLong&#160;, llStatFlag As LongLong&#160;;
+ 
+ 
+&#160;
+ 
+dEndTime = DateTimeValue(); dStartTime = dEndtime - 3600000; ' Current time less 1 hour
+ 
+ 
+llEvents = ALARM_ON + ALARM_OFF + BIT_TO_0 + BIT_TO_1;
+ 
+ 
+llStatFlag = DUR_AT_0 + DUR_AT_1 + DUR_AT_NS;
+ 
+ 
+iResult = Export_Log("GETSTATISTIC", "Loglist01", dStartTime, dEndTime, llEvents, 0, 29, "", "@SVB.ExportLogStatus", "\n", "\t", 0, 0, llStatFlag, 0, 1, 0);
+ 
+ 
+&#160;
+ 
+'-------- Check return and, if a previous request is still running, cancel it and clear buffer
+ 
+ 
+If(iResult != 0) Then
+ 
+ 
+Print("Result != 0, historic request not sent");
+ 
+ 
+If(iResult == -30) Then 
+ 
+ 
+Export_Log("CANCEL"); 
+ 
+ 
+Export_Log("DISPOSE"); 
+ 
+ 
+End If
+ 
+ 
+End If 
+ 
+ 
+End Sub
+ 
+ 
+&#160;
+ 
+'-------- On change of status variable process if complete else clean up
+ 
+ 
+Sub OnChangeOfStatus()
+ 
+ 
+Dim sStatus As Single;
+ 
+ 
+Dim lBufferHandle As Long;
+ 
+ 
+Dim iResult As Integer, iLineNumber As Integer;
+ 
+ 
+ 
+ 
+ 
+sStatus = SVB.ExportLogStatus;
+ 
+ 
+If(sStatus==0 || sStatus==4 || sStatus ==5) Then ' Export complete or reached limits
+ 
+ 
+Print("Export_Log complete - status is ", sStatus);
+ 
+ 
+lBufferHandle = Alloc_Buffer(1024);
+ 
+ 
+iResult = 1;
+ 
+ 
+iLineNumber = 1;
+ 
+ 
+While(iResult > 0) 
+ 
+ 
+iResult = Export_Log("READBUFFER", lBufferHandle);
+ 
+ 
+If (iResult> 0) Then
+ 
+BufToExcel(lBufferHandle, "\n", "\t", "export.xlsx", "ex1", "APPEND", iLineNumber);
+ 
+ 
+iLineNumber = iLineNumber + iResult;
+ 
+ 
+Print("Exported ",iResult, " lines to Excel");
+ 
+End If
+ 
+ 
+Delay(1); ' Allow program thread to break in case of overlong processing time
+ 
+ 
+Wend
+ 
+ 
+Print("Total lines = ",iLineNumber);
+ 
+ 
+Export_Log("DISPOSE");
+ 
+ 
+Free_Buffer(lBufferHandle);
+ 
+ 
+Else
+ 
+ 
+If(sStatus==1) Then ' Export running - do nothing
+ 
+ 
+Print("Export_Log running");
+ 
+ 
+Else ' Export failed - cancel and clean up
+ 
+ 
+Print("Export_Log failed - status is ", sStatus);
+ 
+Export_Log("DISPOSE"); 
+ 
+ 
+End If
+ 
+ 
+End If
+ 
+ 
+End Sub
+
+
+========================================
+TOPIC: EXPORT_TREND.htm
+========================================
+EXPORT_TREND
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+EXPORT_TREND
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ See also 
+
+Example
+ 
+Generate historic trend data using the functionality provided by Data Export. See the main Data Export help for details (the Application Explorer.Data Export). See also the important Operational Notes below.
+ 
+WebVue support - Yes.
+ 
+
+ 
+The use of the verbs EXPORT, EXPORT_LOG and EXPORT_TREND is preferred to verbs SVLOG and SVTREND. The latter are kept for compatibility only.
+ 
+The Data Export module is protected by a license option in PcVue's protection key. If you do not have this option then Data Export will only operate in demonstration mode. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Mode
+ Mnemonic
+ Syntax
+ 
+ 
+
+ 1
+ GETRAW
+ 1
+ 
+ 
+ 
+
+ 2
+ GETSAMPLE
+ 2
+ 
+ 
+ 
+
+ 3
+ GETSTATISTIC
+ 3
+ 
+ 
+ 
+
+ 4
+ GETAGGREGATED
+ 4
+ 
+ 
+ 
+
+ 5
+ READBUFFER
+ 5
+ 
+ 
+ 
+
+ 6
+ CANCEL
+ 6
+ 
+ 
+ 
+
+ 7
+ DISPOSE
+ 6
+ 
+ 
+ 
+ 
+ 
+Common Arguments
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ ListVariables
+ 
+ 
+ 
+The list of variables for which to request historic data, as either a string or a pointer to a buffer containing the string. Type STR or DOUBLE.
+ 
+ 
+ 
+
+ Branch
+ 
+ A branch that will be prefixed to all variable names. Type STR;
+ 
+ 
+
+ Unit
+ 
+ The name of the archive unit that contains the historic data. If left empty then the primary archive unit for each variable is used. Type STR.
+ 
+ 
+
+ StartTime
+ 
+ The start time for the historic request. The start time must be earlier than the end time. Type DOUBLE.
+ 
+ 
+
+ EndTime
+ 
+ The end time for the historic request. The end time must be later than the start time. Type DOUBLE.
+ 
+ 
+
+ StatusVariable
+ 
+ The name of a register variable in which the status of the export is reported. Type STR.
+ 
+ 
+
+ LineSeparator
+ 
+ A single character that is to be used as a line separator in the request output. Type STR.
+Using "\n" (carriage return) is recommended to avoid parsing errors due to regional settings or field values (those may have commas, semi-columns or dots).
+ 
+ 
+
+ ColumnSeparator
+ 
+ A single character that is to be used as a column separator in the request output. Type STR.
+Using "\t" (tab) is recommended to avoid parsing errors due to regional settings or field values (those may have commas, semi-columns or dots).
+ 
+ 
+
+ MaxRetLines
+ 
+ The maximum number of lines that the request returns (overrides the global setting Max count for generated data). 0 = no maximum. Type INTEGER.
+ 
+ 
+
+ MaxValuesToProcess
+ 
+ The maximum number of raw values that are to be processed (overrides the global setting Max count for raw data). 0 = no maximum. Type INTEGER.
+ 
+ 
+
+ TimeStampsFormat
+ 
+ The format of the timestamp. 0 = date and time, 1 = date only, 2 = time only. Optional with 0 as the default.
+ 
+ 
+ 
+Syntax 1
+ 
+IntVal = EXPORT_TREND(Mode, VariableName, Branch, Unit, StartTime, EndTime, StatusVariable, LineSeparator, ColumnSeparator, MaxRetLines[, TimeStampsFormat]);
+ 
+Return type: INTEGER.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ VariableName
+ 
+ 
+ 
+The variable from which to collect historic data. Type STR.
+ 
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 1
+ GETRAW
+ 
+ 
+Generate a historic request to return the raw values for a single variable.
+Return: See the Operational Notes below. 
+ 
+ 
+ 
+ 
+Syntax 2
+ 
+IntVal = EXPORT_TREND(Mode, ListVariables, Branch, Unit, StartTime, EndTime, StatusVariable, LineSeparator, ColumnSeparator, MaxValuesToProcess, MaxRetLines, SamplingRateInterval, SamplingRateValue [,SynchroSecondValue, SynchroMinuteValue, SynchroHourValue, SynchroDayValue, SynchroMonthValue, TimeStampsFormat]);
+ 
+Return type: INTEGER.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ SamplingRateInterval
+ 
+ The sample rate unit. Type INTEGER.
+0 = Seconds
+1 = Minutes
+2 = Hours
+3 = Days 
+4 = Weeks
+5 = Months
+6 = Years
+ 
+ 
+
+ SamplingRateValue
+ 
+ The sampling rate value. Type INTEGER.
+ 
+ 
+
+ 
+ 
+SynchroSecondValue 
+SynchroMinuteValue 
+SynchroHourValue 
+SynchroDayValue 
+SynchroMonthValue
+ 
+ 
+ Equivalent to the Synchronization Time and Day properties in the Data Export Sampling tab. See the main Data Export help for details (the Application Explorer.Data Export). Type INTEGER.
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 2
+ GETSAMPLE
+ 
+ 
+Generate a historic request to return sampled value for the variables list.
+ 
+Return: See the Operational Notes below.
+ 
+ 
+ 
+ 
+Syntax 3
+ 
+IntVal = EXPORT_TREND (Mode, ListVariables, Branch, Unit, StartTime, EndTime, StatusVariable, LineSeparator, ColumnSeparator, MaxValuesToProcess, MaxRetLines, StatFlag);
+ 
+Return type: INTEGER.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ StatFlag
+ 
+ 
+ 
+A number calculated using binary weighted values, representing the statistics to generate (decimal values in brackets). Type DOUBLE.
+0x0001 = Min (1)
+0x0002 = Max (2)
+0x0004 = Average (4)
+0x0008 = Sum (8)
+0x0010 = Standard deviation (16)
+0x0020 = First value (32)
+0x0040 = Last value (64)
+0x0080 = Counter (128)
+0x0100 = Min date (256)
+0x0200 = Max date (512)
+0x0400 = First value date (1024)
+0x0800 = Last value date (2048)
+0x1000 = Weighted average (4096)
+ 
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 3
+ GETSTATISTIC
+ 
+ 
+Generate a historic request to return statistical values for the variables list.
+ 
+Return: See the Operational Notes below.
+ 
+ 
+ 
+ 
+Syntax 4
+ 
+IntVal = EXPORT_TREND(Mode, ListVariables, Branch, Unit, StartTime, EndTime, StatusVariable, LineSeparator, ColumnSeparator, MaxValuesToProcess, MaxRetLines, StatFlag, SamplingRateInterval, SamplingRateValue [,SynchroSecondValue, SynchroMinuteValue, SynchroHourValue, SynchroDayValue, SynchroMonthValue, TimeStampsFormat, TimeStampsFields]);
+ 
+Return type: INTEGER.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ TimeStampsFields
+ 
+ 
+ 
+A number indicating the timestamp fields to use. Type INTEGER.
+ 
+0 = Beginning timestamp. The default if TimeStampFields is not used. 
+1 = End timestamp only.
+2 = Both beginning and end timestamps.
+ 
+ 
+ 
+ 
+See Syntax 2 and Syntax 3 for a description of the arguments StatFlag, SamplingRateInterval, SamplingRateValue, SynchroSecondValue, SynchroMinuteValue, SynchroHourValue, SynchroDayValue and SynchroMonthValue. 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 4
+ GETAGGREGATED
+ 
+ 
+Generate a historic request to return aggregated statistical values for the variables list.
+ 
+Return: See the Operational Notes below.
+ 
+ 
+ 
+ 
+Syntax 5
+ 
+IntVal = EXPORT_TREND(Mode, BufferHandle);
+ 
+Return type: INTEGER.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ BufferHandle
+ 
+ 
+ 
+The handle of a buffer previously created using ALLOC_BUFFER. Type LONG.
+ 
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 5
+ READBUFFER
+ 
+ 
+Read the buffer of data after either a GETRAW, GETSAMPLED, GETSTATISTIC or GETAGGREGATED. 
+The status variable must be either 0 (completed), 4 (completed but the maximum number of points has been reached) or 5 (completed but the maximum number of processed values has been reached).
+Return: The number of lines retrieved or if less than 1:
+0 = End of buffer
+-1 = Invalid buffer handle
+-2 = No previous historic request has been sent
+-3 = No answer received
+-4 = Nothing to read
+-5 = Buffer too small
+
+ 
+ 
+ 
+ 
+Syntax 6
+ 
+IntVal = EXPORT_TREND(Mode);
+ 
+Return type: INTEGER.
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 6
+ CANCEL
+ 
+ 
+Cancel the current historic request. A CANCEL should always be followed by a DISPOSE.
+Return: Always 0
+
+ 
+ 
+ 
+
+ 7
+ DISPOSE
+ Release internal buffer used in a historical request. Must always be called before making a further historic request or after a CANCEL.
+Return: Always 0
+ 
+ 
+ 
+Operational Notes
+ 
+The EXPORT_TREND instruction operates asynchronously. That is once a historical request has been generated by either modes GETRAW, GETSAMPLED, GETSTATISTIC or GETAGGREGATED, the script continues without waiting for the historical data to be generated. The instruction's return value indicates if the historic request was successfully sent, or not.
+ 
+When the historical request is complete (successfully or otherwise) the value of the Status Variable is changed accordingly. On this change, if the Status Variable's value indicates a success, READBUFFER mode must be used to retrieve the data into a memory buffer from where further processing can be done (for example exporting to Excel using BUFTOEXCEL).
+ 
+ It will normally be necessary to use READBUFFER more than once until the number of lines it returns is 0 indicating that all data has been processed.
+ 
+
+ 
+If you use a loop including READBUFFER, you must respect the 30 seconds limit that is allowed for a continuous SCADA Basic thread. If you exceed this (which is possible if you are processing large amounts of data), the thread will abort with an error.
+ 
+ 
+After completion, a DISPOSE mode must be executed to release the internal buffer used in the historical request.
+ 
+Return values
+ 
+All return values other than zero indicate an error. In particular, -30 indicates a previous request is still running and should be accommodated in the script.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Value
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 0
+ The historic request has been successfully sent.
+ 
+ 
+
+ -1
+ VariableName or ListVariable is of an incorrect type or cannot be read.
+ 
+ 
+
+ -2
+ Branch is of an incorrect type or cannot be read.
+ 
+ 
+
+ -3
+ UnitName is of an incorrect type or cannot be read.
+ 
+ 
+
+ -4
+ Branch plus VariableName does not exist.
+ 
+ 
+
+ -5
+ The variable, or one of the variables is not configured for trend recording.
+ 
+ 
+
+ -6
+ The StartTime is invalid or undefined.
+ 
+ 
+
+ -7
+ The EndTime is invalid or undefined.
+ 
+ 
+
+ -8
+ StatusVariable is not a string or the variable it names is not a register.
+ 
+ 
+
+ -9
+ LineSeparator cannot be read.
+ 
+ 
+
+ -10
+ ColumnSeparator cannot be read.
+ 
+ 
+
+ -20
+ StatFlag is not a double.
+ 
+ 
+
+ -21
+ SamplingRateInterval is not an integer.
+ 
+ 
+
+ -22
+ SamplingRateValue is not an integer.
+ 
+ 
+
+ -23
+ Synchronize parameter is not valid.
+ 
+ 
+
+ -30
+ A previous historic request is still running.
+ 
+ 
+ 
+Status variable values
+ 
+The status of the latest historical request.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Value
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 0
+ Completed successfully.
+ 
+ 
+
+ 1
+ Running.
+ 
+ 
+
+ 3
+ Canceled.
+ 
+ 
+
+ 4
+ Completed but the maximum number of points has been reached.
+ 
+ 
+
+ 5
+ Completed but the maximum number of processed values has been reached.
+ 
+ 
+
+ 10
+ Failed.
+ 
+ 
+
+ 11
+ Failed due to an incorrect configuration.
+ 
+ 
+
+ 12
+ Failed due to a failed historical request.
+ 
+ 
+ 
+Examples
+ 
+ See the Examples link at the top of the topic.
+
+
+========================================
+TOPIC: EXPORT_TREND_Example.htm
+========================================
+EXPORT_TREND example
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+EXPORT_TREND Example
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ Applies to
+ 
+ 
+This example exercises modes of the EXPORT_TREND command.
+ 
+Const MIN = 1, MAX = 2, AVE = 4, SUM = 8;
+ 
+ 
+Const DEVIATION = 16, FIRST = 32, LAST = 64, COUNTER = 128;
+ 
+ 
+Const MINDATE = 256, MAXDATE = 512, FIRSTDATE = 1024, LASTDATE = 2048;
+ 
+ 
+Const WEIGHTED = 4096;
+ 
+ 
+&#160;
+ 
+Sub Main ()
+ 
+ 
+'-------- Set up event that is triggered when Export_trend is complete
+ 
+ 
+Event("ADDPROG", "SVB.Status", "S>S", "E.svb", "", "OnChangeOfStatus");
+ 
+ 
+End Sub
+ 
+ 
+&#160;
+ 
+'-------- Export_Trend of raw values
+ 
+ 
+Sub Export_Trend_EX1()
+ 
+ 
+Dim dStartTime As Double, dEndTime As Double;
+ 
+ 
+Dim iResult As Integer;
+ 
+ 
+&#160;
+ 
+
+ dEndTime = DateTimeValue();
+ 
+ 
+
+ dStartTime = dEndtime - 3600000; ' Current time less 1 hour
+ 
+ 
+
+ iResult = Export_Trend("GETRAW", "SVB.Register01", "", "Unit01", dStartTime, dEndTime, "SVB.Status", "\t", "\n", 0);
+ 
+ 
+ 
+ 
+ 
+'-------- Check return and, if a previous request is still running, cancel it and clear buffer
+ 
+ 
+ If(iResult != 0) Then
+ 
+ 
+Print("Result != 0, historic request not sent");
+ 
+ 
+If(iResult == -30) Then 
+ 
+ 
+EXPORT_TREND("CANCEL");
+ 
+ 
+EXPORT_TREND("DISPOSE"); 
+ 
+ 
+ End If
+ 
+ 
+End If 
+ 
+ 
+End Sub
+ 
+ 
+&#160;
+ 
+'-------- Export_Trend of sampled values
+ 
+ 
+Sub Export_Trend_EX2()
+ 
+ 
+Dim dStartTime As Double, dEndTime As Double;
+ 
+ 
+Dim iResult As Integer;
+ 
+ 
+
+ dEndTime = DateTimeValue();
+ 
+
+ dStartTime = dEndtime - 3600000; ' Current time less 1 hour
+ 
+ 
+
+ iResult = Export_Trend("GETSAMPLE", "SVB.Register01,SVB.Register02", "", "Unit01", dStartTime, dEndTime, "SVB.Status", "\n", "\t", 0, 0, 1, 1);
+ 
+ 
+ 
+ 
+ 
+'-------- Check return and, if a previous request is still running, cancel it and clear buffer
+ 
+ 
+If(iResult != 0) Then
+ 
+ 
+Print("Result != 0, historic request not sent");
+ 
+ 
+If(iResult == -30) Then 
+ 
+ 
+Export_Trend("CANCEL");
+ 
+ 
+Export_Trend("DISPOSE"); 
+ 
+ 
+End If
+ 
+ 
+End If
+ 
+ 
+End Sub
+ 
+ 
+&#160;
+ 
+'-------- Export_Trend of statistical values
+ 
+ 
+Sub Export_Trend_EX3()
+ 
+ 
+Dim dStartTime As Double, dEndTime As Double, dStatFlag As Double;
+ 
+ 
+Dim iResult As Integer;
+ 
+ 
+ 
+ 
+ 
+
+ dStatFlag = MIN + MAX + AVE + SUM + DEVIATION + FIRST + LAST + COUNTER + WEIGHTED; ' Add/delete stats as required
+ 
+ 
+
+ dEndTime = DateTimeValue();
+ 
+ 
+
+ dStartTime = dEndtime - 3600000; ' Current time less 1 hour
+ 
+ 
+
+ iResult = Export_Trend("GETSTATISTIC", "SVB.Register01,SVB.Register02", "", "Unit01", dStartTime, dEndTime, "SVB.Status", "\n", "\t", 0, dStatFlag );
+ 
+ 
+ 
+ 
+ 
+'-------- Check return and, if a previous request is still running, cancel it and clear buffer
+ 
+ 
+
+ If(iResult != 0) Then
+ 
+ 
+
+ Print("Result != 0, historic request not sent");
+ 
+ 
+
+ If (iResult == -30) Then 
+ 
+ 
+Export_Trend("CANCEL");
+ 
+ 
+Export_Trend("DISPOSE"); 
+ 
+ 
+
+ End If
+ 
+ 
+
+ End If
+ 
+ 
+End Sub
+ 
+ 
+&#160;
+ 
+'-------- >Export_Trend of aggregated values
+ 
+ 
+Sub Export_Trend_EX4()
+ 
+ 
+ Dim dStartTime As Double, dEndTime As Double, dStatFlag As Double;
+ 
+ 
+Dim iResult As Integer;
+ 
+ 
+&#160;
+ 
+
+ dStatFlag = MIN + MAX + AVE + SUM; ' Add/delete stats as required
+ 
+ 
+
+ dEndTime = DateTimeValue();
+ 
+ 
+
+ dStartTime = dEndtime - 3600000; ' Current time less 1 hour
+ 
+ 
+
+ iResult = Export_Trend("GETAGGREGATED", "SVB.Register01,SVB.Register02", "", "Unit01", dStartTime, dEndTime, "SVB.Status", "\n", "\t", 0, 0, dStatFlag, 1, 1);
+ 
+ 
+'-------- Check return and, if a previous request is still running, cancel it and clear buffer
+ 
+ 
+If(iResult != 0) Then
+ 
+ 
+Print("Result != 0, historic request not sent");
+ 
+ 
+If(iResult == -30) Then 
+ 
+ 
+Export_Trend("CANCEL");
+ 
+ 
+Export_Trend("DISPOSE"); 
+ 
+ 
+End If
+ 
+ 
+End If
+ 
+ 
+End Sub
+ 
+ 
+&#160;
+ 
+'-------- On change of status variable process if complete else clean up
+ 
+ 
+Sub OnChangeOfStatus()
+ 
+ 
+Dim sStatus As Single;
+ 
+ 
+Dim lBufferHandle As Long;
+ 
+ 
+Dim iResult As Integer, iLineNumber As Integer;
+ 
+ 
+ 
+ 
+ 
+
+ sStatus = SVB.Status;
+ 
+ 
+If(sStatus==0 || sStatus==4 || sStatus ==5) Then ' Export complete or reached limits
+ 
+ 
+Print("Trend_Export complete - status is ", sStatus);
+ 
+ 
+
+ lBufferHandle = Alloc_Buffer(1024);
+ 
+ 
+
+ iResult = 1;
+ 
+ 
+
+ iLineNumber = 1;
+ 
+ 
+While(iResult > 0) 
+ 
+ 
+iResult = Export_Trend("READBUFFER", lBufferHandle);
+ 
+ 
+If (iResult> 0) Then
+ 
+ 
+BufToExcel(lBufferHandle, "\n", "\t", "export.xlsx", "ex1", "APPEND", iLineNumber );
+ 
+ 
+iLineNumber = iLineNumber + iResult;
+ 
+ 
+Print("Exported ",iResult, " lines to Excel");
+ 
+ 
+End If
+ 
+ 
+Wend
+ 
+ 
+Print("Total lines = ",iLineNumber);
+ 
+ 
+Export_Trend("DISPOSE");
+ 
+ 
+Free_Buffer>(lBufferHandle);
+ 
+Else
+ 
+ 
+ If(sStatus==1) Then ' Export running - do nothing
+ 
+ 
+Print("Trend_Export running");
+ 
+ 
+Else ' Export failed - cancel and clean up
+ 
+ 
+Print("Trend_Export failed - status is ", sStatus);
+ 
+ 
+Export_Trend("CANCEL");
+ 
+ 
+Export_Trend("DISPOSE"); 
+ 
+ 
+End If
+ 
+ 
+End If
+ 
+ 
+End Sub
+
+

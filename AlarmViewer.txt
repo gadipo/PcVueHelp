@@ -1,0 +1,1520 @@
+========================================
+TOPIC: AlarmViewer_Configuring_the_alarm_filter.htm
+========================================
+Configuring the Alarm Viewer filter
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Alarm Viewer Filter
+ 
+The alarm filter is used to decide which alarms will 
+appear in the list. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Domain - Optional 
+ domain filter for alarms. ******** is the default and displays alarms 
+ from all Domains.
+ 
+Nature - Optional 
+ nature filter for alarms. ******** is the default and displays alarms 
+ of all Natures.
+ 
+SQL filter - Optional SQL-style filter for alarms. See the topic Using a SQL expression to filter variables.
+ 
+Alarm level - Filter using the alarm level.
+Minimum level - If 
+selected only alarms of the lowest level are displayed. For example, if the alarm range was set from level 3 to level 10 and the lowest level alarm passing the filter criteria was level 5, only level 5 alarms will 
+be displayed. If, later, a level 4 alarm occurred then only 
+level 4 alarms would be displayed.
+Maximum level - If 
+selected only alarms of the highest level are displayed. This option is mutually exclusive to minimum level. For example, if the alarm range was
+ set from level 3 to level 10 and the highest level alarm passing the filter 
+criteria was level 8, only level 8 alarms will be displayed. If, later, a level 9 alarm occurred then only level 9 alarms would be 
+displayed.
+All -If selected 
+all alarms between the To level and From level properties are displayed.
+From level -Minimum 
+alarm level to display.
+To level -Maximum alarm level to display.
+ 
+Alarm status -Filter using the alarm status.
+Alarm on, not ack. 
+-Display alarms that are on but have not yet been acknowledged by the 
+User.
+Alarm on, ack. -
+ Display alarms that are on and have been acknowledged by the User.
+Alarm off, not ack. 
+-Display alarms that have been on and gone off before being acknowledged by the User.
+Alarm off -Display alarms that are off.
+Maintenance -Display 
+only alarms that have been set to maintenance.
+All alarms unavailable -Display alarms that are unavailable for any reason.
+Alarm inhibited -Displays alarms that are unavailable because they have the inhibited 
+property set in their configuration.
+Alarm not accessible -Displays alarms that are unavailable because their value is no longer updated (NS COM).
+Alarm user masked -Display alarms that are unavailable because they have been masked by 
+a User (from the Alarm display)
+Alarm program masked 
+-Display alarms that are unavailable because they have been masked by 
+a SCADA Basic program.
+Alarm variable masked -Display alarms that are unavailable because have been masked by another variable (a bit or another alarm as specified in the alarm's configuration).
+Alarm expression 
+masked -Display alarms that are unavailable because they have been masked 
+by an expression.
+ 
+ 
+
+ 
+An alarm can be configured to be on when it is either 
+in the one or zero state. See the Variables Tree book in the Application Explorer help for further 
+ information.
+
+
+========================================
+TOPIC: AlarmViewer_Configuring_the_timestamps.htm
+========================================
+Displaying the alarm on, ack and off timestamps on the same line
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Displaying the Alarm On, Ack and Off Timestamps on the Same Line
+ 
+From version 8.20 onwards, it is possible to display the timestamp at which an alarm came on, was acknowledged and went off, all on the same alarm line. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+This is achieved using the following format strings in the line format.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Description
+ Format (Range)
+ On
+ Ack.
+ Off
+ 
+ 
+
+ Year
+ 2 digits
+ #YAlaOn
+ #YAlaAck
+ #YAlaOff
+ 
+ 
+
+ Year
+ 4 digits
+ #yAlaOn
+ #yAlaAck
+ #yAlaOff
+ 
+ 
+
+ Month
+ 2 digits (1 - 12)
+ #MAlaOn
+ #MAlaAck
+ #MAlaOff
+ 
+ 
+
+ Day
+ 2 digits (1 - 31)
+ #DAlaOn
+ #DAlaAck
+ #DAlaOff
+ 
+ 
+
+ Hour
+ 2 digits (0 - 23)
+ #hAlaOn
+ #hAlaAck
+ #hAlaOff
+ 
+ 
+
+ Minutes
+ 2 digits (0 - 59)
+ #mAlaOn
+ #mAlaAck
+ #mAlaOff
+ 
+ 
+
+ Seconds
+ 2 digits (0 - 59)
+ #sAlaOn
+ #sAlaAck
+ #sAlaOff
+ 
+ 
+
+ Milliseconds
+ 3 digits (0 - 999)
+ #lAlaOn
+ #lAlaAck
+ #lAlaOff
+ 
+ 
+ 
+
+ 
+When creating an Alarm Viewer with the three timestamps on the same line it should be configured so that it can operate in List mode only.
+ 
+By default, timestamp of future transitions are represented with a question mark. This character can be replaced by another one by modifying the following HMI option: Replacement symbol if alarm timestamp does not exist.
+
+
+========================================
+TOPIC: AlarmViewer_context_config.htm
+========================================
+Configuring the context menu
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Alarm Viewer Context Menu
+ 
+The Menu tab is used to select which tools are available at run-time from the context menu. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+The tools that are displayed at run-time also depend on if any alarms are selected at the time the context menu is opened. See the topic Using the context menu.
+ 
+The tools are grouped as follows.
+ 
+ 
+Alarm display filters - See the topic Configuring the Alarm Viewer Filter.
+ 
+Alarm acknowledge - User actions to acknowledge selected or all alarms.
+ 
+Alarm mask - User actions to mask or unmask selected alarms.
+ 
+Maintenance - User actions to control maintenance mode. See the topic Using the Alarm Viewer with Alarms in Maintenance 
+ Mode.
+ 
+Others - Other general commands, print selected alarms and change the Alarm Viewer mode.
+ 
+ 
+
+ 
+The behavior at run-time, what exactly the user will have access to on right-click also depends on other features such as alarm associated actions and context mimics, as well as how mouse inputs handling options are defined in the HMI General Options.
+ 
+See Using the Using the context menu for more information.
+
+
+========================================
+TOPIC: AlarmViewer_context_menu.htm
+========================================
+Using the context menu
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Alarm Viewer Context Menu
+ 
+The Alarm Viewer context menu is available if the property Use context menu has been enabled in the Alarm Viewer's configuration. It is opened by right clicking anywhere in the alarm line display area.
+The available tools depend on the configuration of the alarm viewer (Menu tab), and if one or more alarms are selected. Commands available in the context menu correspond to those available in the toolbar, and have the same behavior.
+ 
+The following screen shot shows all available tools. Show picture
+ 
+
+ 
+ 
+ 
+The tools are divided in 3 sections:
+ 
+ 
+Filtering - The 1st section comprises buttons to change the alarm display filter. Any change in the filter applies to the alarm viewer as a whole.
+ 
+User actions - The 2nd section comprises button to control the alarm status: Acknowledge, mask... Unless otherwise stated, the action applies to all selected alarms.
+ 
+Commands - The 3rd section comprises general command buttons: To change the mode or print alarms.
+ 
+ 
+Interaction with other Alarm Viewer actions
+ 
+There are two other forms of actions from the Alarm Viewer triggered by clicking with the mouse. How these behave will depend on how Mouse inputs have been configured in the HMI General Options. 
+ 
+ 
+Associated actions - If associated actions are configured for a right mouse click, and the context menu is enabled, on a right mouse click they appear in the context menu above the other tools.
+ 
+Context mimic - If the context mimic action is configured for a right mouse click, and the context menu is enabled, on a right mouse click the name of the context mimic appears in the context menu above the other tools.
+ 
+ 
+
+ 
+The context mimic and the context menu are two entirely separate features other than the interaction mentioned above.
+
+
+========================================
+TOPIC: AlarmViewer_Creating.htm
+========================================
+Creating an Alarm Viewer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Creating an Alarm Viewer
+ 
+The Alarm Viewer is extremely flexible in its appearance 
+ and operation, so there are many 
+ configurable properties.
+ 
+The procedure for creating an Alarm Viewer follows. Show picture
+ 
+ 
+Open the window in 
+ which the Alarm Viewer will be inserted and select Design mode.
+ 
+Select the Alarm 
+ Viewer tool from either the animation toolbar or the menu.
+ 
+An Alarm Viewer 
+ will be created and its properties dialog automatically opened.
+ 
+ 
+Once you have created an Alarm Viewer, 
+ and closed its properties box, it can be moved, sized and copied the same 
+ as any other drawing element.
+ 
+The Alarm Viewer configuration dialog contains five tabs for the various aspects of the configuration.
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Display - General display features. See also the topic Configuring the line format.
+ 
+Aspect - General appearance - the same as the Aspect tab of all drawing elements.
+ 
+Execution - Properties that select the tools available to the User at run-time. See the topic Configuring the run-time behavior.
+ 
+Filters - Selection of the alarm transitions to display. See the topic Configuring the filter.
+ 
+Menu - Configuration of the run-time context menu. See the topic Configuring the context menu.
+ 
+ 
+Configuring the general display features
+ 
+ 
+Toolbar and menu - The appearance and location of the toolbar at run-time. 
+A drop-down list box is used to select the size of the icons on the toolbar. The space that the toolbar occupies depends on selected size. If None is selected the toolbar is not displayed.
+The position and configuration of the toolbar, but not the size of the icons, can be changed by the User at run-time unless you specifically disable that capability in the Execution tab.
+ 
+Use context menu - Enable the run-time context menu.
+ 
+Scrollbars - The availability and width of the vertical and horizontal scroll bars. The default setting of a vertical scroll bar only is used in most applications.
+ 
+Background - The background color of the display.
+ 
+Alternative color of text - The alternative text color for projects configured with legacy versions of PcVue that did not have the capability to select the two colors for blinking alarms.
+ 
+ 
+
+ 
+The ability to define the size of the icons and the width of the scrollbar allows the application designer to adapt the viewer if touch screens are used at runtime.
+ 
+ 
+
+ 
+You can specify more properties to control the graphical element visibility. From the Aspect tab, behind the down arrow at the bottom of the Properties dialog box:
+ 
+ 
+
+ 
+Specify zoom visibility bounds so that the graphic control is only visible for predefined zoom levels.
+ 
+ 
+
+ 
+Specify layers so that the graphic control is only visible if one of the selected layers is displayed.
+ 
+ 
+ 
+These are even more useful when combined with user permissions and decluttering templates.
+
+
+========================================
+TOPIC: AlarmViewer_Invoking_an_alarms_associated_action.htm
+========================================
+Using the Alarm Viewer to invoke an alarm's associated action
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Alarm Viewer to Invoke an Alarm's Associated Action
+ 
+If you configured one or more associated actions when 
+you created an alarm, you may access them from the Alarm Viewer by clicking on the alarm with the mouse. A list of associated actions 
+will appear adjacent to the mouse pointer. To select the action click 
+on it with the left mouse button. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+If the context menu has been enabled, and associated actions have been configured for the right mouse button, the associated actions appear as part of the context menu.
+
+
+========================================
+TOPIC: AlarmViewer_Mode.htm
+========================================
+Configuring the Alarm Viewer's run-time behavior
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Alarm Viewer's Display Mode
+ 
+The run-time display mode (that is the way that the alarm list behaves) is configured using the Execution tab. Show picture
+
+ 
+The Alarm Viewer has two basic operating modes On-line and List. The behavior of the Alarm Viewer very different depending on what options are selected. For a full explanation, see the topics Using the Alarm Viewer in list mode and Using the Alarm Viewer in On-line mode.
+ 
+Configuring the mode of an Alarm Viewer when the containing mimic is opened
+ 
+The main operating mode is when the Alarm Viewer is first opened is configured by the following properties.
+ 
+ 
+On line - Start the 
+Alarm Viewer in On-line mode.
+ 
+List - Start the Alarm Viewer in List mode.
+ 
+Display new alarms at the bottom (top) of the list - Determines the initial chronological order of the alarms. Either the newest at the bottom or newest at the top. 
+ 
+ 
+Other display options
+ 
+ 
+Realtime buffer - 
+The maximum number of lines that can be displayed. Range 1 to 32000.
+In On-line mode, it is the maximum number of alarm transitions that can be temporarily stored.
+In List mode, it is the maximum number of alarms. 
+ 
+Move alarms to top when status changes - When the status of an alarm already displayed in the Alarm Viewer changes it is moved to the top. Only available when the opening mode is set to List and Display new alarms at the top.
+ 
+Move alarms to bottom when status changes - When the status of an alarm already displayed in the Alarm Viewer changes it is moved to the bottom. Only available when the opening mode is set to List and Display new alarms at the bottom.
+ 
+Scroll display 
+to the oldest - When the Alarm Viewer is opened, the list 
+scrolls so that the oldest alarm event in the list is visible. 
+The order of alarms in the list is not affected. When this option is selected, the Alarm Viewer can 
+only be used in List Mode.
+ 
+Advanced color mode -Both the stroke and background colors for each alarm level, as defined in Color Preferences, are used in the alarm list. Normally the background color is not used, the background color being defined by the configuration of the Alarm Viewer.
+ 
+ 
+Line selection mode
+ 
+ 
+By checkbox - A checkbox is displayed to the left of each line. When the line is selected 
+ at run-time (for acknowledge or masking) the checkbox will be checked.
+ 
+Color reversal - When the line is selected at run-time (for acknowledge or 
+masking) the foreground and background colors will swap. This is the default mode.
+
+
+========================================
+TOPIC: AlarmViewer_Overview.htm
+========================================
+Alarm Viewer overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Alarm Viewer Overview
+ 
+The Alarm Viewer is a control that displays 
+a list of the current state of alarms. Any number of Alarm Viewers may be embedded in a window, the only limitation being the amount of physical space available.
+ 
+ 
+Alarm Viewers may 
+be embedded in any mimic.
+ 
+Unlimited number 
+of Alarm Viewers in each project.
+ 
+Size of alarm list configurable from 1 line to maximum allowed by screen resolution.
+ 
+The alarms to be displayed may be filtered by Domain and Nature, level and status. For example, all alarms on and not acknowledged.
+ 
+The format of the 
+alarm text 100% configurable.
+ 
+Toolbar and context menu to select which alarm transitions are displayed, acknowledge alarms, mask alarms 
+ and change the mode of operation.
+ 
+Filter tool to select the Domain, Nature and level of the alarms that are displayed.
+ 
+Can be scripted by 
+SCADA Basic for more advanced features.
+ 
+Can have a context mimic. For details, see the topic Developing the HMI.Working with Mimics.Context Mimics.Opening a Context Mimic Using the Right-hand Mouse Button.
+ 
+ 
+Show picture
+
+
+========================================
+TOPIC: AlarmViewer_Overview_at_run-time.htm
+========================================
+Overview of the Alarm Viewer at run-time
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the Alarm Viewer at Run-time
+ 
+The Alarm Viewer displays, in a scrollable list, the 
+ current (real-time) status of all alarms that pass its filter criteria. 
+ The filter can operate on the Domain and Nature, alarm level and alarm 
+ status. The filter is initially configured during development and may 
+ also be changed at run-time should the configuration allow it.
+ 
+Alarms are special bit variables that have the alarm 
+ property enabled. An alarm may be generated from either the 1 or 0 state 
+ of the bit and is given a level of 0 to 29. An optional masking bit or 
+ alarm may also be selected. A bit with alarm attributes behaves differently 
+ to a standard bit in that, instead of having three states (true, false 
+ and invalid), it has five.
+ 
+ 
+Off.
+ 
+On and not acknowledged.
+ 
+On and acknowledged.
+ 
+Off and not acknowledged.
+ 
+Unavailable (a general 
+ term for when an alarm is not operating normally for a variety of reasons).
+ 
+ 
+The colors in which alarms appear are defined by the 
+ Alarm on Text tab of the Preferences.Colors dialog box. In normal mode, 
+ only the foreground (font) color is used, the background color being 
+ taken from the Alarm Viewer itself. In advanced mode, both the foreground 
+ and background colors are used.
+ 
+Selecting Alarms
+ 
+Individual alarms are selected by clicking on the relevant line 
+ in the display list. A selected alarm is indicated 
+ by displaying it in reverse video (unless the alarm display is in advanced 
+ color mode - see below). Selected alarms can be acknowledged, printed, 
+ masked or un-masked using the tools on the toolbar or the context menu, and copied to the Windows clipboard using the Ctrl+C keyboard shortcut.
+ 
+
+ 
+If you enable the Context property, it will not be possible 
+ to select and hence acknowledge, mask or un-mask alarms directly from 
+ the alarm display. Instead, clicking on an alarm will open the Alarm Viewer 
+ context window.
+
+
+========================================
+TOPIC: AlarmViewer_run-time_tools.htm
+========================================
+Configuring the Alarm Viewer's run-time behavior
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Alarm Viewer's Run-time Tools
+ 
+The run-time tools, to which the User has access, are configured using the Execution tab. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Printing - If selected, 
+ the User can print selected alarm information, on the specified printer, 
+ directly from the display. The print format can be customized using the Format property and substitution strings.
+ 
+Acknowledgement - 
+ If selected the User can acknowledge alarms.
+ 
+Mask/unmask - If 
+ selected the User can mask and unmask alarms.
+ 
+Filtering - If selected 
+ the User can change the alarm filter.
+ 
+Multi-selection - 
+ If selected the User can select more than one alarm at a time in the alarm 
+ list.
+ 
+Size of Columns - 
+ If selected, the User can change the width of columns at run-time by clicking 
+ and dragging with the mouse on the header.
+ 
+Toolbar Position 
+ - If selected the User can change the toolbar position at run-time.
+ 
+Toolbar Modification 
+ - If selected, the User can change the toolbar configuration at run-time.
+ 
+Context - If selected, 
+ when the User clicks on an alarm line at run time the context window for 
+ Alarm Viewers is opened.
+ 
+Enable sorting - Enables sorting of the alarm list at run-time using the selected column and direction. To select a column for sorting the Sort modification property must also be selected. Enable Sorting is not available in On-line mode.
+ 
+Sort modification - Allows the User to change the column used to sort the alarms at run-time. Enable sorting must be selected before Sort modification can be selected.
+ 
+ 
+
+ 
+If you want to change the column width or modify the toolbar, 
+ but do not want the User to do so, enable the properties and make the 
+ changes at run-time and then disable the properties again. The changes 
+ to the display will be saved.
+ 
+If you want to change the sort column, but do not want the User to do so, enable Sort modification and then disable it after the sort column has been changed.
+ 
+ 
+
+ 
+If you enable the Context property it will not be possible 
+ to select individual alarms and hence acknowledge, mask or un-mask them 
+ directly from the Alarm Viewer.
+ 
+ 
+Changing the way that the list is sorted
+ 
+Using the properties Enable sorting and Sort modification, you can temporarily sort the contents of the Alarm Viewer using the contents of any column into either ascending or descending order.
+ 
+ 
+A column containing numeric data only will cause a numeric sort. For example, using ascending sorting, 2 would be before 3.
+ 
+A column containing alphanumeric data will cause an alphabetic sort. For example, using ascending sorting, 20RedCars would be before 3GreenCars. The first character 2, comes before 3.
+ 
+A column containing time and/or date information will cause a time/date sort.
+ 
+ 
+You can use the Timestamp column as a sort key. The Display new alarms at the top of the list option is ignored if the alarms are sorted according to the timestamp. If multiple lines have the same value in the sorted column (for example when sorting on an extended attribute), the timestamp column is used as a secondary sort criterion.
+
+
+========================================
+TOPIC: AlarmViewer_sorting.htm
+========================================
+Sorting the contents of an Alarm Viewer by column
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Sorting the Contents of an Alarm Viewer by Column
+ 
+When in List mode, the Alarm Viewer contents can be sorted according to the contents of any column. By default, it is sorted according to the date and time with the most recent alarms at the bottom of the list. If configured to permit it, the sort direction and/or the column on which the sort is made can be changed at run-time by clicking on the column header.
+ 
+The sorting is intelligent and depends on the contents of the sorted column.
+ 
+ 
+A column containing numeric data only such as the Priority will cause a numeric sort. For example, using ascending sorting, priority 0 would be above priority 3.
+ 
+A column containing alphanumeric data such as the Description will cause a character sort. For example, using ascending sorting, "BLACK CAR", would be above "GREEN CAR". The first character "B", comes before "G" in the ASCII character set. But "3 BLACKCAR", would be below "1 GREEN CAR". The first character "3", comes after "1" in the ASCII character set.
+ 
+A column containing timestamp (time and/or date) information will cause a time/date sort. For example, using an ascending sort 10:00:13 is above 10:00:20.
+ 
+ 
+
+ 
+By ascending, we mean values get greater from the top to the bottom of the list.
+
+
+========================================
+TOPIC: AlarmViewer_Using_in_advanced_colour_mode.htm
+========================================
+Using the Alarm Viewer in advanced color mode
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Alarm Viewer in Advanced Color Mode
+ 
+In advanced color mode both the stroke and background 
+ color of an alarm are used. When you select an alarm by clicking on it, 
+ instead of the foreground and background colors swapping a tick appears 
+ on the left hand side of the alarm. All other operational features are 
+ the same as when used in standard mode. Show picture
+
+
+========================================
+TOPIC: AlarmViewer_Using_in_list_mode.htm
+========================================
+Using the Alarm Viewer in list mode
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Alarm Viewer in List Mode
+ 
+List mode is indicated by the following icon displayed as the mode tool. 
+ 
+When the Alarm Viewer is opened a list of eligible alarms statuses are displayed. The order in which they appear, and how new eligible alarm transitions are displayed, depends on the Alarm Viewer's configuration (execution tab).
+ 
+What do we mean by eligible alarms?
+ 
+An eligible alarm status or alarm transition is one that passes the filter criteria configured for the Alarm Viewer. See the topic Using the Alarm Viewer filter.
+ 
+How the Execution tab properties affect the operation of the viewer
+ 
+ 
+Display new alarms at the top of the list - When the Alarm Viewer is opened eligible alarms are sorted in chronological order with the newest at the top. New alarms (that is alarms that do not already appear in the list) are added to the top of the list. The way in which new eligible alarm transitions, for alarms that already appear on the list, are treated depends on the property Move alarms to top when status changes.
+If Move alarms to the top when status changes is not set - The line displaying the alarm is updated with the new status and timestamp but remains where it is in the list. The alarms will therefore no longer appear in chronological order. Show picture
+
+If Move alarms to the top when status changes is set - The line displaying the alarm is updated with the new status and timestamp and moved to the top of the list. The alarm statuses therefore remain in chronological order. Show picture
+
+ 
+Display new alarms at the bottom of the list - When the Alarm Viewer is opened eligible alarms are sorted in chronological order with the newest at the bottom. New alarms (that is alarms that do not already appear in the list) are added to the bottom of the list. The way in which new eligible alarm transitions, for alarms that already appear on the list, are treated depends on the property Move alarms to bottom when status changes.
+If Move alarms to the bottom when status changes is not set - The line displaying the alarm is updated with the new status and timestamp but remains where it is in the list. The alarms will therefore no longer appear in chronological order. Show picture
+
+If Move alarms to the bottom when status changes is set - The line displaying the alarm is updated with the new status and timestamp and moved to the bottom of the list. The alarm statuses therefore remain in chronological order. Show picture
+
+ 
+Scroll display to the oldest - When the Alarm Viewer is opened the alarm list is automatically scrolled so that the oldest eligible alarm is visible. Show picture
+
+
+========================================
+TOPIC: AlarmViewer_Using_in_on-line_mode.htm
+========================================
+Using the Alarm Viewer in on-line mode
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Alarm Viewer in On-line Mode
+ 
+On-line mode is indicated by the following icon displayed as the mode tool. 
+ 
+When the Alarm Viewer is opened a list of eligible alarms statuses are displayed in the order that they last changed. New eligible alarm transitions are displayed in the order in which they occur. As each eligible alarm transition is displayed on a new line, the same alarm can appear several times. The alarm 
+ transitions are stored in the temporary display buffer that can be navigated using 
+ the scroll bar. If the mimic is closed the contents of the temporary display is lost. Selecting an alarm automatically switches the display 
+ to list mode.
+ 
+What do we mean by eligible alarms?
+ 
+An eligible alarm status or alarm transition is one that passes the filter criteria configured for the Alarm Viewer. See the topic Using the Alarm Viewer filter.
+ 
+How the Execution tab properties affect the operation of the viewer
+ 
+ 
+Display new alarms at the top of the list - When the Alarm Viewer is opened eligible alarms are sorted in chronological order with the newest at the top. New alarm transitions appear at the top and the list scrolls down to accommodate them. Show picture
+
+ 
+Display new alarms at the bottom of the list - When the Alarm Viewer is opened eligible alarms are sorted in chronological order with the newest at the bottom. New alarm transitions appear at the bottom and the list scrolls up to accommodate them. Show picture
+
+ 
+Move alarms to top when status changes - No effect.
+ 
+Move alarms to bottom when status changes - No effect.
+ 
+Scroll display 
+ to the oldest - On-line mode is not available if this option is selected.
+ 
+ 
+
+ 
+The sorting of columns by clicking on the header is not available in On-line Mode.
+
+
+========================================
+TOPIC: AlarmViewer_Using_the_filter.htm
+========================================
+Using the Alarm Viewer filter
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Alarm Viewer's Filter
+ 
+The alarm filter is displayed from the small command 
+ button below the scroll bar. From the filter dialog box, you can select 
+ the Domain and Nature, the alarm states and levels. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+Changing the alarm filter at run-time is only a temporary 
+ operation, when the window containing the Alarm Viewer is closed, the 
+ changes to the filter are lost.
+ 
+
+ 
+Any SQL filter entered in the Alarm Viewer's configuration is displayed. It can be temporarily cleared by clicking the Clear button, but not changed at run-time.
+
+
+========================================
+TOPIC: AlarmViewer_Using_the_toolbar.htm
+========================================
+Using the Alarm Viewer toolbar
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Alarm Viewer Toolbar
+ 
+The toolbar contains the tools used to select the Alarm 
+ Viewer mode, filter the alarms that are displayed and allow the user to act on alarms (acknowledgment, masking...).
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Mode selection - Select On-line mode. This button is only displayed when 
+ in List mode.
+ 
+ 
+
+ 
+ 
+ 
+ Mode selection - Select List mode. This button is only displayed when in 
+ On-line mode.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display alarms that are On and Not Acknowledged.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display alarms that are On and Acknowledged.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display alarms that are Off and Not Acknowledged.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display the alarms that are Off and Acknowledged.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display all alarms that are unavailable.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display alarms that are user masked.
+ 
+ 
+
+ 
+ 
+ 
+ User action - Acknowledge selected alarms.
+ 
+ 
+
+ 
+ 
+ 
+ User action - Acknowledge all displayed alarms.
+ 
+ 
+
+ 
+ 
+ 
+ User action - Mask selected alarms.
+ 
+ 
+
+ 
+ 
+ 
+ User action - Un-mask selected alarms.
+ 
+ 
+
+ 
+ 
+ 
+ Command - Print selected alarms.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display alarms that are masked by a program.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display alarms that are masked by dependency on another variable.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display alarms are inhibited.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display alarms that are not accessible.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display alarms that are masked by an expression.
+ 
+ 
+
+ 
+ 
+ 
+ Filtering - Display alarms that have maintenance mode set.
+ 
+ 
+
+ 
+ 
+ 
+ User action - Start maintenance mode on an alarm.
+ 
+ 
+
+ 
+ 
+ 
+ User action - Stop maintenance mode on an alarm.
+ 
+ 
+ 
+ 
+
+ 
+The modes ENABLE and DISABLE of the SCADA Basic instruction VARIABLE are the only way to change the inhibition status of an alarm. As for any other type of variable, such changes done by script will be logged if the alarm is archived and the log list is configured appropriately.
+
+
+========================================
+TOPIC: AlarmViewer_Using_to_display_unavailable_alarms.htm
+========================================
+Using the Alarm Viewer to display unavailable alarms
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Alarm Viewer to Display Unavailable Alarms
+ 
+An alarm in the unavailable state no longer responds 
+ to changes in value of its source or User actions. The unavailable state 
+ may be caused by a number of conditions and an alarm will remain in the 
+ unavailable state until the condition or conditions that caused it are 
+ reversed or removed.
+ 
+In the Alarm Viewer, you can select the unavailable alarms to be displayed 
+ according to the condition that caused it. The event text that is displayed 
+ (using the #E format character) is specific to the condition, but the 
+ color is the same for all unavailable alarms of a particular level.
+ 
+The following conditions can cause an alarm to be unavailable.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Condition/Event (#E)
+ 
+ 
+ 
+Cause
+ 
+ 
+ 
+
+ 
+ 
+Alarm operator masked
+ 
+ 
+ 
+The User has masked the alarm using the Alarm Viewer 
+ or it has been masked using the SCADA Basic instruction ALARM.
+ 
+ 
+ 
+
+ 
+ 
+Alarm program masked
+ 
+ 
+ 
+The alarm has been masked by the SCADA Basic instruction 
+ VARIABLE.
+ 
+ 
+ 
+
+ 
+ 
+Alarm variable masked
+ 
+ 
+ 
+The mask variable, as selected in the alarm variable's 
+ configuration, is true.
+ 
+ 
+ 
+
+ 
+ 
+Alarm inhibited
+ 
+ 
+ 
+The Inhibited property has been selected in the Advanced 
+ tab of the variable's configuration or it has been inhibited by script.
+ 
+ 
+ 
+
+ 
+ 
+Alarm not accessible
+ 
+ 
+ 
+The source of the alarm variable is unavailable. For example, 
+ communication to a PLC has failed.
+ 
+ 
+ 
+
+ 
+ 
+Alarm expression masked
+ 
+ 
+ 
+The expression, as selected in the Advanced tab of the 
+ alarm variable's configuration, is true.
+ 
+ 
+ 
+ 
+
+ 
+If you select the option to display all alarms that are 
+ unavailable, using the alarm icon on the tool bar, the event 
+ text that is normally specific to the condition is replaced with Alarm 
+ Unavailable and all unavailable alarms are displayed, irrespective of the reason.
+
+
+========================================
+TOPIC: AlarmViewer_Using_variables_as_alarm_counters.htm
+========================================
+Using Variables as alarm counters
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using Variables as Alarm Counters
+ 
+Certain variable names are recognized as having special 
+ significance. These variables are automatically updated to provide information 
+ about the system operation that would otherwise be unavailable to the 
+ User. Included in this category are a range of register variables that may be used to count and display the number of alarms by state, level, 
+ Domain and Nature.
+ 
+These variables are not created automatically, they must 
+ be created as part of the project configuration by the Developer if they 
+ are to be used. The variables and the information that they contain are 
+ as follows.
+ 
+Variable names of SYSTEM.<TYPE>.<PRIORITY> 
+ format
+ 
+The value of TYPE determines which alarm state is counted.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Type
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 
+ 
+0 or ACKOFF
+ 
+ 
+ 
+Alarm off.
+ 
+ 
+ 
+
+ 
+ 
+1 or NOACKON
+ 
+ 
+ 
+Alarm on and not acknowledged.
+ 
+ 
+ 
+
+ 
+ 
+2 or NOACKOFF
+ 
+ 
+ 
+Alarm off and not acknowledged.
+ 
+ 
+ 
+
+ 
+ 
+3 or ACKON
+ 
+ 
+ 
+Alarm on and acknowledged.
+ 
+ 
+ 
+
+ 
+ 
+4 or NS
+ 
+ 
+ 
+Alarm invalid (not Set).
+ 
+ 
+ 
+
+ 
+ 
+5 or USERMASK
+ 
+ 
+ 
+Alarms masked by the operator.
+ 
+ 
+ 
+ 
+The value of PRIORITY determines which alarm level is 
+ counted. The range is 0 to 29. Alternatively, ALL may be used to count 
+ alarms of all priorities.
+ 
+Variable names of SYSTEM.<TYPE>.<PRIORITY>.<DOM_NAT> 
+ format
+ 
+System alarm counters by type, priority, Domain and Nature.
+ 
+DOM_NAT is a string that determines which Domain and 
+ Nature is to be taken into consideration. The character used to separate the Domain and 
+ Nature is normally an underscore but may be changed using the Project.General 
+ Operation box. The wild character * may be used to signify all Domains 
+ or all Natures.
+ 
+
+ 
+Do not create both versions of an alarm counter register, 
+ for example SYSTEM.3.8 and SYSTEM.ACKON.8.
+ 
+ 
+Examples
+ 
+SYSTEM.3.8 or SYSTEM.ACKON.8
+ 
+A register variable that counts all alarms of level 8 
+ that are On and Not Acknowledged.
+ 
+SYSTEM.1.ALL.ZONE1_ELEC or SYSTEM.NOACKON.ALL.ZONE1_ELEC
+ 
+A register variable that counts all alarms On and Not A acknowledged in Domain ZONE1 and nature ELEC.
+ 
+SYSTEM.3.15.*_CONTROL or SYSTEM.ACKON.15.*_CONTROL
+ 
+A register variable that counts all level 15 alarms with 
+ the CONTROL nature that are On and Acknowledged.
+
+
+========================================
+TOPIC: AlarmViewer_Using_with_alarms_in_maintenance_mode.htm
+========================================
+Using the Alarm Viewer with alarms in maintenance mode
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Alarm Viewer with Alarms in Maintenance 
+ Mode
+ 
+Maintenance Mode is used to modify the behavior of an 
+ alarm so that equipment maintenance can be taken into account. A typical 
+ scenario where maintenance mode might be used follows.
+ 
+ 
+An alarm occurs due 
+ to equipment requiring maintenance.
+ 
+The User acknowledges 
+ the alarm and calls the maintenance department.
+ 
+The User puts the 
+ alarm in maintenance mode. This action can be logged showing the condition 
+ has been recognized by the User. 
+ 
+The maintenance department 
+ carries out the required action and resets the cause of the alarm so that 
+ the alarm is no longer present (Alarm - off).
+ 
+The User removes 
+ the alarm from maintenance mode.
+ 
+ 
+When an alarm has been set in Maintenance Mode its behavior 
+ is modified as shown in the following state diagram. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+The new alarm behavior may be summarized as follows.
+ 
+ 
+The alarm now has 
+ only two possible states, Alarm on - Ack or Alarm off.
+ 
+The alarm is only 
+ visible in an Alarm Viewer with the Maintenance option selected.
+ 
+Changes of state 
+ of the alarm are no longer logged or printed.
+ 
+ 
+How to set Maintenance Mode on an alarm
+ 
+An alarm may be set to maintenance mode using an Alarm 
+ Viewer by first selecting the alarm and then clicking the Start Maintenance 
+ button on the tool bar. An alarm may also be set to maintenance 
+ mode using a SCADA BASIC program. An alarm may only be set to maintenance 
+ mode when it is in the Alarm On - Ack state.
+ 
+How to clear Maintenance Mode on an alarm
+ 
+An alarm may be cleared from maintenance mode using an 
+ Alarm Viewer by first selecting the alarm and then clicking the Stop 
+ Maintenance button on the tool bar. An alarm may also be 
+ cleared from maintenance mode using a SCADA BASIC program. An alarm may 
+ only be cleared from maintenance mode when it is in the Alarm Off state.
+ 
+How to display a list of Alarms in maintenance mode
+ 
+You can display a list of alarms in maintenance mode 
+ in an Alarm Viewer with the maintenance property selected. This is selected 
+ either at design time by selecting the Maintenance property in the Filter 
+ tab, or at run time using the Maintenance button on the toolbar or Maintenance 
+ property in the Alarm Filer dialog.
+ 
+Alarms that have maintenance mode selected 
+ can be in one of two states, Alarm on - Ack or Alarm off.
+ 
+Logging maintenance mode
+ 
+Changes to alarms that are in maintenance mode are no longer logged. However, the action of selecting or clearing maintenance mode is logged and treated if a log list is configured to log such user actions in the same way as acknowledging or masking an alarm.
+
+

@@ -1,0 +1,2227 @@
+========================================
+TOPIC: Audit_acquisition_counter.htm
+========================================
+Audit system variables - data acquisition counters
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Audit System Variables - Data Acquisition Counters and Flow Regulation
+ 
+The following variables reflect the number of data changes that are in a pending or waiting state. Show picture
+ 
+
+ 
+To notify a data change to a destination manager, the source manager creates a message containing the data change and posts it to the destination manager mailbox. These messages are counted in the pending state counter. When there are too many data changes, the flow regulation is activated. In this state any data changes are not posted immediately, instead they are stored in a FIFO (only the most recent transition). The data changes in the FIFO are counted in the waiting state counter
+ 
+ 
+All the variables are registers except where indicated otherwise.
+ 
+System.Audit.<Source>.DA.Number.VariableDataChange.PendingInMailbox.<Manager>
+ 
+The number of pending data changes for each manager.
+ 
+Example: System.Audit.Equipment.DA.Number.VariableDataChange.PendingInMailbox.UserInterface
+ 
+System.Audit.<Source>.DA.Number.SingleItemDataChange.PendingInMailbox.VarManager
+ 
+The number of pending single data changes in the Variable Manager mailbox.
+ 
+System.Audit.<Source>.DA.Number.PacketItemDataChange.PendingInMailbox.VarManager
+ 
+The number of pending packet data changes in the Variable Manager mailbox.
+ 
+System.Audit.<Source>.DA.Number.VariableDataChange.WaitingInFIFO.VarManager
+ 
+The number of waiting data changes in the FIFO of the Variable Manager.
+ 
+System.Audit.<Source>.DA.Number.VariableDataChange.WaitingInFIFO.LAN
+ 
+The number of waiting data changes in the FIFO of the LAN Manager.
+ 
+System.Audit.<Source>.DA.Number.VariableDataChange.Waiting.OPCServer
+ 
+The number of waiting data changes in the list of the OPC server Manager.
+ 
+System.Audit.<Source>.DA.ElapsedTime.VariableDataChange.ActiveFlowRegulation
+ 
+The elapsed time, in milliseconds, during which there has been active flow regulation. Reset on return to passive regulation.
+ 
+System.Audit.<Source>.DA.Number.VariableDataChange.LostTransitions
+ 
+The number of lost transitions during active flow regulation. Reset on return to passive regulation.
+ 
+System.Audit.<Source>.State.VariableDataChange.ActiveFlowRegulation
+ 
+Variable type: Bit.
+ 
+Set to 1 if flow regulation is active else 0.
+ 
+Example: System.Audit.Equipment.State.VariableDataChange.ActiveFlowRegulation
+
+
+========================================
+TOPIC: Audit_acquisition_flow.htm
+========================================
+Audit system variables - data acquisition flows
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Audit System Variables - Data Acquisition Flows
+ 
+The following variables reflect the data flow in the Variable Manager for variable values being acquired to be sent to other managers. All the variables are registers. Show picture 
+ 
+System.Audit.<Source>.DA.Flow.ItemDataChange.Input.VarManager
+ 
+The flow of data items to the Variable Manager from a particular data source. Each data item is attached to a single variable in the Variables Tree.
+ 
+Example: System.Audit.ALL.DA.Flow.ItemDataChange.Input.VarManager
+ 
+System.Audit.<Source>.DA.Flow.PacketItemDataChange.Input.VarManager
+ 
+The flow of data packets to the Variable Manager from a particular data source. For example, for an OPC server (source = OPCClient) it is the number of item arrays per second, for a native driver (source = Equipment) it is the number of frames per second.
+ 
+System.Audit.<Source>.DA.Flow.DetectedVariableDataChange.Input.VarManager
+ 
+The flow of variable changes (after treatment such as deadband) detected by the Variable Manager from a particular data source.
+ 
+System.Audit.<Source>.DA.Flow.VariableDataChange.QualityGood.Output.VarManager
+ 
+The flow of variable changes with good quality sent by the variable manager to all consuming managers.
+ 
+System.Audit.<Source>.DA.Flow.VariableDataChange.QualityBad.Output.VarManager
+ 
+The flow of variable changes with bad quality sent by the variable manager to all consuming managers.
+ 
+System.Audit.<Source>.DA.Flow.VariableDataChange.Input.<Manager>
+ 
+The flow of variable changes sent to a particular manager.
+ 
+Example: System.Audit.ALL.DA.Flow.VariableDataChange.Input.Historical
+
+
+========================================
+TOPIC: Audit_bandwidth.htm
+========================================
+Estimating the bandwidth in a networked application
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Estimating the Bandwidth Used in a Networked Application
+ 
+The Byte Sent and Byte Received counters in the Flow Counters.LAN flow counters can be used when estimating the bandwidth required by PcVue. The same information can also be found in the LAN Flow Counter section of the audit file. Show picture (Server side) Show Picture (Client side)
+
+
+========================================
+TOPIC: Audit_command_counter.htm
+========================================
+Audit system variables - data command counters
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Audit System Variables - Data Command Counters
+ 
+The following variable reflect the number of data commands in a pending state in the Variable Manager. Show picture
+ 
+
+ 
+To send a command from the source manager to the Variable manager, the source manager creates a message packaging the command and posts it to the Variable Manager's mailbox. These messages are counted in the pending in mailbox counter. When the command has been sent to the source device, but is yet to be acknowledged, the command is in the write pending state. These commands are counted in the write pending counter.
+ 
+ 
+All the variables are registers except where indicated otherwise.
+ 
+System.Audit.<Source>.DC.Number.SingleVariableCommand.PendingInMailbox.VarManager
+ 
+The number of pending single variable commands in the Variable Manager's mailbox.
+ 
+System.Audit.<Source>.DC.Number.PacketVariableCommand.PendingInMailbox.VarManager
+ 
+The number of pending packet variable commands in the Variable Manager's mailbox.
+ 
+System.Audit.<Source>.DC.Number.SingleItemCommand.PendingInMailbox
+ 
+The number of pending single item commands in the source variable's mailbox.
+ 
+System.Audit.<Source>.DC.Number.PacketItemCommand.PendingInMailbox
+ 
+The number of pending packet item commands in the source variable's mailbox.
+ 
+System.Audit.<Source>.DC.Number.SingleItemCommand.WritePending
+ 
+The number of single item commands in write pending state.
+ 
+System.Audit.<Source>.DC.Number.PacketItemCommand.WritePending
+ 
+The number of packet item commands in write pending state.
+ 
+System.Audit.<Source>.DC.Number.SingleVariableCommand.WritePending.<Manager>
+ 
+The number of single variable commands in write pending state in the manager that sent the command.
+ 
+System.Audit.<Source>.DC.Number.PacketVariableCommand.WritePending.<Manager>
+ 
+The number of packet variable commands in write pending state in the manager that sent the command.
+ 
+System.Audit.<Source>.DC.Number.SingleItemCommand.Timeout
+ 
+The number of single command items in timeout.
+ 
+System.Audit.<Source>.DC.Number.PacketItemCommand.Timeout
+ 
+The number of packet command items in timeout.
+ 
+System.Audit.<Source>.DC.ElapsedTime.SingleVariableCommand
+ 
+The elapsed time to process a single command. The time starts when the command left the Variable Manager mailbox and the ends when the command is acknowledged by the source device.
+ 
+System.Audit.<Source>.DC.ElapsedTime.PacketVariableCommand
+ 
+The elapsed time to process a packet command. The time starts when the command left the Variable Manager mailbox and the ends when the command is acknowledged by the source device.
+
+
+========================================
+TOPIC: Audit_command_flow.htm
+========================================
+Audit system variables - data command flows
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Audit System Variables - Data Command Flows
+ 
+The following variables reflect the data flows in the Variable Manager for variable values generated by the other managers. Show picture
+ 
+The possible managers are:
+ 
+ 
+UserInterface - Values originate from VBA, Mimic animation, Expression & Recipe
+ 
+OPCServer - Values originate from an OPC client connected to PcVue&#160;
+ 
+Toolkit<X>
+ 
+Lan
+ 
+ 
+All the variables are registers.
+ 
+System.Audit.<Source>.DC.Flow.SingleVariableCommand.Output.<Manager>
+ 
+The flow of single variable writes to the Variable Manager from another manager.
+ 
+Example: System.Audit.ALL.DC.Flow.SingleVariableCommand.Output.UserInterface
+ 
+System.Audit.<Source>.DC.Flow.PacketVariableCommand.Output.<Manager>
+ 
+The flow of packet writes to the Variable Manager from another manager.
+ 
+System.Audit.<Source>.DC.Flow.SingleItemCommand.Output.VarManager
+ 
+The flow of single variable writes from the Variable Manager to the data source.
+ 
+Example: System.Audit.DC.Flow.OPCClient.SingleItemCommand.Output.VarManager
+ 
+System.Audit.<Source>.DC.Flow.PacketItemCommand.Output.VarManager
+ 
+The flow of packet variable writes from the Variable Manager to the data source.
+ 
+System.Audit.<Source>.DC.Flow.SingleVariableCommand.Input.VarManager
+ 
+The flow of single variable writes to the Variable Manager from all managers.
+ 
+System.Audit.<Source>.DC.Flow.PacketVariableCommand.Input.VarManager
+ 
+The flow of packet writes to the Variable Manager from all managers.
+
+
+========================================
+TOPIC: Audit_counters_tab.htm
+========================================
+Description of the counters tab
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Description of the Counters Tab
+ 
+The Counters tab contains four sets of counters. The display of each set is enabled by the corresponding tick box at the top of the tab.
+ 
+ 
+Object - System resource and configuration object counters. Used in conjunction with the instance counters to assess the size of the project, detect memory leaks and run-time overflows. See the topic Object counters.
+ 
+Time - Manager watchdogs and executable process timers. Used to detect when the project is remaining too long processing information in a particular manager. See the topic Time counters.
+ 
+Flow - Data flow counters associated with the change in variable values. Used to monitor data acquisition, data commands, trend recording, and for detecting run-time overflow. See the topic Flow counters.
+ 
+Instance - Counters of the number of Variables, Alarms and Expressions and messages between managers. Used in conjunction with the object counters to assess the size of the project, detect memory leaks and run-time overflows. See the topic Instance counters.
+ 
+ 
+Each set of counters is broken down further into a number of groups. The groups can be expanded or hidden, as required, using the arrow tool found on the far right hand side of the title of each group. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+To reduce the amount of information displayed in the Audit dialog any of the time, flow and instance counters, for which all values are zero when the dialog is opened, are hidden. If, subsequently, they become non-zero you must use the Refresh button to reveal them.
+
+
+========================================
+TOPIC: Audit_files.htm
+========================================
+Audit files
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Audit Files
+ 
+The information displayed in the Counters Tab of the Audit Dialog is periodically recorded in text files to be available for later analysis. The files are located under PcVue's root folder in Bin\Log files. The files are generated for each installed copy of PcVue, not for each project. The number of audit files and the period at which they are generated is configurable.
+ 
+Counters
+ 
+The main audit files in which all the counters are dumped. The files are named Audit.Counters.<xxxx>.txt where <xxxx> is 0000 for the first file that is generated, 0001 for the second file etc. Once the maximum file number has been used (default 9999) the oldest file is discarded and the sequence starts again. By default, the files are generated every 30 minutes while the application is running. See the topic Audit & diagnostics settings.
+ 
+System resource counters
+ 
+The system resource audit files contain counters connected with diagnosing memory or resource leaks. The files are named Audit.SpecificCounters.<xxxx>.txt and the mechanism by which they are generated is the same as for the main audit files. By default, the files are generated every 10 minutes while the application is running. See the topic Audit & diagnostics settings.
+ 
+Watchdog counters
+ 
+The watchdog audit files are only generated when a manager is in watchdog state. The files are named Audit.Watchdog.<xxxx>.txt and are the same format as the main audit files. The files are created as follows.
+ 
+ 
+The first six every 10 seconds
+ 
+The next three every 20 seconds
+ 
+The next two every 30 seconds
+ 
+The next two every 60 seconds
+ 
+Then every 5 minutes until the manager is no longer in the watchdog state
+ 
+ 
+Audit.LoadedManagers.txt
+ 
+Created during startup of the application when all the managers have loaded. Same format as Audit.Counters.<xxxx>.txt.
+ 
+Audit.StartedProject.txt
+ 
+Created during startup of the application when the project has loaded in all the managers. Same format as Audit.Counters.<xxxx>.txt.
+ 
+Audit.LastMinute.txt
+ 
+Updated (overwritten) once a minute while the application is running and then deleted when it is shutdown. Same format as Audit.Counters.<xxxx>.txt. If this file exists when the application is started (because of a crash or dirty previous shutdown) its contents is appended to the T file 
+ 
+Audit.StoppedProject.txt
+ 
+Created during shutdown of the application when the project has un-loaded in all the managers. Same format as Audit.Counters.<xxxx>.txt.
+ 
+Audit.DeletedProject.txt
+ 
+Created during shutdown of the application when the instances of all the managers have been deleted. Same format as Audit.Counters.<xxxx>.txt.
+ 
+Audit.UnloadedManagers.txt
+ 
+Created during shutdown of the application when the managers have un-loaded. Same format as Audit.Counters.<xxxx>.txt.
+
+
+========================================
+TOPIC: Audit_flow_counters.htm
+========================================
+Flow counters
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Flow Counters
+ 
+
+ 
+To reduce the amount of information displayed in the Audit dialog, flow counters for which all values are zero when the dialog is opened are hidden. If they become non-zero while the dialog is open, you must use the Refresh button to reveal them.
+ 
+ 
+Each flow counter contains the immediate value plus the highest five values and their timestamp's. The flow is the number of new instances of an object per second calculated using a 10-second rolling average. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+The flow counters generally reflect the activity of the variable manager and represent:
+ 
+ 
+ The flow of messages or values,
+ 
+ Sent by the variable manager (to other managers),
+ 
+Or received by the variable manager (from other managers).
+ 
+ 
+<Source> can be one of the following. Flow counters for which all values are zero are not displayed so at any one time only some of the flow counter sources will be displayed.
+ 
+ 
+All
+ 
+Internal
+ 
+External
+ 
+Equipment
+ 
+DDE
+ 
+OPC Client
+ 
+LonWorks
+ 
+BACnet
+ 
+IEC 61850
+ 
+IEC 60870-5
+ 
+DNP3
+ 
+SNMP Manager
+ 
+Sql variables
+ 
+OPC UA
+ 
+ 
+<Manager> can be one of the following. 
+ 
+ 
+All
+ 
+User Interface - Includes SCADA Basic, VBA, Expression, Recipes, Associated action, and the User Interface itself.
+ 
+Alarm
+ 
+Historical
+ 
+Lan
+ 
+OPC Server
+ 
+SV Manager Toolkit<X> with X in the range of 1 to 8
+ 
+Interop manager
+ 
+IEC 104 server
+ 
+ 
+Flow on data acquisition from <Source> source of variable
+ 
+The data flow in the Variable Manager for variable values being acquired and to be sent to other managers.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Input packet item
+ The flow of data packets to the Variable Manager from a particular data source. The contents of the packet depends on the source. For example, for an OPC server (source = OPC Client) it is the number of item arrays per second, for another driver (source = Equipment) it is the number of frames per second.
+ 
+ 
+
+ Input single item
+ The flow of single data items to the Variable Manager from a particular data source.
+ 
+ 
+
+ Detected data change
+ The flow of variable changes (after processing such as the application of a dead-band for register variables) detected by the Variable Manager from a particular data source.
+ 
+ 
+
+ Global dispatch - quality good
+ The flow of variable changes with good quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.
+ 
+ 
+
+ Global dispatch - quality bad
+ The flow of variable changes with bad quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.
+ 
+ 
+
+ Global dispatch bits
+ The flow of bit variable changes with good quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.
+ 
+ 
+
+ Global dispatch alarms
+ The flow of alarm variable changes with good quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.
+ 
+ 
+
+ Global dispatch registers
+ The flow of register variable changes with good quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.
+ 
+ 
+
+ Global dispatch texts
+ The flow of text variable changes with good quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.
+ 
+ 
+
+ Global dispatch per packet
+ Flow of variable changes sent by packet by the Variable Manager to all consuming local and remote managers from a particular data source.
+ 
+ 
+
+ Dispatch to <Manager>
+ The flow of variable changes received by a particular manager from a particular data source.
+ 
+ 
+ 
+ 
+Flow on data command from <Source> source of variable
+ 
+The data flows in the Variable Manager for variable values generated by the other managers.
+ 
+ There is one category of flow counters per source, and flows are given with a breakdown by sending manager.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Writing by packet of variable from <Manager> to Var
+ The flow of packet variable writes sent to the Variable Manager by a particular manager.
+ 
+ 
+
+ Variables written by packet from <Manager> to Var
+ The flow of single variable writes (inside packets) sent to the Variable Manager by a particular manager.
+ 
+ 
+
+ Writing of single variable from <Manager> to Var
+ The flow of single variable writes sent to the Variable Manager by a particular manager.
+ 
+ 
+ 
+ 
+Flow of item data command outgoing from var to <Source>
+ 
+The write item data flows by the Variable Manager to the particular data source.
+ 
+ There is one category of flow counters per source.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Writing by packet of items
+ The flow of packet item writes from the Variable Manager to the particular data source.
+ 
+ 
+
+ Writing of single item
+ The flow of single item writes from the Variable Manager to the particular data source.
+ 
+ 
+ 
+ 
+Flow on single variable data command by type of variable
+ 
+The data flows in the Variable Manager for variable values generated by the other managers using write commands.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Bit writing
+ The flow of single bit variable writes to the Variable Manager, from all managers, to all types of data source.
+ 
+ 
+
+ Alarm writing
+ The flow of single alarm variable writes to the Variable Manager, from all managers, to all types of data source.
+ 
+ 
+
+ Register writing
+ The flow of single register variable writes to the Variable Manager, from all managers, to all types of data source.
+ 
+ 
+
+ Text writing
+ The flow of single text variable writes to the Variable Manager, from all managers, to all types of data source.
+ 
+ 
+ 
+ 
+Flow on single variable data command by type of variable
+ 
+The data flows in the Variable Manager for variable values generated by the other managers using set commands.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Bit setting
+ The flow of single bit variable writes to the Variable Manager, from SCADA Basic or the Manager Toolkit, to all types of data source.
+ 
+ 
+
+ Alarm setting
+ The flow of single alarm variable writes to the Variable Manager, from SCADA Basic or the Manager Toolkit, to all types of data source.
+ 
+ 
+
+ Register setting
+ The flow of single register variable writes to the Variable Manager, from SCADA Basic or the Manager Toolkit, to all types of data source.
+ 
+ 
+
+ Text setting
+ The flow of single text variable writes to the Variable Manager, from SCADA Basic or the Manager Toolkit, to all types of data source.
+ 
+ 
+
+ Bit setting from SV Manager Toolkits
+ The flow of single bit variable writes to the Variable Manager, from one of the manager toolkit, to all types of data source.
+ 
+ 
+
+ Alarm setting from SV Manager Toolkits
+ The flow of single alarm variable writes to the Variable Manager, from one of the manager toolkit, to all types of data source.
+ 
+ 
+
+ Register setting from SV Manager Toolkits
+ The flow of single register variable writes to the Variable Manager, from one of the manager toolkit, to all types of data source.
+ 
+ 
+
+ Text setting from SV Manager Toolkits
+ The flow of single text variable writes to the Variable Manager, from one of the manager toolkit, to all types of data source.
+ 
+ 
+ 
+ 
+Flow on global dispatch of variable property change
+ 
+The data flow in the Variable Manager for variable properties sent to other managers.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Dispatch extended properties
+ Flow of dispatching all variable's extended properties.
+ 
+ 
+
+ Dispatch extended text properties
+ Flow of dispatching variable's extended text properties.
+ 
+ 
+
+ Dispatch extended binary properties
+ Flow of dispatching variable's extended binary properties.
+ 
+ 
+
+ Dispatch properties
+ Flow of dispatching variable's properties.
+ 
+ 
+ 
+ 
+LAN flow counter from/to all stations
+ 
+The data flow in the LAN Manager required to manage distributed variables.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Packets sent 
+ Flow of packets sent to all remote stations. A packet contains a number of messages.
+ 
+ 
+
+ Messages sent
+ Flow of messages sent to all remote stations.
+ 
+ 
+
+ Bytes sent
+ Flow of bytes sent to all remote stations. Along with the Bytes received counter, it can be used to calculate the network bandwidth.
+ 
+ 
+
+ Packets received
+ Flow of packets received from all remote stations. A packet contains a number of messages.
+ 
+ 
+
+ Messages received
+ Flow of messages received from all remote stations.
+ 
+ 
+
+ Bytes received
+ Flow of bytes received from all remote stations. Along with the Bytes sent counter, it can be used to calculate the network bandwidth.
+ 
+ 
+ 
+ 
+Messages between managers
+ 
+These counters represent the total message flow between the all of PcVue's managers.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ All messages
+ The flow of all types of message between managers. A message is a general term for the communication mechanism used between managers.
+ 
+ 
+
+ Request messages
+ The flow of Request type message between managers. When you send a Request, the target (recipient) manager must always return a response. The response can be an Ack or Nack message.
+ 
+ 
+
+ Mail messages
+ The flow of Mail message between managers. A Mail message is similar to a Request message except that the message is not acknowledgment by the target manager. For example, a mail message is used to notify an event log to the Historical Manager.
+ 
+ 
+ 
+ 
+Flow of requests to SNMP source
+ 
+Flow of requests sent to the SNMP Manager module. This includes:
+ 
+ 
+Request pending: Total
+ 
+Request pending: Get
+ 
+Request pending: Ping
+ 
+Request pending: Set
+ 
+Request pending: GetBulk
+ 
+Request pending: Probe
+ 
+Request in queue: Total
+ 
+Request in queue: Get
+ 
+Request in queue: Ping
+ 
+Request in queue: Set
+ 
+Request in queue: GetBulk
+ 
+Request in queue: Probe
+ 
+ 
+Flow around Historical Manager for archiving
+ 
+Flow related to archiving in proprietary, ODBC or free units, including:
+ 
+ 
+Global record events
+ 
+Local record events
+ 
+ 
+Flow related to archiving in database units, including:
+ 
+ 
+Dispatch HDS Trends
+ 
+Global record events
+ 
+Local record events
+ 
+ 
+Flow around Historical Manager for DbConnect
+ 
+Flow of commands for the DbConnect service.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Global Execute command: Total
+ Counter of requests send to remote station and executed locally.
+ 
+ 
+
+ Local Execute command: Total
+ Counter of requests executed locally.
+ 
+ 
+
+ Local Execute command: TestConnection
+ Counter of TestConnection requests executed locally.
+ 
+ 
+
+ Local Execute command: DataReader
+ Counter of DataReader requests executed locally.
+ 
+ 
+
+ Local Execute command: Scalar
+ Counter of Scalar requests executed locally.
+ 
+ 
+
+ Local Execute command: NonQuery
+ Counter of NonQuery requests executed locally.
+ 
+ 
+
+ Local Execute command failed: Total
+ Counter of requests failed locally.
+ 
+ 
+
+ Local Execute command failed: TestConnection
+ Counter of TestConnection requests failed locally.
+ 
+ 
+
+ Local Execute command failed: DataReader
+ Counter of DataReader requests failed locally.
+ 
+ 
+
+ Local Execute command failed: Scalar
+ Counter of Scalar requests failed locally.
+ 
+ 
+
+ Local Execute command failed: NonQuery
+ Counter of NonQuery requests failed locally.
+
+
+========================================
+TOPIC: Audit_instance_counters.htm
+========================================
+Instance counters
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Instance Counters
+ 
+Each instance counter contains the current value, the accumulated value since the start of PcVue and the allocated memory (in bytes) in current use. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Part of the instance counters reflect the message queuing and processing activity of the managers and represent quantity of messages sent by a manager or queued and waiting for processing.
+ 
+Other instance counters reflect the quantity of objects configured or being processed.
+ 
+Brief explanation of abbreviations used for PcVue's managers
+ 
+ 
+Startup � Synchronize the start of all other managers and manage the Event Viewer.
+ 
+Timer � Manage single shot and cyclic timers.
+ 
+Eqt � Data acquisition manager for Equipment drivers only.
+ 
+Var � Variables manager, alarms and other data acquisition mechanisms.
+ 
+UI � User interface manager.
+ 
+AlarmList � Alarm server for alarm viewer. Its main function is to manage subscription of the alarm filter lists.
+ 
+His � Manager for historical data.
+ 
+OpcSvr � OPC server. The manager hosting the OPC server.
+ 
+CfgSvr � Configuration server
+ 
+Alarm � Alarm manager.
+ 
+Interop - Interop manager.
+ 
+I104server - IEC 60870-5-104 Server.
+ 
+RPC - Manager for inter-process communication.
+ 
+Geo data - Manager for Geographical data.
+ 
+ 
+Brief explanation of message types
+ 
+Messaging is a general term to designate the communication mechanism used between managers. It is based on mailboxes and message exchanges between managers. There are different types of messages including:
+ 
+ 
+Request � When you send a Request, the target (recipient) manager must always return a response. The response message can be a positive acknowledgement (Ack) or a negative one (Nack).
+ 
+Good request response (Ack) � A positive acknowledgment of a Request message.
+ 
+Bad request response (Nack) � A negative acknowledgment of a Request message.
+ 
+Mail - Similar to a Request message except that the message is not acknowledged by the target manager. For example, a mail message is used to notify an event log to the Historical Manager.
+ 
+Subscribe - This type of message is used to watch an object such as a variable. The target manager must immediately return a response, good if the object is found, otherwise bad. The target manager must also generate a message for every change of state of the watched object.
+ 
+ 
+Brief explanation of variable kinds
+ 
+In order to accommodate the variety of needs, there are different kinds of variables. In term of audit, the main characteristic is the manager in charge of handling them:
+ 
+ 
+Variables: The main kind of variables, handled by the variable manager
+ 
+HMI variables: Kind of variable handled by the UI manager
+ 
+Temporary variables: Kind of variable handled by the UI manager
+ 
+% variables: Kind of variable handled by the UI manager
+ 
+ 
+See the topic About the Variables Tree for more information on these different kinds of variables.
+ 
+Counter of messages
+ 
+The following categories of counters are available:
+ 
+ 
+Counter of pending messages in manager mailbox: Counters of messages waiting to be processed in a manager�s mailbox. The current value should be around 0. Counters are given with a breakdown by manager.
+ 
+Counter of message by type and by source and target manager: Counters according to the type of message (see above), the target manager for the message and the source manager of the message. Counters are given with a breakdown by source manager, target manager and message type.
+ 
+Counter of subscribe messages by source and target manager: Counters of messages of type Subscribe according to the source and target managers. Counters are given with a breakdown by message type, source manager and target manager.
+ 
+Counter of good response to subscribe messages by source and target manager and by local and remote managers: Subscribe message counters according to their source and target managers, and the location of the source and target managers (local or remote station).
+ 
+Pending datachange by source: Current value should be around 0.
+ 
+Pending write command messages on variable by source and type: Counter of write command messages in a pending state. To write a variable, a message is created and sent to the variable manager. When the variable manager receives it, it calls the source of variable to process the write command. This message is deleted when the write is completed. Current value should be around 0. Counters are given with a breakdown by type of write command and variable source type.
+ 
+Pending single write command messages on variable by source and type: Counter of single write command messages in a pending state. To write a variable, a message is created and sent to the variable manager. When the variable manager receives it, it calls the source of variable to process the write command. This message is deleted when the write is completed. Current value should be around 0. Counters are given with a breakdown by variable source type and variable type.
+ 
+Pending write recipe command messages by type. Current value should be around 0.
+ 
+Pending write command to the device by source of variable. Current value should be around 0.
+ 
+Number of write command in error.
+ 
+Pending read command message on variable. Current value should be around 0.
+ 
+Pending read command by source of variable. Current value should be around 0.
+ 
+ 
+Counters for the networking manager (Lan)
+ 
+The following counters are available:
+ 
+ 
+Number of messages in waiting state before send
+ 
+Requests Pending
+ 
+Variable subscribes
+ 
+Number of client connections ready
+ 
+Cumulates packets sent
+ 
+Cumulates messages sent
+ 
+Cumulates bytes sent
+ 
+Cumulates messages received
+ 
+Cumulates bytes received
+ 
+Cumulates client connections aborted
+ 
+Cumulates server connections aborted
+ 
+Routed requests from VAR 
+ 
+ 
+Status on flow regulation
+ 
+ 
+
+ 
+ Current value=0 means regulation is off, 
+ 
+ 
+
+ 
+Current value=1 means regulation is on. 
+ 
+ 
+
+ 
+Cumulative value = number of off/on switches
+ 
+ 
+ 
+The following counters are available:
+ 
+ 
+Status of XXXX source: The status of the flow regulation for the source XXXX. If the current value is 0 then the regulation is off. If the current value is 1 then the regulation is on. The cumulative value is the number of times that the regulation has switched to active.
+ 
+Waiting data changes in the FIFO: During active regulation, data change are not dispatched. Instead, the most recent value only is stored in a FIFO. This counter is the number of waiting data changes in the FIFO.
+ 
+Lost transitions: During active regulation, only the most recent value is stored in FIFO. This counter is the number of lost values for all variables during current regulation period. It is reset when the regulation switches back to passive.
+ 
+ 
+Counters related to data acquisition
+ 
+There are counters specific to each data acquisition sources. They typically include configuration object counts, as well as counters reflecting the data acquisition activity. Because measuring activity cannot be the same for polling-based drivers and subscription or pub/sub drivers, these counters are mostly specific to the type of source.
+ 
+There are such counters for the following data source types and categories:
+ 
+ 
+Equipment: Equipment configuration
+ 
+BACnet: BACnet configuration, BACnet runtime, BACnet command
+ 
+DNP3: DNP3 configuration, DNP3 runtime
+ 
+IEC 60870-5: IEC 60870-5 runtime
+ 
+OPC client: OPC client runtime
+ 
+LonWorks: LonWorks runtime
+ 
+DDE: DDE runtime
+ 
+IEC 61850
+ 
+SNMP: SNMP Manager configuration, SNMP Manager runtime
+ 
+ 
+Counters specific to the file transfer services are also available:
+ 
+ 
+Background file operation
+ 
+Device file transfer
+ 
+ 
+Counters for the variable manager (Var)
+ 
+The following categories of counters are available:
+ 
+Counters of configuration objects in variable manager - Global context - By object type and scope: These counters are the number of configured objects handled by the variable manager in the global context. Counters are given with a breakdown by object type and scope.
+ 
+Counters of runtime objects in variable manager - Global context - By object type and scope: These counters are the number of runtime objects handled by the variable manager in the global context. Counters are given with a breakdown by object type and scope.
+ 
+Counters of configuration objects in variable manager - Web contexts - By object type and scope: These counters are the number of configured objects handled by the variable manager in web contexts. Counters are given with a breakdown by object type and scope.
+ 
+Counters of runtime objects in variable manager - Web contexts - By object type and scope: These counters are the number of runtime objects handled by the variable manager in web contexts. Counters are given with a breakdown by object type and scope.
+ 
+Counters for the UI manager (UI)
+ 
+The following categories of counters are available:
+ 
+Counters of runtime variable objects in UI manager - Global context - By variable kind and scope: These counters are the number of variable runtime objects handled by the UI manager in the global context. Counters are given with a breakdown by variable kind and scope.
+ 
+Counters of runtime variable objects in UI manager - Web contexts - By variable kind and scope: These counters are the number of variable runtime objects handled by the UI manager in web contexts. Counters are given with a breakdown by variable kind and scope.
+ 
+Counters for actions
+ 
+The following categories of counters are available:
+ 
+Counters of configuration action objects - Global context - By object type and scope: These counters are the number of configured action objects in the global context. Counters are given with a breakdown by object type and scope.
+ 
+Counters of configuration action objects - Web contexts - By object type and scope: These counters are the number of configured action objects in web contexts. Counters are given with a breakdown by object type and scope.
+ 
+Counters of runtime action objects - Global context - By object type and scope: These counters are the number of runtime action objects in the global context. Counters are given with a breakdown by object type and scope.
+ 
+Counters of runtime action objects - Web contexts - By object type and scope: These counters are the number of runtime action objects in web contexts. Counters are given with a breakdown by object type and scope.
+ 
+Associated actions configuration: These counters are the number of configured associated action objects. Counters are given with a breakdown by object type.
+ 
+Other counters
+ 
+The following other categories of counters are available:
+ 
+ 
+Application Architect: Mostly configured object counters
+ 
+Historical manager: Mostly configured object counters
+ 
+HDS: Mostly counters related to request handling
+ 
+DbConnect: A counter giving the number of Sql connections
+ 
+Alarm list manager: Mostly counters related to handling alarm list subscription, filtering and alarm counters
+ 
+Web & Mobile: Mostly a series of counters related to the handling of sessions, subscription and web services contexts
+ 
+Geographical data: Mostly configured object counters
+ 
+UIGA: A counter related to the number of animations being handled
+ 
+Scada basic: A series of counters related to the SCADA Basic script engine, including information about loaded programs, and function execution.
+The counter named ALLOC_BUFFER count is of particular interest. It is the counter of buffers that are allocated and not yet freed up. If in your application, this counter is always increasing, it means that at least one of your script is allocating buffers without freeing them after use, leading to memory leaks.
+ 
+IEC 60870-5-104 server:
+Configuration: Number of outstations declared, number of clients allowed, number of points declared
+Runtime: Number of clients connected, number of points written
+ 
+String management
+ 
+Associated labels configuration
+ 
+Log management
+ 
+Timer
+ 
+Miscellaneous runtime
+ 
+Miscellaneous configuration
+
+
+========================================
+TOPIC: Audit_memory_leak.htm
+========================================
+Detecting a memory leak
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Detecting a Memory Leak
+ 
+To check if there is a significant memory leak (that is memory allocated and not de-allocated) you can use the following three counters.
+ 
+ 
+Free virtual memory
+ 
+Private bytes
+ 
+Working set
+ 
+ 
+Together, these three counters show the memory consumption of the sv32.exe and Hds.exe processes, which provide the main process of the PcVue software. Show picture
+
+
+========================================
+TOPIC: Audit_monitoring_tab.htm
+========================================
+Description of the monitoring tab
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Description of the Monitoring Tab
+ 
+The monitoring tab contains information about the flow of real time data between PcVue managers. 
+ 
+ Using the drop down list box at the top left hand corner of the dialog you can choose to display information about either data being acquired by PcVue, or data being produced by PcVue.
+ 
+ 
+Data acquisition - Data being acquired. For example, the contents of a read frame of one of the native drivers.
+ 
+Data command - Data being produced and sent. For example, the contents of a write frame of one of the native drivers.
+ 
+ 
+Using the drop down list box at the center top of the dialog, you can choose the source of the data from one of the following.
+ 
+ 
+All
+ 
+Internal 
+ 
+External 
+ 
+Equipment 
+ 
+DDE 
+ 
+OPC (client)
+ 
+LonWorks
+ 
+BACnet
+ 
+IEC 61850
+ 
+IEC 60870-5
+ 
+DNP3
+ 
+SNMP
+ 
+ 
+If you choose ALL then the information about the flow of data from all sources is combined. In the following picture, the monitoring tab is displaying Data Acquisition from the Internal source. 
+ 
+Menu commands are provided to reset the flow counters, reset the time counters and to close the dialog. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Useful notes and terminology
+ 
+Two types of information are displayed in the monitoring tab.
+ 
+ 
+Flow rates - A rolling 10 second average of the data rate (changes per second). The fields that display flow rates have an Ellipsis button adjacent to them. Clicking on the Ellipsis button displays a pop-up containing the real-time value and the last 5 highest values along with their timestamps.
+ 
+Counters - A numeric value counting the number of occurrences of an item. Counters do not include an Ellipsis button.
+ 
+ 
+Managers exchange real-time data in two message formats.
+ 
+ 
+Single - A single data point such as an OPC Item or single variable.
+ 
+Packet - Several data points treated together. For example, a communication frame, OPC group or recipe.
+ 
+ 
+The dialog shows all managers. Some of the managers have additional functions.
+ 
+ 
+User interface manager - Responsible for the Graphical User Interface and also SCADA Basic, VBA, expressions, recipes and Web Services including WebVue.
+ 
+OPC server manager - Responsible for PcVue as an OPC server and also the HDS.
+ 
+ 
+Data acquisition flow regulation behaves differently depending on the source.
+ 
+ 
+For equipment (native drivers) when flow regulation takes place communication is temporarily suspended and no request for data frames is made.
+ 
+For all other sources when flow regulation takes place communication continues but the application only keeps the most recent values. The number of lost values is counted in the Lost Transitions counter.
+ 
+ 
+Why is the Flow Regulation group sometimes colored red?
+ 
+ 
+The background of the Flow Regulation group, at the bottom of the dialog, is colored red whenever flow regulation is active. This corresponds to a value of 1 for the bit variable System.Audit.<Source>.State.VariableDataChange.ActiveFlowRegulation.
+ 
+ 
+
+ 
+
+ &#160;PcVue only exchanges real-time data between managers when it changes. It does not cyclically send data.
+
+
+========================================
+TOPIC: Audit_object_counters.htm
+========================================
+Object counters
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Object Counters
+ 
+Each object counter includes the current value, the minimum value, the maximum value and average value. By default, the average is calculated over a 30-minute period.
+Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Global memory of the computer
+ 
+The total conventional memory available on the computer. Does not include virtual memory or other forms of memory expansion.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Total physical memory (in KB)
+ The total amount of memory (RAM) installed on the computer.
+ 
+ 
+
+ Free physical memory (in KB)
+ The amount of free memory available on the computer. This is the amount of physical memory that can be immediately reused without having to write its contents to disk first. It is the sum of the size of the standby, free, and zero lists.
+ 
+ 
+
+ RAM usage (in %)
+ The percentage of used memory on the computer.
+ 
+ 
+ 
+ 
+Memory usage in PcVue process
+ 
+Memory in use by the main process (Sv32.exe), excluding that used by the other processes.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Private bytes (KB)
+ The size of allocated memory.
+ 
+ 
+
+ Working set (KB)
+ The set of pages in the virtual address space that are currently resident in physical memory.
+ 
+ 
+
+ Total virtual memory (in KB)
+ The size of the user-mode portion of the virtual address space. This value depends on the type of processor, and the configuration of the operating system. This value is approximately 4 GB for a 64-bit operating system.
+ 
+ 
+
+ Free virtual memory (in KB)
+ The amount of unreserved and uncommitted memory currently in the user-mode portion of the virtual address space.
+ 
+ 
+ 
+ 
+Memory usage in the HDS process
+ 
+Memory in use by the HDS process (Hds.exe).
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Private bytes (in KB)
+ The size of memory that the HDS has allocated.
+ 
+ 
+
+ Working set (in KB)
+ The set of pages in the virtual address space of the HDS that are currently resident in physical memory.
+ 
+ 
+ 
+ 
+Handles and threads in the Sv32 process
+ 
+Handles and threads used by the main executable (Sv32.exe).
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Handles
+ The number of handles used by the process. A handle is a reference to a block of memory in use by the process.
+ 
+ 
+
+ Total threads
+ The total number of threads used by the process.
+ 
+ 
+
+ Free threads in pool
+ The number of unused threads remaining in the SV thread pool and available to the Sv32 process.
+ 
+ 
+
+ Used threads in pool
+ The number of threads currently in use by the Sv32 process in the SV thread pool.
+ 
+ 
+
+ Free Web threads in pool
+ The number of unused threads remaining in the Web thread pool and available to the Sv32 process.
+ 
+ 
+ 
+ 
+Handle leak detection in the Sv32 process
+ 
+A handle leak is when the Sv32 process asks for a handle to a resource but the handle is not freed when the resource is no longer used.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Released thread handles	
+ The number of thread handles released by the thread pool processing. See section [HANDLELEAK] and ReleaseThreadHandleLeak key in sv32.ini
+ 
+ 
+ 
+ 
+Handles and threads in the HDS process
+ 
+Handles and threads used by the HDS process (Hds.exe). 
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Handles
+ The number of handles used by the process. A handle is a reference to a block of memory in use by the process.
+ 
+ 
+
+ Total threads
+ The total number of threads used by the process.
+ 
+ 
+ 
+ 
+Graphic object counters
+ 
+	The Graphics object counters.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ GDI objects
+ 
+ 
+	The number of GDI objects currently in use.
+ 
+GDI are system-level objects that represent graphical device interface resources like fonts, bitmaps, brushes, pens, and device contexts (drawing surfaces).
+ 
+ 
+ 
+
+ USER objects
+ 
+ 
+The number of USER objects currently in use.
+ 
+USER objects are system-level objects and get their name from the fact that they represent user interface elements like windows, menus, cursors, icons, and accelerator tables (keyboard shortcuts).
+ 
+ 
+ 
+
+ Displayed mimics
+ The number of mimics currently opened.
+ 
+ 
+ 
+ 
+Counters of variables
+ 
+	Counters of variables, configuration objects and actual runtime objects, according to the source of their real-time value:
+ 
+ 
+	Internal
+ 
+External
+ 
+Equipment
+ 
+OPC
+ 
+OPC UA
+ 
+DDE
+ 
+LonWorks
+ 
+BACnet
+ 
+IEC 60870-5
+ 
+IEC 61850
+ 
+DNP3
+ 
+SNMP Manager
+ 
+ 
+Counters of variables according to if they have the following properties set are also available:	
+ 
+ 
+	Deleted
+ 
+Inhibited
+ 
+Simulated
+ 
+Saved (permanent)
+ 
+Broadcast
+ 
+Extended attributes enabled
+ 
+Initialization value
+ 
+Permanent scan for mimics - None
+ 
+Remote access
+ 
+ 
+Miscellaneous variable counters 
+
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Unloaded variables
+ The number of variables that are configured, but neither produced nor consumed.	
+ 
+ 
+ 
+ 
+Networking counters	
+ 
+Counters associated with multi-station architecture.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Number of OK server connections
+ The current number of OK server connections to the local station.
+ 
+ 
+
+ Number of OK client connections
+ The current number of OK client connections to the local station.
+ 
+ 
+
+ Number of allocated thread
+ The number of threads being used to manage all connections.
+ 
+ 
+
+ Allocated server object
+ The number of allocated server connection objects.
+ 
+ 
+
+ Allocated client objects
+ The number of allocated client connection objects.
+ 
+ 
+
+ Deleting server objects
+ The number of server connection objects in the Deleting state.
+ 
+ 
+
+ Deleting client objects
+ The number of client connection objects in the Deleting state.
+
+ 
+ 
+
+ Cumulative OK server connections
+ The total number of OK server connections that have been made to the local station since the project started.
+ 
+ 
+
+ Cumulative OK client connections
+ The total number of OK client connections that have been made to the local station since the project started.
+ 
+ 
+
+ Size of send buffer (in bytes)
+ The current size of the networking send buffer.
+ 
+ 
+
+ 
+Size of receive buffer (in bytes)
+ 
+ 
+The current size of the networking receive buffer.
+ 
+ 
+ 
+ 
+ 
+Other networking information are also available:
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Number of stations
+ The total number of stations configured in the application.
+ 
+ 
+
+ Number of real time associations
+ The total number of configured associations for data acquisition.
+ 
+ 
+
+ Number of historical associations
+ The total number of configured associations for archiving.
+ 
+ 
+
+ Number of external source variables
+ The number of variables with an external (a server station) source for its real-time value.
+ 
+ 
+ 
+ 
+Subscriptions groups
+ 
+	Counters of variable subscriptions by group. A group is defined by its update rate.	
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Total number of variable subscriptions
+ The total number of variable subscriptions from local and remote stations.
+ 
+ 
+
+ Number of different groups from local station
+ The number of groups allocated for the local station variable subscriptions.
+ 
+ 
+
+ [ Update rate (ms) ]	
+ The subscription update rate in milliseconds.
+ 
+ 
+
+ Number of subscriptions
+ The number of variable subscriptions in the group.
+ 
+ 
+
+ Number of data changes during the update rate
+ The number of data changes during the update rate. For example, if update rate = 10 sec and the data change every 500 ms, the value is 20.
+
+
+========================================
+TOPIC: Audit_overview.htm
+========================================
+Audit overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Audit Overview
+ 
+The Audit Dialog contains information about the internal operation of PcVue. Its main use is as an aid to diagnose unexpected or erroneous behavior, but it can also be used to check the general "health" of a project. The information comes from the executables (.exe) from which PcVue is composed, and the individual managers contained therein. The Audit Dialog contains two tabs.
+ 
+ 
+Counters
+Objects - System resource and configuration object counters.
+Instance - Counters of messages between PcVue managers and the memory that has been allocated.
+Time - The time spent processing the messages for each manager.
+Flow - Data flows associated with the change of real-time value of variables in the Variables Tree.
+ 
+Monitoring - Detailed information about the data flows associated with the change of real-time value of variables in the Variables Tree presented in a graphical format. Two graphics are available, one that shows information about data acquisition (incoming data) and the other about data commands (outgoing data). 
+ 
+ 
+The information from the Counters Tab is also dumped in text files that can be found in the Log Files folder. For more information, see the topic Audit Files.
+ 
+The information from the Flows tab is also available in system variables. These variables must be enabled in the Audit Configuration dialog before PcVue creates them. For more information, see the topic Audit system variables.
+ 
+The Audit dialog can be opened using any of the following methods.
+ 
+ 
+From the Application Explorer. Select the Project node in the configuration tree and select the Audit Diagnostics task in the left pane.
+ 
+From the keyboard. Function key F4 opens the About dialog from where you can open the Audit dialog by clicking the Diagnostics button.
+ 
+From the event viewer, by using the Audits... command on the menu.
+ 
+ 
+When accessing the Audits from the About dialog, an intermediate dialog is first opened with several buttons. Each button opens a separate instance of the Audit dialog. The configuration (size, position, options) of each instance of the Audit dialog is saved when it is closed and subsequent uses of same button will open the Audit dialog with the same configuration. You can also configure a caption for each button that is then displayed in the Audit dialog title bar. Show picture
+
+
+========================================
+TOPIC: Audit_system_variables.htm
+========================================
+Audit system variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Audit System Variables Naming Rules
+ 
+The audit system variables are provided to animate mimics, create trends and generally facilitate troubleshooting. The audit variable names all start with System.Audit and are constructed using the following branches.
+ 
+<Source>
+ 
+Indicating the data acquisition source selected from the following.
+ 
+ 
+All
+ 
+Internal
+ 
+External
+ 
+Equipment
+ 
+DDE
+ 
+OPCClient
+ 
+OPCUA
+ 
+LON
+ 
+BACnet
+ 
+IEC61850
+ 
+IEC104
+
+ 
+SNMP
+ 
+ 
+<Data type>
+ 
+ 
+DA - Data acquisition
+ 
+DC - Data command
+ 
+ 
+<Counter type>
+ 
+ 
+Flow
+ 
+Instance
+ 
+ElapsedTime
+ 
+ 
+<Manager>
+ 
+The manager concerned.
+ 
+ 
+UserInterface
+ 
+Alarm
+ 
+Historical
+ 
+Lan
+ 
+OPCServer
+ 
+VarManager Toolkit<X> with X in the range of 1 to 8.
+
+
+========================================
+TOPIC: Audit_time_counters.htm
+========================================
+Time counters
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Time Counters
+ 
+Each time counter contains the immediate value plus the highest five values and their timestamp's. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+To reduce the amount of information displayed in the Audit dialog, flow counters for which all values are zero when the dialog is opened are hidden. If, subsequently, they become non-zero you must use the Refresh button to reveal them.
+ 
+ 
+Processing time - By manager
+ 
+A series of time counters to measure the time taken for certain tasks performed by all managers. These time counters are given with a breakdown by manager:
+ 
+ 
+Duration in the phase Start Project - By manager: The duration required in each of PcVue managers to start the project. This includes the load phase and start phase.
+ 
+Duration for processing time of the watchdog message (similar to ping in TCP/IP) - By manager: Watchdog messages are the internal keep-alive mechanism, allowing managers to know if other managers are responsive.
+ 
+Duration for processing time of messages - By manager.
+ 
+ 
+Duration for processing time on specific treatment in Variable Manager
+ 
+A series of time counters to measure the time taken for certain tasks performed by the variable manager (Var). This includes:
+ 
+ 
+Stop project
+ 
+Delete project
+ 
+Loading file Varexp.dat
+ 
+Saving file Varexp.dat
+ 
+Architect - load templates
+ 
+Architect - load parameters
+ 
+Architect - load instances
+ 
+Architect - generation
+ 
+Loading treatment (VarTreat.dat)
+ 
+Starting treatment
+ 
+ 
+Duration for processing time on specific treatment in User Interface
+ 
+A series of time counters to measure the time taken for certain tasks performed by the User Interface manager (UI). This includes:
+ 
+ 
+Load variables: The time taken to load the variable definitions from Variable manager into memory.
+ 
+Variable subscriptions: The time taken to process subscription requests for variables to the Variable manager and their acknowledgments.
+ 
+Load expression on variable: The time taken to load expression on variable items.
+ 
+Load expression used to mask alarm: The time taken to load expression used to mask alarms.
+ 
+Load events: The time taken to load event items.
+ 
+UI timer: The total time spent in the timer function of the User Interface manager.
+ 
+SCADA Basic timer: The time taken in the timer function of the User Interface manager to process SCADA Basic functions.
+ 
+SCADA Basic function: Time taken to process SCADA Basic functions.
+ 
+SCADA Basic Expression Recalculation: Time taken to process expression recalculation when requested via a SCADA Basic script.
+ 
+ 
+Duration for processing time opening and closing Web sessions and client contexts
+ 
+A series of time counters to measure the time taken for certain tasks performed when opening and closing Web sessions and client contexts. This includes:
+ 
+ 
+Session context creation/deletion
+ 
+Client context creation/deletion
+ 
+Session-related variables creation/deletion in Var manager
+ 
+Loading/unloading of alarm synthesis
+ 
+Starting/stopping alarm synthesis
+ 
+Events creation/deletion
+ 
+Expressions creation/deletion
+ 
+Cyclic functions creation/deletion
+ 
+ 
+Duration with flow regulation active - By source
+ 
+A series of time counters to measure the time spent with flow regulation active. These time counters are given with a breakdown by source:
+ 
+ 
+All sources
+ 
+External source
+ 
+Equipment source
+ 
+DDE source
+ 
+OPC source
+ 
+LonWorks source
+ 
+BACnet source
+ 
+IEC 60870-5 source
+ 
+IEC 61850 source
+ 
+DNP3 source
+ 
+SNMP source
+ 
+OPC UA source
+ 
+Sql variables source
+ 
+ 
+Other auditable processing time counters
+ 
+Series of time counters are available to measure the time taken by some modules for some of their specific tasks. This includes:
+ 
+Tasks specific to the CimWay component:
+ 
+ 
+CimWay Start: The time taken to load the driver definitions from the COMM.DAT file into memory and starting all communication objects.
+ 
+CimWay Stop: The time taken to stop all communication objects and unload the driver definitions from memory.
+ 
+ 
+Tasks specific to the LNS component:
+ 
+ 
+LNS Global Start
+ 
+LNS Lca Start
+ 
+LNS Network Start
+ 
+LNS Node Start
+ 
+LNS Variables Start
+ 
+LNS Monitoring Start
+ 
+ 
+Tasks specific to the Alarm manager:
+ 
+ 
+Alarm counters initialization
+ 
+ 
+Tasks specific to the Startup manager:
+ 
+ 
+Timer function
+ 
+Audit object counters update
+ 
+Audit flow counters update
+ 
+Audit system variables update
+ 
+ 
+Other miscellaneous tasks:
+ 
+ 
+Proprietary log record: The time taken processing recording a log in a proprietary archive unit.
+ 
+Save Audit.Counters.xxxx file: The time taken saving the audit counters to file.
+ 
+Save Audit.SpecificCounters.xxxx file: The time taken saving the audit specific counters to file.
+ 
+Beep: The time spent when the SCADA Basic function Beep is used to sound the PC's speaker.
+ 
+Online print for log: The time taken to process the online print for a log.
+ 
+Graphic print: The time taken to process a graphic print.
+ 
+SvBatch select: The time taken to process a select operation in a batch process.
+ 
+SvBatch insert: The time taken to process an insert operation in a batch process.
+ 
+DDE - Transaction: The time taken to process a DDE transaction.
+ 
+SvBatch update: The time taken to process an update operation in a batch process.
+ 
+Global key read: The time taken to read the protection key.
+
+

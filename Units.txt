@@ -1,0 +1,5275 @@
+========================================
+TOPIC: Units_configuring_database.htm
+========================================
+Configuring a database archive unit
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a Database Archive Unit
+ 
+Database archive units require very little configuration. Their main purpose is to behave as a container for the log and trend folders so that the recording architecture of the HDS is the same as that of PcVue native data recording.
+ 
+How to configure a Database type archive unit
+ 
+ 
+Open the Application Explorer and expand the configuration 
+ tree to select the Archive 
+ Units folder.
+ 
+From the task list, 
+ select Add 
+ a database unit. The Archive Unit dialog opens.Show picture
+
+ 
+In the General tab, 
+ enter a Name 
+ and optional Description 
+ for the archive unit.
+ 
+Click the OK button 
+ to confirm the configuration. A new archive unit is created containing 
+ two folders, Log Lists and Trend.
+ 
+ 
+
+ 
+It is only necessary to create one database archive unit 
+ no matter how many HDS databases or log lists you create.
+
+
+========================================
+TOPIC: Units_free_changing_locformat_files.htm
+========================================
+Changing the location and format of the free archive unit files
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Changing the Location and Format of the Free Archive 
+ Unit Files
+ 
+How to change the location of the files
+ 
+By default, the files that make up a free format archive 
+ unit are located in the TH folder of the project in a sub folder of the 
+ same name as the archive unit. You can change the location of the files 
+ to a different folder, or select a text variable containing the 
+ location for the archive files, using the Files tab of the Archive Unit properties 
+ dialog. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+How to limit the size of the free format files
+ 
+By default, the free format archive unit creates just 
+ one file of unlimited size called H00000.WRI. To limit the file size tick 
+ the property Control 
+ archive file size and enter a maximum size for the file. Data is 
+ then written in sequentially named files starting with H00000.WRI. As 
+ each file becomes full it is renamed to have a .DAT extension and writing 
+ continues to the next file in the sequence. So at any time within the 
+ folder, there will be several files with the .DAT extension and one file 
+ with the .WRI extension.
+ 
+How to configure the line format used in a free format 
+ archive unit
+ 
+The format in which trend (Historic) data and log data 
+ is written is configured using the configuration strings defined by the 
+ properties Trend
+ data format and Log 
+ data format respectively. The format elements used in the configuration 
+ strings can be found in the topic Format 
+ Elements for Log List Printing and Free Format Archive Units.
+ 
+You can enter an alternative configuration string directly 
+ in the field or configure it using a dialog displayed by clicking the 
+ ellipsis button adjacent to the field.
+ 
+For Trend data format Show picture
+ 
+
+ 
+ 
+ 
+For Log data format Show picture
+ 
+
+ 
+ 
+ 
+Any characters entered other than the format elements 
+ are interpreted literally. So for example the format string #D/#M/#Y #h:#m:#s 
+ #t = #C would produce a record such as:
+ 
+03/10/06 16:32:46 EFFLUENT.TANK1.LEVEL = 1.67
+
+
+========================================
+TOPIC: Units_free_configuring.htm
+========================================
+Configuring a free archive unit
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a Free Archive Unit
+ 
+How to create a free archive unit
+ 
+ 
+Open the Application Explorer, expand the configuration tree and select the Archives
+ Units folder. 
+ 
+From the task list,
+ select Add
+ a free unit. The Archive Unit dialog opens. Show
+ picture
+
+ 
+Enter the Name and option Description for the new archive unit.
+ 
+Configure the archive
+ unit options (see list below).
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+Options 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Property
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 
+ 
+Unit name
+ 
+ 
+ 
+The name of the archive unit. The name is also used as
+ the name of the folder in which it is held and so the characters used
+ in the name are limited to those that the operating system supports for
+ folder names.
+ 
+ 
+ 
+
+ 
+ 
+Description
+ 
+ 
+ 
+A description for the archive unit.
+ 
+ 
+ 
+
+ 
+ 
+Cache size (KB)
+ 
+ 
+ 
+The size of the memory buffer in which data is stored
+ before being written to disk. Using a memory buffer reduces the amount
+ of output activity and hence the load on the host PC.
+ 
+ 
+ 
+
+ 
+ 
+Write period
+ 
+ 
+ 
+The period at which the content of the memory buffer is
+ written to disk. If this is set to zero the buffer will only be written
+ when it is full.
+ 
+ 
+ 
+
+ 
+ 
+Writing enabled at start-up
+ 
+ 
+ 
+If selected, recording in the Archive Unit starts when
+ PcVue is started. Alternatively, recording may be started and
+ stopped with the SCADA BASIC instruction HISTORY.
+
+
+========================================
+TOPIC: Units_free_overview.htm
+========================================
+Free archive unit overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Free Archive Unit Overview
+ 
+Each free archive unit consists of a folder containing 
+ several files. The folder may be located anywhere within the Windows' 
+ file system of the host PC.
+ 
+Data is written in sequentially named files starting 
+ with H00000.WRI. As each file becomes full it is renamed to have a .DAT 
+ extension and writing continues to the next file in the sequence. So at 
+ any time within the folder, there will be several files with the .DAT 
+ extension and one file with the .WRI extension.
+ 
+What you can do
+ 
+ 
+The .DAT files may 
+ be moved, deleted or used by other programs. 
+ 
+The single .WRI file 
+ is in constant use by the software and shall not be changed or moved while 
+ it is running.
+ 
+The free archive 
+ unit has no mechanism for automatically backing up or deleting files, 
+ so the number of files will continue to increase until the disk is full 
+ or until files are manually deleted or moved. It is up to the developer 
+ to decide how files in the free archive units will be managed.
+ 
+ 
+Data Formats
+ 
+Data is recorded in the free archive units in a format 
+ configured by the developer, so data may easily be recorded for another 
+ program to import directly.
+ 
+The mechanisms that record data have no buffering so 
+ each item of data will appear as separate entry in time order, not blocked 
+ together as in the proprietary units.
+
+
+========================================
+TOPIC: Units_in_the_ae.htm
+========================================
+Managing archive units in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing Archive Units in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks available when the Archives Units folder is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a database unit
+ Creates a general-purpose archive unit in which data is recorded in an industry standard database such as SQL Server. 
+ 
+ 
+
+ 
+ 
+ 
+ Add a proprietary unit
+ Creates a general-purpose archive unit in which data is recorded in files in a format specific to PcVue. 
+ 
+ 
+
+ 
+ 
+ 
+ Add a free unit
+ Creates a special-purpose archive unit in which data is recorded in files in a user configurable format.
+ 
+ 
+
+ 
+ 
+ 
+ Add an ODBC unit
+ Creates a special-purpose archive unit in which data is recorded in an ODBC database. Superseded by the database archive unit from version 8.10 onwards.
+ 
+ 
+
+ 
+ 
+ 
+ Add a VCR unit
+ Creates a special-purpose archive unit only used for projects configured 
+ for the VCR facility. 
+ 
+ 
+ 
+ 
+Tasks available when a database archive unit is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the database archive unit.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the database archive unit properties dialog.
+ 
+ 
+ 
+ 
+Tasks available when a proprietary archive unit is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the proprietary archive unit.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the proprietary archive unit properties dialog.
+ 
+ 
+ 
+ 
+Tasks available when a free archive unit is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the free archive unit.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the free archive unit properties dialog.
+ 
+ 
+ 
+ 
+Tasks available when an ODBC archive unit is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the ODBC archive unit.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the ODBC archive unit properties dialog.
+ 
+ 
+ 
+ 
+Tasks available when a VCR archive unit is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the VCR archive unit.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the VCR archive unit properties dialog.
+ 
+ 
+ 
+ 
+Tasks available when a Log Lists folder is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a log list
+ Add a log list to the log list folder of the selected archive unit.
+ 
+ 
+ 
+ 
+Tasks available when a Trends folder is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a trend
+ Add a variable to the trends folder of the selected archive unit.
+ 
+ 
+ 
+ 
+Tasks available when a Log Report folder is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a log report
+ Add a log report to the log report folder of the selected archive unit.
+ 
+ 
+ 
+ 
+Tasks available when a Log List is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected Log List.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the log list properties dialog.
+ 
+ 
+ 
+ 
+Tasks available when a Trend is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected variable (trend) from the trend folder.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the trend properties dialog.
+ 
+ 
+ 
+ 
+Tasks available when a Log Report is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected Log Report.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the log report properties dialog.
+ 
+ 
+ 
+ 
+Rules and behavior of cut, copy and paste
+ 
+The following table describes the rules and behavior when using cut and paste, or copy and paste, on configuration items in the Archives folder.
+ 
+ 
+ 
+ 
+ 
+
+ Archive item
+ Behavior
+ 
+ 
+
+ Log list
+ 
+ 
+The pasted Log List must have a unique name.
+You can only paste a Log List to the same type of archive unit from which it originated.
+
+ 
+ 
+ 
+
+ Trend
+ 
+ 
+The pasted Trend must have a unique name within the archive unit although the name can be repeated in different archive units within the same project.
+You can only paste a Trend to the same type of archive unit from which it originated.
+As the Trend item name is also the name of the trended variable, a variable with the same name as the pasted Trend must already exist.
+ 
+ 
+ 
+
+ Log report
+ 
+ 
+The pasted Log Report must have a unique name.
+ 
+ 
+ 
+
+ Database archive
+unit
+ 
+ 
+The pasted Archive Unit must have a unique name.
+Any subordinate Log Lists are duplicated but with a new and unique name. 
+Any subordinate Trends are duplicated with the same name (same variable) but with the Primary property de-selected.
+
+ 
+ 
+ 
+
+ Proprietary archive unit
+ 
+ 
+The pasted Archive Unit must have a unique name.
+Any subordinate Log Lists are duplicated but with a new and unique name. 
+Any subordinate Trends are duplicated with the same name (same variable) but with the Primary property de-selected. 
+Any subordinate Log Reports are duplicated but with a new and unique name.
+
+ 
+ 
+ 
+
+ Free unit
+ 
+ 
+The pasted Archive Unit must have a unique name.
+Any subordinate Log Lists are duplicated but with a new and unique name. 
+Any subordinate Trends are duplicated with the same name (same variable) but with the Primary property de-selected.
+
+ 
+ 
+ 
+
+ ODBC unit
+ 
+ 
+The pasted Archive Unit must have a unique name.
+Any subordinate Log Lists are duplicated but with a new and unique name. 
+Any subordinate Trends are duplicated with the same name (same variable) but with the Primary property de-selected.
+
+ 
+ 
+ 
+
+ VCR unit
+ Not supported by cut copy paste as it is only possible to have one VCR archive unit in a project.
+ 
+ 
+ 
+ 
+
+ 
+Pasting any of the configuration item from the Archives folder only creates the configuration. It does not paste any historical data that may have been recorded by the original item.
+ 
+If you cut and paste an Archive Unit the data recorded in the original archive unit will be lost.
+
+
+========================================
+TOPIC: Units_log_data_configure_a_log_list.htm
+========================================
+How to configure a HDS log list
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure a HDS Log List
+ 
+ 
+Open the Application Explorer and expand the configuration tree to select a previously configured database archive unit.
+ 
+Select the Log Lists 
+ folder, and from the task list select Add 
+ a log list. The Log List Configuration dialog appears.
+ 
+Enter a Name 
+ and optional Description 
+ for the log list.
+ 
+If not using the 
+ default database and table select the Database tab and select the Database 
+ and Table 
+ to be used.
+ 
+Click the OK 
+ button to confirm the configuration. A new log list is created.
+
+
+========================================
+TOPIC: Units_log_data_filtering_events.htm
+========================================
+Filtering Events Using the Event Filter Tab
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Filtering Events Using the Event Filter Tab
+ 
+The Event Filter tab allows filtering of events that 
+ are recorded according to the event type. Ticking an option means that 
+ the event is allowed to pass, un-ticking an option means that the event 
+ is blocked. Show picture 
+ 
+The following event types are supported.
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Alarm events
+ 
+ 
+Alarm off. The 
+ change of an alarm to the off state.
+ 
+Alarm off, Not 
+ Ack. The change of an alarm to the off, not acknowledged state.
+ 
+Alarm on, Ack. 
+ The change of an alarm to the on, acknowledged state.
+ 
+Alarm on, Not 
+ Ack. The change of an alarm to the on, not acknowledged state.
+ 
+Unavailable alarm 
+ events
+ 
+ 
+Expression 
+ masked
+ 
+Inhibited
+ 
+Not accessible
+ 
+Program masked
+ 
+Variable masked
+ 
+User masked
+ 
+ 
+ 
+Bit changes
+ 
+ 
+Change to 0. 
+ The change of a bit from any state to 0.
+ 
+Change to 1. 
+ The change of a bit from any state to 1.
+ 
+Unavailable. 
+ The change from any state to unavailable (invalid).
+ 
+ 
+User actions
+ 
+ 
+Acknowledge. 
+ Acknowledging an alarm.
+ 
+Command. The 
+ forcing of a bit, register or text variable from a control zone animation.
+ 
+Execute program. 
+ Running a SCADA Basic program from a control zone animation.
+ 
+Logon/logoff. 
+ Logging on and off and failed attempts at logging on.
+ 
+Alarm mask. Masking 
+ an alarm
+ 
+ 
+ 
+Alarm events may also be filtered by a minimum and maximum 
+ alarm level.
+
+
+========================================
+TOPIC: Units_log_data_recording_overview.htm
+========================================
+Overview of recording log data in the HDS
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Recording Log Data in the HDS
+ 
+What data can I record?
+ 
+Log data is primarily recorded for display through PcVue Log Viewer. The following events can be recorded.
+ 
+ 
+Changes in value 
+ of database bit variables.
+ 
+Changes in value 
+ of database alarm variables.
+ 
+User actions:
+Logging on and off (including failures).
+Sending a command (forcing a bit, register or text variable) from a 
+ control zone on a mimic.
+Running a program from a control zone on a mimic.
+Acknowledging an alarm.
+ 
+ 
+Making events eligible for recording
+ 
+To make bit and alarm variables eligible for logging 
+ you select the properties Log 
+ to 0 and Log 
+ to 1 in the variable's configuration.
+ 
+All user actions are eligible for logging without requiring 
+ any configuration.
+ 
+Selecting what and where events are to be recorded
+ 
+Events that are to be logged are selected by the configuration 
+ of one or more log lists. The output of each log list is sent to either 
+ a specific, or the default, log table and database. The same events can 
+ be logged by one or more log lists.
+ 
+
+ 
+Filtering at recording time based on properties such as the domain, nature or other extended attributes is not available with HDS log lists.
+ 
+In general, all events will be logged with a single log list and stored in a single Log table in your database.
+ 
+Filtering is possible when requesting and displaying logged events to the user with the log viewer, or when exporting logged data.
+ 
+ 
+
+ 
+Population filtering based on the source is not supported to filter in log viewers (and log printing) when data are archived using a database archive unit (HDS).
+
+
+========================================
+TOPIC: Units_ODBC_conf.htm
+========================================
+Configuring an ODBC archive unit
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring an ODBC Archive Unit
+ 
+To record trend, log or report data in an ODBC source, you create an ODBC type archive unit. The archive unit may be used to record and play back data in the same way as a proprietary archive unit. The data will be recorded using the driver and file specified by the data source.
+ 
+Recording data in an ODBC archive unit takes more space and is slower than when using a proprietary format archive unit. Depending on exactly what is being recorded, and the type of database used, a single record can use over 1 Kb of disk space.
+ 
+How to configure an ODBC archive unit
+ 
+ 
+Open the Application Explorer, expand the configuration
+ tree and select the Archive
+ Units folder.
+ 
+From the task, list
+ select Add
+ an ODBC unit. The Archive Unit dialog is opened.
+ 
+Enter a name for
+ the archive unit in the Name field. The unit name is limited to 12 characters. Enter an optional description
+ for the archive unit in the Description field.
+ 
+Select the ODBC database
+ logical name that you have previously configured. Show picture See the topic Configuring
+ an ODBC database in PcVue.
+
+ 
+Configure any ODBC
+ archive unit options (see below).
+ 
+Click OK
+ to confirm the configuration and close the dialog.
+ 
+ 
+Other ODBC archive unit options
+ 
+ 
+Read only - If selected,
+ the Archive Unit is read only.
+ 
+ 
+
+ 
+When configuring redundant servers, note that an ODBC archive unit only supports multiple active servers association, the property Historical servers must be configured with a list containing such an association (as opposed to a single active server association).
+
+
+========================================
+TOPIC: Units_ODBC_conf_in_Supervisor.htm
+========================================
+Configuring an ODBC database in PcVue&#160;
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring an ODBC Database in PcVue&#160;
+ 
+Before an ODBC database can be used by PcVue, 
+ it must first be added to the Databases folder of the Archives Configuration 
+ Explorer. If the database is to be used just for recipes then no further 
+ configuration is required. If the database is to be used to record trend, 
+ log or report data then an ODBC archive unit must also be created.
+ 
+How to add an ODBC database to the Databases folder 
+ of the Archives Configuration Explorer
+ 
+ 
+Open Application 
+ Explorer, expand the configuration 
+ tree and select the Databases folder.
+ 
+From the task list, 
+ select Add 
+ an ODBC database. The ODBC 
+ database dialog is displayed.
+ 
+Enter a name by which 
+ the database will be known in PcVue in the Name text box. You 
+ can enter an optional description for the database in the Description 
+ text box.
+ 
+Enter the name of 
+ the database, as configured in Windows' ODBC Setup dialog, in the ODBC 
+ name text box. Show picture
+
+ 
+Configure any ODBC 
+ database options (see list below).
+ 
+Click OK 
+ to confirm the configuration and close the dialog.
+ 
+ 
+
+ 
+For information on how to monitor the connection to the underlying ODBC data source, see the topic ODBC status variables.
+ 
+ 
+Options when configuring an ODBC database
+ 
+In most applications, the following properties will not 
+ need to be changed and may be left at their default value.
+ 
+In the General tab:
+ 
+ 
+Database type - The structure and number of the tables with the database was changed 
+ between version 6 and 7 of PcVue to optimize efficiency. Select 
+ Old 
+ only if the project is to be compatible with version 6, otherwise leave 
+ at the default setting of Optimized.
+ 
+Read only - The database is read only (no data can be written by PcVue).
+ 
+Manual commit - Enables a manual commit of the database at the specified 
+ period.
+ 
+ 
+In the Advanced tab:
+ 
+ 
+Login name - The name of the user for connection to the ODBC source (if it 
+ was configured with one).
+ 
+Password - The password for the connection to the ODBC source (if it 
+ was configured with one).
+ 
+Connection time-out - The time in seconds allowed for a response from 
+ the ODBC source when an attempt at connection is made. Default 15 seconds
+ 
+Query time-out - The time in seconds allowed for a response from the 
+ ODBC source when a query is made. Default 15 second.
+ 
+Delimiter for identifiers - Some RDBMS require the use of a particular text delimiter in queries. Select single quote if you are using a MySQL DB.
+ 
+ 
+
+ 
+ The value of the properties Connection time-out and Query time-out are passed to the underlying ODBCdriver configured in the Windows ODBC Data Source. They may be ignored by some ODBCdrivers.
+ 
+ 
+ODBC table names
+ 
+&#160;PcVueuses the following default table names 
+ to record data. If required, the table names can changed using the Tables 
+ tab.
+ 
+ 
+Version 6.0
+HIS - Historic (trend), Log and Report data.
+RECH - Recipe configuration information
+RECV - Recipe variable information.
+ 
+Version 7.0 onwards
+TRD - Data generated by the historic trend mechanism and played back 
+ through the Trend Viewer.
+LOG - Data generated by the log lists and played back by the Log Viewer.
+REP - Data generated by the report mechanism.
+RECH - Recipe configuration information.
+RECV - Recipe variable information.
+
+
+========================================
+TOPIC: Units_ODBC_data_sources_configuration_tool.htm
+========================================
+Using the trace facility in the ODBC Data Sources configuration tool
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Trace Facility in the ODBC Data Sources Configuration 
+ Tool
+ 
+You can use the Tracing tab in the Data Sources configuration tool from 
+ the Windows Control Panel to display calls to ODBC drivers. You will only 
+ need to do this if asked by the Technical Support desk.
+ 
+ 
+From the Windows 
+ Start button, select Settings.Control 
+ Panel.
+ 
+Open the Data Sources 
+ (ODBC) tool.
+ 
+Select the Tracing 
+ tab.
+ 
+Enter a location 
+ for the log file that will be generated.
+ 
+Click the Start 
+ Tracing Now command button to start the trace.
+ 
+Click the same button 
+ to stop the trace.
+ 
+ 
+Show picture
+
+
+========================================
+TOPIC: Units_ODBC_overview.htm
+========================================
+ODBC and PcVue&#160;
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ODBC and PcVue&#160;
+ 
+ODBC is an acronym for Open 
+ Data Base 
+ Connectivity. 
+ 
+ODBC defines a standard protocol by which a program or 
+ application may open, read, and write to any compliant database. Once 
+ a program has ODBC connectivity it should, in theory, be able to access 
+ any ODBC compliant database without the need for extra tools or development.
+ 
+ODBC Architecture
+ 
+Whilst it is not strictly necessary to understand how 
+ the ODBC interface works in order to use it with PcVue, it can 
+ be useful when understanding its limitations and solving problems. The 
+ architecture of ODBC is best explained with a simple diagram. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+In this case, the 
+ Application is PcVue. It 
+ uses the standard ODBC functions to open, read and write to the chosen 
+ database.
+ 
+The Driver Manager 
+ is responsible for loading the driver corresponding to the database used.
+ 
+The Driver interprets 
+ the ODBC functions, sends the requests to the relational database and 
+ returns the results to the Application using standard query language (Sql) 
+ commands.
+ 
+The Relational Database 
+ (RDB) stores the data requested and sent by the Application.
+ 
+ 
+
+ 
+&#160;PcVue does not support automatic reconnection to the DBMS in case the connection to the ODBC data source is lost. Re-establishing the connection requires PcVue to be restarted.
+ 
+To limit the risk of disconnection, it is recommended to host the DBMS on the same computer as the archive server station, and to store data on a local filesystem to avoid any network infrastructure dependency.
+ 
+Maintenance procedures that require closing the connection shall accommodate the need to restart PcVue.
+ 
+ 
+Using ODBC with PcVue&#160;
+ 
+&#160;PcVue is able to use ODBC in the following ways.
+ 
+ 
+For historic data 
+ - an ODBC database may be used by an ODBC archive unit. Data may be recorded 
+ and played back in the same way as for a proprietary archive unit.
+ 
+For recipes - recipes 
+ may be saved to, or loaded from, an ODBC database.
+ 
+ 
+
+ 
+Recording and playing back data using an ODBC data source 
+ is considerably slower than when using a proprietary format archive unit.
+ 
+ 
+The following ODBC compliant database systems have been 
+ tested with PcVue&#160;
+ 
+ 
+Access 97 and 2000
+ 
+Oracle V8
+ 
+SQL Server 6.5
+ 
+ 
+A single ODBC database can be used to record data from 
+ many ODBC archive units and recipes.
+ 
+Using ODBC requires that the following configuration steps be completed in the correct order.
+ 
+ 
+Using the operating 
+ system - check that you have ODBC drivers installed on your PC.
+ 
+Using the operating 
+ system - create an ODBC database source. The name of the ODBC source is 
+ used in the configuration of PcVue.
+ 
+Configure PcVue 
+ to inform it of the existence of the ODBC database. You will use the name 
+ you gave the database when you created the ODBC source using the operating 
+ system.
+ 
+Create one or more 
+ ODBC archive units that will use the database to record the data.
+	And/or
+ 
+Create one or more 
+ recipes using the database to record the data.
+ 
+ 
+
+ 
+The variable name, variable title, and extended text attributes fields are limited to 40 characters in ODBC archive units. If variables are recorded, whose configuration exceed this limitation the fields are truncated to 40 characters and an error is generated in the Event Viewer.
+
+
+========================================
+TOPIC: Units_ODBC_setting_up_on_host_PC.htm
+========================================
+Setting up an ODBC source on the host PC
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Setting up an ODBC Source on the Host PC
+ 
+The ODBC source defines the driver and data file that 
+ is to be used by the PcVue software to record 
+ data. One or more ODBC sources may be configured.
+ 
+ 
+Open Windows Administrative Tools. The simplest way to do this is to type Admin into Search Windows on the task bar and then select Administrative Tools from the result list. 
+ 
+Open ODBC Data Sources (32 bit) by double clicking on the corresponding icon. A dialog similar 
+ to the following will be displayed. Show picture
+
+ 
+Select the Drivers 
+ tab and check that the driver that you want to use, for example Access, 
+ is installed.
+ 
+Select the User 
+ DSN tab and click the Add 
+ button. The Create 
+ New Data Source dialog is displayed. Show picture
+
+ 
+Select the driver 
+ that you want to use and click Finish. 
+ The ODBC Setup dialog is displayed.
+ 
+Enter the Data 
+ Source Name. This 
+ is the name that is used to reference the data source from 
+ the PcVue. Enter an optional description. Show picture
+
+ 
+Select the database. Some database drivers 
+ allow a data source to be created at this point whereas others only allow 
+ the selection of one that has been previously created.
+ 
+Select OK 
+ to confirm selection and / or creation of the data source.
+
+
+========================================
+TOPIC: Units_ODBC_table_formats.htm
+========================================
+Table formats for ODBC archive units
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Table Formats for ODBC Archive Units
+ 
+
+ 
+The variable name, variable title, and extended text attributes fields are limited to 40 characters in ODBC archive units. If variables are recorded, whose configuration exceed this limitation the fields are truncated to 40 characters and an error is generated in the Event Viewer.
+ 
+ 
+Format for TRD table (Historic trend data)
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Field
+ 
+ 
+ 
+Field name
+ 
+ 
+ 
+Type
+ 
+ 
+ 
+Description
+ 
+ 
+ 
+
+ 
+ 
+1
+ 
+ 
+ 
+PROJECT
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Project name
+ 
+ 
+ 
+
+ 
+ 
+2
+ 
+ 
+ 
+CHRONO
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Event time as milliseconds since 1970
+ 
+ 
+ 
+
+ 
+ 
+3
+ 
+ 
+ 
+RECTS
+ 
+ 
+ 
+Date/time
+ 
+ 
+ 
+Event time and date stamp
+ 
+ 
+ 
+
+ 
+ 
+4
+ 
+ 
+ 
+STATION
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The station number
+ 
+ 
+ 
+
+ 
+ 
+5
+ 
+ 
+ 
+UNITNAME
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Name of the archive unit
+ 
+ 
+ 
+
+ 
+ 
+6
+ 
+ 
+ 
+VARTYPE
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The type of variable (LOG, ANA, TXT or SYS)
+ 
+ 
+ 
+
+ 
+ 
+7
+ 
+ 
+ 
+NAME
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Variable name
+ 
+ 
+ 
+
+ 
+ 
+8
+ 
+ 
+ 
+TITLE
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Variable title
+ 
+ 
+ 
+
+ 
+ 
+9
+ 
+ 
+ 
+NVAL
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The value of the variable (Numeric type)
+ 
+ 
+ 
+
+ 
+ 
+10
+ 
+ 
+ 
+VALIDITY
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Validity of the variable (0 = valid, else 1)
+ 
+ 
+ 
+
+ 
+ 
+11
+ 
+ 
+ 
+BATT
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Variable binary attributes
+ 
+ 
+ 
+
+ 
+ 
+12 - 27
+ 
+ 
+ 
+SATT1 - SATT16
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Extended attributes
+ 
+ 
+ 
+
+ 
+ 
+28 - 43
+ 
+ 
+ 
+CSATT1 - CSATT16
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Value of extended attribute if it is a variable name
+ 
+ 
+ 
+
+ 
+ 
+44 - 51
+ 
+ 
+ 
+DATT1 - DATT8
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Unused
+ 
+ 
+ 
+
+ 
+ 
+52 - 59
+ 
+ 
+ 
+CDATT1 - CDATT8
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Unused
+ 
+ 
+ 
+ 
+Format for LOG table (data generated by the log lists)
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Field
+ 
+ 
+ 
+Field name
+ 
+ 
+ 
+Type
+ 
+ 
+ 
+Description
+ 
+ 
+ 
+
+ 
+ 
+1
+ 
+ 
+ 
+PROJECT
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Project name
+ 
+ 
+ 
+
+ 
+ 
+2
+ 
+ 
+ 
+CHRONO
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Event time as milliseconds since 1970
+ 
+ 
+ 
+
+ 
+ 
+3
+ 
+ 
+ 
+RECTS
+ 
+ 
+ 
+Date/Time
+ 
+ 
+ 
+Event time and date stamp
+ 
+ 
+ 
+
+ 
+ 
+4
+ 
+ 
+ 
+STATION
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The station number
+ 
+ 
+ 
+
+ 
+ 
+5
+ 
+ 
+ 
+UNITNAME
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Name of the archive unit
+ 
+ 
+ 
+
+ 
+ 
+6
+ 
+ 
+ 
+VARTYPE
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The type of variable (LOG, ANA, TXT or SYS)
+ 
+ 
+ 
+
+ 
+ 
+7
+ 
+ 
+ 
+NAME
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Variable name
+ 
+ 
+ 
+
+ 
+ 
+8
+ 
+ 
+ 
+TITLE
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Variable title
+ 
+ 
+ 
+
+ 
+ 
+9
+ 
+ 
+ 
+NVAL
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The value of the variable (Numeric type)
+ 
+ 
+ 
+
+ 
+ 
+10
+ 
+ 
+ 
+TVAL
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The value of the variable (Text type)
+ 
+ 
+ 
+
+ 
+ 
+11
+ 
+ 
+ 
+PRIORITY
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The priority for an alarm variable
+ 
+ 
+ 
+
+ 
+ 
+12
+ 
+ 
+ 
+AVAL
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Validity of the variable (0 = valid, else 1)
+ 
+ 
+ 
+
+ 
+ 
+13
+ 
+ 
+ 
+LOGLIST
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The name of the log filter
+ 
+ 
+ 
+
+ 
+ 
+14
+ 
+ 
+ 
+EVTYPE
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The event type
+ 
+ 
+ 
+
+ 
+ 
+15
+ 
+ 
+ 
+EVTITLE
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The event title
+ 
+ 
+ 
+
+ 
+ 
+16
+ 
+ 
+ 
+EVTEXT
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The event text
+ 
+ 
+ 
+
+ 
+ 
+17
+ 
+ 
+ 
+COMPINF
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Complimentary information
+ 
+ 
+ 
+
+ 
+ 
+18
+ 
+ 
+ 
+USERNAME
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The user name
+ 
+ 
+ 
+
+ 
+ 
+19
+ 
+ 
+ 
+USERNOTE
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The user entered comment
+ 
+ 
+ 
+
+ 
+ 
+20
+ 
+ 
+ 
+TSTYPE
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+ 
+21
+ 
+ 
+ 
+TSVAL
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Timestamp from equipment
+ 
+ 
+ 
+
+ 
+ 
+22
+ 
+ 
+ 
+BATT
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Variable binary attributes
+ 
+ 
+ 
+
+ 
+ 
+23 - 38
+ 
+ 
+ 
+SATT1 - SATT16
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Extended attribute
+ 
+ 
+ 
+
+ 
+ 
+39 - 54
+ 
+ 
+ 
+CSATT1 - CSATT16
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Value of extended attribute if it is a variable name
+ 
+ 
+ 
+
+ 
+ 
+55 - 62
+ 
+ 
+ 
+DATT1 - DATT8
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Unused
+ 
+ 
+ 
+
+ 
+ 
+63 - 70
+ 
+ 
+ 
+CDATT1 - CDATT8
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Unused
+ 
+ 
+ 
+ 
+Format for REP table (data generated by report mechanism)
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Field
+ 
+ 
+ 
+Field name
+ 
+ 
+ 
+Type
+ 
+ 
+ 
+Description
+ 
+ 
+ 
+
+ 
+ 
+1
+ 
+ 
+ 
+PROJECT
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Project name
+ 
+ 
+ 
+
+ 
+ 
+2
+ 
+ 
+ 
+CHRONO
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Event time as milliseconds since 1970
+ 
+ 
+ 
+
+ 
+ 
+3
+ 
+ 
+ 
+RECTS
+ 
+ 
+ 
+Date/Time
+ 
+ 
+ 
+Event time and date stamp
+ 
+ 
+ 
+
+ 
+ 
+4
+ 
+ 
+ 
+STATION
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The station number
+ 
+ 
+ 
+
+ 
+ 
+5
+ 
+ 
+ 
+UNITNAME
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Name of the archive unit
+ 
+ 
+ 
+
+ 
+ 
+6
+ 
+ 
+ 
+VARTYPE
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The type of variable (LOG, ANA, TXT or SYS)
+ 
+ 
+ 
+
+ 
+ 
+7
+ 
+ 
+ 
+TAGNAME
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Variable internal ID
+ 
+ 
+ 
+
+ 
+ 
+8
+ 
+ 
+ 
+NAME
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Variable name
+ 
+ 
+ 
+
+ 
+ 
+9
+ 
+ 
+ 
+TITLE
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Variable title
+ 
+ 
+ 
+
+ 
+ 
+10
+ 
+ 
+ 
+NVAL
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The value of the variable (Numeric type)
+ 
+ 
+ 
+
+ 
+ 
+11
+ 
+ 
+ 
+TVAL
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The value of the variable (Text type)
+ 
+ 
+ 
+
+ 
+ 
+12
+ 
+ 
+ 
+VALIDITY
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Validity of the variable (0 = valid, else 1)
+ 
+ 
+ 
+
+ 
+ 
+13
+ 
+ 
+ 
+REPORT
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The report name
+ 
+ 
+ 
+
+ 
+ 
+14
+ 
+ 
+ 
+REPORT01
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The transition to trigger the report (0 or 1)
+ 
+ 
+ 
+
+ 
+ 
+15
+ 
+ 
+ 
+BATT
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Variable binary attributes
+ 
+ 
+ 
+
+ 
+ 
+16 - 31
+ 
+ 
+ 
+SATT1 - SATT16
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Extended attributes
+ 
+ 
+ 
+
+ 
+ 
+32 - 47
+ 
+ 
+ 
+CSATT1 - CSATT16
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Value of extended attribute if it is a variable name
+ 
+ 
+ 
+
+ 
+ 
+48 - 55
+ 
+ 
+ 
+DATT1 - DATT8
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Unused
+ 
+ 
+ 
+
+ 
+ 
+56 - 63
+ 
+ 
+ 
+CDATT1 - CDATT8
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Unused
+
+
+========================================
+TOPIC: Units_other_printers_virtual.htm
+========================================
+The (Printers) virtual archive unit
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The '(Printers)' Virtual Archive Unit
+ 
+The '(Printers)' virtual archive unit enables you to 
+ print log and report data without also storing it in an archive unit. 
+ It has no properties of its own to configure, as it only exists to provide a container for log lists and log reports that only have a printer output. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+This function is identical to the facilities that you 
+ can configure for an actual archive unit, in a Log List dialog (for ASCII 
+ output) or a Log Report dialog (for graphical printing via drivers). 
+ 
+ 
+
+ 
+Log report printing supports network printers. Even if the Log report configuration (Printing tab) only shows directly connected printers, you can use a network printer by entering directly its name under the form \\<PrinterServer>\<PrinterName>.
+
+
+========================================
+TOPIC: Units_overview.htm
+========================================
+Types of archive units
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Types of Archive Unit
+ 
+Several different types of archive unit may be configured. 
+ The type of archive units that you use is dependent on how the recorded 
+ data is to be retrieved.
+ 
+Database
+ 
+General-purpose archive unit.
+ 
+ 
+Main advantage - Records data in an industry standard database.
+ 
+Main disadvantages - Can use a large storage space. Access speed can be compromised with larger databases files. 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Data source
+ 
+ 
+ 
+Trend data from variables added to the Trends folder and 
+ log data from the Log Lists.
+ 
+ 
+ 
+
+ 
+ 
+Data retrieval
+ 
+ 
+ 
+Historic Trend Viewer.
+Log Viewer.
+Programmatically using SCADA Basic.
+ 
+ 
+ 
+
+ 
+ 
+Recording system
+ 
+ 
+ 
+Industry standard database. Maintenance mechanism for controlling file size and/or age of data.
+ 
+ 
+ 
+
+ 
+ 
+Location
+ 
+ 
+ 
+In the Databases folder in the root of the installation folder.
+ 
+ 
+ 
+
+ 
+ 
+Record format
+ 
+ 
+ 
+Sql relational database tables. Format of tables partially configurable.
+ 
+ 
+ 
+
+ Redundancy and consolidation
+ Supported.
+ 
+ 
+ 
+Proprietary
+ 
+General-purpose archive unit.
+ 
+ 
+Main advantage - 
+ Highly optimized data recording for maximum performance.
+ 
+Main disadvantage 
+ - Proprietary format so access by 3rd party products limited.
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Data source
+ 
+ 
+ 
+Trend data from variables added to the Trends folder, 
+ Log data from the Log Lists and report data.
+ 
+ 
+ 
+
+ 
+ 
+Data retrieval
+ 
+ 
+ 
+Historic Trend Viewer.
+Log Viewer.
+Mimics configured as reports.
+Programmatically using SCADA Basic.
+ 
+ 
+ 
+
+ 
+ 
+Recording system
+ 
+ 
+ 
+File based. Each archive unit is composed of a number 
+ of files of pre-defined size. The oldest file is discarded when the unit 
+ becomes full and a new file is created. Files may be automatically copied 
+ to another location before they are discarded.
+ 
+ 
+ 
+
+ 
+ 
+Location
+ 
+ 
+ 
+Normally within the TH folder of the project.
+ 
+ 
+ 
+
+ 
+ 
+Record format
+ 
+ 
+ 
+Proprietary. Binary or ASCII data is recorded 
+ in blocks. The record format is partly configurable.
+ 
+ 
+ 
+
+ Redundancy and consolidation
+ Not supported.
+ 
+ 
+ 
+(Printers)
+ 
+A pre-configured virtual archive unit that allows log 
+ and report data to be sent directly to a printer without being recorded 
+ in an archive unit.
+ 
+Free
+ 
+Special purpose archive unit only used if access to data 
+ is required in a simple ASCII format by 3rd party product.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Data source
+ 
+ 
+ 
+Trend data from variables added to the Trends folder and 
+ Log data from the Log Lists.
+ 
+ 
+ 
+
+ 
+ 
+Data retrieval
+ 
+ 
+ 
+3rd party products, word processor, spreadsheet, database 
+ etc. - depending on the chosen recording format.
+ 
+ 
+ 
+
+ 
+ 
+Recording system
+ 
+ 
+ 
+File based. Sequential system with new uniquely named 
+ file created each time the current file becomes full. No file management 
+ - files must be moved or deleted by some means external to PcVue.
+ 
+ 
+ 
+
+ 
+ 
+Location
+ 
+ 
+ 
+Anywhere within the Windows' file system.
+ 
+ 
+ 
+
+ 
+ 
+Record Format
+ 
+ 
+ 
+ASCII. Each data point is recorded on a single line. The 
+ record format is fully configurable.
+ 
+ 
+ 
+
+ Redundancy and consolidation
+ Not supported.
+ 
+ 
+ 
+ODBC
+ 
+Special-purpose archive unit only used if access to data 
+ is required in database format by a 3rd party product. Superseded in version 
+ 8.10 onwards by the database type archive unit.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Data Source
+ 
+ 
+ 
+Trend data from variables added to the Trends folder, 
+ Log data from the Log Lists and report data.
+ 
+ 
+ 
+
+ 
+ 
+Data Retrieval
+ 
+ 
+ 
+Through the HMI using a historic Trend Viewer.
+Through the HMI using a Log Viewer.
+Through the HMI using mimics configured as reports.
+Any program with connectivity to the selected database.
+ 
+ 
+ 
+
+ 
+ 
+Recording System
+ 
+ 
+ 
+ODBC database.
+ 
+Automatic reconnection to the ODBC data source is not supported. If the connection is lost, PcVue must be restarted.
+ 
+ 
+ 
+
+ 
+ 
+Location
+ 
+ 
+ 
+Anywhere within the Windows' file system.
+ 
+ 
+ 
+
+ 
+ 
+Recording Format
+ 
+ 
+ 
+ODBC database in fixed format tables.
+ 
+ 
+ 
+
+ Redundancy and consolidation
+ Not supported.
+ 
+ 
+ 
+VCR
+ 
+Special-purpose archive unit only used for projects configured 
+ for the VCR facility.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Data Source
+ 
+ 
+ 
+The values of register, bit, alarm and text variables.
+ 
+ 
+ 
+
+ 
+ 
+Data Retrieval
+ 
+ 
+ 
+Through the HMI using a specially configured PcVue 
+ station. The data is replayed in pseudo real time controlled using a VCR 
+ style (Video Cassette Recorder) dialog.
+ 
+ 
+ 
+
+ 
+ 
+Recording System
+ 
+ 
+ 
+File based. New file created periodically each time a 
+ snapshot of the variable values is taken.
+ 
+ 
+ 
+
+ 
+ 
+Location
+ 
+ 
+ 
+Normally within the TH folder of the project.
+ 
+ 
+ 
+
+ 
+ 
+Recording Format
+ 
+ 
+ 
+Proprietary.
+ 
+ 
+ 
+
+ Redundancy and consolidation
+ Not supported.
+ 
+ 
+ 
+
+ 
+If you need to archive data timestamped at the device level, it is recommended to use Database archiving (HDS). In general, the native recording system (proprietary archive unit) does not provide a reliable data sequence.
+
+
+========================================
+TOPIC: Units_prop_cache_works.htm
+========================================
+How the Proprietary Unit cache works
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How the Proprietary Unit Cache Works
+ 
+Data recording in the Proprietary Archive Unit uses a memory-based cache to reduce the amount of disk activity and increase the recording efficiency.
+ 
+There is a cache for:
+ 
+ 
+Each variable that is trended.
+ 
+Each Log List.
+ 
+Each report.
+ 
+ 
+Each cache has two properties, Memory Size and Write Period, that together determine how the cache behaves. This is best explained by a diagram.
+ 
+
+ 
+ 
+ 
+The default configuration of 32K of memory and 120 second write period have been chosen as the best compromise between recording efficiency and minimizing loss of data under normal operating conditions.
+
+
+========================================
+TOPIC: Units_prop_configuring.htm
+========================================
+Configuring a proprietary archive unit
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a Proprietary Archive Unit
+ 
+How to create and configure a proprietary archive unit
+ 
+ 
+Open the Application Explorer and expand the configuration tree to select the Archives
+ Units folder. 
+ 
+From the task list,
+ select Add
+ a proprietary unit. The Archive Unit dialog opens. Show picture
+
+ 
+Enter the Name and optional Description for the new archive unit.
+ 
+Configure the archive
+ unit options (see list below)
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+Archive unit properties available from the General
+ tab 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Property
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 
+ 
+Unit name 
+ 
+ 
+ 
+The name of the archive unit. The unit name or full path
+ name (see below) is limited to 12 characters.
+Normally the name will be the same as that of the project
+ sub-folder where the archive unit is located. However, it is also possible
+ to specify a complete path, for example C:\ALARMS. In that case, the archive
+ unit is created outside of the project folder. 
+ 
+ 
+ 
+
+ 
+ 
+Description
+ 
+ 
+ 
+A description for the archive unit.
+ 
+ 
+ 
+
+ 
+ 
+Read Only
+ 
+ 
+ 
+Option to make the archive unit read-only.
+ 
+ 
+ 
+
+ 
+ 
+File format
+ 
+ 
+ 
+Option for recording the data with or without the variable's
+ extended attributes.
+ 
+ 
+ 
+
+ 
+ 
+Archive capacity
+ 
+ 
+ 
+Total capacity of the archive unit in megabytes. See note below
+
+ 
+ 
+ 
+
+ 
+ 
+Archive file size
+ 
+ 
+ 
+The size of each file making up the archive unit. This must be a divisor of the total capacity. The file size should be such that between 10 and 20 files are required. See note below.
+ 
+ 
+ 
+
+ 
+ 
+Percentage full register 
+ 
+ 
+ 
+The name of a register in the database that, if specified,
+ will display the percentage use of the archive unit.
+ 
+ 
+ 
+ 
+For details of how to configure the backing-up of archive
+ units, see the topic Creating
+ Archive Unit Backups.
+ 
+
+ 
+For the maximum and minimum sizes of archive units and files, see the topic Recording Limits.
+ 
+ 
+Archive unit properties available from the Networking tab
+ 
+ 
+ 
+ 
+
+ 
+ 
+Property
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ Historical servers
+ The name of a server station list (historical server list). Used on multi-station applications to define on which stations data will be recorded for the archive unit. See the Networking book for further information.
+ 
+ 
+
+ Clients
+ The name of a client station list. Used on multi-station applications to define which stations will be able to request records for the archive unit. See the Networking book for further information.
+ 
+ 
+ 
+
+ 
+In most cases, the list of servers producing a proprietary archive unit is a list that only contains one station. In some cases, if you want to archive a set of data in local archives on several stations, it contains a list of stations where these local archives should be managed.
+ 
+Using a server list that contains an association of servers is not recommended, as it implies performing redundant operations that are not supported by proprietary archive units. With such a configuration, depending on which station of the association was active or passive at some point in time, you would end up with gaps in your archived data, and no mean for consolidating them.
+ 
+If your project requires redundancy and consolidation for archive data, you should use HDS database archive units.
+ 
+ 
+Deleting an archive unit
+ 
+ 
+Open the Application Explorer and expand the configuration tree to select the Archives
+ Units folder.
+ 
+Select the archive unit to be deleted and, from the task list, select Remove. 
+ 
+Click OK in the confirmation dialog to complete the process.
+
+
+========================================
+TOPIC: Units_prop_creating_backups.htm
+========================================
+Configuring Archive Unit Backups
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring Archive Unit Backups
+ 
+The back-up mechanism copies the content of an archive unit folder to the back-up folder. The back-up is initiated by the change of state of a database bit variable. When a back-up is initiated, the following actions take place:
+ 
+ 
+The archive unit cache is flushed to the archive unit files.
+ 
+Any files in the archive folder, that do not already exist in the back-up folder, are copied to the back-up folder.
+ 
+Recording continues in the archive unit in the next file in the sequence.
+ 
+The value of the percentage full register is set to 0.
+ 
+ 
+The back-up mechanism is normally configured so that it is triggered when the archive unit approaches full (for example when the percentage full register is at 90%). Using the back-up mechanism means that you can keep historic data indefinitely without older data being discarded by the archive unit's circular recording mechanism.
+ 
+ Files in a back-up folder may be freely copied, moved 
+ or deleted without affecting PcVue's operation. Files that have been moved elsewhere (for example to long term storage) can be restored at any time if necessary. See the topic Managing archive unit backup files.
+ 
+Configuring an archive unit back-up
+ 
+ 
+Open the Application Explorer and expand the configuration 
+ tree to select the archive unit to be configured.
+ 
+From the task list, 
+ select Properties.
+ 
+Select the Back-up 
+ tab and configure the back-up properties. See the list below. Show picture
+
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Property
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 
+ 
+Back-up archive files
+ 
+ 
+ 
+Enable the back-up option.
+ 
+ 
+ 
+
+ 
+ 
+Back-up directory
+ 
+ 
+ 
+The name of the folder to which the archive files are 
+ to be copied. 
+A separate back-up folder is required for each archive unit that will be 
+ backed up.
+ 
+ 
+ 
+
+ 
+ 
+Identification text 
+ 
+ 
+ 
+The name of a database text variable that, if specified, 
+ is used to append a comment to the text that appears in the Event Viewer. The text is limited to 12 characters. Show picture
+ 
+ 
+ 
+
+ 
+ 
+Triggering bit
+ 
+ 
+ 
+The name of the database bit used to initiate a back-up.
+ 
+ 
+ 
+
+ 
+ 
+To 0, to 1
+ 
+ 
+ 
+The transition of the triggering bit on which the back-up 
+ is run.
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+The back-up folder for each archive unit must have a unique 
+ name to prevent the files from one archive unit being mixed with those 
+ from another.
+ 
+ 
+Automating the back-up
+ 
+When you create each archive unit, you can select a database 
+ register variable that is updated automatically to indicate how full the 
+ unit is. The register variable measures the capacity as a percentage, 
+ 100% being full and 0% empty. Using the threshold system, you can use 
+ the register to set a bit that is then used to initiate a backup.
+ 
+
+ 
+The back-up folder cannot be defined by a UNC name such as \\MyFileServer\MyBackupDir, and it is strongly advised not to back-up archives directly over a network or onto an external disk (USB disk, NAS, File server etc.). Doing so may lead to file corruption and risks of unrecoverable archive data.
+
+
+========================================
+TOPIC: Units_prop_data_attributes_filter_expression.htm
+========================================
+Using an attributes filter expression
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using an Attributes Filter Expression
+ 
+An attributes filter expression is used to apply additional filter criteria to the data that is recorded. An attributes filter can be used when configuring both log and trend recording. A filter starts with an equals sign and is followed by one or more expressions. Each expression consists of a variable, an operator and a value, all enclosed in brackets (...). 
+ 
+For example: =(#t BEG ALM) would include all variable names (#t) beginning (BEG) with the text ALM.
+ 
+The following symbols are supported.
+ 
+ 
+ 
+ 
+ 
+
+ Symbol
+ Description
+ 
+ 
+
+ #t
+ The variable's name
+ 
+ 
+
+ #A1 to #A16
+ The variable's extended text attributes. #A1 and #A2 are Domain and Nature respectively
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ #T
+ Variable label (description).
+ 
+ 
+
+ #B
+ Boolean attribute (as a word).
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ Operators
+ Description
+ 
+ 
+
+ ==
+ Equal to
+ 
+ 
+
+ >
+ Greater than
+ 
+ 
+
+ <
+ Less than
+ 
+ 
+
+ >=
+ Greater than or equal to
+ 
+ 
+
+ <=
+ Less than or equal to.
+ 
+ 
+
+ ^ or BEG
+ Beginning with "string"
+ 
+ 
+
+ $ or INC
+ Including "string"
+ 
+ 
+
+ [ or END
+ Ending with string
+ 
+ 
+
+ &&
+ Logical AND used between expressions
+ 
+ 
+
+ ||
+ Logical OR used between expressions
+ 
+ 
+ 
+ 
+The attributes filter expression is entered in the filter's Attributes Filter tab where you can either enter the filter directly typing it into the Filter generated text box, or use a selection of drop down list boxes and command buttons to construct the filter interactively. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Examples of filter expressions
+ 
+ 
+ 
+ 
+ 
+
+ Filter
+ Description
+ 
+ 
+
+ =(#t BEG FACTORY)&&((#A1 == DOM1)||(#A1 == DOM2))
+ The name of the variable starts with FACTORY and the Domain is either DOM1 or DOM2.
+ 
+ 
+
+ =(#A1 == DOM1)||(#A2 == NAT1)
+ The Domain is DOM1 or the Nature is NAT1.
+ 
+ 
+
+ =(#A5 >=10)&&(#A5 < 35)
+ The attribute A5 is greater than or equal to 10 and less than 35.
+ 
+ 
+ 
+ 
+
+ 
+Note the use of brackets in the first example to control the order in which the expressions are evaluated.
+ 
+ 
+
+ 
+It is recommended to enclose text values with quotation marks, and it is mandatory for the expression to work as expected if the value contains a special character such as a space, a comma or a quotation mark. For example: (#T BEG "Urgent alarm").
+
+
+========================================
+TOPIC: Units_prop_log_data_adv_conf.htm
+========================================
+Log List advanced configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Log List Advanced Configuration
+ 
+The following properties are all found in the log list's 
+ Advanced tab.
+ 
+Changing what attributes are recorded each time an 
+ event is logged
+ 
+When used with a proprietary archive unit you can customize 
+ the log list so that one or more of a variable's extended attributes are 
+ logged along with the normal information. The value of these extended 
+ attributes can then be displayed in the Log Viewer. The attributes that 
+ are recorded are selected by format elements entered in the Attributes 
+ to record string.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Format elements
+ 
+ 
+ 
+To record
+ 
+ 
+ 
+
+ 
+ 
+#@A1 to #@A16
+ 
+ 
+ 
+Extended text attributes A1 to A16. #A1 and #A2 represent 
+ the variable's Domain and Nature respectively and are the default setting.
+ 
+ 
+ 
+
+ 
+ 
+#@B
+ 
+ 
+ 
+Extended binary attribute.
+ 
+ 
+ 
+
+ 
+ 
+#@*A3 to #@*A16
+ 
+ 
+ 
+Deferred extended text attributes. The real time value 
+ of the variable named in the extended attributes A3 to A16 is 
+ recorded.
+ 
+ 
+ 
+ 
+Changing the output buffer
+ 
+When used with a proprietary format archive unit, the 
+ output from a log list is buffered to reduce how often data is written 
+ to the archive unit thereby reducing activity on the media on which it 
+ resides. The operation of the buffer is controlled by the following properties.
+ 
+ 
+Cache memory size - The 
+ size of the memory buffer used. If set to zero then it is disabled.
+ 
+Write period - The 
+ frequency at which the cache is flushed to HISTO.SAV.
+ 
+ 
+See the topic How the proprietary archive unit cache works for a description of the operation of the output buffer (cache).
+ 
+The Cache memory size and Write 
+ period properties are found in the Advanced tab of the Report dialog.
+ 
+Configuring a time ordered buffer
+ 
+Under some special circumstances related to how data is timestamped, it can be useful to delay storage to overcome small time lags. For this purpose, each 
+ log list has an optional buffer in which data may be sorted before being 
+ output. The operation of the time ordered buffer is controlled using the 
+ following properties.
+ 
+ 
+Memory size - The 
+ size of the memory buffer used to sort data before it is copied to disk.
+ 
+Period - The period 
+ for which data is sorted. If this is zero then no sorting takes place.
+ 
+ 
+
+ 
+If you need to archive data timestamped at the device level, it is recommended to use Database archiving (HDS). In general, the native recording system (proprietary archive unit) does not provide a reliable data sequence.
+ 
+ 
+Inhibiting a log list using a database bit
+ 
+The output from a log list can be temporarily suspended 
+ using a database bit variable. You can choose one or zero as the state 
+ during which the log list operation is suspended. 
+ 
+
+ 
+While a log list is suspended, all events that would have 
+ passed its filter criteria are lost.
+
+
+========================================
+TOPIC: Units_prop_log_data_configuring.htm
+========================================
+How to configure a native log list
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure a Native Log List
+ 
+Log lists are created and configured using the Log List
+ dialog as follows. 
+ 
+Creating and configuring a log list
+ 
+ 
+Open the Application Explorer and expand the configuration
+ tree to display a previously configured archive unit folder and select
+ its Log Lists folder. 
+ 
+From the task list,
+ select Add
+ a Log List. This opens the Log List properties dialog at the
+ General tab. Show picture
+
+ 
+Enter a unique name
+ for the log list into the Name text box.
+ 
+To create the log
+ list with the default settings, click the OK button. A new log list will appear in the Log Lists folder.
+ 
+ 
+
+ 
+Each log list must have a unique name within the project.
+ 
+ 
+ 
+Deleting a log list
+ 
+ 
+Open the Application Explorer and expand the configuration
+ tree to select an archive unit folder and its Log Lists folder. 
+ 
+Select the log list
+ to be deleted.
+ 
+In the task list,
+ select Remove and then click OK to confirm the action.
+
+
+========================================
+TOPIC: Units_prop_log_data_filtering_events.htm
+========================================
+Filtering events using the Event Filter tab
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Filtering Events Using the Event Filter Tab
+ 
+The Event Filter tab configures filtering of events according to the event type. Ticking an option means that 
+ the event is allowed to pass, un-ticking an option means that the event 
+ is blocked. Show picture 
+ The following event types are supported.
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Alarm events
+ 
+ 
+Alarm off. The 
+ change of an alarm to the off state.
+ 
+Alarm off, Not 
+ Ack. The change of an alarm to the off, not acknowledged state.
+ 
+Alarm on, Ack. 
+ The change of an alarm to the on, acknowledged state.
+ 
+Alarm on, Not 
+ Ack. The change of an alarm to the on, not acknowledged state.
+ 
+Unavailable alarm 
+ events
+ 
+ 
+Expression 
+ masked
+ 
+Inhibited
+ 
+Not accessible
+ 
+Program masked
+ 
+Variable masked
+ 
+User masked
+ 
+ 
+ 
+Bit changes
+ 
+ 
+Change to 0. 
+ The change of a bit from any state to 0.
+ 
+Change to 1. 
+ The change of a bit from any state to 1.
+ 
+Unavailable. 
+ The change from any state to unavailable (invalid).
+ 
+ 
+User actions
+ 
+ 
+Acknowledge. 
+ Acknowledging an alarm.
+ 
+Command. The 
+ forcing of a bit, register or text variable from a control zone animation.
+ 
+Execute program. 
+ Running a SCADA Basic program from a control zone animation.
+ 
+Logon/logoff. 
+ Logging on and off and failed attempts at logging on.
+ 
+Alarm mask. Masking 
+ an alarm
+ 
+ 
+ 
+Alarm events may also be filtered by a minimum and maximum 
+ alarm level.
+
+
+========================================
+TOPIC: Units_prop_log_data_filters_overview.htm
+========================================
+Overview of log data recording in proprietary archive units 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Log Data Recording in Proprietary Archive Units 
+ 
+ 
+What data can I record?
+ 
+Log data is primarily recorded for display through PcVue Log Viewer. The following events can be recorded.
+ 
+ 
+Changes in value 
+ of bit variables.
+ 
+Changes in value 
+ of alarm variables.
+ 
+User actions:
+Logging on and off (including failures).
+Sending a command (forcing a bit, register or text variable) from a 
+ control zone on a mimic.
+Running a program from a control zone on a mimic.
+Acknowledging an alarm.
+ 
+ 
+Making events eligible for recording
+ 
+To make bit and alarm variables eligible for recording 
+ you select the properties Log 
+ to 0 and Log 
+ to 1 in the variable's configuration.
+ 
+All user actions are eligible for logging without requiring 
+ any configuration.
+ 
+Using log lists to select what and where events are 
+ to be recorded
+ 
+Events that are to be logged are selected by the configuration 
+ of one or more log lists. A log list is attached to specific archive unit 
+ to which its output is directed. The output from a log list can also be 
+ printed to create alarm printers, event printers etc. The same events 
+ can be logged by one or more log lists.
+ 
+Using log lists with other types of archive unit
+ 
+Log lists are also used with Free Format and ODBC archive units. 
+ 
+Log lists are also be used with the (Printers) virtual archive 
+ unit when only printed output (not recording) is required. 
+ 
+
+ 
+If you need to archive data timestamped at the device level, it is recommended to use Database archiving (HDS). In general, the native recording system (proprietary archive unit) does not provide a reliable data sequence.
+
+
+========================================
+TOPIC: Units_prop_log_data_printing.htm
+========================================
+Printing from a log list
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Printing from a Log List
+ 
+As well as being sent to an archive unit, the output 
+ from a log list may also be sent to one of the line printers configured in PcVue. 
+ Log lists created subordinate to the (Printers) virtual archive unit produce 
+ only printed output as the (Printers) archive unit does not record anything.
+ 
+To enable printing from a log list select one of the 
+ printers (1 to 12) from the Printer 
+ drop down list box in the log lists General tab. The selected printer 
+ must have been configured in PcVue.
+ 
+Formatting the printed output
+ 
+The content of each printed line can be configured using 
+ a format string entered in the Format 
+ text box in the log list's General tab. The 
+ format elements used in the string can be found in the topic Format 
+ Elements for Log List Printing and Free Format Archive Units.
+ 
+You can enter an alternative configuration string directly 
+ in the field or configure it using a dialog displayed by clicking the 
+ ellipsis button adjacent to the field. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Any characters entered other than the format elements 
+ are interpreted literally. So for example the format string #D/#M/#Y #h:#m:#s 
+ #t = #C would produce a printed line such as:
+ 
+03/10/06 16:32:46 EFFLUENT.TANK1.LEVEL = 1.67
+
+
+========================================
+TOPIC: Units_prop_managing_summary_files.htm
+========================================
+Management of the archive unit summary files
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing the Archive Unit Summary Files
+ 
+For each archive unit that is created, a corresponding 
+ summary file is produced. The summary file contains essential information 
+ that is used by PcVue to access the archive unit files. Should 
+ the summary file become corrupted the contents of the entire archive unit 
+ will be lost. 
+ 
+To protect the summary file against corruption caused 
+ by hard disk errors, two copies are maintained. The main summary file takes 
+ the name of the archive unit plus a .SAV extension. For example, for an 
+ archive unit called PROP1, the file would be called PROP1.SAV. The copy 
+ just takes the name of the archive unit with no extension, for example 
+ PROP1. The two files are never opened at the same time. Both are held 
+ with the archive units, e.g. in the project's folder TH/<unit name>. 
+ Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Before it reads from or writes to the main summary file 
+ PcVue checks its integrity. If it is found to be corrupted, its 
+ contents are replaced by the copy.
+ 
+Two system variable bits are provided that can be used 
+ to monitor the status of the summary files.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Variable
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 
+ 
+SYSTEM.UNIT.<Archive Unit>.SOM1_STATUS
+ 
+ 
+ 
+The status of the main summary file.
+ 
+ 
+ 
+
+ 
+ 
+SYSTEM.UNIT.<Archive Unit>.SOM2_STATUS
+ 
+ 
+ 
+The status of the copy summary file.
+ 
+ 
+ 
+ 
+Each variable is set to a value of 0 if the file is healthy 
+ and to 1 if it is corrupt.
+
+
+========================================
+TOPIC: Units_prop_report_adv_options.htm
+========================================
+Report advanced options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Report Advanced Properties
+ 
+Changing the output buffer
+ 
+When used with a proprietary format archive unit, report data is buffered to reduce how often data is written 
+ to the archive unit thereby reducing activity on the media on which it 
+ resides. The operation of the buffer is controlled by the following properties.
+ 
+ 
+Cache memory size - The 
+ size of the memory buffer used. If set to zero then it is disabled.
+ 
+Cache write period - The 
+ frequency at which the cache is flushed to HISTO.SAV.
+ 
+ 
+See the topic How the proprietary archive unit cache works for a description of the operation of the output buffer (cache).
+ 
+The Block length and Write 
+ period properties are found in the Advanced tab of the Report dialog.
+ 
+Printing options
+ 
+ 
+No form feeds between 
+ windows � Suppresses the form feeds normally sent to the printer between 
+ each window.
+ 
+No printing status 
+ box � Disables the printing status box that normally appears whilst a 
+ report is being printed.
+ 
+ 
+The No 
+ form feeds between windows and No 
+ printing status box properties are found in the Printing tab of 
+ the Report dialog.
+
+
+========================================
+TOPIC: Units_prop_report_conf.htm
+========================================
+Configuring a report
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure a Report
+ 
+A report is configured in two stages.
+ 
+ 
+Drawing the mimics used as source 
+ windows.
+ 
+Configuring the report's 
+ properties. 
+ 
+ 
+Drawing the source windows
+ 
+The mimic used as source windows are designed using the usual drawing tools. The following drawing elements should not be 
+ used in a window to be used for a report.
+ 
+ 
+Trend Viewer.
+ 
+Alarm Viewer.
+ 
+Log Viewer.
+ 
+Grid Viewer.
+ 
+ActiveX controls.
+ 
+OLE objects.
+ 
+ 
+If the reports are to be printed, you should take into 
+ consideration the limitations of the printer you are using.
+ 
+Animations can use the real time values of variables 
+ or expressions. The window itself (border, title bar, background) is not 
+ printed, it just provides a container for the drawing elements that form 
+ the report.
+ 
+The window is printed at 96 pixels per inch (approximately 
+ 37.8 pixels per cm). That is to say, a square of 96 pixels on the screen 
+ would be 1 inch (2.54 cm) square on the paper.
+ 
+
+ 
+Using A4 paper in portrait mode and taking into account 
+ the margins that a typical printer requires limits the maximum printable 
+ size of the window to about 750 pixels wide by 1050 pixels high.
+ 
+ 
+How to configure a report
+ 
+ 
+Open the Application Explorer and expand the configuration 
+ tree to select an archive unit and its Reports sub-folder. 
+ 
+From the task list, 
+ select Add 
+ a log report. The Log Report configuration dialog opens. Show picture
+
+ 
+Enter a name and optional 
+ description for the report in the Name 
+ and Description 
+ fields respectively.
+ 
+Enter the name of 
+ the bit variable used to activate the report in the Trigger 
+ bit text box. You can either type in the name or select it using 
+ the Variable Browser displayed by clicking the ellipsis button adjacent 
+ to the text box.
+ 
+Select the bit transitions 
+ on which the report will be activated.
+ 
+Select the Windows 
+ tab and enter the name of up to five windows and their corresponding branches 
+ that will define the layout of the report and the variables that are recorded. 
+ You can either type in the names or select them using the dialog displayed 
+ by clicking the ellipsis button adjacent to the text box.
+ 
+If the report is 
+ to be printed when it is activated, select the Printing tab, select the 
+ printer that is to be used and tick the Enable 
+ tick box.
+ 
+Click on the OK 
+ button to confirm the configuration of the report.
+ 
+ 
+Important notes about reports
+ 
+ 
+A report is limited 
+ to 256 variables in total (irrespective of the number of mimics), using 
+ a block size of 8KB.
+ 
+If you add or remove 
+ variables in a window used for a report, any instances that have been 
+ archived will no longer display or print correctly. It is also possible 
+ that the variables will have the wrong values or no value at all.
+ 
+To view or print 
+ a report, the current user must have window access rights corresponding 
+ to those configured in the report's windows. Recording a report in the 
+ archive units is unaffected by user rights.
+
+
+========================================
+TOPIC: Units_prop_report_replay_toolbox.htm
+========================================
+The Report Selection and Replay 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Report Selection and Replay 
+ Toolbox
+ 
+The Report Selection and Replay Toolbox enables a user 
+ to select and play back recorded reports through their source windows 
+ and to produce hard copies on the Windows' default printer.
+ 
+How to use the toolbox to print a report
+ 
+ 
+Click on function key F12 to open the Report Selection and Replay toolbox. 
+ Show picture
+
+ 
+Select the report 
+ name using the Log Report list box.
+ 
+Select the instance 
+ of the report to be printed by clicking on its entry in the list. You 
+ can either:
+Scroll the list then make a selection.
+Click on the list heading then select a particular data and time. Show picture
+
+ 
+Click on the print 
+ tool. The report will be printed on the Windows default 
+ printer. 
+ 
+ 
+How to view a report on the screen
+ 
+ 
+Open the Report Selection 
+ and Replay toolbox (F12).
+ 
+Select the report 
+ name in the Log Report list box.
+ 
+In the Associated 
+ Mimics section Show picture 
+ click on a button to select a source window for the report. There is one button for each of the 5 possible windows that form a report. You can open 
+ one or more windows at the same time. Each window is opened in Reference 
+ mode. This is indicated by a marker in its top left hand corner. Show picture
+
+ 
+Select the report 
+ to be viewed by clicking on its entry in the list. You can either:
+Scroll the list then make a selection.
+Click on the list heading then select a particular data and time. Show picture
+
+ 
+ 
+What is Reference mode?
+ 
+When you open a window from the Report Selection and 
+ Replay toolbox, it is opened in Reference mode. 
+ 
+ 
+The window and its 
+ animations are disconnected from the real time database. 
+ 
+It displays values 
+ that have been recorded by the report mechanism.
+ 
+ 
+Using the Reference Set selection tools, you can open 
+ the same window twice in different reference modes. You can then display 
+ different instances of the report on the screen at the same time. Show picture
+
+
+========================================
+TOPIC: Units_prop_reports_overview.htm
+========================================
+Overview of recording report data in proprietary archive units
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Recording Report Data in Proprietary Archive Units
+ 
+What is a report?
+ 
+A report is a record of the real-time value of selected 
+ bit, register and text variables, at a particular point in time. 
+ 
+ 
+Configuring a report
+ 
+A report is defined by 1 to 5 mimic windows that are 
+ created in the normal manner. These windows have three purposes.
+ 
+ 
+The animations in 
+ the windows define which variables are to be included in the report.
+ 
+They define the layout 
+ of the report if it is to be printed.
+ 
+They can be used 
+ with the Report Replay Toolbox to replay reports later by the 
+ user. 
+ 
+ 
+When is report data recorded?
+ 
+Report data is recorded each time a report is activated. 
+ A report is activated by a change in value of a selected database bit 
+ variable. Using a database bit means that a report can be easily configured 
+ to be event driven, scheduled or on demand. 
+ 
+How can I play back a report?
+ 
+If a report is recorded in the archive units, you can 
+ view it on the screen or print it later using the Report Replay 
+ Toolbox. Reports are printed in a WYSIWYG ('What You See Is What You Get') 
+ format on the printer selected during the report configuration. The report 
+ on the printer will look identical to the mimic windows that define it 
+ (within the limitations of the printer you are using).
+ 
+Using reports with the (Printers) virtual archive unit
+ 
+Reports attached to the (Printers) virtual archive unit 
+ can only be printed when they are activated. The real time value of the 
+ reports is not saved.
+
+
+========================================
+TOPIC: Units_prop_restoring_files.htm
+========================================
+Managing Archive Unit Back-up Files
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing Archive Unit Back-up Files
+ 
+What are the files in a back-up folder?
+ 
+ 
+hxxxxxxx.dat - Archive unit data file where xxxxxxxx is a unique sequential number within that archive unit. For example h0000023.dat.
+ 
+hxxxxxxx.ind - Archive unit index file where xxxxxxx is a unique sequential number within that archive unit. For example h0000023.ind. The index file contains information about the time period covered by the data blocks in the corresponding data file.
+ 
+<Archive unit> - The summary file with the same name as that of the archive unit. For example U_PROP1. The summary file contains essential information 
+ that is used by PcVue when creating new data files in the archive unit folder. The summary file is not used in the back-up folder but it is required when restoring a project after a catastrophic failure.
+ 
+<Archive unit>.end - See below.
+ 
+ 
+What is the <archive unit>.end file used for?
+ 
+ Because the backup process is asynchronous, there is no way to easily know when it has finished. The file <archive unit>.end is always the last file that is written and it presence can be used as a flag indicating that the backup process is completed. The <archive unit>.end file does not actually contain useful data and any existing instance of it can be deleted before the back-up is started. Whatever mechanism is used to initiate the back-up (SCADA Basic program for example), the presence of the <archive unit>.end file is checked to know when the back-up is complete.
+ 
+
+ 
+<archive unit> should be substituted with the name of the actual archive unit to get the file name. For example Trends.end
+ 
+ 
+Removing files from the back-up folder
+ 
+You can delete or move the data and index files from the back-up folder as required without affecting PcVue's operation other than it will no longer have access to the data. For each data file that you delete or move, you must also delete or move the corresponding index file.
+ 
+If you have more than one archive unit (and hence more than one back-up folder) be careful not to mix up the files. It is strongly recommended that you keep them in a sub folder with the Archive Unit name.
+ 
+Restoring files in the back-up folder
+ 
+Data and index files can be restored to the back-up folder without affecting PcVue's operation. Data contained with the files becomes immediately available. You should not restore the summary file.
+ 
+Restoring files after a catastrophic failure
+ 
+If you have had to make a full restore of the project, for example after a hard disk crash, the summary file should be copied from the back-up folder to the Archive Unit folder within the project. This will ensure that PcVue continues recording data in the next data file in the sequence. If you do not restore the summary file, PcVue will start recording in the first file in the sequence (h0000000.dat) and any historic data in the back-up folder will be out of sequence and no longer available.
+
+
+========================================
+TOPIC: Units_prop_smaller_than_configured_size.htm
+========================================
+Why are my Proprietary Archive Units Smaller than the Configured Size?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Why are my Proprietary Archive Units Smaller than the Configured Size?
+ 
+Under some circumstances, the files that make up each Archive Unit are smaller than configured. There can be various reasons for this.
+ 
+Mismatch in the configuration of the archive unit file size and the cache memory size
+ 
+To understand how this can happen a more detailed explanation of the recording mechanism is required.
+ 
+ 
+Each archive data file is paired with a matching index file. For example, H0000001.DAT is paired with H0000001.IND. Each time a block of data is written to a data file, a corresponding entry is written to the index file.
+ 
+The index file is limited to a maximum of 1500 entries. 
+ 
+ Therefore, the corresponding data file is limited to 1500 x cache memory size. 
+ 
+ 
+By default, the cache memory size is 32 KB meaning that the data file size limit of 32 MB will be reached before the maximum number of entries are made in the index file. However if the cache memory size is reduced its possible that the maximum number of entries in the index file will be reached before the data file is full, thereby limiting the capacity of the archive unit. For example if the cache size is reduced to 4 KB, the maximum data file size will be 1500 x 4 KB = 6 MB, much less than the maximum configurable data file size of 32 MB.
+ 
+ Flushing the cache memory to the archive unit before it is full
+ 
+The cache memory used to buffer data can sometimes be flushed to an archive unit file before it is full. This can occur under the following circumstances.
+ 
+ 
+When the software is shut down.
+ 
+When an archive unit back-up takes place.
+ 
+When it is forced using the SCADA Basic History instruction.
+ 
+ 
+When the cache is flushed, a corresponding entry is written to the index file resulting in a similar limitation to that explained in the paragraph above.
+
+
+========================================
+TOPIC: Units_prop_trend_data_adding_var_to_folder.htm
+========================================
+Adding a Variable to a Proprietary Archive Unit Trends Folder
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding a Variable to a Proprietary Archive Unit Trends Folder
+ 
+How to add a variable to a Trends folder
+ 
+ 
+Open the Application Explorer and expand the configuration
+ tree to display a previously configured archive unit folder and select
+ its Trends folder.
+ 
+In the task list, 
+ select Add 
+ a trend. The Trend Configuration dialog opens. Show picture
+
+ 
+Enter the name of 
+ the variable to be added to the Trends folder in the Variable 
+ text box. You can either type in the name or select it from the Variable 
+ Browser displayed by clicking the ellipsis button adjacent to the text 
+ box.
+ 
+Enter an optional 
+ description in the Description 
+ text box.
+ 
+By default, the value 
+ of the variable will be recorded each time that it changes. To change 
+ this tick the Period tick box and enter a Period value in seconds. See the topic Understanding the trend period for more information.
+ 
+Click OK 
+ to confirm the configuration and close the dialog.
+ 
+ 
+Deleting a trend
+ 
+ 
+Open the Application Explorer and expand the configuration
+ tree to display a previously configured archive unit folder and select
+ its Trends folder.
+ 
+In the right pane, 
+ select the trend to be deleted.
+ 
+From the task list 
+ select Remove 
+ and then confirm the action by clicking the OK button.
+
+
+========================================
+TOPIC: Units_prop_trend_data_adv_conf.htm
+========================================
+Trend recording advanced options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Trend Recording Advanced Options
+ 
+Inhibiting a trend recording using a database bit
+ 
+Trend recording can be temporarily suspended using a 
+ bit variable. You can choose one or zero as the state during 
+ which recording is suspended.
+ 
+The Inhibiting 
+ Bit properties are found in the General tab of the Trend dialog.
+ 
+Disabling the recording of an invalid value on shutdown
+ 
+By default, for any trend, PcVue records an invalid value as the final point during shutdown. This is done so that the period of time when the software is shut down is clearly shown in a Trend Viewer. The recording of this invalid value can be disabled by ticking the property Do not record invalid value on shutdown. 
+ 
+This property is found in the General tab.
+ 
+Importing trend data
+ 
+If the property Import 
+ data file is ticked then the real time value of the variable is 
+ not recorded. Instead, trend data can be 
+ imported using the SCADA BASIC instruction HISTORY.
+ 
+The Import 
+ data file property is found in the Advanced tab of the Trend dialog. Show picture
+
+ 
+Recording a variable's extended attributes
+ 
+When used with a proprietary archive unit you can customize 
+ the trend recording so that one or more of a variable's extended attributes 
+ are recorded along with the standard information. The attributes that 
+ are recorded are selected by format elements entered in the Attributes 
+ to store field.
+ 
+ 
+ 
+ 
+ 
+
+ Format element
+ To record
+ 
+ 
+
+ 
+ 
+#@A1 to #@A16
+ 
+ Extended text attributes A1 to A16. #A1 and #A2 represent 
+ the variable's Domain and Nature respectively and are the default setting.
+ 
+ 
+
+ 
+ 
+#@B
+ 
+ Extended binary attribute.
+ 
+ 
+
+ 
+ 
+#@*A3 to #@*A16
+ 
+ Deferred extended text attributes. The real time value 
+ of the variable named in the extended attributes A3 to A16 is 
+ recorded.
+ 
+ 
+ 
+ 
+The Attributes 
+ to store property is found in the Advanced tab of the Trend dialog.
+ 
+Changing the output buffer
+ 
+When used with a proprietary format archive unit, trend data is buffered to reduce how often data is written 
+ to the archive unit thereby reducing activity on the media on which it 
+ resides. The operation of the buffer is controlled by the following properties.
+ 
+ 
+Cache memory size - The 
+ size of the memory buffer used. If set to zero then it is disabled.
+ 
+Cache write period - The 
+ frequency at which the cache is flushed to HISTO.SAV.
+ 
+ 
+See the topic How the proprietary archive unit cache works for a description of the operation of the output buffer (cache).
+ 
+The Block length and Write 
+ period properties are found in the Advanced tab of the Trend dialog.
+ 
+Changing the data storage format
+ 
+ 
+Text - The data 
+ will be recorded in ASCII. Data recorded in ASCII format may be read by 
+ a text editor or other program supporting text files, but is less compact 
+ than data stored in binary.
+ 
+Binary - The data 
+ will be recorded in binary. Data recorded in Binary format may not be 
+ read by a text editor, but as the data is more compact it is quicker to 
+ replay it through a Trend Viewer and requires less disk space.
+ 
+Add variable name for each record - By default each block of trend data is 
+ labeled with an internal identifier that only PcVue understands, 
+ but is the most efficient in terms of disk space. As an alternative, each data block 
+ can be labeled with the variable name. This means that the data in the 
+ file is then much easier to interpret with a text editor or other program, 
+ but the size of the records increases considerably.
+
+
+========================================
+TOPIC: Units_prop_trend_data_overview.htm
+========================================
+Overview of trend recording in proprietary archive units
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Trend Recording in Proprietary Archive Units
+ 
+What data can I record?
+ 
+Trend data is primarily recorded for display through PcVue Trend Viewer. The following data can be recorded.
+ 
+ 
+Changes in value 
+ of bit variables.
+ 
+Changes in value 
+ of register variables.
+ 
+ 
+Configuring variables for trend 
+ recording
+ 
+To configure a variable for trend recording in the native 
+ archive units you add its name to the Trends folder in a proprietary archive unit.
+ 
+
+ 
+The same configuration is used for trend recording in a Free Format or ODBC archive unit. 
+ 
+ 
+How do I configure the rate at which variables are 
+ recorded?
+ 
+The rate at which bit and register variables are recorded 
+ by is configured in the dialog that is displayed when a variable is added 
+ to the Trends folder.
+ 
+
+ 
+If you need to archive data timestamped at the device level, it is recommended to use Database archiving (HDS). In general, the native recording system (proprietary archive unit) does not provide a reliable data sequence.
+
+
+========================================
+TOPIC: Units_trend_data_adding_a_var_to_trends_folder.htm
+========================================
+Adding a variable to a HDS Trends folder
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding a Variable to a HDS Trends Folder
+ 
+ 
+Open the Application Explorer and expand the configuration tree to select the Trends 
+ folder of a database archive unit.
+ 
+From the task list, 
+ select Add 
+ a trend. The Trend (Variable) configuration dialog appears. Show picture
+
+ 
+If not using the 
+ defaults, select the Database, 
+ Table 
+ and Trend 
+ Group to be used.
+ 
+Click the OK 
+ button to confirm the configuration. The variable is added to the Trends 
+ folder. Trend recording starts immediately.
+
+
+========================================
+TOPIC: Units_trend_data_adv_options.htm
+========================================
+HDS Trend recording advanced options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+HDS Trend Recording Advanced Options
+ 
+Inhibiting a trend recording using a database bit
+ 
+Trend recording can be temporarily suspended using a 
+ database bit variable. You can choose one or zero as the state during 
+ which recording is suspended.
+ 
+The Inhibiting 
+ Bit properties are found in the General tab of the Trend dialog.
+ 
+Disabling the recording of an invalid value on shutdown
+ 
+By default, for any trend, PcVue records an invalid value as the final point during shutdown. This is done so that the period of time when the software is shut down is clearly shown in a Trend Viewer. The recording of this invalid value can be disabled by ticking the property Do not record invalid value on shutdown. 
+ 
+This property is found in the General tab.
+
+
+========================================
+TOPIC: Units_trend_data_configuring_a_trend_group.htm
+========================================
+Configuring a trend group to record
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a Trend Group
+ 
+A Trend Group is used to configure the recording properties, for one or more variables, when recorded in a database archive unit. The properties must be given careful consideration to make sure variables are only recorded when necessary. Recording variables more often that necessary by using too small a Period or Deadband can rapidly fill a database.
+ 
+How to configure a trend group for exception recording
+ 
+ 
+
+ 
+Open the Application Explorer and expand the configuration 
+ tree to select the Trend Group folder.
+ 
+ 
+
+ 
+From the task list, 
+ select Add 
+ a trend group.
+ 
+ 
+
+ 
+In the Name 
+ field, enter a name by which the Trend Group will be known. You can enter 
+ an optional comment in the Description 
+ field.
+ 
+ 
+
+ 
+Tick the Set 
+ as default tick box if the trend group is to be used as the default. 
+ The Set 
+ as default tick box is only available if you have created two or 
+ more trend groups. 
+ 
+
+ 
+There can be one, and only one, Trend Group with the property 
+ Set 
+ as default ticked.
+ 
+ 
+ 
+
+ 
+Enter the Period for the group in hours, minutes, seconds and milliseconds. The minimum is 0 seconds and the maximum 
+ 100 hours. See the topic Understanding the trend period for a detailed explanation of how the trend period works.
+ 
+ 
+
+ 
+Enter the Deadband 
+ for the group as a percentage of the variable range. This deadband is in addition to any deadband set in the variable configuration. See below for an explanation.
+ 
+
+ 
+While the Deadband is optional, it is recommended that 
+ it is always used. When measuring analogue values digitally there is always 
+ a small variation in the measured value, even if the process value is 
+ steady, due to the way in which analogue to digital converters work.
+ 
+ 
+ 
+
+ 
+Click the OK 
+ button to confirm the configuration and close the dialog.
+ 
+ 
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+If the minimum update rate of 0 seconds is used, the value, timestamp, or quality
+ of all variables allocated to that group will be recorded every time they 
+ change. 
+ 
+ 
+How the deadband affects recording
+ 
+When deciding what deadband to use in a Trend Group you must also consider any deadband configured in the variable's configuration will be in addition to that in the Trend Group. The effect is sometimes not obvious and is best illustrated by a simple example.
+
+ 
+The value from the equipment increments by 1 every second. The register variable to which it is linked is configured with a physical deadband of 3. Hence, the real-time value of the variable increases in 3's. 3, 6, 9, 12, 15 etc. The register is also recorded using a Trend Group with a deadband of 10%. The register's range is 0 to 100 hence, the deadband represents a physical value of 10. The value that is recorded will increment in 12's (remember that the real-time value increments in 3's). The following picture illustrates this. The white trace represents the raw value from the equipment. The green trace represents the real-time value of the register and the yellow trace what is actually recorded. Show picture
+
+
+========================================
+TOPIC: Units_trend_data_period.htm
+========================================
+Understanding How the Trend Period Affects Recording
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Understanding How the Trend Period Affects Recording
+ 
+The trend period referred to in this topic appears in both the Trend Group dialog (Database Archive Unit) and in the Trend dialog (Proprietary Archive Unit). Show picture
+
+ 
+&#160;PcVue allows the choice of on-change trend recording or periodic recording. The choice is made in the Archives Settings dialog and applies to the entire project. This topic explains the exact behavior of the two methods.
+ 
+To illustrate the behavior the following variable values plotted against time are used. The Period is set to 10 seconds.
+ 
+ 
+
+ 
+On startup, if the station does not belong to a Historical server association, an invalid point with a timestamp of the startup, is always recorded.
+ 
+ 
+On-change recording
+ 
+ 
+If the value, timestamp, or quality of the variable does not change during the Period, nothing is recorded.
+ 
+If the value, timestamp or quality of the variable changes during the period, the most recent value is recorded along with the time at the end of the period.
+Value of 3 is recorded with a timestamp of hh:mm: 10
+Value of 3 is recorded with a timestamp of hh:mm: 20
+Value of 2 is recorded with a timestamp of hh:mm: 40
+ 
+If the value, timestamp or quality of the variable changes during the period, and the source of the variable's value is a timestamped protocol (BACnet, OPC etc.), the most recent value is recorded along with the timestamp at which it changed.
+Value of 3 is recorded with a timestamp of hh:mm: 09
+Value of 3 is recorded with a timestamp of hh:mm: 19
+Value of 2 is recorded with a timestamp of hh:mm: 38
+ 
+ 
+Periodic (one record per period) recording 
+ 
+ 
+The value of the variable and the time is recorded at the end of each period. This behavior is irrespective of the source of the variable.
+Value of 3 is recorded with a timestamp of hh:mm: 10
+Value of 3 is recorded with a timestamp of hh:mm: 20
+Value of 3 is recorded with a timestamp of hh:mm: 30
+Value of 2 is recorded with a timestamp of hh:mm: 40
+ 
+ 
+If the Period is set to 0
+ 
+ 
+If the period is set to 0 the value of the variable, and the timestamp, is recorded every time that the value, timestamp or quality changes irrespective of which recording mode is selected.
+Value of 4 is recorded with a timestamp of hh:mm: 04
+Value of 3 is recorded with a timestamp of hh:mm: 09
+Value of 5 is recorded with a timestamp of hh:mm: 12
+Value of 6 is recorded with a timestamp of hh:mm: 17
+Etc.
+
+
+========================================
+TOPIC: Units_trend_data_recording_overview.htm
+========================================
+Overview of recording trend data in the HDS
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Recording Trend Data in the HDS
+ 
+What data can I record?
+ 
+Trend data is primarily recorded for display through PcVue Trend Viewer. The following data can be recorded.
+ 
+ 
+Changes in value 
+ of database bit variables.
+ 
+Changes in value 
+ of database register variables.
+ 
+ 
+Configuring variables for HDS trend recording
+ 
+To configure a variable for trend recording in the HDS 
+ you add its name to the Trends folder in a Database type archive unit.
+ 
+How do I configure the rate at which variables are 
+ recorded?
+ 
+The rate at which bit and register variables are recorded 
+ by the HDS is configured using a Trend Group. At least one trend group 
+ must be configured to provide the default recording rate.
+
+
+========================================
+TOPIC: Units_VCR_conf.htm
+========================================
+Configuring and using a VCR Archive Unit
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring and using a VCR Archive Unit
+ 
+The VCR facility enables you to record changes 
+ of variables on one PcVue station and play them back through 
+ mimics on another station. 
+ 
+For details of how to configure this facility, see the 
+ sub-book The VCR facility in the book Extras & Add-ons.
+
+

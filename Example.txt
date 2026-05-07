@@ -1,0 +1,934 @@
+========================================
+TOPIC: Example_global_params.htm
+========================================
+Global parameter examples
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Global Parameter Examples
+ 
+Example 1
+ 
+The requirement is to set the Domain property of all variables to a value based on their location within the top-level branch of the topology. Show picture
+
+ 
+The most efficient way to do this is to create a global parameter that is linked to the Domain property. By positioning the global parameter at the building level in the topology, we can also take advantage of using an expression to automatically calculate the Domain property using the name of the instance.
+ 
+ 
+Create the global parameter gDomain. Show picture
+
+ 
+Position the global parameter gDomain assigning it to the Building template. The value, which is the result of the expression Me.Name, automatically takes the Name property of the Building template. 
+By configuring the assignation of the parameter to have a Topology scope, it applies not only to the variables of the Building template but also to the variables of all sub-ordinate templates. Thus, all variables sub-ordinate to Building01 will have the Domain Building01, all variables sub-ordinate to Building02 will have the Domain Building02, etc. Show picture
+
+ 
+When the Building template is instantiated, the resulting values of the gDomain parameter can be seen. As its value is the result of an expression, it cannot be manually entered. Had the global parameter been an input type, the user could have entered a value (or overwritten it if it had a default value).Show picture
+
+ 
+ 
+
+ 
+Note that the icon representing the Building nodes has changed to indicate the use of a global parameter at this level.
+ 
+ 
+Example 2
+ 
+The requirement is to assign the same server list to all element instances. This can be simply achieved by positioning, at the top level of the instantiation tree, a global parameter gServerList impacting the property Server station list of all elements.
+ 
+ 
+Create the global parameter gServerList. As the parameter is to affect all elements that have the Server station list property, the Element type is set to Any. Show picture
+
+ 
+The global parameter gServerList is added directly to the Instances Tree at the top level and using Topology scope. All elements having the ServerList property take the value entered for the parameter at the top level. Note the plus sign adjacent to the global parameter icon, which indicates the parameter has been added at the instances level, not at the template level. Show picture
+
+
+========================================
+TOPIC: Example_keyword.htm
+========================================
+Keywords examples
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Keywords Examples
+ 
+The keywords used when referring to elements and properties of the Application Architect's structure in an expression can be difficult to understand when first used. The following example illustrates their use.
+ 
+Modeling
+ 
+A template named VALVE (description: regulating valve) including the following elements. Show picture
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Type
+ Properties
+ Sub elements
+ 
+ 
+
+ Variable
+ Name:CMD
+ &#160;
+ 
+ 
+
+ Variable
+ 
+ 
+Name: POSITION
+ 
+Description: Valve Position
+ 
+ Behavior: TREND
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+A template named PUMP including the following elements. Show picture
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Type
+ Properties
+ Sub elements
+ 
+ 
+
+ Variable
+ Name: FLOW
+ Behavior: TREND
+ 
+ 
+
+ Included template
+ 
+ 
+Name: INLETVALVE (VALVE)
+ 
+Branch: INLETVALVE
+ 
+Description: Inlet valve
+ 
+ &#160;
+ 
+ 
+
+ Included template
+ 
+ 
+Name: OUTLETVALVE (VALVE)
+ 
+Branch: OUTLETVALVE
+ 
+Description: Outlet valve
+ 
+ &#160;
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+Instantiation
+ 
+A topology element named AREA_WEST (branch AREA_W) with a single instantiation of PUMP named PUMP_A (Branch: PA, Description: Pump A). Show picture
+
+
+========================================
+TOPIC: Example_keyword_navigation.htm
+========================================
+Example of the use of navigation keywords
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Example of the use of Navigation Keywords
+ 
+The following example refers to the structure illustrated in the topic Keyword examples.
+ 
+Me
+ 
+Me is the current elements. If no keyword is specified then it defaults to Me.
+ 
+Parent
+ 
+Points to one level up in the hierarchy.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Keyword
+ Refers to
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ Parent
+ PUMP_A.INLETVALVE
+ 
+ 
+
+ &#160;
+ Parent.Parent
+ PUMP_A
+ 
+ 
+
+ &#160;
+ Parent.Parent.Parent
+ AREA_WEST
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION.TREND
+ Parent
+ INLETVALVE.POSITION
+ 
+ 
+
+ PUMP_A.FLOW
+ Parent
+ PUMP_A
+ 
+ 
+ 
+ 
+
+ 
+The Parent keyword can be used to navigate in both the instance and modeling trees. In the modeling tree, the template is the highest level. In the instance tree, when used in a template, this keyword can navigate back to the instance of the template that contains it.
+ 
+ 
+TemplateInstance
+ 
+Points to the root of the template instance, but never above it.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Keyword
+ Refers to
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ TemplateInstance
+ PUMP_A.INLETVALVE
+ 
+ 
+
+ &#160;
+ TemplateInstance.Parent
+ PUMP_A
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION.TREND
+ TemplateInstance
+ PUMP_A.INLETVALVE
+ 
+ 
+
+ PUMP_A.INLETVALVE
+ TemplateInstance
+ PUMP_A.INLETVALVE
+ 
+ 
+
+ PUMP_A
+ TemplateInstance
+ PUMP_A
+ 
+ 
+
+ PUMP_A.FLOW.TREND
+ TemplateInstance
+ PUMP_A
+ 
+ 
+ 
+ 
+Template
+ 
+Points directly to the root of the template, but never above it.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Keyword
+ Refers to
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ Template
+ VALVE
+ 
+ 
+
+ PUMP_A.OUTLETVALVE.POSITION
+ Template
+ VALVE
+ 
+ 
+ 
+ 
+TopTemplateInstance
+ 
+Points to the highest root template instance above any included template.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Keyword
+ Refers to
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ TopTemplateInstance
+ PUMP_A
+ 
+ 
+
+ &#160;
+ TopTemplateInstance.Parent
+ AREA_WEST
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION.TREND
+ TopTemplateInstance
+ PUMP_A
+ 
+ 
+
+ PUMP_A.INLETVALVE
+ TopTemplateInstance
+ PUMP_A
+ 
+ 
+
+ PUMP_A
+ TopTemplateInstance
+ PUMP_A
+ 
+ 
+
+ PUMP_A.FLOW.TREND
+ TopTemplateInstance
+ PUMP_A
+ 
+ 
+ 
+ 
+TopTemplate
+ 
+Points to the highest root template above any included template.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Keyword
+ Refers to
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ TopTemplate
+ PUMP
+ 
+ 
+
+ &#160;
+ TopTemplate.Parent
+ ERROR - Unable to resolve
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION.TREND
+ TopTemplate
+ PUMP
+ 
+ 
+
+ PUMP_A.INLETVALVE
+ TopTemplate
+ PUMP
+ 
+ 
+
+ PUMP_A
+ TopTemplate
+ PUMP
+ 
+ 
+
+ PUMP_A.FLOW.TREND
+ TopTemplate
+ PUMP
+ 
+ 
+ 
+ 
+Origin
+ 
+Points to the element from which it is instantiated.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Keyword
+ Refers to
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ Origin
+ POSITION (Variable)
+ 
+ 
+
+ &#160;
+ Origin.Parent
+ VALVE
+ 
+ 
+
+ &#160;
+ Parent.Origin
+ INLETVALVE (Included template)
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION.TREND
+ Origin
+ TREND
+ 
+ 
+
+ PUMP_A.INLETVALVE
+ Origin
+ VALVE
+ 
+ 
+
+ PUMP_A
+ Origin
+ PUMP
+
+
+========================================
+TOPIC: Example_keyword_properties.htm
+========================================
+Example of the use of Property Keywords
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Example of the use of Property Keywords
+ 
+The following example uses the template structure illustrated in the topic Keyword examples.
+ 
+Name
+ 
+Return the last part of the element name.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Expression
+ Returns
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ Name
+ POSITION
+ 
+ 
+
+ &#160;
+ Parent.Name
+ INLETVLALVE
+ 
+ 
+
+ &#160;
+ TemplateInstance.Name
+ INLETVALVE
+ 
+ 
+
+ &#160;
+ TopTemplateInstance.Name
+ PUMP_A
+ 
+ 
+
+ &#160;
+ Origin.Name
+ POSITION
+ 
+ 
+
+ &#160;
+ Template.Name
+ VALVE
+ 
+ 
+ 
+ 
+ShortName
+ 
+Return the name of the element starting at the root template. That is, the template that has been instantiated.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Expression
+ Returns
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ ShortName
+ PUMP_A.INLETVALVE.POSITION
+ 
+ 
+
+ &#160;
+ Parent.ShortName
+ PUMP_A.INLETVLALVE
+ 
+ 
+
+ &#160;
+ TemplateInstance.ShortName
+ PUMP_A.INLETVALVE
+ 
+ 
+
+ &#160;
+ TopTemplateInstance.ShortName
+ PUMP_A
+ 
+ 
+
+ &#160;
+ Origin.ShortName
+ ERROR: Unable to resolve ShortName.
+ 
+ 
+
+ &#160;
+ Template.ShortName
+ ERROR: Unable to resolve ShortName.
+ 
+ 
+ 
+ 
+FullName
+ 
+Return the name of the element starting at the root.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Expression
+ Returns
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ FullName
+ FACTORY.AREA_WEST.PUMP_A. INLETVALVE.POSITION
+ 
+ 
+
+ &#160;
+ Parent.FullName
+ FACTORY.AREA_WEST.PUMP_A.INLETVALVE
+ 
+ 
+
+ &#160;
+ TemplateInstance.FullName
+ FACTORY.AREA_WEST.PUMP_A.INLETVALVE
+ 
+ 
+
+ &#160;
+ TopTemplateInstance.FullName
+ FACTORY.AREA_WEST.PUMP_A
+ 
+ 
+
+ &#160;
+ Origin.FullName
+ ERROR: Unable to resolve FullName.
+ 
+ 
+
+ &#160;
+ Template.FullName
+ ERROR: Unable to resolve FullName.
+ 
+ 
+ 
+ 
+Branch
+ 
+Return the last branch of the element (the leaf) .
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Expression
+ Returns
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ Branch
+ POSITION
+ 
+ 
+
+ &#160;
+ Parent.Branch
+ INLETVALVE
+ 
+ 
+
+ &#160;
+ TemplateInstance.Branch
+ INLETVALVE
+ 
+ 
+
+ &#160;
+ TopTemplateInstance.Branch
+ PA
+ 
+ 
+
+ &#160;
+ Origin.Branch
+ ERROR: Unable to resolve Branch.
+ 
+ 
+
+ &#160;
+ Template.Branch
+ ERROR: Unable to resolve Branch.
+ 
+ 
+ 
+ 
+ShortBranch
+ 
+Return the branch of the element starting at the root template. That is, the template that has been instantiated.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Expression
+ Returns
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ Branch
+ PA.INLETVALVE.POSITION
+ 
+ 
+
+ &#160;
+ Parent.Branch
+ PA.INLETVALVE
+ 
+ 
+
+ &#160;
+ TemplateInstance.Branch
+ PA.INLETVALVE
+ 
+ 
+
+ &#160;
+ TopTemplateInstance.Branch
+ PA
+ 
+ 
+
+ &#160;
+ Origin.Branch
+ ERROR: Unable to resolve ShortBranch.
+ 
+ 
+
+ &#160;
+ Template.Branch
+ ERROR: Unable to resolve ShortBranch.
+ 
+ 
+ 
+ 
+FullBranch
+ 
+Return the branch of the element starting at the root.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Expression
+ Returns
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ Branch
+ AREA_WEST.PA.INLETVALVE.POSITION
+ 
+ 
+
+ &#160;
+ Parent.Branch
+ AREA_WEST.PA.INLETVALVE
+ 
+ 
+
+ &#160;
+ TemplateInstance.Branch
+ AREA_WEST.PA.INLETVALVE
+ 
+ 
+
+ &#160;
+ TopTemplateInstance.Branch
+ AREA_WEST.PA
+ 
+ 
+
+ &#160;
+ Origin.Branch
+ ERROR: Unable to resolve FullBranch.
+ 
+ 
+
+ &#160;
+ Template.Branch
+ ERROR: Unable to resolve FullBranch.
+ 
+ 
+ 
+ 
+Description
+ 
+Return the description of the element. Except for instantiation of a template, all descriptions are configured during modeling and so for simplicity it is the description of the element in modeling that is returned.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Origin
+ Expression
+ Returns
+ 
+ 
+
+ PUMP_A.INLETVALVE.POSITION
+ Description
+ Valve Position
+ 
+ 
+
+ &#160;
+ Parent.Description
+ 
+ 
+Inlet Valve
+ 
+ 
+ 
+
+ &#160;
+ TemplateInstance.Description
+ Inlet Valve
+ 
+ 
+
+ &#160;
+ TopTemplateInstance.Description
+ Pump A
+ 
+ 
+
+ &#160;
+ Origin.Description
+ Valve Position
+ 
+ 
+
+ &#160;
+ Template.Description
+ Regulating Valve
+
+
+========================================
+TOPIC: Example_parameter.htm
+========================================
+Parameter examples
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Parameter Examples
+ 
+Example 1
+ 
+The requirement is to configure the maximum temperature setting for all heating and ventilation units (HVAC) in a number of buildings. The temperature setting must be the same for all HVAC units in a particular building, but it must be possible for it to be different for each building.
+ 
+The solution is to create a parameter, pMaxCmd, to define the Command.Maximum property of a register variable. We do not want to affect the Command.Maximum of all register variables, only those representing the Temperature of an HVAC unit. The parameter can have a default value but it should be capable of having a different value for each building if necessary.
+ 
+ 
+Create the parameter pMaxCmd. Show picture
+
+ 
+Define the Command.Maximum property of the register variables representing the HVAC temperature using the parameter pMaxCmd. Show picture
+
+ 
+Define where the parameter value will be set. In this case, it is at the Building template. Show picture
+
+ 
+Enter the actual value for each building during the instantiation process. The value is propagated to each sub-ordinate use of the parameter (the Command.Maximum property of the Temperature register variable). Show picture
+
+ 
+ 
+Example 2
+ 
+The requirement is to use two standard display formats, long or short, for register variables in a project. The choice is to be specific to each variable and does not depend on the variable structure or the topology. The actual format for each of the two standards must be easily changed and propagated throughout the project. Instead of entering the display format directly in each register's Format property, it will be defined by two parameters pShortFormat and pLongFormat. The appropriate parameter is then used to define the Format for each register. Changing the long or short format across the entire project can then be done by changing the respective parameter and regenerating.
+ 
+ 
+Create the parameters pShortFormat and pLongFormat. Show picture
+
+ 
+Define the Format property of the register variables using the appropriate parameter. Show picture
+
+

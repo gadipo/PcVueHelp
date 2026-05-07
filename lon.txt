@@ -1,0 +1,829 @@
+========================================
+TOPIC: lon_configuring_a_network.htm
+========================================
+Configuring a Lonworks network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a LonWorks Network
+ 
+A LonWorks Network object in PcVue configuration represents and provides access to a LonWorks network. The configuration is accessed from the Application Explorer - <Project>.Communication.Data acquisition.LonWorks.
+ 
+
+ 
+A trace is displayed in the Event Viewer and the network is not started if you use a version of the LNS tools that is not supported.
+ 
+For example, LNS version 3.24 is known to be unstable and versions of the IzoT Net Server earlier than 4.5 are not compatible. They should not be used.
+ 
+ 
+Adding a network
+
+ 
+ 
+Select the LonWorks folder in the Application Explorer and, from the task list, select Add a network. The LonWorks Network dialog opens.
+ Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+Enter the name of the network in the Network alias text box. You can accept the suggested default or enter one of your own. The network alias cannot be changed once it has been configured.
+
+ 
+Enter a description of the network. The description appears in the contents pane of the Application Explorer and can be useful to identify the network later. The description is optional.
+ 
+Select the Network Name using the drop down list box. The list box will display a list of 
+networks that have been created by the LonWorks configuration software 
+(LonMaker).
+ 
+Select the System Name using the drop-down list box. Normally the system name is the same as the network name.
+
+ 
+Tick the Activate at startup property so that the network is activated at startup. If this property is not selected then a SCADA BASIC program may be used to activate the network.
+ 
+Click the OK button to close the dialog and save the configuration. 
+
+ 
+ 
+The Advanced Parameters tab
+
+ 
+Show picture
+ 
+ 
+
+ 
+ 
+ 
+ 
+Monitoring parameters.
+ 
+Allow PcVue to bind variables to the host - Allows the developer to configure the binding of variables to the LNS host using the property Bind the variable in each variable's configuration. This property is for backwards compatibility for projects created with earlier versions of PcVue where its use was commonplace. Its use is no longer recommended. Instead, the driver uses any binding configured in the Network Management Tool (NL220 or LonMaker) which is more flexible and efficient.
+Delayed monitoring stop when nodes become off-net - The delay (in seconds) before the node monitoring is stopped in the event that the node is detected as being off-net. This is to prevent the monitoring of a node from stopping if the node is expected to go temporarily off-net from time to time.
+ 
+Default monitoring options for variables. The configuration of the following three properties only affects the default settings of variables. The settings can still be changed for individual variables when they are configured.
+Use default parameters - Use the monitoring configuration (binding and polling) that is configured in the LonWorks network management tool.
+Poll interval - The default polling interval in seconds. The range of this value is from 1 to 3355443 seconds in steps of 0.1. The maximum value is equivalent to approximately 39 days. It is recommended that you use a minimum value of 60 seconds.
+ 
+Background ping configuration.
+ 
+ 
+Update the network configuration - check this to configure the classes of ping in PcVue or leave it unchecked to do so outside of PcVue.
+Ping intervals - set the ping interval for each class, in seconds.
+Mobile class.
+Temporary class.
+Stationary class.
+Permanent class.
+Device configuration - select one of the following:
+Do not change - PcVue does not modify the configuration.
+Set to mobile class.
+Set to temporary class.
+Set to stationary class.
+Set to permanent class.
+Router configuration - select one of the following:
+Do not change - PcVue does not modify the configuration.
+Set to mobile class.
+Set to temporary class.
+Set to stationary class.
+Set to permanent class.
+ 
+Networking.
+ 
+Primary server station - The name of the station (or list) on which the link with the LonWorks Server is active. For the other stations, the configuration of this network will be accessible, but PcVue does not connect with the LonWorks Server.
+Secondary server station - Not used in this version.
+
+
+========================================
+TOPIC: lon_configuring_a_node.htm
+========================================
+Configuring a Lonworks node
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a LonWorks Node
+ 
+How to add a LonWorks node
+
+ 
+ 
+Select the Nodes folder of a previously configured LonWorks network in the Application Explorer and, from the task list, select Add a node. The Node configuration dialog opens.
+ 
+Enter an alias for the node in the Node alias field. The node alias cannot be changed once it has been configured.
+ Show picture
+
+ 
+Enter subsystem through which the node will be accessed. The ellipsis button adjacent to the Subsystem field allows you to browse and select the available subsystems. Show picture 
+When subsystems are nested, each subsystem must be separated by a �#� character. For example, if the node is located in the subsystem �sub_1_1� of the subsystem �sub_1�, the field must contain �sub_1#sub_1_1�.
+
+ 
+Select the physical node to which the configuration refers using the Node name drop down list box.
+
+ 
+Select Activate at startup if the node is to be activated when the network starts. If this property is not selected then a SCADA BASIC program can be used to activate the node.
+
+ 
+Click the OK button to close the dialog and save the configuration.
+ 
+ 
+How to configure a watchdog
+ 
+The watchdog mechanism has been replaced by a system using network "pings" in version 9.0 and later. No configuration is required. For information about backwards compatibility with projects created with earlier versions, please contact your support agency.
+ 
+The Advanced tab
+
+ 
+Show picture
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+Start-up
+Synchronous read when start monitoring - Only selected when using power line transmission. The default is not selected.
+ 
+Variable browsing
+
+Browse LonMark object - Browse LonWorks variables compliant with the LonMark standard. The default is selected.
+
+Use device template - Use the node template rather than the node itself. Browsing uses the XIF file. If the node uses plug-ins this option must be de-selected as plug-ins modify the node properties, not the template to which the node is linked.
+
+
+========================================
+TOPIC: lon_configuring_the_server_properties.htm
+========================================
+LonWorks server settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LonWorks Server Settings
+ 
+
+ 
+LonWorks settings are not available from the global Communications Settings dialog.
+ 
+ 
+The LonWorks Server general settings are accessed from the Application Explorer by selecting 
+ Project.Communication.Data acquisition.LonWorksand choosing the Settings command from the task list. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+You can only make changes to the LonWorks 
+ Server properties if the network is stopped. The network is automatically 
+ started again when the dialog is closed. 
+ If you choose not to stop the network, you can still open the dialog, but 
+ not save any changes.
+ 
+ 
+User mode
+Single � The 
+ network can only be opened by one application. If PcVue is running, 
+ any attempt to access this network by other applications will fail.
+Multi-user � This 
+ is the default option. It allows 1 or more applications to access the 
+ same network at the same time. For example, you could run PcVue 
+ and the LonWorks network configuration tool at the same time.
+ 
+Access mode
+Local � The database 
+ (LonDB) containing the network is located on the same computer as PcVue.
+Remote � No longer used. Included for backwards compatibility only.
+
+
+========================================
+TOPIC: lon_in_the_ae.htm
+========================================
+Managing LonWorks in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing LonWorks in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks applicable to LonWorks
+ 
+When the LonWorks folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add network
+ Add a connection to a LonWorks network.
+ 
+ 
+
+ 
+ 
+ 
+ Start networks
+ Start the connection to all LonWorks networks.
+ 
+ 
+
+ 
+ 
+ 
+ Stop networks
+ 
+ 
+Stop the connection to all LonWorks networks.
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Details
+ Display the LonWorks details dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Settings
+ Display the general LonWorks settings dialog.
+ 
+ 
+ 
+ 
+When a LonWorks network is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start network
+ Start the connection to a specific LonWorks network.
+ 
+ 
+
+ 
+ 
+ 
+ Stop network
+ Stop the connection to a specific LonWorks network.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the connection to a LonWorks network.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for a LonWorks network connection.
+ 
+ 
+ 
+ 
+When the Nodes folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a node
+ Add a node to the selected LonWorks network.
+ 
+ 
+ 
+ 
+When a node is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start a node
+ Star communication with a node.
+ 
+ 
+
+ 
+ 
+ 
+ Stop a node
+ Stop communication with a node.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the node from the LonWorks network.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the node properties dialog.
+ 
+ 
+ 
+ 
+Rules and behavior of cut, copy and paste
+ 
+The following table describes the rules and behavior, and in particular any restrictions, when using cut or copy and paste on configuration objects in the LonWorks folder.
+ 
+ 
+ 
+ 
+ 
+
+ LonWorks object
+ Behavior
+ 
+ 
+
+ Network
+ The pasted Network is given a unique name.
+Any subordinate Nodes are duplicated using the original name.
+The mapping of any variables is not duplicated.
+ 
+ 
+
+ Node
+ 
+ 
+The pasted Node is given a unique name within the context of the Network.
+
+
+========================================
+TOPIC: lon_network_tips_and_tuning.htm
+========================================
+LonWorks network tips and tuning
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LonWorks Network Tips and Tuning
+ 
+
+ 
+For more information about LonWorks tips and tuning, please see the Knowledge base articles KB781 and KB456.
+ 
+ 
+Reading and modifying the catalog
+ 
+The fields displayed in PcVue are taken directly 
+ from the catalog recorded in the LonDB. For variable types UNVT and UCPT, 
+ it is necessary to use the program LDRFCAT.EXE to insert new variables 
+ in the catalog.
+ 
+LCA object server error messages
+ 
+All errors from the LCA Object Server are reported in 
+ the event viewer (F7). The error codes refer to the code 
+ and descriptions in the help file LNSOBJRF.HLP.
+ 
+Additional error tracing
+ 
+You can enable additional error tracing by starting PcVue with the flag, -LNSDEBUG, in the command line. The additional 
+ trace is reported in the file, Lns_catalog_reseau.dump in the Bin\Log Files directory.
+ 
+
+ 
+Additional traces should only be used if requested by 
+ your support agency.
+ 
+ 
+Optimum LonWorks network bandwidth figures
+ 
+ 
+ 
+ 
+
+ 
+ 
+Condition
+ 
+ 
+ 
+Bandwidth
+ 
+ 
+ 
+
+ 
+ 
+No traffic (IP pings only)
+ 
+ 
+ 
+2%
+ 
+ 
+ 
+
+ 
+ 
+Normal traffic 
+ 
+ 
+ 
+10%
+ 
+ 
+ 
+
+ 
+ 
+Peak traffic 
+ 
+ 
+ 
+70%
+ 
+ 
+ 
+ 
+It is estimated that with a 50% usage of network bandwidth, 
+ 50% of the exchanges are lost.
+ 
+Status values
+ 
+The status values for LonWorks node and network are as follows.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Status value
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 
+ 
+0
+ 
+ 
+ 
+No error detected for the network or the node.
+ 
+ 
+ 
+
+ 
+ 
+1
+ 
+ 
+ 
+Cannot load the LCA Object Server. Check the software installation on the computer.
+ 
+ 
+ 
+
+ 
+ 
+2
+ 
+ 
+ 
+The network configured cannot be found in the LonDB.
+ 
+ 
+ 
+
+ 
+ 
+3
+ 
+ 
+ 
+The system configured cannot be found in the LonDB.
+ 
+ 
+ 
+
+ 
+ 
+4
+ 
+ 
+ 
+An error occurred when starting the network.
+ 
+ 
+ 
+
+ 
+ 
+5
+ 
+ 
+ 
+The sub-system configured cannot be found in the LonDB
+ 
+ 
+ 
+
+ 
+ 
+6
+ 
+ 
+ 
+The node configured cannot be found in the LonDB
+ 
+ 
+ 
+
+ 
+ 
+7
+ 
+ 
+ 
+An error occurred when starting the node.
+ 
+ 
+ 
+
+ 
+ 
+8
+ 
+ 
+ 
+Node startup failed.
+ 
+ 
+ 
+
+ 
+ 
+9
+ 
+ 
+ 
+Node startup not activated.
+ 
+ 
+ 
+
+ 
+ 
+10
+ 
+ 
+ 
+Network startup not activated
+ 
+ 
+ 
+
+ 
+ 
+11
+ 
+ 
+ 
+Network start failed - The station is not a producer for this network.
+ 
+ 
+ 
+
+ 
+ 
+12
+ 
+ 
+ 
+Communication with the node is faulty (watchdog error).
+ 
+ 
+ 
+
+ 
+ 
+13
+ 
+ 
+ 
+Network start failed - Another network already started and only one network can be used at a time.
+ 
+ 
+ 
+
+ 14
+ The node is not present at startup.
+ 
+ 
+
+ 15
+ No network interface when configured in remote NSI.
+ 
+ 
+
+ 16
+ The node is detached.
+ 
+ 
+
+ 17
+ The node's status is uncertain, the watchdog is pending.
+ 
+ 
+
+ 18
+ The node is not commissioned.
+ 
+ 
+
+ 19
+ LNS Turbo Edition is required, older versions are no more supported.
+ 
+ 
+
+ 20
+ No network interface is declared on the network.
+ 
+ 
+
+ 21
+ The network is offnet.
+
+
+========================================
+TOPIC: lon_overview.htm
+========================================
+Overview of LonWorks
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of LonWorks
+ 
+The interface between PcVue and the LonWorks 
+ network uses an ActiveX control (software component), provided by Dialog semiconductor (formerly Echelon), 
+ known as the LonWorks LCA Object Server (or LonWorks Server). Information about the configuration of 
+ the network is provided by the LonWorks Database (LonDB) which must be 
+ first created using a 3rd party configuration tool.
+ 
+&#160;PcVue LonWorks interface supports the following 
+ features.
+ 
+ 
+Compatible with IzoT Net Server 4.5, 
+ 
+Supports network 
+ variables and configuration properties IP (SNVT's, UNVT's, SCPT's and 
+ UCPT's),
+ 
+Supports LonMark 
+ Object and Equipment Plugins.
+ 
+ 
+The LonWorks configuration is accessed from the Application Explorer Project.Communication.Data acquisition.LonWorks.
+ 
+Whilst you are configuring 
+ the LonWorks within PcVue there may be periods from a few seconds 
+ to several minutes whilst the application requests the LCA Object Server. 
+ During this time, a message dialog is displayed. 
+ You can close the dialog and cancel an operation by pressing the escape 
+ (Esc) key.
+
+

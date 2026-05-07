@@ -1,0 +1,5061 @@
+========================================
+TOPIC: iccp_configuration.htm
+========================================
+Installation and configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Installation and Configuration
+ 
+For PcVue to work with ICCP features, the application designer must:
+ 
+ 
+Have a license with ICCP Server option enabled. The driver can run in demo mode for one hour. However, any networking architectures do not work in demo mode.
+ 
+Reference the svmgrICCP.dll file in the usrmgr.dat file that is in the Bin folder.
+ 
+Have a configuration file, ICCP.ini, which must be located in the C folder of the project. It is used to configure the ICCP LCCs in PcVue.
+ 
+ 
+The usrmgr.dat file should have the following content:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[USRMGR\svmgrICCP]
+ 
+ 
+ 
+
+ 
+DLL=svmgrICCP.dll
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ICCP.ini file
+ 
+Some fields of the ICCP.ini file are mandatory. If they are missing or invalid, the driver fails to start. Other fields are optional and if they are missing or invalid, the task uses default values. The Event Viewer displays warning messages in the event of a missing or invalid field.
+ 
+To comment a line in the ICCP.ini file, you can enter a single quotation mark (�) at the beginning of the line.
+ 
+The following paragraphs describe the ICCP.ini file in more details.
+ 
+
+ 
+Name fields are used as unique identifiers for the configured items. Their value must be of type String with a max length of 20 characters.
+Allowed characters are: [a-z], [A-Z], [0-9] and underscore.
+ 
+ 
+General parameters section
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Field
+ Data type
+ Value
+ Description
+ 
+ 
+
+ LogMessageLevel
+ Integer
+ 
+ 
+1..4
+ 
+Default to 1
+ 
+ 
+ 
+Optional
+ 
+Sets the level of trace details the user wants to have for general elements. Children elements use the general logging level if the default option is selected.
+ 
+Each level includes messages related to lower levels. The traces are essential for troubleshooting purposes.
+ 
+ 
+Level 1 - Minimum. Contains basic messages (errors, basic summary, etc.)
+ 
+Level 2 - Light details. Contains more detailed messages (connections details, extended summaries etc.).
+ 
+Level 3 - Full details. Contains full details.
+ 
+Level 4 - Stack. Contains all messages.
+ 
+ 
+ 
+ 
+
+ AttributeNumber
+ Integer
+ 
+ 
+3..16
+ 
+Default to 16
+ 
+ 
+ 
+Optional
+ 
+Sets which variable text extended attribute is used to define ICCP parameters.
+ 
+ 
+ 
+
+ BranchSeparator
+ 
+ 
+String
+ 
+ 
+ 
+Single character
+ 
+Default to '/'
+ 
+ 
+ 
+Optional
+ 
+The character used as the branch separator in the ICCP.ini and text extended attributes.
+ 
+ In the varexp.dat file, this character is used for separating the parameters in the extended attribute.
+For example in extended attribute #16:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+ICCP/DiscreteVar/#F/DomainName/Discrete/Telemetered
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Full7LayerStack
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+The input is not case sensitive.
+ 
+Sets whether the ICCP model runs with full 7 layer stack addressing.
+ 
+ 
+
+ 
+If True is selected, then the model with run with full 7 layer stack addressing. This means that the driver allows creating several control centers that can occupy the same port.
+ 
+ 
+
+ 
+If False is selected, the user must use different ports if multiple control centers are configured.
+ 
+ 
+ 
+ 
+ 
+
+ SystemVariableRefreshPeriod
+ Integer
+ 
+ 
+1..65535
+ 
+Default to 5
+ 
+ 
+ 
+Optional
+ 
+Defines the period in seconds that the ICCP driver waits to refresh the value of statistic related system variables.
+ 
+For LCCs, the variables affected by this refresh period are:
+ 
+ 
+
+ 
+InformationReportsSent.
+ 
+ 
+
+ 
+DeviceSelectRequestsReceived.
+ 
+ 
+
+ 
+DeviceOperateRequestsReceived.
+ 
+ 
+ 
+For RCCs, the variables affected by this refresh period are:
+ 
+ 
+
+ 
+InformationReportsReceived.
+ 
+ 
+
+ 
+DeviceSelectRequestsSent.
+ 
+ 
+
+ 
+DeviceOperateRequestsSent.
+ 
+ 
+ 
+ 
+ 
+
+ VarNameCmdRequest
+ 
+ 
+String
+ 
+ &#160;
+ 
+ 
+Optional
+ 
+Name of the variable used to send commands to the Add-on. See Commands for more information.
+ 
+
+ 
+The variable must have the Control property set.
+ 
+ 
+The variable is produced by a list containing all server stations configured to load the ICCP Add-on, and be consumed by all stations that potentially send commands.
+ 
+For example: @ICCP.CMD_Request
+ 
+ 
+ 
+
+ VarNameCmdResult
+ 
+ 
+String
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+Optional 
+ 
+Name of the variable used to receive results from commands sent to the Add-on. See Commands for more information.
+ 
+
+ 
+The variable must have the Control property set.
+ 
+ 
+ The variable is produced by a list containing all server stations configured to load the ICCP Add-on, and be consumed by all stations that potentially send commands.
+ 
+For example: @ICCP.CMD_Result
+ 
+ 
+ 
+ 
+ 
+Example of General parameters sections in the ICCP.ini file
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[GeneralParameters]
+ 
+ 
+ 
+
+ 
+LogMessageLevel&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 2
+ 
+ 
+ 
+
+ 
+AttributeNumber&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 16
+ 
+ 
+ 
+
+ 
+BranchSeparator&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= /
+ 
+ 
+ 
+
+ 
+Full7LayerStack&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= True
+ 
+ 
+ 
+
+ 
+SystemVariableRefreshPeriod&#160;&#160;&#160;&#160;= 5
+ 
+ 
+ 
+
+ 
+VarNameCmdRequest&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= ICCP.DriverCMDs.Request
+ 
+ 
+ 
+
+ 
+VarNameCMDResult&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= ICCP.DriverCMDs.Result
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Application References sections 
+ 
+The sections [ARn] in the ICCP.ini file define the addressing information necessary to define LCCs or RCCs. Depending on the use of the AR, the fields are associated to either local or remote addresses.
+ 
+There are different functions to the application references depending on the Local Control Center type (Calling Client/Server, Called Client/Server, etc). Also, most of the fields in the ARs are optional, which can have different meanings:
+ 
+ 
+If it is a Called type, omitting a specific field implies that upon remote connection, the local control center does not require an exact match of that field to accept or deny the connection.
+ 
+If it is a Calling type, omitting a specific field implies that when the local control center sends the connection request to the remote, it does not include that field.
+ 
+ 
+The exact requirements of each connection to a remote is handled between the two parties.
+ 
+
+ 
+The TSelector field is particularly important. To avoid connection issues, it is recommended to use different TSelectors for different LCCs.
+ 
+To differentiate application references, the user must create different blocks in the ICCP.ini file in a section called [ARX] where X is an increment starting from 1.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Field
+ Data type
+ Value
+ Description
+ 
+ 
+
+ Name
+ 
+ 
+String
+ 
+ <Name>
+ 
+ 
+Mandatory
+ 
+Determines the name of the AR.
+ 
+Names must be unique among ARs. The input is case sensitive
+ 
+If this field is empty, the AR is not created.
+ 
+ 
+ 
+
+ IPAddress
+ 
+ 
+String
+ 
+ 
+ 
+<IP Address>
+ 
+Default to 0.0.0.0
+ 
+ 
+ 
+Optional
+ 
+Format: xxx.xxx.xxx.xxx. 
+ 
+For example: 192.168.0.10.
+ 
+Determines the IP Address of the control center. The user can enter 0.0.0.0 or leave the field empty to use the localhost address.
+ 
+ 
+ 
+
+ AppTitle
+ 
+ 
+String
+ 
+ <App Title>
+ 
+ 
+Optional
+ 
+Format: Integer values separated by commas: X,Y,Z,W.
+ 
+ For example: 1,1,999,1.
+ 
+It is part of the stack address of the control center.
+ 
+ 
+ 
+
+ AEQualifier
+ 
+ 
+Integer
+ 
+ <AEQual>
+ 
+ 
+Optional
+ 
+Only positive values are valid. 
+ 
+For example: 12.
+ 
+It is part of the stack address of the control center.
+ 
+ 
+ 
+
+ APInvokeID
+ 
+ 
+Integer
+ 
+ <APInvoke>
+ 
+ 
+Optional
+ 
+Only positive values are valid.
+ 
+For example: 10.
+ 
+It is part of the stack address of the control center.
+ 
+ 
+ 
+
+ PSelector
+ 
+ 
+String
+ 
+ <PSelector>
+ 
+ 
+Optional
+ 
+Format: Integers separated by spaces: XX YY ZZ WW. 
+ 
+For example: 00 00 00 01.
+ 
+It is part of the stack address of the control center.
+ 
+ 
+ 
+
+ SSelector
+ 
+ 
+String
+ 
+ <SSelector>
+ 
+ 
+Optional
+ 
+Format: Integers separated by spaces: XX YY ZZ WW.
+ 
+For example: 00 01.
+ 
+It is part of the stack address of the control center.
+ 
+ 
+ 
+
+ TSelector
+ 
+ 
+String
+ 
+ <TSelector>
+ 
+ 
+Optional
+ 
+Format: Integers separated by spaces: XX YY ZZ WW.
+ 
+For example: 00 01.
+ 
+It is part of the stack address of the control center.
+ 
+ 
+ 
+ 
+ 
+Example of Application References sections in the ICCP.ini file
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[AR1]
+ 
+ 
+ 
+
+ 
+Name = LCC1
+ 
+ 
+ 
+
+ 
+IPAddress = 192.168.0.29
+ 
+ 
+ 
+
+ 
+AppTitle = 1,1,999,1
+ 
+ 
+ 
+
+ 
+AEQualifier = 12
+ 
+ 
+ 
+
+ 
+APInvokeID = 10
+ 
+ 
+ 
+
+ 
+AEInvokeID= 10
+ 
+ 
+ 
+
+ 
+PSelector = 00 00 00 01
+ 
+ 
+ 
+
+ 
+SSelector = 00 01
+ 
+ 
+ 
+
+ 
+TSelector= 00 01
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Networks sections
+ 
+The sections [NetworkX] in the ICCP.ini file define a Network that contains any number of Local Control Center objects. The Network is mainly useful to separate different PcVue stations and behaviors. To differentiate networks, the user must create different sections in the ICCP.ini file, each named [NetworkX] where X starts at 1.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Field
+ Data type
+ Value
+ Description
+ 
+ 
+
+ Name
+ 
+ 
+String
+ 
+ <Name>
+ 
+ 
+Mandatory
+ 
+A string that must be unique among Networks. The input is case sensitive.
+ 
+Determines the name of the Network.
+ 
+
+ 
+We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.
+ 
+ 
+If it is empty, the Network is not created.
+ 
+ 
+ 
+
+ LogMessageLevel
+ 
+ 
+Integer
+ 
+ 
+ 
+0..4
+ 
+Default to 0
+ 
+ 
+ 
+Optional
+ 
+Determines which level of trace details the user wants to have for the network. Children elements use this value if the default option is selected.
+ 
+Each level includes messages related to lower levels. The traces are essential for troubleshooting purposes:
+ 
+ 
+Level 0 - Default. Uses the Log Message Level that is set in the General Parameters section.
+ 
+Level 1 - Minimum. Contains basic messages (errors, basic summary, etc.)
+ 
+Level 2 - Light details. Contains more detailed messages (connections details, extended summaries, etc.).
+ 
+Level 3 - Full details. Contains full details.
+ 
+Level 4 - Stack. Contains all messages.
+ 
+ 
+ 
+ 
+
+ AssociationName
+ 
+ 
+String
+ 
+ 
+ 
+<NetworkingName>
+ 
+Default to empty string
+ 
+ 
+ 
+Optional
+ 
+It is case sensitive.
+ 
+Determines the name of the server association that produces the ICCP interface as part of the networking.
+ 
+For example: The project has an association called �ASSOC1�, then the same name must be entered in the AssociationName of the ICCP.ini file.
+ 
+ 
+ 
+
+ DelayWhenBecomingActive
+ 
+ 
+Integer
+ 
+ 
+ 
+0..2147483647
+ 
+Default to 0
+ 
+ 
+ 
+Optional
+ 
+Determines the period in seconds that the ICCP driver waits on a newly active station after a networking switchover before starting the communication objects.
+ 
+This parameter addresses the switchover being too fast where the newly active station could connect to a remote that was still connected to the newly passive station.
+ 
+ 
+ 
+ 
+ 
+Example of Networks sections in the ICCP.ini file
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Network1]
+ 
+ 
+ 
+
+ 
+Name = NET1
+ 
+ 
+ 
+
+ 
+LogMessageLevel&#160;&#160;&#160;&#160;= 3
+ 
+ 
+ 
+
+ 
+AssociationName&#160;&#160;&#160;&#160;= DAS_ASSOC1
+ 
+ 
+ 
+
+ 
+DelayWhenBecomingActive = 2
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+LCCs sections
+ 
+The sections [NetworkX/LocalControlCenterY] in the ICCP.ini file define the information of a local control center to be created. Multiple local control center can be created.
+ 
+If multiple LCCs are configured, it is important to pay close attention to:
+ 
+ 
+The AR, in particular the IP Address and the Port that must be different for the different configured LCCs when not using Full 7 Layer Stack addressing.
+ 
+All the AR fields when using Full 7 Layer Stack addressing. All the LCCs can share the same port in this case.
+ 
+ 
+
+ 
+The TSelector field in the ARs is especially important to differentiate the different LCCs that are being created.
+ 
+ 
+All LCCs must be configured linked to a Network. To differentiate LCCs, the user must configure a different section for each LCC (in the ICCP.ini file) called [NetworkX/LocalControlCenterY] where X and Y increase starting from 1.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Field
+ Data type
+ Value
+ Description
+ 
+ 
+
+ Name
+ 
+ 
+String
+ 
+ <Name>
+ 
+ 
+Mandatory
+ 
+A string that must be unique among LCCs in a Network. The input is case sensitive.
+ 
+Determines the name of the local control center. 
+ 
+
+ 
+We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.
+ 
+ 
+If this field is empty, the LCC is not created.
+ 
+ 
+ 
+
+ LocalAR
+ 
+ 
+String
+ 
+ <ARName>
+ 
+ 
+Mandatory
+ 
+A string that must match the Name of a defined AR. It is case sensitive.
+ 
+Determines the addressing information of the local control center with the information that is defined on the AR.
+ 
+If this field is empty, the LCC is not created.
+ 
+ 
+ 
+
+ LogMessageLevel
+ 
+ 
+Integer
+ 
+ 
+ 
+0..4
+ 
+Default to 0
+ 
+ 
+ 
+Optional
+ 
+Determines which level of trace details the user wants to have for the LCC. Children elements use this value if the default option is selected.
+ 
+Each level includes messages related to lower levels. The traces are essential for troubleshooting purposes:
+ 
+ 
+Level 0 - Default. Uses the Log Message Level that is set in the Network section.
+ 
+Level 1 - Minimum. Contains basic messages (errors, basic summary, etc.)
+ 
+Level 2 - Light details. Contains more detailed messages (connections details, extended summaries, etc.).
+ 
+Level 3 - Full details. Contains full details.
+ 
+Level 4 - Stack. Contains all messages.
+ 
+ 
+ 
+ 
+
+ IsServer
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+Determines whether the ICCP local control center is going to be a Server.
+ 
+ 
+ 
+
+ IsClient
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+Determines whether the ICCP local control center is going to be a Client.
+ 
+ 
+ 
+
+ InitiateCommunication
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+Determines whether the ICCP local control center initiates communication with RCCs or not (calling/called behavior). This field is only relevant if the local control center is a Client and a Server (bidirectional).
+ 
+ 
+ 
+
+ Full7LayerStack
+ 
+ 
+Boolean
+ 
+ True/False
+ 
+ 
+Optional
+ 
+Determines whether the ICCP model of this specific LCC runs with full 7 layer stack addressing.
+ 
+ 
+
+ 
+If True is selected, then the model with run with full 7 layer stack addressing. This means that the driver allows to create several control centers that can occupy the same port.
+ 
+ 
+
+ 
+If False is selected, it does not run with full 7 layer stack addressing. In this case, the user must use different ports if multiple control centers are configured. This parameter also affects the creation of the Application References.
+ 
+ 
+ 
+The default value is the option that was selected in the General Parameters section.
+ 
+ 
+ 
+
+ MajorVersion
+ 
+ 
+Integer
+ 
+ 
+ 
+1996/2000
+ 
+Default to 2000
+ 
+ 
+ 
+Optional
+ 
+Determines the major version of the acting control center. The minor version is always 8.
+ 
+ 
+ 
+
+ MaxDSTS
+ 
+ 
+Integer
+ 
+ 
+ 
+0..100
+ 
+Default to 10
+ 
+ 
+ 
+Optional
+ 
+Determines the maximum number of DS Transfer Sets that are available on the local server for each domain.
+ 
+ 
+ 
+
+ MaxPDUSize
+ 
+ 
+Integer
+ 
+ 
+ 
+0..65535
+ 
+ Default to 65535
+ 
+ 
+ 
+Optional
+ 
+Determines the maximum size of the PDUs.
+ 
+ 
+ 
+
+ Port
+ 
+ 
+Integer
+ 
+ 
+ 
+0..65535
+ 
+Default to 102
+ 
+ 
+ 
+Optional
+ 
+Determines the TCP port that the ICCP control center uses.
+ 
+ 
+ 
+
+ InitiateRetryDelay
+ 
+ 
+Integer
+ 
+ 
+ 
+0..65535
+ 
+Default to 30
+ 
+ 
+ 
+Optional
+ 
+Determines the time in seconds that a calling control center waits before attempting to connect to the RCCs. Once the local control center attempts to connect to the entire list of Main and Backup remote IP addresses, it waits the time set with this parameter.
+ 
+ 
+ 
+
+ CalledDisconnectTimeout
+ 
+ 
+Integer
+ 
+ 
+ 
+0..65535
+ 
+Default to 30
+ 
+ 
+ 
+Optional
+ 
+Determines the time in seconds that a called control center waits for RCCs to reconnect before signaling a connection loss.
+ 
+ 
+ 
+
+ InvertStateSingleBit
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive. 
+ 
+Determines whether the ICCP model inverts the value of ICCP states in FULL mode mapping ID.
+ 
+For example:
+ 
+ 
+
+ 
+Normal mode:
+ 
+ 
+
+ 
+When a PcVue bit is 0, the ICCP state that it represents is 1.
+ 
+ 
+
+ 
+When a PcVue bit is 1, the ICCP state that it represents is 2.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Inverted mode:
+ 
+ 
+
+ 
+ When a PcVue bit is 0, the ICCP state that it represents is 2.
+ 
+ 
+
+ 
+When a PcVue bit is 1, the ICCP state that it represents is 1.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ MapSVSimuToEntered
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+Determines whether an SV ICCP Server variable sends the ICCP Quality Current Source Entered flag when the PcVue variable is simulated.
+ 
+If set to True, an SV ICCP server variable is sent with: 
+ 
+ 
+
+ 
+The Quality Current Source flag set to Entered to the remote client if the variable is simulated.
+ 
+ 
+
+ 
+The Quality Current Source flag specified in the variables extended attribute if the variable is not simulated.
+ 
+ 
+ 
+If set to False, an SV ICCP server variable is always sent with the Quality Current Source flag that is specified in the variable extended attribute.
+ 
+ 
+ 
+
+ AuthMechanism
+ 
+ 
+String
+ 
+ 
+ 
+None, Password or Certificate
+ 
+Default to None
+ 
+ 
+ 
+Optional
+ 
+Determines which ACSE authentication mechanism the parent ICCP Server or Client uses.
+ 
+ 
+
+ 
+None - Non-secure ICCP communication.
+ 
+ 
+
+ 
+Password - Password-based, ACSE level, non-secure ICCP communication.
+ 
+ 
+
+ 
+Certificate - IEC 62351 based, secure ICCP communication based on certificates.
+ 
+ 
+ 
+Selecting Password or Certificate requires the addition of another Security section as a child of the LCC ICCP.ini file. See section Security of this topic for more information.
+ 
+ 
+ 
+ 
+ 
+Example of LCCs sections in the ICCP.ini file
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Network1/LocalControlCenter1]
+ 
+ 
+ 
+
+ 
+Name&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= LCC1
+ 
+ 
+ 
+
+ 
+LocalAR&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= Main_LCC
+ 
+ 
+ 
+
+ 
+LogMessageLevel&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 3
+ 
+ 
+ 
+
+ 
+IsServer&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= true
+ 
+ 
+ 
+
+ 
+IsClient&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= true
+ 
+ 
+ 
+
+ 
+InitiateCommunication&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= false
+ 
+ 
+ 
+
+ 
+Full7LayerStack&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= false
+ 
+ 
+ 
+
+ 
+MajorVersion&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 2000
+ 
+ 
+ 
+
+ 
+MaxDSTS&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 10
+ 
+ 
+ 
+
+ 
+MaxPDUSize&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 32000
+ 
+ 
+ 
+
+ 
+Port&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 102
+ 
+ 
+ 
+
+ 
+InitiateRetryDelay&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 15
+ 
+ 
+ 
+
+ 
+CalledDisconnectTimeout&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 35
+ 
+ 
+ 
+
+ 
+InvertStateSingleBit&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= false
+ 
+ 
+ 
+
+ 
+MapSVSimuToEntered&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= true
+ 
+ 
+ 
+
+ 
+AuthMechanism&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= None
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Local Domains sections
+ 
+The sections [NetworkX/LocalControlCenterY/LocalDomainZ] in the ICCP.ini file define the information of a local domain to be created, specifically an ICC domain. The VCC domain is always created by default when a Local Control Center is created. All Local Domains must be created linked to a Local Control Center. To differentiate local domains, the user must create different sections in the ICCP.ini file called [NetworkX/LocalControlCenterY/LocalDomainZ] where X, Y and Z increase starting from 1.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Field
+ Data type
+ Value
+ Description
+ 
+ 
+
+ 
+ 
+Name
+ 
+ 
+ 
+String
+ 
+ <Name>
+ 
+ 
+Mandatory
+ 
+A string that must be unique among Local Domains in a Local Control Center. The input is case sensitive.
+ 
+Determines the name of the local domain that is created inside the corresponding local control center.
+ 
+
+ 
+We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.
+ 
+ 
+If this field is empty, the local domain is not created.
+ 
+ 
+ 
+
+ BilateralTableID
+ 
+ 
+String
+ 
+ 
+ 
+<ID>
+ 
+Max length 20 characters
+ 
+ 
+ 
+Mandatory
+ 
+A string that must be unique among created domains. The input is case sensitive.
+ 
+Determines the bilateral table ID associated to this local domain.
+ 
+If this field is empty, the local domain is not created.
+ 
+ 
+ 
+ 
+ 
+Example of Local Domains sections in the ICCP.ini file
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Network1/LocalControlCenter1/LocalDomain1]
+ 
+ 
+ 
+
+ 
+Name&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MyLocalDomain
+ 
+ 
+ 
+
+ 
+BilateralTableID&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MyBTID
+ 
+ 
+ 
+
+ 
+[Network1/LocalControlCenter1/LocalDomain2]
+ 
+ 
+ 
+
+ 
+Name&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MySecondLocalDomain
+ 
+ 
+ 
+
+ 
+BilateralTableID&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MySecondBTID
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+RCCs sections
+ 
+The sections [NetworkX/LocalControlCenterY/RemoteControlCenterZ] in the ICCP.ini file define the information of an RCC to be created. Multiple RCCs can be created for each local control center that is defined.
+ 
+Remote Domains are included in the fields of this section. The VCC remote domain is automatically create for each RCC.
+ 
+All RCCs must be created linked to a Local Control Center. To differentiate RCCs, the user must create different sections in the ICCP.ini file called [NetworkX/LocalControlCenterY/RemoteControlCenterZ] where X, Y and Z increase starting from 1.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Field
+ Data type
+ Value
+ Description
+ 
+ 
+
+ Name
+ 
+ 
+String
+ 
+ <Name>
+ 
+ 
+Mandatory
+ 
+A string that must be unique among RCCs in a Local Control Center. The input is case sensitive.
+ 
+Determines the name of the RCC that is created inside the corresponding local control center. 
+ 
+
+ 
+We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.
+ 
+ 
+If this field is empty, the RCC is not created.
+ 
+ 
+ 
+
+ LogMessageLevel
+ 
+ 
+Integer
+ 
+ 
+ 
+0..4
+ 
+Default to 0
+ 
+ 
+ 
+Optional
+ 
+Determines which level of trace details the user wants to have for the RCC. Children elements use this value if the default option is selected.
+ 
+Each level includes messages related to lower levels. The traces are essential for troubleshooting purposes:
+ 
+ 
+Level 0 - Default. Uses the Log Message Level that is set in the Local Control Center section.
+ 
+Level 1 - Minimum. Contains basic messages (errors, basic summary, etc.).
+ 
+Level 2 - Light details. Contains more detailed messages (connections details, extended summaries, etc.)
+ 
+Level 3 - Full details. Contains full details.
+ 
+Level 4 - Stack. Contains all messages.
+ 
+ 
+ 
+ 
+
+ RemoteAR1
+ 
+ 
+String
+ 
+ <ARName>
+ 
+ 
+Mandatory
+ 
+A string that must match the Name of a defined AR. It is case sensitive.
+ 
+Determines the Main addressing information of the RCC with the information that is defined on the AR.
+ 
+If this field is empty, the RCC is not created.
+ 
+ 
+ 
+
+ RemoteAR2
+ 
+ 
+String
+ 
+ <ARName>
+ 
+ 
+Optional
+ 
+A string that must match the Name of a defined AR. It is case sensitive.
+ 
+Determines redundant addressing information of the RCC with the information that is defined on the AR.
+ 
+This is used when the local control center has calling behavior (Client only or Client/Server that initiates communication).
+ 
+It is used in the scenario that the main RCC becomes unavailable and the local control center tries to initiate communication with the redundant.
+ 
+ It is used when the local control center has called behavior (Server only or Client/Server that does not initiate communication). It establishes which other remote connection attempts are accepted.
+ 
+The default value is to not include any redundant ARs.
+ 
+ 
+ 
+
+ RemoteAR3..RemoteAR10
+ 
+ 
+String
+ 
+ <ARName>
+ 
+ 
+Optional
+ 
+A string that must match the Name of a defined AR. It is case sensitive.
+ 
+It is similar to RemoteAR2 for a second to 9th redundant remote.
+ 
+ 
+ 
+
+ LocalDomain
+ 
+ 
+String
+ 
+ <DomainName>
+ 
+ 
+Mandatory
+ 
+A string that must match the Name of a defined Local Domain in the Local Control Center. It is case sensitive.
+ 
+Determines which local domain the RCC has access to. This name must be consistent with the Remote Domain that is entered on the side of the third party RCC. If the LCC is Client Only type, then this field is not relevant and is ignored.
+ 
+If this field is empty, the RCC is not created.
+ 
+ 
+ 
+
+ RemoteDomain
+ 
+ 
+String
+ 
+ <DomainName>
+ 
+ 
+Mandatory
+ 
+A string that is the domain name of the RCC. It is case sensitive.
+ 
+Determines the domain on the RCC that the local control center has access to. The correct remote domain name is important to establish a proper connection, even if the user is interested in only VCC variables.
+ 
+This name must be consistent with the Local Domain that is entered from the point of view of the third party RCC.
+ 
+
+ 
+We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.
+ 
+ 
+If this field is empty, the RCC is not created.
+ 
+ 
+ 
+
+ OverrideQualityNormalSource
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+Determines whether the RCC ignores the quality normal source flag for data received from a remote.
+ 
+ 
+
+ 
+If set to True, then the driver considers all variables to have a normal quality normal source, even if the remote sends an abnormal flag.
+ 
+ 
+ 
+ 
+
+ 
+If set to False, then the driver behaves normally and considers the flag that is being received from the remote.
+ 
+ 
+ 
+ 
+ 
+
+ AuthMechanism
+ 
+ 
+String
+ 
+ 
+ 
+None, Password or Certificate
+ 
+Default to None
+ 
+ 
+ 
+Optional
+ 
+Determines which ACSE authentication mechanism the parent ICCP Server or Client uses.
+ 
+ 
+
+ 
+None - Non-secure ICCP communication.
+ 
+ 
+
+ 
+Password - Password-based, ACSE level, non-secure ICCP communication.
+ 
+ 
+
+ 
+Certificate - IEC 62351-based, secure ICCP communication based on certificates.
+ 
+ 
+ 
+Selecting Password or Certificate requires the addition of another Security section as a child of the RCC in the ICCP.ini file. See section Security for this topic for more information.
+ 
+ 
+ 
+ 
+ 
+Example of RCCs sections in the ICCP.ini file
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Network1/LocalControlCenter1/RemoteControlCenter1]
+ 
+ 
+ 
+
+ 
+Name&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MyRCC1
+ 
+ 
+ 
+
+ 
+LogMessageLevel&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 1
+ 
+ 
+ 
+
+ 
+RemoteAR1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= LCC1_RCC1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+ 
+ 
+ 
+
+ 
+RemoteAR2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= BackupAR1
+ 
+ 
+ 
+
+ 
+RemoteAR3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= BackupAR1
+ 
+ 
+ 
+
+ 
+LocalDomain&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= LCC1_Dom1
+ 
+ 
+ 
+
+ 
+RemoteDomain&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= SIM_Domain
+ 
+ 
+ 
+
+ 
+OverrideQualityNormalSource&#160;&#160;&#160;&#160;&#160;= False
+ 
+ 
+ 
+
+ 
+AuthMechanism&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= None
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data Sets & Data Set Transfer Sets sections 
+ 
+The sections [NetworkX/LocalControlCenterY/RemoteControlCenterZ/DataSetW] in the ICCP.ini file define the information related to the Remote Data Sets & Transfer Sets to be created. Multiple Data Sets can be created for each RCC that is defined.
+ 
+Variables that are defined in future sections can only belong to one Data Set.
+ 
+All Data Sets must be created linked to an RCC. To differentiate data sets, the user must create different section in the ICCP.ini file named [NetworkX/LocalControlCenterY/RemoteControlCenterZ/DataSetW] where X, Y, Z and W increase starting from 1.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Field
+ Data type
+ Value
+ Description
+ 
+ 
+
+ Name
+ 
+ 
+String
+ 
+ <Name>
+ 
+ 
+Mandatory
+ 
+A string that must be unique among RCCs. The input is case sensitive.
+ 
+Determines the name of the Data Set that is created inside the corresponding RCC.
+ 
+
+ 
+We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.
+ 
+ 
+ If this field is empty, the remote domain is not created.
+ 
+ 
+ 
+
+ IncludeTransferSetName
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+If set to True, the local control center requests the inclusion of the Transfer Set Name in the reports of this specific data set.
+ 
+ 
+ 
+
+ IncludeTransferSetTimeStamp
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive. 
+ 
+If set to True, the local control center requests the inclusion of the Transfer Set Time Stamp in the reports of that specific data set.
+ 
+ 
+ 
+
+ IncludeDSConditionsDetected
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+If set to True, the local control center requests the inclusion of the DS Conditions Detected in the data set reports of that specific data set.
+ 
+ 
+ 
+
+ IncludeEventCodeDetected
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+If set to True, the local control center requests the inclusion of the Event Code Detected in the data set reports of that specific data set.
+ 
+ 
+ 
+
+ DSConds_IntervalTimout
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+If set to True, the RCC should send a report when the Interval Time is elapsed.
+ 
+ 
+ 
+
+ DSConds_IntegrityTimeout
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False 
+ 
+ 
+ 
+It is not case sensitive.
+ 
+This field is optional. If set to True, the RCC should send a report of the entire Data Set when the Integrity Check time interval expires. This only applies when RBE is set to True.
+ 
+ 
+ 
+
+ DSConds_ObjectChange
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to True
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+If set to True, the RCC should send a report when any object in the Data Set changes. Possible changes include a change of value, status or quality flags.
+ 
+ 
+ 
+
+ DSConds_OperatorRequest
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False 
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+If set to True, the RCC should send a report when an operator at the RCC requests it.
+ 
+ 
+ 
+
+ DSConds_ExternalEvent
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False 
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+If set to True, the RCC should send a report when any other external event condition that is not described in the other conditions becomes true.
+ 
+ 
+ 
+
+ DSTSParam_StartTime
+ 
+ 
+Integer
+ 
+ 
+ 
+0..65535
+ 
+Default to 0
+ 
+ 
+ 
+Optional
+ 
+The time value (in seconds) for the RCC to begin Condition Monitoring. If Start Time is 0, then the RCC assumes it to be its current time and begins Condition Monitoring immediately.
+ 
+ 
+ 
+
+ DSTSParam_Interval
+ 
+ 
+Integer
+ 
+ 
+ 
+0..65535
+ 
+Default to 10
+ 
+ 
+ 
+Optional
+ 
+The time interval (in seconds) between Data Set Transfer reports. The Interval starts when the Start Time occurs.
+ 
+ 
+
+ 
+If RBE is set to False, then the current state of all objects in the data set are reported when the Interval expires.
+ 
+ 
+
+ 
+If RBE is set to True, then the current state of only the changed objects in the data set are reported when the Interval expires.
+ 
+ 
+
+ 
+If multiple changes occur to the same object during the Interval, then only the final value is reported.
+ 
+ 
+ 
+ 
+ 
+
+ DSTSParam_TLE
+ 
+ 
+Integer
+ 
+ 
+ 
+0..65535
+ 
+Default to 60
+ 
+ 
+ 
+Optional
+ 
+This is a time that is primarily relevant to the remote ICCP server. It is the time over which the remote ICCP server has to send the Data Set Transfer Report to the local ICCP control center. If the remote ICCP server anticipates that it cannot send the Data Set Transfer Report to the local ICCP control center within the TLE time, then it does not generate the report, and discards the data.
+ 
+ 
+ 
+
+ DSTS_BufferTime
+ 
+ 
+Integer
+ 
+ 
+ 
+0..65535
+ 
+Default to 2
+ 
+ 
+ 
+Optional
+ 
+Time interval (in seconds) for buffering the ObjectChange condition before reporting to the local control center.
+ 
+The Buffer Time starts when the first ObjectChange condition occurs.
+ 
+ 
+
+ 
+If DSTSParam_RBE is false, then the current states of all objects in the Data Set are reported when the Buffer Time expires.
+ 
+ 
+
+ 
+If DSTSParam_RBE is true, then the current state of only the changed objects in the Data Set are reported when the Buffer Time expires.
+ 
+ 
+
+ 
+If the Buffer Time is zero, then a report is generated for each change. If multiple changes occur to the same object during the Buffer Time, then only the final value is reported.
+ 
+ 
+ 
+A Buffer Time of 0 can cause an overflow of Data Set Transfer Reports and can affect overall network performance.
+ 
+ 
+ 
+
+ DSTSParam_IntegrityCheck
+ 
+ 
+Integer
+ 
+ 
+ 
+0..65535
+ 
+Default to 30
+ 
+ 
+ 
+Optional
+ 
+The time value (in seconds) for integrity check when IntegrityTimeOut and RBE conditions are used.
+ 
+ 
+ 
+
+ DSTSParam_BlockData
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False 
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+Controls the type of Transfer reporting mechanism to be used. If set to True, the transfer report uses the blocked mechanism.
+ 
+ 
+ 
+
+ DSTSParam_Critical
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False 
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+Controls the type of Transfer Report.
+ 
+ 
+
+ 
+If set to True, the Transfer Report is critical and an acknowledgment from the local control center back to the RCC is expected.
+ 
+ 
+
+ 
+If set to False, no acknowledgment is expected.
+ 
+ 
+ 
+ 
+ 
+
+ DSTSParam_RBE
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to True
+ 
+ 
+ 
+Optional
+ 
+It is not case sensitive.
+ 
+Indicates whether the RCC should use the Report by Exception mechanism. If set to True, only the changed objects are reported.
+ 
+ 
+ 
+ 
+ 
+Example of Data Sets & Data Set Transfer Sets sections in the ICCP.ini file
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Network1/LocalControlCenter1/RemoteControlCenter1/DataSet1]
+ 
+ 
+ 
+
+ 
+Name = MyDataSet
+ 
+ 
+ 
+
+ 
+IncludeTransferSetName = true
+ 
+ 
+ 
+
+ 
+IncludeTransferSetTimeStamp = true
+ 
+ 
+ 
+
+ 
+IncludeDSConditionsDetected = true
+ 
+ 
+ 
+
+ 
+IncludeEventCodeDetected = true
+ 
+ 
+ 
+
+ 
+DSConds_IntervalTimeout&#160;&#160;&#160;&#160;= false
+ 
+ 
+ 
+
+ 
+DSConds_IntegrityTimeout = false
+ 
+ 
+ 
+
+ 
+DSConds_ObjectChange = true
+ 
+ 
+ 
+
+ 
+DSConds_OperatorRequest&#160;&#160;&#160;&#160;= false
+ 
+ 
+ 
+
+ 
+DSConds_ExternalEvent = false
+ 
+ 
+ 
+
+ 
+DSTSParam_StartTime = 0
+ 
+ 
+ 
+
+ 
+DSTSParam_Interval = 20
+ 
+ 
+ 
+
+ 
+DSTSParam_TLE = 60
+ 
+ 
+ 
+
+ 
+DSTSParam_BufferTime = 2
+ 
+ 
+ 
+
+ 
+DSTSParam_IntegrityCheck = 5
+ 
+ 
+ 
+
+ 
+DSTSParam_BlockData = false
+ 
+ 
+ 
+
+ 
+DSTSParam_Critical = false
+ 
+ 
+ 
+
+ 
+DSTSParam_RBE = true
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Security
+ 
+Defines the information that is required to setup security mechanisms. The Local Control Center and the RCC sections have a field called AuthMechanism where you can choose which authentication mechanism is used.
+ 
+If the you choose password based security or certificate based security, then a security section can be added for each Local Control Center or RCC.
+ 
+
+ 
+Both Local Control Center and RCC security sections are the same and require the exact fields. However, the fields are different depending on the AuthMechanism.
+ 
+ 
+
+ 
+All Security sections must be created linked to either an LCC or an RCC. To differentiate Security sections, you must create different blocks in the ICCP.ini file.
+ 
+ 
+The security section has a structure like the following:
+ 
+For security applied to the Local Control Center:
+ 
+ 
+
+ 
+[NetworkX/LocalControlCenterY/Security]
+ 
+ 
+ 
+For security applied to the RCC:
+ 
+ 
+
+ 
+[NetworkX/LocalControlCenterY/RemoteControlCenterZ/Security]
+ 
+ 
+ 
+where X, Y and Z increase starting from 1.
+ 
+
+ 
+The security section is loaded at startup with the parameters of the ICCP.ini at that moment. However, two ICCP Driver requests are available to dynamically reload the security configuration. Refer to the topic ICCP System Variables and commands for more information.
+ 
+ 
+Password based security
+ 
+This section of inputs defines the information required for a Security section to be created corresponding to a specific LCC or RCC.
+ 
+
+ 
+If Password based security is selected, then any Certificate based security fields are ignored.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Field
+ Data type
+ Value
+ Description
+ 
+ 
+
+ WeakPassword
+ 
+ 
+String
+ 
+ 
+ 
+<Password>
+ 
+Default to empty string
+ 
+ 
+ 
+Optional
+ 
+It is case sensitive.
+ 
+Determines the password for ACSE authentication.
+ 
+For example: The ICCP.ini file should contain:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Network1/LocalControlCenter1/Security]
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+WeakPassword&#160;&#160;&#160;&#160;= Secpw123!
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[Network1/LocalControlCenter1/RemoteControlCenter1/Security]
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+WeakPassword = ClientSecpw123!
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Certificate based security
+ 
+This section of inputs defines the information required for a Security section to be created corresponding to a specific LCC or RCC.
+ 
+
+ 
+If Certificate based security is selected, then any Password based security fields are ignored.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Field
+ Data type
+ Value
+ Description
+ 
+ 
+
+ PKI_Directory
+ 
+ 
+String
+ 
+ 
+ 
+<FolderPath>
+ 
+Default to the built-in PKI folder
+ 
+ 
+ 
+Optional
+ 
+It is case sensitive.
+ 
+Indicates the general path used by the fields in this section that reference files. If the field is not defined, then any file that is used in the next fields uses the PcVue built-in PKI structure. The information for each file can change and is described individually.
+ 
+If a path is defined, then any file that is used in the next fields uses this path as a base.
+ 
+For example: For a file called Cert.pem:
+ 
+ 
+
+ 
+PKI_Directory = C:\PKI\
+ 
+ 
+
+ 
+FileField = Cert.pem
+ 
+ 
+ 
+The driver searches for the combination of the path and the file name. C:\PKI\Cert.pem
+ 
+ 
+ 
+
+ CA_VerifyDepth
+ 
+ 
+Integer
+ 
+ 
+ 
+0..31
+ 
+Default to 0
+ 
+ 
+ 
+Optional
+ 
+The Certificate Authority Chaining Verification Depth.
+ 
+
+ 
+CAs can refer to other CAs for authority.
+ 
+ 
+For example: Company X can sign Company Y, who can sign a certificate. If you have Company X�s CA certificate and have a depth of 1, you can accept Company Y. With a depth of 0 you cannot.
+ 
+ 
+ 
+
+ CA_CertificateFile
+ 
+ 
+String
+ 
+ <FilePath>
+ 
+ 
+Mandatory
+ 
+It is case sensitive.
+ 
+The path to the file containing the Certificate Authority Certificate. If the PKI_Directory field is the built-in PKI structure, then the file should be in the �PKI\Trusted\Certs� directory.
+ 
+
+ 
+Only the filename should be written in the field.
+ 
+ 
+ 
+ 
+
+ CA_CRL
+ 
+ 
+String
+ 
+ <FilePath>
+ 
+ 
+Mandatory
+ 
+It is case sensitive.
+ 
+The path to the file containing the Certificate Authority Certificate Revocation List. If the PKI_Directory field is the built-in PKI structure, then the file should be in the PKI\Trusted\CRL directory.
+ 
+
+ 
+Only the filename should be written in the field.
+ 
+ 
+ 
+ 
+
+ MMS_CommonName
+ 
+ 
+String
+ 
+ 
+ 
+<Name>
+ 
+ 
+ 
+Mandatory
+ 
+It is case sensitive.
+ 
+The common name to expect in incoming MMS certificates.
+ 
+Empty string disables MMS related parameters.
+ 
+ 
+ 
+
+ MMS_PrivateKeyFile
+ 
+ 
+String
+ 
+ 
+ 
+<FilePath>
+ 
+ 
+ 
+Mandatory
+ 
+It is case sensitive.
+ 
+The path to the file containing the private key for signing ACSE Authentication. If the PKI_Directory field is the built-in PKI structure, then the file should be in the PKI\Own\Private directory.
+ 
+
+ 
+Only the filename should be written in the field.
+ 
+ 
+ 
+ 
+
+ MMS_PrivateKeyPassPhrase
+ 
+ 
+String
+ 
+ 
+ 
+<PassPhrase>
+ 
+Default to empty string
+ 
+ 
+ 
+Optional
+ 
+It is case sensitive.
+ 
+The PassPhrase for decrypting the private key.
+ 
+ 
+ 
+
+ MMS_PublicCertificateFile
+ 
+ 
+String
+ 
+ 
+ 
+<FilePath>
+ 
+ 
+ 
+Mandatory
+ 
+It is case sensitive.
+ 
+The path to the file containing the public certificate. If the PKI_Directory field is the built-in PKI structure, then the file should be in the PKI\Own\Certs directory.
+ 
+
+ 
+Only the filename should be written in the field.
+ 
+ 
+ 
+ 
+
+ MMS_DisablesSecurity
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Allows you to disable certificate security on the MMS layer.
+If set to True, security related to MMS layer is not used.
+ 
+ 
+ 
+
+ TLS_DisableSecurity
+ 
+ 
+Boolean
+ 
+ 
+ 
+True/False
+ 
+Default to False
+ 
+ 
+ 
+Allows you to disable certificate security on the TLS layer.
+ 
+If set to True, security related to TLS layer is not used.
+ 
+ 
+ 
+
+ TLS_CommonName
+ 
+ 
+String
+ 
+ 
+ 
+<Name>
+ 
+Default to empty string
+ 
+ 
+ 
+Optional
+ 
+It is case sensitive.
+ 
+The common name to expect in incoming TLS certificates.
+ 
+
+ 
+Empty string disables TLS related parameters.
+ 
+ 
+ 
+ 
+
+ TLS_RSA_PrivateKeyFile
+ 
+ 
+String
+ 
+ <FilePath>
+ 
+ 
+Mandatory
+ 
+It is case sensitive.
+ 
+The path to the file containing the private key for RSA TLS ciphers. If the PKI_Directory field is the built-in PKI structure, then the file should be in the PKI\Own\Private directory.
+ 
+
+ 
+Only the filename should be written in the field.
+ 
+ 
+ 
+ 
+
+ TLS_RSA_PrivateKeyPassPhrase
+ 
+ 
+String
+ 
+ 
+ 
+<PassPhrase>
+ 
+Default to empty string
+ 
+ 
+ 
+Optional
+ 
+It is case sensitive.
+ 
+The PassPhrase for decrypting the private key for RSA TLS ciphers.
+ 
+ 
+ 
+
+ TLS_RSA_PublicCertificateFile 
+ 
+ 
+String
+ 
+ <FilePath>
+ 
+ 
+Mandatory
+ 
+It is case sensitive.
+ 
+The path to the file containing the public certificate for key for RSA TLS ciphers. If the PKI_Directory field is the built-in PKI structure, then the file should be in the PKI\Own\Certs directory.
+ 
+
+ 
+Only the filename should be written in the field.
+ 
+ 
+ 
+ 
+ 
+ 
+Example Security section the ICCP.ini file
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Network1/LocalControlCenter1/Security]
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;PKI_Directory&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= C:\PKI\
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;CA_VerifyDepth&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 1
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;CA_CertificateFile&#160;&#160;&#160;&#160;= sample_ca_rsa_public_certificate.pem
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;CA_CRL&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= sample_ca_certificate_revocation_list.pem
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;MMS_CommonName&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MMS
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;MMS_PrivateKeyFile&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= sample_mms_rsa_private_key.pem
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;MMS_PrivateKeyPassPhrase&#160;&#160;&#160;&#160;&#160;= pwmms1234
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;MMS_PublicCertificateFile&#160;&#160;&#160;&#160;&#160;= sample_mms_rsa_public_cert.pem
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TLS_CommonName&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= TLS
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TLS_RSA_PrivateKeyFile&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= sample_tls_rsa_private_key.pem
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TLS_RSA_PrivateKeyPassPhrase&#160;&#160;&#160;&#160;&#160;= pwtls1234
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TLS_RSA_PublicCertificateFile&#160;&#160;&#160;&#160;&#160;= sample_tls_rsa_public_cert.pem
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[Network1/LocalControlCenter1/RemoteControlCenter1/Security]
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;PKI_Directory&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= C:\PKI\
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;CA_VerifyDepth&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 1
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;CA_CertificateFile&#160;&#160;&#160;&#160;= client_sample_ca_rsa_public_certificate.pem
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;CA_CRL&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= client_sample_ca_certificate_revocation_list.pem
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;MMS_CommonName&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MMS
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;MMS_PrivateKeyFile&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= client_sample_mms_rsa_private_key.pem
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;MMS_PrivateKeyPassPhrase&#160;&#160;&#160;&#160;&#160;= Clientpwmms1234
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;MMS_PublicCertificateFile&#160;&#160;&#160;&#160;&#160;= client_sample_mms_rsa_public_cert.pem
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TLS_CommonName&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= TLS
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TLS_RSA_PrivateKeyFile&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= client_sample_tls_rsa_private_key.pem
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TLS_RSA_PrivateKeyPassPhrase&#160;&#160;&#160;&#160;&#160;= Clientpwtls1234
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TLS_RSA_PublicCertificateFile&#160;&#160;&#160;&#160;&#160;= client_sample_tls_rsa_public_cert.pem
+ 
+ 
+ 
+
+ 
+&#160;
+
+
+========================================
+TOPIC: iccp_configuring_variables.htm
+========================================
+Configuring ICCP variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring ICCP Variables
+ 
+The user can create and configure ICCP variables in PcVue by adding a formatted value in the extended attributes of the variable. This value contains ICCP mapping information for that variable. It has 7 or 9 fields, depending on the type, with each field separated by a special character corresponding to the parameter BranchSeparator.
+ 
+The user can configure two important parameters in the ICCP.ini file that are later used to parse the variables extended attributes:
+ 
+ 
+BranchSeparator - The field separator in text extended attributes
+ 
+AttributeNumber - The Id of the text extended attribute that contains the ICCP mapping
+ 
+ 
+
+ 
+The number of characters in an extended attribute is limited to 100. To reduce the length, some of the more common fields are entered with a single or a few characters.
+ 
+ 
+
+ 
+It is important that to use short names with care for the elements Network, LCC, Local Domain, RCC, Remote Domain and Data Set. All the name lengths come into play when using this extended attribute text.
+ 
+ 
+Required parameters
+ 
+In the extended attribute, the user must enter specific information that is important to define the variable mapping. All the fields must be separated by the character BranchSeparator defined in the ICCP.ini file. The specific order of these fields depends on the variables type (data or device command) and its origin (local or remote).
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Field
+ Value
+ Description
+ 
+ 
+
+ 1
+ ICCP
+ 
+ 
+A header that must be ICCP. Mandatory for all ICCP variables. 
+ 
+Used to identify that this is an ICCP variable.
+ 
+Case sensitive.
+ 
+ 
+ 
+
+ 2
+ <LocalOrRemote>
+ 
+ 
+A string that can be either: L or R. These letters represent Local or Remote variables.
+ 
+Defines if the variable belongs to the local control center or to the remote control center.
+ 
+Mandatory. Not case sensitive.
+ 
+ 
+ 
+
+ 3
+ <DataType>
+ 
+ 
+A string that defines the ICCP data type of the variable. It must be one of the 15 data types or 3 control types.
+ 
+The allowed values for this field are: D, DE, DQ, DQT, DQTE, R, RE, RQ, RQT, RQTE, S, SE, SQ, SQT, SQTE, CC, DSP or RSP.
+ 
+Mandatory. Not case sensitive.
+ 
+ 
+ 
+
+ 4
+ <Network>
+ 
+ 
+A string that defines the Network that the variable belongs to.
+ 
+It must match a Network Name configured in the ICCP.ini file.
+ 
+Mandatory. Case sensitive.
+ 
+ 
+ 
+
+ 5
+ <LCC>
+ 
+ 
+A string that defines the LCC that the variable belongs to. 
+ 
+It must match a LCC Name configured in the ICCP.ini file that is consistent with the Network.
+ 
+Mandatory. Case sensitive.
+ 
+ 
+ 
+
+ 6
+ <RCC>
+ 
+ 
+A string that defines the RCC that the variable belongs to.
+ 
+It must match a RCC Name configured in the ICCP.ini file that is consistent with the LCC and Network.
+ 
+Only Remote variables require this field. Case sensitive.
+ 
+ 
+ 
+
+ 7
+ <Domain>
+ 
+ 
+A string that defines the domain name (Local or Remote) that the variable belongs to.
+ 
+- If the LocalOrRemote field is L, then this field is the local domain name.
+ 
+- If the LocalOrRemote field is R, then this field is the remote domain name.
+ 
+It must match a domain configured in the ICCP.ini file.
+ 
+- If the variable is Local. Either VCC or the Local Domain Name entry established in desired Local Domain section of the ICCP.ini file.
+ 
+- If the variable is Remote. Either VCC or the Remote Domain entry established in the desired Remote Control Center section of the ICCP.ini file.
+ 
+Mandatory. Case sensitive.
+ 
+ 
+ 
+
+ 8
+ <DataSet>
+ 
+ 
+A string that defines the data set that the variable belongs to.
+ 
+ It must match a dataset configured in the ICCP.ini file.
+ 
+Only Remote data type variables require this field. Case sensitive.
+ 
+ 
+ 
+
+ 9
+ <ICCPVarName>
+ 
+ 
+A string that defines the ICCP variable name.
+ 
+The name does not have to be the same as the variable name to which it is mapped. The name must be unique in the domain (Local or Remote) it is assigned to.
+ 
+Case sensitive.
+ 
+ 
+ 
+
+ 10
+ <MappingId>
+ 
+ 
+A string that defines the mapping mechanism that the variable is to use. There are 3 possible options for this field: F (Full), H (High) and L (Low). This field should be F for all variable cases except for the following: State, StateExtended, StateQ, StateQTimeTag and StateQTimeTagExtended.
+ 
+Only variables for monitoring require this field. This field is case sensitive.
+ 
+ 
+ 
+
+ 11
+ <CurrentSource>
+ 
+ 
+A string that defines the ICCP source of the variable.It can be: Entered, Calculated, Estimated or Telemetered.
+ 
+The allowed values for this field are: EN, C, ES or T. 
+ 
+It specifies the nature of the value. 
+ 
+Only local data type variables require this field. Not case sensitive.
+ 
+ 
+ 
+
+ 12
+ <SBOOrDE>
+ 
+ 
+A string that defines the control mechanism for the variable. 
+ 
+The value can be either SBO (Select Before Operate) or DE (Direct Execute). 
+ 
+Mandatory only for device command type variables. Not case sensitive.
+ 
+ 
+ 
+ 
+ 
+More information about <MappingId>
+ 
+ 
+For ICCP States, you can select to use a bit, register or alarm variable.
+ 
+All Discrete, Real, ControlCommand, DiscreteSetPoint and RealSetpoint variables use F as their mapping ID. ICCP State variables have 4 possible states: 0, 1, 2 and 3. Typically, 0 is intermediate, 1 is open, 2 is closed and 3 is error.
+ 
+A register mapped to a state, functions in the following way:
+ 
+As a register it can only have F as its mapping Id.
+The value 0 represents a State value of 0 (00 or intermediate).
+The value 1 represents a State value of 1 (01 or open).
+The value 2 represents a State value of 2 (10 or closed).
+Any other value represents a State value of 3 (11 or error).
+ 
+A bit or alarm can function in the same way.
+ 
+If the mapping Id is F and the bit is valid in PcVue, it can send only 2 values. This option can be inverted when used in conjunction with the InvertStateSingleBit parameter discussed previously.
+The value of 0 represents a State value of 1 (01 or open).
+The value of 1 represents a State value of 2 (10 or closed).
+If the bit variable is not valid (Status NS) it represents a State value of 3 (11 or error).
+ 
+If the mapping Id is not F, then the ICCP State must be represented with 2 bits or 2 alarms. One of the bits will represent the High part of the bitstring and the other bit will represent the Low part.
+ 
+H and L must be used together. They must be associated to the same <ICCPVarName> but with different PcVue variable names.
+Example: 2 PcVue bit variables with the following fields in the extended attribute:
+SVBit1 -> ICCP/MyState/H/Dom/Discrete/Telemetered
+SVBit2 -> ICCP/MyState/L/Dom/Discrete/Telemetered
+When SVBit1 is 0 and SVBit2 is 0, they represent an ICCP state MyState of 0 (00 or intermediate)
+When SVBit1 is 0 and SVBit2 is 1, they represent an ICCP state MyState of 1 (01 or open)
+When SVBit1 is 1 and SVBit2 is 0, they represent an ICCP state MyState of 2 (10 or closed)
+When SVBit1 is 1 and SVBit2 is 1, they represent an ICCP state MyState of 3 (11 or error)
+In this High/Low configuration of the states, the timestamp that is sent to the ICCP variable comes directly from the variable�s origin.
+ 
+ 
+For local ICCP monitoring variables
+ 
+The structure of the parameters should be entered in the corresponding extended attribute of the variable and contain 9 different fields as follows:
+ 
+ICCP/<LocalOrRemote>/<DataType>/<Network>/<LocalControlCenter>/<Domain>/<ICCPVarName>/<MappingID>/<CurrentSource>
+ 
+Example for a VCC variable:
+ 
+ICCP/L/D/NET1/LCC2/VCC/SV_VCC_Disc/F/T
+ 
+Example for an ICC variable:
+ 
+ICCP/L/D/NET1/LCC2/LCC2_Dom1/SV_ICC_Disc/F/T
+ 
+For local ICCP device command variables
+ 
+The structure of the parameters should be entered in the corresponding extended attribute of the variable and must contain 8 different fields as follows:
+ 
+ICCP/<LocalOrRemote>/<DataType>/<Network>/<LocalControlCenter>/<Domain>/<ICCPVarName>/<IsSBO>
+ 
+Example for a VCC SBO variable:
+ 
+ICCP/L/DSP/NET1/LCC2/VCC/SV_VCC_DSP_SBO/SBO
+ 
+Example for an ICC DE variable:
+ 
+ICCP/L/RSP/NET1/LCC2/LCC2_Dom1/SV_ICC_RSP_DE/DE
+ 
+For remote ICCP monitoring variables
+ 
+The structure of the parameters should be entered in the corresponding extended attribute of the variable and must contain 10 different fields as follows:
+ 
+ICCP/<LocalOrRemote>/<DataType>/<Network>/<LocalControlCenter>/<RemoteControlCenter>/<Domain>/<DataSet>/<ICCPVarName>/<MappingID>
+ 
+Example for a VCC variable:
+ 
+ICCP/R/RQ/NET1/LCC2/LCC2_MyRCC1/VCC/LCC2_MyDataSet/SIM_VCC_RealQ/F
+ 
+Example for an ICC variable:
+ 
+ICCP/R/SQTE/NET1/LCC2/LCC2_MyRCC1/SIM_Domain/LCC2_MyDataSet/SIM_ICC_Reg_StateQTTE/F
+ 
+For remote ICCP device command variables
+ 
+The structure of the parameters should be entered in the corresponding extended attribute of the variable and should contain 9 different fields as follows.
+ 
+ICCP/<LocalOrRemote>/<DataType>/<Network>/<LocalControlCenter>/<RemoteControlCenter>/<Domain>/<ICCPVarName>/<IsSBO>
+ 
+Example for a VCC DE variable:
+ 
+ICCP/R/DSP/NET1/LCC2/LCC2_MyRCC1/VCC/SIM_VCC_DSP_DE/DE
+ 
+Example for an ICC SBO variable:
+ 
+ICCP/R/CC/NET1/LCC2/LCC2_MyRCC1/SIM_Domain/SIM_ICC_CC_SBO_Reg/SBO
+
+
+========================================
+TOPIC: iccp_overview.htm
+========================================
+Overview of the ICCP Add-on
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the ICCP Add-on
+ 
+ICCP is a protocol, also known as ICCP/TASE.2, standardized as part of the IEC 60870-6 series of standards. It operates over TCP/IP to connect control centers in a power system. A control center identifies itself on the network with a series of parameters (IP Address, App Title, etc.). ICCP can connect a server to one or several clients as required. Data frames are delivered using MMS (Manufacturing Message Specification) messages. 
+ 
+ICCP uses two mechanisms to transfer data: User requests and Object changes (exceptions).
+There are two classes of data objects:
+ 
+ 
+Data value for monitoring,
+ 
+Device command value for commands.
+ 
+ 
+Abbreviations
+ 
+The following abbreviations and acronyms may be found in this help book:
+ 
+ 
+AE -	Application Entity
+ 
+AP - Application Process
+ 
+AR - Application Reference
+ 
+BT - Bilateral Table
+ 
+CBB - Conformance Building Block
+ 
+DE - Direct Execute
+ 
+DS - Data Set
+ 
+DSTS - Data Set Transfer Set
+ 
+ICC - Inter-Control Center 
+ 
+ICCP - Inter-Control Center Protocol 
+ 
+IEC - International Electrotechnical Commission 
+ 
+IP - Internet Protocol
+ 
+LCC - Local Control Center 
+ 
+MMS - Manufacturing Messaging Specification
+ 
+NS - Not Set
+ 
+PDU - Protocol Data Unit
+ 
+RCC - Remote Control Center
+ 
+SBO - Select Before Operate
+ 
+TASE - Telecontrol Application Service Element, IEC�s designation of an international standard protocol for utility data exchanges
+ 
+TASE.2 - TASE version based on the ICCP protocol
+ 
+TCP - Transmission Control Protocol
+ 
+VCC - Virtual Control Center
+ 
+VMD - Virtual Manufacturing Device
+ 
+ 
+VCC vs ICC Domains
+ 
+There are two types of domains in ICCP. The first one is the VCC, which is a global scope domain. The second is an ICC and it is a user-generated domain. The VCC scope is higher than an ICC scope. Domains are mainly used to group variables up.
+ 
+A remote client can access a local server's ICC domain and the variables the server publishes and still have access to any variables published in the VCC domain. However, the local server must have enough DSTransfer Sets available to share with all the remote clients that connect. If a remote client attempts to connect and the local server does not have an available DS Transfer Set, the remote will not be able to receive advanced data transmission schemes.
+ 
+The remote client requires the existence of a remote domain (a local domain in the PcVue application�s perspective) in order to be able to connect. Because of this, a local Server or Client/Server has to create at least one Local Domain (ICC), even if the remote only require access to VCC variables.
+ 
+Basic ICCP model structure
+ 
+To create a local ICCP server that can communicate with one or multiple clients the application designer must configure the following settings as a minimum.
+ 
+ 
+The 7 layer stack settings for the local server to be created,
+ 
+An ICC domain and bilateral table information,
+ 
+Local variables belonging to either the ICC or the VCC for the server to publish.
+ 
+ 
+More specific information can also be entered, however this is optional. The user can enter these ICCP parameters to be more specific when creating the Local Control Center. The optional parameters are explained in more detail in the following chapters.
+ 
+For the local ICCP client, it is necessary to have at a minimum:
+ 
+ 
+The 7 layer stack information for the local client, which includes the 7 layer stack info of the remote,
+ 
+One ICC domain defined,
+ 
+One Data Set defined with its associated DS transfer set,
+ 
+Remote variables belonging to either the ICC or the VCC for the client to subscribe to.
+ 
+ 
+For the local server part, it is necessary to have at least one ICC domain and its associated bilateral table ID for the communication to work, even if the user does not want variables in the ICC Domain (and has all of the variables in the VCC).
+ 
+For every local domain that is created, the server will automatically create 10 DS Transfer sets for the clients to access from the local server. This parameter can be changed if required with the parameter LocalServerMaxDSTS.
+ 
+For the local client part, it is necessary to have the remote information that the client is connecting to, as well as the local addressing information.
+ 
+When creating a bidirectional exchange, it is necessary to define the parameter that indicate which control center is going to initiate the communication.
+ 
+Structure
+ 
+In PcVue, the ICCP model consists of different objects that are nested in the following way:
+ 
+ 
+ICCP Family
+ 
+ICCP AR
+ICCP Network
+ 
+ICCP Local Control Centers
+ 
+ICCP Local Domains
+ 
+ICCP DSTS
+ICCP Remote Control Centers
+ 
+ICCP Remote Domains
+ 
+ICCP DS
+ 
+ICCP DSTS
+
+
+========================================
+TOPIC: iccp_redundancy.htm
+========================================
+ICCP redundancy
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ICCP Redundancy
+ 
+The ICCP Add-on supports 2 redundancy mechanisms that can be combined:
+ 
+ 
+Redundancy of ICCP interfaces when more than one Application References are configured for a given remote control center,
+ 
+Redundancy as part of the networking system when more than one PcVue station support as an ICCP interface.
+ 
+ 
+Redundancy of ICCP interface for remote control centers
+ 
+When an ICCP control center has the Calling behavior, or when it initiates communication (Client only or Client/Server that initiates communication):
+ 
+ 
+When a remote control center fails or disconnects for any reason, PcVue ICCP local control center goes through a list of backup remote control centers, defined in the ICCP.ini file, to reestablish connection.
+ 
+The backup remote control centers are only differentiated by their Application Reference and these are entered in the RemoteARX field of the Remote Control Center, where X can be from 1-10 .
+ 
+If none are available, the Local Control Center will attempt to reconnect to the defined remote control centers in order, after the InitiateRetryDelay timer of the local control center passes.
+ 
+If the entire first cycle passes and no backup center is available for connection, PcVue will set the status of all remote variables to NS (invalid).
+ 
+ 
+When an ICCP control center has the Called behavior, or when it does not initiate communication (Server only or Client/Server that does not initiate):
+ 
+ 
+The behavior of remote disconnections works by waiting a given number of seconds (as defined by the parameter CalledDisconnectTimeout) to let a remote control center reconnect. If this timeout expires, then the remote data variables are set to quality NS (invalid).
+ 
+ 
+
+ &#160;PcVue Networking
+ 
+When creating a redundant PcVue architecture, the ICCP variables are handled based on the producer/consumer principle. Variables on the active station are published to all the passive stations or client stations. Any modification to a variable on any of the networking stations are detected and updated by the ICCP driver.
+ 
+For such high availability architectures to operate properly, the ICCP.ini file must be configured as follow:
+ 
+ 
+The PcVue association name must be included in the field AssociationName of the Network.
+ 
+The IPAddress field is most likely different for each station that is expected to maintain ICCP communication. The active station has one IP address, and the passive station has a different one. It is important to pay attention to this detail for proper operations. 
+It is possible to leave the IPAddress field empty, and the driver uses the localhost address.
+ 
+ 
+When there is a switchover between active and passive stations:
+ 
+ 
+Calling Client/Servers: The newly active station will cycle across its remote control centers, trying to connect to one of them before setting remote data variables to status NS (invalid).
+ 
+Called Client/Servers: The newly active station will wait a given number of seconds (as defined by the parameter CalledDisconnectTimeout) to let a remote control center reconnect. If this timeout expires, then the remote data variables are set to status NS (invalid).
+
+
+========================================
+TOPIC: iccp_system_vars.htm
+========================================
+ICCP system variables and commands
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ICCP System Variables and commands
+ 
+System Variables
+ 
+The ICCP system variables are available to improve visibility when operating the driver. They must be created manually.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Name
+ Type
+ Description
+ 
+ 
+
+ System.ICCP.<NetworkName>.ON
+ 
+ Bit
+ 
+ 
+The NetworkName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+ 
+
+ 
+Value 0 indicates that the network is stopped.
+ 
+ 
+
+ 
+Value 1 indicates that the network is started.
+ 
+ 
+ 
+ 
+ 
+
+ System.ICCP.<NetworkName>.<LCCname>.ON
+ 
+ Bit
+ 
+ 
+The NetworkName and LCCName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+Value 0 indicates that the LCC is stopped.
+ 
+Value 1 indicates that the LCC is started.
+ 
+ 
+ 
+
+ 
+ 
+System.ICCP.<NetworkName>.<LCCname>.
+ 
+ 
+InformationReportsSent
+ 
+ 
+ Register
+ 
+ 
+The NetworkName and LCCName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+Indicates the number of Reports sent by the LCC.
+ 
+ 
+ 
+
+ System.ICCP.<NetworkName>.<LCCname>.
+ 
+DeviceSelectRequestsReceived
+ 
+ Register
+ 
+ 
+The NetworkName and LCCName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+Indicates the number of Reports received by the LCC.
+ 
+ 
+ 
+
+ 
+ 
+System.ICCP.<NetworkName>.<LCCname>.
+ 
+ 
+DeviceOperateRequestsReceived
+ 
+ 
+ Register
+ 
+ 
+The NetworkName and LCCName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+Indicates the number of Operate requests received by the LCC.
+ 
+ 
+ 
+
+ System.ICCP.<NetworkName>.<LCCname>.NbClients
+ 
+ Register
+ 
+ 
+The NetworkName and LCCName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+Indicates the number of remote clients connected to the LCC.
+ 
+ 
+ 
+
+ System.ICCP.<NetworkName>.<LCCName>.<RCCName>.ON
+ 
+ Bit
+ 
+ 
+The NetworkName, LCCname and RCCName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+ 
+
+ 
+Value 0 indicates that the RCC is stopped.
+ 
+ 
+
+ 
+Value 1 indicates that the RCC is started.
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+System.ICCP.<NetworkName>.<LCCName>.<RCCName>.
+ 
+ 
+STATUS
+ 
+ 
+ Register
+ 
+ 
+The NetworkName, LCCname and RCCName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+ 
+
+ 
+Value 0 indicates that the RCC is connected.
+ 
+ 
+
+ 
+Value 1 indicates that the RCC is disconnected.
+ 
+ 
+
+ 
+Value 2 indicates that the RCC is in an error state.
+ 
+ 
+ 
+ 
+ 
+
+ System.ICCP.<NetworkName>.<LCCName>.<RCCName>.
+ 
+InformationReportsReceived
+ 
+ Register
+ 
+ 
+The NetworkName, LCCname and RCCName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+Indicates the number of Reports received from the RCC.
+ 
+ 
+ 
+
+ 
+ 
+System.ICCP.<NetworkName>.<LCCName>.<RCCName>.
+ 
+ 
+DeviceSelectRequestsSent
+ 
+ 
+ Register
+ 
+ 
+The NetworkName, LCCname and RCCName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+Indicates the number of Select requests sent to the RCC.
+ 
+ 
+ 
+
+ 
+ 
+System.ICCP.<NetworkName>.<LCCName>.<RCCName>.
+ 
+ 
+DeviceOperateRequestsSent
+ 
+ 
+ Register
+ 
+ 
+The NetworkName, LCCname and RCCName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+Indicates the number of Operate requests sent to the RCC.
+ 
+ 
+ 
+
+ 
+ 
+System.ICCP.<NetworkName>.<LCCName>.<RCCName>.
+ 
+ 
+ActiveAR
+ 
+ 
+ Text
+ 
+ 
+The NetworkName, LCCname and RCCName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+Indicates the name of the AR the RCC is currently connected to. Useful when an RCC has multiple redundant AR configured.
+ 
+ 
+ 
+
+ 
+ 
+System.ICCP.<NetworkName>.<LCCName>.<RCCName>.
+ 
+ 
+<RemoteDomainName>.<DSName>.Created
+ 
+ 
+ Bit
+ 
+ 
+The NetworkName, LCCname, RCCName, RemoteDomainName and DSName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+ 
+
+ 
+Value 0 indicates that the Dataset has not been created on the remote.
+ 
+ 
+
+ 
+Value 1 indicates that the Dataset ha been created on the remote.
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+System.ICCP.<NetworkName>.<LCCName>.<RCCName>.
+ 
+ 
+<RemoteDomainName>.<DSName>.DSTSEnabled
+ 
+ 
+ Bit
+ 
+ 
+The NetworkName, LCCname, RCCName, RemoteDomainName and DSName must match that configured in the ICCP.ini file. The variable must not have the Command property set.
+ 
+ 
+
+ 
+Value 0 indicates that DSTS linked to the Dataset has not been enabled on the remote.
+ 
+ 
+
+ 
+Value 1 indicates that the DSTS linked to the Dataset has been enabled on the remote.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Commands
+ 
+You can send commands to the Add-on including starting and stopping a communication object, setting the log level...
+To do so, you use two Text variables which names are set with the configuration keys called VarNameCmdRequest and VarNameCmdResult.
+The Request variable is used to send the command, the Result variable is used to receive the execution result. You cannot send 2 commands at the same time.
+ 
+The following table describes the commands that can be sent to the ICCP driver. The text must be one string that contains the different fields separated by commas.
+Example:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+StopLCC,Network01.MyLCC
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Command
+ Argument 1
+ Argument 2
+ Argument 3
+ Argument 4
+ Description
+ 
+ 
+
+ StopNetwork
+ <NetworkName>
+ N/A
+ N/A
+ N/A
+ 
+ 
+Stops the Network specified by <Network Name>.
+ 
+Also stops all objects that are nested below (LCCs and RCCs).
+ 
+Example: StopNetwork,MyICCPNetwork
+ 
+ 
+ 
+
+ StartNetwork
+ <NetworkName>
+ N/A
+ N/A
+ N/A
+ 
+ 
+Starts the Network specified by <Network Name>.
+ 
+Also starts all objects that are nested below (LCCs and RCCs).
+ 
+Example: StartNetwork,MyICCPNetwork
+ 
+ 
+ 
+
+ StopLCC
+ <NetworkName>
+ <LCCName>
+ N/A
+ N/A
+ 
+ 
+Stops the LCC specified by <Network Name> and <LCC Name>.
+ 
+Also stops all objects that are nested below (RCCs).
+ 
+Example: StopLCC,MyICCPNetwork,MyLCC
+ 
+ 
+ 
+
+ StartLCC
+ <NetworkName>
+ <LCCName>
+ N/A
+ N/A
+ 
+ 
+Starts the LCC specified by <Network Name> and <LCC Name>.
+ 
+Also starts all objects that are nested below (RCCs).
+ 
+Example: StartLCC,MyICCPNetwork,MyLCC
+ 
+ 
+ 
+
+ ResetInformationReportsSent
+ <NetworkName>
+ <LCCName>
+ N/A
+ N/A
+ 
+ 
+Resets the InformationReportsSent system variable for the LCC specified by <Network Name> and <LCC Name>.
+ 
+Example: ResetInformationReportsSent,MyICCPNetwork,MyLCC
+ 
+ 
+ 
+
+ ResetDeviceSelectRequestsReceived
+ <NetworkName>
+ <LCCName>
+ N/A
+ N/A
+ 
+ 
+Resets the DeviceSelectRequestsReceived system variable for the LCC specified by <Network Name> and <LCC Name>.
+ 
+Example: ResetDeviceSelectRequestsReceived,MyICCPNetwork,MyLCC
+ 
+ 
+ 
+
+ ResetDeviceOperateRequestsReceived
+ <NetworkName>
+ <LCCName>
+ N/A
+ N/A
+ 
+ 
+Resets the DeviceOperateRequestsReceivedsystem variable of the LCC specified by <Network Name> and <LCC Name>.
+ 
+Example:
+ 
+ResetDeviceOperateRequestsReceived.MyICCPNetwork.MyLCC
+ 
+ 
+ 
+
+ ReloadLCCSecurityConfig
+ <NetworkName>
+ <LCCName>
+ N/A
+ N/A
+ 
+ 
+Reloads the security configuration for the LCC specified by <Network Name> and <LCC Name>.
+ 
+Example:
+ReloadLCCSecurityConfig,MyICCPNetwork,MyLCC
+ 
+ 
+ 
+
+ StopRCC
+ <NetworkName>
+ <LCCName>
+ <RCCName>
+ N/A
+ 
+ 
+Stops the RCC specified by <Network Name> <LCC Name> and <RCC Name>.
+ 
+Example: StopRCC,MyICCPNetwork,MyLCC,MyRCC
+ 
+ 
+ 
+
+ StartRCC
+ <NetworkName>
+ <LCCName>
+ <RCCName>
+ N/A
+ 
+ 
+Starts the RCC specified by <Network Name> <LCC Name> and <RCC Name>.
+ 
+Example: StartRCC,MyICCPNetwork,MyLCC,MyRCC
+ 
+ 
+ 
+
+ SwitchActiveRCC
+ <NetworkName>
+ <LCCName>
+ <RCCName>
+ <NewARName>
+ 
+ 
+Sets the active RCC to the one specified by <NewAR Name>.
+ 
+Command applies only to LCCs that have the calling behavior (Client or Calling Client/Server).
+ 
+The <NewAR Name> must match a previously configured RemoteARX field of an RCC in the ICCP.ini configuration file.
+ 
+Example: SwitchActiveRCC,MyICCPNetwork,MyLCC,MyRCC,MyBackupAR1
+ 
+ 
+ 
+
+ ResetInformationReportsReceived
+ <NetworkName>
+ <LCCName>
+ <RCCName>
+ N/A
+ 
+ 
+Resets the InformationReportsReceived system variable for the RCC by <Network Name> <LCC Name> and <RCC Name>.
+ 
+Example: ResetInformationReportsReceived,MyICCPNetwork,MyLCC,MyRCC
+ 
+ 
+ 
+
+ ResetDeviceSelectRequestsSent
+ <NetworkName>
+ <LCCName>
+ <RCCName>
+ N/A
+ 
+ 
+Resets the DeviceSelectRequestsSent system variable for the RCC by <Network Name> <LCC Name> and <RCC Name>.
+ 
+Example: ResetDeviceSelectRequestsSent,MyICCPNetwork,MyLCC,MyRCC
+ 
+ 
+ 
+
+ ResetDeviceOperateRequestsSent
+ <NetworkName>
+ <LCCName>
+ <RCCName>
+ N/A
+ 
+ 
+Resets the DeviceOperateRequestsSent system variable for the RCC by <Network Name> <LCC Name> and <RCC Name>.
+ 
+Example: ResetDeviceOperateRequestsSent,MyICCPNetwork,MyLCC,MyRCC
+ 
+ 
+ 
+
+ ReloadRCCSecurityConfig
+ <NetworkName>
+ <LCCName>
+ <RCCName>
+ N/A
+ 
+ 
+Reloads the security configuration for the RCC by <Network Name> <LCC Name> and <RCC Name>.
+ 
+Example:
+ReloadRCCSecurityConfig,MyICCPNetwork,MyLCC,MyRCC
+ 
+ 
+ 
+
+ ChangeGlobalLogLevel
+ Integer (1-4)
+ N/A
+ N/A
+ N/A
+ 
+ 
+Sets the Log Message Level at the Global level.
+ 
+This level affects all objects below if they are using default log level.
+ 
+ 
+ 
+
+ ChangeNetworkLogLevel
+ <NetworkName>
+ Integer (0-4)
+ N/A
+ N/A
+ 
+ 
+Sets the Log Message Level at the Network level. This level affects all objects below if they are using default log level.
+ 
+ 
+ 
+
+ ChangeLCCLogLevel
+ <NetworkName>
+ <LCCName>
+ Integer (0-4)
+ N/A
+ 
+ 
+Sets the Log Message Level at the LCC level. This level affects all objects below if they are using default log level.
+ 
+ 
+ 
+
+ ChangeRCCLogLevel
+ <NetworkName>
+ <LCCName>
+ <RCCName>
+ Integer (0-4)
+ 
+ 
+Sets the Log Message Level at the RCC level.
+ 
+ 
+ 
+
+ PrintConfigurationSummary
+ N/A
+ N/A
+ N/A
+ N/A
+ 
+ 
+Generates a set of configuration summary messages in the Event Viewer. Displays the structure of created objects inside PcVue.
+ 
+ 
+ 
+
+ PrintVariableSummary
+ N/A
+ N/A
+ N/A
+ N/A
+ 
+ 
+Generates a set of variable summary messages in the Event Viewer. Displays the structure of created variables inside PcVue.
+ 
+ 
+ 
+
+ PrintLogLevelSummary
+ N/A
+ N/A
+ N/A
+ N/A
+ 
+ 
+Generates a set of log level summary messages in the Event Viewer. Displays the structure of the log levels inside PcVue.
+
+
+========================================
+TOPIC: iccp_traces.htm
+========================================
+ICCP log messages and traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ICCP Log Messages and Traces
+ 
+There are two types of traces that will appear in the Event Viewer of PcVue, and in the Log Files: Log Messages and Traces.
+ 
+Log Messages
+ 
+This type of message is used for events that occur when the project starts (ICCP Control Center object creation and variable creation/modification) and with different connection events (connect, disconnect, etc.). This type of message can be configured in the ICCP.ini file with the field LogMessageLevel. There is a hierarchy of Log Message Levels for the different types of ICCP objects (Global/Family, Network, Local Control Center and Remote Control Center). Each one has its own LogMessageLevel, and if Default is selected, the specific object will use the LogMessageLevel of its parent object. During runtime it is possible to modify the LogMessageLevel of each object with the SCADA Basic verbs. However, the changes done at runtime will only persist while the project is running, they will not be saved to the ICCP.ini file.
+ 
+It has five different level of details that the user can select for their purposes. A higher level includes the messages of all lower levels
+ 
+ 
+LogMessageLevel = 0: Default � This level is the default option for all ICCP objects (except for global). Using this level will apply the Log Message Level of the parent object.
+ 
+LogMessageLevel = 1: Minimum � This level will show the most basic messages that include detected errors in the inputs of the ICCP.ini file and in the variable creation. It will also display a basic message for connections/disconnections of remote control centers.
+ 
+LogMessageLevel = 2: Light details � This level includes more details of the control center creation, variable creation and connections/disconnections of a remote control center.
+ 
+LogMessageLevel = 3: Full details � This level has the most level of detail of the different events while still maintaining a tracing structure.
+ 
+LogMessageLevel = 4: Stack � This level includes messages directly from the underlying ICCP driver kernel. This implies that there will be less order in the messages.
+ 
+ 
+It is important to note that Log Messages are not designed to display events that occur cyclically, like variable updates.
+ 
+Traces
+ 
+This type of messages are used for events that occur cyclically and must only be activated temporarily for diagnostic purpose. To enable these traces, the user must create a SCADA Basic program inside the PcVue project that enables the traces. The code required is the following:
+ 
+To enable:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+TRACE(1,&#160;11,&#160;"03");
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To disable:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+TRACE(0,&#160;11,&#160;"03");
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The first argument can be 1 (to enable) or 0 (tor disable).
+ 
+The second argument is the dll number that must be 11 if the ICCP dll is the first SV Manager Add-on currently loaded.
+ 
+The third argument is an hexadecimal number that represents the bit mask that are selected for the trace to be enabled or disabled.
+ 
+ 
+SCADA Basic example: To activate/deactivate Traces for bits 0, 1, 2, 3 and 4.
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+Sub ActivateTraces()
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TRACE(1,11,"1");
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TRACE(1,11,"2");
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TRACE(1,11,"4");
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TRACE(1,11,"8");
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TRACE(1,11,"10");
+ 
+ 
+ 
+
+ 
+End Sub
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+Sub DeactivateTraces()
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TRACE(0,11,"1");
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TRACE(0,11,"2");
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TRACE(0,11,"4");
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TRACE(0,11,"8");
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;TRACE(0,11,"10");
+ 
+ 
+ 
+
+ 
+End Sub
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The meaning of the bits are summarized in the following table. Information regarding variable updates are obtained with bits 1-4.
+ 
+ 
+ 
+ 
+ 
+
+ Bit
+ Description
+ 
+ 
+
+ 0
+ Errors
+ 
+ 
+
+ 1
+ Basic information - Local changes: Local server data updates (to remote) and remote client device command updates (update to remote device)
+ 
+ 
+
+ 2
+ Basic information - Remote changes: Remote server data updates (from remote) or local client device updates (update from remote device)
+ 
+ 
+
+ 3
+ Detailed information for Bit1
+ 
+ 
+
+ 4
+ Detailed information for Bit2
+ 
+ 
+
+ 5
+ General information
+ 
+ 
+
+ 6
+ Stack messages
+ 
+ 
+
+ 7
+ Other
+
+
+========================================
+TOPIC: iccp_variable_types.htm
+========================================
+ICCP variable types
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ICCP Variable Types
+ 
+Supported ICCP data types
+ 
+There are 15 data types for monitoring and 3 types of commands available with the PcVue ICCP add-on.
+ 
+ 
+ 
+ 
+ 
+
+ ICCP data types
+ Description
+ 
+ 
+
+ Discrete
+ Contains information about a Discrete Value.
+ 
+ 
+
+ DiscreteExtended
+ Contains information about a Discrete Value, Quality Flags, Timestamp (up to second resolution) and COV counter (Change of Value).
+ 
+ 
+
+ DiscreteQ
+ Contains information about a Discrete Value and Quality Flags.
+ 
+ 
+
+ DiscreteQTimetag
+ Contains information about a Discrete Value, Quality Flags and Timestamp (up to second resolution).
+ 
+ 
+
+ DiscreteQTimetagExtended
+ Contains information about a Discrete Value, Quality Flags and Timestamp (up to millisecond resolution).
+ 
+ 
+
+ Real
+ Contains information about a Real Value.
+ 
+ 
+
+ RealExtended
+ Contains information about a Real Value, Quality Flags, Timestamp (up to second resolution) and COV counter (Change of Value).
+ 
+ 
+
+ RealQ
+ Contains information about a Real Value and Quality Flags.
+ 
+ 
+
+ RealQTimetag
+ Contains information about a Real Value, Quality Flags and Timestamp (up to second resolution).
+ 
+ 
+
+ RealQTimetagExtended
+ Contains information about a Real Value, Quality Flags and Timestamp (up to millisecond resolution).
+ 
+ 
+
+ State
+ Contains information about a State Value.
+ 
+ 
+
+ StateExtended
+ Contains information about a State Value, Quality Flags, Timestamp (up to second resolution) and COV counter (Change of Value).
+ 
+ 
+
+ StateQ
+ Contains information about a State Value and Quality Flags.
+ 
+ 
+
+ StateQTimetag
+ Contains information about a State Value, Quality Flags and Timestamp (up to second resolution).
+ 
+ 
+
+ StateQTimetagExtended
+ Contains information about a Discrete Value, Quality Flags and Timestamp (up to millisecond resolution).
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ ICCP command types
+ Description
+ 
+ 
+
+ ControlCommand
+ A discrete variable that can be modified by a client.
+ 
+ 
+
+ DiscreteSetPoint
+ A discrete variable that can be modified by a client.
+ 
+ 
+
+ RealSetPoint
+ A real variable that can be modified by a client. 
+ 
+ 
+ 
+ 
+Mapping of ICCP types to PcVue variable types 
+ 
+There are a few rules when creating a variable in PcVue and assigning an ICCP type to it:
+ 
+ 
+ICCP data types for monitoring
+ 
+All Discrete types - Register variable
+All Real types - Register variable
+all State types - Register, bit or alarm variable
+ 
+ICCP data types for commands
+ 
+ControlCommand -	Register, bit or alarm variable
+DiscreteSetPoint	- Register variable
+RealSetPoint	- Register variable
+ 
+ 
+Any variable type that does not follow these rules or any PcVue text variable with ICCP information in its extended attribute will not be included in the ICCP model.
+ 
+For the ControlCommand type, when it is created as a Bit or Alarm:
+ 
+ 
+The ICCP value of 0 gives value 0 in PcVue.
+ 
+An ICCP value different from 0 gives value 1 in PcVue.
+
+
+========================================
+TOPIC: iccp_vtq.htm
+========================================
+How the value, quality and timestamp are mapped
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How the Value, Quality and Timestamp are Mapped
+ 
+The general rules for mapping ICCP variables to PcVue variables are explained in the topic ICCP Variable Types. The information in this topic explains how the value, quality and timestamp are mapped.
+ 
+
+ 
+Note that there are four types of quality flags in ICCP: Quality Validity, Quality Timestamp, Quality Normal Source and Quality Current Source.
+ 
+ 
+Value
+ 
+Controls work slightly different when the PcVue variable is a bit or an alarm.
+ 
+ 
+For Local bit/alarm controls, variables are updated with value 0 when receiving a 0 from the remote control center, and are updated with value 1 when receiving any value different from 0 from the remote control center.
+ 
+For Remote bit/alarm controls, an operate command is sent to the remote control center with value 0 when updating the value in PcVue to 0, and with value 1 when updating the value in PcVue to any value different than 0.
+ 
+ 
+Quality Validity
+ 
+There are four possible values for this flag: Valid, Held, Suspect or Not Valid.
+ 
+Local PcVue ICCP Server: PcVue flags are mapped to ICCP flags. These are sent to a remote ICCP client.
+ 
+ 
+ 
+ 
+ 
+
+ &#160;PcVue status
+ ICCP Quality Validity
+ 
+ 
+
+ Other than NS
+ Valid
+ 
+ 
+
+ No flag mapped. Held is never sent
+ Held
+ 
+ 
+
+ No flag mapped. Suspect is never sent
+ Suspect
+ 
+ 
+
+ NS
+ Not Valid
+ 
+ 
+ 
+ 
+Local PcVue ICCP Client: ICCP flags are mapped to PcVue flags. These are sent from a remote ICCP server
+ 
+ 
+ 
+ 
+ 
+
+ ICCP Quality Validity
+ 
+ &#160;PcVue status
+ 
+ 
+
+ Valid
+ Set to Valid
+ 
+ 
+
+ Held
+ Set to NS WD.
+ 
+ 
+
+ Suspect
+ Set to NS. Shown in traces
+ 
+ 
+
+ Not Valid
+ Set to NS. Shown in traces
+ 
+ 
+ 
+ 
+Timestamp quality 
+ 
+There are two possible values for this flag: Valid and Not Valid.
+ 
+Local PcVue ICCP Server: PcVue status are mapped to ICCP flags. These are sent to a remote ICCP client.
+ 
+ 
+ 
+ 
+ 
+
+ &#160;PcVue status
+ ICCP Timestamp quality
+ 
+ 
+
+ Timestamp OK
+ Valid
+ 
+ 
+
+ Timestamp not OK
+ Not valid
+ 
+ 
+ 
+ 
+Local PcVue ICCP Client: ICCP flags are mapped to PcVue flags. These are sent from a remote ICCP server
+ 
+ 
+ 
+ 
+ 
+
+ ICCP Timestamp quality
+ 
+ &#160;PcVue status
+ 
+ 
+
+ Valid
+ Timestamp OK
+ 
+ 
+
+ Not valid
+ Timestamp not OK
+ 
+ 
+ 
+ 
+Quality Normal Source
+ 
+There are two possible values for this flag: Valid and Not Valid.
+ 
+Local PcVue ICCP Server: PcVue status are mapped to ICCP flags. These are sent to a remote ICCP client.
+ 
+ 
+ 
+ 
+ 
+
+ 
+ &#160;PcVue status
+ ICCP Timestamp quality
+ 
+ 
+
+ No PcVue mapped. Normal is always sent
+ Normal
+ 
+ 
+
+ No PcVue mapped. Abnormal is never sent
+ Abnormal
+ 
+ 
+ 
+ 
+Local PcVue ICCP Client: ICCP flags are mapped to PcVue flags. These are sent from a remote ICCP server
+ 
+ 
+ 
+ 
+ 
+
+ ICCP Timestamp quality
+ 
+ &#160;PcVue status
+ 
+ 
+
+ Normal
+ Set to valid
+ 
+ 
+
+ Abnormal
+ Set to NS FMT
+ 
+ 
+ 
+ 
+Quality Current Source
+ 
+There are four possible values for this flag: Entered, Calculated, Estimated or Telemetered. These flags are related to how the data is obtained.
+ 
+Local PcVue ICCP Server: PcVue status are mapped to ICCP flags. These are sent to a remote ICCP client.
+ 
+ 
+ 
+ 
+ 
+
+ 
+ &#160;PcVue status
+ ICCP Quality Current Source
+ 
+ 
+
+ 
+ 
+As configured in field <CurrentSource>
+ 
+Or if variable is simulated and MapSVSimuToEntered is set to True
+ 
+ Entered
+ 
+ 
+
+ As configured in field <CurrentSource>
+ Calculated
+ 
+ 
+
+ As configured in field <CurrentSource>
+ Estimated
+ 
+ 
+
+ As configured in field <CurrentSource>
+ Telemetered
+ 
+ 
+ 
+ 
+Local PcVue ICCP Client: ICCP flags are mapped to PcVue status. These are sent from a remote ICCP server
+ 
+ 
+ 
+ 
+ 
+
+ ICCP Quality Current Source
+ 
+ &#160;PcVue status
+ 
+ 
+
+ Entered
+ Not mapped. Shown in traces
+ 
+ 
+
+ Calculated
+ Not mapped. Shown in traces
+ 
+ 
+
+ Estimated
+ Not mapped. Shown in traces
+ 
+ 
+
+ Telemetered
+ Not mapped. Shown in traces
+ 
+ 
+ 
+ 
+Timestamps
+ 
+The origin of the timestamp that is sent to the remote control center via ICCP can be:
+ 
+ 
+Internal: If this is the case (for internal variables or I/O variable not timestamped at the source), then the timestamp that is used is the one from PcVue (SV status).
+ 
+External: If the variable comes from a device supporting timestamping at the source (IE C104, DNP3, etc.) then the timestamp that is used is the one from the device (PLC status).
+ 
+ 
+The timestamps that are received from the remote control center via ICCP can be:
+ 
+ 
+Valid: It is marked by Good Quality in PcVue and represented by the status PLC.
+ 
+Not Valid: It is marked by Bad Quality in PcVue. It does not have the status PLC.
+ 
+ 
+The precision of the timestamp in ICCP depends on the variable type:
+ 
+ 
+Second precision for some data types.
+ 
+Millisecond precision for others.
+ 
+ 
+Change of value counter (COV)
+ 
+The COV counter is only available for DiscreteExtended, RealExtended and StateExtended ICCP variable types. This counter increases every time the value is updated. In the current version, the COV counter is not mapped.
+ 
+ 
+For local server variables: The COV is updated and sent to the remote. The value can be seen in the traces for diagnostics.
+ 
+For remote server variables: The COV is received from the remote. The value can be seen in the traces for diagnostics.
+
+

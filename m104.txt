@@ -1,0 +1,898 @@
+========================================
+TOPIC: m104_adding_devices_config.htm
+========================================
+Adding Devices to an IEC 60870-5 network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding Devices to an IEC 60870-5 Network
+ 
+An IEC 60870-5 device object in PcVue configuration represents, and provides access to, an IEC 101 or an IEC 104 device. In practice, a device may be a data concentrator collecting together several discrete sectors corresponding to underlying devices, or it may have sectors for data it handles directly. You can choose from either an IEC 101 or an IEC 104 compatible device depending on your network architecture.
+ 
+In PcVue, an IEC 60870-5 device is identified by the Name that you give it during the configuration.
+ 
+Adding a Device
+ 
+ 
+Select an IEC 60870-5 network in the Application Explorer. From the task pane, select Add an IEC 101 device or Add an IEC 104 device to open the Device dialog. The general configuration is the same for either. Show picture
+ 
+
+ 
+
+ 
+
+ 
+In the Name field, enter a name for the device.
+ 
+Enter the optional descriptive text in the Description field. The description is only used in the Application Explorer.
+ 
+In the IP Address field, enter the device's unique IP address.
+ 
+Click on OK to confirm the configuration and close the dialog.
+ 
+ 
+The Advanced tab
+ 
+The Advanced tab contains several device properties pre-set to recommended defaults and in most cases will not need to be changed. A different set of properties is available for the IEC 101 and IEC 104 devices. Please refer to the documentation provided by the device manufacturer for properties that must match the device configuration. Show pictures
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+The following properties are available for IEC 104 devices:
+ 
+ 
+Connection parameters
+TCP/IP parameters
+Remote port - The TCP port used to communicate with the device. Default 2404.
+Originator address - The address to be used by the driver to identify the PcVue IEC 104 client. Default 0.
+Link layer properties
+T0 - Timeout of connection establishment. Default 30 sec.
+T1 - Timeout of send or test APDUs. Default 15 sec.
+T2 - Timeout for acknowledges in case of no data messages. T2 < T1. Default 10 sec.
+T3 - Timeout for sending test frames in case of a long idle state. Default 20 sec.
+APDU sequence control parameters - Maximum number of outstanding I format APDUs
+k - Maximum difference between the receive and send sequence numbers. Default 12.
+w - Latest acknowledge after receiving w I format APDUs. w should not exceed 2/3 of k. Default 8.
+ Application layer properties
+Response timeout - Timeout for Application layer response messages. Default 10 sec.
+ 
+ 
+The following properties are available for IEC 101 devices:
+ 
+ 
+Connection parameters
+Connection type
+TCP/IP - If enabled, communication over TCP will be used with the device.
+Remote port - The TCP port used to communicate with the device. Default 2404.
+UDP/IP - If enabled, communication over UDP will be used with the device.
+Listening port - The UDP port used to listen to incoming messages. Default 2405.
+The listening port must be unique for all IEC 101 devices over UDP produced by the same server list.
+Remote port - The UDP port used to send messages to the device. Default 2404.
+Link layer properties
+Link address - The Link layer address of the device. Default 0.
+Link address size - The size of the link address. Either 1 or 2 bytes. Default 2.
+Link mode - Unbalanced. Fixed value.
+T0 - Timeout of connection establishment. Default 30 sec.
+Session layer
+Common address of ASDU size - Size of the common address of ASDU. Either 1 or 2 3 bytes. Default 2.
+Cause of transmission (COT) size - Size of the cause of transmission. Either 1 or 2 bytes. Default 2.
+Information object address (IOA) size - Size of the Information object address. Either 1, 2 or 3 bytes. Default 3.
+ Application layer properties
+Response timeout - Timeout for Application layer response messages.
+ 
+Classes polling
+Class 1 polling delay - Polling interval for class 1 data. Default 0 means a new poll request is sent as soon as the previous one is completed.
+Class 2 polling delay - Polling interval for class 2 data. Default 500 ms.
+Class 1 polling delay when an application layer response is pending - Polling interval for class 1 data when a request is pending. Default 0 means a new poll request is sent as soon as the previous one is completed.
+Class 2 polling delay when an application layer response is pending - Polling interval for class 2 data when a request is pending. Default 0 means a new poll request is sent as soon as the previous one is completed.
+ 
+Field devices redundancy
+Link status watchdog for standby devices - The interval at which the link status is checked for standby devices. Default 1 sec.
+ 
+ 
+The Traces tab
+ 
+The Traces tab is used to enable debugging traces in the event of any problems with the device. Only use this if advised to do so by your support agency.
+
+
+========================================
+TOPIC: m104_adding_sectors_config.htm
+========================================
+Adding Sectors to an IEC 60870-5 device
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding Sectors to an IEC 60870-5 Device
+ 
+A sector object in PcVue configuration represents, and provides access to, a physical IEC 60870-5 sector. A sector normally represents a piece of discrete control equipment (for example a circuit breaker) and is connected to the network via a device.
+ 
+On an IEC 60870-5 network, a sector is identified by the Common address of ASDU. In PcVue, it is identified by the Name that you give it during the configuration.
+ 
+Adding a Sector
+ 
+ 
+Select an IEC 60870-5 device in the Application Explorer. From the task pane, select Add a sector to open the Sector dialog. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+In the Name field, enter a name for the IEC 60870-5 Sector.
+ 
+Enter the optional descriptive text in the Description field. The description is only used in the Application Explorer.
+ 
+In the Common address of ADSU filed, enter the Sector's address. This is the identity of the Sector within the Device through which it is connected.
+ 
+Tick Activate at start-up if the sector is to be activated when the device is started.
+ 
+Click on OK to confirm the configuration and close the dialog.
+ 
+ 
+The Advanced tab
+ 
+The Advanced tab contains the many sector properties, pre-set to recommended defaults and in most cases will not need to be changed. Please refer to the documentation provided by the device manufacturer for properties that must match the device configuration. 
+ Show picture
+ 
+
+ 
+ 
+ 
+The following properties are those that are most commonly changed.
+ 
+ 
+Communication properties
+Support activation termination (C_SE_ACTTERM) - If enabled, PcVue expects to receive a C_SE_ACTTERM message upon command termination. If such a message is not received, the command is processed as failed. If disabled, the C_SE_ACTTERM message is not expected and is not used to handle command failure.
+Address format - The format of the address of Information Objects. See the topic IEC 60870-5 variable mapping.
+The IEC 101 prescribes formats structured or unstructured on 1, 2 or 3 bytes (MSB first), the IEC 104 prescribes formats structured or unstructured on 3 bytes (MSB first). Other address formats are provided for convenience to support communication with devices requiring such interop provisions.
+ 
+Data exchange mechanisms
+Upon reception of end of init (EOI) - The list of initialization requests to send upon receiving the EOI message.
+When a device comes online - The list of initialization requests to send when a device comes online.
+When a device comes online (after a short offline period) - The list of initialization requests to send when a device comes online after a short period offline.
+Short offline period definition - The maximum duration to consider an offline period as short and apply the corresponding initialization sequence.
+Support spontaneous transmission - If enabled, PcVue listen for spontaneous transmission and process them to refresh variables. If disabled, only periodic requests are used to keep variables updated.
+ 
+Periodic requests
+General Interrogation (GI)
+Polling period - The time interval at which general interrogation requests are sent. Default 1 min.
+Interrogation of groups
+Group 1 to 16 - The time interval at which group interrogation requests are sent for each group number. Not activated by default.
+General Counter Interrogation
+Polling period - The time interval at which general counter interrogation requests are sent. Not activated by default.
+Interrogation of counter groups
+Group 1 to 4 - The time interval at which counter group interrogation requests are sent for each group number. Not activated by default.
+Clock synchronization
+Execution period - The time interval at which clock synch requests are sent. Not activated by default.
+ 
+Monitoring
+Double-point
+Overwrite default values - If enabled, overwrite the settings related to Double-point raw value interpretation for all variables mapped on a double-point information object from the selected sector.
+ 
+Data
+Timestamp
+UTC - If enabled, all timestamps received from the selected sector are interpreted as expressed in UTC and converted accordingly for processing and display.
+Local - If enabled, all timestamps received from the selected sector are interpreted as expressed in the Local time zone of the Data Acquisition Server and converted accordingly for processing and display.
+ 
+ 
+
+ 
+The property Overwriting threshold parameters can only be enabled if the setting Deadband property - Control direction - Overwrite threshold parameters is activated.
+ 
+Because sending threshold parameters can take a significant amount of time, in the case of the initialization when a device comes online after a short period offline, you have the choice to restart the procedure, or resume the procedure if not completed. If you choose to resume, note that the thresholds parameters will not be sent at all if the procedure went to completion during an earlier initialization sequence and you are just facing short communication interruptions. 
+ 
+ 
+The Traces tab
+ 
+The Traces tab is used to enable debugging traces in the event of any problems with the Sector. Only use this if advised to do so by your support agency.
+
+
+========================================
+TOPIC: m104_in_the_ae.htm
+========================================
+Managing IEC 60870-5 in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing IEC 60870-5 in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks applicable to IEC 60870-5
+ 
+When the IEC 60870-5 folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Settings
+ Display the general IEC 60870-5 settings dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Add a network
+ Configure a new IEC 60870-5 network.
+ 
+ 
+ 
+ 
+When an IEC 60870-5 network is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add an IEC 104 device
+ Add an IEC 104 device to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Add an IEC 101 device
+ Add an IEC 101 device to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Start network
+ Start the network.
+ 
+ 
+
+ 
+ 
+ 
+ Stop network
+ Stop the network.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the network.
+ 
+ 
+
+ 
+ 
+ 
+ Mapping
+ Open the mapping dialog used to link variables to IEC 60870-5 information objects.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the network.
+ 
+ 
+ 
+ 
+When an IEC 60870-5 device is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a sector
+ Add a new sector to the selected device. Not available for standby devices.
+ 
+ 
+
+ 
+ 
+ 
+ Start device
+ Start the connection to the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Stop device
+ Stop the connection to the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Ping
+ Send a Ping to the device to check its status. A command dialog opens during the Ping process displaying the results.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Activate device
+ Activate the device. Only of use when a main and standby device have been configured.
+ 
+ 
+ 
+ 
+When an IEC 60870-5 sector is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start sector
+ Start the sector.
+ 
+ 
+
+ 
+ 
+ 
+ Stop sector
+ Stop the sector.
+ 
+ 
+
+ 
+ 
+ 
+ General interrogation
+ Send a General interrogation command for the selected sector.
+ 
+ 
+
+ 
+ 
+ 
+ Counter interrogation
+ Send a Counter interrogation command for the selected sector.
+ 
+ 
+
+ 
+ 
+ 
+ Clock synchronization
+ Send a Clock Synchronization command to the selected sector.
+ 
+ 
+
+ 
+ 
+ 
+ Test
+ Send a test command to the selected sector.
+ 
+ 
+
+ 
+ 
+ 
+ Reset process
+ Send a Reset process command to the selected sector.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the selected sector.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the selected sector.
+ 
+ 
+ 
+ 
+Rules and behavior of cut, copy and paste
+ 
+The following table describes the rules and behavior, and in particular any restrictions, when using cut or copy and paste on configuration objects in the 60870-5 folder.
+ 
+ 
+ 
+ 
+ 
+
+ 60870-5 object
+ Behavior
+ 
+ 
+
+ Network
+ The pasted Network is given a unique name.
+Any subordinate Devices and Sectors are duplicated using the original name.
+The mapping of any variables is not duplicated.
+ 
+ 
+
+ Device
+ 
+ 
+The pasted Device is given a unique name.
+ 
+Any subordinate Sectors are duplicated using the original name.
+ 
+ 
+ 
+
+ Sector
+ The pasted Sector is given a unique name.
+
+
+========================================
+TOPIC: m104_mapping.htm
+========================================
+Mapping IEC 60870-5 information objects to variablesIEC 60870-5-104 information object to variable mapping
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mapping IEC 60870-5 information objects to variables
+ 
+The IEC 60870-5 Mapping dialog is used to map (link) IEC 60870-5 information objects to PcVue variables. It can be opened from the Application Explorer when an IEC 60870-5 network is selected by using the Mapping task.
+ 
+The left pane contains a tree display of the devices, sectors and information object types of the selected IEC 60870-5 network. The right pane contains a list of all addresses for the selected information object type, together with any variables to which they are linked. An icon adjacent to each address indicates the type of variable with which it corresponds. 
+
+ 
+
+ 
+The format of the address depends on the Address format property as defined for the sector.
+ 
+ 
+Right clicking in an empty area in the right pane displays a context menu allowing you to choose the columns to display:
+ 
+ 
+Name - The Information Object Address. 
+ 
+Variable - The name of the variable mapped on the IOA if any.
+ 
+Flags - The status flags of the Information Object (valid or not).
+ 
+Timestamp - The timestamp when the Information Object was last refreshed.
+ 
+Cause of transmission - The Cause of transmission corresponding to the last refresh of the Information Object.
+ 
+ 
+Right clicking on a row corresponding to an IOA in the right pane displays a context menu with the following commands:
+ 
+ 
+Map a new variable - Creates a new variable and map it on the selected IOA.
+ 
+Map existing variable - Opens the Variable Selector dialog to select an existing variable and map it on the selected IOA.
+ 
+Unmap variable - Un-maps (removes the link) the selected variable from the corresponding information object.
+ 
+Variable properties - Opens the properties of the variable mapped to the IOA.
+ 
+Read - Forces a read request for the IOA. If successful, the Value, Flags, Timestamp and Cause of transmission columns are refreshed.
+ 
+Select columns - To choose the columns to display.
+ 
+ 
+How to map an information object to an existing variable
+ 
+ 
+Right click in the right pane of the IEC 60870-5 Mapping dialog on the row corresponding to the IOA you want the variable to be mapped to.
+ 
+From the pop-up menu, select the Map existing variable command. The Variable Selector dialog opens. Show picture
+
+ 
+Select the variable to be mapped. Click the Apply button, the link between the information object address and the variable is made.
+ 
+ 
+ In this context, the variable selector is not modal. Once the variable selector is open and you have mapped a first variable, you can select another IOA in the mapping dialog and then select another variable to be mapped on it without having to close and re-open the variable selector.
+ 
+
+ 
+For more information on the operation of the Variable Selector, see the topic Using the Variable Selector.
+ 
+ 
+How to un-map a variable
+ 
+ 
+Open the IEC 60870-5 Mapping dialog and select the IOA corresponding to the variable to be un-mapped. 
+ 
+Right click on the selected variable and, from the context menu, select the command Unmap variable.
+ 
+ 
+How to map a new variable
+ 
+You can automatically create a variable and map it to an information object address using the following method:
+ 
+ 
+Right click on the information object address (that is not yet mapped to any variable) and, from the context menu, select Map new variable. A variable with default properties and the correct type to match the item is automatically created and linked to it. By default, the variable name is constructed using the following syntax. <Network>.<Device>.<Sector>.<Type>.<Address>, and you can customize it if need be. Show picture
+
+ 
+ 
+
+ 
+Double clicking on an information object address that is not yet mapped to any variable proposes you to map a new variable.
+ 
+Double clicking on an information object address that is already mapped to a variable opens the variable properties.
+
+
+========================================
+TOPIC: m104_network_config.htm
+========================================
+Configuring an IEC 60870-5 network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring an IEC 60870-5 Network
+ 
+An IEC 60870-5 Network object in PcVue configuration, represents and provides access to the physical connection to an IEC 60870-5 network. The configuration is accessed from the Application Explorer - Project.Communication.Data acquisition.IEC 60870-5.
+ 
+Adding a network
+ 
+ 
+Select the IEC 60870-5 folder in the Application Explorer and, from the task list, select Add a network. The IEC 60870-5 Network dialog opens. Show picture
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+In the Name field, enter the name of the network. You can accept the suggested default or enter one of your own.
+ 
+Enter a description of the network. The description appears in the contents pane of the Application Explorer and can be useful to identify the network later. The description is optional.
+ 
+To activate the network connection at startup, tick Activate at start-up.
+ 
+If you are configuring a multi-station application, select the list of servers in the Advanced tab. The network will only be activated and data acquisition performed on those stations named in that list.
+ 
+Click on OK to confirm the configuration and close the dialog. 
+ 
+ 
+
+ 
+For the servers' list, only associations of type Single active server are supported, associations of type Multiple active server cannot be used with the IEC 60870-5 driver.
+ 
+ 
+The Traces tab
+ 
+The Traces tab is used to enable debugging traces in the event of any problems with the network. Only use this if advised to do so by your support agency.
+
+
+========================================
+TOPIC: m104_network_settings.htm
+========================================
+IEC 60870-5 settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IEC 60870-5 client general settings
+ 
+IEC 60870-5 settings are accessed from the Application Explorer by selecting <Project>.Communication.Data acquisition.IEC 60870-5 and choosing the Settings command from the task list. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Invalidate variables - Defines if variable status should be set to invalid upon connection failure.
+Never - The variables are never made invalid. This can be used when there is intermittent communication with the equipment.
+Immediately - The variables are made invalid immediately on a communication failure. This is the default value.
+After a delay - The variables are made invalid after the specified delay.
+ 
+Monitoring
+Use the local timestamp upon device reconnection - Use PcVue�s timestamp for the first value received after a device is re-connected.
+Double-point
+Intermediate state - Defines how Intermediate state value should be interpreted.
+Time before invalidating bit variable - The delay of the intermediate state (0,0 or 1,1) before the object is considered to be in error.
+Off � Defines how Off value should be interpreted.
+On � Defines how On value should be interpreted.
+Indeterminate � Defines how Indeterminate value should be interpreted.
+Time before invalidating bit variable - The delay of the indeterminate state (0,0 or 1,1) before the object is considered to be in error.
+Register/Text mapping
+Apply the invalidating rules as for bit variables - If enabled, settings driving invalidity for bit variables are applied to register and text variables mapped on double-points.
+ 
+Control
+Update the variable immediately with the written value - If enabled, the variable value is updated immediately after the write rather than waiting for the device to acknowledge the command execution.
+Single command
+Default qualifier - The default qualifier sent with a Single command.
+Default method - The default method, either Direct Execute or Select Before Execute, used for a Single command.
+Time tagged - If enabled, a time-tagged command will be sent.
+Double command, Regulating step, Bitstring, Set-point-command - See Single command.
+ 
+Quality descriptor management - Selects which of the quality flags from the device are considered as invalid quality in PcVue. By default, only substituted (SB) is not selected.
+ 
+Attributes and properties - Defines how relevant variable properties shall be mapped on IEC 60870-5 built-in mechanisms. 
+Deadband property
+Control direction - Overwrite threshold parameters - If enabled, the deadband value of the variable is sent to devices to overwrite the threshold parameters.
+ 
+Networking
+Switchover turnaround delay - The guaranteed interval of silence during data acquisition server switchover. During this time, no request is sent to devices by the IEC 60870-5 driver. Required by some devices as part of their connection management. Default 200 ms.
+
+
+========================================
+TOPIC: m104_overview.htm
+========================================
+Overview of IEC 60870-5Overview of IEC 60870-5-104
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of IEC 60870-5
+ 
+IEC 60870-5 is a communication standard designed for telecontrol in the power generation and distribution systems. PcVue operates has a client (master) and the field devices are servers (slaves). Both polling and unsolicited data exchange are supported. In practice, a general interrogation is used at startup to collect the initial state of servers, and then a mix of polling and unsollicited data exchanges are used to refresh data.
+ 
+The IEC 60870-5 driver in PcVue supports the IEC 60870-5-104 protocol, designed to operate over TCP/IP.
+It also supports a variant of the IEC 60870-5-101 protocol (originally defined to operate over serial transmission channels) that operates in unbalanced mode over TCP or UDP. While this flavor of the IEC 101 over IP does not correspond to the original standard, it is used nowadays in a variety of systems where legacy IEC 101 devices are accessed through serial-to-IP gateways.
+ 
+ 
+An IEC 60870-5 network has Devices,
+ 
+ A device is comprised of one or more Sectors,
+ 
+ A Sector hosts and exposes a predefined set of Information Objects.
+ 
+Support for Devices compliant with either the IEC 60870-5-101 (via a serial-IP gateway) or the IEC 60870-5-104 standard.
+ 
+A Device can either be a data concentrator, collecting together several discrete Sectors, or it can have integrated Sectors. Often a Device will only have one Sector making the Device and Sector synonymous. Each Device is identified on the network by its IP address.
+ 
+A Sector is typically a piece of control equipment with one or more Information Objects - for example a circuit breaker.
+ 
+Information Objects represent the physical inputs and outputs. The types of Information Object that are available is as defined by the IEC 60870-5 standard. Each type has a corresponding ASDU (Application Service Data Unit) which defines the structure, type and format of messages.
+ 
+ 
+ 
+The IEC 60870-5 configuration is accessed from the Application Explorer - Communication.Data acquisition.IEC 60870-5.
+
+
+========================================
+TOPIC: m104_standby_device_config.htm
+========================================
+Adding a standby device
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding a Standby Device
+ 
+What is a standby device?
+ 
+A standby device provides a redundant network path to the field device or a path to an alternate redundant field device (another IP address). Should the main device fail, communication is automatically switched to the standby device thereby providing continuous service.
+ 
+Sectors and variable mapping is not necessary for the standby device as it is assumed to be the same as the primary device.
+ 
+Adding a standby device
+ 
+ 
+Select an existing IEC 60870-5 network and device in the Application Explorer. In the lower right pane task bar, select Add a standby Device. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+The Device Creation dialog opens with default properties.
+ 
+A device Name is generated automatically. You can either accept it or enter a name more appropriate to a standby device.
+ 
+Enter the IP Address for the standby device.
+ 
+Configure the other properties, including those in the Advanced tab. It is probable that they will need to be the same as the main device. See Adding Devices to an IEC 60870-5 network for more information.
+ 
+Click on OK to confirm the configuration and close the dialog.
+ 
+ 
+Standby device operation
+ 
+When PcVue starts, it will attempt to communicate with the main and standby devices to check their presence. If the primary device is available, it will retrieve the value of any mapped variables from it.
+ 
+If the primary device is not available at startup, or if it fails later, value retrieval for the mapped variables automatically switches to a standby device.
+ 
+
+ &#160;PcVue will continue to try and establish communication with the failed primary device, but it will not automatically switch back when communication is re-established.
+ 
+You can force a switch back to the primary device using the following methods.
+ 
+ 
+Restarting PcVue.
+ 
+Manually, using the Activate Device task in the Application Explorer.
+ 
+Using a SCADA Basic script incorporating the M60870_5 instruction, SWITCHOVER mode.
+ 
+ 
+
+ 
+You can create more than one standby device for a single main device. In the case of failure of the main device, the first standby device is selected. If that standby device also fails, the second standby device is selected, etc.
+ 
+ 
+System status variables
+ 
+Specific system status variables are provided for standby device management. See the IEC 60870-5 status variables book for information.
+
+

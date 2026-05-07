@@ -1,0 +1,542 @@
+========================================
+TOPIC: iec104_in_the_ae.htm
+========================================
+Managing the IEC 60870-5-104 Server in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing the IEC 60870-5-104 Server in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks applicable to the IEC 60870-5-104 server
+ 
+When the IEC 60870-5-104 server node is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Settings
+ Display the IEC 60870-5-104 Server Settings dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Add an outstation
+ Display the Outstation Creation dialog.
+ 
+ 
+ 
+ 
+When the Outstation node is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a sector
+ Display the Sector Creation dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the outstation from the configuration.
+ 
+ 
+
+ 
+ 
+ 
+ Network interfaces
+ Display the outstation's Network Interfaces dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the outstation's Properties dialog.
+ 
+ 
+ 
+ 
+When a Sector is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the sector from the configuration.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the sector's Properties dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Add point
+ Display the Point Creation dialog.
+ 
+ 
+ 
+ 
+Rules and behavior of cut, copy and paste
+ 
+The following table describes the rules and behavior, and in particular any restrictions, when using cut or copy and paste on configuration objects in the IEC 60870-5-104 node.
+ 
+ 
+ 
+ 
+ 
+
+ IEC 60870-5-104 Server
+ Description
+ 
+ 
+
+ Outstation
+ The pasted outstation shall have a unique name.
+Sectors and points are duplicated with their original names.
+
+ 
+ 
+
+ Sector
+ The pasted sector shall have a unique name.
+Points are duplicated with their original names.
+
+ 
+ 
+
+ Point
+
+ The pasted point shall have a unique name.
+
+
+========================================
+TOPIC: iec104_network.htm
+========================================
+Configuring an IEC 60870-5-104 outstation network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring an IEC 60870-5-104 Outstation's Network Interface
+ 
+The Network Interface configuration defines on which of a project's stations an outstation is started and exposed on the network. You must configure a Network Interface for each configured outstation. The Network Interface configuration is accessed from the Application Explorer, when an outstation node is selected in the configuration tree, using the Network Interfaces task. 
+ 
+There are two methods by which an outstation's availability can be defined. With both methods, the outstation IP address is that of the host PC.
+ 
+ 
+Specific IP address - Used when the project has a standalone configuration (no multi-station networking). The outstation is started and available when the IP address in its configuration matches that of the host PC.
+ 
+IP address dependent on a server station's node name - Used when the project configuration includes multi-station networking. The outstation is started and available when the Data Server and Node Name in its configuration matches that of the host PC (as taken from PcVue's Networking configuration).
+ 
+ 
+How to configure a specific IP address
+ 
+ 
+Open the Network Interfaces dialog.
+ 
+Select the Add Network Interface tool. The Network Interface creation dialog opens. Show picture
+
+ 
+Enter a Name for the connection or leave it at its default. Enter a name for the connection in the Name text box. This is the name by which the connection will be known in PcVue. You can accept the suggested default or enter one of your own.
+ 
+Enter a description of the connection (optional).
+ 
+Leave Data Server set to (Local station) and enter the IP address of the host PC (By IP property). Note that the By Node property is dimmed.
+ 
+For the majority of projects the Port can be left at the default value of 2404. Only change it if you are aware of a specific conflict or policy in your organization.
+ 
+Click OK to close the Network Interface creation dialog.
+ 
+Click OK to close the Network Interfaces dialog.
+ 
+ 
+Configuring an IP address dependent on a server station's node name
+ 
+
+ 
+The following configuration is dependent of the project's Networking configuration so this must be completed first.
+ 
+ 
+ 
+Open the Network Interfaces dialog.
+ 
+Select the Add Network Interface tool. The Network Interface creation dialog opens.
+ 
+Enter a Name for the connection or leave it at its default. Enter a name for the connection in the Name text box. This is the name by which the connection will be known in PcVue. You can accept the suggested default or enter one of your own.
+ 
+Enter a description of the connection (optional).
+ 
+Using the Data server drop down list box select the data server, from the project's Networking configuration, on which the outstation is to be started and available. Show picture
+
+ 
+The By Node property is automatically completed with the first node name from the selected data server. You only need to consider changing this if the server has multiple NICs, in which case it will have more than one node. Note that the By IP property is dimmed.
+ 
+Click OK to close the Network Interface creation dialog.
+ 
+Repeat steps 2 to 7 for any further servers on which the outstation is to be started and available.
+ 
+When finished click OK to close the Network Interfaces dialog.
+ 
+ 
+Configuring the Network Interface for a redundant association of real-time data servers
+ 
+There is no specific configuration for redundant servers, however, you could consider the following scenario.
+ 
+A multi-station project with comprises a redundant association of two real-time data servers, DataServer1 and DataServer2, and a real-time client DataClient1. A single outstation is configured with its Network interface configured so the Network Access is via DataClient1. The outstation is started and available using the IP address of DataClient1. It is not available on either DataServer1 or DataServer2.
+ 
+A third-party IEC 60870-5-104 client is configured so it communicates with the outstation of DataClient1. Real-time data will automatically come from either ServerA or ServerB depending on which is active within the association.
+ 
+Advanced properties
+ 
+The Network Interface configuration dialog, Advanced tab, contains network and IEC104 related outstation properties. The properties are pre-set to recommended defaults and in most cases will not need to be changed. Show picture
+
+ 
+For information about any changes required from the default, see the documentation provided by the client manufacturer or the IEC 60870-5-104 standard.
+
+
+========================================
+TOPIC: iec104_outstation.htm
+========================================
+Adding an outstation to the IEC 60870-5-104 Server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding an Outstation to the IEC 60870-5-104 Server
+ 
+An Outstation item represents PcVue presence on the network as an IEC 60870-5-104 device. Outstation configuration is accessed from the Application Explorer using the Add an outstation task when Servers.IEC 60870-5-104 is selected in the configuration tree.
+ 
+After you have completed an outstation's configuration, you must then configure its Network Interface.
+ 
+
+ 
+An outstation is identified on an IEC 60870-5-104 network by its IP address. Most of the time, a PC has only one active IP address and therefore the IEC 60870-5-104 server must be configured in such a way that only one outstation is active on a particular PC. In the case of a gateway, the PC will most probably have more than one NIC, in which case you will need to carefully configure the Network Interface to make sure the correct NIC is used by the outstation.
+ 
+ 
+How to add an outstation
+ 
+ 
+Select the IEC 60870-5-104 node in the Application Explorer and select Add an outstation from the task list. The Outstation creation dialog opens. The following screenshot was taken with the default configuration. Show picture
+
+ 
+Enter the name of the outstation in the Name text box. This is the name by which the outstation will be known in PcVue. You can accept the suggested default or enter one of your own.
+ 
+Enter a description of the outstation (optional).
+ 
+Click Apply to confirm the configuration.
+ 
+ 
+Configuring allowed clients
+ 
+The Allowed Clients tab allows you to choose those clients to which PcVue outstation will respond. Configuring the allowed clients is highly recommended for security purposes.
+ 
+ 
+Select the Allowed Clients tab and select Accept only connections from these clients.
+ 
+Add the list of clients.
+Select the Add Client tool at the top of the list. The Authorized client dialog opens. Show picture
+
+Enter the name for the client in the Name text box. You can accept the suggested default or enter one of your own.
+Enter a description (optional).
+Identify the client using either its IP Address or its Host name. You can open a network browsing dialog using the Ellipsis button adjacent to the Host name field. 
+Click OK to confirm the configuration.
+Repeat steps a to f for any further clients.
+ 
+Click Apply to confirm the configuration.
+ 
+ 
+
+ 
+The Network browsing dialog can take several seconds to open during which time further access to the Application Explorer is suspended.
+ 
+ 
+Advanced options
+ 
+If you are configuring a multi-station application, select the Advanced tab and select the Servers list. The outstation will only be activated on those stations named in that list.
+
+
+========================================
+TOPIC: iec104_overview.htm
+========================================
+Overview of the IEC 60870-5-104 Server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the IEC 60870-5-104 Server
+ 
+IEC 60870-5-104 is a communication standard for telecontrol particularly for the power generation and distribution market. It is a client/server protocol operating over TCP/IP. In the case of the IEC 60870-5-104 Server, PcVue is a server supporting both polling and unsolicited data exchange. In general, the client only uses polling at startup to collect the initial data values. Subsequent values are collected only when they are sent by the server using unsolicited messaging (also known as spontaneous messaging in the IEC 60870-5-104 standard).
+ 
+ 
+The IEC 60870-5-104 Server configuration comprises Outstations, Sectors and Information Objects (IO).
+ 
+The Outstation item identifies and defines one and only one IEC 104 interface exposed by PcVue in a Networking architecture. Each outstation is identified on the network by its Server list. Only those stations in the list expose a configured outstation. Those stations also have to have a corresponding Network Interface defined.
+ 
+A sector is typically a piece of control equipment with one or more information objects - for example a circuit breaker. In PcVue, the sector is only used as a logical data organization.
+ 
+Information Objects represent the physical inputs and outputs. The types of information object that are available is strictly controlled by the IEC 60870-5-104 standard. Each type has a corresponding ASDU (Application Service Data Unit) which defines the structure, type and format of messages. In PcVue, each information object is mapped to a variable providing the real-time value, timestamp and quality. Information objects are often referred to as data points.
+ 
+The IEC 104 Server exposes I/O and internal variables (scope Shared and Local station).
+ 
+ 
+
+ &#160;PcVue IEC 60870-5-104 Server configuration is accessed from the Application Explorer - <Project>.Communication.Servers.IEC 60870-5-104.
+
+
+========================================
+TOPIC: iec104_sector.htm
+========================================
+Adding a sector to an IEC 60870-5-104 outstation
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding a Sector to an IEC 60870-5-104 Outstation
+ 
+The sector item is used for the logical grouping of data points and, if required, to change the behavior of its sub-ordinate data points from the default. Sector configuration is accessed from the Application Explorer using the Add a sector task when an IEC 60870-5-104 outstation is selected in the configuration tree.
+ 
+How to add a sector to an outstation.
+ 
+ 
+Select a previously configured IEC 60870-5-104 outstation in the Application Explorer and select Add a sector from the task list. The Sector creation dialog opens. The following screenshot was taken with the default configuration. Show picture
+
+ 
+Enter the name of the sector in the Name text box. This is the name by which the sector will be known in PcVue. You can accept the suggested default or enter one of your own.
+ 
+Enter a description of the sector (optional).
+ 
+Enter the common address of ASDU. This is the identifier of the sector within the outstation and must be unique. You can accept the suggested default or enter one of your own.
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+Advanced options
+ 
+The following properties are available in the Sector configuration dialog, Advanced tab. The following screenshot was taken with the default settings. Show picture
+
+ 
+ 
+Enable period transmission
+Background - Enable and configure the background transmission of all data points attached to the sector. The period is in milliseconds.
+Cyclic - Enable and configure the cyclic transmission of all data points attached to the sector. The period is in milliseconds.
+ 
+Override defaults for - Override the defaults, as set in the IEC 60870-5-104 Server Settings dialog, for the behavior of the spontaneous event queues and timestamping of the various data point types in the sector.
+
+
+========================================
+TOPIC: iec104_variables.htm
+========================================
+Adding data points to an IEC 60870-5-104 sector
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding Data Points to an IEC 60870-5-104 Sector
+ 
+In a conventional IEC 60870-5-104 device, a sector's data points represent the physical inputs and outputs. In PcVue IEC 60870-5-104 server, a sector's data points represents variables from the variable tree. Each data point represents a single variable. 
+ 
+Data points are created and linked to variables using the Point Creation dialog. The dialog can be opened either from the IEC 60870-5-104 Server configuration tree Show picture, or directly from the variable's tree. Show picture 
+ 
+ 
+How to add a data point to an IEC 60870-5-104 outstation sector
+ 
+ 
+Select a previously configured IEC 60870-5-104 outstation sector and click the Data Point Creation tool. The Point Creation dialog opens.
+ 
+In the Read group.
+ Select the Object Type. A list of the supported object types is shown below.
+The Information Object Address is automatically generated using the sector's default settings. You can either accept it or enter one of your own.
+ 
+Enter the variable name. The ellipsis button adjacent to the Variable field opens the Variable Selector dialog. The variable type that you can use is dependent on the Object Type. 
+ 
+If the variable has the Command property set in its configuration, the Write group is displayed. The configuration here allows the client to force the value of the variable. 
+Select the Mode. You can choose from None, Direct Execute or Select Before Operate. None means that IEC 104 clients will not be able to force the value. Show picture
+
+The Information Object Address is automatically generated using the sector's default settings. You can either accept it or enter one of your own.
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+
+ 
+To open the Point Creation dialog directly from a variable, navigate to the variables tree, select the variable, and then select Publish as IEC 104 point in the variable behavior (lower right pane). 
+ 
+ 
+Advanced properties
+ 
+The properties in Advanced tab of the Data Point dialog all affect the way in which PcVue will transmit variable's value. The following screenshot shows the default properties. Show picture
+
+ 
+ 
+Refresh modes
+Enable spontaneous transmission - The variable value is transmitted spontaneously (unsolicited) each time the value changes.
+Groups
+Global - The variable value is transmitted whenever a global request is received.
+Group 1 to 16 - The variable value is transmitted whenever a request for the particular group (1 to 16) is received.
+ 
+ 
+Supported IEC 60870-5-104 object type
+ 
+The behavior of each data point is defined by an object type strictly controlled by the IEC 60870-5-104 standard. The following are supported by PcVue IEC 60870-5-104 server.
+ 
+ 
+ 
+ 
+ 
+
+ IEC 60870-5-104 object type
+ Variable type
+ 
+ 
+
+ Single point
+ Bit
+ 
+ 
+
+ Double point
+ Bit or Register
+ 
+ 
+
+ Step position
+ Register
+ 
+ 
+
+ Measured value, normalized
+ Register
+ 
+ 
+
+ Measured value, scaled
+ Register
+ 
+ 
+
+ Measured value, short gloating point
+ Register
+ 
+ 
+
+ Integrated total
+ Register
+
+

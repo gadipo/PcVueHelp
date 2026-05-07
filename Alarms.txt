@@ -1,0 +1,1248 @@
+========================================
+TOPIC: ALARM_Example.htm
+========================================
+ALARM example
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ALARM Example
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ Applies to
+ 
+ 
+This program illustrates the use of the ALARM instruction.
+ 
+Example prerequisites
+ 
+ 
+
+ 
+A text variable, @SB_EXAMPLES.AlarmName, is required. This variable must have the Command property set.
+ 
+ 
+
+ One or more bit variables with the Alarm property set. These variables must also have the Command property set.
+ 
+ 
+
+ A mimic containing a Send-Text animation to set the variable SB_EXAMPLES. To use the ACKTAG example this mimic will also need an Alarm Viewer. Show picture
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+DIM sWindow AS Str, sBranch AS Str, sIdentity AS STR;
+ 
+ 
+ 
+
+ 
+'-------- Intialise program wide variables
+ 
+ 
+ 
+
+ 
+SUB Main()
+ 
+ 
+ 
+
+ 
+&#160;&#160;sWindow = "Mimic8";
+ 
+ 
+ 
+
+ 
+&#160;&#160;sBranch = "";
+ 
+ 
+ 
+
+ 
+&#160;&#160;sIdentity = "Alarm1";
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Exercises the modes of Syntax 1. The mode is passed as an argument.
+ 
+ 
+ 
+
+ 
+SUB EXEC_ALARM_SYNTAX1 ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM sAlarmName AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM sMode AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iReturn AS INTEGER;
+ 
+ 
+ 
+
+ 
+&#160;&#160;sMode = GETARG("ARG1"); ' Get mode passed as an argument
+ 
+ 
+ 
+
+ 
+&#160;&#160;sAlarmName = @SB_EXAMPLES.AlarmName;
+ 
+ 
+ 
+
+ 
+&#160;&#160;iReturn = ALARM(sMode, sAlarmName);
+ 
+ 
+ 
+
+ 
+&#160;&#160;Print("Syntax 1, Mode ",sMode, " returned ",iReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Exercises the modes of Syntax 5. The mode is passed as an argument.
+ 
+ 
+ 
+
+ 
+SUB EXEC_ALARM_SYNTAX5 ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM sAlarmName AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM sMode AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iReturn AS INTEGER;
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST Flag = 1;
+ 
+ 
+ 
+
+ 
+&#160;&#160;sMode = GETARG("ARG1"); ' Get mode passed as an argument
+ 
+ 
+ 
+
+ 
+&#160;&#160;sAlarmName = @SB_EXAMPLES.AlarmName;
+ 
+ 
+ 
+
+ 
+&#160;&#160;iReturn = ALARM(sMode, sAlarmName, Flag);
+ 
+ 
+ 
+
+ 
+&#160;&#160;Print("Syntax 5, Mode ",sMode, " returned ",iReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Acknowledge all alarms. Use carefully - may affect system performance if there are many alarms.
+ 
+ 
+ 
+
+ 
+SUB EXEC_ALARM_ACKALL ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iReturn AS INTEGER;
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST Flag = 1; 'Indicates that the action should be logged as it would be from an Alarm Viewer
+ 
+ 
+ 
+
+ 
+&#160;&#160;sAlarmName = @SB_EXAMPLES.AlarmName;
+ 
+ 
+ 
+
+ 
+&#160;&#160;iReturn = ALARM("ACKALL", Flag);&#160;
+ 
+ 
+ 
+
+ 
+&#160;&#160;Print("Acknowledge all alarms returned ",iReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Acknowledge a single alarm using it's ID within an Alarm Viewer
+ 
+ 
+ 
+
+ 
+SUB EXEC_ALARM_ACKTAG ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iReturn As INTEGER;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM sAlarmId AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;sAlarmId = ALARMDISPLAY("SELECTED", sWindow, sBranch, sIdentity); ' Get selected alarm ID
+ 
+ 
+ 
+
+ 
+&#160;&#160;iReturn = ALARM("ACKTAG", sAlarmId);
+ 
+ 
+ 
+
+ 
+&#160;&#160;IF (iReturn == 1) THEN
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;PRINT("Acknowledge alarm ID ", sAlarmID, " successful");
+ 
+ 
+ 
+
+ 
+&#160;&#160;ELSE
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;PRINT("Acknowledge alarm ID ", sAlarmID, " failed");
+ 
+ 
+ 
+
+ 
+&#160;&#160;END IF
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Acknowledge alarms by domain and nature
+ 
+ 
+ 
+
+ 
+SUB EXEC_ALARM_ACKDOMNAT ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM sDomain AS STR, sNature AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iReturn AS INTEGER;
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST Flag = 1; 'Indicates that the action should be logged as it would be from an Alarm Viewer
+ 
+ 
+ 
+
+ 
+&#160;&#160;sDomain = "DOM1";
+ 
+ 
+ 
+
+ 
+&#160;&#160;sNature = "";
+ 
+ 
+ 
+
+ 
+&#160;&#160;iReturn = ALARM("ACKDOMNAT", sDomain, sNature, Flag);
+ 
+ 
+ 
+
+ 
+&#160;&#160;Print("Acknowledge alarms of Domain ", sDomain, " and Nature ", sNature, " returned ",iReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Acknowledge alarms by priority
+ 
+ 
+ 
+
+ 
+SUB EXEC_ALARM_ACKPRIO ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iPriority AS INTEGER;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iReturn AS INTEGER;
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST Flag = 1; 'Indicates that the action should be logged as it would be from an Alarm Viewer
+ 
+ 
+ 
+
+ 
+&#160;&#160;iPriority = 1;
+ 
+ 
+ 
+
+ 
+&#160;&#160;iReturn = ALARM("ACKPRIO", iPriority, Flag);
+ 
+ 
+ 
+
+ 
+&#160;&#160;Print("Acknowledge alarms of Priority ", iPriority, " returned ",iReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Temporarily change an alarms level
+ 
+ 
+ 
+
+ 
+SUB EXEC_ALARM_SETALARMLEVEL ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iReturn As INTEGER, iLevel AS INTEGER;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM sAlarmName AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;sAlarmName = @SB_EXAMPLES.AlarmName;
+ 
+ 
+ 
+
+ 
+&#160;&#160;iLevel = IVAL(GETARG("ARG1")); ' Get new alarm level passed as argument
+ 
+ 
+ 
+
+ 
+&#160;&#160;iReturn = ALARM("SETALARMLEVEL", sAlarmName, iLevel);
+ 
+ 
+ 
+
+ 
+&#160;&#160;Print("Change alarm level of ", sAlarmName, " to level ", iLevel, " returned ",iReturn);
+ 
+ 
+ 
+
+ 
+END SUB&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+
+
+========================================
+TOPIC: Alarm_synthesis_add.htm
+========================================
+How to add an alarm synthesis
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Add an Alarm Synthesis
+ 
+ 
+Create the alarm synthesis and selecting the level filter.
+Select the Alarm Syntheses folder in the Application Explorer configuration tree and, from the task list, select Add an alarm synthesis. A dialog to configure a new alarm synthesis will open. Show picture
+
+Enter a name by which the alarm synthesis will be known. The name is only used within the contents pane of the Application Explorer.
+Enter a description of the alarm synthesis. The description is optional and only appears in the contents pane of the Application Explorer.
+If the project has a multi-station configuration select the Server list name. The alarm synthesis will only be active on stations that appear in that list.
+If the project is also using a Population, and you want to take this into account, tick Take the applied population into account. See the Population overview for information about Populations.
+Select the range of alarms to be taken into account using the Minimum and Maximum fields.
+ 
+Select the Filter tab and configure the filter. See the topic Configuring an alarm synthesis filter.
+ 
+Select the Variables tab and select the variables. Enter or select the names of the variables to be used as the alarm counter and status variables. It is only necessary to enter those that you require. All but three of the variables must be registers. See the topic Alarm synthesis overview. The Set default button automatically enters default names for the counter variables after which you need only select a branch.
+ 
+Click OK to confirm the configuration and close the dialog.
+
+
+========================================
+TOPIC: Alarm_synthesis_branch.htm
+========================================
+Configuring an alarm synthesis branch
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring an Alarm Synthesis Branch
+ 
+Configuring a variable branch means that the alarm synthesis will only take into account variables of that branch in addition to any expression or attribute filter and the alarm levels. You can enter a simple branch or include the * wildcard. Show picture
+
+ 
+The ellipsis button adjacent to the Branch name property displays the Branch Selector for easy branch selection. Selecting All modifies the selection by including a wild card. See the example below.
+ 
+Examples
+ 
+Branch01 will include all variables of that branch, but not of any sub-branches.
+ 
+Branch01.* will include all variables of that branch plus those of any sub-branch.
+
+
+========================================
+TOPIC: Alarm_synthesis_filters.htm
+========================================
+Configuring an alarm synthesis filter
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring an alarm synthesis filter
+ 
+An alarm synthesis filter can be based either on an extended attribute filter or on an expression.
+ 
+Configuring an extended attribute filter
+ 
+This is a simple filter comprising a single extended attribute and a configured value. Show picture
+
+ 
+If you select attribute #A1 - DOMAIN or #A2 - NATURE, a list of available domains or natures can be selected from the Attribute value property. If any other attribute is selected you must enter a string in the Attribute value property.
+ 
+Configuring an expression filter
+ 
+An expression filter is made up of one or more simple expressions joined with logical AND or OR operators. Each simple expression consists of a variable attribute, an operator and a value enclosed in brackets. You can either type in the filter expression directly (in the Filter generated field) or use the list boxes and command buttons to generate it interactively. Show picture
+
+ 
+The following attributes and operators are supported.
+ 
+ 
+ 
+ 
+ 
+
+ Symbol
+ Description
+ 
+ 
+
+ #t
+ The variable's name
+ 
+ 
+
+ #A1 to #A16
+ The variable's extended text attributes. #A1 and #A2 are Domain and Nature respectively
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ #L
+ The leaf (final element) of a variable's name
+ 
+ 
+
+ #B1 to #B32
+ The variable's extended binary attributes
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+
+ Operators
+ Description
+ 
+ 
+
+ ==
+ Equal to
+ 
+ 
+
+ >
+ Greater than
+ 
+ 
+
+ <
+ Less than
+ 
+ 
+
+ >=
+ Greater than or equal to
+ 
+ 
+
+ <=
+ Less than or equal to.
+ 
+ 
+
+ ^ or BEG
+ Beginning with "string"
+ 
+ 
+
+ $ or INC
+ Including "string"
+ 
+ 
+
+ [ or END
+ Ending with string
+ 
+ 
+
+ &&
+ Logical AND used between expressions
+ 
+ 
+
+ ||
+ Logical OR used between expressions
+ 
+ 
+ 
+ 
+Examples of filter expressions
+ 
+ 
+ 
+ 
+ 
+
+ Filter
+ Description
+ 
+ 
+
+ =(#t BEG FACTORY)&&((#A1 == DOM1)||(#A1 == DOM2))
+ The name of the variable starts with FACTORY and the Domain is either DOM1 or DOM2.
+ 
+ 
+
+ =(#A1 == DOM1)||(#A2 == NAT1)
+ The Domain is DOM1 or the Nature is NAT1.
+ 
+ 
+
+ =(#A5 >=10)&&(#A5 < 35)
+ The attribute A5 is greater than or equal to 10 and less than 35.
+ 
+ 
+ 
+ 
+
+ 
+Note the use of brackets in the first example to control the order in which the expressions are evaluated.
+ 
+ 
+
+ 
+It is recommended to enclose text values with quotation marks, and it is mandatory for the expression to work as expected if the value contains a special character such as a space, a comma or a quotation mark. For example: (#T BEG "Urgent alarm").
+
+
+========================================
+TOPIC: Alarm_synthesis_overview.htm
+========================================
+Alarm synthesis overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Alarm Synthesis Overview
+ 
+Alarm Synthesis allows you to create alarm counter and status variables for groups of alarms. Each alarm group produces several counter and status values. This is similar to PcVue's integrated alarm counter variables except that it is configurable and far more flexible. The variable used for each counter or status must be defined before configuring the alarm group. You can choose to use as many or few of an alarm group's counters as required.
+ 
+Alarm Syntheses is managed from the Alarm Syntheses node in the Application Explorer.
+ 
+
+ 
+Alarm Synthesis is one of a range of special variable behaviors which, in earlier versions of PcVue, could only be configured by manually editing a file named VARTREAT.DAT. There are other special behaviors that still require manual configuration of this file. See the book Vartreat- Special variable behaviors.
+ 
+ 
+
+ 
+There are also three alarm variables associated with an alarm synthesis. They must be a special type of alarm known as an Enumerated Alarm. These can only be configured by manually editing VAREXP.DAT and ENUMALA.DAT. See the topic Creating group alarm counters.
+ 
+ 
+How is the group of alarms defined?
+ 
+An alarm group is defined by a range of alarm levels (say from 0 to 29) and a filter that comprises variable branches, extended attributes and expressions. See the topic Configuring an alarm synthesis filter.
+ 
+What alarm counters and status variables can be configured?
+ 
+Each status and counter uses a register variable.
+ 
+ 
+Status variables
+The level of the highest level (numerically) alarm that is on and not acknowledged
+The level of the highest level (numerically) alarm that is on and acknowledged
+ 
+Counter variables. The number of alarms that are:
+On and acknowledged
+On (acknowledged or not)
+Off and not acknowledged
+Off
+Invalid
+Masked
+Masked by the user
+Masked by program
+Masked by dependence on another variable
+Masked by an expression
+On and in maintenance mode
+Off and in maintenance mode
+Inhibited
+ 
+ 
+What alarm variables can be configured?
+ 
+The following alarm variables can be configured. They can only be configured by manually editing VAREXP.DAT. See the topic Creating group alarm counters. The variables must be Enumerated Alarms (see below).
+ 
+ 
+The level of the highest priority alarm that is:
+On and not acknowledged
+On and acknowledged
+On (acknowledged or not acknowledged)
+ 
+ 
+About Enumerated alarms
+ 
+Alarm Synthesis makes use of a special type of alarm variable known as an Enumerated Alarm. An Enumerated Alarm can be used in the Alarm Viewer to display different labels depending on the alarm value and language setting. This capability is used to display the level the highest priority alarm that is on for a particular alarm group. Show picture 
+
+ 
+The configuration to create an Enumerated Alarm requires manual editing of a file called ENUMALA.DAT. This is outside of the scope of this help. If your application requires this capability, please contact your technical support agency.
+ 
+
+ 
+In computer programming, an enumerated type (also called enumeration or enum) is a data type consisting of a set of named values called elements, members or enumerators of the type. (cf. Wikipedia)
+
+
+========================================
+TOPIC: ALARMDISPLAY_Example.htm
+========================================
+ALARMDISPLAY example
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ALARMDISPLAY Example
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ Applies to
+ 
+ 
+Example 1
+ 
+In the following example, the window AllAlarm 
+ contains an Alarm Viewer animation identified as AllDomain. 
+ It assumes that an Alarm Viewer has been configured without the lower 
+ border, whose functionality has been replaced with command buttons to 
+ launch the various sub-programs.
+ 
+SUB Main ()
+ 
+DIM Win As Str, ID AS Str;
+ 
+Win = "AllAlarm";
+ 
+ID = "AllDomain";
+ 
+END SUB
+ 
+&#160;
+ 
+SUB ToStart ()
+ 
+AlarmDisplay("Begin",Win,"",ID);
+ 
+END SUB
+ 
+&#160;
+ 
+SUB ToEnd ()
+ 
+AlarmDisplay("End",Win,"",ID);
+ 
+END SUB
+ 
+&#160;
+ 
+SUB PageUp ()
+ 
+AlarmDisplay("Before", Win, "", ID);
+ 
+END SUB
+ 
+&#160;
+ 
+SUB PageDown ()
+ 
+AlarmDisplay("After", Win, "", ID);
+ 
+END SUB
+ 
+&#160;
+ 
+SUB ListMode ()
+ 
+AlarmDisplay("Mode",Win,"",ID);
+ 
+END SUB
+ 
+&#160;
+ 
+' Display alarms of the previous hour
+ 
+SUB daterange()
+ 
+DIM Hd1 as double;
+ 
+DIM Hd2 as double;
+ 
+DIM ret as integer;
+ 
+Hd2 = DateTimeValue();
+ 
+Hd1 = Hd2 - 3600000;
+ 
+ret = ALARMDISPLAY("DATERANGE", "alm1","","IDalarm1",Hd1,Hd2);
+ 
+print ( "ALARMDISPLAY mode DATERANGE ret=", ret);
+ 
+END SUB
+ 
+&#160;
+ 
+' Reset the filter on the date
+ 
+SUB resetdaterange()
+ 
+DIM Hd1 as double;
+ 
+DIM Hd2 as double;
+ 
+DIM ret as integer;
+ 
+Hd2 = 0;
+ 
+Hd1 = 0;
+ 
+ret = ALARMDISPLAY("DATERANGE", "alm1","","IDalarm1",Hd1,Hd2);
+ 
+print ( "ALARMDISPLAY mode DATERANGE ret=", ret);
+ 
+END SUB
+ 
+Example 2
+ 
+This example uses the instructions ADDSTRING, LINESELECT and XMLPATH:
+ 
+SUB main()
+ 
+END SUB
+ 
+&#160;
+ 
+SUB subscribe()
+ 
+DIM WinName as str;
+ 
+DIM WinBranch as str;
+ 
+DIM NameSpace as str;
+ 
+DIM iRet as integer;
+ 
+&#160;
+ 
+WinName = WINDOW("CURRENTNAME");
+ 
+WinBranch = WINDOW("CURRENTBRANCH");
+ 
+NameSpace = AddString(WinBranch,"/");
+ 
+NameSpace = AddString(NameSpace,WinName);
+ 
+NameSpace = AddString(NameSpace,"/alarm1");
+ 
+@lineselect.Syno = WinName;
+ 
+@lineselect.Branch = WinBranch;
+ 
+@lineselect.AlarmSelected = "";
+ 
+@lineselect.NameSpace = NameSpace;
+ 
+iRet = AlarmDisplay("LINESELECT",WinName,WinBranch,"alarm1","P","","SelectLine","");
+ 
+Print("Subscription with result: ",iRet);
+ 
+END SUB
+ 
+&#160;
+ 
+SUB SelectLine()
+ 
+DIM WinName as str;
+ 
+DIM WinBranch as str;
+ 
+DIM NameSpace as str;
+ 
+DIM AlarmSelected as str;
+ 
+DIM iBuf as long;
+ 
+&#160;
+ 
+WinName = WINDOW("CURRENTNAME");
+ 
+WinBranch = WINDOW("CURRENTBRANCH");
+ 
+NameSpace = AddString(WinBranch,"/");
+ 
+NameSpace = AddString(NameSpace,WinName);
+ 
+&#160;
+ 
+NameSpace = AddString(NameSpace,"/alarm1");
+ 
+@lineselect.NameSpace = NameSpace;
+ 
+'AlarmSelected = XMLPATH("GETSTR",NameSpace,"lineselect/variable");
+ 
+iBuf = XMLPATH("GET",NameSpace,"lineselect/variable");
+ 
+AlarmSelected = CGET_BUFFER(iBuf, 0, 255);
+ 
+@lineselect.AlarmSelected = AlarmSelected ;
+ 
+XMLPATH("UNLOAD",NameSpace);
+ 
+END SUB
+
+
+========================================
+TOPIC: Alarms_Overview.htm
+========================================
+Overview of Alarms
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Alarms Overview
+ 
+The main purpose of an alarm is to bring to the user's attention that a particular condition has occurred in the process being 
+ supervised. For example, a temperature may be above a certain value. Alarms 
+may be:
+ 
+ 
+Displayed as a real 
+ time list in an Alarm Viewer.
+ 
+Displayed individually using certain animations, for example Color on Alarm.
+ 
+Acknowledged, masked, unmasked and set to maintenance by the user.
+ 
+Recorded in the archive files and played back through a Log Viewer.
+ 
+Printed in real time 
+as they occur.
+ 
+Counted in special 
+register variables according to the alarm state, alarm level, Domain and 
+Nature.
+ 
+Used to generate 
+an external sensory alert, such as a sound, to attract the user's attention.
+ 
+ 
+How is an alarm generated?
+ 
+An alarm is generated by a bit variable that has the alarm property 
+enabled. Once configured as an alarm the behavior of the bit is modified 
+so that its real time value has 5 possible states (instead of 3 for a 
+Bit). Its state depends not only on the source of the variable, but also on the action of a user.
+ 
+ 
+ 
+ 
+
+ 
+ 
+State
+ 
+ 
+ 
+Cause
+ 
+ 
+ 
+
+ 
+ 
+Off
+ 
+ 
+ 
+The alarm is off.
+ 
+ 
+ 
+
+ 
+ 
+Off and not acknowledged
+ 
+ 
+ 
+The alarm is off, but it has been on and not acknowledged 
+by a user.
+ 
+ 
+ 
+
+ 
+ 
+On and not acknowledged
+ 
+ 
+ 
+The alarm is on and has not been acknowledged by a user.
+ 
+ 
+ 
+
+ 
+ 
+On and acknowledged
+ 
+ 
+ 
+The alarm is on and has been acknowledged by a user.
+ 
+ 
+ 
+
+ 
+ 
+Unavailable
+ 
+ 
+ 
+The alarm is masked by the condition of another Alarm 
+or Bit, or inhibited by a user.
+ 
+ 
+ 
+ 
+An alarm may be configured so that it is on when the source bit is in either the 1 or 0 states.
+ 
+The Alarm state diagram
+ 
+Alarms not inhibited or switched to maintenance operate 
+according to the following state diagram. Show picture
+
+

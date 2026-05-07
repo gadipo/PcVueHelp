@@ -1,0 +1,1542 @@
+========================================
+TOPIC: Busbar_basic_notation.htm
+========================================
+Dynamic Busbar Coloring Concepts
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Concepts
+ 
+The Topology Engine uses 3 main concepts.
+ 
+ 
+Nodes,
+ 
+Switches,
+ 
+Transformers.
+ 
+ 
+They are used to describe the network topology and are referred to as topology items.
+ 
+Nodes
+ 
+Nodes are the parts of the electrical network connected by switches and transformers. For example, a node can be an incoming source, a busbar, or an outgoing, feeder. The nodes can be of three types.
+ 
+ 
+Passive: The nodes those are not able to provide their own voltage level.
+ 
+Static: The nodes with a determinate voltage (e.g. Earth)
+ 
+Measured: For measured nodes, it is possible to define steady sources such as generators or other sources that are active up to a specified voltage level. The source can be set manually by user input or coming from the field as a voltage measurement. As a consequence, measured nodes are able to provide their own voltage level. Measured nodes are also called injection nodes.
+ 
+ 
+The Topology Engine supports up to 8 discrete voltage levels, which can be interpreted in an arbitrary manner, e.g. not associated with any particular voltage value (12 kV, 20 kV�). One of these levels is the earth voltage level and another represents voltage absence. Each measured node is able to provide only one voltage level that must be declared as its default injection value. If a node�s injection value is set to 0, the node is passive. If node injection value is set to non-significant, the node will provide the uncertain value as default injection. The node injection value can change at runtime.
+ 
+Switches
+ 
+Switches are any type of device able to open or close an electrical circuit with regards to voltage calculation (breaker, isolator, disconnector, earthing switch�). The switching capability does not affect the Topology Engine calculations. A switch can only be in one of the three following states.
+ 
+ 
+Position open,
+ 
+Position closed,
+ 
+Unknown position, also called uncertain, non-significant or NS.
+ 
+ 
+A switch is always connected to two nodes.
+ 
+Transformers
+ 
+Transformers are devices that are able to modify the voltage level. They are characterized by an input voltage level and an output voltage level. Like switches, transformers are always connected to two Nodes. Unlike switches, transformers are directional devices.
+
+
+========================================
+TOPIC: Busbar_config_errors.htm
+========================================
+Dynamic Busbar Coloring Configuration errors
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuration Errors
+ 
+Typical configuration errors are as follows.
+ 
+ 
+On Nodes
+No Communication Variable set for type Measured � Communication
+ 
+On Switches
+No Communication Variable set for type Communication
+Same Upstream and Downstream Nodes
+ 
+On Transformers
+Same Upstream and Downstream Nodes
+Unknown, absence of voltage or earth voltage level selected
+ 
+On Voltages Configuration
+Voltages levels with overlapping min/max boundaries
+Voltages levels not correctly ordered
+ 
+ 
+The items having errors are displayed in red in the tree on the left side of the configuration tool. The errors concerning the Voltages Configuration are not displayed, but a warning is displayed when they are validated. Generation of the configuration files is prevented if one or more configuration error exists. Show picture
+
+
+========================================
+TOPIC: Busbar_config_tool_overview.htm
+========================================
+Dynamic Busbar Coloring Configuration tool overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuration Tool Overview
+ 
+As part of the Add-on, a configuration tool is provided with the Topology Engine. the name of the executable is ConfigTool.exe. The configuration tool allows you to define all the configuration items from the electrical topology viewpoint and creates the 2 main configuration files.
+ 
+ 
+TopoConfig.xml: The configuration file of the Topology Engine
+ 
+TopoImport.xml: An XML Generic Import file to instantiate the necessary templates available in the SH_ELEC_COLO library. Show picture
+
+ 
+ 
+Creating or loading a project
+ 
+The tool starts with a new empty project. You can create a new project by clicking the New project menu button. To load an existing project, click the Load project menu button. You will be asked to select your project folder. Show picture
+
+
+========================================
+TOPIC: Busbar_how_to_use_the_project.htm
+========================================
+Dynamic Busbar Coloring How to use the Add-on in your project
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to use the Add-on in Your Project
+ 
+This topic describes the steps you will have to follow in order to use the Dynamic Busbar Coloring Add-on in your own application. Each step is briefly described and includes references to subsequent sections where installation and configuration are explained in detail.
+ 
+The necessary entry point is the description of the network topology � a single line diagram is usually available and sufficient.
+ 
+In addition, the following elements are necessary for using the Add-on in your project.
+ 
+ 
+The dedicated configuration tool � It allows you to create the topology configuration files,
+ 
+The SH_ELEC and SH_ELEC_COLO libraries ,
+ 
+Your project.
+ 
+ 
+In order to become familiar with the different configuration items, a sample project is available. It is a good starting point before you go through the configuration and set-up of your own project. 
+ 
+Step 1 Preparatory work
+ 
+Using the single line diagram identify the list of topology items, their properties, and their dependencies.
+ 
+First, identify the list of switches and transformers, then the nodes that are instrumented (with field variables), those that have a static value (earth, static input) and feeders.
+ 
+Next, complete the list with the nodes that are used to connect the devices (bus, connection between a switch and a transformer�)
+ 
+Finally, associate them with the required variables that may already exist in your project. If not, it is time to define the variable hierarchy and branches.
+ 
+Step 2 Configure the topology engine
+ 
+Create the Topology Engine configuration files in C folder of your project either manually or using the dedicated configuration tool. The files required to run the Configuration Tool must be copied in the BIN directory of PcVue.
+ 
+Creating and maintaining a Topology Engine configuration using the Configuration Tool requires that you have the SH_ELEC_COLO library available.
+ 
+See The configuration tool for more information on the configuration tool.
+ 
+Step 3 Configure the variables
+ 
+The configuration tool is able to create all configuration items required for the Topology Engine to calculate and maintain data related to dynamic coloring. This is mainly sets of internal variables used for calculation and graphic animations. These variables are generated based on templates and instances automatically created by the configuration tool. It is up to you to use the Application Architect to modify the templates and add the extra variables necessary to handle data coming from the field (switch positions, injection�) or to ensure that the necessary variables are in the project.
+ 
+Step 4 Install the Topology Engine
+ 
+To activate the svmgrTopology.dll, add the following lines in the file BIN\Usrmgr.dat :
+ 
+[USRMGR\svmgrTopology]
+DLL=svmgrTopology.dll
+ 
+Step 5 First tests
+ 
+This is all that is required to run the Topology Engine regardless of anything else in the project.
+ 
+Launch PcVue with your own project. Using the Event viewer, make sure the svmgrTopology.dll and your configuration are loaded successfully. See Traces for more information about the messages and errors raised by the Topology Engine Runtime.
+ 
+Once any loading errors are fixed, it is time to develop the mimics and symbols to visualize voltage levels across your network.
+ 
+Step 6 Mimic design
+ 
+See Using node voltages in the application for more information.
+
+
+========================================
+TOPIC: Busbar_network.htm
+========================================
+Dynamic Busbar Coloring Networked applications
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Networked Application
+ 
+Within an architecture having networked stations and distributed processing, the following conditions must be fulfilled.
+ 
+ 
+The Topology Engine shall be active only on a single station at a time,
+ 
+This active station shall be the active producer of the Topology Engine variables
+ 
+ 
+It is then possible to either install the Topology Engine on a single station, or on several redundant servers. In the latter case, the setting ServerVarName of the Topology.ini file must have a valid value. See ServerVarName for more information.
+
+
+========================================
+TOPIC: Busbar_overview.htm
+========================================
+Dynamic Busbar Coloring Overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Dynamic Busbar Coloring Overview
+ 
+The aim of this Add-on is to calculate the distribution of voltages across an electrical grid that may not be fully equipped with voltage sensors. It allows visualizing the presence or absence of voltage on all busbar and feeders, a feature also known as Dynamic Busbar Coloring.
+ 
+This set of functions is referred to as the Topology Engine (or just engine) in this help. The main functional component of the Topology Engine is a program, svmgrTopology.dll, developed using the SV Manager toolkit.
+ 
+Dynamic Busbar Coloring gives the operator a quick overview of the state of a substation or other distribution network and shows, at a glance, whether any specific part of the substation (e.g. busbar segment) is earthed, energized, or de-energized. This function helps operators to be informed about the current state so that they can make proper decisions, especially in emergency situations.
+ 
+During initialization, the engine reads the configuration file that defines the structure of the electrical network, and builds, in memory, the list of variables required for the calculation of voltage distribution.
+ 
+When any of these variables� values change, the engine recalculates the distribution of voltages, and updates the result in PcVue variables used for logging, alarming and visualization.
+
+
+========================================
+TOPIC: Busbar_save_generate.htm
+========================================
+Dynamic Busbar Coloring Saving and generating the Topology Engine configuration files
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Saving and Generating the Topology Engine Configuration Files
+ 
+The one click method
+ 
+You can export the configuration to PcVue by using the menu button Export configuration. A console prompt will be opened while exporting and closed when export is completed. PcVue must be running for the export to succeed.
+ 
+The manual method
+ 
+To save a project click the Save Project menu button. The files TopoConfig.xml and TopoImport.xml will be created or updated in the C project folder. In the case of a new project, a dialog box prompts you to select the project folder.
+ 
+ 
+From PcVue select the menu command Configure.Smart Generators� to open the Smart Generator.
+ 
+Click New Import, give your import a name such as TopoImport and select the file to import, TopoInport.xml, from the C directory of your project. Click the Finish button to complete the import. If you are updating an existing configuration, select the existing import and click the Synchronize button. Show picture
+
+ 
+Return to the PcVue workspace and select the menu command Configure.Application Architect� to open the Application Architect. Show picture
+
+ 
+In the Architect, select the menu command Task.Generate to generate the configuration.
+ 
+Restart PcVue so that the Topology Engine loads its configuration.
+ 
+Check successful loading. Use the PcVue Event Viewer to make sure the configuration is loaded successfully by the svmgrTopology.dll. See Traces for more information.
+
+
+========================================
+TOPIC: Busbar_topology_engine_settings.htm
+========================================
+Dynamic Busbar Coloring Topology Engine settings and .ini file
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Topology Engine Settings and .ini File
+ 
+The Topology Engine .ini file is named Topology.ini and is located in C directory of your project. This file allows you to change some of the Topology Engine settings. 
+ 
+[Config]
+ 
+ServerVarName=System.Association.Localhost
+ 
+LogMessageLevel=2
+ 
+GenerateReport=1
+ 
+NodeNSvalue=previous
+ 
+SwitchNSvalue=previous
+ 
+NodeProbAsReal=1
+ 
+SwitchProbAsReal=0
+ 
+IgnoreProbVsRealConflict=0
+ 
+The Topology.ini file is optional. In case of absence, the Topology Engine will use default settings.
+ 
+The ServerVarName setting
+ 
+It specifies the name of a bit variable which will enable the engine to run or not. If its value is 1, then the Topology Engine output is sent to the variables. If its value is 0, then the Topology Engine output is not sent to the variables.
+ 
+If no variable is specified, then the Topology Engine output is sent to the variables. If the specified variable does not exist, then the Topology Engine output is not sent to the variables.
+ 
+For example, to support an architecture where calculations are to be done only on the active server of an association named <AssocName>, this setting could be set to �SYSTEM.<AssocName>.LOCALHOST�.
+ 
+The LogMessageLevel setting
+ 
+Specifies the level of log messages in the Event Viewer. There are 4 levels.
+ 
+ 0 = Error
+ 
+1 = Warning
+ 
+2 = Info
+ 
+3 = Debug.
+ 
+Each level includes messages from any sub-ordinate levels, e.g. Error messages are also logged if level is Warning, Info or Debug.
+ 
+The default value is 2 (Log Level: INFO). With this level, the Topology Engine will log the minimum necessary information associated with the loading its configuration and detecting major events.
+ 
+Sometimes, due to an error in the topology configuration, or due to lack of corresponding variables, the topology calculation results may not be as expected. In such a case, it is useful to set the log level to 3 (Log Level: DEBUG). However, particularly with a high number of topology items, there will be a large volume of log messages.
+ 
+The NodeNSValue setting
+ 
+Specifies the behavior of the Topology Engine when a Node value becomes NS. There are 3 values.
+ 
+Previous - Keeps the previous value and sets it as uncertain
+ 
+Default - Uses the �Default Injection� value as uncertain
+ 
+V0 - Uses the V0 level (or Absence of Voltage).
+ 
+The default value is Previous.
+ 
+The SwitchNSValue setting
+ 
+Specifies the behavior of the Topology Engine when a Switch position value becomes NS. There are 4 values:
+ 
+Previous - Keeps the previous value and sets it as uncertain.
+ 
+Default - Uses the �Default Position� value as uncertain.
+ 
+Close - Considers the switch as probably open.
+ 
+Open - Considers the switch as probably close.
+ 
+The default value is Previous.
+ 
+The NodeProbAsReal setting
+ 
+Specifies the behavior of the Topology Engine when a Node is in an uncertain state. The default value is 0 (Uncertain values as Significant: NO). With this value, the Topology Engine will use both uncertain and significant values.
+ 
+If you want to ignore Node uncertain values, you must specify 1 (Uncertain values as Significant: YES). For example, if a calculation gives a node at voltage level V2�, then the result is output as voltage level V2.
+ 
+The SwitchProbAsReal setting
+ 
+It specifies the behavior of the Topology Engine when a Switch is in an uncertain state. The default value is 0 (Uncertain values as Significant: NO). With this value, the Topology Engine will use both uncertain and significant values.
+ 
+If you want to ignore Switch uncertain values, you must specify 1 (Uncertain values as Significant: YES).
+ 
+The IgnoreProbVsRealConflict setting
+ 
+It specifies the behavior of the Topology Engine when there are both Significant and Uncertain Voltage on a Node. The default value is 0 (Ignore Uncertain Voltage in case of Significant Voltage: NO). With this value, the Topology Engine will use both uncertain and significant values in every case.
+ 
+If you want to ignore uncertain values when there is a significant value on a node, you must specify 1 (Ignore Uncertain Voltage in case of Significant Voltage: YES). In that case, uncertain values will be kept only if there is no significant voltage on the node. For example, if a calculation gives a node at voltage level (V1+V2�), then the result is output as voltage level V1.
+
+
+========================================
+TOPIC: Busbar_topology_items.htm
+========================================
+Dynamic Busbar Coloring Topology items
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Topology Items
+ 
+All the Topology Engine items can be created with the configuration tool. The name of each item is uniquely assigned by the configuration tool and cannot be changed. All the other properties of the items can be edited. All items configuration dialogs have 3 buttons.
+ 
+ 
+Reset - Undo last changes and restore default values for the item,
+ 
+Apply - Apply the changes immediately (new start point for the Reset button)
+ 
+Delete - Delete the selected item
+ 
+ 
+Any changes you make are automatically applied whenever you select another item. 
+ 
+Voltages Configuration
+ 
+The Voltages Configuration is accessed from the associated button in the menu bar. For each Voltage Level, it is possible to specify its bounds. Voltage levels must be ordered from the lowest (V0) to the highest (V6). Their bounds cannot cross one another (V1 max must be lower or equal to V2 min). Show picture
+
+ 
+Networks
+ 
+The first item to create is a Network. To insert a new Network, click the Add Network menu button. The project must have at least one network. Networks are used to split an electrical system into logical pieces. You can for example create one Network per mimic you need to design. The other types of items (nodes, switches�) can be linked together only if they belong to the same network.
+ 
+The only property of a Network is its label. This label is used in the tree on the left side of the configuration tool. Show picture
+
+ 
+Nodes
+ 
+To insert a new Node, select a Network and click the Add Node menu button. There are 4 types of Node.
+ 
+ 
+Passive,
+ 
+Static,
+ 
+Measured � Manual,
+ 
+Measured � Communicating.
+ 
+ 
+The common properties are as follows.
+ 
+ 
+Label - The name used in the tree on the left side,
+ 
+Branch - The branch used to instantiate the corresponding template,
+ 
+Network - The Network that the Node belongs to,
+ 
+Default Injection - The default voltage level of the Node,
+ 
+Injection Type - The type of the Node.
+ 
+ 
+For Passive and Static Nodes, no additional properties are required. Show picture
+
+ 
+For Measured � Manual Nodes, the additional property Injection Variable Scale is required. It is possible to specify the scale for of the voltage value you set (1V, 10V, 100V or 1kV). Show picture
+
+ 
+Finally, for Measured � Communication Nodes, two additional properties are required.
+ 
+ 
+Injection Variable Scale, which works as for Measured � Manual Nodes,
+ 
+Injection Variable Name, to specify the field variable that the Node is linked to. This variable can be a Bit or a Register.
+ 
+ 
+Show picture
+ 
+
+ 
+ 
+ 
+Switches
+ 
+To insert a new Switch, select a network and click the Add Switch menu button.
+ 
+There are 2 types of Switch.
+ 
+ 
+Manual,
+ 
+Communicating.
+ 
+ 
+The common properties are as follows.
+ 
+ 
+Label - The name used in the tree at the left side of the tool,
+ 
+Branch - The branch used to instantiate the corresponding template,
+ 
+Network - The Network that the Switch belongs to,
+ 
+Upstream Node - The first Node that the Switch is linked to,
+ 
+Downstream Node - The second Node that the Switch is linked to,
+ 
+Default Position Value - The default position of the Switch,
+ 
+Switch Type - The type of the Switch.
+ 
+ 
+According to the symbols library and as usual on single line diagrams.
+ 
+ 
+The Upstream Node corresponds to the Node at the top or left side of the Switch in the diagram,
+ 
+The Downstream Node corresponds to the Node at the bottom or right side of the Switch in the diagram.
+ 
+ 
+For Manual Switches, no additional properties are required. Show picture
+
+ 
+For Communicating Switches, the additional property Position Variable Name is required. It is used to specify the field variable that the Switch is linked to. This variable can be a Bit or a Register. You also have to specify the values corresponding to the Open and the Close positions. Show picture
+
+ 
+Transformers
+ 
+To insert a new Transformer, select a network and click the Add Transformer menu button.
+ 
+Transformers� properties are as follows.
+ 
+ 
+Label - The name used in the tree at the left side of the tool,
+ 
+Branch - The branch used to instantiate the corresponding template,
+ 
+Network - The Network the Transformer belongs to,
+ 
+Upstream Node - The first Node that the Transformer is linked to,
+ 
+Upstream Voltage - The supposed Voltage level of the first Node,
+ 
+Downstream Node - The second Node that the Transformer is linked to,
+ 
+Downstream Voltage - The supposed Voltage level of the second Node.
+ 
+ 
+According to the symbols library, and as usual on single line diagrams, the Upstream Node corresponds to the Node at the top or left side of the Transformer in the diagram. And the Downstream Node corresponds to the Node at the bottom or right side of the Transformer in the diagram. Show picture
+
+
+========================================
+TOPIC: Busbar_traces.htm
+========================================
+Dynamic Busbar Coloring Topology engine traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Topology Engine Traces
+ 
+The Topology Engine Add-on takes advantage of PcVue diagnostic traces to log messages at run-time. The messages appear in the Event Viewer.
+ 
+The log messages have the following format:
+ 
+.....,Topology Engine,<Log Level>,<The Subject>: <The Message>
+ 
+Where:
+ 
+ 
+<Log Level> - Error / Warning / Info / Debug
+ 
+<The Subject> - Project / Setting / Config / Data
+ 
+<The Message> Is the text of the message
+ 
+ 
+Messages issued by the Topology Engine are as follows.
+ 
+ 
+ 
+ 
+ 
+
+ Message
+ Description
+ 
+ 
+
+ Topology EngineInfoProject: Load with demo mode
+ Indicates the project will run in demo mode (license not found). In demonstration mode, the Topology Engine calculates the voltage distribution for a period of 1 hour and then sets all calculation results to Invalid.
+ 
+ 
+
+ Topology EngineInfoConfig: Configuration successfully loaded
+ Indicates the configuration was loaded without detecting any error.
+ 
+ 
+
+ Topology EngineInfoConfig: Start
+ The Topology Engine has started its process and calculation mechanisms.
+ 
+ 
+
+ Topology EngineInfoProject: Unable to read dongle, error 3
+ Indicates that the protection dongle could not found.
+ 
+ 
+ 
+ 
+In addition error messages can also occur while loading configuration or at run-time. Most of the errors described in the following table are configuration related, raised at loading time. In general, they can be fixed by checking and modifying the Topology Engine configuration. In all cases, the item or variable in error is referenced in the message.
+ 
+ 
+ 
+ 
+ 
+
+ Error code
+ Description
+ 
+ 
+
+ ERROR_ID_INVALID
+ The item identifier is invalid. The item can be of type switch transformer node or network.
+ 
+ 
+
+ ERROR_VARNAME_INVALID
+ The variable name is invalid.
+ 
+ 
+
+ ERROR_INJECTION_INVALID
+ The value of the injection at a node is invalid.
+ 
+ 
+
+ ERROR_INJECTION_NODEFAULT
+ The Default injection value is missing on a Static node.
+ 
+ 
+
+ ERROR_POSITION_INVALID
+ The value indicated for the switch position is invalid.
+ 
+ 
+
+ ERROR_POSITION_UNDEFINED
+ The normal position of the switch is not defined.
+ 
+ 
+
+ ERROR_NODE_UNKNOWN
+ An undefined node is referenced in the configuration item. For example the upstream or downstream node of a switch (or transformer) may be missing in the configuration.
+ 
+ 
+
+ ERROR_NODE_EXISTS
+ 2 or more nodes are using the same identifier.
+ 
+ 
+
+ ERROR_NODE_USED
+ The node is already referenced. This error is in particular raised in the case of a switch where the upstream and downstream nodes are referencing the same node introducing an undesired loop. The same can apply to a transformer.
+ 
+ 
+
+ ERROR_SWITCH_UNKNOWN
+ The switch or transformer is referenced but undefined.
+ 
+ 
+
+ ERROR_SWITCH_EXISTS
+ The switch or transformer is defined twice.
+ 
+ 
+
+ ERROR_CONFIG_NOTREAD
+ The configuration file cannot be accessed. This issue is raised if one or more configuration file is missing or if the file system security prevents the Topology Run-time Engine from opening them.
+ 
+ 
+
+ ERROR_CONFIG_INVALID
+ The main configuration file format is invalid and cannot be recognized.
+ 
+ 
+
+ ERROR_CONFIG_NOTWRITTEN
+ The main configuration file cannot be saved.
+ 
+ 
+
+ ERROR_CONFIG_NOTSUBSCRIBED
+ The Topology Engine Run-time failed to subscribe to its configuration.
+ 
+ 
+
+ ERROR_SYSTEM_NOTSUBSCRIBED
+ The Topology Engine Run-time failed to subscribe to PcVue system variables.
+ 
+ 
+
+ ERROR_VARIABLE_NOTEXIST
+ The variable (as referenced in the Topology Engine configuration) is missing in PcVue configuration.
+ 
+ 
+
+ ERROR_VARIABLE_NOTSUBSCRIBED
+ The Topology Engine Run-time failed to subscribe to the variable.
+ 
+ 
+
+ ERROR_VARIABLE_NOTUNSUBSCRIBED
+ The Topology Engine Run-time failed to unsubscribe from the variable.
+ 
+ 
+
+ ERROR_ONCHANGE_DATAUNKNOWN
+ A new value is received for the variable but it cannot be processed by the Topology Engine Runtime.
+ 
+ 
+
+ ERROR_CALCULATE_TRANSFOLOOP
+ An undesired loop is configured with transformers. In particular 2 transformers with different ratios but sharing the same upstream and downstream nodes.
+
+
+========================================
+TOPIC: Busbar_using_node_voltages.htm
+========================================
+Dynamic Busbar Coloring Using the node voltages in the application
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Node voltages in the Application
+ 
+The Topology Engine writes the calculation results, the nodes voltages, into the variables declared in its configuration as the Node Voltage Variables. It is up to the application designer to take advantage of these values for logging, alarming and visualization.
+ 
+Graphic animations
+ 
+On the graphic side, it is advisable to use these values in generic symbols using the appropriate animations. The association of the voltage levels with the desired colors is not enforced by the Topology Engine and must be decided by the application designer. For this purpose, the Color on register value and Image on register value animations can be used with the set of desired colors.
+ 
+An example of a possible color animation configuration follows.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Voltage
+ Value
+ Color
+ 
+ 
+
+ Absence (V0)
+ 1
+ &#160;
+ &#160;
+ 
+ 
+
+ V1
+ 2
+ &#160;
+ &#160;
+ 
+ 
+
+ Conflict: V0+V1
+ 3
+ &#160;
+ &#160;
+ 
+ 
+
+ V2
+ 4
+ &#160;
+ &#160;
+ 
+ 
+
+ Conflict: V0+V2
+ 5
+ &#160;
+ &#160;
+ 
+ 
+
+ Conflict: V1+V2
+ 6
+ &#160;
+ &#160;
+ 
+ 
+
+ Conflict: V0+V1+V2
+ 7
+ &#160;
+ &#160;
+ 
+ 
+
+ V3
+ 8
+ &#160;
+ &#160;
+ 
+ 
+
+ Conflict: V0+V3
+ 9
+ &#160;
+ &#160;
+ 
+ 
+
+ Conflict: V1+V3
+ 10
+ &#160;
+ &#160;
+ 
+ 
+
+ Conflict: V0+V1+V3
+ 11
+ &#160;
+ &#160;
+ 
+ 
+
+ Conflict: V2+V3
+ 12
+ &#160;
+ &#160;
+ 
+ 
+
+ Conflict: V0+V2+V3
+ 13
+ &#160;
+ &#160;
+ 
+ 
+
+ Conflict: V1+V2+V3
+ 14
+ &#160;
+ &#160;
+ 
+ 
+
+ Conflict: V0+V1+V2+V3
+ 15
+ &#160;
+ &#160;
+ 
+ 
+
+ V4
+ 16
+ &#160;
+ &#160;
+ 
+ 
+
+ Unavailable
+ NS
+ &#160;
+ &#160;
+ 
+ 
+
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+ 
+ 
+If you need to display more voltage colors, you can use several instances of this animation.
+ 
+
+ 
+It is up to the application designer to give priority in displaying voltage conflicts or supposed voltage values. Safety constraints normally lead to giving priority to display and highlight uncertainty instead of supposed values, but end-user needs might require uncertainty to be ignored. 
+ 
+ 
+It is also possible to use Image on register value or Visibility on register value animations.
+ 
+Library
+ 
+The SH_ELEC_COLO library provides several symbols based on the variables set of the templates. They use Visibility on register value animations to display different images.
+ 
+The following colors are used in the library.
+ 
+ 
+ 
+ 
+ 
+
+ Voltage
+ Color
+ 
+ 
+
+ V0 or V0�
+ Gray
+ 
+ 
+
+ V1 or V1�
+ Blue
+ 
+ 
+
+ V2 or V2�
+ Cyan
+ 
+ 
+
+ V3 or V3�
+ Green
+ 
+ 
+
+ V4 or V4�
+ Orange
+ 
+ 
+
+ V5 or V5�
+ Purple
+ 
+ 
+
+ V6 or V6�
+ Yellow
+ 
+ 
+
+ V7 or V7�
+ White
+ 
+ 
+
+ No communication
+ Pink
+ 
+ 
+
+ Conflict
+ Blinking red
+ 
+ 
+
+ Potential conflict
+ Fixed red
+ 
+ 
+ 
+ 
+Logging and alarming
+ 
+It is possible to customize the templates provided in the library to add alarms and event logging. One basic modification that can be done is to add an expression to include a bit variable indicating voltage absence. This will be calculated based on the VOLTAGE Variable. As it represent a logical level and not the real voltage level, the expression will be �Voltage <= 1�. The resulting voltage absence variable is flagged to be an alarm.
+
+
+========================================
+TOPIC: Busbar_variables.htm
+========================================
+Dynamic Busbar Coloring The PcVue Variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ &#160;PcVue Variables
+ 
+When the Topology Engine runs:
+ 
+ 
+It reads input information - switches positions and nodes injections - from PcVue variables,
+ 
+It writes calculation results - nodes voltages - to PcVue variables.
+ 
+ 
+To ensure correct calculations by the Topology Engine, and be able to use its results, all the variables declared in its configuration must exist and be configured correctly.
+ 
+ 
+Node Injection Variables,
+ 
+Node Voltage Variables,
+ 
+Switch Position Variables.
+ 
+ 
+Templates from the application Architect library
+ 
+The library SH_ELEC_COLO is provided with the Topology Engine. It contains a number of templates that correspond to the different topology items. Show picture
+
+ 
+These templates can be used to automatically generate the variables and their configuration.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Node
+ 
+ 
+
+ Variable
+ Mandatory
+ I/O
+ Data Type
+ Remark
+ 
+ 
+
+ Voltage
+ Yes
+ I
+ Register
+ Logical output level. This variable name can be modified through the configuration file.
+ 
+ 
+
+ Injection
+ No
+ O
+ Register
+ Logical input level. This variable name can be modified through the configuration file.
+ 
+ 
+
+ VoltageConflict
+ No
+ O
+ Bit
+ Set to 1 when there is a voltage conflict (e.g.: V1+V2)
+ 
+ 
+
+ PotentialVoltageConflict
+ No
+ O
+ Bit
+ Set to 1 when there is a potential voltage conflict (e.g.: V1+V2� or V1�+V2�)
+ 
+ 
+
+ MeasuredInjection
+ No
+ I
+ Register
+ Real injection in Volt when Node is of type �Measured�. This variable is used by the symbols provided with the library.
+ 
+ 
+
+ ManualInjection
+ No
+ I
+ Register
+ Manual injection value when Node is of type �Measured� with a manual input. This variable is used by the symbols provided with the library.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Switch
+ 
+ 
+
+ Variable
+ Mandatory
+ I/O
+ Data Type
+ Remark
+ 
+ 
+
+ Position
+ Yes
+ I
+ Bit
+ Position of the Switch. 0 for open 1 for close. The variable name can be modified through the configuration file.
+ 
+ 
+
+ Upstream.Voltage
+ No
+ O
+ Register
+ Copy of the Voltage variable of the upstream Node.
+ 
+ 
+
+ Upstream.VoltageConflict
+ No
+ O
+ Bit
+ Copy of the VoltageConflict variable of the upstream Node.
+ 
+ 
+
+ Upstream.PotentialVoltageConflict
+ No
+ O
+ Bit
+ Copy of the PotentialVoltageConflict variable of the upstream Node.
+ 
+ 
+
+ Downstream.Voltage
+ No
+ O
+ Register
+ Copy of the Voltage variable of the downstream Node.
+ 
+ 
+
+ Downstream.VoltageConflict
+ No
+ O
+ Bit
+ Copy of the VoltageConflict variable of the downstream Node.
+ 
+ 
+
+ Downstream.PotentialVoltageConflict
+ No
+ O
+ Bit
+ Copy of the PotentialVoltageConflict variable of the downstream Node.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Transformer
+ 
+ 
+
+ Variable
+ Mandatory
+ I/O
+ Data Type
+ Remark
+ 
+ 
+
+ Upstream.Voltage
+ No
+ O
+ Register
+ Copy of the Voltage variable of the upstream Node.
+ 
+ 
+
+ Upstream.VoltageConflict
+ No
+ O
+ Bit
+ Copy of the VoltageConflict variable of the upstream Node.
+ 
+ 
+
+ Upstream.PotentialVoltageConflict
+ No
+ O
+ Bit
+ Copy of the PotentialVoltageConflict variable of the upstream Node.
+ 
+ 
+
+ Downstream.Voltage
+ No
+ O
+ Register
+ Copy of the Voltage variable of the downstream Node.
+ 
+ 
+
+ Downstream.VoltageConflict
+ No
+ O
+ Bit
+ Copy of the VoltageConflict variable of the downstream Node.
+ 
+ 
+
+ Downstream.PotentialVoltageConflict
+ No
+ O
+ Bit
+ Copy of the PotentialVoltageConflict variable of the downstream Node.
+ 
+ 
+ 
+ 
+Link with field variables
+ 
+The Topology Engine includes another function that links field variables to Topology Engine Variables. Two types of variable are identified.
+ 
+ 
+Injection variables
+ 
+Switch position Variables
+ 
+ 
+This feature enables the use of templates and graphical symbols provided in the SH_ELEC_COLO library without any modification, and only by editing the configuration file.
+ 
+Injection variables
+ 
+To make the link between a field injection variable and the Topology Engine variable, it is possible to use the properties Field Injection Variable and Field Injection Scale described in Nodes. At start-up, the Topology Engine automatically subscribes to the field variable and, according to the variable type, performs different actions.
+ 
+If it is a bit variable, then if its value is 0, the Topology Engine uses the voltage absence level (V0), and if the value is 1, it uses the Default Voltage Level of the node.
+ 
+If it is a register variable, then according to the scale and the Voltages configuration (see Voltages), the Topology Engine performs 2 actions.
+ 
+ 
+Convert the value into a voltage level (V0 to V6)
+ 
+Copy the value and quality into the MeasuredInjection variable (in Volts)
+ 
+ 
+Switch position variables
+ 
+To make the link between a field switch position variable and the Topology Engine variable, it is possible to use the properties Field Position Variable, Field Open Position Value and Field Close Position Value described in Switches.
+ 
+At start-up, the Topology Engine automatically subscribes to the field variable and each time there is a change, it compares the new value to both Field Open Position Value and Field Close Position Value to set the potentially new position. If the value does not correspond to any of them, the switch position is set to NS.
+ 
+
+ 
+When using the SH_ELEC_COLO library without any modification, switch positions are animated based on calculated internal variables whose values are normalized (to accommodate normal position, inversions of value...). Using these internal variables for controlling switch positions is ineffective with communicating switches because variables for switch control have to be separated from these internal variables for practical reasons (data mapping, typing...). It is recommended to customize the symbols, at least for the switch control buttons.
+
+
+========================================
+TOPIC: Busbar_voltage_calculation.htm
+========================================
+Dynamic Busbar Coloring Voltage calculation principles
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Voltage Calculation Principles
+ 
+To calculate the voltage distribution, the Topology Engine uses some rules. It is important to understand them in order to create the correct configuration and to use the Dynamic Busbar Coloring. This topic explains these rules and introduces notations.
+ 
+Voltage levels
+ 
+The Topology Engine supports 8 discrete voltage levels, noted V0, V1, V2, V3, V4, V5, V6 and V7:
+ 
+ 
+Levels V1 to V6 can be interpreted in an arbitrary manner. It is up to PcVue application designer to associate voltage levels to the physical system voltages he is working on.
+ 
+It is assumed that V1<V2, V2<V3. For example:
+V1 can be interpreted as 220V,
+V2 as 0.4 kV,
+V3 as 10 kV,
+etc.
+ 
+V0 and V7 are special values, they are discussed in more detail later in this topic.
+Level V0 is reserved for the absence of voltage.
+Level V7 is reserved for earth.
+ 
+ 
+Within the Topology Engine, voltage levels are coded as described in the following table.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Voltage level
+ V7*
+ V6
+ V5
+ V4
+ V3
+ V2
+ V1
+ V0**
+ 
+ 
+
+ Index in word
+ [7]
+ [6]
+ [5]
+ [4]
+ [3]
+ [2]
+ [1]
+ [0]
+ 
+ 
+
+ Voltage code
+ 128
+ 64
+ 32
+ 16
+ 8
+ 4
+ 2
+ 1
+ 
+ 
+ 
+ 
+*V7 reserved for earth level.
+**V0 reserved for voltage absence.
+ 
+
+ 
+Values shown in the table are exactly the voltage codes, they are not RGB color values. This table shows the colors used in the sample project.
+ 
+ 
+Sometimes it is not be possible to determine the presence or absence of the voltage - typically in the case of uncertain switch position. In such cases, the Topology Engine uses the uncertain voltages levels. Codes for uncertain voltage levels are equal to codes of usual voltage levels multiplied by 256. The uncertain voltage levels are notated V0�, V1�, V2�, V3�, V4�, V5�, V6� and V7�.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Voltage level
+ V7'
+ V6'
+ V5'
+ V4'
+ V3'
+ V2'
+ V1'
+ V0'
+ 
+ 
+
+ Index in word
+ [15]
+ [14]
+ [13]
+ [12]
+ [11]
+ [10]
+ [9]
+ [8]
+ 
+ 
+
+ Voltage code
+ 32768
+ 16384
+ 8192
+ 4096
+ 2048
+ 1024
+ 512
+ 256
+ 
+ 
+ 
+ 
+Voltage calculation
+ 
+Voltages are always distributed from the measured nodes through switching devices and to the busbar parts. So the voltage calculation always starts from the power sources, through transformers and closed switches, to the connected busbar parts.
+ 
+The earth - Voltage level V7
+ 
+The earth is a very special case of voltage level. It should not be confused with the absence of voltage, although in both cases the voltage sensor will indicate 0. Unlike the absence of voltage, the superposition of earth and any other voltage is considered as a voltage conflict. In addition, the earth cannot pass through transformers. This is why the earth voltage level is fixed to level V7, which is processed by the Topology Engine in a particular way.
+ 
+The absence of voltage - Voltage level V0
+ 
+The level V0 is reserved for the absence of voltage. The Topology Engine processes it as any other voltage level except that, when on a same node voltage absence (V0) and earth level (V7) are detected, the earth level is given the priority. The voltage level output in such a situation is that the node is at the earth level.
+
+

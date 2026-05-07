@@ -1,0 +1,634 @@
+========================================
+TOPIC: Context_menu.htm
+========================================
+Drawing context menu
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Drawing Context Menu
+ 
+The drawing context menu gives quick access to the most 
+ frequently used commands and to a drawing element Properties dialog. The 
+ menu is displayed by clicking anywhere in a selected drawing element (or 
+ group of elements) with the right mouse button. The window in which the 
+ drawing element resides must be in Edit mode. 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ &#160;
+ 
+ 
+Cut the drawing element and place it on 
+ the Windows Clipboard. 
+ 
+Copy the drawing element to the Windows Clipboard. 
+ 
+ 
+Delete the drawing element. 
+
+ 
+Create a drawing group from the selected 
+ elements. 
+ 
+Restore 
+ a drawing group to its individual elements.
+ 
+Lock the drawing element. 
+ 
+Unlock the drawing element. 
+ 
+Arrange the selected drawing elements. 
+ 
+ 
+Only applicable to objects in 3D windows.
+ 
+Create a symbol using the selected drawing 
+ elements. 
+ 
+Enable the drawing element so that it may 
+ be used as a VBA control.
+ 
+Enable use of a VBA script inside a symbol.
+ 
+Display the scripting language editor.
+
+ 
+Animate the selected drawing element.
+ 
+List the selected object's properties.
+ 
+Display the Drawing Properties dialog.
+ 
+Import/export the texts of a symbol. See 
+ the Help topic How to Import/Export a File's Texts, in the Text Management 
+ book.
+
+
+========================================
+TOPIC: Context_mimic.htm
+========================================
+Mimic context menu
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mimic Context Menu
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+Paste the contents of 
+ the Windows Clipboard.
+ 
+Toggle alignment of drawings 
+ to the grid.
+ 
+Toggle display of the 
+ grid.
+ 
+Change the background 
+ color of the mimic.
+ 
+Change the color of the 
+ grid.
+ 
+Display the Window Properties 
+ dialog.
+ 
+Import or export the texts 
+ for a mimic.
+ 
+Select Run mode.
+ 
+ 
+ 
+ 
+The mimic context menu gives quick access to some of the 
+ more frequently changed mimic properties and to the Window Properties 
+ dialog. It also allows you to paste the contents of the Windows Clipboard 
+ into the mimic at the current cursor position. The menu may be displayed 
+ by clicking anywhere in a mimic background with the right mouse button 
+ whilst the mimic is in Design mode.
+
+
+========================================
+TOPIC: Context_mimic_example_alarm_management.htm
+========================================
+Context mimic example - alarm management
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Context Mimic Example - Alarm Management
+ 
+The following mimic may be used to acknowledge, mask 
+ and unmask any alarm displayed in one of three alarm animations supporting 
+ the Context mimic feature.
+ 
+ 
+Create a mimic named 
+ CTXALARM. The Popup Behavior attribute must be enabled. The width and height should 
+ be approximately 100 and 120 respectively. The other attributes are at 
+ the discretion of the developer.
+ 
+In Draw mode add 
+ three text strings - Acknowledge, Mask and Un-mask. Give each of the text strings 
+ the Button attribute.
+ 
+Apply Run Macro animation (SCADA Basic) to each of the text strings. The following instructions
+ should be used.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+For the Acknowledge button
+ 
+ 
+ 
+ALARM("ACK", "#V");
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+For the Mask button
+ 
+ 
+ 
+ALARM("MASK", "#V");
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+For the Unmask button
+ 
+ 
+ 
+ALARM("UNMASK", "#V");
+ 
+ 
+ 
+ 
+
+ 
+Note the use of the substitution string #V in the field 
+ where an alarm variable name would normally be entered.
+ 
+ 
+ 
+Save the mimic.
+ 
+From the Preferences
+ sub-menu on the Configure menu, select the Context Mimics to open the Context Windows dialog. Show picture
+ 
+ 
+Select the Alarm 
+ Animations tick box. 
+ 
+Enter the name of 
+ the mimic just created in the corresponding drop-down list box.
+ 
+Confirm the configuration 
+ by selecting the OK command button. 
+ 
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Click the mouse button on any of the 
+ supported animations to display the mimic CTXALARM. By default, the right mouse button is used.
+ 
+The corresponding 
+ alarm may be acknowledged, masked or unmasked from the mimic.
+ 
+The mimic will be 
+ closed automatically as soon as focus is lost.
+
+
+========================================
+TOPIC: Context_mimic_Opening_from_a_macro.htm
+========================================
+Opening a context mimic from a macro
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Opening a Context Mimic from a Macro
+ 
+A context mimic may be opened from a macro animation 
+ using the Context instruction. In this case, the mimic is opened when the 
+ macro is run which, like all control zones, occurs when the support drawing 
+ element is clicked on with the left mouse button.
+ 
+Unlike opening a context mimic by clicking on an animation 
+ with the right mouse button, where only specific mimics may be opened, 
+ any mimic may be opened as a context mimic using the Context instruction.
+ 
+The CONTEXT instruction
+ 
+The syntax of the Context instruction is as follows.
+ 
+CONTEXT,WinName,VarName
+ 
+Where:
+ 
+ 
+ 
+ 
+
+ 
+ 
+WinName
+ 
+ 
+ 
+The name of the mimic to be opened.
+ 
+ 
+ 
+
+ 
+ 
+VarName
+ 
+ 
+ 
+The name of the variable for the context of the mimic.
+
+
+========================================
+TOPIC: Context_mimic_Opening_using_right_mouse_btn.htm
+========================================
+Opening a context mimic using a mouse button
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Opening a Context Mimic Using a Mouse Button
+ 
+A context mimic may be opened by clicking with a 
+ mouse button on certain animation types. The mimic that is opened depends 
+ on the type of variable in the animation and is defined using the Context 
+ Windows dialog displayed from the menu Preferences.Context mimics. 
+ The names of up to six mimics may be entered, one for each of the variable 
+ types (bit, alarm, register and text) and for the Alarm Viewer and Log Viewer. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+In general, the ability to open a context mimic is only 
+ available from animations using a single variable, plus the Alarm 
+ Viewer and Log Viewer. The following animations are supported:
+ 
+ 
+ 
+ 
+
+ 
+ 
+Variable
+ 
+ 
+ 
+Supported Animations
+ 
+ 
+ 
+
+ 
+ 
+Bit
+ 
+ 
+ 
+Color - bit
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+Label - bit
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+Object - bit
+ 
+ 
+ 
+
+ 
+ 
+Alarm
+ 
+ 
+ 
+Color - alarm
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+Label - alarm
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+Object - alarm
+ 
+ 
+ 
+
+ 
+ 
+Register
+ 
+ 
+ 
+Value - Register
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+Color - Register level
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+Value - Register and Bits
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+Color - Register bit
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+Object - Register bit
+ 
+ 
+ 
+
+ 
+ 
+Text
+ 
+ 
+ 
+Text on alarm
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+Text on bit
+ 
+ 
+ 
+ 
+
+ 
+When a mimic is opened from a Link Open animation, the 
+ user is aware of its presence because the support drawing element is highlighted 
+ when the cursor is positioned over it. Animations that support the 
+ opening of context mimics do not have this feature and so some other mechanism 
+ must be used to indicate to the user that a mimic may be opened from them.
+ 
+The ability to open a Context mimic from an animation 
+ may be enabled and disabled using the option No context mimic in the variable 
+ definition.
+ 
+Which mouse button opens context mimics is selected by the HMI option Mouse inputs accessible from the Configuration menu. The default is the right button. See HMI General Options topic for more information.
+
+
+========================================
+TOPIC: Context_mimic_Overview.htm
+========================================
+Overview of context mimics
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Context Mimics
+ 
+A context mimic is created in the same way as any other 
+ mimic. It becomes a context mimic when it is opened in one of two special 
+ ways.
+ 
+ 
+By clicking on certain 
+ animation types with the right-hand button of the mouse.
+ 
+By using the CONTEXT 
+ instruction from a Script animation. 
+ 
+ 
+To differentiate it from a normal Mimic Open operation, 
+ when a context mimic is opened the drawing element supporting the originating 
+ animation is surrounded by a rectangle with a dashed border. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+A context mimic has a special relationship with the variable 
+ used in the animation (or specified in the CONTEXT instruction).
+ 
+ 
+The variable name 
+ is automatically made available in the text variable SYSTEM.CONTEXT.NAME.
+ 
+The variable title 
+ is automatically made available in the text variable SYSTEM.CONTEXT.TITLE.
+ 
+Substitution strings 
+ associated with the variable may be used in any script animation in the 
+ Context mimic. For example, #V will substitute the variable name. 
+ 
+ 
+Context mimics are created using the Mimic Editor in 
+ the same way as any other mimic. The only special requirement is that 
+ a context mimic must be configured with the Popup Behavior property enabled.
+ 
+A context mimic behaves as a child of the mimic in which 
+ the originating animation resides.
+ 
+ 
+It may only be moved 
+ within the bounds of the parent mimic.
+ 
+The opening position 
+ is determined by the attributes of the child mimic. 
+ 
+ 
+
+ 
+A major feature of a context mimics is the way in which attributes of the context variable may be substituted using special character strings in animations. See the topic Using Substitution Strings in an Animation for more information.
+
+

@@ -1,0 +1,157 @@
+========================================
+TOPIC: Advanced.htm
+========================================
+Data export advanced properties
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data Export Advanced Properties
+ 
+The Data Export Advanced tab contains properties that, for most applications, will not need to be changed from the default. Show picture
+
+ 
+ 
+If output exists - The following properties determine what happens if, on generation, the output already exists. The exact behavior depends on the output type.
+Excel
+Merge - The export, consisting of one or more worksheets, is merged with the existing workbook.
+Any worksheets with a different name to those already in the workbook are added to the workbook.
+For any worksheets that already exist the behavior depends on the configuration of the trend or log page. See the topics Trend Page Advanced Properties and Log Page Advanced Properties.
+Overwrite - The original workbook is deleted and a new workbook created.
+Make numbered copy - A new workbook is generated with the name taking the format of a numbered copy. This is the default option.
+Cancel generation - Generation is canceled if the workbook already exists.
+Csv
+Merge - The export, consisting of one or more Csv files, is added to the existing folder. 
+Any files with a different name to those already in the folder are added to the folder.
+For any files that already exist the behavior depends on the configuration of the trend or log page. See the topics Trend Page Advanced Properties and Log Page Advanced Properties.
+Overwrite - The original folder and files are deleted and a new folder and files are created.
+Make numbered copy - A new folder will be created with the name taking the format of a numbered copy. This is the default option.
+Cancel generation - Generation is canceled if the folder already exists.
+ 
+Selected language - Select which of the two language configurations is to be used for any bilingual strings in the export. For example, a variable's description.
+ 
+Export folder - The folder in which all the exported files will be generated. The default folder is defined in the Data Export settings.
+ 
+Template folder - The folder in which any Excel workbook templates are located. The default folder is defined in the Data Export settings.
+ 
+Networking - Manage the generation of exports when using a networked architecture. Select the list containing the names of the historical servers on which the export is to be executed. This list can contain stations which only produce the Data Export and which are clients regarding the historical data. In the case of an Association, if a Data Export is triggered, only the active producer stations will actually complete the generation.
+ 
+
+ 
+While the list specifies the historical server stations for performing the Data Export, executing the EXPORT() SCADA Basic instruction directly from a client station without export rights will not automatically redirect the request to the stations in the list.
+ 
+To ensures the export is correctly executed on the designated station(s) in the list:
+ 
+ 
+Create a variable configured to be produced by the server station of interest and consumed by client stations that can initiate the call.
+ 
+On this variable change, trigger an event that calls the SCADA Basic function on the server station, which in turn executes the EXPORT() function.
+
+
+========================================
+TOPIC: Advanced_Drawing_Properties.htm
+========================================
+Overview of advanced drawing properties
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Advanced Drawing Properties
+ 
+Most of the drawing elements support additional advanced 
+ properties that are not normally displayed in the Properties dialog. To display 
+ the advanced properties you can either:
+ 
+ 
+Select the Display.Advanced 
+ Mode command. The Advanced properties are displayed every time you display 
+ a drawing element�s properties.
+ 
+Click the down arrow 
+ button at the bottom of a Property box. The dialog will change to show the 
+ Advanced properties for that specific drawing element.
+ 
+ 
+Show picture
+
+
+========================================
+TOPIC: Advanced_security_strat_overview.htm
+========================================
+What is advanced security strategy?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+What is the Advanced Security Strategy?
+ 
+Enabling the advanced security strategy modifies the operation of the 
+ User Accounts mechanism in the following way.
+ 
+ 
+User profiles become 
+ hierarchical.
+ 
+Account names must 
+ be 6 characters or greater.
+ 
+The first time a 
+ User Account is used the password must be changed.
+ 
+The first time a 
+ User Account is used the account all properties, except the name, can be changed.
+ 
+User accounts can 
+ be de-activated.
+ 
+If a User Account 
+ is deleted a record of it remains in the user definition file.
+ 
+Information about 
+ a failed login attempt is available in two system variables.
+ 
+Failed login attempts 
+ generate an event, Attempted logon failure, that can be logged.
+ 
+On reaching the maximum number of failed login attempts configured in the User Accounts Settings (default 3) a User Account is locked.
+ 
+All passwords used in a project, including any that have 
+ expired or were used in deleted accounts, must be unique. An internal 
+ record is kept of the previous 1000 passwords to ensure this.
+ 
+ 
+To enable advanced security strategy you must tick the property, 
+ Enable advanced security strategy in the User Accounts settings
+
+
