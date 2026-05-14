@@ -3,6 +3,7 @@ package com.gadipo.pcvue.xmlbulk.core;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class XmlBulkEditorTest {
@@ -21,7 +22,7 @@ class XmlBulkEditorTest {
                 """;
 
         EditResult result = editor.edit(xml, new EditRequest(
-                new SearchCriteria("Property", "id", "Alarm", null, null, "/Root/Object", "//Object[contains(., 'Fire_Det')]/Property[@id='Alarm']"),
+                new SearchCriteria("Property", "id", "Alarm", null, null, "/Root/Object", "Object", "Fire_Det"),
                 EditOperation.REPLACE_TEXT,
                 "-1",
                 null,
@@ -42,7 +43,7 @@ class XmlBulkEditorTest {
                 """;
 
         EditResult result = editor.edit(xml, new EditRequest(
-                new SearchCriteria("Item", "status", "old", null, null, null, null),
+                new SearchCriteria("Item", "status", "old", null, null, null, null, null),
                 EditOperation.REPLACE_ATTRIBUTE_VALUE,
                 "new",
                 "status",
@@ -70,7 +71,7 @@ class XmlBulkEditorTest {
                 """;
 
         EditResult result = editor.edit(xml, new EditRequest(
-                new SearchCriteria("TemplateInstance", "Name", "binary_input", "Fire_Det", null, null, null),
+                new SearchCriteria("TemplateInstance", "Name", "binary_input", "Fire_Det", null, null, null, null),
                 EditOperation.REMOVE_NODE,
                 null,
                 null,
@@ -81,6 +82,6 @@ class XmlBulkEditorTest {
 
         assertEquals(1, result.matchedNodeCount());
         assertTrue(result.outputXml().contains("Name=\"other\""));
-        assertTrue(!result.outputXml().contains("Name=\"binary_input\""));
+        assertFalse(result.outputXml().contains("Name=\"binary_input\""));
     }
 }

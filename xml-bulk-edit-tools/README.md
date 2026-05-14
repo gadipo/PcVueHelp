@@ -8,7 +8,7 @@ This folder contains a Java 17, Maven-based toolset for bulk XML editing workflo
 
 ## Features
 
-- Search/filter by tag name, attribute name/value contains, text contains, text regex, XPath-like path contains, and XPath expression.
+- Search/filter by tag name, attribute name/value contains, text contains, text regex, XPath-like path contains, and ancestor tag/text criteria for nested matching.
 - Bulk operations:
   - replace text
   - replace attribute values
@@ -21,7 +21,7 @@ This folder contains a Java 17, Maven-based toolset for bulk XML editing workflo
 ## Build (all modules)
 
 ```bash
-cd /home/runner/work/PcVueHelp/PcVueHelp/xml-bulk-edit-tools
+cd xml-bulk-edit-tools
 mvn clean package
 ```
 
@@ -30,7 +30,7 @@ mvn clean package
 Build:
 
 ```bash
-cd /home/runner/work/PcVueHelp/PcVueHelp/xml-bulk-edit-tools
+cd xml-bulk-edit-tools
 mvn -pl xml-bulk-cli -am package
 ```
 
@@ -42,7 +42,9 @@ java -jar xml-bulk-cli/target/xml-bulk-cli-1.0.0-SNAPSHOT-jar-with-dependencies.
   --tag Property \
   --attr-name id \
   --attr-value-contains Alarm \
-  --xpath "//TemplateInstance[contains(., 'Fire_Det')]//Property[@id='Alarm']" \
+  --xpath-contains "/Root/TemplateInstance/Property" \
+  --ancestor-tag TemplateInstance \
+  --ancestor-text-contains Fire_Det \
   --replace-text -1 \
   --dry-run \
   --report /absolute/path/change-report.txt \
@@ -54,8 +56,9 @@ java -jar xml-bulk-cli/target/xml-bulk-cli-1.0.0-SNAPSHOT-jar-with-dependencies.
 Run in embedded container:
 
 ```bash
-cd /home/runner/work/PcVueHelp/PcVueHelp/xml-bulk-edit-tools
-mvn -pl xml-bulk-webapp -am spring-boot:run
+cd xml-bulk-edit-tools
+mvn -pl xml-bulk-webapp -am package
+mvn -pl xml-bulk-webapp org.springframework.boot:spring-boot-maven-plugin:3.3.5:run
 ```
 
 Open: `http://localhost:8080/`
@@ -63,12 +66,12 @@ Open: `http://localhost:8080/`
 Build WAR for Tomcat deployment:
 
 ```bash
-cd /home/runner/work/PcVueHelp/PcVueHelp/xml-bulk-edit-tools
+cd xml-bulk-edit-tools
 mvn -pl xml-bulk-webapp -am package
 ```
 
 WAR path:
 
-- `/home/runner/work/PcVueHelp/PcVueHelp/xml-bulk-edit-tools/xml-bulk-webapp/target/xml-bulk-webapp-1.0.0-SNAPSHOT.war`
+- `xml-bulk-webapp/target/xml-bulk-webapp-1.0.0-SNAPSHOT.war`
 
 Deploy this WAR to an external Tomcat instance.

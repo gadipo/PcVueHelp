@@ -37,7 +37,8 @@ public final class XmlBulkCliApplication {
                         parsed.textContains(),
                         parsed.textRegex(),
                         parsed.xpathContains(),
-                        parsed.xpathExpression()),
+                        parsed.ancestorTagName(),
+                        parsed.ancestorTextContains()),
                 parsed.operation(),
                 parsed.replacement(),
                 parsed.operationAttributeName(),
@@ -97,7 +98,8 @@ public final class XmlBulkCliApplication {
                   --text-contains <substring>
                   --text-regex <pattern>
                   --xpath-contains <xpath-like-substring>
-                  --xpath <xpathExpression>
+                  --ancestor-tag <tagName>
+                  --ancestor-text-contains <substring>
 
                 Operations (choose one):
                   --replace-text <newText>
@@ -124,7 +126,8 @@ public final class XmlBulkCliApplication {
             String textContains,
             String textRegex,
             String xpathContains,
-            String xpathExpression,
+            String ancestorTagName,
+            String ancestorTextContains,
             EditOperation operation,
             String replacement,
             String operationAttributeName,
@@ -142,7 +145,8 @@ public final class XmlBulkCliApplication {
             String textContains = null;
             String textRegex = null;
             String xpathContains = null;
-            String xpathExpression = null;
+            String ancestorTagName = null;
+            String ancestorTextContains = null;
             EditOperation operation = null;
             String replacement = null;
             String operationAttributeName = null;
@@ -163,7 +167,8 @@ public final class XmlBulkCliApplication {
                     case "--text-contains" -> textContains = requireValue(tokens, ++i, token);
                     case "--text-regex" -> textRegex = requireValue(tokens, ++i, token);
                     case "--xpath-contains" -> xpathContains = requireValue(tokens, ++i, token);
-                    case "--xpath" -> xpathExpression = requireValue(tokens, ++i, token);
+                    case "--ancestor-tag" -> ancestorTagName = requireValue(tokens, ++i, token);
+                    case "--ancestor-text-contains" -> ancestorTextContains = requireValue(tokens, ++i, token);
                     case "--replace-text" -> {
                         operation = EditOperation.REPLACE_TEXT;
                         replacement = requireValue(tokens, ++i, token);
@@ -215,7 +220,8 @@ public final class XmlBulkCliApplication {
                     textContains,
                     textRegex,
                     xpathContains,
-                    xpathExpression,
+                    ancestorTagName,
+                    ancestorTextContains,
                     operation,
                     replacement,
                     operationAttributeName,

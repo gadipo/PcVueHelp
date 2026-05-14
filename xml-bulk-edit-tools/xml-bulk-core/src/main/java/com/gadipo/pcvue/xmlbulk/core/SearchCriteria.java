@@ -7,5 +7,6 @@ public record SearchCriteria(
         String textContains,
         String textRegex,
         String xpathContains,
-        String xpathExpression) {
+        String ancestorTagName,
+        String ancestorTextContains) {
 }

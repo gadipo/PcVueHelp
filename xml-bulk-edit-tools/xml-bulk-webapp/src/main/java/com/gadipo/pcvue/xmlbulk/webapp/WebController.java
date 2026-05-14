@@ -19,6 +19,7 @@ public class WebController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("operationValues", EditOperation.values());
+        model.addAttribute("xmlInput", "<Root/>");
         return "index";
     }
 
@@ -31,7 +32,8 @@ public class WebController {
             @RequestParam(value = "textContains", required = false) String textContains,
             @RequestParam(value = "textRegex", required = false) String textRegex,
             @RequestParam(value = "xpathContains", required = false) String xpathContains,
-            @RequestParam(value = "xpathExpression", required = false) String xpathExpression,
+            @RequestParam(value = "ancestorTagName", required = false) String ancestorTagName,
+            @RequestParam(value = "ancestorTextContains", required = false) String ancestorTextContains,
             @RequestParam("operation") EditOperation operation,
             @RequestParam(value = "replacement", required = false) String replacement,
             @RequestParam(value = "operationAttributeName", required = false) String operationAttributeName,
@@ -45,7 +47,7 @@ public class WebController {
 
         try {
             EditResult result = editor.edit(xmlInput, new EditRequest(
-                    new SearchCriteria(tagName, attributeName, attributeValueContains, textContains, textRegex, xpathContains, xpathExpression),
+                    new SearchCriteria(tagName, attributeName, attributeValueContains, textContains, textRegex, xpathContains, ancestorTagName, ancestorTextContains),
                     operation,
                     replacement,
                     operationAttributeName,

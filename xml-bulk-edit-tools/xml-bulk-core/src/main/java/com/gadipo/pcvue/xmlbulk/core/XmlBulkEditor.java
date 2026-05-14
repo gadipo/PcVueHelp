@@ -1,13 +1,15 @@
 package com.gadipo.pcvue.xmlbulk.core;
 
+import com.google.re2j.Pattern;
+import com.google.re2j.PatternSyntaxException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
-import javax.xml.namespace.NamespaceContext;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -15,17 +17,12 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
-import java.util.Set;
-import java.util.regex.Pattern;
 
 public class XmlBulkEditor {
 
@@ -33,11 +30,10 @@ public class XmlBulkEditor {
         try {
             Document document = parseXml(xml);
             SearchCriteria criteria = request.criteria() == null
-                    ? new SearchCriteria(null, null, null, null, null, null, null)
+                    ? new SearchCriteria(null, null, null, null, null, null, null, null)
                     : request.criteria();
 
-            Set<Node> xpathMatches = resolveXPathMatches(document, criteria.xpathExpression());
-            List<Element> candidates = collectMatchingElements(document, criteria, xpathMatches);
+            List<Element> candidates = collectMatchingElements(document, criteria);
             List<ChangeRecord> changes = new ArrayList<>();
 
             for (Element element : candidates) {
@@ -51,34 +47,20 @@ public class XmlBulkEditor {
         }
     }
 
-    private Set<Node> resolveXPathMatches(Document document, String xpathExpression) throws Exception {
-        if (isBlank(xpathExpression)) {
-            return Set.of();
-        }
-        XPath xpath = XPathFactory.newInstance().newXPath();
-        xpath.setNamespaceContext(new EmptyNamespaceContext());
-        NodeList nodeList = (NodeList) xpath.evaluate(xpathExpression, document, XPathConstants.NODESET);
-        Set<Node> results = new HashSet<>();
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            results.add(nodeList.item(i));
-        }
-        return results;
-    }
-
-    private List<Element> collectMatchingElements(Document document, SearchCriteria criteria, Set<Node> xpathMatches) {
+    private List<Element> collectMatchingElements(Document document, SearchCriteria criteria) {
         List<Element> matches = new ArrayList<>();
-        Pattern textRegex = isBlank(criteria.textRegex()) ? null : Pattern.compile(criteria.textRegex());
+        Pattern textRegex = compileRegex(criteria.textRegex());
         NodeList allElements = document.getElementsByTagName("*");
         for (int i = 0; i < allElements.getLength(); i++) {
             Element element = (Element) allElements.item(i);
-            if (matchesCriteria(element, criteria, textRegex, xpathMatches)) {
+            if (matchesCriteria(element, criteria, textRegex)) {
                 matches.add(element);
             }
         }
         return matches;
     }
 
-    private boolean matchesCriteria(Element element, SearchCriteria criteria, Pattern textRegex, Set<Node> xpathMatches) {
+    private boolean matchesCriteria(Element element, SearchCriteria criteria, Pattern textRegex) {
         if (!isBlank(criteria.tagName()) && !Objects.equals(criteria.tagName(), element.getTagName())) {
             return false;
         }
@@ -119,11 +101,44 @@ public class XmlBulkEditor {
             return false;
         }
 
-        if (!xpathMatches.isEmpty() && !xpathMatches.contains(element)) {
+        if (!matchesAncestorCriteria(element, criteria.ancestorTagName(), criteria.ancestorTextContains())) {
             return false;
         }
 
         return true;
+    }
+
+    private boolean matchesAncestorCriteria(Element element, String ancestorTagName, String ancestorTextContains) {
+        if (isBlank(ancestorTagName) && isBlank(ancestorTextContains)) {
+            return true;
+        }
+        Node current = element;
+        while (current != null && current.getNodeType() == Node.ELEMENT_NODE) {
+            Element ancestor = (Element) current;
+            if (!isBlank(ancestorTagName) && !ancestorTagName.equals(ancestor.getTagName())) {
+                current = current.getParentNode();
+                continue;
+            }
+            if (isBlank(ancestorTextContains) || ancestor.getTextContent().contains(ancestorTextContains)) {
+                return true;
+            }
+            current = current.getParentNode();
+        }
+        return false;
+    }
+
+    private Pattern compileRegex(String regex) {
+        if (isBlank(regex)) {
+            return null;
+        }
+        if (regex.length() > 256) {
+            throw new IllegalArgumentException("textRegex is too long. Maximum length is 256 characters.");
+        }
+        try {
+            return Pattern.compile(regex);
+        } catch (PatternSyntaxException ex) {
+            throw new IllegalArgumentException("Invalid textRegex pattern: " + ex.getMessage(), ex);
+        }
     }
 
     private void applyOperation(Document document, Element element, EditRequest request, List<ChangeRecord> changes) throws Exception {
@@ -219,25 +234,34 @@ public class XmlBulkEditor {
     }
 
     private Document parseXml(String xml) throws Exception {
+        rejectUnsafeXmlConstructs(xml);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-        disableExternalEntities(factory);
-        factory.setNamespaceAware(false);
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        return builder.parse(new InputSource(new StringReader(xml)));
-    }
-
-    private void disableExternalEntities(DocumentBuilderFactory factory) throws Exception {
         factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
         factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
         factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
         factory.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        factory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
         factory.setXIncludeAware(false);
         factory.setExpandEntityReferences(false);
+        factory.setNamespaceAware(false);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        builder.setEntityResolver((publicId, systemId) -> new InputSource(new StringReader("")));
+        return builder.parse(new InputSource(new StringReader(xml)));
+    }
+
+    private void rejectUnsafeXmlConstructs(String xml) throws SAXException {
+        String lower = xml.toLowerCase(Locale.ROOT);
+        if (lower.contains("<!doctype") || lower.contains("<!entity")) {
+            throw new SAXException("DOCTYPE and ENTITY declarations are not allowed.");
+        }
     }
 
     private String toXml(Document document) throws Exception {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
         Transformer transformer = transformerFactory.newTransformer();
         transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
@@ -274,22 +298,5 @@ public class XmlBulkEditor {
             return first;
         }
         return isBlank(second) ? null : second;
-    }
-
-    private static final class EmptyNamespaceContext implements NamespaceContext {
-        @Override
-        public String getNamespaceURI(String prefix) {
-            return XMLConstants.NULL_NS_URI;
-        }
-
-        @Override
-        public String getPrefix(String namespaceURI) {
-            return null;
-        }
-
-        @Override
-        public java.util.Iterator<String> getPrefixes(String namespaceURI) {
-            return java.util.Collections.emptyIterator();
-        }
     }
 }
