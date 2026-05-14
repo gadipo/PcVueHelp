@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>PcVue XML Bulk Editing Tool</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; min-height: 220px; font-family: monospace; }
+        .grid { display: grid; grid-template-columns: repeat(2, minmax(250px, 1fr)); gap: 10px; }
+        .box { border: 1px solid #ddd; padding: 12px; border-radius: 6px; }
+        label { display: block; margin-top: 8px; }
+        input, select { width: 100%; }
+        .error { color: #b00020; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 5px; font-size: 12px; }
+    </style>
+</head>
+<body>
+<h1>PcVue XML Bulk Editing Tool</h1>
+<form method="post" action="/apply">
+    <div class="box">
+        <label>XML Input</label>
+        <textarea name="xmlInput" th:text="${xmlInput}"><Root><TemplateInstance Name="binary_input"><FreeParameter Name="BACnet_EDEKeyname">Vitania'Floor3'Fire_Det_F1</FreeParameter><Property id="Alarm">0</Property></TemplateInstance></Root></textarea>
+    </div>
+
+    <div class="grid">
+        <div class="box">
+            <h3>Search Criteria</h3>
+            <label>Tag Name <input name="tagName"/></label>
+            <label>Attribute Name <input name="attributeName"/></label>
+            <label>Attribute Value Contains <input name="attributeValueContains"/></label>
+            <label>Text Contains <input name="textContains"/></label>
+            <label>Text Regex <input name="textRegex"/></label>
+            <label>XPath-like Contains <input name="xpathContains"/></label>
+            <label>XPath Expression <input name="xpathExpression"/></label>
+        </div>
+
+        <div class="box">
+            <h3>Operation</h3>
+            <label>Operation
+                <select name="operation">
+                    <option th:each="op : ${operationValues}" th:value="${op}" th:text="${op}"></option>
+                </select>
+            </label>
+            <label>Replacement / New Text <input name="replacement"/></label>
+            <label>Operation Attribute Name <input name="operationAttributeName"/></label>
+            <label>Operation Attribute Value <input name="operationAttributeValue"/></label>
+            <label>Node XML (for ADD_CHILD_XML) <input name="nodeXml"/></label>
+            <label><input type="checkbox" name="dryRun" value="true"/> Dry run (preview only)</label>
+            <button type="submit">Apply</button>
+        </div>
+    </div>
+</form>
+
+<p th:if="${error}" class="error" th:text="${error}"></p>
+
+<div class="box" th:if="${resultXml != null}">
+    <h3>Result XML</h3>
+    <p>Matched nodes: <span th:text="${matchedNodeCount}"></span></p>
+    <textarea readonly th:text="${resultXml}"></textarea>
+</div>
+
+<div class="box" th:if="${changes != null}">
+    <h3>Change Report</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Path</th>
+            <th>Change Type</th>
+            <th>Before</th>
+            <th>After</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="change : ${changes}">
+            <td th:text="${change.path}"></td>
+            <td th:text="${change.changeType}"></td>
+            <td th:text="${change.beforeValue}"></td>
+            <td th:text="${change.afterValue}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
