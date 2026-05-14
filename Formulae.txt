@@ -1,0 +1,4296 @@
+========================================
+TOPIC: Expression.htm
+========================================
+Using expressions in the folder, workbook, template or sheet names
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using Expressions in the Folder, Workbook, Template or Sheet Names
+ 
+When entering an expression for either a folder, workbook, template or page name you can either type in the expression directly or use the Expression Editor dialog. The Expression Editor dialog is displayed by clicking the down arrow button adjacent to the right of the field. Use of the Expression Editor dialog is recommended as it includes keyword auto-completion that helps to prevent errors.
+ 
+
+ 
+The same Expression Editor dialog is used for several aspects of PcVue's configuration. Each of the properties available are only applicable to certain aspects of configuration. For this particular configuration, only those listed below are applicable.
+ 
+ 
+Expression syntax
+ 
+An expression always starts with the equality operator (=) and will contain at least one or more of the following elements.
+ 
+ 
+String value - A string delimited by quotation marks. For example ".xlsx". 
+ 
+String operator - Concatenation (+), equivalent to numeric operator addition. 
+ 
+A property of a configuration element - The syntax is Item.Property. For example Export.Name. 
+ 
+ 
+
+ 
+Navigation is used to navigate through the template hierarchy to select the element that is to be referenced.
+ 
+Property selects the required property of that element.
+ 
+ 
+Using the Expression Editor dialog
+ 
+The expression editor dialog includes keyword auto-completion. 
+ 
+Pressing the Ctrl+Spacebar keys simultaneously displays a pop-up window containing a list of keywords. If you type one or more characters on a line before using Ctrl+ Spacebar, the list will automatically scroll to first relevant keyword. The required keyword is selected using either the Enter or Tab keys, or by clicking with the mouse.
+ 
+On typing a full stop, the editor checks the preceding text. If the text is identified as a keyword, the Property pop-up opens displaying a list of properties for that keyword. The required property is selected using either the Enter or Tab keys or by clicking with the mouse. Show picture
+
+ 
+Property and keywords useable with Data Export
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ Description
+ 
+ 
+
+ Name
+ The Name of the export or page.
+ 
+ 
+
+ FileName
+ The name of the export output (Excel workbook filename or Csv container folder)
+ 
+ 
+
+ Day
+ The day as a number from 1 to 31.
+ 
+ 
+
+ DayName
+ The day as a string.
+ 
+ 
+
+ Week
+ The week as a number from 1 to 53.
+ 
+ 
+
+ Month
+ The month as a number from 1 to 12.
+ 
+ 
+
+ MonthName
+ The month as a string.
+ 
+ 
+
+ Year
+ The year.
+ 
+ 
+
+ Hours
+ The hours.
+ 
+ 
+
+ Minutes
+ The minutes.
+ 
+ 
+ 
+ 
+
+ 
+Values for the following properties are localized according to the language selected for the export : DayName, MonthName.
+Time & Date properties are resolved based on the local time of the computer generating the output.
+Time & Date properties on the Export item are those of the Reference timestamp.
+Time & Date properties on the Page item are those of the 1st page even if for a given generation more than one page may be exported.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Keywords
+ Usable properties
+ 
+ 
+
+ Export
+ 
+ 
+Name, FileName, Day, DayName, Week, Month, MonthName, Year, Hours & Minutes
+ 
+ 
+ 
+
+ Export.StartDate
+
+ Day, DayName, Week, Month, MonthName, Year, Hours & Minutes
+ 
+ 
+
+ Export.EndDate
+
+ Day, DayName, Week, Month, MonthName, Year, Hours & Minutes
+ 
+ 
+
+ Page
+ Name
+ 
+ 
+
+ Page.DataSheet
+ Name
+ 
+ 
+
+ Page.StatisticsSheet
+ Name
+ 
+ 
+
+ Page.AggregateSheet
+ Name
+ 
+ 
+
+ Page.StartDate
+ Day, DayName, Week, Month, MonthName, Year, Hours & Minutes
+ 
+ 
+
+ Page.EndDate
+ Day, DayName, Week, Month, MonthName, Year, Hours & Minutes
+ 
+ 
+ 
+ 
+
+ 
+Variable names can also be used in expressions. During the generation, and as part of the expression evaluation, they will be replaced by the current values of the corresponding variables.
+ 
+ 
+Expression examples
+ 
+ 
+ 
+ 
+ 
+
+ Expression
+ Example output
+ 
+ 
+
+ ="MyExport.xlsx"
+ MyExport.xlsx
+ 
+ 
+
+ =Page.Name
+ Trend01
+ 
+ 
+
+ =Export.Name+".xlsx"
+ Export01.xlsx
+ 
+ 
+
+ ="DailyReport "+Export.Day+"-"+Export.Month+"-"+Export.Year+".xlsx"
+ DailyReport 22-05-2013.xlsx
+
+
+========================================
+TOPIC: Expression_add_template.htm
+========================================
+How to add an expression template or expression on variable
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Add an Expression Template or Expression on Variable
+ 
+Expression syntax elements
+ 
+An expression template or expression on variable contains one or more of the following elements:
+ 
+ 
+Variable names - For example INLET.PRESSURE. See the topic How to use Variables in Expressions.
+ 
+Operators - See the topic Expression Main Functions and Operators.
+ 
+Functions - See the topic Expression Main Functions and Operators.
+ 
+Constant boolean value - 0 and 1.
+ 
+Constant numeric value - For example 100.
+ 
+Constant string value - A string delimited by quotation marks. For example, 'Tank level'
+ 
+ 
+
+ 
+To avoid unexpected results, the expression elements used must respect the output type. For example if you were creating an expression on a register variable, it must only contain elements that combined together generate a numerical result.
+ 
+ 
+How to add an expression template or expression on variable
+ 
+The process to add either an Expression Template or Expression on Variable is very similar.
+ 
+ 
+Select the Expressions folder in the Application Explorer configuration tree and, from the task list, select Add an expression template or Add an expression on a variable as appropriate. A dialog to configure a new expression will open.
+ 
+Using the General tab configure the expression general properties. Show picture
+
+Enter a name for the expression in the Name field. The name is used when referencing the expression in an animation.
+Enter a description of the expression. The description appears in the contents pane when the Expressions folder is selected. The description is optional.
+If creating an Expression on Variable.
+ Enter a branch in the Branch field. The branch is prefixed to all variables used in the expression including the result. The ellipsis button adjacent to the Branch field opens the Branch Selector dialog. The branch is optional.
+Select the Result variable in which the result of the expression will be placed. The result variable does not need the control 
+ property set. The ellipsis button adjacent to the Result field displays the Variable Selector dialog
+If the project has a multi-station configuration select the Server list name. The expression will only be computed on stations that appear in that list.
+Select an optional Enabling bit to enable or disable the expression. The bit must be set to 1 to enable the expression calculation.
+Tick the Enable box. It must be ticked for the expression calculation to be enabled.
+ 
+Select the Expression tab and enter the expression. See the topic Expression functions and operators. You can select any variables, which are to be included in the expression, using the Variable Selector tool above the expression field. Show picture
+
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+
+ 
+Expressions on variables and expression templates are limited to 32 000 characters and 40 variables.
+ 
+An expression on variable or an expression template is evaluated each time any 
+ of the variables within it changes. This makes expressions preferable to calculating a value in a script where you would have to arrange for it to be executed on event each time any value changes.
+
+
+========================================
+TOPIC: Expression_editor.htm
+========================================
+Using the expression editor
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Expression Editor
+ 
+The expression editor dialog includes keyword auto-completion. 
+ 
+
+ 
+It is recommended to enclose text values with quotation marks, and it is mandatory for the expression to work as expected if the value contains a special character such as a space, a comma or a quotation mark. For example: StrRemove('ab,cdefgh', 3, 2).
+ 
+ 
+Pressing the Ctrl+Space keys simultaneously displays a pop-up window containing a list of keywords including functions, operators and properties. If you type one or more characters on a line before using Ctrl+ Space, the list will automatically scroll to first relevant keyword. The required keyword selected using either the Enter, or Tab keys, or by clicking with the mouse. Show picture
+
+ 
+On typing a full stop, the editor checks the preceding text. If the text is identified as a navigation keyword, the Property pop-up opens displaying a list of properties for that keyword. The required property is selected using either the Enter, or Tab keys, or by clicking with the mouse. Show picture
+
+ 
+When the editor is used in the Application Architect, the small tool in the toolbar can be used to select and enter the value of other parameters. Show picture
+
+
+========================================
+TOPIC: Expression_excel.htm
+========================================
+Expression functions for referencing an Excel file
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Expression functions for Referencing an Excel File
+ 
+The expression engine is able to access the cells of an Excel spreadsheet using the following syntax. To use a spreadsheet in this manner a File Reference must be configured in the Application Explorer. The File Reference configures how the file is managed and specifies the alias Name, which is used to reference the spreadsheet in an expression.
+ 
+The supported Excel file formats are Xls, Xlsx, Xlsm. Cells are accessed using their numerical address. Addresses such as A1 and A1:E5 are not supported. The cell index is 1 based.
+ 
+
+ 
+It is recommended to enclose text values with quotation marks, and it is mandatory for the expression to work as expected if the value contains a special character such as a space, a comma or a quotation mark. For example: StrRemove('ab,cdefgh', 3, 2).
+ 
+ 
+Functions
+ 
+See section below for a detailed explanation of the parameters.
+ 
+
+ 
+If the optional parameters oNullData, szSeparator or svHSeparator are not specified the defaults from the File Reference are used.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Operation
+ 
+ 
+
+ ExcelGetCell(szReference, szSheetname, iRow, iCol[, oNullData])
+ Return the contents of the specified cell.
+ 
+ 
+
+ ExcelHTextJoin(szReference, szSheetname, iRow[, iFirstCol, iLastCol, szSeparator, oNullData, szEnclosureChar])
+ Return a string containing the contents of a row cells. If the cell values include characters normally used as cell separators, the szEnclosureChar parameter can be used to enclose the cell values. If iFirstCol is not set or set to zero, the join starts at the first column. If the iLastCol is not set or set to zero, the join ends at the last cell containing a value.
+ 
+ 
+
+ ExcelVTextJoin(szReference, szSheetname, iCol[, iFirstRow, iLastRow, szSeparator, oNullData, szEnclosureChar])
+ Return a string containing the contents of a column of cells. If the cell values include characters normally used as cell separators, the szEnclosureChar parameter can be used to enclose the cell values. If iFirstRow is not set or set to zero, the join starts at the first row. If the iLastRow is not set or set to zero, the join ends at the last cell containing a value.
+ 
+ 
+
+ ExcelTextJoin(szReference, szSheetname, iFirstRow, iFirstCol, iLastRow, iLastCol[, szHSeparator, szVSeparator, bVertical, oNullData, szEnclosureChar])
+ Return a string containing the contents of an area of cells. If the cell values include characters normally used as cell separators, the szEnclosureChar parameter can be used to enclose the cell values.
+ 
+ 
+
+ ExcelHLookup(szReference, szSheetname, iHLookupIndex, szHLookupValue, iHValueIndex[, iOptimise, oNullData])
+ Search a given row of an array and returns the value of the indicated cell. If iOptimise is set to 0 or not specified, there is no optimization. If iOptimise is set to 1 then column optimization is used (the column retains the same value).
+ 
+ 
+
+ ExcelVLookup(szReference, szSheetname, iVLookupIndex, szVLookupValue, iVValueIndex[, iOptimise, oNullData])
+ Search a given column of an array and returns the value of the indicated cell. If iOptimise is set to 0 or not specified, there is no optimization. If iOptimise is set to 1 then row optimization is used (the row retains the same value).
+ 
+ 
+
+ ExcelLookup(szReference, szSheetname, iHLookupIndex, szHLookupValue, iVLookupIndex, szVLookupValue[, iOptimise, oNullData])
+ Return the contents of a cell from an array by searching for a key value in a row and column. If iOptimise is set to 0 or not specified, there is no optimization. If iOptimise is set to 1 then row optimization is used (the row retains the same value). If iOptimise is set to 2 then column optimization is used (the column retains the same value).
+ 
+ 
+
+ ExcelHMatch(szReference, szSheetname, iHLookupIndex, szHLookupValue)
+ Look up a value in a row and returns the cell index or 0 if no match.
+ 
+ 
+
+ ExcelVMatch(szReference, szSheetname, iVLookupIndex, szVLookupValue)
+ Look up a value in a column and returns the cell index or 0 if no match.
+ 
+ 
+ 
+ 
+Parameters
+ 
+ 
+ 
+ 
+ 
+
+ bVertical
+ 
+ 
+Area scan type.
+ 
+ 0 or not specified = horizontal scan.
+1 = vertical scan.
+ 
+ 
+ 
+
+ iCol
+ Index of column to retrieve.
+ 
+ 
+
+ iFirstCol
+ Index of the first column to retrieve.
+ 
+ 
+
+ iFirstRow
+ Index of the first row to retrieve.
+ 
+ 
+
+ iHLookupIndex
+ Index of the row to search.
+ 
+ 
+
+ iHValueIndex
+ Index of the row for which the corresponding value is to be returned.
+ 
+ 
+
+ iLastCol
+ Index of the last column to retrieve.
+ 
+ 
+
+ iLastRow
+ Index of the last row to retrieve.
+ 
+ 
+
+ iOptimise
+ Search optimization.
+0 or not specified = no optimization.
+1 = column optimization (the col retains the same value).
+ 
+ 
+
+ iRow
+ Index of the line to retrieve.
+ 
+ 
+
+ iVLookupIndex
+ Index of the row / column to search.
+ 
+ 
+
+ iVValueIndex
+ Index of the column for which the value is to be returned.
+ 
+ 
+
+ oNullData
+ Optional parameter containing the value to return if a cell is empty. If not specified, and a cell is empty, the characters from the Default substitution characters for empty cells property in the File Reference are used.
+ 
+ 
+
+ szEnclosureChar
+ The character used to enclose cells� values in the return string.
+ 
+ 
+
+ szHLookupValue
+ The value to search for.
+ 
+ 
+
+ svHSeparator
+ Cell separator. If not specified the character from Default row separator property in the File Reference is used.
+ 
+ 
+
+ szReference
+ Identifier (name) of the file.
+ 
+ 
+
+ szSeparator
+ Cell separator. If not specified the character from Default column separator property in the File Reference is used.
+ 
+ 
+
+ szSheetName
+ The sheet name.
+ 
+ 
+
+ szVLookupValue
+ The value to search for.
+ 
+ 
+
+ szVSeparator
+ 0, 'NULL', '\''
+ 
+ 
+ 
+ 
+Excel File Referencing Examples
+ 
+The following table represents the Excel sheet used in the examples.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ &#160;
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+ 
+ 
+
+ 1
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+
+ 2
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+
+ 3
+ &#160;
+ &#160;
+ Property01
+ Property02
+ Property03
+ Property04
+ Property05
+ Property06
+ &#160;
+ 
+ 
+
+ 4
+ &#160;
+ Var01
+ V01-P01
+ V01-P02
+ V01-P03
+ V01-P04
+ V01-P05
+ V01-P06
+ &#160;
+ 
+ 
+
+ 5
+ &#160;
+ Var02
+ V02-P01
+ V02-P02
+ V02-P03
+ V02-P04
+ V02-P05
+ V02-P06
+ &#160;
+ 
+ 
+
+ 6
+ &#160;
+ Var03
+ V03-P01
+ V03-P02
+ V03-P03
+ V03-P04
+ V03-P05
+ V03-P06
+ &#160;
+ 
+ 
+
+ 7
+ &#160;
+ Var04
+ V04-P01
+ V04-P02
+ V04-P03
+ V04-P04
+ V04-P05
+ V04-P06
+ &#160;
+ 
+ 
+
+ 8
+ &#160;
+ Var05
+ V05-P01
+ V05-P02
+ V05-P03
+ V05-P04
+ V05-P05
+ V05-P06
+ &#160;
+ 
+ 
+
+ 9
+ &#160;
+ Var06
+ V06-P01
+ V06-P02
+ V06-P03
+ V06-P04
+ V06-P05
+ V06-P06
+ &#160;
+ 
+ 
+
+ 10
+ &#160;
+ Var07
+ V07-P01
+ V07-P02
+ V07-P03
+ V07-P04
+ V07-P05
+ V07-P06
+ &#160;
+ 
+ 
+
+ 11
+ &#160;
+ Var08
+ V08-P01
+ V08-P02
+ V08-P03
+ V08-P04
+ V08-P05
+ V08-P06
+ &#160;
+ 
+ 
+
+ 12
+ &#160;
+ Var09
+ V09-P01
+ V09-P02
+ V09-P03
+ V09-P04
+ V09-P05
+ V09-P06
+ &#160;
+ 
+ 
+
+ 13
+ &#160;
+ Var10
+ V10-P01
+ V10-P02
+ V10-P03
+ V10-P04
+ V10-P05
+ V10-P06
+ &#160;
+ 
+ 
+
+ 14
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+
+ 15
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Expression
+ Result
+ 
+ 
+
+ =ExcelGetCell('FileRef01', 'Sheet1', 7, 3)
+ V04-P01
+ 
+ 
+
+ =ExcelHTextJoin('FileRef01', 'Sheet1', 4)
+ NULL:Var01:V01-P01:V01-P02:V01-P03:V01-P04:V01-P05:V01-P06
+ 
+ 
+
+ =ExcelVTextJoin('FileRef01', 'Sheet1', 2, 4)
+ Var01:Var02:Var03:Var04:Var05:Var06:Var07:Var08:Var09:Var10
+ 
+ 
+
+ =ExcelTextJoin('FileRef01', 'Sheet1', 4, 3, 6, 5, ':', '\\', 0, 'NULL', '\'')
+ 'V01-P01':'V01-P02':'V01-P03'\'V02-P01':'V02-P02':'V02-P03'\'V03-P01':'V03-P02':'V03-P03'
+ 
+ 
+
+ =ExcelHLookup('FileRef01', 'Sheet1', 3, 'Property02', 8)
+ V05-P02
+ 
+ 
+
+ =ExcelVLookup('FileRef01', 'Sheet1', 2, 'Var03', 4)
+ V03-P02
+ 
+ 
+
+ =ExcelLookup('FileRef01', 'Sheet1', 3, 'Property02', 2, 'Var04', 1)
+ V04-P02
+ 
+ 
+
+ =ExcelHMatch('FileRef01', 'Sheet1', 3, 'Property02')
+ 4
+ 
+ 
+
+ =ExcelVmatch('FileRef01', 'Sheet1', 2, 'Var03')
+ 6
+
+
+========================================
+TOPIC: Expression_json.htm
+========================================
+Expression functions for Json parsing
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Expression functions for Json parsing
+ 
+Json is an acronym for JavaScript Object Notation. The Json format is often used for serializing structured data over a network connection, primarily between a web server and a web application, serving as an alternative to XML. 
+ 
+
+ 
+It is recommended to enclose text values with quotation marks, and it is mandatory for the expression to work as expected if the value contains a special character such as a space, a comma or a quotation mark. For example: StrRemove('ab,cdefgh', 3, 2).
+ 
+ 
+The JsonGetValue function can be used to parse Jsondata fragments, and has the following syntax.
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Operation
+ 
+ 
+
+ JsonGetValue(szInputString, szPath)
+ Extract the value of the parameter specified in szPath from the Json input szInputString. Key name matching is case sensitive.
+ 
+ 
+ 
+ 
+The use of the JsonGetValue function is best illustrated with an example. Consider the following Json fragment.
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+{
+ 
+ 
+ 
+
+ 
+"stores":[
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"Lambton Quay",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"Willis Street"
+ 
+ 
+ 
+
+ 
+],
+ 
+ 
+ 
+
+ 
+"manufacturers":[
+ 
+ 
+ 
+
+ 
+{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"name":"Acme Co",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"products":[
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"name":"Anvil",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"price":50
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;}
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;]
+ 
+ 
+ 
+
+ 
+},
+ 
+ 
+ 
+
+ 
+{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"name":"Contoso",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"products":[
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"name":"Elbow Grease",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"price":99.95
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;},
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"name":"Headlight Fluid",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"price":4
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;}
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;]
+ 
+ 
+ 
+
+ 
+&#160;&#160;}
+ 
+ 
+ 
+
+ 
+&#160;]&#160;
+ 
+ 
+ 
+
+ 
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the JsonGetValue function, it is possible to extract the desired part of the message.
+ 
+ 
+JsonGetValue(value, 'manufacturers[0].name') -> 'Acme Co'
+ 
+JsonGetValue(value, 'Manufacturers[0].name') -> Empty string
+ 
+JsonGetValue(value, 'manufacturers[0].products[0].price') -> '50'
+ 
+JsonGetValue(value, 'manufacturers[1].products[0].name') -> 'Elbow Grease'
+ 
+JsonGetValue(value, 'manufacturers[1].products[22].name') -> Empty string
+ 
+ 
+
+ 
+More advanced examples are available in the MQTT add-on help available in the book Extras and Add-ons.
+ 
+ 
+
+ 
+Pay attention to the fact that Json syntax is case sensitive.
+
+
+========================================
+TOPIC: Expression_substitution.htm
+========================================
+Defining a Property by an Expression
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Defining a Property by an Expression
+ 
+When a property is defined by an expression, the property value is replaced by an expression that is evaluated for each instance of the template. An expression can include fixed values and context sensitive operands such as the instance name or its description.
+ 
+
+ 
+For information on expression syntax including how to use the expression editor, functions, operators and the use of variables, see the Expression Engine book in the Application Explorer help.
+ 
+ 
+How to define a property by an expression
+ 
+ 
+Select the Templates tab.
+ 
+Navigate the templates configuration tree and open the properties grid that contains the property to be substituted.
+ 
+Right click on the property name (left column) and, from the pop-up menu, select Define by and Expression. The value of the property will change to the equality sign and it will be marked by a green icon . Show picture
+
+ 
+Click the down arrow button adjacent to the value field to open the expression editor.
+ 
+ 
+
+ 
+When the template is instantiated, the value that is produced by the expression is specific to the property for which it has been used and is not propagated anywhere else.
+ 
+ 
+How to enter an expression
+ 
+When entering an expression in a parameter, or directly in a property, you can either type in the expression directly or use the Expression Editor dialog. The Expression Editor dialog is displayed by clicking the down arrow button adjacent to the right of the field. Use of the Expression Editor dialog is recommended as it includes keyword auto-completion that helps to prevent errors.
+ 
+Expression syntax
+ 
+An expression always starts with the equality operator (=) and will contain one or more of the following elements.
+ 
+ 
+String value - A string delimited by quotation marks. For example, "Tank level".
+ 
+Numeric value - For example 100.
+ 
+Operators - See the Main functions and Operators topic in the Expression Engine book of the Application Explorer help.
+ 
+Functions - See the Main functions and Operators topic in the Expression Engine book of the Application Explorer help.
+ 
+Excel reference - See the Functions for referencing an Excel file topic in the Expression Engine book of the Application Explorer help.
+ 
+The value of another parameter - The syntax is Params("ParamName"). For example Params("pDomain").
+ 
+A property of a configuration element - The syntax is Navigation.Property. For example TemplateInstance.Name. See below for the possible values of Navigation and Property.
+ 
+ 
+
+ 
+Navigation is used to navigate through the template hierarchy to select the element that is to be referenced. 
+ 
+Property selects the required property of that element.
+ 
+ 
+
+ 
+In expressions, some special characters needs to be prefixed by the backslash ("\") escape character so that they are interpreted correctly:
+ 
+ 
+
+ 
+\\ for the backslash
+ 
+ 
+
+ 
+\' for the simple quote
+ 
+ 
+
+ 
+\" for the double quote
+ 
+ 
+
+ 
+\t for the tab
+ 
+ 
+
+ 
+\r for the carriage return
+ 
+ 
+
+ 
+\n for the new line
+ 
+ 
+ 
+ For example to include a simple quote in an expression:
+"Light " + Parent.Name + " doesn\'t work" 
+ 
+ 
+Navigation keywords
+ 
+The navigation keywords are used to navigate within the instances or modeling tree to the element from which you want to retrieve the property. Navigation keywords can be linked using the full stop character. 
+ 
+ 
+ 
+ 
+ 
+
+ Keyword
+ Description
+ 
+ 
+
+ Me
+ Current element. This keyword is optional and if no positioning keyword is specified, this corresponds to the use of "Me".
+ 
+ 
+
+ Parent
+ This keyword is used to go to an upper level in the hierarchy of elements.
+ 
+ 
+
+ TemplateInstance or Inst
+ This keyword will allow us to go back up to the root of a template instance, but never leave it, the template is included or not.
+ 
+ 
+
+ Template or Tpl
+ This keyword is a shortcut to be positioned directly on the root template, in modeling mode, but never leave it, the template is included or not.
+ 
+ 
+
+ TopTemplateInstance or TopInst
+ This keyword is used to position on the highest root template, it means by going over the included template.
+The highest root template is the template instantiated by the user.
+
+ 
+ 
+
+ TopTemplate or TopTpl
+ This keyword is used to position on the highest root template, in modeling mode, it means by going over the included template.
+ 
+ 
+
+ Origin
+ This keyword is used to position on the element used to instantiate the current element.
+ 
+ 
+ 
+ 
+Property keywords
+ 
+ 
+ 
+ 
+ 
+
+ Keyword
+ Description
+ 
+ 
+
+ Name
+ The name of the element.
+ 
+ 
+
+ ShortName
+ The name of the element up to and including the primary template.
+ 
+ 
+
+ Fullname
+ The name of the element up to and including the root of the tree.
+ 
+ 
+
+ Branch
+ The branch of the element.
+ 
+ 
+
+ ShortBranch
+ The branch of the element up to and including the primary template.
+ 
+ 
+
+ FullBranch
+ The branch of the element up to and including the root of the tree.
+ 
+ 
+
+ Description
+ The description of the element.
+ 
+ 
+
+ NamingRule
+ The Naming Rule of the element
+ 
+ 
+ 
+ 
+For more information on the keywords and examples of their use see the book Keyword examples.
+ 
+Functions
+ 
+ 
+ 
+ 
+ 
+
+ Syntax
+ Description
+ 
+ 
+
+ ChildCount(eCountType[, str, num])
+ Returns the number of child elements according to the arguments. See explanation below.
+ 
+ 
+
+ NameSegment(num[, bool])
+ Returns a string that contains the substring of the current FullName at the given zero based position (num) in string parameter that is delimited by �.�. By default bool is false and the zero based position is left. If bool is true the zero based position is right.
+ 
+ 
+
+ BranchSegment(num[, bool])
+ Same as NameSegment except that it works on the FullBranch string. See below.
+ 
+ 
+ 
+ 
+How to use the ChildCount function in an expression
+ 
+The argument eCountType determines which types of child elements should be counted and on which criteria, child element's instance name or child element's template name.
+ 
+Possible values are as follow:
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Value
+ What kind of child elements will be counted
+ Expected value for argument str
+ 
+ 
+
+ _ctInst
+ Count the number of child instances (excluding the embedded instances)
+ A regular expression on instance names
+ 
+ 
+
+ _ctInst_ByType
+ Count the number of child instances (excluding the embedded instances)
+ A regular expression on the instance type (name of the template)
+ 
+ 
+
+ _ctEmbedded
+ Count the number of embedded instances (excluding the child instances)
+ A regular expression on instance names
+ 
+ 
+
+ _ctEmbedded_ByType
+ Count the number of embedded instances (excluding the child instances)
+ A regular expression on the instance type (name of the template)
+ 
+ 
+
+ _ctInstAndEmbedded
+ Count the number of child and embedded instances
+ A regular expression on instance names
+ 
+ 
+
+ _ctInstAndEmbedded_ByType
+ Count the number of child and embedded instances
+ A regular expression on the instance type (name of the template)
+ 
+ 
+
+ _ctVar
+ 
+ 
+ Count the number of child elements of type variable 
+ 
+ A regular expression on variable names
+ 
+ 
+
+ _ctVarBit
+ 
+ 
+ Count the number of child elements of type bit variables
+ 
+ A regular expression on variable names
+ 
+ 
+
+ _ctVarReg
+ Count the number of child elements of type register variables
+ A regular expression on variable names
+ 
+ 
+
+ _ctVarText
+ 
+ 
+Count the number of child elements of type text variables
+ 
+ A regular expression on variable names
+ 
+ 
+
+ _ctMimic
+ 
+ 
+Count the number of child elements of type mimic
+ 
+ A regular expression on mimic names
+ 
+ 
+
+ _ctSymbol
+ 
+ 
+Count the number of child elements of type symbol
+ 
+ A regular expression on symbol names
+ 
+ 
+ 
+ 
+The argument str is used to account for child elements that match a pattern based on a regular expression:
+ 
+ 
+* Matches one or more characters
+ 
+? Matches any single character
+ 
+# Matches any number
+ 
+[abc] Matches one character among {a; b; c}
+ 
+[!abc] Matches one character other than {a; b; c}
+ 
+[a-z] Matches one character between a and z
+ 
+[!a-z] Matches a character not between a and z
+ 
+ 
+The argument num is the depth level for matching child elements :
+ 
+ 
+If omitted (or -1): Count among child elements with no depth-level limit.
+ 
+0: Count elements in the current instance and its embedded instances only (excluding any child item).
+ 
+Any other positive value n: Count among child elements down to the nth level.
+ 
+ 
+Examples:
+ 
+=Inst.ChildCount(_Var) returns the number of variables in the current instance, in its embedded instances and in all its child instances.
+ 
+=Inst.ChildCount(_VarBit,"*",0) returns the number of bit variables in the current instance and its embedded instances.
+ 
+=Inst.ChildCount(_ctInst,"Floor*",1) returns the number of child instances with a name starting with 'Floor', one level down the current instance.
+ 
+=Inst.ChildCount(_ctInstAndEmbedded_ByType,"Valve") returns the number of child and embedded instances of type 'Valve' (template name), with no depth limit.
+
+
+========================================
+TOPIC: Expression_syntax.htm
+========================================
+Expression Main Functions and Operators
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Expression Main Functions and Operators
+ 
+The following tables list the most usual functions and operators supported by the Expression Engine. Note that not all functions and operators are available in all expression contexts.
+ 
+Base math functions
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Operation
+ 
+ 
+
+ Abs(Var)
+ Absolute value of Var.
+ 
+ 
+
+ Ceil(Var)
+ Smallest integer greater than or equal to Var.
+ 
+ 
+
+ Ceiling(Var)
+ Smallest integer greater than or equal to Var.
+ 
+ 
+
+ Exp(Var)
+ e raised to power of Var.
+ 
+ 
+
+ Floor(Var)
+ Largest integer less than or equal to Var.
+ 
+ 
+
+ IEEERemainder(Var1, Var2)
+ Remainder after dividing Var1 by Var2.
+ 
+ 
+
+ If(Condition,Val_True, Val_False)
+ If Condition is true returns Val_True, else returns Val_False.
+ 
+ 
+
+ Log(Var)
+ Natural logarithm of Var.
+ 
+ 
+
+ Log(Var1, Var2)
+ Logarithm of Var1 using base Var2.
+ 
+ 
+
+ Log10(Var)
+ Logarithm of Var using base 10.
+ 
+ 
+
+ Max(Var1, Var2[, Var3,...,VarN])
+ The greater of Var1, Var2, Var3...VarN.
+ 
+ 
+
+ Min(Var1, Var2[, Var3,...,VarN])
+ The lesser of Var1, Var2, Var3...VarN.
+ 
+ 
+
+ Power(Var1, Var2)
+ Var1 raised to the power of Var2.
+ 
+ 
+
+ Round(Var1)
+ Rounds Var1 to the nearest integer.
+ 
+ 
+
+ Round(Var1, Var2)
+ Rounds Var1 to Var2 decimal places.
+ 
+ 
+
+ Sign(Var)
+ The sign of Var. -1 if it is negative +1 if it is positive.
+ 
+ 
+
+ Sqrt(Var)
+ Square root of Var.
+ 
+ 
+
+ Truncate(Var)
+ Integer part of Var.
+ 
+ 
+ 
+ 
+Trigonometric functions
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Operation
+ 
+ 
+
+ Acos(Var)
+ Angle (in degrees) whose cosine is Var.
+ 
+ 
+
+ Asin(Var)
+ Angle (in degrees) whose sine is Var.
+ 
+ 
+
+ Atan(Var)
+ Angle (in degrees) whose tangent is Var.
+ 
+ 
+
+ Cos(Var)
+ Cosine of Var (angle in degrees).
+ 
+ 
+
+ Pi()
+ Return a rounded value of Pi.
+ 
+ 
+
+ Sin(Var)
+ Sine of the angle Var (angle in degrees).
+ 
+ 
+
+ Tan(Var)
+ Tangent of the angle Var (angle in degrees.
+ 
+ 
+
+ ToDegrees(Var)
+ Convert the value Var from radians to degrees.
+ 
+ 
+
+ ToRadians(Var)
+ Convert the value Var from degrees to radians.
+ 
+ 
+ 
+ 
+Conversion functions
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Operation
+ 
+ 
+
+ ToBool(Var)
+ Convert the value Var to an equivalent boolean value.
+ 
+ 
+
+ ToDbl(Var)
+ Convert the value Var to an equivalent double value.
+ 
+ 
+ 
+ 
+String handling functions
+ 
+
+ 
+It is recommended to enclose text values with quotation marks, and it is mandatory for the expression to work as expected if the value contains a special character such as a space, a comma or a quotation mark. For example: StrRemove('ab,cdefgh', 3, 2).
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Operation
+ 
+ 
+
+ NumIndex(Var[, Bool1])
+ Return an integer representing the right or left digits of the string depending on the value of Bool1. By default, Bool1 is false and the function returns the right index.
+ 
+ 
+
+ StrCompare(Str1, Str2)
+ Compare 2 strings Str1 and Str2 and returns an integer that indicates their relationship to one another, taking the case into account.
+Examples: StrCompare('cba', 'abc') = 1, StrCompare('abc', 'abc') = 0, StrCompare('abc', 'cba') = -1
+ 
+ 
+
+ StrCompareNoCase(Str1, Str2)
+ As StrCompare but ignoring the case.
+ 
+ 
+
+ StrContains(Str1, Str2[, Bool])
+ Return true if Str2 is a substring of Str1, return false otherwise. If Bool is true, string comparison is case sensitive, if it is false, string comparison is not case sensitive (default true).
+ 
+ 
+
+ StrEqual(Str1, Str2)
+ 
+ 
+Compare 2 strings Str1 and Str2 and returns 0 if the strings are different or 1 if they are the same, taking the case into account.
+ 
+StrCompare('str1', 'str2') = False, StrCompare('str1', 'STR1') = False, StrCompare('str1', 'str1') = True
+ 
+ 
+ 
+
+ StrEqualNocase(Str1, Str2)
+ As StrEqual but ignoring the case.
+ 
+ 
+
+ StrExtract(Str1, Chr1, Num1)
+ Return a substring of Str1 from the position Num1 delimited by the characters Chr1.
+Examples: StrExtract('My.name.is.John', '.',1) = 'name', StrExtract('My.name.is.John', '.',2) = 'is'
+ 
+ 
+
+ StrIndex(Str1[, Bool])
+ Return a string representing the right or left digits of Str1 depending on the value of Bool. By default, Bool is false and the function returns the right index.
+ 
+ 
+
+ StrIndexOf(Str1, Str2)
+ Return the index of the first occurrence of the string Str2 in Str1. Returns -1 if Str2 is not found.
+ 
+ 
+
+ StrLastIndexOf(Str1, Str2)
+ Return the index of the last occurrence of the string Str2 in Str1. Returns -1 if Str2 is not found.
+ 
+ 
+
+ StrLeft(Str1, Num1)
+ Return the leftmost Num1 characters of the string Str1.
+ 
+ 
+
+ StrLen(Str1)
+ Return the number of characters in Str1.
+ 
+ 
+
+ StrPadInt(Str1, Num1[, Chr1])
+ As StrPadLeft, but Chr1 is optional, and if omitted, Str1 is left padded with zeroes.
+ 
+ 
+
+ StrPadLeft(Str1, Num1, Chr1)
+ Left align the characters of Str1, padding on the left with the character Chr1 to the specified total length Num1. 
+Example: StrPadLeft('abcdef' , 10 ,'x') = 'xxxxabcdef'
+ 
+ 
+
+ StrPadRight(Str1, Num1, Chr1)
+ Right align the characters of Str1, padding on the right with the character Chr1 to the specified total length Num1.
+Example: StrPadRight('abcdef' , 10 ,'x') = 'abcdefxxxx'
+ 
+ 
+
+ StrRemove(Str1, Num1[, Num2])
+ Return Str1 less the characters from the start position Num1 to the end position Num2.
+Example: StrRemove('abcdefgh', 3, 2) = 'abcfgh'
+ 
+ 
+
+ StrReplace(Str1, Str2, Str3)
+ Return Str1 with all occurrences of Str2 replaced by Str3.
+ 
+ 
+
+ StrReverseExtract(Str1, Chr1, Num1)
+ Return a substring of Str1 from the position Num1 delimited by the characters Chr1, starting from the end of Str1.
+Examples: StrReverseExtract('My.name.is.John', '.',1) = 'is', StrReverseExtract('My.name.is.John', '.',2) = 'name'
+ 
+ 
+
+ StrRight(Str1, Num1)
+ Return the rightmost Num1 characters of the string Str1.
+ 
+ 
+
+ StrSubstring(Str1, Num1)
+ Return the substring of Str1 starting at the index position Num1.
+ 
+ 
+
+ StrSubstring(Str1, Num1, Num2)
+ Return the substring of Str1 starting at the index position Num1 and has a length of Num2.
+ 
+ 
+
+ StrToLower(Str1)
+ Return all characters of Str1 as lower case.
+ 
+ 
+
+ StrToUpper(Str1)
+ Return all characters of Str1 as upper case.
+ 
+ 
+
+ StrTrim(Str1[, Str2])
+ Return Str1 with all leading and trailing occurrences of a set of characters specified in Str2 removed. If Str2 is not specified, the function removes leading and trailing spaces.
+Example: StrTrim(' *abcdefgh* ', ' *a') = 'bcdefgh'
+ 
+ 
+
+ StrTrimEnd(Str1, Str2)
+ Return Str1 with all trailing occurrences of the set of characters specified in Str2 removed.
+Example: StrTrimEnd('123abc456xyz789', '123456789') = '123abc456xyz'
+ 
+ 
+
+ StrStrimStart(Str1, Str2)
+ Return Str1 with all leading occurrences of a set of characters specified in Str2 removed.
+ 
+ 
+
+ ToStr(Value)
+ Return the character string corresponding to Value. Value can be of any type.
+For example, if the Value input is of type boolean, ToStr() will return the string 'true' or 'false'.
+ 
+ 
+ 
+ 
+Hexadecimal string handling functions
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Operation
+ 
+ 
+
+ Base64StrToHexStr(Var)
+ Convert the Var base64 string to a hexadecimal string.
+ 
+ 
+
+ HexStrToBit(Var, iPos, iOffset)
+ 
+ 
+Extract the bit (0 or 1) at the position defined by iPos and iOffset in the hexadecimal string Var.
+ 
+iOffset is the offset of the bit within the single hexadecimal character specified by IPos.
+ 
+ 
+ 
+
+ HexStrToByte(Var, iPos)
+ Extract the byte at the position iPos in the hexadecimal string Var.
+ 
+ 
+
+ HexStrToFloat(Var, iPos)
+ Extract the float (IEEE single precision value) at the position iPos in the hexadecimal string Var.
+ 
+ 
+
+ HexStrToInt16(Var, iPos)
+ Extract the Int16 (16 bit value) at position iPos in the hexadecimal string Var.
+ 
+ 
+
+ HexStrToInt32(Var, iPos[, iSize])
+ Extract the Int32 (32 bit value) at position iPos in the hexadecimal string Var.
+iSize is the number of bytes to extract (optional - default 4)
+ 
+ 
+
+ HexStrToNibble(Var, iPos)
+ Extract the nibble (4 bit value) at position iPos in the hexadecimal string Var.
+ 
+ 
+
+ HexStrToUInt16(Var, iPos)
+ Extract the UInt16 (unsigned 16 bit value) at position iPos in the hexadecimal string Var.
+ 
+ 
+
+ HexStrToUInt32(Var, iPos[, iSize])
+ Extract the UInt32 (unsigned 32 bit value) at position iPos in the hexadecimal string Var. 
+iSize is the number of bytes to extract (optional - default 4)
+ 
+ 
+
+ ArrayByteStrToBase64Str(Str)
+ Convert an array of bytes, Integers expressed in decimal, passed as a string into a base64 string. The array can be expressed with syntax '[x,y,z]' or 'x,y,z'
+For example, if the Str input is the byte array '[3,1,17]', ArrayByteStrToBase64Str returns the string 'AwER'.
+ 
+ 
+ 
+ 
+Swapping functions
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Operation
+ 
+ 
+
+ ReverseNibbles(Var)
+ Reverse the position of nibbles within the decimal value Var.
+Example: ReverseNibbles(12345) = 37635 (12345 = 0x3039 -> 0x9303 = 37635)
+ 
+ 
+
+ SwapBytes(Var)
+ Swap the byte order of the decimal value Var.
+Example: SwapBytes(12345) = 14640 (12345 = 0x3039 -> 0x3930 = 14640)
+ 
+ 
+
+ SwapNibbles(Var)
+ Swap the nibble order for each byte of the decimal value Var.
+Example: SwapNibbles(12345) = 915 (12345 = 0x3039 -> 0x0393 = 915)
+ 
+ 
+
+ SwapWords(Var)
+ Swap the word order of the decimal value Var.
+Example: SwapWords(12345) = 809 041 920 (12345 = 0x3039 -> 0x30390000 = 809 041 920)
+ 
+ 
+ 
+ 
+Operators
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Operator and syntax
+ Operation
+ Precedence
+ Notes
+ 
+ 
+
+ ( )
+ Parentheses
+ 1
+ Used to control the order of execution. Example: (Var1 * Var2) / (Var1 + Var2).
+ 
+ 
+
+ Bitwise operators
+ 
+ &#160;
+ &#160;
+ Bitwise operators, including left and right shift, discard the fractional part of any values.
+ 
+ 
+
+ ~ Var1
+ Bitwise NOT
+ 2
+ &#160;
+ 
+ 
+
+ BNOT Var1
+ Bitwise NOT
+ 2
+ &#160;
+ 
+ 
+
+ Var1 & Var2
+ Bitwise AND
+ 8
+ &#160;
+ 
+ 
+
+ Var1 BAND Var2
+ Bitwise AND
+ 8
+ &#160;
+ 
+ 
+
+ Var1 | Var2
+ Bitwise OR
+ 10
+ &#160;
+ 
+ 
+
+ Var1 BOR Var2
+ Bitwise OR
+ 10
+ &#160;
+ 
+ 
+
+ Var1 ^ Var2
+ Bitwise XOR
+ 9
+ &#160;
+ 
+ 
+
+ Var1 XOR Var2
+ Bitwise XOR
+ 9
+ &#160;
+ 
+ 
+
+ Var1 << Var2
+ Left shift
+ 5
+ &#160;
+ 
+ 
+
+ Var1 LSHIFT Var2
+ Left shift
+ 5
+ &#160;
+ 
+ 
+
+ Var1 >> Var2
+ Right shift
+ 5 
+ &#160;
+ 
+ 
+
+ Var1 RSHIFT Var2
+ Right shift
+ 5
+ &#160;
+ 
+ 
+
+ Arithmetic operators
+ 
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+
+ -Var1
+ Negate
+ 2
+ &#160;
+ 
+ 
+
+ Var1 * Var2
+ Multiplication
+ 3 
+ &#160;
+ 
+ 
+
+ Var1 / Var2
+ Division
+ 3
+ &#160;
+ 
+ 
+
+ Var1 % Var2
+ Modulus
+ 3
+ No longer supported - Use MOD instead.
+ 
+ 
+
+ Var1 MOD Var2
+ Modulus
+ 3
+ &#160;
+ 
+ 
+
+ Var1 POW Var2
+ Power
+ 3 
+ &#160;
+ 
+ 
+
+ Var1 + Var2
+ Addition
+ 4 
+ &#160;
+ 
+ 
+
+ Var1 - Var2
+ Subtraction
+ 4 
+ &#160;
+ 
+ 
+
+ Comparison operators
+ 
+ &#160;
+ &#160;
+ Comparison operators return 1 if true, else 0.
+ 
+ 
+
+ Var1 == Var2
+ Equality
+ 7
+ &#160;
+ 
+ 
+
+ Var1 = Var2
+ Equality
+ 7
+ &#160;
+ 
+ 
+
+ Var1 != Var2
+ Inequality
+ 7
+ &#160;
+ 
+ 
+
+ Var1 < Var2
+ Less than
+ 6
+ &#160;
+ 
+ 
+
+ Var1 <= Var2
+ Less than or equal
+ 6
+ &#160;
+ 
+ 
+
+ Var1 > Var2
+ Greater than
+ 6
+ &#160;
+ 
+ 
+
+ Var1 >= Var2
+ Greater than or equal
+ 6
+ &#160;
+ 
+ 
+
+ Var1 in (value1, value2,...)
+ Equality against at least one of many values
+ 7
+ Equivalent to multiple ORed equality tests.
+ 
+ 
+
+ Logical operators
+ 
+ &#160;
+ &#160;
+ Logical operators are intended for use with bit variables. If used with register variables only the LSB is taken into account.
+ 
+ 
+
+ !Var1
+ Logical NOT
+ 2
+ &#160;
+ 
+ 
+
+ NOT Var1
+ Logical NOT
+ 2
+ &#160;
+ 
+ 
+
+ Var1 || Var2
+ Logical OR
+ 12
+ &#160;
+ 
+ 
+
+ Var1 OR Var2
+ Logical OR
+ 12
+ &#160;
+ 
+ 
+
+ Var1 && Var2
+ Logical AND
+ 11
+ &#160;
+ 
+ 
+
+ Var1 AND Var2
+ Logical AND
+ 11
+ &#160;
+ 
+ 
+ 
+ 
+Expression Examples
+ 
+Motor1.Stop & Motor1.Start | Motor1.Fault
+ 
+(Inlet.Flow1 + Inlet.Flow2)/100 (note the use of brackets)
+ 
+Tank1.Temperature & 65520 (masks the first 4 bits of the value)
+ 
+Sqrt(Inlet.Pressure) (takes the square root)
+
+
+========================================
+TOPIC: Expression_TS.htm
+========================================
+Expression functions for timestamps
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Expression Functions for Timestamp Manipulation
+ 
+The following functions are designed for timestamp conversions and are provided primarily for use with the Sql Variables driver.
+ 
+
+ 
+It is recommended to enclose text values with quotation marks, and it is mandatory for the expression to work as expected if the value contains a special character such as a space, a comma or a quotation mark. For example: StrRemove('ab,cdefgh', 3, 2).
+ 
+ 
+Common parameters
+ 
+ 
+ 
+ 
+ 
+
+ Parameter
+ Description
+ 
+ 
+
+ Kind
+ 
+ 
+Timestamp kind, use either predefined constant TS_Utc or TS_Local. 
+ 
+ 
+ 
+
+ Format
+ 
+ 
+Type: String.
+ 
+Timestamp format string.
+ 
+Year: YY or YYYY.
+ 
+Month: MM.
+ 
+Day: DD.
+ 
+Hours: HH.
+ 
+Minutes: mm.
+ 
+Seconds: ss.
+ 
+Milliseconds: fff, ff or f.
+ 
+Z; Indicates if the time is UTC or Local.
+ 
+#: Allows some of the timestamp parts to be ignored.
+ 
+ 
+ 
+
+ TS
+ 
+ 
+Type: Double.
+ 
+A timestamp expressed as the number of milliseconds since the first of January 1970 at 00:00:00.000, as used by the SCADA Basic instruction DATETIMEVALUE. 
+ 
+ 
+ 
+ 
+ 
+Functions
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Operation
+ 
+ 
+
+ StrToTs(Str, Kind, Format)
+ 
+ 
+Returns the timestamp Str as a double. 
+
+ 
+Example 1: StrToTS('2020-04-14T17:06:26.423Z', TS_Utc, 'YYYY-MM-DDTHH:mm:ss.fffZ') > 1586883986423
+ 
+Example 2: StrToTS('2020-04-14T17:06:26.423Z', TS_Local, 'YYYY-MM-DDT##:##:##.###Z') = 1586876786423 Ignores the time and takes date only.
+ 
+ 
+ 
+
+ StrToFileTimeUtc(Str)
+ Returns the timestamp Str as a UTC FileTime.
+Example: StrToFiletimeUtc('2019-10-29T16:14:40.284Z') = 132168392802840000
+ 
+ 
+
+ TSToStr(TS, Kind [, Format])
+ 
+ 
+Returns the timestamp TS as a string. 
+ 
+If Format is omitted then a default format of YYYY-MM-DDTHH:mm:ss.fffZ is used.
+ 
+In addition to the usual format characters:
+ 
+If Format is 'DATE' then YYYY-MM-DD is used.
+ 
+If Format is 'TIME' then HH:mm:ss.fffZ is used.
+ 
+Example 1: TsToStr(1586883986789, TS_Utc) = '2020-04-14T17:06:26.789Z'
+ 
+Example 2: TsToStr(1586883986789, TS_Utc, 'Date') = '2020-04-14'
+ 
+ 
+ 
+
+ TSToOADate(TS, Kind)
+ 
+ 
+Returns an OLE Automation date from the TS.
+ 
+Example: TSToOADate(1586883986423, TS_Utc) = 637224807864230000
+ 
+ 
+ 
+
+ OADateToTS(Date, Kind)
+ 
+ 
+Returns a TS from an OLE Automation date. Date is a double.
+ 
+Example: OADateToTS(637224807864230000, TS_Utc) = 1586883986423
+ 
+ 
+ 
+
+ TSToFileTime(TS)
+ 
+ 
+Returns a FileTime date from a TS.
+ 
+Example: TSToFileTime(1586883986423) = 132313575864230000
+ 
+ 
+ 
+
+ FileTimeToTS(FileTime)
+ 
+ 
+Returns a TS from a FileTime date.
+ 
+Example: FileTimeToTS(132313575864230000) = 1586883986423
+ 
+ 
+ 
+
+ TSToPosixTime(TS)
+ Returns a Posix time from a TS.
+ 
+ 
+
+ PosixTimeToTS(PosixTime)
+ Returns a TS from a Posix time.
+ 
+ 
+
+ TsGetYears(TS, Kind)
+ 
+ 
+Returns the year of a TS.
+ 
+Example: TSGetYears(1586883986423, TS_Utc) = 2020
+ 
+ 
+ 
+
+ TsGetMonths(TS, Kind)
+ 
+ 
+Returns the month of a TS.
+ 
+Example: TSGetMonths(1586883986423, TS_Utc) = 4
+ 
+ 
+ 
+
+ TsGetDays(TS, Kind)
+ 
+ 
+Returns the days of a TS.
+ 
+Example: TSGetDays(1586883986423, TS_Utc) = 14
+ 
+ 
+ 
+
+ TsGetHours(TS, Kind)
+ 
+ 
+Returns the hours of a TS.
+ 
+Example: TSGetHours(1586883986423, TS_Utc) = 17
+ 
+ 
+ 
+
+ TsGetMinutes(TS, Kind)
+ 
+ 
+Returns the minutes of a TS.
+ 
+Example: TSGetMinutes(1586883986423, TS_Utc) = 6
+ 
+ 
+ 
+
+ TsGetSeconds(TS, Kind)
+ 
+ 
+Returns the seconds of a TS.
+ 
+Example: TSGetSeconds(1586883986423, TS_Utc) = 26
+ 
+ 
+ 
+
+ TsGetMilliseconds(TS, Kind)
+ 
+ 
+Returns the milliseconds of a TS.
+ 
+Example: TSGetMilliseconds(1586883986423, TS_Utc) = 423
+ 
+ 
+ 
+
+ TsAddYears(TS, Kind, Number)
+ 
+ 
+Returns a TS with an added Number of years. Number can be positive or negative.
+ 
+Example: TSAddYears(1586883986423, TS_Utc, 2) = 1649955986423
+ 
+ 
+ 
+
+ TsAddMonths(TS, Kind, Number)
+ 
+ 
+Returns a TS with an added Number of months. Number can be positive or negative.
+ 
+Example: TSAddMonths(1586883986423, TS_Utc, 2) = 1592154386423
+ 
+ 
+ 
+
+ TsAddDays(TS, Kind, Number)
+ 
+ 
+Returns a TS with an added Number of days. Number can be positive or negative.
+ 
+Example: TSAddDays(1586883986423, TS_Utc, 2) = 1587056786423
+ 
+ 
+ 
+
+ TsAddHours(TS, Kind, Number)
+ 
+ 
+Returns a TS with an added Number of hours. Number can be positive or negative.
+ 
+Example: TSAddHours(1586883986423, TS_Utc, 2) = 1586891186423
+ 
+ 
+ 
+
+ TsAddMinutes(TS, Kind, Number)
+ 
+ 
+Returns a TS with an added Number of minutes. Number can be positive or negative.
+ 
+Example: TSAddMinutes(1586883986423, TS_Utc, 2) = 1586884106423
+ 
+ 
+ 
+
+ TsAddSeconds(TS, Kind, Number)
+ 
+ 
+Returns a TS with an added Number of seconds. Number can be positive or negative.
+ 
+Example: TSAddSeconds(1586883986423, TS_Utc, 2) = 1586883988423
+ 
+ 
+ 
+
+ TsAddMilliseconds(TS, Kind, Number)
+ 
+ 
+Returns a TS with an added Number of milliseconds. Number can be positive or negative.
+ 
+Example: TSAddMilliseconds(1586883986423, TS_Utc, 2) = 1586883986425
+ 
+ 
+ 
+
+ TsUtcToLocal (TS)
+ 
+ 
+Returns a local timestamp from the supplied UTC timestamp.
+ 
+Example: TSUtcToLocal(1586883986423) = 1586891186423
+ 
+ 
+ 
+
+ TsLocalToUtc (TS)
+ 
+ 
+Returns a UTC timestamp from the supplied local timestamp.
+ 
+Example: TSLocalToUtc(1586891186423) = 1586883986423
+ 
+ 
+ 
+
+ TsNow (Kind)
+ Returns the timestamp at the time the expression is calculated. Kind can be either TS_Utc or TS_Local.
+Example: TsNow(TS_Utc) 
+= 1586883986425
+
+
+========================================
+TOPIC: Expression_use_variables.htm
+========================================
+How to use variables in expressions
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to use Variables in Expressions
+ 
+Normally, when using a variable in an expression, you simply include the variable name in the expression. For example:
+ 
+EXP(LOG(INLET.PRESSURE)/2)
+ 
+Where INLET.PRESSURE is the variable name.
+ 
+However, some variations are useful to know.
+ 
+Using variable attributes in an expression
+ 
+In addition to using variable values, you can also use extended attributes in an expression. To use an extended attribute you append the attribute reference to the variable name as follows.
+ 
+ 
+To use a text attribute you append :An where n is the numeric reference of the text attribute. Example @MYBRANCH.MYVAR:A3
+ 
+To use a binary attribute you append :Bn where n is the numeric reference of the binary attribute. Example @MYBRANCH.MYVAR:B1
+ 
+ 
+Using the ?.VarName syntax
+ 
+Unless prefixed with the @ character, variable names that you include in an expression are relative to any branch being used. However, it is possible to reference variables starting back from the root of the branch hierarchy by using the ?.VarName syntax. For example, the expression is used with the branch ProcessB.Machine2.Engine1 but you need to use the variable ProcessB.NumRunning. In that case, you can use ?.NumRunning in the expression. The question mark tells the expression engine to start from the root level in the branch hierarchy when resolving the variable name and in this example, it would result in the variable name ProcessB.NumRunning being used in the expression at run-time.
+ 
+You can use more question marks to address all intermediate levels in the branch hierarchy. For example, ?.?.?.VarName would go down three levels from the root. 
+ 
+Using the square bracket [] syntax
+ 
+A variable name must be enclosed in square brackets if it starts with a number, includes a special character such as the * (star) or starts with a reserved string (such as TS_Local or TS_Utc). This is so that the Expression Engine correctly interprets it as a variable name and is useful when you need to use alarm counters or other variables that do not strictly follow the variable naming rules in expressions.
+ 
+For example:
+ 
+If 01_BranchXYZ.Var1 and 01_BranchXYZ.Var2 are 2 variables in a project, an expression such as [01_BranchXYZ.Var1] + [01_BranchXYZ.Var2] will be parsed properly by the expression engine whereas 01_BranchXYZ.Var1 + 01_BranchXYZ.Var2 will cause a failure.
+
+
+========================================
+TOPIC: Expression_Xml.htm
+========================================
+Expression functions for referencing an Xml file
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Expression functions for Referencing an Xml File
+ 
+The expression engine is able to access elements and attributes of an Xml file using functions based on XPath. To use an Xml file in this manner, a File Reference must be configured in the Application Explorer. The File Reference configures how the file is managed and specifies the alias Name, which is used to reference the Xml file in an expression.
+ 
+
+ 
+It is recommended to enclose text values with quotation marks, and it is mandatory for the expression to work as expected if the value contains a special character such as a space, a comma or a quotation mark. For example: StrRemove('ab,cdefgh', 3, 2).
+ 
+ 
+Functions
+ 
+See section below for a detailed explanation of the parameters.
+ 
+
+ 
+If the optional parameters oNullData is not specified the default from the File Reference are used.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Operation
+ 
+ 
+
+ XmlGetValue(szReference, szXPathQuery[, oNullData])
+ Return a string containing the value of the first Xml node that matches the XPath query. If no match, the default value (oNullData) is returned.
+ 
+ 
+ 
+ 
+Parameters
+ 
+ 
+ 
+ 
+ 
+
+ szReference
+ Identifier (name) of the file.
+ 
+ 
+
+ szXPathQuery
+ A string representing the XPath query to be executed to extract the Xml node.
+ 
+ 
+
+ oNullData
+ Optional parameter containing the value to return if a value is empty or if no match could be found. If not specified, the characters from the Default substitution characters for empty cells property in the File Reference are used.
+ 
+ 
+ 
+ 
+Xml File Referencing Examples
+ 
+The following data represents the Xml file used in the examples. FileRef01 is the name of the File Reference corresponding to the Xml file.
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+<?xml version="1.0"?>
+ 
+ 
+ 
+
+ 
+<!-- A fragment of a book store inventory database -->
+ 
+ 
+ 
+
+ 
+<bookstore xmlns:bk="urn:samples">
+ 
+ 
+ 
+
+ 
+&#160;&#160;<book genre="novel"&#160;publicationdate="1997" bk:ISBN="1-861001-57-8">
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<title>Pride And Prejudice</title>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<author>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;<first-name>Jane</first-name>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;<last-name>Austen</last-name>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;</author>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<price>24.95</price>
+ 
+ 
+ 
+
+ 
+&#160;&#160;</book>
+ 
+ 
+ 
+
+ 
+&#160;&#160;<book genre="novel"&#160;publicationdate="1992" bk:ISBN="1-861002-30-1">
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<title>The Handmaid's Tale</title>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<author>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;<first-name>Margaret</first-name>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;<last-name>Atwood</last-name>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;</author>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<price>29.95</price>
+ 
+ 
+ 
+
+ 
+&#160;&#160;</book>
+ 
+ 
+ 
+
+ 
+&#160;&#160;<book genre="novel"&#160;publicationdate="1991" bk:ISBN="1-861001-57-6">
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<title>Emma</title>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<author>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;<first-name>Jane</first-name>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;<last-name>Austen</last-name>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;</author>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<price>19.95</price>
+ 
+ 
+ 
+
+ 
+&#160;&#160;</book>
+ 
+ 
+ 
+
+ 
+</bookstore>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Expression
+ Result
+ 
+ 
+
+ XmlGetValue('FileRef01', 'descendant::book[author/last-name=\'Austen\']/title')
+ "Pride And Prejudice"
+ 
+ 
+
+ XmlGetValue('FileRef01', 'descendant::book[author/last-name=\'Austen\']/@publicationdate') 
+ "1997"
+ 
+ 
+
+ XmlGetValue('FileRef01', '/bookstore/book[1]/title') 
+ "The Handmaid's Tale"
+ 
+ 
+
+ XmlGetValue('FileRef01', 'descendant::book[last()]/title') 
+ "Emma"
+
+
+========================================
+TOPIC: Formulae_creating.htm
+========================================
+Creating a formula
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Creating a Formula
+ 
+A new formula is configured by selecting the Create command 
+ button in the Formula Management dialog box. If an existing formula is 
+ currently selected the dialog box which is displayed will contain its 
+ configuration enabling a new formula to be created with similar characteristics.
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Tab Options and Command Buttons
+ 
+ 
+Title - A free format 
+ name which will appear as an identifier in the list of defined formulae.
+ 
+Branch - A variable 
+ branch to be applied to all variable names in the formula not preceded 
+ with an @.
+ 
+Result - The name 
+ of the variable into which the result of the formula is placed.
+ 
+Enabling Bit - The 
+ name of a bit that, if specified, must have a value of 1 for 
+ the formula to be processed.
+ 
+Event - The result 
+ is calculated each time one of the variables in its definition changes.
+ 
+Cyclic - The result 
+ is calculated periodically.
+ 
+Both - The result 
+ is calculated each time one of the variables changes and periodically.
+ 
+Period - The period 
+ in seconds for activation of a cyclic formula.
+ 
+v1 to v8 - The names 
+ of the variables used in the formula. Normally all fields must 
+ be completed, except when using one of the algorithms with standard operators 
+ where at least one variable must be entered.
+ 
+op1 to op4 - Used 
+ to specify the operator type a formula using a standard algorithm.
+ 
+c1 to c8 - The value 
+ for the constants (if any) used in the selected algorithm.
+ 
+ 
+
+ 
+Normally the triggering mode (Event, Cyclic or Both) is 
+ determined by the algorithm selected and is not user configurable.
+
+
+========================================
+TOPIC: Formulae_flow_calculation_1.htm
+========================================
+Flow calculation 1
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Flow calculation 1: F 
+ = c1*v1*(v2+c2)/(v3+c3)
+ 
+ 
+ 
+ 
+
+ 
+ 
+Result
+ 
+ 
+ 
+D = k * V * (P+a) / (T+b)
+ 
+ 
+ 
+
+ 
+ 
+Variables
+ 
+ 
+ 
+v1 = Volume V (REGISTER)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v2 = Pressure P (REGISTER)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v3 = Temperature T (REGISTER)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v4 = Inhibit (BIT)
+ 
+ 
+ 
+
+ 
+ 
+Constants
+ 
+ 
+ 
+c1 = Scaling factor k
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c2 = Pressure correction a =1.013 Pascal
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c3 = Temperature correction b=273 Kelvin
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c4 = Threshold for V below which the formula will not 
+ operate
+ 
+ 
+ 
+
+ 
+ 
+Remarks
+ 
+ 
+ 
+If V is invalid then the result will be invalid
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If P is invalid then the result = k * V / (T+b)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If T is invalid then the result = k * V * (P+a)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If P and T are invalid then the result = k * V
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If the operand (T+b) = 0 the result is invalid
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If V is less than c4 then the result will be 0
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If v4 = 1 then the formula will be inhibited and the result 
+ invalid
+
+
+========================================
+TOPIC: Formulae_flow_calculation_2.htm
+========================================
+Flow calculation 2
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Flow calculation 2: F = c1*v1*sqrt((v2+c2)/(v3+c3))
+ 
+ 
+ 
+ 
+
+ 
+ 
+Result
+ 
+ 
+ 
+F = k * d P * � ((P+a) / (T+b))
+ 
+ 
+ 
+
+ 
+ 
+Variables
+ 
+ 
+ 
+v1 = Differential pressure d P (REGISTER)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v2 = Pressure P (REGISTER)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v3 = Temperature T (REGISTER)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v4 = Inhibit (BIT)
+ 
+ 
+ 
+
+ 
+ 
+Constants
+ 
+ 
+ 
+c1 = Scaling factor k
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c2 = Pressure correction a =1.013 Pascal
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c3 = Temperature correction b=273 Kelvin
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c4 = Threshold for d P below which the formula will not 
+ operate
+ 
+ 
+ 
+
+ 
+ 
+Remarks
+ 
+ 
+ 
+If d P is invalid then the result will be invalid
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If P is invalid then the result = k * d P * � (1/ (T+b))
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If T is invalid then the result = k * d P * � (P+a)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If P and T are invalid then the result = k * d P
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If the operand (T+b) = 0 the result is invalid
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If the operand ((P+a) / (T+b)) < 0 the result is invalid
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If d P is less than c4 then the result will be 0
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If v4 = 1 then the formula will be inhibited and the result 
+ invalid
+
+
+========================================
+TOPIC: Formulae_flow_calculation_3.htm
+========================================
+Flow calculation 3
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Flow calculation 3: F = c1*sqrt(v1*(v2+c2)/(v3+c3)*(1-c5*v1/c6max))
+ 
+ 
+ 
+ 
+
+ 
+ 
+Result
+ 
+ 
+ 
+F = k * � (d Q * (P+a) / (T+b) * (1-y * d Q / d Qmax))
+ 
+ 
+ 
+
+ 
+ 
+Variables
+ 
+ 
+ 
+v1 = Flow from differential pressure d Q (REGISTER)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v2 = Pressure P (REGISTER)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v3 = Temperature T (REGISTER)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v4 = Inhibit (BIT)
+ 
+ 
+ 
+
+ 
+ 
+Constants
+ 
+ 
+ 
+c1 = Scaling factor k
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c2 = Pressure correction a =1.013 Pascal
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c3 = Temperature correction b=273 Kelvin
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c4 = Threshold for d Q below which the formula will not 
+ operate
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c5 
+ = Secondary pressure correction y
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c6 = Maximum flow from differential pressure
+ 
+ 
+ 
+
+ 
+ 
+Remarks
+ 
+ 
+ 
+If d Q is invalid then the result will be invalid
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If P is invalid then the result = k * � (d Q / (T+b) * 
+ (1-y * d Q / d Qmax))
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If T is invalid then the result = k * � (d Q * (P+a) * 
+ (1-y * d Q / d Qmax))
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If both P and T are invalid them the result = k * � d 
+ Q
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If the operand (T+b) = 0 then the result will be invalid
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If the operand (d Q * (P+a) / (T+b) * (1-y * d Q / d Qmax)) 
+ < 0 then the result will be invalid
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If the operand (d Q * / (T+b) * (1-y * d Q / d Qmax)) 
+ < 0 then the result will be invalid
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If the operand (d Q * (P+a) * (1-y * d Q / d Qmax)) < 
+ 0 l then the result will be invalid
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If v4 = 1 then the formula will be inhibited and the result 
+ will be 0.
+
+
+========================================
+TOPIC: Formulae_Integral.htm
+========================================
+Integral
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Integral: C = C+(v1*Period/3600)
+ 
+ 
+ 
+ 
+
+ 
+ 
+Result
+ 
+ 
+ 
+Cpt = Cpt + (Measured value * Period/3600)
+ 
+ 
+ 
+
+ 
+ 
+Variables
+ 
+ 
+ 
+v1 = Measured value (REGISTER)
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v2 = Reset the result to zero (BIT)
+ 
+ 
+ 
+
+ 
+ 
+Constants
+ 
+ 
+ 
+c1 = The threshold value for v1 at which the formula will 
+ operate
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c2 = Value (0 or 1) at which the reset bit operates.
+ 
+ 
+ 
+
+ 
+ 
+Remarks
+ 
+ 
+ 
+If the formula is inhibited by the threshold the result 
+ remains at the previous value.
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+If the measured value is invalid the result will be invalid.
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+The reset to zero only operates on the transition of v2 
+ to the chosen state (0 or 1).
+
+
+========================================
+TOPIC: Formulae_management_dialog_box.htm
+========================================
+Formula management dialog box
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Formula Management Dialog Box
+ 
+
+ 
+Configuration of Formula is not available in the Application Explorer. It is accessible from the configuration menu.
+ 
+ 
+The Formula dialog box is displayed from the Action sub-menu 
+ and is used to display, delete, modify and create formulae.
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+The dialog box contains a list of configured formulae 
+ and has command buttons to create, modify and delete them. The operation 
+ of the dialog box is similar to that used to manage Scheduler and Cyclic 
+ actions.
+ 
+The Formula List
+ 
+Configured formulae are displayed, one per line, in a 
+ scrollable list. The list can contain a maximum of 512 lines and so it 
+ is split up into 64 pages (64 * 512 = 32768 formulae). Each entry in the 
+ list displays details of a particular formula including its name and 
+ branch.
+ 
+Also displayed is the status of the formula. A formula 
+ may be enabled (indicated by a star), disabled (no indication) or temporary 
+ (indicated by a T). A temporary formula is one that has been created 
+ (and may be deleted) under control of a SCADA BASIC program.
+ 
+A formula may be selected by clicking on its display 
+ in the list. A selected formula is indicated by the characters <> 
+ appearing at opposite ends of the line. Several formulae may be selected 
+ at the same time. Clicking on a line again will de-select it. Double clicking 
+ on a formula will display its configuration in a dialog box.
+ 
+Tab Options and Command Buttons
+ 
+ 
+Defined - Display 
+ all formulae that are defined but not enabled.
+ 
+Enabled - Display 
+ all formulae that are defined and enabled.
+ 
+Temporary - Display 
+ all temporary (created by a SCADA BASIC program) formulae.
+ 
+Page - Select the 
+ page that is displayed in the list.
+ 
+Type - Selection 
+ the algorithm to use for a formula.
+ 
+All -Select all displayed 
+ formulae.
+ 
+None -Deselect all 
+ displayed formulae.
+ 
+Enable - Enable all 
+ selected formulae.
+ 
+Disable - Disable 
+ all selected formulae.
+ 
+Delete - Delete all 
+ selected formulae. A confirmation box limits the risk of accidental deletion.
+ 
+Refresh - Refresh 
+ the display showing the current status of the formulae.
+ 
+Save - Save any changes 
+ to hard disk. The changes will be remembered when the software is restarted.
+ 
+Validate - Validate 
+ the changes made and save to memory. The dialog box is closed. The changes 
+ will be lost when the software is restarted.
+ 
+Create - Create a 
+ new formula. The Formula Parameter dialog box is displayed.
+
+
+========================================
+TOPIC: Formulae_overview.htm
+========================================
+About formulae
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+About Formulae
+ 
+A formula is the name given to the mechanism that calculates 
+ the value of a variable using an algorithm, and the value of a number of 
+ other variables.
+ 
+The formula mechanism supports a number of industry standard 
+ algorithms, plus two that are User configurable. The available algorithms are:
+ 
+ 
+ 
+ 
+
+ 
+ 
+Flow Calculation 1
+ 
+ 
+ 
+F = c1*v1*(v2+c2)/(v3+c3)
+ 
+ 
+ 
+
+ 
+ 
+Flow Calculation 2
+ 
+ 
+ 
+F = c1*v1*sqrt((v2+c2)/(v3+c3))
+ 
+ 
+ 
+
+ 
+ 
+Flow Calculation 3
+ 
+ 
+ 
+F = c1*sqrt(v1*(v2+c2)/(v3+c3)*(1-c5*v1/c6max))
+ 
+ 
+ 
+
+ 
+ 
+Integral
+ 
+ 
+ 
+C = C+(v1*Period/3600)
+ 
+ 
+ 
+
+ 
+ 
+Standard Operator 1
+ 
+ 
+ 
+R = (op1) v1 (op2) v2 (op3) v3 (op4) v4
+ 
+ 
+ 
+
+ 
+ 
+Standard Operator 2
+ 
+ 
+ 
+R = R+((op1) v1 (op2) v2 (op3) v3 (op4) v4)
+ 
+ 
+ 
+ 
+Where possible, formulae should be given preference over 
+ calculating a value with a SCADA BASIC program, as formulae are considerably 
+ more efficient.
+
+
+========================================
+TOPIC: Formulae_standard_operator_1.htm
+========================================
+Standard operators 1
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Standard Operators 1: R=([((op1)v1)op2v2]op3v3)op4v4)
+ 
+ 
+ 
+ 
+
+ 
+ 
+Result
+ 
+ 
+ 
+R = (-, +, * or /) v1 (-, +, * or /) v2 (-, +, * or /) 
+ v3 (-, +, * or /) v4
+ 
+ 
+ 
+
+ 
+ 
+Variables
+ 
+ 
+ 
+v1 = First variable
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v2 = Second variable
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v3 = Third variable
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v4 = Fourth variable
+ 
+ 
+ 
+
+ 
+ 
+Constants
+ 
+ 
+ 
+c5 = Value substituted for v1 if not specified
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c6 = Value substituted for v2 if not specified
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c7 = Value substituted for v3 if not specified
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c8 = Value substituted for v4 if not specified
+ 
+ 
+ 
+
+ 
+ 
+Remarks
+ 
+ 
+ 
+The constants c5, c6, c7 and c8 will be substituted for 
+ the variables v1, v2, v3 and v4 respectively if they are not specified.
+
+
+========================================
+TOPIC: Formulae_standard_operator_2.htm
+========================================
+Standard operators 2
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Standard operators 2: R = R+([((op1)v1)op2v2]op3v3)op4v4)
+ 
+ 
+ 
+ 
+
+ 
+ 
+Result
+ 
+ 
+ 
+R = (-, +, * or /) v1 (-, +, * or /) v2 (-, +, * or /) v3 (-, +, * or 
+ /) v4 + R
+ 
+ 
+ 
+
+ 
+ 
+Variables
+ 
+ 
+ 
+v1 = First variable
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v2 = Second variable
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v3 = Third variable
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+v4 = Fourth variable
+ 
+ 
+ 
+
+ 
+ 
+Constants
+ 
+ 
+ 
+c5 = Value substituted for v1 if not specified
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c6 = Value substituted for v2 if not specified
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c7 = Value substituted for v3 if not specified
+ 
+ 
+ 
+
+ 
+ 
+&#160;
+ 
+ 
+ 
+c8 = Value substituted for v4 if not specified
+ 
+ 
+ 
+
+ 
+ 
+Remarks
+ 
+ 
+ 
+The constants c5, c6, c7 and c8 will be substituted for the variables 
+ v1, v2, v3 and v4 respectively if they are not specified.
+
+

@@ -1,0 +1,934 @@
+========================================
+TOPIC: Recipes_config.htm
+========================================
+How to configure a recipe 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure a Recipe
+ 
+Recipes are configured and managed from the Recipe Configuration 
+ dialog displayed from the Recipe command on the Station sub-menu. This 
+ dialog can also be displayed at run-time from a mimic using 
+ the Recipe animation.
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Configure the recipe number and name.
+Display the Recipe 
+ Configuration dialog.
+Select the Standard 
+ button to initialize all fields.
+In the Number field, enter a unique numeric 
+ ID for the recipe. The range is 0 to 99999999. An optional 
+ descriptive name can also be entered in the Title field. The Title field 
+ is limited to a maximum of 40 characters. The number and title are used 
+ to identify a recipe when sending or modifying it after it has been created.
+ 
+Select the variables and values.
+Select the Edit button. 
+ The Recipe Edit dialog is displayed.
+Select the first variable in the recipe. The name of the variable can be typed 
+ directly in the Variable text box or selected by displaying the Variable 
+ Selector using adjacent button.
+Enter the recipe 
+ value for the variable in the Source field. You can enter either a value or the name of another variable.
+If the variable is a register, enter a Maximum and Minimum. If the User has permission to change the recipe value at run-time these are the limits between which it can be changed. If left at the default of 0 and 0 the maximum and minimum from the register configuration is used.
+Select the Insert 
+ command button to insert the variable and its recipe value into the variable 
+ list.
+Repeat steps 2.b to 2.e until the variable list is complete. The position in which the variable 
+ is inserted in the list can be selected by the buttons marked << 
+ and >>. The maximum number of variables in a single recipe is 5120. 
+ The maximum number of variables that can be displayed at one time in the 
+ recipe's configuration dialog is 512. If more than 512 variables are used 
+ a drop down list box appears to allow the selection of additional 
+ pages.
+ 
+Save the recipe and close the dialog.
+Select OK to return 
+ to the main recipe configuration dialog.
+Select Validate to 
+ save the recipe. A dialog will be displayed prompting for the name 
+ of a file in which the recipe is to be saved. Each recipe must be saved in 
+ a different file. It is suggested that the recipe number is used followed 
+ by the extension RCP. For example 12345.RCP.
+Select OK to confirm 
+ saving the recipe. 
+ 
+ 
+Tab options and command buttons
+ 
+ 
+Number - A unique numeric ID by which the recipe is identified.
+ 
+Title - The recipe title.
+ 
+Parameters - Display the sending allowance and tracking variable dialog 
+ box. See section below for further details.
+ 
+Edit - Display the recipe edit dialog.
+ 
+Send - Send the recipe. That is, insert the recipe values into 
+ the corresponding variables in the variables tree.
+ 
+Real-time - Retrieve the current (real-time) values of the variables 
+ listed in the recipe.
+ 
+Search - Search for a recipe. A dialog box is displayed showing 
+ a list of recipes that are available.
+ 
+OK - Save the current recipe. A request for the file name in 
+ which to save the recipe is displayed
+ 
+Cancel - Cancel any modifications and exit the recipe dialog box.
+ 
+Standard - Initialize the recipe dialog box.
+ 
+Display names - The name of each variable is displayed in the variable 
+ list.
+ 
+Display titles - The title of each variable is displayed in the variable 
+ list.
+
+
+========================================
+TOPIC: Recipes_config_edit_dialog_box.htm
+========================================
+The Recipe Edit dialog
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Recipe Edit Dialog
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Value - The value 
+ of the variable in the recipe is a fixed number.
+ 
+Variable - The value 
+ of the variable in the recipe is taken from the value of another variable.
+ 
+Name - The name of 
+ the variable to insert or delete from the variable list.
+ 
+Source � Either the 
+ recipe value for the variable or the name of a variable containing the 
+ value depending on which option is selected.
+ 
+Minimum - The minimum 
+ value to which the recipe variable can be set. The default is taken automatically 
+ from the variable�s configuration but can be changed if required.
+ 
+Maximum - The maximum 
+ value to which the recipe variable can be set. The default is taken automatically 
+ from the variable�s configuration but can be changed if required.
+ 
+Enable Modification 
+ - Allow the value of the variable to be modified by a User before it is 
+ sent. The minimum and maximum values allowed are specified by the range.
+ 
+Insert - Insert the 
+ selected variable and recipe value at the current position in the list.
+ 
+<< - Move the 
+ position in the list up for the next variable to be inserted.
+ 
+>> - Move the 
+ position in the list down for the next variable to be inserted.
+ 
+Delete - Delete the 
+ selected variable from the list.
+ 
+OK - Validate the 
+ list of variables. The recipe edit dialog box is closed.
+ 
+Display names - The 
+ name of each variable is displayed in the variable list.
+ 
+Display titles - 
+ The title of each variable is displayed in the variable list. 
+ 
+ 
+
+ 
+If you are using a variable to supply the value for the 
+ recipe variable you must ensure that the variables are of the same type. 
+ That is to supply a value to a register a register must be used etc.
+
+
+========================================
+TOPIC: Recipes_ODBC.htm
+========================================
+Using ODBC with recipes
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using ODBC with Recipes
+ 
+An ODBC database can be used to both save a recipe created 
+ in PcVue and to create a recipe that can then be used. 
+ 
+How to save a recipe in an ODBC database
+ 
+To save a recipe in an ODBC database it is created in 
+ the normal way except that the type is selected as Database 
+ and the name of the ODBC database (as configured in the Databases tree 
+ of the Archive Configuration Explorer) must be specified. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+The recipe information is saved in two tables in the 
+ database. The first table stores the recipe header information, containing 
+ the number and name of the recipe and other general information. The second 
+ table stores the list of variables and values. The default names for the 
+ two tables are RECH (recipe header information) and RECV (recipe variable 
+ information).
+ 
+As recipes from different projects can be saved in the 
+ same database, a recipe is identified by a unique sequence number in the 
+ header table. This number also appears in the definition of each variable 
+ in the variable table.
+ 
+Creating a recipe from an ODBC database
+ 
+Before a recipe can be created off-line, the ODBC database 
+ must be first configured in PcVue. The recipe header can then 
+ be entered in the table RECH and the recipe variable list in the table 
+ RECV. The link between the recipe header and the recipe variables is made 
+ using the IDENT field that is present in both tables.
+ 
+New recipes that have been created outside of PcVue 
+ are only registered during the startup phase. Therefore, 
+ you cannot add a recipe created outside PcVue while it is running.
+
+
+========================================
+TOPIC: Recipes_overview.htm
+========================================
+Recipes overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Recipes Overview
+ 
+A Recipe is a list of variables each with a 
+ desired value. When a Recipe is sent, the values are copied into the corresponding 
+ variables in the variables tree. 
+ 
+Typical usage 
+ 
+The most common use of Recipes is in a batch process 
+ where a production plant is being used to produce batches of different 
+ products. The instructions to the control device on how a product is to 
+ be made is sent to it as a list of values from a PcVue station. 
+ The list is known as a Recipe. Recipes can also be used in conjunction 
+ with the Scheduler for simple time based control, such as that required 
+ in a building management system.
+ 
+How recipes are created
+ 
+Recipes are normally created by the developer using the 
+ Recipes command on the sub-menu Configure.Station. When each recipe is 
+ created it is given a unique numeric reference and title to identify it 
+ when sending it or displaying its configuration. Recipes can optionally 
+ be allocated to a group known as a family, which can be then used as a 
+ criteria when selecting a recipe for modification or sending. 
+ 
+Recipes can also be created at run-time if the user has 
+ the necessary access rights.
+ 
+In addition, Recipes can be created by the RECIPE 
+ instruction in the SCADA BASIC program language. This can be used to create 
+ recipes from files downloaded by a host computer, or to provide other 
+ special options.
+ 
+
+ 
+Access to recipes is controlled by a user's access rights. 
+ A user can be given rights to change, send or create recipes. For more 
+ information, see the Help book on User Accounts.
+ 
+ 
+Limitations
+ 
+By default, a recipe is limited to a maximum of 2000 variables. It is possible to increase this limit - contact your support agency for further information.
+
+
+========================================
+TOPIC: Recipes_properties_dialog_box.htm
+========================================
+The Recipe Properties dialog
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Recipe Properties Dialog Box
+ 
+The properties dialog box is used to specify a number 
+ of optional recipe properties.
+ 
+ 
+Branch - The name 
+ of a variables tree branch to be used as a prefix for all variable names in 
+ the variable list.
+ 
+Family - The name 
+ of a family group to which any number of recipes can be attached. The 
+ family can be used as a filter when selecting and sending recipes.
+ 
+Access Level - A 
+ command level for the recipe. If specified the recipe can only be sent 
+ by a user with corresponding command level rights.
+ 
+Type - The storage 
+ type for the recipe selected from either proprietary or database. For 
+ database storage, you must also select an archive unit that has been configured 
+ as database type.
+ 
+Sending allowance 
+ bit - The name of a bit variable. If specified the bit 
+ must be set to 1 to allow the recipe to be sent.
+ 
+Tracking variable 
+ - The name of register or text variable. If a register is selected 
+ it will contain the number of the recipe after it is sent. If a text variable 
+ is selected it will contain the title of the recipe after it is sent. 
+ A record can be kept of the recipes that have been sent using a small 
+ program.
+ 
+Send even if variable 
+ is invalid - The recipe will be sent even if one or more of the variables 
+ is invalid. 
+ 
+Send mode - See the Recipe send mode topic.
+
+
+========================================
+TOPIC: Recipes_send.htm
+========================================
+Sending a recipe
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Sending a Recipe
+ 
+A Recipe can be sent using several mechanisms.
+ 
+ 
+From a Scheduled 
+ action. A Recipe is sent periodically at the specified time.
+ 
+From a Scheduled 
+ Action using a Timetable agenda. One recipe can be sent at the start and 
+ a second one at the end of each period in the timetable.
+ 
+By a user using a 
+ Send Recipe animation in a window. Options include modification, with 
+ confirmation and selection. For further details, see the chapter on Animation 
+ in the Window Editor manual.
+ 
+From a SCADA BASIC 
+ program.
+
+
+========================================
+TOPIC: Recipes_send_mode.htm
+========================================
+Recipe send mode
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Recipe Send Mode
+ 
+The send mode properties in the Recipe Properties dialog determine exactly how the variables are sent depending on the communication method being used. 
+ 
+For equipment variables
+ 
+ 
+Block - The variables are sorted according to the communication frame that they belong to. All variables between the highest and lowest address are sent including any not in the recipe.
+ 
+Multiple - The variables are sorted according to the communication frame that they belong to and into contiguous blocks. Only the variables contained in the recipe are sent, but a larger number of writes may be required (one write for each block).
+ 
+ 
+For OPC variables
+ 
+There are four options when sending variables to an OPC server. The options are best illustrated by example. 
+ 
+
+ 
+The order in which the variables are declared in the recipe directly affects the sequence in which they are written to the OPC servers.
+ 
+ 
+
+ &#160;PcVue is connected to two OPC servers.
+
+OPC Server 1 contains variables MV1 and MV2. OPC Server 2 contains MV3 and MV4.
+PcVue subscribes to MV1 and MV2 using the group Group1 and to MV3 and MV4 using Group2.
+A recipe is configured that contains all 4 variables in the order MV3, MV1, MV2, MV4. 
+ 
+
+ 
+ 
+ 
+ 
+Optimized serialization
+Write MV3 to OPC Server 2 and wait for the result.
+If the result is OK, write MV1 and MV2 to OPC Server 1 and wait for the result.
+If the result is OK, write MV4 and wait for the result.
+The recipe is completed. Three OPC writes are used.
+ 
+ 
+ 
+Full serialization
+Write MV3 to OPC Server 2 and wait for the result.
+If the result is OK, write MV1 to OPC Server 1 and wait for the result.
+If the result is OK, write MV2 to OPC Server 1 and wait for the result.
+If the result is OK, write MV4 and wait for the result.
+The recipe is completed. Four OPC writes are used.
+ 
+No optimization
+Write MV3 to OPC Server 2.
+Write MV1 to OPC Server 1.
+Write MV2 to OPC Server 1.
+Write MV4 to OPC Server 2.
+Wait for all four results.
+The recipe is completed. Four OPC writes are used.
+ 
+Full optimization
+Write MV3 and MV4 to OPC Server 2.
+Write MV1 and MV2 to OPC Server 1.
+Wait for all two results.
+The recipe is completed. Two OPC writes are used.
+
+
+========================================
+TOPIC: Recipes_table_formats_for_ODBC.htm
+========================================
+Table formats for ODBC recipes
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Table Formats for ODBC Recipes
+ 
+Table format for recipe header RECH
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Field
+ 
+ 
+ 
+Field name
+ 
+ 
+ 
+Type
+ 
+ 
+ 
+Description
+ 
+ 
+ 
+
+ 
+ 
+1
+ 
+ 
+ 
+PROJECT
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Project name
+ 
+ 
+ 
+
+ 
+ 
+2
+ 
+ 
+ 
+IDENT
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Recipe identifier
+ 
+ 
+ 
+
+ 
+ 
+3
+ 
+ 
+ 
+RECNUM
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Recipe number
+ 
+ 
+ 
+
+ 
+ 
+4
+ 
+ 
+ 
+RECTITLE
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Recipe title
+ 
+ 
+ 
+
+ 
+ 
+5
+ 
+ 
+ 
+FAMILY
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Recipe family
+ 
+ 
+ 
+
+ 
+ 
+6
+ 
+ 
+ 
+RLEVEL
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Recipe level
+ 
+ 
+ 
+
+ 
+ 
+7
+ 
+ 
+ 
+ALLOWBIT
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Sending allowance bit
+ 
+ 
+ 
+
+ 
+ 
+8
+ 
+ 
+ 
+TRACKVAR
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Tracking variable
+ 
+ 
+ 
+
+ 
+ 
+9
+ 
+ 
+ 
+BRANCH
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Variables tree branch
+ 
+ 
+ 
+ 
+Table format for recipe variables RECV
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Field
+ 
+ 
+ 
+Field name
+ 
+ 
+ 
+Type
+ 
+ 
+ 
+Description
+ 
+ 
+ 
+
+ 
+ 
+1
+ 
+ 
+ 
+PROJECT
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Project name
+ 
+ 
+ 
+
+ 
+ 
+2
+ 
+ 
+ 
+IDENT
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Recipe identifier
+ 
+ 
+ 
+
+ 
+ 
+3
+ 
+ 
+ 
+NAME
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Variable name
+ 
+ 
+ 
+
+ 
+ 
+4
+ 
+ 
+ 
+CHANGE
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+Enable modification flag
+ 
+ 
+ 
+
+ 
+ 
+5
+ 
+ 
+ 
+TVAL
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+The value of the variable if type text
+ 
+ 
+ 
+
+ 
+ 
+6
+ 
+ 
+ 
+NVAL
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The value of the variable if type register or bit
+ 
+ 
+ 
+
+ 
+ 
+7
+ 
+ 
+ 
+NVALMIN
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The minimum value
+ 
+ 
+ 
+
+ 
+ 
+8
+ 
+ 
+ 
+NVALMAX
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+The maximum value
+ 
+ 
+ 
+
+ 
+ 
+9
+ 
+ 
+ 
+NVALREP
+ 
+ 
+ 
+Number
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+ 
+10
+ 
+ 
+ 
+VARIND
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+&#160;
+
+

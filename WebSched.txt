@@ -1,0 +1,1928 @@
+========================================
+TOPIC: WebSched_access_mgmnt.htm
+========================================
+Access management
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Concurrent Access Management
+ 
+The WebScheduler allows concurrent access to the schedules by more than one User. However, this does allow the possibility of two users editing the same schedule at the same time. Rather than prevent this, the WebScheduler provides information to the User about when each schedule was last accessed and last changed so that the User can make an informed decision about making any changes. The information is updated every 30 seconds and is displayed in the top right hand corner of the Calendar, Standard Week, Special Days Behavior and Effective Period pages. Show picture
+
+ 
+The background of the information is color-coded.
+ 
+ 
+Normal - No other user is accessing the schedule.
+ 
+Yellow - One or more other users are accessing the same schedule. Show picture
+
+ 
+Red - One or more other users have changed the schedule since the user opened it and the user is now viewing out of date information. Show picture
+
+ 
+ 
+
+ 
+Beside this information allowing a user to make a decision whether he can do modifications or not, the save process is handled according to the following principle: The last user saving modifications will overwrite any other modification done by another user.
+
+
+========================================
+TOPIC: WebSched_bacnet_faq.htm
+========================================
+WebScheduler and BACnet FAQ
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The WebScheduler and BACnet FAQ
+ 
+The WebScheduler is designed as a generic tool presenting a consistent interface independent of the underlying scheduling technology. However, there are some different operational features depending on what scheduling technology you are using. This topic describes those for BACnet.
+ 
+BACnet B-OWS & B-AWS requirements
+ 
+The WebScheduler's capability integrates all functionality required to fulfill the scheduling BIBBs. As a consequence, the WebScheduler can be used in PcVue projects that are required to match B-OWS or B-AWS requirements. Projects that do not require Schedules do not need to use the WebScheduler.
+ 
+BACnet Schedule Object
+ 
+The BACnet Schedule Object is a structured list of date, time and value pairs that can be used by a BACnet Device to schedule operations. The Weekly Schedule property of this object is used to control the Present Value property based on the 7 days of the week. Each day of the week has a corresponding schedule containing values and times that are used for that day. The Weekly Schedule property can be overridden by the Exception Schedule property, which can be configured to define alternative behaviors for dates, date ranges and date patterns configured either directly in the exception or in a referenced calendar object.
+ 
+BACnet Calendar Object
+ 
+The BACnet Calendar Object is a list of dates used to generate an exception in one or more Schedule Objects.
+ 
+WebScheduler Standard Week
+ 
+The WebScheduler Standard Week page is used to manage the behavior of a schedule for each of the seven days of a week. For BACNet, the Standard Week corresponds to the WeeklySchedule property of an instance of the Schedule object.
+ 
+WebScheduler Special Days
+ 
+The Special Days page is used to manage BACnet Calendar Objects. 
+ 
+WebScheduler Calendar
+ 
+The Calendar page is used to manage an entire schedule including the Standard Week, Exceptions, Special Days and Effective Period (as applicable). It gives a view on what will be actually run by the device for a certain time period, taking into account the Standard Week, Exceptions, Special Days and Effective Period.
+ 
+WebScheduler Effective Period
+ 
+The WebScheduler Effective Period page is used to manage the Effective Period property of an instance of a BACnet Schedule Object. 
+ 
+Understanding the behavior caused by the BACNet NULL status
+
+ 
+The absence of any interval in the Scheduler Control indicates the schedule's default output value will be set as defined by its schedule-default property. If this value is NULL, the output value of the schedule is undefined. The same applies to exception periods - on days with exception behavior (i.e. other than the standard week), the empty space means that the output of the exception is NULL or undefined. This means that, unintentionally, standard week behavior can be reactivated. In general, it is preferential to never set the default output value of a schedule to NULL or undefined, instead using the Effective Period to limit a schedule's effect.
+ 
+Example
+ 
+ 
+ You have schedule with the schedule default = NULL. The Standard Week is configured with each day as follows.
+ 9:00 = 1
+
+ 16:00 = NULL
+ 
+ You have one exception period on 14/11/2014 configured as follows.
+ 8:00 = 1
+ 14:00 = NULL
+ 
+As the exception period remains undefined after 14:00 (NULL), what you see in the WebScheduler HMI is the following.
+ 8:00 = 1
+ 14:00 = 1
+
+ 16:00 = NULL
+ 
+ If you remove the interval from 8:00-14:00 on 14/11 the exception is modified in the following manner as one small interval remains in the WebScheduler HMI.
+ 14:00 = 1
+ 16:00 = NULL
+ 
+ 
+Consequently after reload you have the following behavior on 14/11:
+
+ 9:00 = 1 (from the Standard Week)
+
+ 14:00 = 1 (from the updated exception)
+
+ 16:00 = NULL (from the updated exception)
+ 
+ 
+User rights
+ 
+The WebScheduler controls user access to BACnet Schedule and Calendar objects based on "Timetables" privileges as defined in the connected user's profile. The file SchedulesAccess.dat is ignored.
+
+
+========================================
+TOPIC: WebSched_config_cron.htm
+========================================
+Built-in Scheduler driver configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Built-in Scheduler Driver Configuration
+ 
+The configuration file for the configuration of the WebScheduler driver for PcVue built-in timetables is named ScheduleData.Drivers.CronDat.dll.config located in the folder c:\inetpub\<SV Website>\ScheduleData\Bin\ScheduleData.Drivers.CronDat.dll.config where <SV Website> is the name of the web site as defined with the Web Deployment Console at the time of deployment of the ScheduleData service. The file has an xml structure and can be edited with a simple text editor.
+ 
+The following settings are user configurable.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ Default
+ Description
+ 
+ 
+
+ Level Separator
+ _ (underscore)
+ The character or character chain used to define the hierarchy levels of the schedules. 
+ 
+ 
+ 
+ 
+Optional settings
+ 
+The following are optional and only used if they are not already defined in the PcVue project configuration. They define the associated labels for the Native Scheduler's states and appear, for example, in the Mode List of the Add Interval dialog.
+ 
+ 
+ 
+ 
+
+ Property
+ 
+ 
+
+ TwoStateModeName_0
+ 
+ 
+
+ TwoStateModeName_1
+ 
+ 
+
+ MultiStateModeName_0
+ 
+ 
+
+ MultiStateModeName_1
+ 
+ 
+
+ MultiStateModeName_2
+ 
+ 
+
+ MultiStateModeName_3
+
+
+========================================
+TOPIC: WebSched_config_file_locations.htm
+========================================
+Configuration overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuration Overview
+ 
+Some of the configuration of the WebScheduler is made by editing text based configuration files. A user must not be logged into the WebScheduler whilst changes are being made to these files. Some of the files have an XML structure but they can all be edited with a simple text editor such as Notepad.
+ 
+c:\inetpub\<SV Website>\WebScheduler\Web.config
+ 
+ 
+Settings specific to the appearance of the WebScheduler web portal. For example first day of the week.
+ 
+c:\inetpub\<SV Website>\ScheduleData\App_Data\SchedulesAccess.dat
+ 
+ 
+Allocation of WebScheduler rights to PcVue Users.
+ 
+c:\inetpub\<SV Website>\ScheduleData\BIN\ScheduleData.Drivers.CronDat.dll.config
+ 
+ 
+Configuration required to use PcVue built-in Scheduler.
+ 
+Where <SV Website> is the name corresponding to the IIS web site you have deployed with the Web Deployment Console.
+ 
+The Web Scheduler functionality changed substantially with version 11.0 of PcVue. 
+ 
+ 
+Prior to version 11.0, the Web Scheduler was able to manage and run its own Schedules. 
+ 
+From version 11.0, onwards the Web Scheduler is purely a tool for managing PcVue built-in schedules and those found in BACnet Schedule and Calendar objects.
+ 
+ 
+Changes to the configuration of BACnet Schedules, Calendars and Enumerated Associated Labels in version 11.2 of PcVue.
+ 
+ 
+Prior to version 11.2, configuration was by editing the file Schedules.dat. 
+ 
+From version 11.2 onwards, Schedules.dat is no longer used. BACnet Schedules, Calendars and Enumerated Associated Labels are configured using the Application Explorer.
+ 
+ 
+How Web Scheduler user access is controlled:
+ 
+ 
+
+ 
+The WebScheduler controls user access to BACnet Schedule and Calendar objects based on "Timetables" privileges as defined in the connected user's profile. The file SchedulesAccess.dat is ignored.
+ 
+ 
+
+ 
+The WebScheduler controls user access to built-in Cron scheduler based on privileges defined in the file SchedulesAccess.dat.
+ 
+ 
+ 
+
+ 
+The WebScheduler cannot be used for built-in Schedules that toggle a bit, or run a program.
+
+
+========================================
+TOPIC: WebSched_config_hmi.htm
+========================================
+Web portal configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Web Portal Configuration 
+ 
+The general appearance of the WebScheduler web portal is configured using the file C:\inetpub\SV Website\WebScheduler\Web.config where SVWebsite is the name of the web site as defined with the Web Deployment Console at the time of deployment of the WebScheduler. The file has an xml structure and can be edited with a simple text editor.
+ 
+The settings described below are all found in the applicationSettings section.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ Range
+ Default
+ Description
+ 
+ 
+
+ CompanyName
+ &#160;
+ &#160;
+ Reserved setting.
+ 
+ 
+
+ ProductName
+ &#160;
+ &#160;
+ Reserved setting.
+ 
+ 
+
+ NeedHelpText
+ &#160;
+ &#160;
+ Configurable message displayed on the login screen.
+ 
+ 
+
+ FirstDayOfWeek
+ Monday | Tuesday | Wednesday | Thursday | Friday | Saturday |Sunday
+ Monday
+ The day designated as the first of the week.
+ 
+ 
+
+ BusinessBeginsHour
+ 0 � 24
+ 0
+ Start time for highlighting business time on the schedule control.
+ 
+ 
+
+ BusinessEndsHour
+ 0 � 24
+ 24
+ End time for highlighting business time on the schedule control.
+ 
+ 
+
+ ColorizeScheduleDefault
+ True
+False
+ False
+ Defines if the default value of the schedule shall be represented by an interval.
+ 
+ 
+
+ ScheduleBusinessBackColor
+ Html color name as a String
+ None
+ 
+ 
+Defines the color for the schedule control background for business hours.
+ 
+Examples: "LightBlue" or "BlanchedAlmond"
+ 
+ 
+ 
+
+ ScheduleNonBusinessBackColor
+ Html color name as a String
+ None
+ Defines the color for the schedule control background for non-business hours
+ 
+ 
+
+ ScheduleWeekendBackColor
+ Html color name as a String
+ None
+ Defines the color for the schedule control background for week-end days
+ 
+ 
+
+ FullyExpandTreeview
+ 
+ 
+True
+ 
+False
+ 
+ True
+ If enabled, the tree-view in the left pane will be by default expanded when opening the schedule list page. Otherwise, tree nodes will be collapsed.
+ 
+ 
+
+ SingleViewMinZoom
+ 1-1440
+ 60
+ Minimum zoom level, in minutes per cell, when viewing a single timetable.
+ 
+ 
+
+ SingleViewMaxZoom
+ 1-1440
+ 1
+ Maximum zoom level, in minutes per cell, when viewing a single timetable.
+ 
+ 
+
+ MultiViewMinZoom
+ 1-1440
+ 1440
+ Minimum zoom level, in minutes per cell, when viewing multiple timetables.
+ 
+ 
+
+ MultiViewMaxZoom
+ 1-1440
+ 1
+ Maximum zoom level, in minutes per cell, when viewing multiple timetables.
+ 
+ 
+
+ MultiViewResourceHeaderWidth
+ 1-10000
+ 100
+ The size of the schedule header the Calendar page for multiple schedules.
+ 
+ 
+
+ EnableStorageAsLoginLogout
+ True
+False
+ False
+ Enables the login and logout user actions from the WebScheduler to be logged in the archives in a similar manner to that of a user login and logout on PcVue. The comment field is used to record the client name.
+
+
+========================================
+TOPIC: WebSched_config_user.htm
+========================================
+Schedule access rights configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Schedule Access Rights Configuration
+ 
+The SchedulesAccess.dat file is used to configure the access permission of each WebScheduler user to each of the configured schedules. The file is of CSV (comma-separated value) format with three columns.
+ 
+It is located in the folder C:\inetpub\<SV Website>\ScheduleData\App_Data where <SV Website> is the name of the web site as defined with the Web Deployment Console at the time of deployment of the ScheduleData service.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Column
+ Use
+ Description
+ 
+ 
+
+ 1
+ User Name
+ User name. The asterisk and question mark can be used to match several use names.
+ 
+ 
+
+ 2
+ Schedule Name
+ Schedule name. The asterisk and question mark can be used to match several schedule names.
+ 
+ 
+
+ 3
+ Access Level
+ None = 0
+
+CalendarRead = 1
+CalendarWrite = 16
+
+StandardWeekRead = 256
+
+StandardWeekWrite = 2048
+
+Full = 65535
+
+ 
+ 
+ 
+ 
+Notes
+ 
+ 
+WebScheduler users must first be configured in the normal manner using the Application Explorer. 
+ 
+File format
+There can be multiple lines for one specific user defining the user�s access rights to various schedules.
+
+There can be multiple lines for one specific schedule defining the schedule�s access rights for different users.
+The Schedule Name must be enclosed with double-quotes, the User Name must not.
+ 
+The default configuration of the WebScheduler is:
+*,"*",65535
+which provides full access for all users to all schedules.
+ 
+Permissions
+The permissions StandardWeekRead and StandardWeekWrite control access not only to the Standard Week page but also to the Effective Period and Special Days Behavior pages.
+As the Standard Week, Effective Period and Special Days Behavior pages are only accessible after first selecting a Calendar page, the user must have at least the permission level 1 (CalendarRead) to have access to these pages. Permissions 256 (StandardWeekRead) and 2048 (StandardWeekWrite) cannot be used by themselves. Instead you should use 257 (CalendarRead & StandardWeekRead) and 2049 (CalendarWrite & StandardWeekWrite).
+Access to the Special Days page is controlled by the CalendarRead and CalendarWrite permissions
+ 
+ 
+
+ 
+The configuration of ScheduleAccess.dat is only taken into account on IIS startup. Therefore, after editing this file you must restart IIS (Open the Windows Command Prompt with Administrator rights and type IISreset).
+ 
+For a user to have access to any of the schedules they must at least have at least permission level 1 (CalendarRead), permitting access to the Calendar page, which is the entry point to the schedules configuration.
+ 
+ 
+
+ 
+The WebScheduler controls user access to BACnet Schedule and Calendar objects based on "Timetables" privileges as defined in the connected user's profile. The file SchedulesAccess.dat is ignored. 
+ 
+The WebScheduler controls user access to built-in Cron scheduler based on privileges defined in the file SchedulesAccess.dat.
+ 
+ 
+Example
+ 
+There are three configured schedules, TT_01, TT_02 andTT_03, and two users WS_OPERATOR and WS_MANAGER.
+ 
+ScheduleAccess.dat is configured as follows.
+ 
+WS_OPERATOR,TT_01,257
+ 
+WS_OPERATOR,TT_02,257
+ 
+WS_OPERATOR,TT_03,65535
+ 
+WS_MANAGER,*,65535
+ 
+The following behavior can be observed.
+ 
+The user, WS_OPERATOR, can read only the TT_01 and TT_02 calendars and standard week.
+ 
+The user, WS_OPERATOR, can read and write the TT_03 calendar and standard week.
+ 
+The user, WS_MANAGER, can read and write everything.
+
+
+========================================
+TOPIC: WebSched_log_files.htm
+========================================
+Log file locations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Log Files
+ 
+The WebScheduler produces two sets of log files. You may be asked to check then or send them to technical support in the event of erroneous operation.
+ 
+ 
+ 
+ 
+ 
+
+ Component
+ Path
+ 
+ 
+
+ Web portal
+ c:\inetpub\<SV Website>\WebScheduler\bin\LogFiles
+ 
+ 
+
+ Schedule data service
+ c:\inetpub\<SV Website>\ScheduleData\bin\LogFiles
+ 
+ 
+ 
+ 
+Where <SV Website> is the name corresponding to the IIS web site you have deployed with the Web Deployment Console.
+
+
+========================================
+TOPIC: WebSched_mimic_integration.htm
+========================================
+Integrating the Web Scheduler in a mimic
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Integrating the Web Scheduler in a Mimic
+ 
+The WebScheduler can be displayed in a mimic by inserting a Web Browser ActiveX into the mimic and setting the browser Url to the WebScheduler using a VBA script. You can set the Url by using the Navigate2 method. Show picture
+
+ 
+For information on how to insert an ActiveX into a mimic see the topic Using an ActiveX Control in a Mimic.
+ 
+
+ 
+The WebScheduler may have minor differences in look and feel when displayed in an ActiveX and manipulated programmatically.
+ 
+ 
+WebScheduler Url shortcuts
+ 
+The following Url shortcuts have been provided to directly access individual pages of the WebScheduler. Some modes also require a parameter, or parameters, appended to the mode. When accessing the WebScheduler in this manner the User Rights (permissions) of the user are still taken into account.
+ 
+ 
+ 
+ 
+ 
+
+ Mode
+ For access to
+ 
+ 
+
+ default
+ The Overview page.
+ 
+ 
+
+ schedulescollection
+ The Schedules Collection page. Similar to the Overview but just displaying the schedules.
+ 
+ 
+
+ specialdayscollection
+ The Special Days Collection page. Similar to the Overview but just displaying the special days.
+ 
+ 
+
+ specialdays
+ A Special Days. The name of the Special Days must be supplied as parameter 'id'.
+ 
+ 
+
+ singleviewcalendar
+ A Calendar. The name of the schedule must be supplied as parameter 'id'.
+ 
+ 
+
+ singleviewstandardweek
+ A Standard Week. The name of the schedule must be supplied as parameter 'id'.
+ 
+ 
+
+ singleviewspecialdays
+ A Special Days Behavior. The name of the schedule must be supplied as parameter 'id'.
+ 
+ 
+
+ singlevieweffectiveperiod
+ An Effective Period. The name of the schedule must be supplied as parameter 'id'.
+ 
+ 
+
+ multiviewcalendar
+ Several Calendars in multi view mode. The names of the schedules must be supplied as parameters named 'id'.
+ 
+ 
+
+ multiviewstandardweek
+ Several Standard Weeks in multi view mode. The names of the schedules must be supplied as parameters named 'id'.
+ 
+ 
+ 
+ 
+Url examples
+ 
+ 
+Display the Overview page.
+https://<hostname or IP>/WebScheduler/?mode=default
+ 
+Display the calendar of the Heating Profile schedule
+https://<hostname or IP>/WebScheduler/?mode=singleviewcalendar&id=Heating%20profile
+ 
+Display the calendar for both the Heating Profile and Lighting schedules in multiview
+https://<hostname or IP>/WebScheduler/?mode=multiviewcalendar&id=Heating%20profile&id=Lighting
+ 
+ 
+
+ 
+Depending on the ActiveX used, special characters the Url may have to be replaced by a % sign followed by the ASCII code of the character. For example, a space is replaced with "%20".
+ 
+ 
+Using the WebScheduler without manually logging in
+ 
+You must log in to the WebScheduler before you can use it. However, this may not always be convenient or even required when using it from within a mimic as it is likely that the User has already logged into PcVue. To avoid the User having to log in to the scheduler each time, you can use the Remember me on this machine option on the Login page the first time that the WebScheduler is opened. See the Login page topic. Subsequently, the User will be able to navigate directly to the required page without having to log in first.
+ 
+
+ 
+No distinction of user rights is possible when using this option.
+
+
+========================================
+TOPIC: WebSched_native_faq.htm
+========================================
+The WebScheduler and PcVue Built-in Scheduler FAQ
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The WebScheduler and PcVue Built-in Scheduler FAQ
+ 
+The WebScheduler is designed as a generic tool presenting a consistent interface independent of the underlying scheduling technology. However, there are some different operational features depending on what scheduling technology you are using. This topic describes those for the PcVue built-in Scheduler.
+ 
+
+ &#160;PcVue built-in Schedules
+ 
+The WebScheduler can only manage PcVue built-in Schedules that are configured to use the Timetable agenda type. The other agenda types (Once, Monthly, Weekly, Daily and Hourly) cannot be managed by the WebScheduler.
+ 
+A Timetable has a Standard Week with one or more pairs of start and end times for each of the seven days, plus Exception Periods of one or more days where the start and end time pairs are different (or even non-existent). In PcVue, the start and end times can be used to run a program, run a recipe, toggle a bit or set a bit to 0 or 1, but the WebScheduler can only be used for those schedules that run a recipe or set a bit to 0 or 1.
+ 
+
+ 
+From version 11.2 of PcVue onwards, consecutive periods with only one minute between them behave as one contiguous period. For example, the periods Monday 12:00 to 23:59 and Tuesday 00:00 to 11:59 will behave as one period Monday 12:00 to Tuesday 11:59 with no action taking place at Monday 23:59 or Tuesday 00:00.
+ 
+ 
+
+ 
+The WebScheduler cannot be used for built-in Schedules that toggle a bit, or run a program.
+ 
+ 
+WebScheduler Standard Week
+ 
+The WebScheduler Standard Week page is used to manage the behavior of a schedule for each of the seven days of a week. For the PcVue Native Scheduler, the WebScheduler's Standard Week corresponds to a timetable's Standard Week.
+ 
+WebScheduler Special Days
+ 
+There is no equivalent for the PcVue built-in Scheduler.
+ 
+WebScheduler Calendar
+ 
+The WebScheduler Calendar page is used to manage an entire schedule including the Standard Week, Exceptions, Special Days and Effective Period (as applicable). It gives a view on what will be actually run by PcVue for a certain time period, taking into account the Standard Week and any Exception Periods. Modifying the schedule using the calendar will create or modify Exceptions Periods for the schedule and leave the Standard Week unchanged.
+ 
+WebScheduler Effective Period
+ 
+There is no equivalent for the PcVue built-in Scheduler.
+ 
+User rights
+ 
+The WebScheduler controls user access to built-in Cron scheduler based on privileges defined in the file SchedulesAccess.dat.
+
+
+========================================
+TOPIC: WebSched_Overview.htm
+========================================
+WebScheduler Overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+WebScheduler Overview
+ 
+The WebScheduler is a Web Browser based application for managing the schedules that you find in typical applications such as BMS. It is designed to manage schedules from multiple sources and present them in a uniform manner no matter what equipment or field device driver are used.
+ 
+See Web and Mobile Client Applications Overview for an overview of Web & Mobile client applications, including their common requirements and deployment steps.
+ 
+The configuration steps specific for the WebScheduler access to PcVue are as follows:
+ 
+ 
+Schedules must be configured in PcVue before the WebScheduler can have access. Although the WebScheduler can be used to edit schedules, it cannot create them.
+This apply both to the built-in Cron timetables, and to the BACnet Schedule and Calendar objects,
+ 
+Make sure timetable user rights, as defined in user profile, are set appropriately as they apply to the access to Cron built-in timetables,
+ 
+Make sure the ScheduleAccess.dat file is defined appropriately, as it controls the user access to BACnet Schedules and Calendars.
+ 
+ 
+This book includes detailed information about how to design your project so that users can successfully take advantage of the WebScheduler.
+ 
+ This version of the WebScheduler supports PcVue built-in Schedules (Cron elements) and the schedules found in BACnet devices (Schedule and Calendar objects). However, the WebScheduler has been designed so that other schedule types (for example those found in LonWorks) can be added in the future as required.
+ 
+
+ 
+The WebScheduler is a management tool allowing the user to visualize and edit schedules. It does not run schedules itself.
+ 
+ 
+ 
+The WebScheduler can only configure the PcVue Scheduler existing schedules - it cannot create new ones.
+ 
+The changes brought to built-in CRON schedules are only saved on the web back end station. The WebScheduler must be used in conjunction with a SCADA Basic script used to distribute changes in multi-station (networked) applications.
+ 
+ The WebScheduler manages BACnet Schedule and Calendar objects via the PcVue BACnet communication driver. The WebScheduler does not communicate directly over BACnet itself.
+
+
+========================================
+TOPIC: WebSched_page_behavior.htm
+========================================
+Special Days Behavior page
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Special Days Behavior Page
+ 
+The Special Days Behavior page is displayed using the Special Days Behavior tab on the Calendar page. It displays the Special Days collections that can be selected for the schedule. Show picture
+
+ 
+The Special Days Behavior page displays the time intervals to be used for all days of each selected Special Days calendar, for a particular schedule. Users with configuration rights can edit the intervals. See the topic - Editing a schedule.
+ 
+Special Days Behavior page main features
+ 
+ 
+The identity of the schedule to which the Special Days Behavior applies.
+ 
+The default output of the schedule - that is the output when there is no active interval BACnet only).
+ 
+Edit toolbar. Edit tools for the Schedule Control. See the topic - Editing a schedule.
+ 
+Schedule Control. Provides the main display and edit features for the schedule. See the topics - Schedule Control main display features and Editing a schedule.
+ 
+Edit mode tools. See the topic - Editing a schedule.
+ 
+Schedule Control zoom tools. See the topic - Schedule Control main display features.
+ 
+Selection of the Special Days calendars used in the schedule. 
+ 
+ 
+Selecting Special Days Calendars
+ 
+All configured Special Days Calendars are available to each BACnet Schedule. They are not available to PcVue Native Schedules. To enable a Special Days Calendar tick the adjacent box and then the OK button. Selected calendars appear in the Schedule control in a similar manner to days in a Standard Week.
+ 
+
+ 
+The Special Days Calendars select which are the special days. The intervals for those special days are configured in the Special Days Behavior page and therefore can be different for each schedule.
+
+
+========================================
+TOPIC: WebSched_page_calendar.htm
+========================================
+Calendar page
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calendar Page
+ 
+The Calendar page is displayed when you select a schedule in the Overview page. Upon opening, it displays the current week of the schedule. Show picture
+
+ 
+The Calendar page displays the actual time intervals of the selected schedule taking into account the configuration of the Standard Week, Exception Periods and Special Days (BACnet only). Users with configuration rights can edit the schedule directly from the Calendar page. See the topic - Editing a schedule.
+ 
+
+ 
+During the periods not covered by an interval, the Schedule�s default value is set.
+ 
+ 
+Calendar page main features
+ 
+ 
+The identity of the schedule.
+ 
+The default output of the schedule - that is the output when there is no active interval.
+ 
+Navigation toolbar. See description below.
+ 
+Edit toolbar. Edit tools for the Schedule Control. See the topic - Editing a schedule.
+ 
+Schedule Control. Provides the main display and edit features for the schedule. See the topics - Schedule Control main display features and Editing a schedule.
+ 
+Edit mode tools. See the topic - Editing a schedule.
+ 
+Schedule Control zoom tools. See the topic - Schedule Control main display features.
+ 
+Month at a view tool. See below.
+ 
+ 
+Navigation toolbar
+ 
+Show picture
+ 
+
+ 
+ 
+ 
+The navigation tools are used to select the week displayed by the Schedule Control. They can be used to select the previous or next week, month or year. 
+ 
+The Month control works by adding (subtracting) one month to (from) the first date in the Schedule Control. The week to be displayed is the week starting on the Monday prior to the calculated date.
+ 
+The Calendar tool displays a date picker from which you can select a new start week. Note that the Schedule Control always displays a complete week.
+ 
+The This Week tool navigates to the current week.
+ 
+Month at a view tool 
+ 
+The Month at a view tool expands the week axis so that you can view four weeks at a time instead of the usual one. Show picture
+
+
+========================================
+TOPIC: WebSched_page_default.htm
+========================================
+Overview page
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview Page
+ 
+The Overview page is the first page that is displayed after a successful login. This page can be opened at any time by clicking the WebScheduler logo that appears on all the WebScheduler pages. The Default page is divided into two panes.
+ 
+ 
+The left pane contains a configuration tree with two main branches, one for the Schedules (BACnet and built-in CRON), and the other for Special Days. The configuration tree can be used to navigate directly to a Schedule or Special Day by clicking on the node.
+ 
+The right pane contains a table with all items sorted by their name.
+
+ 
+ 
+In addition, the lower border displays the name of the current user and the version of the WebScheduler. Show picture
+
+ 
+What is displayed in the table?
+ 
+The table includes useful information about each of the Schedules and Special Days. 
+ 
+ 
+Name - The identity of the Schedule or Special Days within the WebScheduler as configured in PcVue. 
+ 
+Description - A longer description of the Schedule or Special Days as configured in PcVue. Optional.
+ 
+Last access - The time and the user when the schedule or special days were last accessed.
+ 
+Last changed - The time and the user when the schedule or special days were last changed.
+ 
+Standard week empty - Displays a warning if the schedule standard week is empty.
+ 
+Exception period active - Displays a warning if the schedule configuration means that an exception period is currently active.
+ 
+ 
+Sorting and filtering the table
+ 
+The information in the table can be sorted by Name, Description etc. using the sort tool at the right of the column. 
+ 
+The rows that are displayed can also be filtered by entering a filter string in the text box immediately below the header.
+ 
+The table context menu
+ 
+The table context menu is displayed by clicking the down arrow adjacent to the Select All tick box. Show picture
+
+ 
+ 
+Select all - Selects all items in the table.
+ 
+Select none - De-selects all items in the table.
+ 
+Filter empty standard weeks - Filter the items in the table by showing only for which the standard week is empty.
+ 
+Filter exception period active - Filter the items in the table by displaying only those with an active exception period.
+ 
+Clear filters - Clear filters - Clear all filters that have been applied so that all items are displayed in the table.
+ 
+Display selected - Display the selected items. If you select more than one, they are stacked one above each other in the Calendar page. 
+ 
+ 
+Other user actions
+ 
+Clicking on the name of a Schedule or Special Days will open the Calendar page for that item.
+
+
+========================================
+TOPIC: WebSched_page_effective.htm
+========================================
+Effective Period page
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Effective Period Page
+ 
+The Effective Period page is displayed using the Effective Period tab. Show picture
+
+ 
+The Effective Period page displays the active period for the schedule. That is the period during which the schedule actively sets values in the managed schedule using the configuration of the periods and modes. Users with configuration rights can edit the Effective Period.
+ 
+Effective Period page main features
+ 
+ 
+The identity of the schedule to which the Effective Period applies.
+ 
+Save tool. 
+ 
+Start and End of period controls.
+ 
+ 
+Understanding the Start and End of period controls
+ 
+The Start and End controls operate in the same manner. Reading from the left to the right you can select a Date (day of the month), Month, Year and Day (day name). As well as the possible range of values, you would expect for each of the controls (for example 1 to 12 for the Month) you could also select ANY that effectively excludes it from the configuration. The Start and End is configured in this way for maximum flexibility when mapping onto the equivalent property of the actual schedule. 
+ 
+
+ 
+Although the start and end of a period are configured independently, they would normally be configured in the same manner. For example, if the start was configured as a day of the week (for example Any, Any, Any, Monday), the end would also be a day of the week (for example Any, Any, Any, Friday).
+ 
+ 
+Examples of the use of the Start and End of period controls
+ 
+ 
+A specific date. The schedule will be active between the two dates. Select a value for the Date, Month and Year properties. The Day property is set to ANY. Example:
+Start: 01, 01, 2014, ANY
+End: 31, 12, 2014, ANY.
+ 
+A day of the week. The schedule will be active between the selected days of each week. Select ANY for the Date, Month and Year properties. Select a day name for the Day property. Example:
+Start: ANY, ANY, ANY, Monday
+End: ANY, ANY, ANY, Friday
+ 
+Always. Tick the Always tick box. The start and End controls are disabled and the schedule is always active.
+
+
+========================================
+TOPIC: WebSched_page_login.htm
+========================================
+Login page
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Login Page
+ 
+The WebScheduler is accessed by entering the WebScheduler's Url into a Web Browser. Upon successfully connection to the web server, the Login page is displayed. Show picture
+
+ 
+To log in enter the Username and Password of a User of PcVue with WebScheduler access rights. The connection is established on clicking Login and, assuming good credentials have been entered, the WebScheduler default page is displayed.
+ 
+Using Remember me
+ 
+If you tick Remember me, the next time that you start the WebScheduler on the same PC, you will go directly to the Overview page without having to login first (Auto login). This option requires the use of cookies and so they must be permitted in the Web Browser configuration to use it.
+ 
+You can clear the auto login from a button on the Settings page.
+ 
+
+ 
+You can also click the Change Password button link if you want to change your password.
+
+
+========================================
+TOPIC: WebSched_page_multi_sched.htm
+========================================
+Calendar page (multiple schedules)
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Calendar Page (Multiple Schedules)
+ 
+The Calendar page (Multiple Schedules) is displayed when you select one or more schedules in the Overview page and use the Display selected command on the context menu. Upon opening, it displays the current week of the schedules. Show picture
+
+ 
+
+ 
+The loading time can be several seconds depending on how many schedules are being displayed.
+ 
+ 
+The Calendar page displays the actual time intervals of the selected schedules taking into account the configuration of the Standard Week, Exception Periods and Special Days (BACnet only). Users with configuration rights can edit the schedule directly from the Calendar page. See the topic - Editing a schedule.
+ 
+Calendar page (multiple schedules) main features
+ 
+The main features of the Calendar page (multiple schedules) are similar to those of the standard Calendar Page with the following exceptions.
+ 
+ 
+The number of displayed schedules.
+ 
+Schedule Control. Provides the main display and edit features for the schedule. By default, it displays an entire week for each schedule in a single row. There will be one row for each of the selected schedules. The standard Calendar page displays a single schedule with seven rows, one day per row. 
+ 
+Week/day Control. Selection of the period displayed per row - either an entire week or a particular day.
+ 
+ 
+For an explanation of the other features, see the topic about the standard Calendar page.
+
+
+========================================
+TOPIC: WebSched_page_other.htm
+========================================
+Other pages
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Other Pages
+ 
+Settings page
+ 
+Show picture
+ 
+
+ 
+ 
+ 
+The Settings page displays information about the WebScheduler and a button, No auto login, that can be used to clear Auto login. The button is only visible if Remember me on this machine had been selected.
+ 
+Help page
+ 
+Displays this help.
+ 
+Logout tab
+ 
+Logs the current user out from the WebScheduler and displays the Login page.
+
+
+========================================
+TOPIC: WebSched_page_properties.htm
+========================================
+Properties page
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Properties Page
+ 
+The Properties page is displayed using the Properties tab. Show picture
+
+ 
+The Properties page displays miscellaneous properties for the schedule. It can be used to allow a schedule to be disabled without deleting it.
+ 
+Property page main features
+ 
+ 
+The identity of the schedule to which the Effective Period applies.
+ 
+Save tool. 
+ 
+Tick box to enable/disable the schedule, plus the schedule's status.
+
+
+========================================
+TOPIC: WebSched_page_special_days.htm
+========================================
+Special days page
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Special Days Page
+ 
+
+ 
+Edits are not automatically saved. You must use the Save tool to save edits before closing the page or they will be lost.
+ 
+ 
+The Special Days page is used to create a calendar of one or more intervals (days) that are to be treated differently. For example, you might create a Special Days calendar called Public Holidays. Special Days are defined using the following properties.
+ 
+ 
+An interval of one or more days starting at a specific date.
+ 
+A recurrence pattern. The recurrence can be daily, weekly, monthly, yearly or none.
+ 
+The end of the recurrence. The end can be a specific date, after a number or recurrences or never.
+ 
+ 
+A Special Days calendar can be used with one or more schedules. You attach a Special Days calendar to a Schedule using the Special Days Behavior page. The Special Days Behavior page is also used to define the interval start and end times as the Special Days calendar only defines those days where the interval start and end times are used. 
+ 
+When using BACnet, a Special Days calendar is saved in a Calendar object. One Calendar object is used for each Special Days calendar. 
+
+ 
+Special Days page main features
+ 
+Show picture
+ 
+
+ 
+ 
+ 
+ 
+The identity of the Special Days calendar.
+ 
+Calendar toolbar. Tools to navigate the calendar.
+ 
+Edit toolbar. Tools to add new days and to save the configuration.
+ 
+Configured days. Defined by either just start date (which means indefinite), a start date and a number of occurrences, or a start date and end date. The letter in brackets indicates the recurrence pattern.
+(N) No recurrence.
+(D) Daily. Recurs every day during the configured duration. 
+(W) Weekly. Recurs one named day of each week during the configured duration.
+(M) Monthly. Recurs one day of each month during the configured duration.
+(Y) Yearly. Recurs one day of each year during the configured duration.
+The tools at the end of each line can be used to edit or delete the configured days.
+ 
+Interactive calendar.
+Day view.
+Month view.
+Special days interval.
+ 
+ 
+How to add days to the Special Days schedule using the Add tool
+ 
+ 
+Click the Add tool. The Add Interval dialog opens. Show picture
+
+ 
+Configure the interval by either entering the Start of interval date and a Duration in days, or a Start of interval date and an End of interval date. You can either type in a date or select it from the calendar that is displayed when clicking any of the date fields.
+ 
+Configure the recurrence pattern for the interval.
+No recurrence - A single occurrence of the interval. The End of recurrence property is not used.
+Daily - Every day starting at the Start of interval until the End of the recurrence. The End of interval and Duration are not used.
+Weekly - One or more named days per week starting at the Start of interval until the End of the recurrence. The End of interval and Duration are not used.
+Monthly - Repeat the interval defined each month until the End of recurrence.
+Yearly - Repeat the interval defined each year until the End of recurrence.
+ 
+For a recurring pattern, the end can be defined as End after (n) occurrences, an End by date or No end date, in which case the interval recurs indefinitely.
+ 
+ 
+How to add special days using click and drag
+ 
+You can add special days by clicking and dragging with the mouse in the Calendar Day View. The interval will start where the mouse button is clicked down and end where it is released. This method will produce a single interval with no recurrence, but it can be edited afterwards using the Interval dialog which is displayed when clicking anywhere on the interval in the calendar.
+
+
+========================================
+TOPIC: WebSched_page_std_week.htm
+========================================
+Standard Week page
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Standard Week Page
+ 
+The Standard Week page is displayed using the Standard Week tab. It displays the standard week for the schedule. Show picture
+
+ 
+The Standard Week page displays the time intervals of the selected schedule not taking into account the configuration of any Exception Periods and Effective Period (BACnet only). Users with configuration rights can edit the intervals that make up the Standard Week. See the topic - Editing a schedule.
+ 
+Standard Week page main features
+ 
+ 
+The identity of the schedule to which the standard week applies.
+ 
+The default output of the schedule - that is the output when there is no active interval.
+ 
+Edit toolbar. Edit tools for the Schedule Control. See the topic - Editing a schedule.
+ 
+Schedule Control. Provides the main display and edit features for the schedule. See the topics - Schedule Control main display features and Editing a schedule.
+ 
+Edit mode tools. See the topic - Editing a schedule.
+ 
+Schedule Control zoom tools. See the topic - Schedule Control main display features.
+
+
+========================================
+TOPIC: WebSched_scada_basic.htm
+========================================
+Using SCADA Basic to Update the PcVue built-in Scheduler
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using SCADA Basic to Update the PcVue built-in Scheduler
+ 
+The WebScheduler manages the PcVue built-in Schedules by interfacing with the station having the role of Web back end. Upon modification, this station saves the Cron configuration, but does not automatically notifies other stations.
+ 
+In a multi-station system, Cron timetables may be executed by a station different from the Web back end, it is therefore important that Cron configuration be distributed across stations. The suggested method is to use a SCADA Basic script incorporating the CRONTAB instruction (used specifically for manipulating the built-in Scheduler). A sample project including a suitable script can be downloaded from the Knowledge Base or requested from technical support. 
+ 
+A code fragment is shown below.
+ 
+Sub UpdateCron ()
+ 
+ 
+Dim lHandle AsLong;
+ 
+ 
+lHandle = Alloc_Buffer(128);
+ 
+ 
+Crontab("NETWORKBROADCAST", "LMdfClient01", lHandle, "@Cron.Status", 1);
+ 
+ 
+Free_Buffer(lHandle);
+ 
+ 
+End Sub
+
+
+========================================
+TOPIC: WebSched_starting.htm
+========================================
+Starting the WebScheduler
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Starting the WebScheduler
+ 
+The WebScheduler can be started either from the Start Menu shortcut created by the PcVue installation, or by typing in the Url into a Web Browser. 
+ 
+The following syntaxes are used for the Url.
+ 
+ 
+https://<Host computer name>/WebScheduler - Where <Host computer name> is the name of the PC hosting IIS.
+ 
+https://<Host computer IP>/WebScheduler - Where <Host computer IP> is the IP address of the PC hosting IIS.
+ 
+https://LocalHost/WebScheduler - When accessing the WebScheduler on the same PC on which IIS is hosted.
+
+
+========================================
+TOPIC: WebSched_timeouts.htm
+========================================
+Understanding the WebScheduler's Time-out Behavior
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Understanding the WebScheduler's Time-out Behavior
+ 
+The WebScheduler's timeout behavior is influenced by two timeouts.
+ 
+ 
+The Web Service's client session time-out configured in the Application Explorer. (Servers>Settings>Common server properties for WebVue and Web Services toolkit>Client session time-out. Default value 5 minutes.
+ 
+The IIS HTTP session time-out. Default value 20 minutes.
+ 
+ 
+There are a number of possible timeout scenarios.
+ 
+ 
+If you are actively using the WebScheduler, (using the Calendar, Standard Week or Special Days Behavior pages) the session is held open by the WebScheduler's Concurrent Access Management, which sends a message to the server every 30 seconds.
+
+ 
+If the period of inactivity is greater than the Web Services session time-out, PcVue will end the session and there will be a message in the Event Viewer.
+ 
+If the period of inactivity is greater than the Web Services session time-out but less that the IIS HTTP session time-out the session in PcVue will be closed but the WebScheduler web application will still be active and remember the username and password. If activity starts again, the WebScheduler will attempt to reconnect to PcVue using these credentials.
+ 
+If the period of inactivity is greater than the IIS HTTP session time-out then the user will have to log in and start the session again.
+
+
+========================================
+TOPIC: WebSched_timetable_edit.htm
+========================================
+Editing a schedule
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Editing a Schedule Using the Schedule Control
+ 
+
+ 
+You must use the Save tool to save edits before closing the page or they will be lost.
+ 
+ 
+Schedules can be edited using the Schedule Control only by User's with the correct edit rights. The configuration changes that result from editing a schedule depend on its type (BACnet or built-in) and the page in which the changes are being made.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Page
+ Effect on a BACnet device (schedule)
+ Effect on a built-in Schedule
+ 
+ 
+
+ Calendar
+ Modifies the Exception-Period property of the Schedule object of the BACnet device.
+ Modifies, creates and/or deletes Exception Periods.
+ 
+ 
+
+ Standard week
+ Modifies the Weekly-Schedule property of the Schedule object of the BACnet device.
+ Modifies the Standard Week.
+ 
+ 
+
+ Special days
+ Modifies the Exception-Period property of the Schedule object of the BACnet device.
+ Not available.
+ 
+ 
+ 
+ 
+Note that the Schedule Control has many different methods by which the intervals, making up a schedule, can be edited. Many of edit operation are automatically applied to all selected periods (one or several).
+ 
+The edit toolbar
+ 
+Show picture
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Tool
+ Description
+ 
+ 
+
+ Discard and reload
+ Discard any changes since the last save and reload the saved version.
+ 
+ 
+
+ Save
+ Save the current edits.
+ 
+ 
+
+ Save as
+ Save the current week as the Standard Week. Only available from the Calendar page (and with the correct permissions).
+ 
+ 
+
+ Export
+ Create an image of the schedule in .png format.
+ 
+ 
+
+ Add
+ Add a new interval. The Interval dialog opens to configure the interval. The interval is placed in the selected location on the Schedule Control. See below.
+ 
+ 
+
+ Delete
+ Delete the selected intervals.
+ 
+ 
+
+ Edit
+ Open the Interval dialog for the selected interval.
+ 
+ 
+
+ Select all
+ Select all intervals.
+ 
+ 
+
+ Unselect all
+ Unselect all intervals.
+ 
+ 
+
+ Cut
+ Cut the selected intervals. A copy is put on the clipboard and the intervals are deleted from the schedule.
+ 
+ 
+
+ Copy
+ Copy the selected intervals to the clipboard.
+ 
+ 
+
+ Paste
+ Paste the intervals in the clipboard starting at the selected the location.
+ 
+ 
+
+ Duplicate
+ The selected intervals are duplicated in all rows of the control.
+ 
+ 
+ 
+ 
+How to add a new interval
+ 
+There are two methods to create a new interval.
+ 
+ 
+Using click and drag.
+Click in the grid (on an empty cell) where the interval is to start and drag the pointer to where the interval is to end.
+On releasing the mouse button, the Interval dialog is opened. Show picture
+
+Check the interval times are correct.
+If you are working on an enumerated schedule, select the Mode.
+Click OK to confirm the configuration.
+ 
+Using the Add tool.
+Click in the grid where the interval is to start and then select the Add tool. The interval dialog opens.
+Configure the interval as above.
+ 
+ 
+How to select/de-select individual intervals
+ 
+Individual intervals can be selected by clicking with the mouse. Click once to select and again to de-select. A selected interval is indicated with a hatched pattern. Several intervals can be selected concurrently by clicking on them one at a time.
+ 
+How to select/de-select multiple intervals
+ 
+
+ 
+The following behaviors are for the Calendar Page. Exact behaviors may differ slightly for the other page types.
+ 
+ 
+There are several methods by which multiple intervals can be selected/de-selected.
+ 
+ 
+Click in upper-left corner cell - Selects all intervals.
+ 
+Click on the day header - Selects all intervals for that day.
+ 
+ Click on the time header - Selects all intervals that include the selected time.
+ 
+ Click on multiple intervals (one after the other)
+ 
+<Ctrl>-A - Selects all intervals.
+ 
+ 
+Editing intervals using the mouse
+ 
+There are two actions that can be performed directly on an interval using the mouse.
+ 
+ 
+Drag the interval to a new location.
+Move the mouse over the join between upper and lower bars until the pointer changes to the Move symbol.
+Click and drag the interval to a new location. Show picture
+
+ 
+Drag the start or end time.
+Move the mouse over the start or the end of the interval bar until the pointer changes to the Horizontal Resize symbol.
+Click and drag the start or end time to its new location. Show picture
+
+ 
+ 
+Editing intervals using the keyboard
+ 
+
+ 
+The following behaviors are for the Calendar Page. Exact behaviors may differ slightly for the other page types.
+ 
+ 
+The following keystrokes can be used to edit selected intervals.
+ 
+ 
+<Del> - Delete intervals.
+ 
+Left and right arrow keys:
+ Move 15 minutes.
++ <Ctrl> Move 5 minutes.
+ + <Shift> Move 1 minute.
+ 
+Up and down arrow keys - Move one day.
+ 
+<Ctrl-C> / <Ctrl-X> / <Ctrl-V> - Copy / Cut / Paste.
+ 
+<Esc> Close the Interval dialog.
+ 
+ 
+Other interval editing options
+ 
+The tools located below the lower left of Schedule Control can be used to select alternative modes of editing when using the mouse to click and drag intervals.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Tool
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Normal mode
+ See above. Overlapped intervals are not permitted.
+ 
+ 
+
+ 
+ 
+ 
+ Slip crop overlapping
+ The overlapping portion of the interval being dragged is deleted.
+ 
+ 
+
+ 
+ 
+ 
+ Slip crop overlapped
+ The overlapping portion of the interval, over which the interval being dragged, is deleted.
+ 
+ 
+
+ 
+ 
+ 
+ Slip crop delete
+ The interval that is being overlapped, by the interval that is being dragged, is deleted in its entirety.
+ 
+ 
+
+ 
+ 
+ 
+ Split interval
+ Clicking on an interval will split it into two intervals at the click position.
+ 
+ 
+ 
+ 
+The Interval context menu
+ 
+Show picture
+ 
+
+ 
+ 
+ 
+The Interval context menu is displayed when right clicking on a time interval.
+ 
+ 
+Edit interval - Open the Edit Interval dialog from where the interval can be directly edited.
+ 
+Select interval - Select the clicked interval.
+ 
+Unselect interval - Unselect the clicked interval.
+ 
+Select all intervals - Select all intervals of the displayed week.
+ 
+Unselect all intervals - Unselect all intervals of the displayed week.
+ 
+Align left - Make the start time of all selected intervals the same. The interval that was right clicked on is taken as the reference. Show picture
+
+ 
+Align right - Make the end time of all selected intervals the same. The interval that was right clicked on is taken as the reference. Show picture
+
+ 
+Merge - Merge the selected intervals. One new interval is created starting at the start time of the oldest interval and ending at the end time of the newest interval. Show picture
+
+ 
+Delete interval - Delete the selected intervals.
+ 
+Duplicate interval - The selected intervals are duplicated in all days of the week.
+ 
+Copy interval - The selected intervals are copied to the clipboard.
+ 
+ 
+The Time Span context menu
+ 
+Show picture
+ 
+
+ 
+ 
+ 
+The Time Span context menu is displayed when right clicking on the Schedule Control grid outside of a configured interval.
+ 
+ 
+Add interval - The Interval dialog opens to configure the interval.
+ 
+Paste interval - Paste the intervals from the clipboard, starting at the selected the location.
+ 
+Merge selected intervals - Merge the selected intervals. One new interval is created starting at the start time of the oldest interval and ending at the end time of the newest interval.
+
+
+========================================
+TOPIC: WebSched_timetable_main.htm
+========================================
+Schedule Control main display features
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Schedule Control Main Display Features
+ 
+The Schedule Control is the primary display element of the Web Scheduler and appears in the Calendar, Standard Week and Special Days pages. The Schedule Control displays a weekly schedule in a grid arranged in seven rows - each representing a day, and 48 columns. The time unit that each column represents depends on the zoom level and by default is 30 minutes. The day displayed as the first day of the week is configured in the Web Portal configuration and is Monday by default. 
+ 
+Schedule Control main display features
+ 
+Show picture
+ 
+
+ 
+ 
+ 
+ 
+Displays the date and week number in the Calendar page (or the Schedule names when the Calendar page is in multiple mode), the day name in the Standard Week page and the Special Days name in the Special Days page.
+ 
+Displays a single day with hour and minutes using 24-hour notation.
+ 
+Chart colored for non-business hours.
+ 
+Chart colored for business hours.
+ 
+Interval bars. Note the tool-tip displayed when the mouse hovers over.
+ 
+ 
+
+ 
+The Schedule Control appearance is modified for the Multiple Schedule view with the [B] displaying an entire week, and [A] displaying one row for each schedule. See the topic Calendar Page (multiple schedules).
+ 
+ 
+About the Interval bars
+ 
+Each interval bar is made from two bars. If you examine the following zoomed image, you can easily see the difference. The period in this case starts at 06:15. Show picture
+
+ 
+ 
+The upper narrow solid bar is the actual time period accurate to within one minute [F]. 
+ 
+The lower and wider shaded bar is the period shown snapped to the time grid [G].
+ 
+ 
+Zoom controls 
+ 
+The zoom controls allow you to zoom in and out of the day axis. The grid period can be 1, 5, 15, 30, (default) or 60 minutes when displaying a single schedule (Calendar and Special Days Behavior pages), or 5, 15, 30, 60, 180, 360, 720 or 1440 minutes when displaying multiple schedules (Calendar page (multiple schedules)).
+ 
+When necessary a horizontal scroll bar is displayed allowing you to navigate the entire 24 hours of the Day axis.
+
+

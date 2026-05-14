@@ -1,0 +1,1777 @@
+========================================
+TOPIC: Datacon_in_the_ae.htm
+========================================
+Managing Data Connections in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing Data Connections in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks applicable to Data Connections
+ 
+When the Data Connections folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a Sql connection
+ Add a new Sql data connection.
+ 
+ 
+
+ 
+ 
+ 
+ Settings
+ Display the Data connections settings dialog. See the topic Data connections settings for more information.
+ 
+ 
+ 
+ 
+When a specific data connection is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start Sql connection
+ Start the selected Sql connection
+ 
+ 
+
+ 
+ 
+ 
+ Stop Sql connection
+ Stop the selected Sql connection
+ 
+ 
+
+ 
+ 
+ 
+ Test connection
+ Test the selected Sql connection
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the selected data connection properties dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected data connection.
+ 
+ 
+
+ 
+ 
+ 
+ Add Sql read query
+ Add a Sql read query to the selected data connection.
+ 
+ 
+
+ 
+ 
+ 
+ Add Sql write query
+ Add a Sql write query to the selected data connection.
+ 
+ 
+ 
+ 
+When a specific Sql query is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected Sql query.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the selected Sql query properties dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Test read query (resp. write query)
+ Test the selected Sql read query (resp. write query). This action executes the query and displays the results.
+ 
+ 
+
+ 
+ 
+ 
+ Trigger read query (resp. write query)
+ Trigger the selected Sql read query (resp. write query). This action executes the query and processes the results (update variable values for example).
+ 
+ 
+
+ 
+ 
+ 
+ Trigger read query with parameters (resp. write query)
+ Trigger the selected Sql read query (resp. write query) and propose to manually fill-in the value of the expected parameters. This action executes the query and processes the results (update variable values for example).
+ 
+ 
+ 
+ 
+Behavior of cut, copy and paste
+ 
+You can cut and paste or copy and paste a data connection. A new data connection is created with a default name.
+ 
+You can cut and paste or copy and paste a Sql read or write query. A new Sql query is created with a default name.
+
+
+========================================
+TOPIC: Datacon_overview.htm
+========================================
+Data connections overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data Connections Overview
+ 
+The Data connection feature is protected by the license.
+ 
+The Data Connection feature facilitates the connection of PcVue to third party systems. In particular, Sql connections are useful to exchange data with Enterprise systems such as:
+ 
+ 
+MES - For retrieving production parameters and giving feedback on its execution...
+ 
+CMMS - For triggering work orders on event and alarms, retrieving work orders' status and accessing spare parts availability...
+ 
+ERP - For exchanging information about production planning, raw material availability and usage...
+ 
+Weather data - Either pushing weather data to a central database if weather stations are directly connected or retrieving weather data in a third-party system, for use in PcVue&#160;.
+ 
+etc.
+ 
+ 
+Simply said, Sql connections and the underlying Sql request handler can be used to bridge PcVue to any external data source, provided that a compatible ADO.NET provider is available.
+ 
+The module behind Sql connection handling helps you connect seamlessly to Sql data sources. It includes:
+ 
+ 
+Request routing inside the multi-station system - In order to avoid the need to open the access to the data source to all stations of the network, the configuration allows you to define which station is in charge of the interface to the DBMS. All other stations will go through this designated station to execute requests.
+ 
+Support for single active server associations - A Sql connection can be produced by an association for redundant paths to the DBMS.
+ 
+Error handling
+ 
+Asynchronous command handling
+ 
+Centralized connection strings at the project configuration level
+ 
+etc.
+ 
+ 
+This Sql bridge supports a large variety of database commands including:
+ 
+ 
+Select, Insert, Update and Delete queries
+ 
+Scalar and non-query requests
+ 
+Requests on tables, views, stored procedure execution
+ 
+ 
+Data Connections allow the developer to configure a connection to a Data Source, typically a Database Management System (DMBS) using the ADO.NET technology. The Data Source can be local, on another server on the local network or cloud based.
+This version includes support for:
+ 
+ 
+
+ 
+Microsoft's SQL Server - Local, network or Azure
+ 
+ 
+
+ 
+Oracle - Based on the ODP.NET provider
+ 
+ 
+
+ 
+Built-in providers
+ 
+ 
+
+ 
+A generic data source is also included which can be used to connect to any Data Source that supports the ADO.NET technology.
+ 
+ 
+ 
+
+ 
+The Data Connections feature is based on a process running as a Windows service called SV DbConnect.
+ 
+ This service is installed as part of PcVue installation and must be running for Sql connections and requests to operate properly.
+ 
+By default, the service SV DbConnect runs with a virtual account. While this is suitable in the most common situations, you may need to change the selected account depending on the constraints of the RDBMS and the ADO.NET provider.
+ 
+ 
+Access to Data Sources via Sql connections is possible using SCADA Basic, the SV Manager Toolkit and, using Sql Read Queries or Sql Write Queries, you can map variables to data from any data source. 
+ 
+
+ 
+ 
+ 
+Sql Queries
+ 
+Pre-defined Sql queries can be added to a configured Sql Connection. See the topic How to configure an Sql query. A query can be configured to run cyclically and / or on various events. The data produced by a query can be used in the following ways. 
+ 
+ 
+By mapping to one or more variables. See the topics Linking a variable to a Sql read query and Linking a variable to a Sql write query.
+ 
+By configuring a Sql grid control to display rows returned by a Sql query. See the topic Sql grid control.
+
+
+========================================
+TOPIC: Datacon_sql_query_conf.htm
+========================================
+How to configure Sql queries
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to configure Sql queries
+ 
+Data connections enables you to create Sql read and Sql write queries. In general, a Sql read query takes advantage of statements such as SELECT and returns rows from a table, and a Sql write query sends a non-query request, using statements such as INSERT, UPDATE or DELETE, that performs some action on the database and eventually affects rows.
+ 
+Depending on your data data source and provider, a wizard is available to help you design your query, or you can type the query manually.
+ 
+
+ 
+The pre-defined Sql read queries are used to map Sql variables. See the topic Linking a Variable to a Sql Read Query for more information.
+ 
+The pre-defined Sql write queries can be used with Sql variables that have the Command property set. See the topic Linking a Variable to a Sql Write Query for more information.
+ 
+They can also be used to populate the Grid control in a mimic. See the topic Sql grid control for more information.
+ 
+ 
+Prerequisites
+ 
+ 
+You have configured a SQL connection.
+ 
+ 
+Creating a new query and configuring the general properties
+ 
+
+ 
+A Sql query used to map Sql variables is able to handle a maximum of 5000 returned values, a value being a field of a row.
+ 
+For example, a Sql query returning 50 rows with 6 fields each corresponds to 300 values.
+ 
+ 
+ 
+Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.
+ 
+Click on the Add Sql query button in the toolbar and choose whether to add a read or a write query. Show picture
+ 
+
+ 
+ 
+ 
+Enter a query name and (optional) a description. The name is used as the Id of the query throughout the application.
+ 
+Select User interface in the Consumer type drop-down If you plan to use this Sql query with the Sql grid control. Only Read queries have this option.
+If you plan to use the Sql query with the Sql variables driver, select Sql variables in the Consumer type drop-down.
+ 
+
+ 
+Once you select User interface in the Consumer type, you only have the Parameters and the Traces tab to configure. The Parameters tab only appears if you have entered a parameter in the Query field.
+ 
+ 
+Select the scope of the Sql query. The scope is used to control the distribution of the Sql query results across user sessions. The scope is not available for User interface consumer type.
+ 
+
+ 
+The scope of the following variables must match the scope of the query: Inhibiting bit variable, triggering bit variable, execution status variable, and execution error variable.
+ 
+Refer to Linking a variable to a Sql read query and Configuration Items Affected by Scope for more information about the Scope property.
+ 
+ 
+(For a Sql read query) Select the kind of data to be returned by the Sql command:
+ 
+ 
+Read rows - Used when a query is designed to return a set of rows comprising one or multiple fields.
+ 
+Read a scalar value - Used when a query is designed to return a single scalar value.
+ 
+ 
+The Kind property is not available for User interface consumer type, only reading rows is of interest.
+ 
+Enter a query. The query must respect the Sql syntax as supported by the underlying data source and ADO.Net Data provider. Although the query editor highlights keywords, there is no auto-completion. The maximum query length is 10,000 characters.
+ 
+
+ 
+We recommended to use tools such as a query editor and query performance profiler provided with your data source to design and test your queries. It will help you tune them before you configure the Sql queries in the Application Explorer. In general, poorly designed Sql requests negatively affects the system performances and availability, and in particular the time it takes the external source to process them.
+ 
+ 
+ 
+Use the Add a substitution parameter button to add a parameter to the query.
+ 
+Use the Add snippet button to insert a predefined Sql query snippet. Query snippets availability depends on the data source and data provider selected when configuring the data connection.
+ 
+Use the Open Sql query wizard button to facilitate the configuration of Sql queries. It is useful to create a new query from scratch and cannot be used to modify an existing one. See Using the Sql query wizard to configure a query section to learn more.
+The Sql query wizard availability depends on the data source and data provider selected when configuring the data connection.
+ 
+ 
+
+ 
+As part of the query editing for certain built-in providers, you have the possibility to insert emojis.
+ 
+ 
+ 
+Configuring the query parameters
+ 
+Parameter configuration allows the value of one or more fields within the query to be provided by the query execution context (for example the variable mapping).
+ 
+
+ 
+The Parameters tab only appears if you added substitution parameters in the Query field in the General tab.
+ 
+ 
+ 
+Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.
+ 
+Select and open a Sql query, then click on the Parameters tab of the Sql query creation dialog. Here you can configure the parameters added in the General tab. You can enter a description as well as define the following properties: Show picture
+ 
+
+ 
+ 
+ 
+ 
+ 
+Max string length - The maximum number of characters between 1 and 2048. The default is 132.
+ 
+Is numeric - If ticked, the parameter is checked to verify that its contents is numeric.
+ 
+Block if escaped strings - If ticked, a parameter value containing an escape string will be blocked and the query will not be processed, for example if the parameter value includes: \0, 1F, 7F, simple or double quotes. If not ticked, the parameter values are not verified, they may contain escape string and be more susceptible to Sql injection risks.
+ 
+Use default value - If ticked, the Default Value is used if the value of the parameter cannot be resolved.
+ 
+Default value - A value, expression or an empty string.
+ 
+ 
+ 
+
+ 
+The default value is useful as a fallback if the parameter value cannot be resolved at runtime. For this reason, while the fallback can be an expression, we recommend not to reference an element that may not be resolvable at all times and in all circumstances.
+ 
+For example, if a parameter is defined by an expression to calculate a timespan depending on the timestamp of a variable (a query to retrieve data for the previous 10 minutes since a variable value has changed), a good fallback is to use TsNow(Ts_Utc) as default value because it will be a good approximation in many cases. Using the timestamp of another variable may not be helpful as default value if you consider that a variable may not be initialized.
+ 
+In particular, defining the default value of a parameter by an expression that includes the value of the parameter itself will never work properly (circular dependency).
+ 
+ 
+Configuring the execution properties
+ 
+ 
+Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.
+ 
+Select and open a Sql query, then click on the Execution tab of the Sql query creation dialog. Here you can configure when a query is executed. A query can be executed cyclically, on event and/or upon completion of another query. You can configure the following properties to fine tune query execution: Show picture
+ 
+
+ 
+ 
+ 
+ 
+Cyclic - The cycle period is configurable from 10 seconds to 1 hour. There is no synchronization. For example, if you configure the period to be 0:10:00 (10 minutes) and the application start-up was at 12:05:15, the first execution will be at startup, the next one at 12:15:15, 12:25:15 etc.
+ 
+Triggering bit - The name of a bit variable used to trigger the execution upon value change.
+ 
+On query completed - If ticked, the query is executed upon completion of the query you select here. The condition under which the query is triggered depends on the execution status of the selected query. For example, you can trigger the query when the selected one succeeded and returned no row, or if it failed. The following matrix indicates if the query is executed depending on the configuration and results of the first query. Selection can be combined, for example to execute the query if no row is returned and also if the query failed:
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ &#160;
+ Query executed with success At least 1 row returned
+ Query executed with success 0 row returned
+ Query failed to execute
+ 
+ 
+
+ (For Sql read queries only) If With data is selected (For Sql write queries only) If With affected data is selected
+ The query is triggered
+ &#160;
+ &#160;
+ 
+ 
+
+ (For Sql read queries only) If Without data is selected (For Sql write queries only) If Without affected data is selected
+ &#160;
+ The query is triggered
+ &#160;
+ 
+ 
+
+ If Failed is selected
+ &#160;
+ &#160;
+ The query is triggered
+ 
+ 
+ 
+ 
+ 
+Allow loop execution - If ticked, allows query chaining that can potentially lead to an infinite loop. It should not be selected if you do not control query chaining precisely. But for example, it is necessary if you configure the query to be called on completion of a query that is itself chained on the execution of the query you are configuring.
+ 
+Allow trigger by script - Enable the query to be triggered using the SQL_QUERY SCADA Basic instruction.
+ 
+(For Sql write queries only) Allow trigger by variable change - Enable the query to be triggered if a mapped variable changes. Depending on the variable mapping, the query may be triggered on variable command or on value change or both.
+ 
+(For Sql read queries only) Execution repeating - The Sql query can be configured in such a way that the execution is repeated if the number of received rows exceeds a maximum you define. It is useful if your query is designed to retrieve a certain amount of rows in nominal mode (with a Select TOP clause for example). However, in some rare cases such as a restart after a long period of time or an avalanche of new rows, you need the query to be repeated until all rows stored during the shutdown are retrieved.
+ 
+ 
+Repeat query - Tick to activate the execution repeating. It can be used for both a cyclic query and a query executed on a triggering bit.
+ 
+Max received row count - The threshold, in number of rows received, that will trigger a reiteration of the execution. The execution can be repeated more than once if the received row count is still greater or equal to the defined value.
+ 
+ 
+Inhibiting bit - The name of a bit variable that may be used to inhibit execution.
+ 
+ 
+
+ 
+Irrespective of the configuration in the Execution tab, a query is only executed once it has been mapped to at least one variable if it has parameters defined.
+ 
+Contrary to a Sql read query, if there is no parameter defined, a Sql write query is executed if a trigger condition is met, even if no variable is mapped.
+ 
+ 
+
+ 
+A query triggered in background is not executed if it is still running from a previous execution.
+ 
+ 
+Configuring the advanced properties
+ 
+ 
+Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.
+ 
+Select a Sql query, then click on the Advanced tab. Here you can select variables to provide information about the status of the query, and queuing properties if trigger by script is enabled in the Execution tab. You can configure the following properties: Show picture
+ 
+
+ 
+ 
+ 
+ 
+Execution status - The status that can be provided are:
+ 
+ 
+0 = Successful.
+ 
+1 = Running.
+ 
+2 = Failed.
+ 
+3 = Canceled.
+ 
+ 
+Execution error - A text variable providing additional information when the status variable indicates a failure. In most cases, the error text itself comes directly from the ADO.NET Data provider.
+ 
+Number of rows affected - A register variable providing the number of rows returned by the last execution of the query. Set to 0 if the query has failed.
+ 
+ 
+ 
+
+ 
+Each query has its own queue. When flow regulation is active, all query requests (calls) are queued and actually executed in the order they were added to the queue.
+ 
+Expression parameters for a query are evaluated at execution time and not when queuing.
+ 
+ 
+Activating traces
+ 
+ 
+Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.
+ 
+Select a Sql query, then click on the Traces tab. Here you can enable diagnostic trace messages. Each trace generates specific messages that are logged in the Trace Files and displayed in the Event Viewer dialog (F7). Show picture
+ 
+
+ 
+ 
+ 
+ 
+The following are some of the traces you can activate:
+ 
+ 
+Trace 1: General - Enable general traces related to the handling of the Sql query.
+ 
+Trace 2: Configuration - Enable traces specific to the configuration handling of the Sql query.
+ 
+Trace 3: Runtime (Sql variable driver - General) - Enable general traces related to the Sql variable driver activity for this query.
+ 
+Trace 4: Runtime (Sql variable driver - Triggers) - Enable traces related to the triggering of this query for the Sql variable driver.
+ 
+Trace 5: Runtime (Sql variable driver - Queries) - Enable traces related to the handling of this query for the Sql variable driver.
+ 
+Trace 6: Runtime (Sql variable driver - Queries with details) - Enable detailed traces related to the handling of this query for the Sql variable driver, including parameter substitutions and value extractions.
+ 
+Trace 7: Runtime (Sql variable driver - Mapping) - Enable traces related to the mapping resolution of this query for the Sql variable driver.
+ 
+Trace 8: Runtime (Sql variable driver - Performances) - Enable traces related to performances of this query for the Sql variable driver.
+ 
+ 
+Using the Sql query wizard to configure a query
+ 
+The Sql query wizard is a Sql query designer that helps you create a new query in a few clicks, even if you are not familiar with the Sql syntax.
+ 
+
+ 
+The Sql query wizard availability depends on the data source and data provider selected when configuring the data connection. It may or may not be available for the data provider you are using.
+ 
+The datasource must be available to use the Sql query wizard. Iif necessary, a connection is established to browse tables and other elements that are the base for building queries.
+ 
+ 
+ 
+Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.
+ 
+Click on the Add Sql query button in the toolbar and choose whether to add a read or a write query, then click the button Open Sql query wizard in the Sql command section to start designing your query.
+ 
+
+ 
+At any point in the wizard, you can test your queries by clicking the Test button in the bottom left corner. This opens the Sql query test dialog, where you can input parameter values and view the query results along with execution status details.
+ 
+ 
+For a typical Sql-based datasource such as Sql Server instance or an Oracle database server, the configuration is the following:
+ 
+For a Sql read query:
+ 
+ 
+Choose a table from the drop-down and use the control icons on the right of the table to select and order the data. The Add calculation column button allows you to add calculated columns based on tables columns.
+ 
+Click Next, select your Sql query elements using the drop-down fields of the table to filter the data to return (Where clause). You can also set the max number of rows to be returned and whether to only return distinct rows.Show picture
+ 
+
+ 
+ 
+ 
+Click Next, define how you want to order and group results using the arrows on the right of the tables then click Finish.
+ 
+ 
+For a Sql write query:
+ 
+ 
+Select whether the Sql query is designed to insert, update, or delete rows. The Sql query wizard dialog opens.
+ 
+Select from the drop-down, the table to modify and depending on the action selected in the previous dialog, you can:
+ 
+ 
+Insert data by selecting column names and entering values for the selected columns.
+ 
+
+ 
+For CHAR/VARCHAR field types, use single quotes around 'null' to store it as a string rather than a NULL value.
+ 
+ 
+Delete data by filtering the table selected to identify the rows to delete.
+ 
+Update data values by selecting columns and entering or replacing a value. Values can be set to null or replaced by the value of a parameter.
+ 
+ 
+Click Finish.
+ 
+ 
+For a typical REST-based API, the configuration is the following:
+ 
+
+ 
+The configuration for read and write queries is similar, with the key difference being the method used. Write queries typically use POST, PUT, or PATCH, along with a body payload for data. Write requests generally don't include filtering or ordering, as these apply to data retrieval.
+ 
+ 
+ 
+Select a REST API method. The following HTTP methods are available: Get, Put, Post, Patch, and Delete.
+ 
+Enter the full API Uri, including query parameters. The Params grid is instantly populated with the query parameters included in the Uri of the request. Show picture
+ 
+
+ 
+ 
+ 
+In the Header tab, add key and value pairs for headers required by the API.
+ 
+In the Body tab, enter the body string (if required by the API). There are three possible formats: application/json, text/plain, or x-www-form-urlencoded.
+ 
+In the Results pane, enter a limit for parsing nested JSON. See the documentation of the provider you are using for more information.
+ 
+Click Next, select the fields you need from the query result. The Add calculation column button allows you to add calculated columns based on tables columns.
+ 
+
+ 
+You can rename the fields and use the control icons on the right of the table to order them.
+ 
+ 
+Click Next, select your Sql query elements using the drop-down fields of the table to filter the data to return (Where clause). You can also set the max number of rows to be returned and whether to only return distinct rows.
+ 
+Click Next, define how you want to order and group results using the arrows on the right of the tables then click Finish.
+
+
+========================================
+TOPIC: Datacon_sql_tableformat.htm
+========================================
+Supported table formats
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Supported Table Formats
+ 
+The following table formats are supported when using Sql Read Queries as a source for the value of variables (SELECT).
+They are also supported when using Sql write queries to affect one or more rows (INSERT, UPDATE...)
+ 
+
+ 
+A table can be the result of one or more joins or any other processing performed at the data source level.
+ 
+ 
+
+ 
+The maximum number of values that it is possible to read is limited by the maximum column count supported by ADO.Net provider, or by the Data Source minus 1.
+ 
+ 
+Narrow table format
+ 
+The narrow format is a table with one field containing the values and another the metadata of the value. This is one of the most common formats and is used in PcVue by the HDS for log and trend data.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_Ts
+ field_Name
+ field_Value
+ field_Quality
+ 
+ 
+
+ 11/01/2019 10h00
+ Temperature
+ 22,5
+ 192
+ 
+ 
+
+ 11/01/2019 10h00
+ Humidity
+ 63
+ 192
+ 
+ 
+
+ 11/01/2019 10h00
+ Wind
+ 39
+ 192
+ 
+ 
+
+ 11/01/2019 10h01
+ Temperature
+ 22,5
+ 192
+ 
+ 
+
+ 11/01/2019 10h01
+ Humidity
+ 64
+ 192
+ 
+ 
+
+ 11/01/2019 10h01
+ Wind
+ 12
+ 192
+ 
+ 
+
+ 11/01/2019 10h02
+ Humidity
+ 64
+ 192
+ 
+ 
+
+ 11/01/2019 10h02
+ Humidity
+ 64
+ 192
+ 
+ 
+ 
+ 
+The simplest query for this format is to read the last value of each metric (temperature, humidity and wind), but this requires one Sql request for each variable and is not very efficient.
+ 
+ 
+ 
+ 
+
+ 
+ 
+SELECT TOP(1)
+ 
+[field_Ts],
+ 
+[field_Value],
+ 
+[field_Name]
+ 
+FROM [NarrowTable]
+ 
+WHERE [field_Name] = �Temperature�
+ 
+ORDER BY [field_Ts] DESC
+ 
+ 
+ 
+ 
+ 
+An alternative approach is to use query mutualization obtaining the last value of each metric, and then mapping the result to several variables.
+The example below is given for Sql Server and may not work with other RDBMS.
+ 
+ 
+ 
+ 
+
+ 
+ 
+;WITH CTE AS
+ 
+(
+ 
+SELECT
+ 
+ 
+[field_Ts],
+ 
+[field_Value],
+ 
+[field_Name],
+ 
+ROW_NUMBER() OVER(PARTITION BY [field_Name] ORDER BY [field_Ts] DESC) AS "RowNumber"
+ 
+FROM [NarrowTable]
+ 
+WHERE [field_Ts] > DATEADD(DD, -10, GETDATE())
+ 
+)
+ 
+SELECT
+ 
+ 
+[field_Ts],
+ 
+[field_Value],
+ 
+ [field_Name]
+ 
+FROM CTE WHERE RowNumber=1
+ 
+ORDER BY [field_Ts] DESC
+ 
+ 
+ 
+ 
+ 
+Using the above sample data the result of this query is as follows.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_Ts	
+ field_Name	
+ field_Value	
+ field_Quality
+ 
+ 
+
+ 11/01/2019 10h00	
+ Wind	
+ 39	
+ 192
+ 
+ 
+
+ 11/01/2019 10h03	
+ Temperature	
+ 22,5	
+ 192
+ 
+ 
+
+ 11/01/2019 10h05	
+ Humidity	
+ 64	
+ 192
+ 
+ 
+ 
+ 
+In this example, 3 values and their quality are read with one SQL Query execution, but it could be extended to many more.
+ 
+Wide table format with single timestamp
+ 
+The wide table format is that where each metric appears in a separate field. This format is a snapshot of several metrics at a particular time.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_Ts
+ field_Temperature
+ field_Humidity
+ field_Wind
+ �
+ 
+ 
+
+ 11/01/2019 10h00
+ 22,5
+ 63
+ 39
+ �
+ 
+ 
+
+ 11/01/2019 10h01
+ 22,5
+ 64
+ 12
+ �
+ 
+ 
+
+ 11/01/2019 10h02
+ 22,5
+ 64
+ 17
+ �
+ 
+ 
+ 
+ 
+This is the easier format to use if we are interested in only keeping the latest value of each metric (Temperature, Humidity and Wind).
+ 
+ 
+ 
+ 
+
+ 
+ 
+SELECT TOP(1)
+ 
+[field_Ts],
+ 
+[field_Temperature],
+ 
+[field_Humidity]
+ 
+[field_Wind]
+ 
+FROM [WideTable]
+ 
+ORDER BY [field_Ts] DESC
+ 
+ 
+ 
+ 
+ 
+Using the above sample data the result of this query is as follows.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_Ts	
+ field_Temperature	
+ field_Humidity	
+ field_Wind	
+ �
+ 
+ 
+
+ 11/01/2019 10h02	
+ 22,5	
+ 64	
+ 17 
+ �
+ 
+ 
+ 
+ 
+In this example, 3 values are read with one Sql Query but it could be extended to many more. 
+ 
+Wide table format with multiple timestamps
+ 
+Similar to the above but with the timestamp repeated for each metric. This is a format in common use by SCADA providers.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_Ts
+ field_Ts Temperature
+ 
+ 
+field_ValueTemperature
+ 
+ 
+ 
+field_TsHumidity
+ 
+ 
+ 
+Field_ValueHumidity
+ 
+ �
+ 
+ 
+
+ 11/01/2019 10h00
+ 11/01/2019 10h00
+ 22,5
+ 11/01/2019 10h00
+ 63
+ �
+ 
+ 
+
+ 11/01/2019 10h01
+ 11/01/2019 10h01
+ 23,0
+ 11/01/2019 10h01
+ 64
+ �
+ 
+ 
+
+ 11/01/2019 10h02
+ 11/01/2019 10h02
+ 23,5
+ 11/01/2019 10h01
+ 64
+ �
+ 
+ 
+ 
+ 
+This an easy format to use if you are interested in only keeping the latest value of each metric (Temperature, Humidity and Wind).
+ 
+ 
+ 
+ 
+
+ 
+ 
+SELECT TOP(1)
+ 
+[field_Tstemperature],
+ 
+[field_ValueTemperature],
+ 
+[field_TsHumidity]
+ 
+[field_ValueHumidity]
+ 
+FROM [WideTable]
+ 
+ORDER BY [field_Ts] DESC
+ 
+ 
+ 
+ 
+ 
+Using the above sample data the result of this query is as follows.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_TsTemperature	
+ field_ValueTemperature	
+ field_TsHumidity	
+ field_ValueHumidity 
+ �
+ 
+ 
+
+ 11/01/2019 10h02	
+ 23,5	
+ 11/01/2019 10h02	
+ 64	
+ �
+ 
+ 
+ 
+ 
+With this example, 2 or more values are read with one Sql Query but it could be extended to many more.
+ 
+Wide table format without timestamp
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_BatchID
+ field_Failed
+ field_Score
+ field_Operator
+ 
+ 
+
+ 4012
+ 0
+ 965
+ AD
+ 
+ 
+
+ 4013
+ 0
+ 1093
+ AD
+ 
+ 
+
+ 4014
+ 0
+ 875
+ AD
+ 
+ 
+
+ 4015
+ 1
+ 15
+ AD
+ 
+ 
+ 
+ 
+Again, easy to use if you are interested in only keeping only the n latest values for all the metrics (Failed, Score, Operator).
+ 
+ 
+ 
+ 
+
+ 
+ 
+SELECT TOP(2)
+ 
+[field_Failed],
+ 
+[field_Score],
+ 
+[field_Operator]
+ 
+FROM [WideTable]
+ 
+ORDER BY [field_BatchID] DESC
+ 
+ 
+ 
+ 
+ 
+Using the above sample data the result of this query is as follows.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_BatchID	
+ field_Failed	
+ field_Score	
+ field_Operator
+ 
+ 
+
+ 4014	
+ 0	
+ 875	
+ AD
+ 
+ 
+
+ 4015	
+ 1	
+ 15	
+ AD
+ 
+ 
+ 
+ 
+With this example, it is possible to read one or more value sets with one Sql Query.
+ 
+Fixed table format
+ 
+A table in which the number of rows and their use is fixed.
+ 
+ 
+ 
+ 
+ 
+
+ field_Day
+ field_Production
+ 
+ 
+
+ Monday
+ 10005
+ 
+ 
+
+ Tuesday
+ 98509
+ 
+ 
+
+ Wednesday
+ 99678
+ 
+ 
+
+ Thursday
+ 10014
+ 
+ 
+
+ Friday
+ 99256
+ 
+ 
+
+ Saturday
+ 73968
+ 
+ 
+
+ Sunday
+ NULL
+ 
+ 
+ 
+ 
+It is not necessary to filter or order the result.
+ 
+ 
+ 
+ 
+
+ 
+ 
+SELECT
+ 
+ 
+[field_Day],
+ 
+[field_Production],
+ 
+[field_Operator]
+ 
+FROM [FixTable]
+ 
+ 
+ 
+ 
+ 
+Using the above sample data the result of this query is as follows.
+ 
+ 
+ 
+ 
+ 
+
+ field_Day	
+ field_Production
+ 
+ 
+
+ Monday	
+ 10005
+ 
+ 
+
+ Tuesday	
+ 98509
+ 
+ 
+
+ Wednesday	
+ 99678
+ 
+ 
+
+ Thursday	
+ 10014
+ 
+ 
+
+ Friday	
+ 99256
+ 
+ 
+
+ Saturday	
+ 73968
+ 
+ 
+
+ Sunday	
+ NULL
+ 
+ 
+ 
+ 
+With this example, it is possible to read one or more value sets with one Sql Query.
+ 
+Alternatively, the result could be just one scalar value.
+ 
+ 
+ 
+ 
+
+ 
+ 
+SELECT COUNT(*) as Result
+ 
+ 
+FROM [FixTable]
+ 
+ 
+ 
+ 
+ 
+Using the above sample data the result of this query is as follows.
+ 
+ 
+ 
+ 
+
+ Result
+ 
+ 
+
+ 7
+
+
+========================================
+TOPIC: Datacon_sqlcon_configuration.htm
+========================================
+Sql Connections configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Sql Connections Configuration
+ 
+
+ 
+The required ADO.NET provider must be installed on the computer used for configuration purpose, and also on runtime computers belonging to the list of Servers of the Sql connection (see Advanced properties below).
+ 
+ 
+How to create and configure a Sql Connection
+ 
+ 
+Open the Application Explorer and expand the configuration tree to select the Data Connections folder.
+ 
+From the task list, select Add a Sql connection. The Sql Connection creation dialog opens. Show picture
+
+ 
+Either accept the default or enter the Sql connection Name. The name is used as the Id of the connection throughout the application.
+ 
+Enter the optional Description. The description appears in the Application Explorer whenever the Data Connections folder is selected.
+ 
+Select the Data Source from either:
+Microsoft SQL Server - Creates a connection using the SQL Server ADO.NET provider.
+Oracle Database - Creates a connection using the Oracle Data Provider for .NET (ODP.NET).
+Built-in providers - Creates a connection using one of PcVue's built-in provider.
+Other providers - Creates a connection using any other third-party ADO.NET provider.
+ 
+Select the Data Provider. The drop down list is automatically populated with entries appropriate to the selected data source unless you have selected Other in which case all data providers available on the local computer are listed.
+ 
+Click Apply.
+ 
+ 
+At this point, the Connection String, used when establishing the connection, is partially completed but you must then configure the properties in Data Source specific tab before the configuration is complete.
+ 
+Configuring a SQL Server connection
+ 
+ 
+Select the Authentication Mode. You may need to ask your System Administrator for this information. 
+Windows authentication. The credentials used to connect to the DBMS will be those of the running SV DbConnect service. A User name and Password are not required.
+SQL server authentication. You must enter a valid SQL Server User name and Password.
+Active directory password authentication. For connecting to a Microsoft Azure database. You must also enter a User name and Password that are valid on your Azure Active Directory.
+Active directory integrated authentication. The credentials used to connect to the DBMS will be those of the running SV DbConnect service. This authentication mode can only be used if your local Active Directory is extended to your Azure Active Directory. A User name and Password are not required.
+ 
+Select the SQL Server tab. This tab is only visible if you selected SQL Server as the Data Source. Show picture
+
+ 
+Select or enter the server name. A dialog displaying the list of discovered SQL server instances, both on the local computer and on the network, can be displayed using the Ellipsis button.
+ 
+Select the Authentication Mode. You may need to ask your System Administrator for this information. 
+Windows authentication. The credentials used to connect to the DBMS will be those of the running SV DbConnect service. A User name and Password are not required.
+SQL server authentication. You must enter a valid SQL Server User name and Password.
+Active directory password authentication. For connecting to a Microsoft Azure database. You must also enter a User name and Password that are valid on your Azure Active Directory.
+Active directory integrated authentication. The credentials used to connect to the DBMS will be those of the running SV DbConnect service. This authentication mode can only be used if your local Active Directory is extended to your Azure Active Directory. A User name and Password are not required.
+ 
+Select or enter the database name. A dialog displaying a list of discovered databases, from the selected server instance, can be displayed using the Ellipsis button
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+
+ 
+The Server name is the SQL Server instance name, it can take several forms depending on:
+ 
+ 
+
+ 
+Where the SQL Server instance is located
+ 
+ 
+
+ 
+SQL Server instance settings
+ 
+ 
+
+ 
+System level settings
+ 
+ 
+ 
+For example it can be:
+ 
+ 
+
+ 
+(local) or .\ or . (dot) to connect to the default local SQL Server instance or .\MySQLServerInstanceName for a named SQL Server instance
+ 
+ 
+
+ 
+The server IP address such as 192.168.x.y or 192.168.x.y\MySQLServerInstanceName for named instances
+ 
+ 
+
+ 
+The server hostname such as MySQLServerHostname
+ 
+ 
+
+ 
+ The fully qualified instance name such as MySQLServerHostName\MySQLServerInstanceName
+ 
+ 
+
+ 
+MyAzureDomain.database.windows.net for Microsoft Azure database and Microsoft Azure data warehouse instances
+ 
+ 
+ 
+ 
+
+ 
+When using Windows authentication, a User name and Password are not required.
+ 
+Pay attention to the fact that the credentials used to connect to the DBMS will be those of the running SV DbConnect service.
+ 
+ 
+Configuring an Oracle connection
+ 
+ 
+Select the Oracle tab. This tab is only visible if you selected Oracle as the Data Source. Show picture
+
+ 
+Select either TNS (Transparent Network Substrate) or EZ Connect (Easy connect) for the connection type.
+If using TNS an Oracle configuration file, tnsnames.ora, provides the connection parameters. The .Net Service Name drop down list box is populated using the contents of this file and the appropriate entry must be selected.
+If using EZ Connect you must manually enter the Server name (or IP address), Port number and Database service name.
+ 
+Select the Authentication Mode from one of the following. You may need to ask your System Administrator for this information.
+Windows authentication. The credentials used to connect to the DBMS will be those of the running SV DbConnect service. A User name and Password are not required.
+SQL authentication. You must also enter a valid User name and Password.
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+Configuring a built-in provider
+ 
+If you select the Data Source as Built-in providers, you must configure the connection string in the Built-in tab. Use the ellipsis button to discover the properties supported by the selected provider.
+ 
+Please refer to the documentation specific to the selected provider for more information.
+ 
+Configuring other third-party providers
+ 
+If you select the Data Source as Other providers, you can click the ellipsis button to discover the properties supported by the selected provider or manually enter the connection string in the Other tab.
+ 
+By using a Data Source of type Other providers, you can take advantage of any third party ADO.NET provider. See the next paragraph for more information on how to manually set connection properties without the need to manually edit the connection string.
+ 
+
+ 
+The behavior and level of support for such third-party ADO.NET providers may vary depending on the provider you decide to use. In particular, not all ADO.NET providers implement the necessary features for accessing the list of advanced properties. Refer to the product documentation of the third-party ADO.NET provider for more information.
+ 
+ 
+Manually editing advanced properties of a connection string
+ 
+Much of the configuration that takes place in the Data Connection dialog is used to generate a connection string that is then used by PcVue when connecting to the database. Advanced users can edit the connection string directly in the Sql connection dialog from the server specific tab. The Ellipsis button adjacent to the Connection String field displays a list of available properties as exposed by the selected ADO.NET provider.
+As an example, here is the list of properties for SQL Server Show picture or Oracle Show picture
+
+ 
+
+ 
+Some providers hide security related fields, including the user name and password. Then, they cannot be edited from the connection string.
+ 
+ 
+Testing the connection
+ 
+Once it has been configured, the connection can be tested using either the Test Connection button in the Sql Connection dialog or the Test Connection tool. PcVue will attempt to connect to the server using the configured Connection String. A dialog is displayed showing success or, should the connection attempt fail, error information.
+ 
+
+ 
+The Test Connection tool allows you to test the connection end-to-end:
+ 
+ 
+
+ 
+If the station from which you run the test is not in the list of Producers, the connection is established through the multi-station and therefore the connection will fail if none of the Producer stations is running.
+ 
+ 
+
+ 
+If the connection string does not include the database, the test will consist of a connection to the DBMS instance only. It does not guarantee that all of the hosted databases will be accessible.
+ 
+ 
+
+ 
+If the connection string does include the database, the test will consist of a connection to the database itself. It guarantees that the configured database is accessible, but it does not guarantee that all of the tables (and other database items) will be accessible.
+ 
+ 
+ 
+ 
+The Advanced Properties tab
+ 
+ 
+General
+Timeouts
+Command time-out - The wait time before terminating a command, sent by PcVue using DbConnect, and generating an error. A value of 0 indicates no limit (an attempt to execute a command will wait indefinitely). The default is 1 minute.
+ 
+Servers - Server station list producing the Sql connection (optional). It must be a list of type Historical server. Used in multi-station applications. Those stations in the Server Station List will handle the interface to the DBMS and all other stations will delegate requests to those stations in the Server Station List. If the list contains an association, it must be of type Single active server.
+ 
+ 
+The Traces tab
+ 
+The Traces tab allows you to enable diagnostic trace messages. Each trace generates specific messages that are logged in the Trace Files and displayed in the Event Viewer dialog (F7). The following screen shot was taken with the default configuration. Show picture
+ 
+
+ 
+ 
+ 
+ 
+ 
+General - Not used.
+ 
+Configuration - Information associated with configuration. Useful when trying to diagnose configuration loading issues or if a problem is caused by the configuration or run-time of the SV DbConnect service.
+ 
+Sql request - Shows all the requests sent to the SV DbConnect service. The trace includes the Id of the request, the actual Sql request text, if the request was successful or failed, and the processing time.
+
+
+========================================
+TOPIC: Datacon_systemvar.htm
+========================================
+System variables and audit
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data Connection System Variables and Audit
+ 
+System variables
+ 
+A number of system variables are available. They are created automatically according to the configuration.
+ 
+If a Data Connection is deleted from the configuration, the corresponding system variables are not deleted automatically.
+ 
+SYSTEM.<StationName>.Components.DbConnect.Alive
+ 
+Indicate the state of the SV DbConnect process, the Windows service in charge of handling Data Connections.
+0=Service unreachable (the SV DbConnect service may not be installed or not started)
+1=Service available
+ 
+Variable type � BIT.
+ 
+Produced by the station <StationName> and consumed by all stations 
+ that have a client connection to the <StationName> server.
+ 
+SYSTEM.<StationName>.DataConnections.<SqlConnectionName>.On
+ 
+Indicate the state of the Sql connection corresponding to <SqlConnectionName>, as seen from the station <StationName>.
+0=Not ready to receive request (the Sql connection may not be started)
+1=Ready to receive request
+ 
+Variable type � BIT.
+ 
+Produced by the station <StationName> and consumed by all stations 
+ that have a client connection to the <StationName> server. 
+ 
+Audit - Flow counters
+ 
+The following flow counters are available in the category Flow around Historical Manager for DbConnect.
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ Global Execute command: Total
+ Flow counter for requests sent to remote station and executed locally
+ 
+ 
+
+ Local Execute command: Total
+ Flow counter for requests executed locally
+ 
+ 
+
+ Local Execute command: TestConnection
+ Flow counter for TestConnection requests executed locally
+ 
+ 
+
+ Local Execute command: DataReader
+ Flow counter for DataReader requests executed locally
+ 
+ 
+
+ Local Execute command: Scalar
+ Flow counter for Scalar requests executed locally
+ 
+ 
+
+ Local Execute command: NonQuery
+ Flow counter for NonQuery requests executed locally
+ 
+ 
+
+ Local Execute command failed: Total
+ Flow counter for requests failed locally
+ 
+ 
+
+ Local Execute command failed: TestConnection
+ Flow counter for TestConnection requests failed locally
+ 
+ 
+
+ Local Execute command failed: DataReader
+ Flow counter for DataReader requests failed locally
+ 
+ 
+
+ Local Execute command failed: Scalar
+ Flow counter for Scalar requests failed locally
+ 
+ 
+
+ Local Execute command failed: NonQuery
+ Flow counter for NonQuery requests failed locally
+ 
+ 
+ 
+ 
+Audit - Instance counters
+ 
+The following instance counters are available in the category DbConnect:
+ 
+ 
+ 
+ 
+ 
+
+ Object
+ Definition
+ 
+ 
+
+ SqlConnections
+ The number of Sql connections
+ 
+ 
+
+ TestConnectionRequest message
+ The number of TestConnectionRequest messages sent
+ 
+ 
+
+ SqlQuery
+ The number of Sql queries
+ 
+ 
+
+ SendQuery
+ The number of Sql queries sent
+ 
+ 
+
+ SqlVariables
+ The number variables mapped onto a Sql query
+
+

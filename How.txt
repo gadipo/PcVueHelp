@@ -1,0 +1,521 @@
+========================================
+TOPIC: How_models_are_displayed_in_design_mode.htm
+========================================
+How 3D models are displayed in design mode
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How 3D Models are Displayed in Design Mode
+ 
+The HMI uses the following conventions to represent a 
+ 3D model when the mimic is in Design mode. 
+ 
+
+ 
+ 
+ 
+
+ 
+Individual frames are only highlighted when selected using 
+ the Graphic Explorer.
+ 
+The material is not shown in Design mode other than via its 
+ properties being used to color the representation of the mesh.
+
+
+========================================
+TOPIC: How_the_HMI_manages_materials.htm
+========================================
+How the HMI handles materials
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How the HMI Handles Materials
+ 
+When rendering the surface of a mesh, the HMI uses all 
+ the material properties from the 3D model file. However, only the following 
+ properties are available from the 3D Properties dialog.
+ 
+ 
+Diffuse color
+ 
+Specular color
+ 
+Emissive color
+ 
+Specular level
+ 
+Opacity
+ 
+ 
+Materials that are not indexed have a temporary index 
+ created by the HMI so the material is available for selection, and the 
+ properties for editing, from the 3D Properties dialog. The index name 
+ for non-indexed materials is produced as follows.
+ 
+ 
+The HMI creates an 
+ index named 'Material #x' where x is a number from 0 to the number of 
+ different non-indexed materials inside a model file.
+ 
+Meshes with the same 
+ material properties share the same indexed material.
+
+
+========================================
+TOPIC: How_the_Import_Export_Tool_Works.htm
+========================================
+How the Import/Export Tool works
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How the Import/Export Tool Works
+ 
+The Import/Export Tool can be used to export strings 
+ from, or import strings to, an individual mimic, mimic template, symbol 
+ or entire library.
+ 
+ 
+Local library - all 
+ mimics, mimic templates and symbols of the local project.
+ 
+Common Library - 
+ all mimics, mimic templates and symbols of the common library.
+ 
+Shared libraries 
+ - all mimics, mimic templates and symbols of the named shared library.
+ 
+ 
+
+ 
+For more information on libraries, see the book called 
+ The Project Libraries in the main Help.
+ 
+ 
+The exported strings are stored in one or more text files 
+ in CSV (comma separated value) format from where they can be manipulated 
+ by a third party package such as a word processor or spreadsheet. One 
+ file can include strings from any number of sources (mimics, mimic templates 
+ and symbols). For details, see the topic on Configuring the Import/Export Tool and the book on Import/Export 
+ File Formats.
+ 
+How the Import/Export Tool interacts with PcVue's 
+ language capability
+ 
+Normally during the exporting process, strings for both 
+ base and alternative languages are exported. The resulting file will contain 
+ records for strings in both languages even if one of them is not used 
+ and the strings are null. 
+ 
+When importing you select the 
+ two languages to import, one for the base and one for the alternative 
+ language, from the selection of languages that the file contains. For example, a file may contain strings for English, German, French and Spanish. 
+ You could select French for the base language strings and German for the 
+ alternative language string.
+ 
+
+ 
+Importing strings from different languages does not affect PcVue's language configuration.
+ 
+For example, if PcVue was installed as French/English and you imported strings for French/German, the software configuration and appearance will still be as French/English.
+
+
+========================================
+TOPIC: How_the_SQL_Server_Uses_Memory.htm
+========================================
+How the SQL Server Uses Memory
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How the SQL Server Uses Memory 
+ 
+There are two principal methods for setting the SQL Server 
+ memory options manually: 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Method
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 
+ 
+Set Min Server Memory and Max Server Memory:
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+ 
+ 
+to span a range of memory 
+ values. 
+ 
+ 
+ 
+ 
+This is useful in situations where system or database 
+ administrators want to configure an instance of SQL Server in conjunction 
+ with the memory requirements of other applications running on the same 
+ computer.
+ 
+ 
+ 
+
+ 
+ 
+ 
+to the same value. 
+ 
+ 
+ 
+ 
+This value corresponds to the fixed amount of memory that 
+ will be allocated to SQL Server.
+ 
+ 
+ 
+ 
+Min Server Memory
+ 
+You use Min Server Memory to guarantee a minimum amount 
+ of memory to an instance of SQL Server. 
+ 
+SQL Server will not immediately allocate the amount of 
+ memory specified in Min Server Memory on startup. However, after memory 
+ usage has reached this value due to loading from client stations, SQL 
+ Server cannot free memory from the allocated buffer pool unless the value 
+ of Min Server Memory is reduced.
+ 
+
+ 
+SQL Server is not guaranteed to allocate the amount of 
+ memory specified in Min Server Memory. If the load on the server never 
+ necessitates the allocation of the amount of memory specified in Min Server 
+ Memory, then SQL Server will run with less memory.
+ 
+ 
+Only set Min Server Memory if the start time of new applications 
+ sharing the same server as SQL Server becomes a problem. It is better 
+ to let SQL Server use all of the available memory.
+ 
+Max Server Memory 
+ 
+You use Max Server Memory to prevent SQL Server from 
+ using more than the specified amount of memory, thus leaving the remaining 
+ memory available to start other applications quickly. SQL Server does 
+ not immediately allocate the memory specified in Max Server Memory on 
+ startup. Memory usage is increased as needed by SQL Server until it reaches 
+ the value specified in Max Server Memory. SQL Server cannot exceed this 
+ memory usage unless the value of Max Server Memory is raised.
+ 
+There is a short delay between the start of a new application 
+ and the time when SQL Server releases memory. Using Max Server Memory 
+ prevents this delay and may give better performance to the other application. 
+ 
+ 
+
+ 
+As you increase the amount of SQL Server memory, ensure 
+ that there is sufficient disk space to grow the operating system's virtual 
+ memory support file to accommodate additional memory.
+
+
+========================================
+TOPIC: How_to_add_a_geotag.htm
+========================================
+How to add a geo-tag
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Add a Geo-tag
+ 
+A geo-tag is a beacon, the detection of which is used to determine a geographical zone. The main property of a geo-tag is its unique ID. By associating a geo-tag with a zone, the PcVue server can determine the zones where a SnapVue client is located.
+ 
+ 
+ Select the Geo-tags folder in the Application Explorer and, from the task list, select Add a geo-tag. The Geo-tag Configuration dialog opens. Show picture
+
+ 
+Enter a name by which the geo-tag will be known.
+ 
+Enter a description of the geo-tag. The description is optional and only appears in the contents pane of the Application Explorer.
+ 
+Enter the geo-tag Physical ID. What you enter here depends on the geo-tag type.
+For a BLE beacon, it is the UUID of the beacon.
+For an NFC tag, it is the text from the NFC in NDEF (text) format.
+For a QR Code, it is the text that corresponds to the QR code as defined at the time of generating the QR Code.
+For a Wi-Fi endpoint, it is the MAC address of the access point.
+ 
+Click OK to confirm the configuration and close the dialog.
+
+
+========================================
+TOPIC: How_to_add_a_location.htm
+========================================
+How to add and configure a zone
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Add and Configure a Zone
+ 
+A zone usually represents a real world location such as a room in a building or a specific piece of equipment. Zones can, and will normally, be nested. For example Building1.Floor1.Room1.Chiller1. 
+ 
+The geo-tags associated with a zone allow the PcVue server to determine the location of the SnapVue client user or its proximity to a given piece of equipment.
+ 
+The actions added to a zone define what the user of the SnapVue mobile app can visualize and operate when at that zone. Actions can also be cascaded from a parent zone.
+ 
+
+ 
+When a user has been determined as being in a child zone they are, by definition, also in the parent zone.
+ 
+ 
+ 
+ Select the Zones folder, or a zone that is already configured, in the Application Explorer and, from the task list, select Add a zone. The Zone Configuration dialog opens. Show picture
+
+ 
+Enter a name by which the zone will be known.
+ 
+Enter a description of the zone. The description is optional and only appears in the contents pane of the Application Explorer.
+ 
+Enter the Local branch of the zone. As for variables, branches associated to zones are hierarchical. The Context branch is a reminder of the parent zone's branch. The branch will be used as a filter for any variables available to an action. Branches are aggregated from parent zone, child zone and action unless preceded by the '@' character. For example, if the zone FLOOR01 has branch FL1 and a child zone ROOM1 has the branch RM1 any variables available to actions added to the ROOM1 will be filtered by the branch FL1.RM1.
+ 
+Select the Browsing level. For a user to have access to a zone they must have access to the corresponding level in the user profile.
+ 
+Detection criteria - It is the logic used to identify a zone based on the detection of several tags. For example, if a zone has two associated tags B1 and B2. If all geo-tags are detected means that a user must see both geo-tags to be detected in the zone. If at least one geo-tag is detected means that it is enough for a user to detect at least one of the geo-tags to be detected in the zone.
+ 
+Detection in a single child zone at a time - Defines if child zones are mutually exclusive or not. That is, if a user can be in more than one child zone at the same time. This is used in situations where geo-tags from more than one child zone are visible at the same time. Using this property, only the zone corresponding to the closest geo-tag is selected.
+As part of the tracking process, each zone receives a score depending on the distance to its geo-tags as well as the scores of child zones. The better the score, the greater is the probability that the user is in the zone.
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+Advanced tab
+ 
+A zone has advanced properties. Show picture
+
+ 
+ 
+Variables filtering - Properties that filter the variables available to actions and hence to the SnapVue client. Variables can be filtered by a branch and / or an expression.
+Sql expression - A Sql expression used to filter variables instead of, or as well as, the branch name. For example Domain = "MyDomain". See the topic Using an Sql Expression to Filter the List of Variables in the Grid Control book. If you use both a Branch name and Sql expression filter they are combined using a logical AND. 
+ 
+Geospatial reference - The configured real world position of a zone in latitude, longitude and altitude. Used in conjunction with the GPS Position reported by the mobile client as a method of determining zone. The radius specifies the circle within which the position is valid.
+Use parent zone - Use the geospatial reference of the parent zone.
+Use static value - Use the entered value. Latitude and Longitude are in degrees, Altitude and Radius are in meters.
+ 
+ 
+How to associate a geo-tag with a zone
+ 
+ 
+ Select a configured zone and, from the task list, select Associate a geo-tag. The geo-tag Association Configuration dialog opens. Show picture
+
+ 
+Select the geo-tag Tag name. A given geo-tag can be associated to one or more zones.
+ 
+Enter the Maximum detection distance. If not entered the default of zero is used.
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+Geo-tag priority and accuracy
+ 
+If there is more than one detectable geo-tag type, there may be some conflict in the determined zone. To overcome this the SnapVue client reports geo-tag types using the following priority.
+ 
+ 
+NFC or QR tags first because they are the most accurate. Their accuracy is under 1 meter and the most recent scanned takes priority.
+ 
+If no NFC or QR tags are seen, then Bluetooth tags are used. BLE beacon positioning accuracy is about 1-2 meters.
+ 
+Else, if no BLE is seen, then Wi-Fi is used. Wi-Fi Access Point positioning accuracy is about 10 meters.
+ 
+Else, if no Wi-Fi is seen, then GPS is used. GPS positioning accuracy is about 100 meters.
+ 
+ 
+How to add an action to a zone
+ 
+ 
+ Select a configured zone and, from the task list, select the required action from the Add an action list. The Action Configuration dialog opens. Show picture
+
+ 
+Enter a Name for the action.
+ 
+Enter an optional Description.
+ 
+Select the Cascade display mode you need. This property drives how the action will be made visible to users detected in children zones and with which branch it will be resolved. There are 3 possible choices to combine:
+If the action should only be visible on this zone (the one where it is configured) or if it should also be visible to a user detected in a child zone.
+If the action should always be resolved (branch-wise) in the context of the zone where the user is detected (either this zone or a child zone), or if it should always be resolved in the context of this zone (the one where it is configured)
+ 
+Select the optional Enabling bit that can be used to dynamically enable and disable the action.
+ 
+Select the Parameters tab and configure the action parameters. See the Actions book.
+ 
+Select the Tile tab and configure the tile. The tile determines the appearance of the action within the SnapVue mobile application. See the Actions book.
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+For further information on the configuration of actions, see the Actions book.
+
+
+========================================
+TOPIC: How_to_conserve_resources_text.htm
+========================================
+How to conserve system resources when using 3D text
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Conserve System Resources When Using 3D Text
+ 
+As with any 3D technology, use of 3D text can cause an application to use excessive system resources at run time. Varied font sets, sizes, styles and depths of extrusion all multiply the basic resources used. 
+ 
+The 3D Text tool is designed to enable you to use the PC's memory resources sparingly if you limit the range of character variants you employ. The HMI creates (renders) one 3D model for each distinct character it finds in the 3D texts and stores them in memory for re-use. For instance, a letter 'a' (in lower case, with a particular font, size and extrusion) would be rendered and stored once, ready for assembling into all 3D texts in which it occurs identically.
+ 
+Some basic guidelines are as follows.
+ 
+ 
+Use an adequate range of characters (letters, digits, symbols and punctuation) to make the meanings of all 3D texts clear.
+ 
+Standardize the 3D texts wherever convenient (e.g. the 9,999 texts PLC_0001, PLC_0002 ... PLC_9999 share just 14 characters). 
+ 
+Chose a particular font, size, style and extrusion depth in which to display them.
+
+
+========================================
+TOPIC: How_to_extend_the_functionality_of_the_VBE.htm
+========================================
+How to extend the functionality of the VBE
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Extending the functionality of the VBE
+ 
+The VBE (Visual Basic Environment) is the object model for Microsoft VBA Extensibility 5.3. It contains functionality such as:
+ 
+ 
+Adding and enumerating a project's references.
+ 
+Setting or getting the project's description, help file, and help context. 
+ 
+ 
+Using these references and properties, you can alter and add to the functionality that is provided in VBA.
+ 
+The VBE object is the root object that contains all other objects and collections represented in VBA.
+ 
+The VBE object
+ 
+The VBE object lists the collections of objects in the VBE. All objects have a VBE property that points to the VBE object. The VBE object's VBProjects property returns the collection of all projects currently open in the VB Integrated Development Environment (IDE). For example, this code displays the name of the first of the VB projects:
+ 
+MsgBox VBE.VBProjects(1).Name
+ 
+For more information on the VBE object, see the topic VBE Object in Microsoft VBA Help.
+ 
+The VBProject object
+ 
+The term 'project' in the VB/VBA context is distinct from 'project' in the HMI. A VBA project can be associated with a mimic, a symbol or a project in the HMI.
+ 
+The VBProject object represents a project in VB/VBA. It enables you to access the project's properties, VB components and references. For example, this code displays the name of the current VBA project:
+ 
+MsgBox ThisProject.VBProject.Name
+ 
+For more information on the VBProject object, see the topic VBProject Object in Microsoft VBA Help.
+ 
+The VBProject property is used to gain access to the functionality of the VBE object.
+
+

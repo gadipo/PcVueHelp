@@ -1,0 +1,1036 @@
+========================================
+TOPIC: 21CFR_How_to_provide_an_audit_trail.htm
+========================================
+How to provide an audit trail
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How To Provide an Audit Trail
+ 
+To provide an audit trail of user actions you use the 
+ Log Filters, Archive Units and Log Viewer.
+ 
+ 
+The Log Filters select 
+ what actions are logged and where they are stored.
+ 
+The Archive Units 
+ store the logged actions.
+ 
+The Log Viewer provides 
+ a way to view the logged actions that have been stored in the Archive 
+ Units.
+ 
+ 
+For detailed information on configuring Log Filters, 
+ Archive Units and Log Viewers see the main Help.
+ 
+
+ 
+The records recorded using the Log Filters are not encrypted. 
+ Therefore, it is necessary to provide some other means to protect them 
+ against tampering, such as restricting physical access to the PC on which 
+ they are located.
+ 
+ 
+What can be logged
+ 
+The following run-time user actions may be logged.
+ 
+ 
+ 
+ 
+
+ 
+ 
+Source and action
+ 
+ 
+ 
+Option in Log Filter configuration
+ 
+ 
+ 
+
+ 
+ 
+Animation - Send bit
+ 
+ 
+ 
+Command
+ 
+ 
+ 
+
+ 
+ 
+Animation - Send register
+ 
+ 
+ 
+Command
+ 
+ 
+ 
+
+ 
+ 
+Animation - Send text
+ 
+ 
+ 
+Command
+ 
+ 
+ 
+
+ 
+ 
+Animation - Send recipe
+ 
+ 
+ 
+Command
+ 
+ 
+ 
+
+ 
+ 
+Animation - Run program
+ 
+ 
+ 
+Program
+ 
+ 
+ 
+
+ 
+ 
+Alarm display - Acknowledge alarm
+ 
+ 
+ 
+Acknowledge
+ 
+ 
+ 
+
+ 
+ 
+Alarm display - Mask alarm
+ 
+ 
+ 
+User mask
+ 
+ 
+ 
+
+ 
+ 
+Logon
+ 
+ 
+ 
+Logon/Logoff
+ 
+ 
+ 
+
+ 
+ 
+Logoff
+ 
+ 
+ 
+Logon/Logoff
+ 
+ 
+ 
+ 
+If you select the option to Logon/Logoff, logon failures 
+ are also recorded. Automatic logoff due to a period of inactivity is recorded 
+ as a normal logoff.
+ 
+What cannot be logged
+ 
+The following run-time user actions cannot be logged 
+ and therefore their use must be carefully considered in a 21CFR Part 11 
+ compliant project. 
+ 
+ 
+ 
+
+ 
+ 
+Source and action
+ 
+ 
+ 
+
+ 
+ 
+Animation - Send timetable
+ 
+ 
+ 
+
+ 
+ 
+Animation - Link open
+ 
+ 
+ 
+
+ 
+ 
+Animation - Link close
+ 
+ 
+ 
+
+ 
+ 
+Animation - Link note
+ 
+ 
+ 
+
+ 
+ 
+Animation - Run macro
+ 
+ 
+ 
+
+ 
+ 
+Animation - Run application
+ 
+ 
+ 
+
+ 
+ 
+Animation - Creating, modifying or deleting a recipe
+ 
+ 
+ 
+
+ 
+ 
+Animation - Creating, modifying or deleting a timetable
+ 
+ 
+ 
+
+ 
+ 
+Log in dialog - Changing the system date and time
+ 
+ 
+ 
+ 
+
+ 
+It is not possible to record individual changes made to 
+ a project configuration when in Design mode. Therefore, it is suggested 
+ that once a 21 CFR Part 11 compliant project has been approved, it is 
+ operated with a run-time protection key only.
+
+
+========================================
+TOPIC: 21CFR_Logging_the_previous_value_of_a_register.htm
+========================================
+Logging the previous value of a register
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Logging the Previous Value of a Register Variable
+ 
+When logging the change in value of a register variable 
+ as a result of a Send-Register animation it can be useful to log the previous 
+ value of the register as well as the new value. The new value is logged 
+ by default and may be displayed using the #C mnemonic in the Log Viewer configuration.
+ 
+You log the previous value of the register by using an 
+ extended attribute configured to display the previous control value. To 
+ configure that 
+ you must manually edit the configuration file VARCONF.DAT to add the line 
+ 
+Set=%PreviousControlValue% 
+ 
+after the attribute's definition.
+ 
+In the following example attribute 5 has been configured 
+ in this way.
+ 
+[ATTRIBUTE\TextAttribute1]
+DistributedMode=Static
+[ATTRIBUTE\TextAttribute2]
+DistributedMode=Static
+[ATTRIBUTE\TextAttribute3]
+DistributedMode=Static
+[ATTRIBUTE\TextAttribute4]
+DistributedMode=Dynamic
+[ATTRIBUTE\TextAttribute5]
+DistributedMode=Dynamic
+Set=%PreviousControlValue%
+[ATTRIBUTE\TextAttribute6]
+DistributedMode=Dynamic
+[ATTRIBUTE\TextAttribute7]
+DistributedMode=Static
+[ATTRIBUTE\TextAttribute8]
+DistributedMode=Dynamic
+[ATTRIBUTE\TextAttribute9]
+DistributedMode=Static
+[ATTRIBUTE\TextAttribute10]
+DistributedMode=Dynamic
+[ATTRIBUTE\TextAttribute11]
+DistributedMode=Static
+[ATTRIBUTE\TextAttribute12]
+DistributedMode=Dynamic
+[ATTRIBUTE\TextAttribute13]
+DistributedMode=Static
+[ATTRIBUTE\TextAttribute14]
+DistributedMode=Dynamic
+[ATTRIBUTE\TextAttribute15]
+DistributedMode=Static
+[ATTRIBUTE\TextAttribute16]
+DistributedMode=Dynamic
+[ATTRIBUTE\BoolAttribute1]
+DistributedMode=Dynamic
+ 
+Once this change has been made you can log the previous 
+ control value by adding the attribute to the Attributes to record field 
+ of the Log Filter configuration, for example #@A5.
+ 
+To display the previous control value in the Log Viewer you add the attribute to the Column Format field of its configuration 
+ dialog. 
+ 
+
+ 
+You must shut down PcVue before editing the file VARCONF.DAT.
+
+
+========================================
+TOPIC: 21CFR_Overview.htm
+========================================
+What is 21 CFR Part 11
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+What is 21 CFR Part 11?
+ 
+21 CFR Part 11 is a document from the US Food and Drugs 
+ Administration (FDA) that sets forth the requirements that have to be 
+ met in order that electronic records and electronic signatures are considered 
+ to be as trustworthy as paper records with handwritten signatures.
+ 
+Definition of electronic records and signatures
+ 
+ 
+An electronic record 
+ is - any combination of text, graphics, data, audio, pictorial or other 
+ information represented in a digital form that is created, modified, maintained, 
+ archived and retrieved or distributed by a computer system.
+ 
+An electronic signature 
+ is - a computer data compilation of any symbol or series of symbols executed, 
+ adopted or authorized by an individual to be the legally binding equivalent 
+ of the individual's handwritten signature.
+
+
+========================================
+TOPIC: 21CFR_Part_11_requirements_in_the_Supervisor.htm
+========================================
+Interpreting 21 CFR Part 11 requirements in PcVue&#160;
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Interpreting 21 CFR Part 11 Requirements in PcVue&#160;
+ 
+The topics in this book provide guidelines to interpreting 
+ the requirements of 21 CFR Part 11 in terms of PcVue features. 
+ However, they do not infer a commitment on behalf of the developers of 
+ PcVue in any way or form. Ultimately, it is the responsibility 
+ of the persons or company developing the application to ensure that the 
+ 21 CFR Part 11 requirements are met.
+ 
+In this text paragraphs from 21 CFR Part 11 are in an 
+ italic typeface followed by the interpretation of the requirements in 
+ PcVue in a normal type face.
+ 
+Paragraphs from 21 CFR Part 11 that are not considered 
+ to have an impact on the configuration of PcVue are not included 
+ in the topics of this book. However, these paragraphs may have an impact 
+ on the overall system design and operational procedures and must not be 
+ ignored.
+ 
+The developer must be aware that using these 
+ features is not a guarantee of compliance, in fact software alone cannot 
+ provide compliance. Many of the requirements must be met procedurally, 
+ whilst other issues can be resolved by restricting access to the host 
+ PC, both physically and electronically.
+ 
+You must also take into account that 21 CFR Part 11 is 
+ a document about electronic records and electronic signatures - it is 
+ not specific to the use of PCs and PC applications such as SCADA. As 
+ such, it is open to interpretation and its application is affected by guidance 
+ documents that are issued from time to time by the FDA.
+ 
+21 CFR Part 11 contains subparts.
+ 
+ 
+Subpart A - General 
+ Provisions. Describes the scope, implementation and definitions of terms 
+ used in 21 CFR Part 11. This subpart has no effect on the configuration 
+ of PcVue.
+ 
+Subpart B - Electronic 
+ Records. Describes the controls for closed and open systems. PcVue 
+ is considered to be a closed system.
+ 
+Subpart C - Electronic 
+ Signatures. Describes the implementation and use of electronic signatures. 
+ In PcVue, an electronic signature is known as a User Account.
+
+
+========================================
+TOPIC: 21CFR_Part_11_Subpart_B_-_Electronic_Records.htm
+========================================
+21 CFR Part 11 Subpart B - Electronic Records
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+21 CFR Part 11 Subpart B - Electronic Records
+ 
+11.10 Controls for closed systems 
+ 
+Persons who use closed 
+ systems to create, modify, maintain, or transmit electronic records shall 
+ employ procedures and controls designed to ensure the authenticity, integrity, 
+ and, when appropriate, the confidentiality of electronic records, and 
+ to ensure that the signer cannot readily repudiate the signed record as 
+ not genuine. Such procedures and controls shall include the following:
+ 
+ 
+(c) Protection of records to enable their 
+ accurate and ready retrieval throughout the records retention period. 
+ 
+ 
+The electronic records produced by PcVue are, in general, recorded in ASCII and do not include a checksum. 
+ Therefore the PC on which the files are recorded should be both physically 
+ and electronically secure to prevent tampering with the files. Consideration 
+ should be given to regular archiving of the files on read-only media 
+ such as DVD-R.
+ 
+(d) Limiting system access to authorized 
+ individuals.
+ 
+
+ &#160;PcVue must be configured so that access 
+ is only provided to authorized Users.
+ 
+(e) Use of secure, computer-generated, 
+ time-stamped audit trails to independently record the date and time of 
+ operator entries and actions that create, modify, or delete electronic 
+ records. Record changes shall not obscure previously recorded information. 
+ Such audit trail documentation shall be retained for a period at least 
+ as long as that required for the subject electronic records and shall 
+ be available for agency review and copying.
+ 
+
+ &#160;PcVue can be configured to provide 
+ an audit trail (log) of the following user actions. 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Action
+ 
+ 
+ 
+Comment
+ 
+ 
+ 
+
+ 
+ 
+Changing the value of a variable.
+ 
+ 
+ 
+Extended attributes may be used to allow the previous 
+ value and the signatories to be recorded.
+ 
+ 
+ 
+
+ 
+ 
+Sending a recipe.
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+ 
+Accepting alarms.
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+ 
+Masking alarms.
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+ 
+Running a SCADA BASIC program.
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+ 
+Login and Logout
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+ 
+
+ &#160;PcVue cannot be configured to 
+ provide an audit trail (log) of the following user actions so they 
+ should not be incorporated in a 21 CFR Part 11 compliant system. 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Action
+ 
+ 
+ 
+Comment
+ 
+ 
+ 
+
+ 
+ 
+Creating, modifying or deleting a recipe.
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+ 
+Creating, modifying or deleting a timetable.
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+ 
+Creating, modifying or deleting a variable.
+ 
+ 
+ 
+This is disabled if you are using a run-time license.
+ 
+ 
+ 
+
+ 
+ 
+Validation of a batch record
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+ 
+Modifying the content of mimics.
+ 
+ 
+ 
+This is disabled if you are using a run-time license.
+ 
+ 
+ 
+ 
+(g) Use of authority checks to ensure that 
+ only authorized individuals can use the system, electronically sign a 
+ record, access the operation or computer system input or output device, 
+ alter a record, or perform the operation at hand. 
+ 
+
+ &#160;PcVue must be configured so access 
+ is only provided to authorized Users. A user is authorized by logging 
+ in with a name and password before accessing the system.
+ 
+11.50 Signature manifestations. 
+ 
+(a) Signed electronic records shall contain 
+ information associated with the signing that clearly indicates all of 
+ the following:
+ 
+(1) The printed name of the signer;
+ 
+(2) The date and time when the signature 
+ was executed; and
+ 
+(3) The meaning (such as review, approval, 
+ responsibility, or authorship) associated with the signature.
+ 
+
+ &#160;PcVue logging must be configured 
+ so that the name of the signer (user), time and date, and the action is 
+ recorded as part of any record.
+ 
+11.70 Signature/record linking
+ 
+Electronic signatures and handwritten signatures 
+ executed to electronic records shall be linked to their respective electronic 
+ records to ensure that the signatures cannot be excised, copied, or otherwise 
+ transferred to falsify an electronic record by ordinary means. 
+ 
+The electronic records produced by PcVue are, in general, recorded in ASCII and do not include a checksum. 
+ Therefore the PC on which the files are recorded should be both physically 
+ and electronically secure to prevent tampering with the files. Consideration 
+ should be given to regular archiving of the files on read-only media 
+ such as DVD-R.
+
+
+========================================
+TOPIC: 21CFR_Part_11_Subpart_C_-_Electronic_Signatures.htm
+========================================
+21 CFR Part 11 Subpart C - Electronic Signatures
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+21 CFR Part 11 Subpart C - Electronic Signatures
+ 
+The interpretation of an electronic signature for PcVue is the combination of a user name and password, plus other 
+ optional information such as first name and last name, together known 
+ as a User Account.
+ 
+
+ 
+To enable some of the features necessary for 21 CFR Part 
+ 11 the property Use the advanced security strategy, in the User Accounts Settings, must be ticked. See the topic Application Explorer.User Accounts.Settings for further information. The following text assumes this has been done.
+ 
+ 
+
+ 
+To guarantee the integrity of the user rights configuration 
+ file the option to encrypt it must be selected. 
+ 
+ 
+11.100 General Requirements
+ 
+(a) Each electronic 
+ signature shall be unique to one individual and shall not be reused by, 
+ or reassigned to, anyone else.
+ 
+The names used in all accounts must be unique. If a User 
+ Account is deleted a record is kept of its existence so the name cannot 
+ be re-used.
+ 
+All passwords used in a project, including any that have 
+ expired or were used in deleted accounts, must be unique. An internal 
+ record is kept of the previous 1,000 passwords to ensure this. Passwords 
+ must be six or more characters in length.
+ 
+11.200 Electronic signature components and controls
+ 
+(a) Electronic signatures 
+ that are not based upon biometrics shall:
+ 
+(1) Employ at least two distinct identification 
+ components.
+ 
+A User Account comprises of at least an 
+ account name and password.
+ 
+(i) When an individual executes a series 
+ of signings during a single, continuous period of controlled system access, 
+ the first signing shall be executed using all electronic signature components; 
+ subsequent signings shall be executed using at least one electronic signature 
+ component that is only executable by, and designed to be used only by, 
+ the individual.
+ 
+When a user logs in (the first signing), 
+ both the user name and password must be entered which is normal with PcVue. For subsequent signings, for example using a control zone 
+ to change the value of a variable, the user must re-enter, as a minimum, 
+ the password. To achieve this the Security animation must be used on any 
+ control zone that is considered to require an electronic signature.
+ 
+ii) When an individual executes one or 
+ more signings not performed during a single, continuous period of controlled 
+ system access, each signing shall be executed using all of the electronic 
+ signature components.
+ 
+When using the Security animation to secure 
+ a control zone, it cannot be activated unless a user is already logged 
+ in.
+ 
+(2) Be used only by their genuine owners; 
+ and
+ 
+(3) Be administered and executed to ensure 
+ that attempted use of an individual�s electronic signature by anyone other 
+ than its genuine owner requires collaboration of two or more individuals.
+ 
+When an administrator creates a User Account, 
+ the account is given a name and password. The first time the account is 
+ used the user must change the password so that it is only known by the 
+ user. Once an account has been created it can only be deactivated (in 
+ which case it may be reactivated) or deleted by an administrator. A record 
+ of deleted accounts is kept. A deleted account cannot be recreated.
+ 
+(b) Electronic signatures based upon biometrics 
+ shall be designed to ensure they cannot be used by anyone other than their 
+ genuine owners.
+ 
+Not relevant to the configuration of PcVue.
+ 
+11.300 Controls for identification codes / passwords
+ 
+Persons who use electronic signatures based 
+ upon use of identification codes in combination with passwords shall employ 
+ controls to ensure their security and integrity. Such controls shall include:
+ 
+(a) Maintaining the 
+ uniqueness of each combined identification code and password, such that 
+ no two individuals have the same combination of identification code and 
+ password.
+ 
+The names used in all accounts must be unique. 
+ If a User Account is deleted a record is kept of its existence so the 
+ name cannot be re-used.
+ 
+The passwords used in all current User Accounts 
+ must be unique. A record is kept of the previous 1,000 passwords ensuring 
+ (within reasonable doubt) that all passwords are unique. Passwords must 
+ be 6 or more characters.
+ 
+(b) Ensuring that identification 
+ code and password issuances are periodically checked, recalled, or revised 
+ (e.g. to cover such events as password aging).
+ 
+Use the Password lifespan 
+ property in the Advanced tab of the user's profile so that the user 
+ is forced periodically to change the password.
+ 
+(c) Following loss management 
+ procedures to electronically deauthorize lost, stolen, missing, or otherwise 
+ potentially compromised tokens, cards, and other devices that bear or 
+ generate identification code or password information, and to issue temporary 
+ or permanent replacements using suitable, rigorous controls.
+ 
+Accounts may be deactivated 
+ or deleted. A deactivated account may be reactivated. A deleted account 
+ cannot be recreated.
+ 
+(d) Use of transaction 
+ safeguards to prevent unauthorized use of passwords and/or identification 
+ codes, and to detect and report in an immediate and urgent manner any 
+ attempts at their unauthorized use to the system security unit, and, as 
+ appropriate, to organizational management.
+ 
+An alarm is generated 
+ using the variable SYSTEM.StationName.USER.REJECTED each time 
+ a failed login occurs. After three failed login attempts an account is 
+ deactivated.
+
+
+========================================
+TOPIC: 21CFR_Protecting_the_integrity_of_the_historic_data_files.htm
+========================================
+Protecting the integrity of the historic data files
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Protecting the Integrity of Historic Data Files
+ 
+You can apply a cyclic 
+ redundancy check (CRC) to protect the integrity of the data files in which the historical data is recorded in the 
+ archive units. This appends to the data a pattern of bits that reflects 
+ the entire sequence of bits in the file. When such a file is read from 
+ beginning to end, any loss, addition or modification of the file's contents 
+ can be detected.
+ 
+How to enable CRC on historic data files
+ 
+1. In the Application Explorer, select Archives.Settings to open the Settings - Archives dialog.
+ 
+2. Check the option Secure 
+ records to prevent tampering with files. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+3. Select OK 
+ to close the dialog and apply the changed setting.
+ 
+
+ 
+You cannot apply CRC retrospectively. 
+ 
+ 
+It must 
+ be enabled before any historic data is recorded. Any data recorded before 
+ CRC is enabled will be lost.
+ 
+What is CRC?
+ 
+CRC is an acronym for Cyclic Redundancy [check] Code: a technique for error detection used to assure that a program or data file 
+ has been accurately transferred or recorded. The CRC is the result of 
+ a calculation on the set of written bits; it is appended to the data. 
+ When the data is read, the calculation is repeated and the result is compared 
+ to the encoded value. The calculations are chosen to optimize error detection.
+
+
+========================================
+TOPIC: 21CFR_Using_extended_attributes.htm
+========================================
+Using extended attributes to add more information to a log
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using Extended Attributes to Add More Information to 
+ a Logged Action
+ 
+Using the variables extended attributes, you can record 
+ additional information when a variable is logged following a user action 
+ such as Send Register. The extended attributes allow you to configure 
+ and record up to fourteen text strings, plus a binary pattern, specific 
+ to each variable. 
+ 
+A special use of extended attributes allows you to include 
+ the value of other variables in the record.
+ 
+How to enable extended attributes
+ 
+ 
+In the dialog Configure.Application Explorer, select Variables.Settings to open the Settings - Variables dialog.
+ 
+In Attributes and Properties, check the property, Extended Attributes.
+ 
+ 
+How to add an extended attribute to a variable
+ 
+ 
+Open the configuration 
+ dialog for the variable and open its Extended Attributes tab.
+ 
+Check the property 
+ Enable associated attributes.
+ 
+Enter the text for 
+ the extended attributes to be configured. Show picture
+
+ 
+Close 
+ the dialogs.
+ 
+ 
+Recording the value of extended attributes
+ 
+To log an extended attribute you must include its mnemonic 
+ in the Attributes to record field of the Log Filter configuration. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+#@An will record attribute n.
+ 
+#@*An will record the value of the variable named 
+ in the attribute n. 
+ 
+
+ 
+n is the attribute number from 1 to 16. Attributes 
+ 1 and 2 are the Domain and Nature respectively.
+ 
+ 
+Viewing extended attributes in a Log Viewer
+ 
+To view an extended attribute in a Log Viewer you must 
+ enter its mnemonic in the Column Format field of the Display tab of the Log Viewer Configuration dialog. The mnemonic must correspond with one that has been 
+ used in the Log Filter.
+ 
+Typical example - recording the name of the main and 
+ secondary Users
+ 
+A typical use of extended attributes is to record the 
+ name of both the main and secondary users when using the Security animation 
+ with the Double Signatory option. The names of the main and secondary 
+ users are available in the variables SYSTEM.StationName.USER1.LOGIN 
+ and SYSTEM.StationName.USER2.LOGIN, respectively.
+ 
+ 
+Enable extended attributes (as above).
+ 
+In each of the variables 
+ concerned, enter SYSTEM.StationName.USER1.LOGIN in text attribute 
+ 3.
+ 
+In the variables 
+ concerned, enter SYSTEM.StationName.USER2.LOGIN in text attribute 
+ 4.
+ 
+In the Log Filters 
+ add #@*A3,#@*A4 to the Attributes to Record field.
+ 
+In the corresponding 
+ Log Viewers enter #@*A3 and #@*A4 in the Column Format field.
+ 
+ 
+
+ 
+Replace StationName with the name of the station 
+ on which PcVue is running. 
+ 
+The variables SYSTEM.StationName.USER1.LOGIN and 
+ SYSTEM.StationName.USER2.LOGIN must be created manually.
+
+

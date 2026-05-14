@@ -1,0 +1,1072 @@
+========================================
+TOPIC: Wizard_mode_Completing_the_import.htm
+========================================
+Completing the import
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Completing the Database Import
+ 
+The final stage uses the import process dialog that is displayed while the data are imported. Show picture
+ 
+
+ 
+ 
+ 
+It shows a summary of the import parameters (source folder, destination table and number of files imported from). A progress bar is displayed with the duration of importing shown above it.
+ 
+The '+/-' button below that lets you view or hide the lower panel.
+ 
+ 
+Check the summary information. If anything is wrong, you can use the Pause button to suspend the process or Stop to exit from it.
+ 
+The title shows the status of the process ('PERFORMING OPERATION' or 'OPERATION COMPLETED').
+ 
+The lower pane shows a log of the actions performed. Check that a purge took place if required and that the contents of all selected files were imported successfully.
+ 
+ 
+
+ 
+If you stop the import process, some of the data records may already have been imported.
+ 
+ 
+
+ 
+The actions of purging and importing are separate so even when some or all of the data record imports fail, a purge will have already taken place if you specified it.
+
+
+========================================
+TOPIC: Wizard_mode_Filtering_the_variables.htm
+========================================
+Import filter
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Import Filter
+ 
+The Import filter dialog allows you to select the data to import. 
+ 
+ 
+If you are importing Trend records, it will display a list of variables that have records within the date-time range you have specified. Show picture
+ 
+If you are importing Log records, it will display the names of any Log Lists that have records within the date-time range you have specified.
+ 
+ 
+
+ 
+ 
+ 
+Each row contains the name of a variable (or Log List) and the period for which data has been found. You can sort the list in ascending or descending order by clicking the header of any column.
+ 
+ 
+De-select any items that are not required, by removing the tick against it. 
+ 
+If you are importing Log records, enter a Log List suffix (lower right corner of the dialog). This is appended to the Log List names as they are imported. The standard suffix is _IMP. You must have a corresponding Log List configured in PcVue, otherwise you will be unable to view the data once it is imported.
+ 
+ Click on Next to continue.
+ 
+ 
+
+ 
+The Import Filter dialog also has a context (right click) menu with the following commands.
+ 
+ 
+Select all
+ 
+Deselect all
+ 
+Invert selection
+
+
+========================================
+TOPIC: Wizard_mode_Options.htm
+========================================
+The Database Import Options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Database Import Options
+ 
+The behavior of the Database Import tool can be configured using two options from the menu bar displayed in each dialog. Any changes that are made are remembered and used next time the tool is started.
+ 
+ 
+Select Startup Language - Select the language to be used in the wizard's dialogs. The change of language is operational from the next time the tool is started.
+ 
+Options - Open the Options dialog, as below.
+ 
+ 
+The Options dialog
+ 
+You can introduce periods of inactivity in the purging and importing processes. These periods are necessary to prevent a large purge and/or import from monopolizing the CPU. 
+ 
+ 
+Specify the number of rows (records) to be purged/imported followed by a delay before the next purge/import activity. Show picture
+ 
+ 
+
+ 
+ 
+ 
+The default setting is 5,000 rows followed by a delay of 100 ms.
+
+
+========================================
+TOPIC: Wizard_mode_Selecting_source_and_period.htm
+========================================
+Selecting the input source and period
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Selecting the Import Source and Period
+ 
+The first step of the Database Import wizard is to complete the Import Source Configuration dialog. Show picture
+ 
+
+ 
+ 
+ 
+ 
+In Source Directory, identify the folder that contains the data to be imported. You can enter its path in the box or use the browsing button to select it. If you are importing records created by the PcVue's export process they will be located in a folder with the following pattern:
+<PcVue's root folder>\Databases\Export\<Project name>_<Database name>\<Database table name>
+ 
+Use the left-hand calendar and the Start time and date box to set the start of the period. The Today button selects the current date.
+ 
+Use the right-hand calendar and the End time and date box to set the end of the period. Click on Next to continue.
+ 
+ 
+Navigating the calendars
+ 
+By default, each calendar opens with the current month displayed and the current day highlighted.
+ 
+ 
+Use the arrows on either side of the month name to display the previous or next month.
+ 
+Click on the title to display the months in a year. Click again for the years in a decade (e.g. 2000-2009) and again to list the decades in a century.
+ 
+Click on a listed entry to open that period: decade, again for year, then month.
+
+
+========================================
+TOPIC: Wizard_mode_Selecting_the_destination_table.htm
+========================================
+Selecting the destination table
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Selecting the Destination Table
+ 
+The next step is to complete the Import Destination Configuration dialog. It enables the import process to connect to the data server that contains the table into which the data is to be imported. Show picture.
+ 
+
+ 
+ 
+ 
+ 
+In the Server Instance drop-down box, select the data server that contains the table.
+ 
+In the Authentication section, select the mode of authentication for access to the server as either Windows Authentication or SQL Server Authentication. The latter requires a User name and Password.
+ 
+Select Encrypt connection if you want to ensure confidentiality and integrity
+ 
+Click on the Test Connection button. A dialog confirms whether the connection is made. That must occur to enable the next step.
+ 
+In the boxes of the Destination section, type in the Database Name and the Table Name for the destination table. 
+ 
+The option Purge Table Before Import enables you to delete any previous contents of contents of the destination database before the import takes place.
+
+ 
+Click on the Import button to proceed with the import.
+ 
+ 
+
+ 
+To take advantage of an encrypted communication channel, SQL Server must be setup to work with TLS and digital certificates.
+For more information, refer to https://learn.microsoft.com/sql/database-engine/configure-windows/certificate-overview
+ 
+ 
+
+ 
+Make sure you select the correct type of table when importing records. The wizard does not differentiate between them at this stage and you will get an error if you try to import log records into a trend table (or vice-versa)
+ 
+ 
+
+ 
+If you tick the Purge Table Before Import option ALL DATA in the selected table will be PERMANENTLY DELETED before the import.
+
+
+========================================
+TOPIC: Wizard_overview.htm
+========================================
+Starting the network wizard
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Starting the Network Wizard
+ 
+The Network Wizard guides you through the process of 
+ configuring your network architecture. There are two distinct paths through the Network Wizard depending if you are using conventional PC architecture or Windows server configured with Remote Desktop Services.
+ 
+
+ 
+In the topics that follow, step numbers are included in the topic titles as aid to understanding the sequence in which the configuration takes place. The step numbers do not appear in the actual wizard.
+ 
+ 
+ 
+To start the Network Wizard, open the Application 
+ Explorer and expand the configuration tree to select the Networks folder. Form the task list select Network Wizard. Show 
+ picture
+ 
+Select Without Remote Desktop Session Host server or With Remote Desktop Session Host server as appropriate.
+ 
+Click the Next 
+ button to enter Step 1 - Clients and servers creation, or Step RDS1 - Configuring the remote desktop session host servers.
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+The network wizard generates a basic network configuration. 
+ If you want to make any changes once you have finished using the Network 
+ Wizard, the network configuration can be edited in the normal way.
+ 
+ 
+
+ 
+The Network Wizard can only be started when the network 
+ configuration is empty. You can delete the entire network configuration using the Remove all configuration task that is available when the Networking folder is selected in the Application Explorer configuration tree.
+
+
+========================================
+TOPIC: Wizard_Step_1.htm
+========================================
+Step 1 - Clients and Servers Creation
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step 1 - Clients and Servers Creation
+ 
+The Clients/Servers Creation dialog displays a list of stations 
+ created by the wizard and provides command buttons to add, edit and delete 
+ stations. Show picture
+ 
+The wizard 
+ automatically generates all possible client/server station links. If 
+ for any reason there is a client/server link that you do not want, you 
+ can delete it later using the Application Explorer (not the wizard).
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+When you have finished configuring the stations, click Next 
+ to enter step 2 - configuring associations.
+ 
+How to add a station
+ 
+ 
+Click the Add 
+ button. The Station Properties dialog is displayed. Show picture
+
+ 
+The Station Name is automatically generated using the convention shown below. You can accept the name or enter your own.
+ 
+Select either Real-time client 
+ or Real-time Server 
+ behavior. This setting only affects the behavior of the wizard, it does 
+ not affect the client and server behavior of the station. When using 
+ the wizard all stations are configured as both client and server. If 
+ you select Real-time server 
+ the station will be available for selection in a real-time association.
+ 
+If the station is 
+ to be used as a historical server, tick the Historical Server box. 
+ 
+Select and enter 
+ the TCP/IP properties. You can choose to refer to a station either by 
+ its host name or by IP address. 
+ 
+Click OK 
+ to confirm the configuration.
+ 
+ 
+
+ 
+The station number is allocated in the order in which you create the stations starting at the number configured in the Network Settings. Default is 1 for server stations, 50 for associations and 100 for client stations. 
+ 
+ 
+The Station Name is automatically generated using the following convention.
+ 
+ 
+DATACLIENT<n> - For a station configured as a real-time data client.
+ 
+DATASERVER<n> - For a station configured as a real-time data server.
+ 
+HISSERVER<n> - For a station configured as a real-time data client and a historical data server.
+ 
+HISDATASERVER<n> - For a station configured as a real-time data server and a historical data server.
+ 
+ 
+Where <n> is a number reflecting the order in which the stations were configured. Not necessarily the same as the station number.
+ 
+How to delete a station
+ 
+ 
+Select the station 
+ to be deleted.
+ 
+Click the Remove 
+ button.
+ 
+ 
+How to edit a station
+ 
+ 
+Select the station 
+ to be edited.
+ 
+Click the Edit 
+ button.
+
+
+========================================
+TOPIC: Wizard_Step_2.htm
+========================================
+Step 2 - Real-time Data Acquisition Server Association Configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step 2 - Real-time Data Acquisition Server Association Configuration
+ 
+The Real-time Data Acquisition Server Association dialog displays a list of real-time data acquisition server associations created by the wizard and provides command buttons to add, edit and delete associations. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+When you have finished configuring the associations click Next to enter step 3 - configuring historical server associations.
+ 
+How to add an association
+ 
+ 
+Click the Add button. The Association Properties dialog is displayed. Show picture
+
+ 
+The Association Name is automatically generated using the convention shown below. You can accept the name or enter your own.
+ 
+Select the servers to make up the association. An association must contain at least two servers.
+ 
+Click OK to confirm the configuration.
+ 
+ 
+
+ 
+The association number is allocated in the order in which you create the associations starting at the number configured in the Network Settings (default is 1 for server stations, 50 for associations and 100 for client stations).
+ 
+ 
+The Association Name is automatically generated using the following convention.
+ 
+ 
+DAS_ASSOC<n> - For a real-time data server association.
+ 
+ 
+Where <n> is a number reflecting the order in which the associations were configured (not necessarily the same as the association number).
+ 
+How to delete an association
+ 
+ 
+Select the association to be deleted.
+ 
+Click the Remove button.
+ 
+ 
+How to edit an association
+ 
+ 
+Select the association to be edited.
+ 
+Click the Edit button.
+
+
+========================================
+TOPIC: Wizard_Step_3.htm
+========================================
+Step 3 - Historical data server association configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step 3 - Historical Data Server Association Configuration
+ 
+The Historical Data Server Association dialog displays a list of historical server associations created by the wizard and provides command buttons to add, edit and delete associations. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+When you have finished configuring the associations click Next to enter step 4 - configuring station lists.
+ 
+How to add an association
+ 
+ 
+Click the Add button. The Association Properties dialog is displayed. Show picture
+
+ 
+The Association Name is automatically generated using the convention shown below. You can accept the name or enter your own.
+ 
+Select the servers to make up the association. A historical association must contain two servers. Only servers that have the Historical server property enabled are displayed.
+ 
+Click OK to confirm the configuration.
+ 
+ 
+
+ 
+The association number is allocated in the order in which you create the associations starting at the number configured in the Network Settings (default is 1 for server stations, 50 for associations and 100 for client stations).
+ 
+ 
+The Association Name is automatically generated using the following convention.
+ 
+ 
+HDS_ASSOC<n> - For a real-time data server association.
+ 
+ 
+Where <n> is a number reflecting the order in which the associations were configured (not necessarily the same as the association number).
+ 
+How to delete an association
+ 
+ 
+Select the association to be deleted.
+ 
+Click the Remove button.
+ 
+ 
+How to edit an association
+ 
+ 
+Select the association to be edited.
+ 
+Click the Edit button.
+
+
+========================================
+TOPIC: Wizard_Step_4.htm
+========================================
+Step 4 - Client and server list generation
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step 4 - Client and Server List Generation
+ 
+The final step generates the client
+ and server lists for the client and server stations you have created using the wizard. The following lists are created.
+ 
+ 
+One list for each station, with a name based on the station's name
+ 
+One list for each association, with a name based on the association's name.
+ 
+One list of the names of all the stations, with a default
+ name LCALL.
+ 
+One list of the names of any client stations, with a default name of LCCLIENTS.
+ 
+ 
+Click on Finish to complete the Network
+ Wizard and return to the Application
+ Explorer. Show picture
+
+
+========================================
+TOPIC: Wizard_Step_RDS1.htm
+========================================
+Step RDS1 � Remote desktop session host servers configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step RDS1 � Remote Desktop Session Host Servers Configuration
+ 
+This is the first step when using the Network Wizard for network configuration using an RDS host server. It is used to enter the host server's configuration. It does not generate any network configuration directly, but the properties entered here are used in later steps of the wizard. Show picture
+
+ 
+You must enter at least one RDS Host server before using the Next button to continue to the next step - Server creation.
+ 
+How to add a host server
+ 
+ 
+Click the Add 
+ button. The RDS Host Server Properties dialog is displayed. Show picture
+
+ 
+The RDS Host server Name is automatically generated using the convention shown below. You can accept the name or enter your own.
+ 
+Enter an optional Description.
+ 
+Select and enter 
+ the TCP/IP properties. You can choose to refer to a station either by 
+ its host name or by IP address. 
+ 
+Click OK 
+ to confirm the configuration.
+ 
+ 
+The RDS Host server Name is automatically generated using the following convention.
+ 
+ 
+RDSHOST<n>
+ 
+ 
+Where <n> is a number reflecting the order in which the RDS Host servers are configured.
+ 
+To edit or delete a configured RDS Host server use the Edit or Delete buttons respectively.
+
+
+========================================
+TOPIC: Wizard_Step_RDS2.htm
+========================================
+Step RDS2 - Server creation
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step RDS2 - Server Creation
+ 
+This step is used to create the servers in the network configuration. A server can have one or more behaviors selected from License Server, Real-time Data Acquisition Server (DAS) and Historical Data Server (HDS). Show picture
+
+ 
+You must enter at least one Server before using the Next button to continue to the next step - Real-time data acquisition server association configuration.
+ 
+
+ 
+HDS in the network context refers to the use of a station to provide historical data to other stations, regardless of the type of archive unit (proprietary, ODBC, database etc.).
+ 
+ 
+How to add a server
+ 
+ 
+Click the Add button. The Server Properties dialog is displayed. Show picture
+
+ 
+Select the behavior using the License server (LS), Real-time data acquisition server and Historical data server tick boxes. The server must have at least one of the behaviors selected. See Server Configurations table below.
+ 
+The Name is automatically completed depending on the behavior selected in step 2. You can accept the default or enter one of your own.
+ 
+Enter an optional Description.
+ 
+Select how the server is to be hosted. 
+If the server is to be stand-alone, select the IP properties. (IP address or Host name)
+If the server is to run in the same PC as the RDS Host server, select the Session host.
+ 
+Click OK to confirm the configuration.
+ 
+ 
+Server configurations
+ 
+The following server configurations are possible.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ HDS
+ DAS
+ LS
+ Default name if not hosted by a RDS Host
+ Default name if hosted by a RDS Host
+ 
+ 
+
+ &#160;
+ &#160;
+ &#160;
+ Not permitted
+ Not permitted
+ 
+ 
+
+ &#160;
+ &#160;
+ Yes
+ LSVR
+ RDLSVR
+ 
+ 
+
+ &#160;
+ Yes
+ &#160;
+ DASVR
+ RDSASVR
+ 
+ 
+
+ &#160;
+ Yes
+ Yes
+ LDASVR
+ RDLDASVR
+ 
+ 
+
+ Yes
+ &#160;
+ &#160;
+ HDSVR
+ RDHDSVR
+ 
+ 
+
+ Yes
+ &#160;
+ Yes
+ LHDSVR
+ RDLHSVR
+ 
+ 
+
+ Yes
+ Yes
+ &#160;
+ DAHDSVR
+ RDDAHDSVR
+ 
+ 
+
+ Yes
+ Yes
+ Yes
+ LDAHDSVR
+ RDLDAHDSVR
+
+
+========================================
+TOPIC: Wizard_Step_RDS3.htm
+========================================
+Step RDS3 - Real-time data acquisition server association configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step RDS3 - Real-time Data Acquisition Server Association Configuration
+ 
+Identical to Step 2 - Real-time data acquisition server association configuration.
+
+
+========================================
+TOPIC: Wizard_Step_RDS4.htm
+========================================
+Step RDS4 - Historical data server association configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step RDS4 - Historical Data Server Association Configuration
+ 
+Identical to Step 3 - Historical data server association configuration.
+
+
+========================================
+TOPIC: Wizard_Step_RDS5.htm
+========================================
+Step RDS5 - Client creation
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step RDS5 - Client Creation
+ 
+This step is used to create the clients in the network configuration. A client can either be stand-alone (a PC with its own IP configuration) or hosted by the RDS Host server. Show picture
+
+ 
+You must enter at least one client before using the Next button to continue to the next step - RDS hosted clients network dongle renter assignment.
+ 
+How to add a client
+ 
+ 
+Click the Add 
+ button. The Client Properties dialog is displayed. Show picture
+
+ 
+The client Name is automatically generated using the convention shown below. You can accept the name or enter your own.
+ 
+Enter an optional Description.
+ 
+Select how the client is to be hosted.
+If the client is to be stand-alone, select the IP properties. (IP address or Host name).
+If the server is to run in an RDS session, select the Session host.
+ 
+Click OK to confirm the configuration.
+ 
+ 
+The client Name is automatically generated using the following convention.
+ 
+ 
+DATACLIENT<n> - For a stand-alone client
+ 
+RDSCLIENT<n> - For a client hosted on a RDS Session Server.
+ 
+ 
+Where <n> is a number reflecting the order in which the clients are configured.
+ 
+To edit or delete a configured client use the Edit or Delete buttons respectively.
+
+
+========================================
+TOPIC: Wizard_Step_RDS6.htm
+========================================
+Step RDS6 - RDS hosted client as renter
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step RDS6 - RDS Hosted Client as Network Dongle Renter
+ 
+This step is used to confirm the dongle configuration for each of the RDS hosted clients. It displays a list of the clients and their dongle configuration (Dongle owner and slot number). By default, all RDS hosted clients are set to slot 1 of the first dongle owner. Show picture
+
+ 
+When the dongle assignment is correct click the Next button to continue to the next step - Client and server network dongle renter assignment.
+ 
+How to change the dongle assignment
+ 
+ 
+Select one of the stations and click the Edit 
+ button. The Network Dongle Role Properties dialog is displayed. Show picture
+
+ 
+Configure the Slot number and Owner's station name properties as required.
+ 
+Click OK to close the dialog and save the configuration.
+ 
+ 
+
+ 
+Note that the Renter property is always ticked as an RDS hosted client is always a dongle renter.
+
+
+========================================
+TOPIC: Wizard_Step_RDS7.htm
+========================================
+Step RDS7 - Client and server network dongle renter assignment
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step RDS7 - Client and Server Network Dongle Renter Assignment
+ 
+
+ 
+This step is not displayed if there are no clients or servers that are not hosted on an RDS Host server.
+ 
+ 
+This step is used to confirm the dongle configuration for any standalone (not hosted on an RDS host server) clients and servers. Although clients and servers of this type are configured to use their own individual dongles by default, they can alternatively use a network dongle. This dialog allows you to make the network dongle assignment if required. Show picture
+
+ 
+When the dongle assignment is correct click the Next button to continue to the next step - IP conflict and network architecture preview.
+ 
+How to change the dongle assignment
+ 
+ 
+Select one of the stations and click the Edit 
+ button. The Network Dongle Role Properties dialog is displayed. Show picture
+
+ 
+Tick the Renter property.
+ 
+Configure the Slot number and Owner's station name properties as required.
+ 
+Click OK to close the dialog and save the configuration.
+
+
+========================================
+TOPIC: Wizard_Step_RDS8.htm
+========================================
+Step RDS8 - IP conflict and network architecture preview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step RDS8 - IP Conflict and Network Architecture Preview
+ 
+This step is used to check that there are no IP conflicts and also to provide a final visual preview of the network architecture. The table displays the RDS Host servers plus any standalone stations that have their own IP address, that is any station not hosted on an RDS Host server. Show picture
+
+ 
+When any IP conflicts have been resolved you can click the Architecture preview button to display a visual preview or the Next button to continue to the final step - Client and server list generation.
+ 
+How to change IP properties
+ 
+ 
+Select one of the stations and click the Edit 
+ button. The TCP/IP Properties dialog is displayed. Show picture
+
+ 
+Configure the IP address or Host name properties as required.
+ 
+Click OK to close the dialog and save the configuration.
+ 
+ 
+The Architecture Preview dialog
+ 
+The Architecture Preview dialog provides a visual preview of all the RDS Host servers, Real-time data servers, Historical data servers, RD Session hosted clients and Data clients that have been configured. Clicking on a particular item will display a pop-up containing the configured properties permitting a final check to be made before proceeding to the final step when the network configuration is generated. Show picture
+
+
+========================================
+TOPIC: Wizard_Step_RDS9.htm
+========================================
+Step RDS9 - Client and server list generation
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step RDS9 - Client and Server List Generation
+ 
+This is the final step of the Network Wizard. Show picture
+
+ 
+When the Finish button is clicked, the complete network configuration is generated including the client, RDS hosted client and server lists. When the generation is complete, you are prompted to enable Central Project Management, which is mandatory when using an RD Session Host server.
+ 
+What station lists are generated?
+ 
+The following station lists are generated. Show picture
+ 
+ 
+Client lists for each of the clients, RDS clients and servers.
+ 
+A client list, LCALL, containing the names of all stations.
+ 
+A client list, LCCLIENTS, containing the names of all stations configured as real-time clients.
+ 
+One or more client lists, LCRDS_<name of RDS host>_CLIENTS containing the names of the RDS clients hosted by that RD Session Host server.
+
+

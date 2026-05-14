@@ -1,0 +1,562 @@
+========================================
+TOPIC: secdev_network_config.htm
+========================================
+Configuring a Security devices network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a Security devices Network
+ 
+A Security devices Network object in PcVue configuration represents and provides access to a network of security devices. It allows grouping together security devices for which connections shall be handled by the same PcVue server or association of servers.
+ 
+How to add a network
+ 
+ 
+Select the Security devices node in the Application Explorer and select Add a network from the task list. The Security devices Network dialog opens. The following screenshot was taken with the default configuration. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+Enter the name of the network in the Name text box. This is the name by which the network will be known in PcVue. You can accept the suggested default or enter one of your own.
+ 
+Enter a description of the network. The description appears in the contents pane of the Application Explorer and can be useful to identify the network later. The description is optional. 
+ 
+Click on OK to confirm the configuration and close the dialog.
+ 
+ 
+The Advanced tab
+ 
+ 
+Networking
+Clients - If the network is part of a multi-station application, select the name of the Clients List. Only stations in this list will be able to connect to the cameras associated with the network.
+
+
+========================================
+TOPIC: secdev_onvif_cam_config.htm
+========================================
+How to add an ONVIF camera
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to add an ONVIF camera
+ 
+ONVIF cameras are configured in PcVue via the Application Explorer.
+ 
+ 
+Select the Security devices network to which the camera will be added. From the task pane, select Add an ONVIF camera to open the ONVIF Camera dialog. Show picture
+
+ 
+Enter a Name for the camera. This is the alias by which the camera will be known in PcVue. You can also enter an optional Description. This is for reference only and does not appear elsewhere.
+ 
+Enter the camera IP address.
+ 
+Click on OK to confirm the configuration and close the dialog.
+ 
+ 
+The Advanced tab
+ 
+ 
+
+ 
+HTTP port - The HTTP port number. Default 80.
+ 
+ 
+
+ 
+Authentication - Credentials to connect to the camera if required.
+ 
+ 
+
+ 
+User name - The user name to connect to the camera.
+ 
+ 
+
+ 
+Password - The password to connect to the camera.
+
+
+========================================
+TOPIC: secdev_overview.htm
+========================================
+Security devices overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Security devices overview
+ 
+The Security devices node is a collection of those devices that are used in personal safety and property security.
+ 
+It includes the configuration of:
+ 
+ 
+
+ 
+Networks to control connection management accross a multi-station system,
+ 
+ 
+
+ 
+ONVIF camera devices which video streams can be displayed and managed with the ONVIF control.
+
+
+========================================
+TOPIC: security_add_certificate.htm
+========================================
+How to create a security certificate
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to create a security certificate
+ 
+Security certificates in the Application Explorer helps you handle certificate that are used for secure exchanges of information between PcVue and external systems.
+ 
+Prerequisites
+ 
+ 
+You are logged in with a user having the Security administration permission enabled. See the topic Profile properties that affect operating system and development access for more information.
+ 
+ 
+Creating a security certificate
+ 
+ 
+
+ 
+Go to Configure.Application Explorer and expand the Security node.
+ 
+ 
+
+ 
+Select the Certificates node, then click the Add a certificate icon from the task bar or the left pane. Once created, your security certificates appear on the right pane. Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Enter a name for your certificate and a description (optional).
+ 
+ 
+
+ 
+Select from the Origin drop-down list where your security certificates are stored and from which they will be retrieved.
+ 
+ 
+
+ 
+Click the ellipses button on the right to select the identifier of your certificate and private key if it already exists. Alternatively, you can click the Self-signed certificate button to create a new one which will be stored in the \PKI root directory inside PcVue folder as saved on your machine.
+ 
+ 
+
+ 
+Click Ok to save the certificate and close the window.
+ 
+ 
+
+ 
+Select the certificate created, then click the Show certificate details icon from the task bar to check your certificate's information.
+ 
+
+ 
+You can also export the certificate created using Show certificate details in the task pane.
+ 
+You can also import certificates into PcVue using the General tab.
+
+
+========================================
+TOPIC: security_overview.htm
+========================================
+Security overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Security overview
+ 
+The Security node in the Application Explorer provides the possibility to reference security certificates that enable the secure exchange of information between PcVue and other components it communicates with. Certificates behind the Security node are references to actual certificates, designed to abstract the actual certificate's name and characteristics to other PcVue features. You can reference a certificate that already exists, or create a new one and reference it.
+ 
+
+ 
+At the time of writing this topic, security certificates you reference on the Security node are only used for the OPC UA client driver.
+ 
+ 
+&#160;PcVue's PKI
+ 
+For applications to interact and exchange data with one another, a trust relation between them must be established when a Security Policy different than None is enforced.
+ 
+&#160;PcVue provides a built-in PKI configured through a local certificate store which allows to manage certificates. It is located in the \PKI root directory, at the same level as the \BIN folder and is organized as follows:
+ 
+
+ 
+ 
+ 
+The interaction with this folder structure depends on how the trust relation is built between the applications: using CA-Signed or Self-Signed certificates.
+ 
+It is important to note that in both situations the \own folders contains:
+ 
+ 
+
+ 
+The application instance certificate holding the public key in the \certs folder.
+ 
+ 
+
+ 
+The application private key hosted in the \private folder.
+ 
+ 
+ 
+Security certificates
+ 
+The use of a CA entity relies on the principle of Trusted Third Parties (TTP). This TTP is an entity which facilitates the establishment of trust between two entities by trusting a common third one (and its judgments, for instance if it revokes a party�s certificate), here the CA.
+ 
+If PcVue needs to communicate with a given server for instance, it only needs to trust the CA (TTP) trusted by that given server, by adding the CA certificates into its Trust List (reciprocally the server must trust the same CA). Logically, if the CA certificate is not copied to the Trust List, PcVue�s PKI will fail to authenticate the server and it will not be possible to establish a secure channel.
+ 
+
+ 
+Trust establishment differs if the CA involved in the infrastructure are numerous and hierarchically linked. The CA with the highest hierarchy level is considered the TTP and the root of this chain, hence it is often referred as a �trust anchor�.
+ 
+ 
+
+ 
+Refer to the topic How to create a security certificate to learn more about certificate configuration.
+ 
+ 
+Self-signed certificates
+ 
+&#160;PcVue's security feature also provides the possibility to create self-signed certificates. In this case, the client and server within the PKI system cannot use a TTP (CA) as a common entity to establish a trust relation. As no TTP can sign the client and server certificates, there are no guaranties on those certificates' origins, leaving the identities of the applications uncertain. This low level security set-up should only be used for specific situations such as test phase, PoC etc. It is strongly discouraged for deployment in production.
+
+
+========================================
+TOPIC: security_settings.htm
+========================================
+Security settings 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Security settings 
+ 
+Security settings control various access permissions and system behaviors, ensuring secure operation and data integrity. These settings allows configuration of elements such as expiration warnings, security alteration, and server interfaces activation. Proper configuration is essential for enabling features like alarm and historical data access while maintaining system security.
+ 
+The Security settings can be displayed from the Security entry in the Application Explorer's Main settings dialog or from the Settings task when the Security folder is selected in the Application Explorer's configuration tree.
+ 
+Prerequisites
+ 
+ 
+You are logged in with a user having the Security administration permission enabled. See the topic Profile properties that affect operating system and development access for more information.
+ 
+ 
+Security settings reference
+ 
+The following settings can be configured for the project:
+ 
+ 
+Settings:
+ 
+ 
+Warning delay before expiration (in days) - Defines the number of days before a security-related expiration triggers a warning. This helps administrators take preventive actions before access restrictions, certificate validity or credential expiration occurs.
+ 
+ 
+Security alteration:
+ 
+ 
+OPC DA servers:
+ 
+ 
+Allow security altering configuration options - Grants permission to modify security-related configuration elements for OPC DA servers. Enabling this option allows changes to OPC DA servers access control policies, which may impact the system exposure and communication with external OPC clients.
+ 
+ 
+Networking:
+ 
+ 
+Allow security altering configuration options - Grants permission to modify security-related configuration elements for stations in a networking environment. This setting is only available in the project's settings.
+ 
+ 
+COM servers:
+ 
+ 
+Allow alarm server - Activates the Alarm COM server, allowing external applications to access alarm data from PcVue. This is essential for integrating alarm management with third-party systems such as FrontVue.
+ 
+Allow historical server - Activates the Historical COM server, allowing external applications to retrieve stored historical data from PcVue. This is essential for integrating historical management (logs and trends) with third-party systems such as FrontVue.
+ 
+ 
+DDE clients and servers:
+ 
+ 
+Allow feature - Activates the DDE client and server features. This option requires a restart of PcVue to take effect after being enabled.
+ 
+ 
+ 
+ 
+
+ 
+Activating the COM servers is essential if you are using FrontVue as runtime front-end on top of PcVue.
+
+
+========================================
+TOPIC: Security_with_control_zone.htm
+========================================
+Using the security animation with a control zone
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Security Animation with a Control Zone
+ 
+The Security animation is applied to a drawing element 
+ before applying a Control Zone animation to provide additional security. 
+ Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Using the Security animation in conjunction with a Control 
+ Zone you can require the user to:
+ 
+ 
+Re-enter their password 
+ before being allowed access to the control.
+ 
+Enter an additional 
+ user name and password before being allowed access to the control.
+ 
+Re-enter their password 
+ and enter an additional user name and password before being allowed access 
+ to the control.
+ 
+ 
+You can use the Security animation in conjunction with 
+ the following animations.
+ 
+ 
+Send - Bit, Bit with 
+ color, Double bit, Register, Text, Recipe, Timetable and Region.
+ 
+Run - Program, Macro 
+ and Application.
+ 
+Link - Open, Close and Note.
+ 
+ 
+You cannot use the Security animation for additional 
+ security when running a VBA script.
+ 
+
+ 
+The Security animation must be applied to the support 
+ drawing element BEFORE the control zone animation.
+ 
+ 
+Creating a Security animation to force a user to re-enter 
+ their password
+ 
+ 
+Select the drawing 
+ element to which the animation is to be applied.
+ 
+From the menu, select 
+ Animate.Security.User Confirmation.
+ 
+In the Security tab, 
+ select OK to confirm the configuration.
+ 
+Apply the control 
+ zone animation as you would normally.
+ 
+ 
+Creating a Security animation to force a user to enter 
+ an additional name and password
+ 
+ 
+Select the drawing 
+ element to which the animation is to be applied.
+ 
+From the menu, select 
+ Animate.Security.Double Signature.
+ 
+Click the Add button 
+ to display the Users & Profiles Selection dialog. Show picture.
+
+ 
+Select the authorized 
+ users and/or Profiles. To select more than one Profile and/or User 
+ hold down the Ctrl button whilst clicking the left mouse button. If you 
+ select a Profile, any User with that Profile will be authorized.
+ 
+Click OK to confirm 
+ the selection and close the User and Profile selection dialog.
+ 
+In the Security tab, 
+ select OK to confirm the configuration.
+ 
+Apply the control 
+ zone animation as you would normally.
+ 
+ 
+Creating a Security animation to force a user to re-enter 
+ their password and enter an additional name and password
+ 
+ 
+Select the drawing 
+ element to which the animation is to be applied.
+ 
+From the menu, select 
+ Animate.Security.User Confirmation.
+ 
+Tick the Double Signature 
+ property.
+ 
+Add the authorized 
+ Users and/or Profiles as described above.
+ 
+In the Security tab, 
+ select OK to confirm the configuration.
+ 
+Apply the control 
+ zone animation as you would normally.
+ 
+ 
+Other Security animation properties
+ 
+ 
+Confirmation on each 
+command - Ticking this property has two effects.
+ 
+ 
+If you are using 
+ a control zone that requires confirmation, for example Send bit with label, 
+ the password confirmation dialog appears after the command confirmation 
+ dialog (otherwise it is the other way round).
+ 
+If there are 
+ multiple control zones supported by one drawing element, the password 
+ confirmation dialog will appear for each control zone in turn (otherwise, 
+ it only appears once).
+ 
+ 
+Double signature on each command - Ticking this property has two effects.
+ 
+ 
+If you are using 
+ a control zone that requires confirmation, for example Send bit with label, 
+ the double signature dialog appears after the command confirmation dialog 
+ (otherwise it is the other way round).
+ 
+If there are 
+ multiple control zones supported by one drawing element, the double signature 
+ dialog will appear for each control zone in turn (otherwise, it only appears 
+ once).
+ 
+ 
+Message - A text 
+ string that will be displayed in the security dialog at run time.
+ 
+ 
+The following properties are only available if either 
+ Confirmation On Each Command or Double Signature On Each Command is ticked.
+ 
+ 
+Animation name - 
+ If ticked the name of the animation, for example Send Bit, will be added 
+ to the message displayed in the security dialog at run time.
+ 
+Command comment - 
+ If ticked the text entered in the control zone comment field (also used 
+ to provide the text for the tool tip) will be added to the message displayed 
+ in the security dialog at run time.
+ 
+Object name and value 
+ - If ticked the name of the object and the value to which it is to be 
+ forced will be added to the message displayed in the security dialog at 
+ run time. If you are forcing a variable, the name of the variable and the 
+ value to which it will be forced is displayed. For example,: 'Tank 1 Pump1 
+ - Start command'.
+
+

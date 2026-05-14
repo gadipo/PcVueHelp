@@ -1,0 +1,1964 @@
+========================================
+TOPIC: ocpp_installation.htm
+========================================
+How to install and configure the OCPP driver
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to install and configure the OCPP driver
+ 
+The OCPP driver is an Add-on implemented based on the SV Manager SDK. It is made up of:
+ 
+ 
+
+ 
+A dll named svmgrOCPP.dll installed in the \Bin folder as part of the PcVue installation.
+ 
+ 
+
+ 
+A shared library named SH_EV_Charging installed as part of the installation. It includes ready-to-use templates you can instantiate with the Application Architect.
+ 
+ 
+
+ 
+Dependencies of the driver, not provided as part of the installation and to be copied in the folder \Bin\Modules\OCPP.
+ 
+ 
+ 
+
+ 
+You should contact your local reseller to get a copy of the package containing the dependencies to be copied in the folder \Bin\Modules\OCPP.
+ 
+ 
+Prerequisites:
+ 
+ 
+
+ 
+You have a license with the OCPP option enabled. The driver can run in demo mode for 1 hour with 1 charging point.
+ 
+ 
+
+ 
+You have the OCPP driver binary files, including the OCPP module dependencies,
+ 
+ 
+
+ 
+You have the shared library with the templates for OCPP.
+ 
+ 
+ 
+Installing and activating the OCPP driver
+ 
+ 
+
+ 
+If PcVue is running, make sure you shut it down.
+ 
+ 
+
+ 
+Check that the driver's main dll named svmgrOCPP.dll is already installed in the \Bin folder.
+ 
+ 
+
+ 
+Open the usrmgr.dat file in the PcVue�s Bin folder, add the following content and save the modified file:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[USRMGR\svmgrOcpp]&#160;
+ 
+ 
+ 
+
+ 
+DLL=svmgrOcpp.dll
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Extract the driver's dependencies obtain from your your local reseller int the \Bin\Modules\OCPP\ folder.
+ 
+ 
+
+ 
+Configure the endpoint by performing the Url namespace reservation as described in the next paragraph.
+ 
+ 
+ 
+
+ 
+If the usrmgr.dat file is missing, you can simply create it and place the above content in it.
+ 
+ 
+Configuring the endpoint
+ 
+The OCPP driver is implemented based on the Microsoft Windows http.sys web server. Before the OCPP driver can receive and process requests from charge points, http.sys must be configured to dispatch them properly based on the Url namespace reservation mechanism. The reservation gives listed users the right to run a process that listen on that part of the namespace and should be performed for each Http endpoint configured in the OCPPBinding section of the .ini file.
+ 
+
+ 
+Reserving the Url namespace is mandatory so that PcVue can listen to incoming requests when running without administrative privileges.
+ 
+ 
+Open a Windows command line or a PowerShell terminal and type the following command:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+netsh http add urlacl url=http://[HOSTNAME][PORT]/ user=[USER ACCOUNT]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Where:
+ 
+ 
+
+ 
+http://[HOSTNAME][PORT]/ is the Url of the PcVue host charge points connected to.
+ 
+ 
+
+ 
+[USER ACCOUNT] is the name of the user or group of users running the main process of PcVue (Sv32.exe).
+ 
+ 
+ 
+Examples:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+netsh http add urlacl url=https://my-csms.local:8080/ user=Domain\Sv_Users
+ 
+ 
+ 
+
+ 
+netsh http add urlacl url=https://+:8080/ user=Sv_User
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+The firewall must also be configured to allow incoming Http requests.
+ 
+ 
+
+ 
+When creating a WebSocket connection to a 3rd party system PcVue sends an HTTP header of type "Connection�. The value of this header consists of two directives: �Upgrade,Keep-Alive�. However, when evaluating the HTTP response to this message, PcVue is unable to parse a value that contains more than one directive. In other words, the value of the HTTP header �Connection� in the HTTP response must be nothing else than �Upgrade�.
+ 
+ 
+Configuring the OCPP driver
+ 
+The OCPP driver is configured using a .ini file named ocppConfiguration.ini. It includes:
+ 
+ 
+
+ 
+General settings.
+ 
+ 
+
+ 
+OCPP bindings configuration.
+ 
+ 
+
+ 
+Charge points configuration.
+ 
+ 
+
+ 
+Proxy configuration.
+ 
+ 
+ 
+Some fields of the ocppConfiguration.ini file are mandatory. If they are missing or invalid, the driver will fail to start. Other fields are optional and if they are missing or invalid, the task will use default values. The Event Viewer displays warning messages if a field is missing or invalid.
+ 
+To comment a line in the .ini file, you can enter a single quotation mark (�) at the beginning of the line.
+ 
+
+ 
+If you plan to use the Application Architect and the predefined templates provided with the OCPP library, the ocppConfiguration.ini file will be generated automatically. Refer to the topic How to use the OCPP library for more information.
+ 
+ 
+ 
+
+ 
+Go to your PcVue project's C directory and open the ocppConfiguration.ini file. Create the file if it does not exist. This file has several sections explained in the following table:
+ 
+ 
+ 
+ 
+ 
+
+ Section
+ Description
+ 
+ 
+
+ General
+ Driver's general settings.
+ 
+ 
+
+ OcppBinding
+ The TCP binding on which the OCPP server shall listen. Multiple bindings are possible, for instance http and https, or bindings for accessing the server from inside and outside of a public/private network boundary.
+ 
+ 
+
+ Charge point
+ Settings specific to an individual charge point. All charge points from which connections are accepted must be included under as many sections in the configuration file. The name of the section in the .ini file is the identifier of the charge point and must be unique, for example [CP1602]. The Id used as the section name shall match the identifier or name configured in the charge point itself (see the charge point vendor documentation for more information).
+ 
+ 
+
+ Proxy
+ Settings specific to proxying OCPP messages to a third-party central system. The name of the section is [Proxy:Name] where Name is used to identify the third-party central system and must be unique.
+ 
+ 
+ 
+ 
+ 
+
+ 
+Define the names for all well-known charge points, each in a dedicated section and add the necessary keys to each section.
+ 
+
+ 
+If a section is defined for a charge point which incoming requests should be ignored, because it is not yet in service for example, we recommend setting at minimum the Disabled key.
+For example:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[CP1602]
+ 
+ 
+ 
+
+ 
+Disabled=1
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Add any necessary configuration for your project using the settings reference table below.
+ 
+ 
+ 
+ocppConfiguration.ini key references
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Setting Name
+ Section
+ Description
+ Default value
+ 
+ 
+
+ AttributeNumber
+ General
+ Sets which variable text extended attribute is used to define the OCPP mapping information.
+ 16
+ 
+ 
+
+ OCPP16Prefix
+ General
+ Prefix used on the extended attribute to indicate the variable source is a charging station supporting OCPP protocol revision 1.6.
+ OCPP16
+ 
+ 
+
+ OCPP20Prefix
+ General
+ Prefix used on the extended attribute to indicate the variable source is a charging station supporting OCPP protocol revision 2.0.
+ OCPP20
+ 
+ 
+
+ AttributeNumberStatusCode
+ General
+ Sets which variable text extended attribute is used to store additional status and error information, e.g., StatusNotification.Status in plaintext or StatusNotification.ErrorCode in plaintext.
+ 3
+ 
+ 
+
+ ConfigurationDelimiter
+ General
+ Character used to delimit the configuration keys and values in GetConfiguration and ChangeConfiguration payloads or GetVariables and SetVariables payloads respectively.
+ The semi-colon character (";")
+ 
+ 
+
+ HTTPEndpoint
+ OCPPBinding
+ One or multiple Http endpoints to listen to. Wildcards are allowed. Multiple bindings are comma delimited (for example: http://my-csms.local:80, https://my-csms.local:443).
+The Url namespace shall be reserved as described above for each configured Http endpoint.
+ http://+:8080/
+ 
+ 
+
+ UseHTTPBasicAuthentication
+ OCPPBinding
+ 1 to enable Http basic authentication, 0 otherwise.
+ 0
+ 
+ 
+
+ HeartbeatInterval
+ ChargePoint
+ Heartbeat interval in seconds. Used in the boot notification response to tell the charge point which interval to use.
+ 30
+ 
+ 
+
+ HeartbeatTimeout
+ ChargePoint
+ 
+ 
+Interval in seconds before variables mapped on a charge point are set invalid after heartbeat message failure.
+If set to 0 Heartbeat timeout is ignored.
+ 
+For example: 
+If HeartbeatInterval = 30 sec and HeartbeatTimeout = 10 sec, charge point variables will be set invalid 40 seconds after receiving the last heartbeat message.
+ 
+ 10
+ 
+ 
+
+ TimestampFormat
+ ChargePoint
+ Defines the format of the timestamp that is returned by the heartbeat message. If omitted, ISO8601 formatting is used ("2017-09-08T19:01:55.714942+03:00").
+ &#160;
+ 
+ 
+
+ ReceiveMessageTimeout
+ ChargePoint
+ 
+ 
+Receive message timeout in seconds. Interval after which an error response is sent back to the charge point in case the CSMS is not able to process the request in an adequate time.
+ 
+Applicable to the following messages:
+ 
+ 
+Authorize
+ 
+StartTransaction
+ 
+StopTransaction
+ 
+Etc.
+ 
+ 
+This setting shall also account for any performance constraints of the underlying network (connection over a mobile network for instance).
+Normally, this value should be set to the same value as the heartbeat interval.
+ 
+ 30
+ 
+ 
+
+ SendMessageTimeout
+ ChargePoint
+ Send message timeout in seconds. Interval after which a previously sent message is discarded and responses to which are no longer accepted. Interval after which the outbound channel is no longer blocked.
+ 30
+ 
+ 
+
+ ReceiveBufferSize
+ ChargePoint
+ Websockets message receive buffer size (in bytes).
+ 65535
+ 
+ 
+
+ Disabled
+ ChargePoint
+ 
+ 
+Used to temporarily disable a previously configured charge point. Optional.
+0 = Enabled. 1 = Disabled.
+ 
+ 0
+ 
+ 
+
+ 
+ 
+TriggerBootNotification
+ 
+AtConnect
+ 
+ ChargePoint
+ 
+ 
+Automatically triggers a BootNotification when a charge point goes online.
+ 
+Used to retrieve details about the charge point faceplate information when PcVue restarts (vendor, serial number, firmware version, etc.).
+ 
+0 = Disabled. 1 = Enabled.
+ 
+ 0
+ 
+ 
+
+ 
+ 
+TriggerStatusNotification
+ 
+AtConnect
+ 
+ ChargePoint
+ 
+ 
+Automatically triggers a StatusNotification when a charge point goes online.
+ 
+Used to retrieve charge point status inforrmation when the PcVue restarts (charging or not, availability, etc.).
+ 
+0 = Disabled. 1 = Enabled.
+ 
+ 0
+ 
+ 
+
+ DateTimeKind
+ ChargePoint
+ 
+ 
+Used to define the timestamp format to be used by PcVue when sending BootNotification response and Heartbeat response to the charge point.
+ 
+Allowed values: "Local" or" Utc"
+ 
+ "Local"
+ 
+ 
+
+ SendConfigurationAtBoot
+ ChargePoint
+ 
+ 
+Sends a predefined set of configuration settings to the charge point when a BootNotification is received.
+0 = Disabled. 1 = Enabled
+ 
+ 0
+ 
+ 
+
+ ConfigurationFile
+ ChargePoint
+ 
+ 
+The file that contains the predefined set of configuration settings to send when a BootNotification is received from the charge point.
+ 
+The file must be in Json format. It is by default located in the C folder of the PcVue project, but a relative path is also allowed.
+ 
+Example (CP3211.json). Charge point predefined settings file:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+{
+ 
+ 
+ 
+
+ 
+"AuthorizationCacheEnabled": false,
+ 
+ 
+ 
+
+ 
+"HeartbeatInterval": 60000
+ 
+ 
+ 
+
+ 
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Multiple charge points may use the same configuration file. If SendConfigurationAtBoot is enabled this setting is mandatory.
+ 
+ &#160;
+ 
+ 
+
+ WebSocketsEndpoint
+ Proxy
+ The endpoint Url of a third-party central system.
+ &#160;
+ 
+ 
+
+ ReconnectInterval
+ Proxy
+ The interval in seconds after which a new attempt is made to connect to the third-party system.
+ 30 
+ 
+ 
+
+ UseHttpBasicAuthentication
+ Proxy
+ 1 to enable Http basic authentication, 0 otherwise.
+ 0
+ 
+ 
+
+ Password
+ Proxy
+ The password used to authenticate at the third-party system. The password is the same for all outgoing connections to this system.
+ &#160;
+ 
+ 
+
+ SendMessageTimeout
+ Proxy
+ &#160;
+ 30
+ 
+ 
+
+ ReceiveMessageTimeout
+ Proxy
+ &#160;
+ 30 
+ 
+ 
+ 
+ 
+ocppConfiguration.ini file example
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[General]
+ 
+ 
+ 
+
+ 
+OCPP16Prefix=OCPP16
+ 
+ 
+ 
+
+ 
+OCPP20Prefix=OCPP20
+ 
+ 
+ 
+
+ 
+AttributeNumber=16
+ 
+ 
+ 
+
+ 
+AttributeNumberStatusCode=3
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[OcppBinding]
+ 
+ 
+ 
+
+ 
+HttpEndpoint=http://my-csms.local:8082/
+ 
+ 
+ 
+
+ 
+UseHttpBasicAuthentication=0
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[CP1601]
+ 
+ 
+ 
+
+ 
+ReceiveBufferSize=65535
+ 
+ 
+ 
+
+ 
+HeartbeatInterval=30
+ 
+ 
+ 
+
+ 
+HeartbeatTimeout=10
+ 
+ 
+ 
+
+ 
+SendMessageTimeout=30
+ 
+ 
+ 
+
+ 
+ReceiveMessageTimeout=30
+ 
+ 
+ 
+
+ 
+Disabled=0
+ 
+ 
+ 
+
+ 
+TriggerBootNotificationAtConnect=0
+ 
+ 
+ 
+
+ 
+TriggerStatusNotificationAtConnect=0
+ 
+ 
+ 
+
+ 
+DateTimeKind=Local
+ 
+ 
+ 
+
+ 
+TimestampFormat=yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFK
+ 
+ 
+ 
+
+ 
+SendConfigurationAtBoot=0
+ 
+ 
+ 
+
+ 
+ConfigurationFile=CP1601.json
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[CP1602]
+ 
+ 
+ 
+
+ 
+ReceiveBufferSize=65535
+ 
+ 
+ 
+
+ 
+HeartbeatInterval=30
+ 
+ 
+ 
+
+ 
+HeartbeatTimeout=10
+ 
+ 
+ 
+
+ 
+SendMessageTimeout=30
+ 
+ 
+ 
+
+ 
+ReceiveMessageTimeout=30
+ 
+ 
+ 
+
+ 
+Disabled=0
+ 
+ 
+ 
+
+ 
+TriggerBootNotificationAtConnect=0
+ 
+ 
+ 
+
+ 
+TriggerStatusNotificationAtConnect=0
+ 
+ 
+ 
+
+ 
+DateTimeKind=Local
+ 
+ 
+ 
+
+ 
+TimestampFormat=yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFK
+ 
+ 
+ 
+
+ 
+SendConfigurationAtBoot=0
+ 
+ 
+ 
+
+ 
+ConfigurationFile=CP1602.json
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[CP1603]
+ 
+ 
+ 
+
+ 
+ReceiveBufferSize=65535
+ 
+ 
+ 
+
+ 
+HeartbeatInterval=30
+ 
+ 
+ 
+
+ 
+HeartbeatTimeout=10
+ 
+ 
+ 
+
+ 
+SendMessageTimeout=30
+ 
+ 
+ 
+
+ 
+ReceiveMessageTimeout=30
+ 
+ 
+ 
+
+ 
+Disabled=0
+ 
+ 
+ 
+
+ 
+TriggerBootNotificationAtConnect=0
+ 
+ 
+ 
+
+ 
+TriggerStatusNotificationAtConnect=0
+ 
+ 
+ 
+
+ 
+DateTimeKind=Local
+ 
+ 
+ 
+
+ 
+TimestampFormat=yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFK
+ 
+ 
+ 
+
+ 
+SendConfigurationAtBoot=0
+ 
+ 
+ 
+
+ 
+ConfigurationFile=CP1603.json
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[Proxy:3rdPartySystem]
+ 
+ 
+ 
+
+ 
+WebSocketsEndpoint=ws://my-other-csms.com:9990/
+
+
+========================================
+TOPIC: ocpp_lib_templates.htm
+========================================
+How to use the OCPP library
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to use the OCPP library
+ 
+Charge point variables are the carriers of information exchanged between charge points on the network and PcVue. A library of predefined templates is available to ease the mapping of OCPP charging stations data and management messages.
+ 
+The predefined library for OCPP includes:
+ 
+ 
+
+ 
+Images
+ 
+ 
+
+ 
+SCADA Basic scripts
+ 
+ 
+
+ 
+Animated symbols
+ 
+ 
+
+ 
+Templates and Parameters
+ 
+ 
+
+ 
+Mimics
+ 
+ 
+
+ 
+An archive unit
+ 
+ 
+ 
+Prerequisites: 
+ 
+ 
+
+ 
+You have installed and activated the OCCP driver, and performed Url namespace reservation as detailed in the topic How to install and configure the OCPP driver.
+ 
+ 
+
+ 
+You have the OCPP shared library installed (folder \LIB\SH_EV_Charging).
+ 
+ 
+
+ 
+You know how to use the Application Architect to instantiate existing templates.
+ 
+ 
+ 
+Instantiating OCPP templates
+ 
+ 
+
+ 
+Click Configure in the main menu of PcVue then Application Architect.
+ 
+ 
+
+ 
+Click the plus button next to OCPP in the Templates tab. The categories OCPP 1.6 and 2.0 appear, containing templates for all OCPP variables. Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Add an instance of the ChargePointProject template and give it a name. This instance provides:
+ 
+ 
+
+ 
+Variables global to your charge point central monitoring system,
+ 
+ 
+
+ 
+The essential keys for the General and OcppBinding sections of the OcppConfiguration.ini file,
+ 
+ 
+
+ 
+The mimics global to your CSMS,
+ 
+ 
+ 
+ 
+
+ 
+Set the value of input parameters for the essential keys in the .ini file, at least the Http endpoint parameter.
+ 
+ 
+
+ 
+Add an instance of the ChargePoint template as a child of the ChargePointProject instance and give it a name that matches the Id of the actual charge point deployed on the field (for example CPxxxx). This instance provides:
+ 
+ 
+
+ 
+Variables to monitor the charge point,
+ 
+ 
+
+ 
+Inherited templates to support the related of OCPP messages: Status, authorization, handling of reservation, availability, charging profile, firmware update, etc.
+ 
+ 
+ 
+
+ 
+Make sure that the name of the ChargePoint instance you add matches the name (or id) set in the corresponding charge point device. Refer to the charge point vendor documentation for more information.
+ 
+ 
+ 
+
+ 
+Set the value of input parameters as required by your set-up.
+ 
+ 
+
+ 
+For each connector on the charge point you have instantiated, add an instance of the Connector template as a child of the ChargePoint instance (index starts at 1). This instance provides variables and inherited templates to monitor the connector and support the related OCPP messages: Availability, electrical meter values, status, transaction, etc.
+ 
+ 
+
+ 
+Set the value of input parameters as required by your set-up. At least the ConnectorId according to the charge point vendor documentation.
+The phase number is also important if the charge point has more than one phase (possible values are: L1, L2, L3, L1L2, L2L3, L3L1, L1N, L2N, L3N, N).
+ 
+ 
+
+ 
+Repeat steps 7 and 8 for each connector available on the charge point.
+ 
+ 
+
+ 
+Repeat steps 5 to 9 for each charge point.
+ 
+ 
+
+ 
+Save the configuration by clicking File.Save in upper menu then Tasks.Generate to generate the configuration.
+ 
+ 
+Click Configure.Application Explorer in upper menu of PcVue then open the charge point project from Variables tree. All charge point messages and variables generated are displayed. Pre-animated mimics are also generated. Show picture
+
+ 
+
+ 
+An alarm is set by the OCPP driver and is activated when the charge point status is Faulted and deactivated when it is any other value. Alarm and bit variable values are defined in relation to the values set in the associated labels of the Status variable.
+The OCPP driver also writes label string representations in extended attributes of alarm and bit variables such as ChargePointErrorCode written into extended attribute 3.
+ 
+We recommend you include additional details about charge point errors in other extended attributes.
+
+
+========================================
+TOPIC: ocpp_log_traces.htm
+========================================
+OCPP Add-on traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OCPP Add-on traces
+ 
+Event logging 
+ 
+Information regarding the OCPP Add-on is logged in the traces and displayed in the Event Viewer with lines starting with '[OCPP]'.
+ 
+Diagnostic traces 
+ 
+Additional traces can be activated using the SCADA Basic instruction TRACE as follows.
+ 
+TRACE(Mode, ManagerId, HexFlag);
+ 
+ 
+Mode - Turn the additional trace on or off
+1 - On
+0 - Off
+ 
+ManagerID - The identifier of the OCPP Add-on task. Set to 11 if OCPP is the only Add-on in use.
+ 
+HexFlag	- Hexadecimal combination flag. The level of traces to activate/deactivate as per the table below.
+ 
+ 
+ 
+ 
+
+ Type
+ Bit mask
+ 
+ 
+
+ Raw message exchange with charge points
+ 0x0001
+ 
+ 
+
+ Raw message exchange with CSMS (proxy)
+ 0x0002
+ 
+ 
+
+ Incoming requests from charge points
+ 0x0400
+ 
+ 
+
+ Outgoing requests to charge points
+ 0x0800
+ 
+ 
+
+ Incoming responses from charge points
+ 0x1000
+ 
+ 
+
+ Outgoing responses to charge points
+ 0x2000
+ 
+ 
+
+ Incoming requests from CSMS (proxy)
+ 0x0800
+ 
+ 
+
+ Outgoing responses to CSMS (proxy)
+ 0x10000
+ 
+ 
+
+ Incoming responses from CSMS (proxy)
+ 0x20000
+ 
+ 
+ 
+ 
+Example of use of SCADA Basic TRACE instruction 
+ 
+TRACE(1,11,�001�); �Turn on additional trace for raw message exchange with charge points
+ 
+TRACE(1,11,�400�); �Turn on additional trace for incoming requests from charge points
+ 
+TRACE(1,11,�1000�); �Turn on additional trace for incoming responses from charge points
+ 
+&#160;
+ 
+TRACE(0,11,�001�); �Turn off additional trace for raw message exchange with charge points
+ 
+TRACE(0,11,�400�); �Turn off additional trace for incoming requests from charge points
+
+
+========================================
+TOPIC: ocpp_overview.htm
+========================================
+OCPP Add-on overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OCPP Add-on overview
+ 
+The Open Charge Point Protocol (OCPP) is an interface for communication between Electric vehicle charging stations and a central management system. It was originally designed and is supported by the Open Charge Alliance (OCA).
+ 
+The following OCPP versions are supported:
+ 
+ 
+
+ 
+OCPP protocol revision 1.6 - OCPP via Json over WebSocket
+ 
+ 
+
+ 
+OCPP protocol revision 2.0.1
+ 
+ 
+ 
+&#160;PcVue acts as central management system to monitor charging stations. The OCPP specifications allows only one central system to exchange data with a charge point. In practice however, multiple stakeholders have an interest in the data obtained from a charge point. Therefore, PcVue supports the OCPP message proxying to handle the transfer of certain messages to a third-party central system. Show picture
+ 
+
+ 
+ 
+ 
+OCPP messages are mapped onto PcVue variables to take advantage of the product capabilities:
+ 
+ 
+
+ 
+Client/server distribution,
+ 
+ 
+
+ 
+HMI display,
+ 
+ 
+
+ 
+Alarming,
+ 
+ 
+
+ 
+Archiving,
+ 
+ 
+
+ 
+Subscription to data via server interfaces,
+ 
+ 
+
+ 
+Etc.
+ 
+ 
+ 
+There are no configuration dialog's specific to the OCPP Add-on. At the time of writing, it uses a dedicated .ini file and regular configuration features. In addition, a predefined library of templates is available to make it easy to configure charge points and variables using the instantiation capabilities of the Application Architect.
+ 
+Glossary
+ 
+The following terms and acronyms may be found in this help book:
+ 
+ 
+OCPP - Open Charge Point Protocol.
+ 
+EV - Electric Vehicle.
+ 
+EVSE - Electric Vehicle Supply Equipment. An electric vehicle charging station, also called EV charging station, electric recharging point, charging point, charge point and electronic charging station, is an element in an infrastructure that supplies electric energy for the recharging of plug-in electric vehicles - including electric cars, neighborhood electric vehicles and plug-in hybrids.
+ 
+Connector - The actual plug connected to the EV. A charge point may have one or several connectors that operate independently of each other.
+ 
+CSMS - Charging station management system.
+ 
+ 
+
+ 
+Refer to the topic OCPP protocol implementation statements for information on supported OCPP messages.
+
+
+========================================
+TOPIC: ocpp_supported_messages.htm
+========================================
+OCPP protocol implementation statement
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OCPP protocol implementation statement
+ 
+OCPP specifies the exchange of messages between a charge point and a CSMS such as PcVue. OCPP messages are grouped in profiles. This topic includes detailed information about the level of support of OCPP by PcVue.
+ 
+
+ 
+Only one CSMS can be connected with PcVue proxy at the time of writing.
+ 
+ 
+Supported OCPP versions
+ 
+ 
+
+ 
+OCPP protocol revision 1.6 - OCPP via Json over WebSocket.
+ 
+ 
+
+ 
+OCPP protocol revision 2.0.1.
+ 
+ 
+ 
+
+ 
+When creating a WebSocket connection to a 3rd party system PcVue sends an HTTP header of type "Connection�. The value of this header consists of two directives: �Upgrade,Keep-Alive�. However, when evaluating the HTTP response to this message, PcVue is unable to parse a value that contains more than one directive. In other words, the value of the HTTP header �Connection� in the HTTP response must be nothing else than �Upgrade�.
+ 
+ 
+Supported OCPP profiles
+ 
+ 
+ 
+ 
+ 
+
+ Profile name
+ Description
+ 
+ 
+
+ Core
+ Basic charge point functionality. No support for firmware updates, local authorization list management and reservations
+ 
+ 
+
+ Local Auth List Management
+ Features to manage the local authorization list in charge point
+ 
+ 
+
+ Reservation
+ Support for reservation of a charge point
+ 
+ 
+
+ Smart Charging
+ Support for basic Smart Charging functionality, for instance, using control pilot
+ 
+ 
+
+ Remote Trigger
+ Support for remote triggering of charge point initiated messages
+ 
+ 
+ 
+ 
+Supported OCPP messages
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Message
+ Profile
+ Initiated by
+ Responded directly by proxy
+ Forwarded by proxy
+ Requested/Responded from proxy routed to charge point
+ 
+ 
+
+ Authorize (see note below)
+ Core
+ 
+ 
+Client (Charge Point)
+ 
+ 
+ 
+No
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ BootNotification
+ Core
+ 
+ 
+Client (Charge Point)
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ ChangeAvailability
+ Core
+ 
+ 
+Client (Charge Point)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ ChangeConfiguration
+ Core
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ ClearCache
+ Core
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ DataTransfer
+ Core
+ 
+ 
+Client (Charge Point)
+ 
+ / Server (Central System)
+ 
+ 
+ 
+No
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ GetConfiguration
+ Core
+ 
+ 
+Client (Charge Point)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ Heartbeat
+ Core
+ 
+ 
+Client (Charge Point)
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ MeterValues
+ Core
+ 
+ 
+Server (Central System)
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ RemoteStartTransaction
+ Core
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ RemoteStopTransaction
+ Core
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ Reset
+ Core
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ StartTransaction (See note below)
+ Core
+ 
+ 
+Client (Charge Point)
+ 
+ 
+ 
+No
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ StatusNotification
+ Core
+ 
+ 
+Client (Charge Point)
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ StopTransaction (See note below)
+ Core
+ 
+ 
+Client (Charge Point)
+ 
+ 
+ 
+No
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ UnlockConnector
+ Core
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ GetDiagnostics
+ Firmware Management
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ DiagnosticsStatusNotification
+ Firmware Management
+ 
+ 
+Client (Charge Point)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ FirmwareStatusNotification
+ Firmware Management
+ 
+ 
+Client (Charge Point)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ UpdateFirmware
+ Firmware Management
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ GetLocalListVersion
+ Local Auth List Management
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ SendLocalList
+ Local Auth List Management
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ CancelReservation
+ Reservation
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ ReserveNow
+ Reservation
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ ClearChargingProfile
+ Smart Charging
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ GetCompositeSchedule
+ Smart Charging
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ SetChargingProfile
+ Smart Charging
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+
+ TriggerMessage (See note below)
+ Remote Trigger
+ 
+ 
+Server (Central System)
+ 
+ &#160;
+ 
+ 
+Yes
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+ 
+ 
+
+ 
+For the messages Authorize, StartTransaction, StopTransation, and TriggerMessage to be processed, some form of trigger must be implemented as part of the PcVue project. It typically consists of a SCADA Basic script to monitor and control the value of some variables but may vary depending on the design of your project (could be event-based, executed cyclically or upon a user action, etc.).
+
+

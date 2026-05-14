@@ -1,0 +1,1086 @@
+========================================
+TOPIC: Status_variables_availability.htm
+========================================
+Availability of network system variables per version
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Availability of network system variables per version
+ 
+For information on the mnemonics within the triangular 
+ brackets, see the topic Network 
+ variable naming rules.
+ 
+
+ 
+All variable names are preceded by SYSTEM. For example 
+ SYSTEM.STATION_NAME
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Variable name
+ 
+ 
+ 
+Available from version
+ 
+ 
+ 
+
+ 
+ 
+STATION_NAME
+ 
+ 
+ 
+6.00
+ 
+ 
+ 
+
+ 
+ 
+STATION_NUMBER
+ 
+ 
+ 
+6.00
+ 
+ 
+ 
+
+ 
+ 
+<StationName>
+ 
+ 
+ 
+6.00
+ 
+ 
+ 
+
+ 
+ 
+<NodeName>
+ 
+ 
+ 
+8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<ServerConnection>
+ 
+ 
+ 
+6.10
+ 
+ 
+ 
+
+ 
+ 
+<ClientConnection>
+ 
+ 
+ 
+6.10
+ 
+ 
+ 
+
+ 
+ 
+<NodeName>.ACTIVECTX
+ 
+ 
+ 
+8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<ServerConnection>.ACTIVECTX
+ 
+ 
+ 
+7.20d, 8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<ClientConnection>.ACTIVECTX
+ 
+ 
+ 
+7.20d, 8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<NodeName>.ACTIVE_NUMBER
+ 
+ 
+ 
+8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<ServerConnection>.ACTIVE_NUMBER
+ 
+ 
+ 
+8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<ClientConnection>.ACTIVE_NUMBER
+ 
+ 
+ 
+8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<AssociationName>.<StationName>
+ 
+ 
+ 
+6.10
+ 
+ 
+ 
+
+ 
+ 
+<AssociationNumber>.<StationNumber>.SWITCH.PASSIVE_COMPLETED
+ 
+ 
+ 
+7.20d, 8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<AssociationName>.<StationName>.MAIN
+ 
+ 
+ 
+7.20d, 8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<AssociationNumber>.<StationNumber>.ACTIVE_NUMBER
+ 
+ 
+ 
+7.20d, 8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<AssociationName>.USER_STATION
+ 
+ 
+ 
+6.10
+ 
+ 
+ 
+
+ 
+ 
+<StationName>.OK_NUMBER
+ 
+ 
+ 
+6.10
+ 
+ 
+ 
+
+ 
+ 
+<NodeName>.OK_NUMBER
+ 
+ 
+ 
+7.20d, 8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<StationName>C.OK_NUMBER
+ 
+ 
+ 
+7.20d, 8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<StationName>S.OK_NUMBER
+ 
+ 
+ 
+7.20d, 8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<ServerConnection>.OK_NUMBER
+ 
+ 
+ 
+7.20d, 8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<ClientConnection>.OK_NUMBER
+ 
+ 
+ 
+7.20d, 8.00 SP3, 8.10
+ 
+ 
+ 
+
+ 
+ 
+<ServerConnection>.WATCHDOG.COUNT
+ 
+ 
+ 
+7.20c, 8.00
+ 
+ 
+ 
+
+ 
+ 
+<ClientConnection>.WATCHDOG.COUNT
+ 
+ 
+ 
+7.20c, 8.00
+ 
+ 
+ 
+
+ 
+ 
+<AssocNumber>.<StationNumber>.AVAILABLERATE
+ 
+ 
+ 
+8.10
+
+
+========================================
+TOPIC: Status_variables_connection_between_stations.htm
+========================================
+Variables providing the connection status between two stations
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Variables Providing the Connection Status Between Two 
+ Stations
+ 
+SYSTEM.<StationName>
+ 
+Variable type � BIT.
+ 
+Where <StationName> refers to a remote station, 
+ set to 1 if the remote station is connected to the local station, else 
+ 0.
+Where <StationName> refers to the local station, set to 1 if the 
+ local station is connected to at least one remote station, else 0.
+ 
+Produced by <StationName> and all stations that 
+ have a connection with <StationName>.
+ 
+Example: SYSTEM.PIPPIN
+ 
+SYSTEM.<NodeName>
+ 
+Variable type � BIT.
+ 
+Where <NodeName> refers to a remote station, set 
+ to 1 if the remote station is connected to the local station, else 0.
+Where <NodeName> refers to a local station, set to 1 if the local 
+ station is connected to at least one remote station, else 0.
+ 
+Produced by the <StationName> referred to in the 
+ <NodeName> and on all stations that have a connection with <StationName>.
+ 
+Example: SYSTEM.PIPPIN_0
+ 
+SYSTEM.<ServerConnectionName>
+ 
+Variable type � BIT.
+ 
+Where <ServerConnectionName> refers to a remote 
+ station, set to 1 if the local client has established a connection, else 
+ 0.
+Where <ServerConnectionName> refers to the local station, set to 
+ 1 if one or more remote station have established a client connection with 
+ the local server, else 0.
+ 
+Produced by the station <StationName> and all stations 
+ that have a client connection the <ServerConnectionName> server. 
+ 
+ 
+Example: SYSTEM.PIPPIN_0S
+ 
+SYSTEM.<ClientConnectionName>
+ 
+Variable type � BIT
+ 
+Where <ClientConnectionName> refers to a remote 
+ station, set to 1 if the local server has established a connection, else 
+ 0.
+ 
+Where <ClientConnectionName> refers to the local 
+ station, set to 1 if one or more remote station have established a server 
+ connection with the local client, else 0.
+ 
+Produced by the station <StationName> and all stations 
+ that have a server connection the <ClientConnectionName> client. 
+ 
+ 
+Example: SYSTEM.PIPPIN_0C
+
+
+========================================
+TOPIC: Status_variables_naming_rules.htm
+========================================
+Network status variables naming rules
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Network Status Variables Naming Rules
+ 
+
+ &#160;PcVue provides several variables containing status information for stations in a networked application. The variables are generated automatically with names related to the network configuration. The variables can be used to animate a network status mimic that should be considered essential for any networked application.
+ 
+The names of the network status variables are generated automatically by PcVue with branches constructed using the following rules.
+ 
+Naming rules when using TCP/IP prior to version 10.0 SP1
+ 
+ 
+ 
+ 
+ 
+
+ Mnemonic
+ Description
+ 
+ 
+
+ <StationName>
+ The name of the station as entered in the network configuration. Not the name by which the host PC is known on the Windows network.
+ 
+ 
+
+ <StationNumber>
+ The number of the station corresponding to <StationName>. For information on how the station number is configured see the topic How the station number is allocated to a physical PC.
+ 
+ 
+
+ <NodeNumber>
+ The number of a node within a station. 
+ The nodes are configured in the network configuration with each node corresponding to a physical network card in the host PC. Node numbers start at 0.
+ 
+ 
+
+ <NodeName>
+ The identity of the node. = <StationName>_<NodeNumber>
+ 
+ 
+
+ <ServerConnectionName>
+ The identity of server connection. = <StationName>_<NodeNumber>S
+ 
+ 
+
+ <ClientConnectionName>
+ The identity of client connection. = <StationName>_<NodeNumber>C
+ 
+ 
+
+ <AssociationName>
+ The name of an association as entered in the network configuration. Associations are used in redundant configurations.
+ 
+ 
+ 
+ 
+Naming rules when using TCP/IP for version 10.0 SP1 and later
+ 
+Version 10.0 SP1 and later have a minor difference in the way the <ServerConnectionName> and <ClientConnectionName> are constructed. If you open a project created with a version prior to 10.0 SP1, variables constructed using the old scheme will still work as expected. However, if you create any new stations in the network configuration, the new naming scheme will be used when the new status variables are generated.
+ 
+ 
+ 
+ 
+ 
+
+ Mnemonic
+ Description
+ 
+ 
+
+ <ServerConnectionName>
+ The identity of server connection. = <StationName><NodeNumber>S
+ 
+ 
+
+ <ClientConnectionName>
+ The identity of client connection. = <StationName><NodeNumber>C
+ 
+ 
+ 
+ 
+Naming rules when using NetBios
+ 
+NetBios is no longer in common use although it is still supported. The naming scheme, if using Netbios, is modified as follows. Please note that these names can be changed manually in the station properties.
+ 
+ 
+ 
+ 
+ 
+
+ Mnemonic
+ Description
+ 
+ 
+
+ <ServerConnectionName>
+ The identity of server connection. = <StationName>S<NodeNumber>
+ 
+ 
+
+ <ClientConnectionName>
+ The identity of client connection. = <StationName>C<NodeNumber>
+ 
+ 
+ 
+ 
+Example for TCP/IP illustrating the status variable naming rules
+ 
+ 
+ 
+ 
+ 
+
+ Mnemonic
+ Example
+ 
+ 
+
+ <StationName>
+ PIPPIN
+ 
+ 
+
+ <StationNumber>
+ 1
+ 
+ 
+
+ <NodeNumber>
+ 0
+ 
+ 
+
+ <ServerConnectionName>
+ PIPPIN_0S (earlier than 10.0 SP1) 
+PIPPIN0S (10.0 SP1 and later)
+ 
+ 
+
+ <ClientConnectionName>
+ PIPPIN_0C (earlier than 10.0 SP1)
+PIPPIN0C (10.0 SP1 and later)
+ 
+ 
+ 
+ 
+An important note
+ 
+The information provided by some of the variables is 
+ different when <StationName> is the local station and when <StationName> 
+ is the name of another (remote) station on the network.
+
+
+========================================
+TOPIC: Status_variables_overview.htm
+========================================
+Using the network status variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Network Status Variables
+ 
+
+ &#160;PcVue provides a large number of network status 
+ variables provided and it may appear at first that the information provided 
+ by some of them is duplicated.
+ 
+Connection Status and Connection Activity Variables
+ 
+The connection activity variables indicate if a connection 
+ is active. That is a node of PcVue is using the connection for exchange 
+ of information with another node. A connection can only become 
+ active if it is already available
+ 
+The connection status variables indicate if a connection 
+ is available. That is the physical network connection is available to the corresponding PcVue node.
+ 
+On a system with just one network, the connection status 
+ variables and the connection activity variables will have the same values.
+ 
+On a system with dual networks, one of the networks may 
+ have an active server connection whilst the other has an active client 
+ connection, or both client and server connections might use the same network 
+ with the other network having no active connections. In either case, should 
+ a connection become unavailable all activity automatically transfers to 
+ the other. The following picture shows the status of a simple client server 
+ system with dual networks. Both networks are available. The client and 
+ server connections both using one network whilst the other is available 
+ but inactive. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+The corresponding values of the status variables are: 
+ Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+OK_NUMBER and ACTIVE_NUMBER variables
+ 
+The ACTIVE_NUMBER variables indicate the number of remote 
+ nodes with which a local node is actively exchanging information.
+ 
+The OK_NUMBER variables indicate the number of remote 
+ nodes available to a local node. 
+ 
+On a system with one network, the ACTIVE_NUMBER and OK_NUMBER 
+ variables will have the same values.
+ 
+On a system with dual networks, only one of the connections 
+ to a remote node may be active at one time and the ACTIVE_NUMBER and OK_NUMBER 
+ variables may have different values.
+ 
+In the picture above, both the client and server connections 
+ are using node 0. Therefore, the OK_NUMBER and ACTIVE_NUMBER variables 
+ for node 0 have the same values, whereas node 1 has a value of 1 for its 
+ OK_NUMBER variables but the ACTIVE_NUMBER variables are 0.
+
+
+========================================
+TOPIC: Status_variables_providing_station_ID.htm
+========================================
+Variables providing station Id
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Variable Providing Station Id
+ 
+SYSTEM.STATION_NAME
+ 
+Variable type - TEXT.
+ 
+Value - the name of the local station.
+ 
+Produced by all stations.
+ 
+SYSTEM.STATION_NUMBER
+ 
+Variable type � REGISTER.
+ 
+Value - the number of the local station.
+ 
+Produced by all stations.
+
+
+========================================
+TOPIC: Status_variables_related_to_an_association.htm
+========================================
+Variables related to an association
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Variables Related to an Association
+ 
+SYSTEM.<AssocName>.<StationName>
+ 
+Variable type � BIT.
+ 
+Set to 1 if the station <StationName> of association 
+ <AssocName> is active or set to 0 if the station is passive.
+ 
+Produced by the station <StationName> and all stations 
+ linked to the association.
+ 
+Example: SYSTEM.ASSOC.PIPPIN
+ 
+SYSTEM.<AssocNumber>.<StationNumber>.SWITCH.PASSIVE_COMPLETED
+ 
+Variable type � BIT.
+ 
+Follows the status of variables in the station <StationNumber> 
+ when switching from active to passive. Set to 0 when the change is initiated 
+ and set to 1 when all changed variables are refreshed.
+ 
+Produced only by the station <StationNumber>.
+ 
+Example: SYSTEM.10.1.SWITCH.PASSIVE_COMPLETED
+ 
+SYSTEM.<AssociationName>.<StationName>.MAIN
+ 
+Variable type - BIT.
+ 
+Set to 1 when the station <StationName> in association 
+ <AssociationName> is Main, else 0.
+ 
+Produced by the station <StationName> and all the 
+ stations which are linked to the association or directly to the station.
+ 
+Example: SYSTEM.ASSOC.PIPPIN.MAIN
+ 
+SYSTEM.<AssocNumber>.<StationNumber>.ACTIVE_NUMBER
+ 
+Variable type - REGISTER.
+ 
+The number of remote stations that are using the station 
+ <StationNumber> as the active station of association <AssocNumber>.
+ 
+This variable is produced only by the station <StationNumber>.
+ 
+Example: SYSTEM.10.1.ACTIVE_NUMBER
+ 
+SYSTEM.<AssocName>.USER_STATION
+ 
+Variable type � TEXT.
+ 
+The name of the remote server station of the association 
+ <AssocName> that refreshed the local station. It is the active 
+ server with respect to the local station. 
+ 
+Produced only by the stations that have a link with 
+ the association <AssocName>.
+ 
+Example: SYSTEM.ASSOC.USER_STATION
+ 
+Example: PIPPIN and FRODO are the names of two stations 
+ belonging to the association with the name ASSOC. ARAGORN is the name 
+ of a station connected to association ASSOC. If 
+ ARAGORN is refreshed by station PIPPIN then on station ARAGORN the variable 
+ SYSTEM.ASSOC.USER_STATION will contain the string PIPPIN.
+ 
+SYSTEM.<AssocNumber>.<StationNumber>.AVAILABLERATE
+ 
+Variable type - REGISTER.
+ 
+The available rate of the station <StationNumber> 
+ in the association <AssocNumber>. 
+ 
+In a historical association, the available rate is 
+ used to select which server 
+ will respond to a request for historic data from a client when both servers are healthy.
+ 
+In a real-time association with a single active server, the available rate is used to select the server that is active when both servers are healthy.
+ 
+Produced by the station <StationName> and all the 
+ stations which are linked to the association or directly to the station.
+ 
+Example: SYSTEM.20.1.AVAILABLERATE
+ 
+SYSTEM.<AssociationName>.LOCALHOST
+ 
+Variable type - BIT.
+ 
+Set to 1 if the local station within the association 
+ <AssociationName> is active and set to 0 if the station is passive.
+ 
+Produced by all stations. If the station does not belong to the association <AssociationName>, the variable value is NS.
+ 
+Example: SYSTEM.ASSOC.LOCALHOST
+ 
+SYSTEM.<AssocName>.<StationName>.INVALIDTRENDCOUNT
+ 
+Variable type - REGISTER.
+ 
+The invalid trend count for the station 
+ <StationName> produced by the historical association <AssocName>.
+ 
+This variable is produced by the station <StationName> and all stations linked to the association or directly to the station.
+ 
+Example: SYSTEM.HASSOCIATION1.HISERVER1.INVALIDTRENDCOUNT
+ 
+
+ 
+Only for historic associations.
+
+
+========================================
+TOPIC: Status_variables_related_to_connection_activity.htm
+========================================
+Variables related to connection activity
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Variables Related to Connection Activity
+ 
+SYSTEM.<NodeName>.ACTIVECXT
+ 
+Variable type � BIT.
+ 
+Where <NodeName> refers to a remote station, set 
+ to 1 when there is an active connection between the remote node and a 
+ node on the local station (client or server), else 0.
+Where <NodeName> refers to a node of the local station, set to 1 
+ when there is an active connection between the local node and any node 
+ on a remote station (client or server), else 0.
+ 
+Produced by the station <StationName> and all the 
+ stations are linked to the node <NodeName>.
+ 
+Example: SYSTEM.PIPPIN_0.ACTIVECTX
+ 
+SYSTEM.<ClientConnectionName>.ACTIVECXT
+ 
+Variable type � BIT.
+ 
+Where <ClientConnectionName> refers to a remote 
+ station, set to 1 when there is an active connection between the remote 
+ node and a server node on the local station, else 0.
+Where <ClientConnectionName> refers to a node of the local station, 
+ set to 1 when there is an active connection between the local node and 
+ at least one server node on a remote station, else 0.
+ 
+Produced by the station <StationName> and all stations 
+ that have a link to the remote client <ClientConnectionName>.
+ 
+Example: SYSTEM.PIPPIN_0C.ACTIVECTX
+ 
+SYSTEM.<ServerConnectionName>.ACTIVECXT
+ 
+Variable type � BIT.
+ 
+Where <ServerConnectionName> refers to a remote 
+ station, set to 1 when there is an active connection between the remote 
+ node and a client node on the local station, else 0.
+Where <ServerConnectionName> refers to a node of the local station, 
+ set to 1 when there is an active connection between the local node and 
+ at least one client node on a remote station, else 0.
+ 
+Produced by the station <StationName> and all stations 
+ that have a link to the remote server <ServerConnectionName>.
+ 
+Example: SYSTEM.PIPPIN_0S.ACTIVECTX
+ 
+SYSTEM.<NodeName>.ACTIVE_NUMBER
+ 
+Variable type - REGISTER.
+ 
+The number of remote nodes with which the local node 
+ <NodeName> has an active connection.
+ 
+Produced only by the station <StationName> containing 
+ the node <NodeName>.
+ 
+Example: SYSTEM.PIPPIN_0.ACTIVE_NUMBER
+ 
+SYSTEM.<ClientConnectionName>.ACTIVE_NUMBER 
+ 
+Variable type - REGISTER.
+ 
+The number of remote server nodes with which the local 
+ node <ClientConnectionName> has an active connection.
+ 
+Produced only by the station <StationName> containing 
+ the node <ClientConnectionName>.
+ 
+Example: SYSTEM.PIPPIN_0C.ACTIVE_NUMBER
+ 
+SYSTEM.<ServerConnectionName>.ACTIVE_NUMBER 
+ 
+Variable type - REGISTER.
+ 
+The number of remote client nodes with which the local 
+ node <ServerConnectionName> has an active connection.
+ 
+Produced only by the station <StationName> containing 
+ the node <ServerConnectionName>.
+ 
+Example: SYSTEM.PIPPIN_0S.ACTIVE_NUMBER
+
+
+========================================
+TOPIC: Status_variables_related_to_nb_of_connections.htm
+========================================
+Variables related to the number of established connections
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Variables Related to the Number of Established Connections
+ 
+SYSTEM.<StationName>.OK_NUMBER
+ 
+Variable type - REGISTER.
+ 
+The total number of remote stations with which the entire 
+ station <StationName> has a connection.
+ 
+Produced only by the station <StationName>.
+ 
+Example: SYSTEM.PIPPIN.OK_NUMBER
+ 
+SYSTEM.<NodeName>.OK_NUMBER
+ 
+Variable type - REGISTER.
+ 
+The number of remote nodes connected to the station <StationName> 
+ using the node <NodeName>.
+ 
+Produced only by the station <StationName> containing 
+ the node <NodeName>.
+ 
+Example: SYSTEM.PIPPIN_0.OK_NUMBER
+ 
+SYSTEM.<StationName>C.OK_NUMBER
+ 
+Variable type - REGISTER.
+ 
+The total number of remote server nodes with which the 
+ local station <StationName> has a connection.
+ 
+Produced only by the station <StationName>.
+ 
+Example: SYSTEM.PIPPINC.OK_NUMBER
+ 
+SYSTEM.<StationName>S.OK_NUMBER 
+ 
+Variable type � REGISTER.
+ 
+The total number of remote client nodes with which the 
+ local station <StationName> has a connection.
+ 
+Produced only by the station <StationName>.
+ 
+Example: SYSTEM.PIPPINS.OK_NUMBER
+ 
+SYSTEM.<ClientConnectionName>.OK_NUMBER
+ 
+Variable type - REGISTER.
+ 
+The number of remote server nodes with which the local 
+ node <ClientConnectionName> has a connection.
+ 
+Produced only by the station <StationName> containing 
+ the node <ClientConnectionName>.
+ 
+Example: SYSTEM.PIPPIN_0C.OK_NUMBER
+ 
+SYSTEM.<ServerConnectionName>.OK_NUMBER
+ 
+Variable type - REGISTER.
+ 
+The number of remote client nodes with which the local 
+ node <ServerConnectionName> has a connection.
+ 
+Produced only by the station <StationName> containing 
+ the node <ServerConnectionName>.
+ 
+Example: SYSTEM.PIPPIN_0S.OK_NUMBER
+
+
+========================================
+TOPIC: Status_variables_used_to_monitor_connections.htm
+========================================
+Variables used to monitor connections (watchdog)
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Variables used to Monitor Connections (Watchdogs)
+ 
+Watchdog messages are produced by client nodes so that 
+ the corresponding server nodes are able to verify their presence.
+ 
+SYSTEM.<ServerConnectionName>.WATCHDOG.COUNT
+ 
+Variable type - REGISTER.
+ 
+Where <ServerConnectionName> refers to a node of 
+ a local station, the variable counts all watchdog messages received by 
+ that connection. Modulus 1000.
+Where <ServerConnectionName> refers to a node of a remote station, 
+ the variable counts the number of watchdog messages sent from the local 
+ station to that node. The value is reset to 0 if the connection is broken.
+ 
+Produced by the station <StationName> and all the 
+ stations which have a connection with the remote node <ServerConnectionName>.
+ 
+Example: SYSTEM.PIPPIN_0S.WATCHDOG.COUNT
+ 
+SYSTEM.<ClientConnectionName>.WATCHDOG.COUNT
+ 
+Variable type � REGISTER
+ 
+Where <ClientConnectionName> refers to a node of 
+ the local station, the variable counts the watchdog messages sent by that 
+ connection. Modulus 1000.
+ 
+Where <ClientConnectionName> refers to a node of 
+ a remote station, the variable counts the number of watchdog messages 
+ received from that node. The value is reset to 0 if the connection is 
+ broken.
+ 
+It is produced by the station <StationName> and 
+ all the stations that have a connection with the remote node <ClientConnectionName>.
+ 
+Example: SYSTEM.PIPPIN_0S.WATCHDOG.COUNT
+
+

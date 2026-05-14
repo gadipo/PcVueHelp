@@ -1,0 +1,3762 @@
+========================================
+TOPIC: opc_alarmstate_property.htm
+========================================
+Using the AlarmState and AlarmStateLabels properties
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the AlarmState and AlarmStateLabels Properties
+ 
+This topic describes how to use the AlarmState and AlarmStateLabel OPC item properties when using PcVue as an OPC server.
+ 
+AlarmState property
+ 
+This property is a combination of all the alarm states generated using binary weighting. To extract the value of a particular state you must AND the value with a mask. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Alarm state
+ Hexadecimal value
+ Comment
+ 
+ 
+
+ Label number
+ 0x000000FF
+ Index in the array of AlarmStateLabels. See below
+ 
+ 
+
+ Enable
+ 0x00000100
+ Alarm enabled or not (100 enabled, 0 disabled)
+ 
+ 
+
+ Active
+ 0x00000200
+ Alarm active or not (200 on, 0 off)
+ 
+ 
+
+ Acknowledge
+ 0x00000400
+ Alarm acknowledged or not (400 Ack, 0 NoAck)
+ 
+ 
+
+ Masked 01
+ 0x00010000
+ Alarm masked by program (level 1)
+ 
+ 
+
+ Masked 02
+ 0x00020000
+ Alarm masked by program (level 2)
+ 
+ 
+
+ Masked 03
+ 0x00040000
+ Alarm masked by program (level 3)
+ 
+ 
+
+ Masked 04
+ 0x00080000
+ Alarm masked by program (level 4)
+ 
+ 
+
+ Masked 05
+ 0x00100000
+ Alarm masked by operator
+ 
+ 
+
+ Masked 06
+ 0x00200000
+ Alarm masked by variable
+ 
+ 
+
+ Masked 07
+ 0x00400000
+ Reserved
+ 
+ 
+
+ Masked 08
+ 0x00800000
+ Alarm masked by expression
+ 
+ 
+
+ Masked 09
+ 0x01000000
+ Reserved
+ 
+ 
+
+ Masked 10
+ 0x02000000
+ Reserved
+ 
+ 
+
+ Masked 11
+ 0x04000000
+ Reserved
+ 
+ 
+
+ Masked 12
+ 0x08000000
+ Reserved
+ 
+ 
+
+ Masked 13
+ 0x10000000
+ Reserved
+ 
+ 
+
+ Masked 14
+ 0x20000000
+ Reserved
+ 
+ 
+
+ Masked 15
+ 0x40000000
+ Reserved
+ 
+ 
+ 
+ 
+AlarmStateLabels property
+ 
+The value of AlarmStateLabels is an array that contains the labels associated with an alarm state. 
+ 
+This is an example of what you may find in this array. The order of the labels is not guaranteed.
+ 
+ 
+ 
+ 
+ 
+
+ 0
+ Alarm off
+ 
+ 
+
+ 1
+ Alarm on - not ack
+ 
+ 
+
+ 2
+ Alarm on - ack
+ 
+ 
+
+ 3
+ 
+ 
+Alarm off - not ack
+ 
+ 
+ 
+
+ 4
+ 
+ 
+Alarm off - ack
+ 
+ 
+ 
+
+ 5
+ Alarm program masked 01
+ 
+ 
+
+ 6
+ Alarm program masked 02
+ 
+ 
+
+ 7
+ Alarm program masked 03
+ 
+ 
+
+ 8
+ Alarm program masked 04
+ 
+ 
+
+ 9
+ Alarm operator masked
+ 
+ 
+
+ 10
+ Alarm variable masked
+ 
+ 
+
+ 11
+ Alarm expression masked
+ 
+ 
+ 
+ 
+The recommended method to get the correct label is as follows.
+ 
+ 
+Enable the alarm (AlarmState AND 0x100 == 0x100)
+ 
+Mask the alarm using 0xFF. The result is an index into this array.
+
+
+========================================
+TOPIC: opc_config.htm
+========================================
+OPC DA server configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OPC DA server configuration
+ 
+Each instance of PcVue running on a computer host can expose an OPC DA server interface. For security reason, you can configure access control policies to define which PcVue host shall have the OPC DA server interface available.
+An OPC DA server access control policy defines if and how the server interacts with OPC clients, including authentication, browsing, logging, and communication handling. These policies ensure secure and efficient data exchange by managing how OPC DA client permissions enforcement, write operations, and error-handling are performed.
+ 
+This topic covers how to configure an OPC DA access control list.
+ 
+
+ 
+By default, the OPC DA server interface is only accessible to PcVue built-in components on all stations, in particular to the HDS for data archiving purpose.
+ 
+If you are using third party OPC clients, add a policy for the list of PcVue servers these OPC clients will connect to. We recommend you to select OPC clients that support OPC security and turn authentication on.
+ 
+ 
+Configuring an access control policy
+ 
+ 
+
+ 
+Open the Application Explorer and expand Communication then Servers nodes.
+ 
+ 
+
+ 
+Select the OPC DA servers and in the right pane, click Add an OPC DA server policy. The Policy creation dialog opens. Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Enter a name and (Optional) a description.
+ 
+ 
+
+ 
+Select the Advanced tab and define the advanced properties.
+ 
+ 
+ 
+Advanced properties
+ 
+ 
+Access control:
+ 
+ 
+Exclusive - If ticked, restricts access to PcVue built-in components, including the HDS.
+ 
+Turn on authentication - If ticked, requires OPC clients to authenticate before interaction. To enable authentication, you must configure one or more user accounts with a Name, Password, and Browsing levels in the User accounts configuration. Each variable have an assigned browsing level, which can be set in the Advanced dialog of the variable's configuration. Refer to How to configure a user for more information.
+ 
+
+ 
+A browsing level can also be assigned to a variable's extended attributes and the simulation properties. The browsing level assigned to a particular extended attribute is global - that is, it affects that attribute for all variables.
+ 
+ 
+With authentication is enabled:
+ 
+ 
+OPC clients can only see variables that match the browsing levels of the logged-in account.
+ 
+Write access is granted only if the account's command permissions match the variable's command level.
+ 
+OPC client actions, including logon/logoff and write operations, can be logged.
+ 
+ 
+Turn off authentication - If ticked, allows OPC clients to interact without authentication.
+ 
+ 
+Allowed services:
+ 
+ 
+Writes - If ticked, allows an OPC client to write values via the PcVue's OPC server.
+ 
+Browsing - If ticked, allows an OPC client to browse PcVue's address space.
+ 
+ 
+ 
+
+ 
+If an OPC client does not log on, it inherits the browsing and command levels from the DEFPROFILE.
+ 
+ 
+
+ 
+Disabling authentication or logging weakens security and increases the risk of unauthorized access. Ensure changes comply with your organization's security policies.
+ 
+ 
+ 
+Log user actions:
+ 
+
+ 
+When using authentication, commands from the OPC client can be logged as if they were commands from a user logged onto PcVue.
+ 
+ 
+ 
+Writes - If ticked, logs all write requests to PcVue from an OPC client.
+ 
+Logon/logoff - If ticked, logs the action of an OPC client logging on or off.
+ 
+ 
+Address space browsing:
+ 
+ 
+Display properties - If ticked, variable's properties (description, Domain, Nature etc.) are exposed in the address space (in addition to the variables themselves).
+ 
+ 
+Interoperability issues:
+ 
+ 
+Ignore client callback errors - If ticked, sets the action to be taken when the OPC server notifies an OPC client that a function call has failed. 
+If unticked, the result code is treated as a communication failure and the OPC connection is reset. The client then has to terminate the current connection and make a new one.
+If ticked, the result code is ignored and the communication continues with the current connection.
+ 
+Purge pending OnDataChange - If ticked, the OPC Server will purge data buffers if the subscribed OPC client failed to consume the data.
+ 
+ 
+Networking:
+ 
+ 
+Servers - Name of the servers list to which the access control policy applies. The OPC DA server will be exposed as defined by the policy on all stations belonging to the selected list. Refer to the topic How to configure station lists to learn more.
+ 
+
+ 
+The default policy applies to the OPC DA server of PcVue stations for which no other access control policy matches.
+ 
+ 
+ 
+ 
+Activate traces
+ 
+The traces in the OPC DA server access control policy are activated once you click Apply after having configured the general and advanced properties.
+ 
+The following are some of the traces you can activate:
+ 
+ 
+Trace 1: General - Logs data related to the overall OPC DA server activity, including client connections, disconnections, and configuration changes.
+ 
+Trace 4: Full details - Provide in-depth details for all currently active logs data.
+ 
+Trace 5: IOPCCommon - Logs data related to basic OPC connection setup, such as locale and setting client�s name.
+ 
+Trace 6: IOPCServer - Logs data on general OPC server operations, including namespace handling and group creation.
+ 
+Trace 7: IOPCServer::GetStatus() - Logs status requests from OPC clients to monitor server health.
+ 
+Trace 8 : IConnectionPointContainer - Logs request from OPC clients and groups to obtain valid connection points, including for IOPCShutdown.
+ 
+Trace 9 : IOPCItemProperties - Logs requests for item properties such as descriptions, data types etc.
+ 
+Trace 10 : IOPCBrowse ServerAddressSpace - Logs browsing operations in the OPC server�s address space.
+ 
+Trace 11: IOPCSecurityPrivate/IOPCSecurityNT - Logs data related to the authentication and security-related operations.
+ 
+Trace 13: IOPCGroupStateMgt - Logs changes in OPC group state, including creation, deletion, and updates.
+ 
+Trace 14 : IOPCSyncIO - Logs synchronous read and write operations between OPC clients and the server.
+ 
+Trace 15: IOPCAsyncIO - Logs asynchronous data access operations relying on IDataObject between OPC clients and the server.
+ 
+Trace 16 : IOPCAsyncIO2 - Logs asynchronous data access operations relying on IConnectionPointContainer and IOPCDataCallback between OPC clients and the server.
+ 
+Trace 17 : IOPCItemMgt - Logs client requests to add or remove items in an OPC group.
+ 
+Trace 18: IConnectionPointContainer - Logs asynchronous data access operations relying on IConnectionPointContainer between OPC clients and the server.
+ 
+Trace 19: IDataObject - Logs requests related to connection and data using the IDataObject interface.
+ 
+Trace 21: IOPCGroupStateMgt2 - Logs additional changes on OPC group state (as per IOPCGroupStateMgt) and OPC group keep-alive related requests.
+ 
+Trace 29: IOPCDataCallback - Logs data change notifications sent from the server to OPC clients.
+ 
+Trace 30: IOPCShutdown - Logs data related to the shutdown events and notifications sent to OPC clients.
+ 
+Trace 31: IAdviseSink - Logs OPC server interfaces notifications sent to the OPC clients.
+ 
+Trace 32: IEnumOPCItemAttributes - Logs enumeration of item attributes requested by OPC clients.
+
+
+========================================
+TOPIC: opc_group_advanced_properties_tab.htm
+========================================
+The OPC group Advanced tab
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The OPC Group Advanced Tab
+ 
+The Advanced tab in the OPC Group properties 
+ box is for tuning the OPC Server connection. Under 
+ normal circumstances, these properties will not need to be changed.
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+The properties marked with * are only available when 
+ using OPC-DA Classic.
+ 
+The properties marked with ** are only available when using OPC-XML.
+ 
+ 
+
+ 
+Many of the properties that are configured here are sent 
+ directly to the OPC server. The resultant behavior will depend on the 
+ OPC server in use.
+ 
+ 
+ 
+ 
+Deadband 
+ 
+ 
+Use deadband 
+ � A dead-band that is applied by the server to any analogue variables 
+ in the group. The variables must change by a value greater than the dead-band 
+ before they are sent to the client. The behavior of the dead-band depends 
+ on how it was implemented in the server. See the documentation supplied 
+ with the server for further information. The default is not ticked.
+ 
+ 
+Deadband 
+ value - The deadband value in percent. The default is 0.
+ 
+ 
+ 
+Timestamp
+ 
+ 
+Use timestamp 
+ provided by the server - The timestamp for each change in value of an 
+ item is supplied by the OPC server. The default is not ticked.
+ 
+*Localization 
+ of timestamp provided by the server - The following properties decide 
+ how the timestamp is generated. The server refers to the PC where the 
+ OPC server is located. The client refers to the PC where PcVue 
+ is located. TimeBias is the difference between GMT0 and the time zone 
+ selected in the Windows Date/Time Properties dialog.
+ 
+ 
+*UTC (or 
+ GMT) - Timestamp = (server local time - server TimeBias) + client TimeBias. 
+ This is the default.
+ 
+*Local (Current 
+ time zone) - Timestamp = server local time - server TimeBias.
+ 
+*Customized 
+ - Timestamp = (Server Local Time - Server Time Bias) - TimeBias value.
+ 
+ 
+TimeBias 
+ value* � A time offset in minutes that may be applied to the timestamp 
+ of data from an OPC server on another PC (when using DCOM).
+ 
+Adjust with DST if required
+ 
+ 
+ 
+ 
+Connection parameters
+ 
+ 
+Without flow 
+ regulation - If ticked allows a disconnected server to record value changes 
+ locally and then send them in a block when communication is re-established. 
+ The default is not ticked.
+ 
+*Size of exchange 
+ block � The maximum number of items that can be contained in a message 
+ between the server and client. This is sometimes limited by the OPC server. 
+ See the documentation supplied with the server for further information.
+ 
+ 
+*Data update parameters
+ 
+ 
+Update data 
+ by notification - The server sends information to the client when it changes. 
+ This is normal operation and is the default selection.
+ 
+*Update data 
+ by cyclic read - The client periodically polls the server for server for 
+ information. This is only used for old servers or servers that do not 
+ work correctly.
+ 
+*Update data 
+ by user program - Normal update of data is stopped and update only occurs 
+ when requested by a SCADA Basic program using the OPC instruction.
+ 
+ 
+*Item advising 
+ 
+ 
+*Inactive group 
+ while connecting items � If ticked, the group ceases to be refreshed whilst 
+ new items are added. This can be advantageous where the data is being 
+ read in frames from the filed device and the server must re-optimize the 
+ frame configuration each time a new item is added. The default is ticked.
+ 
+ 
+ 
+*Synchronize database 
+ � These properties define how data is sent from the server to the client 
+ when the connection is first established. See the documentation supplied 
+ with the server for which options are supported.
+ 
+ 
+*No synchronization 
+ � This should be selected if the server automatically refreshes all items 
+ after connection.
+*Preserve saved values if quality is bad - If the variable is saved, preserve the saved value on start-up if the OPC item quality is bad.
+ 
+*Synchronize 
+ by cache refresh - The client database is refreshed from the OPC server 
+ cache. All the items are refreshed even those that already have known 
+ values.
+ 
+*Synchronize 
+ by device refresh - The client database is refreshed after the field devices 
+ have been polled. All the items are refreshed even those that already 
+ have known values.
+ 
+ 
+ 
+*Synchronize 
+ by cache read � The client database is refreshed from the OPC server cache. 
+ Only items with unknown values are read. This is the default selection.
+ 
+ 
+ 
+*Synchronize 
+ by device read � The client database is refreshed after the field devices 
+ have been polled. Only items with unknown values are read. 
+ 
+ 
+ 
+*Read
+ 
+ 
+*Read mode
+ 
+ 
+*Automatic 
+ detection � The client attempts to use Asynchronous mode. If this is not 
+ supported by the server then it switches to Synchronous mode. This is 
+ the default selection.
+ 
+ 
+ 
+*Synchronous 
+ mode � The client makes a request for data and then waits for the answer 
+ from the server. This mode should be avoided if possible as whilst the 
+ client is waiting no other activity takes place.
+ 
+ 
+ 
+*Asynchronous 
+ mode � The client makes a request for data and the server informs 
+ the client when the data is Available.
+ 
+ 
+ 
+Write 
+ 
+ 
+*Write mode
+ 
+ 
+*Automatic 
+ detection � See above.
+ 
+ 
+ 
+*Synchronous 
+ mode � See above.
+ 
+ 
+ 
+*Asynchronous 
+ mode � See above.
+ 
+ 
+Synchronize values 
+ after writing � Used to synchronize the client and server after a write 
+ has been performed. 
+ 
+ 
+No synchronization 
+ � No action taken. This is the default selection.
+ 
+ 
+ 
+Synchronize 
+ by cache read � The value in the client is read back from the server cache.
+ 
+ 
+ 
+Synchronize 
+ by device read � The value in the client is read back from the field device. 
+ 
+ 
+Update the variable immediately with the written value - The variable value is updated immediately after the write rather than waiting for it to be read from the OPC server.
+ 
+*Asynchronous write timeout
+*Warning timeout - If the server has not confirmed the write after this period a warning message is generated.
+*Error timeout - If the server has not confirmed the write after this period it is treated as an error.
+ 
+ 
+Data interpretation
+ 
+ 
+Value
+Byte swapping 
+ for word array as a string - Used for servers that send strings as a word 
+ array. If selected it swaps the bytes in each word so that the string 
+ arrives in the correct sequence. The default is ticked.
+Data type conversion
+Done by the SCADA software - Any data type conversion necessary to accommodate the real time value in variables is done by PcVue.
+Done by the OPC server - Any data type conversion necessary to accommodate the real time value in variables is done by the OPC server.
+ 
+ 
+Quality
+Invalidate variables - The action to take with the variables when there is a failure of communication to the OPC server.
+Never - The variables are never made invalid. This can be used when there is intermittent communication with the server.
+Immediately - The variables are made invalid immediately on a communication failure. This is the default value.
+After a delay - The variables are made invalid after the specified delay.
+ 
+Interoperability issues
+*Group name imposed by the server - Use this property to designate the corresponding OPC ;group if the OPC server imposes a non-compliant group name (imposed name too long or comprising characters that are not allowed). 
+**Wait time
+Use wait time - Tick to activate the use of the OPC parameter Wait time. This is required by some OPC servers even if the hold time parameter is not used.
+ 
+Servers - A 
+ drop down list box used in multi-station applications to start the OPC 
+ group only on a specific station or list of stations. For standalone applications, 
+ the list box will be empty.
+
+
+========================================
+TOPIC: opc_group_traces_activation_tab.htm
+========================================
+The OPC Group Traces Activation tab
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The OPC Group Traces Activation tab
+ 
+The Traces tab in the OPC Group properties 
+ box allows the communication between the OPC server and PcVue to 
+ be monitored (traced) in the event of a problem. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+The result of any traces that are enabled is displayed 
+ in the event viewer. You should only change the selection 
+ of properties in this tab if advised to do so by your support agency.
+
+
+========================================
+TOPIC: opc_how_to_configure_a_connection_to_a_server.htm
+========================================
+How to configure a connection to an OPC-DA server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure a Connection to an OPC-DA Server
+ 
+An OPC Server object in PcVue configuration, represents and provides access to an OPC-DA classic server either located on the local PC or on another PC connected by a local area network. The configuration is accessed from the Application Explorer: Project.Communication.Data acquisition.OPC.
+ 
+Configuring a connection to an OPC server on the same 
+ PC
+ 
+ 
+Select the OPC folder in the Application Explorer configuration tree and, from the task list, select Add an OPC server. The OPC Server properties dialog opens. Show picture
+
+ 
+Enter an alias for the server. This is the name by which the server will be known to the project. You can accept the suggested default or enter one of your own.
+ 
+Enter a description of the server. The description appears in the contents pane of the Application Explorer and can be useful to identify the server later. The description is optional.
+ 
+Select the server 
+ using the Server 
+ ProgID drop down list box. The list displays all registered servers 
+ on the host PC. Show picture
+
+ 
+Tick the Activate at start-up property if the connection is to be automatically established at startup. You can also activate the connection 
+ using a SCADA Basic program.
+ 
+Click OK 
+ to confirm the configuration.
+ 
+ 
+If the Activate at start property was selected and the OPC servers' configuration 
+ allows it, the OPC server will now start. 
+ 
+Configuring a connection to an OPC server on another 
+ PC over a local area network
+ 
+ 
+Repeat steps 1 to 3 above. The OPC Server properties dialog opens.
+ 
+Use the browse button 
+ adjacent to the Network 
+ node field to select the name of the computer on which the OPC 
+ server is located. Show picture
+
+ 
+Select the server 
+ using the Server 
+ ProgID drop down list box. The list displays all registered servers 
+ on the host PC. Depending on the network architecture, it may take several 
+ seconds for the list of registered servers to appear.
+ 
+Tick the Start 
+ at launch property if the connection is to be established at startup. You can also activate an OPC server connection 
+ using a SCADA Basic program.
+ 
+Click OK 
+ to confirm the configuration.
+ 
+ 
+If the Start 
+ at launch property was selected and the OPC servers' configuration 
+ allows it, the OPC server will now start. 
+ 
+
+ 
+With some network configurations, the Network Browser dialog 
+ may not show the available computers. You must then type the name directly 
+ in the Network node field.
+
+
+========================================
+TOPIC: opc_how_to_configure_a_connection_to_a_XML_server.htm
+========================================
+How to configure a connection to an OPC XML-DA server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure a Connection to an OPC XML-DA Server
+ 
+An OPC XML-DA Server object in PcVue configuration represents and provides access to an OPC server either located on the local PC or on another PC connected by a local area network. The configuration is accessed from the Application Explorer - Project.Communication.Data acquisition.OPC.
+ 
+Configuring a connection to an OPC XML-DA server
+ 
+ 
+Select the OPC folder in the Application Explorer configuration tree (Project.Communication.Data acquisition.OPC) and, from the task list, select Add an OPC XML-DA server. The OPC Server properties dialog opens.Show picture
+
+ 
+Enter a server alias 
+ name. This is the name by which the server will be known to the project.
+ 
+Enter the server 
+ Url.
+ 
+Tick the Activate at start-up property if the connection is to be established at startup. You can also activate an OPC server connection 
+ using a SCADA Basic program.
+ 
+Click OK 
+ to confirm the configuration.
+ 
+ 
+If the Activate at start-up property was selected and the OPC servers' configuration 
+ allows it, a connection to the OPC server will now be established.
+
+
+========================================
+TOPIC: opc_how_to_configure_a_group.htm
+========================================
+How to configure an OPC group
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure an OPC Group
+ 
+Once you have configured an OPC server you must configure 
+ one or more groups before you can link the OPC server to the variables. An OPC group allows the client to specify options about how 
+ the real time data is to be exchanged with the server. In many cases, you 
+ may only need to create one group.
+ 
+ 
+Open the Application Explorer. Expand the configuration 
+ tree and select a previously configured OPC server. 
+ 
+From the task pane, 
+ select the task Add 
+ an OPC group. The OPC Group properties dialog is displayed. Show picture
+
+ 
+Enter a meaningful 
+ name for the group. The group name is limited to 10 alphanumeric characters. 
+ The group name is used for reference when linking a variable 
+ to an item in that group.
+ 
+Enter an update rate 
+ for the group. Any variables linked to an item in the group will be refreshed 
+ at this rate.
+ 
+Click OK 
+ to confirm the configuration.
+ 
+ 
+
+ 
+When specifying the update rate check the documentation 
+ supplied with the OPC server. Specifying a rate that is not achievable 
+ will only add unnecessary load to the system.
+
+
+========================================
+TOPIC: opc_in_the_ae.htm
+========================================
+Managing OPC in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing OPC in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks applicable to OPC
+ 
+When the OPC folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add an OPC server
+ Add a connection to an OPC-DA classic server.
+ 
+ 
+
+ 
+ 
+ 
+ Add an OPC XML-DA server
+ Add a connection to an OPC XML-DA server.
+ 
+ 
+ 
+ 
+When an OPC server is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add an OPC group
+ Add a group to an OPC server.
+ 
+ 
+
+ 
+ 
+ 
+ Start OPC server
+ Manually start the connection to an OPC server.
+ 
+ 
+
+ 
+ 
+ 
+ Stop OPC server
+ Manually stop the connection to an OPC server.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the OPC server connection.
+ 
+ 
+
+ 
+ 
+ 
+ Mapping
+ Open the OPC Mapping dialog used to link variables to OPC items.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for an OPC server connection.
+ 
+ 
+ 
+ 
+When an OPC group is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start group
+ Manually start the group.
+ 
+ 
+
+ 
+ 
+ 
+ Stop group
+ Manually stop the group.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the group.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the group.
+ 
+ 
+ 
+ 
+Rules and behavior of cut, copy and paste
+ 
+The following table describes the rules and behavior, and in particular any restrictions, when using cut or copy and paste on configuration objects in the OPC folder.
+ 
+ 
+ 
+ 
+ 
+
+ OPC object
+ Behavior
+ 
+ 
+
+ OPC server
+ The pasted OPC Server must be given a unique name.
+Any subordinate OPC Groups are duplicated with the original name.
+The mapping of any variables is not duplicated.
+
+ 
+ 
+
+ OPC group
+ The pasted OPC Group must be given a unique name within the context of the OPC Server.
+
+
+========================================
+TOPIC: opc_mapping_dialog.htm
+========================================
+Using the OPC mapping dialog
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the OPC Mapping Dialog
+ 
+The OPC Mapping dialog is used to map (link) OPC items to PcVue variables. It can be opened from the Application Explorer either when an OPC server is selected by using the Mapping task, or directly from the Source tab of a variable's properties dialog when an OPC source has been selected.
+ 
+The left pane contains a tree display of the configured OPC servers and any folders they contain. The right pane contains a table of the OPC items for the selected folder, together with any of variables to which they are linked and the corresponding OPC group. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+Right clicking anywhere in the right-hand pane displays a context menu with the following commands.
+ 
+ 
+Select columns - Allows selection of which columns are displayed in the dialog. 
+Name - The name of the variable within the OPC server. This column is mandatory. 
+Variable - The name of the variable to which the OPC variable is mapped. 
+Group - The OPC group that the variable is a member of. 
+ItemID - The identity of the OPC item. 
+Original description - The description of the OPC item (if any) as configured in the OPC server. 
+Detail - Detailed information about the OPC item including its type, access and range.
+ 
+Variable selector - Opens the Variable Selector dialog. 
+ 
+Create variable - See below.
+ 
+Default OPC group - Sets the OPC group that is used as default when mapping an OPC item to a variable. Only displayed if more than one OPC group has been configured.
+ 
+Set OPC group - Changes the OPC group for the selected variable. Only displayed if more than one OPC group has been configured.
+ 
+Unmap item - Un-maps (removes the link) between the selected variables and the corresponding OPC item. 
+ 
+ 
+How to map OPC items and variables when opening the OPC mapping dialog from the OPC server configuration
+ 
+ 
+Right-click in the right hand pane of the OPC Mapping dialog and, from the pop-up menu, select the Variable Selector command. The Variable Selector dialog opens. Drag it to a convenient location so you can see both it and the OPC Mapping dialog. Show picture
+
+ 
+Click in the OPC Mapping dialog and select the OPC item to be mapped. 
+ 
+Click in the Variable Selector dialog and select the variable to be mapped. Click the Apply button and the link between the OPC item and variable is made using the default OPC group. 
+ 
+Repeat steps 2 and 3 for all the variables to be mapped. 
+ 
+ 
+
+ 
+You can also open the Variable Selector by double clicking on an OPC item. For more information on the operation of the Variable Selector, see the book The Variable Selector
+ 
+ 
+How to map an OPC item to a variable when opening the mapping dialog from a variable's Source tab
+ 
+ 
+Open the variable's properties dialog and select the Source tab.
+ 
+Select the OPC server using the Source drop down list box.
+ 
+Select the OPC group using the Group name drop down list box.
+ 
+Open the OPC Mapping dialog by clicking the ellipsis button adjacent to the Item Id field. 
+ 
+Expand the OPC configuration tree in the left pane so that the OPC item to which the variable is to be mapped is displayed in the table in the right pane.
+ 
+Double click on the OPC item. The OPC Mapping dialog closes and the chosen OPC item appears in the variable's Item Id.
+ 
+Click OK to confirm the configuration and close the variable's properties dialog.
+ 
+ 
+How to change the OPC group for a mapped variable
+ 
+ 
+Open the OPC Mapping dialog and select the variable to be changed.
+ 
+Right-click on the variables and, from the context menu, select the command Set OPC group and then the name of the new OPC group. 
+ 
+A dialog will appear asking for confirmation. Click OK to confirm the operation. 
+ 
+ 
+How to un-map a variable
+ 
+ 
+Open the OPC Mapping dialog and select the variable to be un-mapped. 
+ 
+Right-click on the selected variables and, from the context menu, select the command Unmap items.
+ 
+A dialog will appear asking for confirmation. Click OK to confirm the operation. 
+ 
+ 
+How to automatically create a variable
+ 
+You can automatically create a variable and simultaneously link it to an OPC item using two methods.
+ 
+ 
+Click in the Variable field for any un-mapped item. The field becomes a text box into which you can directly type a new variable name. A variable with default properties and the correct type to match the item is automatically created and linked to the item.
+ 
+Right-click on any un-mapped OPC item and, from the context menu, select Create variable. A variable with default properties and the correct type to match the item is automatically created and linked to the item. The variable name is constructed using the following syntax. <Server alias>.<OPC item>. Show picture
+
+ 
+ 
+Mapping dissimilar data types
+ 
+When mapping OPC items to variables you normally map like to like, so you map an analog item to a register, a boolean item to a bit or a string item to a text. However, it is possible to map the following dissimilar data types.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Data type
+ &#160;
+ 
+ 
+
+ OPC server
+ &#160;PcVue
+ Behavior
+ 
+ 
+
+ Analog
+ Bit
+ The bit is set to 0 if the analog value is 0, else it is set to 1.
+ 
+ 
+
+ String
+ Register
+ &#160;PcVue will attempt to convert the string to a number. For example, if the string is "10" the register will be 10. If PcVue is unable to convert the string the register is set to invalid with the status NS FMT.
+ 
+ 
+ 
+ 
+If you map any other combinations, the value of the variable will be invalid with a status of NS FMT.
+ 
+
+ 
+You can use an expression for more specialized mapping but it must be manually entered in the variable tree's configuration file. See the book on the Variables Tree for more information.
+
+
+========================================
+TOPIC: opc_overview.htm
+========================================
+Overview of OPC
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of OPC
+ 
+This sub-book describes the use of PcVue as an OPC-DA client, and how to configure the OPC servers it will connect to.
+ 
+OPC is an acronym for Open Platform Communications (formerly OLE for Process Control).
+ 
+OPC Classic is a communication standard based on OLE / COM technology.
+ 
+The OPC concept is based on client/server architecture. PcVue is normally used as an OPC client although it may also 
+ be used as an OPC server. It 
+ can be simultaneously connected to several OPC servers and/or clients 
+ either on the local computer or on remote computer (using DCOM � Distributed 
+ COM).
+ 
+Many manufacturers of industrial controllers now supply 
+ an OPC server with their equipment. The OPC server communicates directly 
+ with the equipment using the manufacturer�s proprietary protocol. PcVue communicates in turn with the server using OPC.
+ 
+After connecting to an OPC server, the OPC client can define 
+ groups of data in the server. A group is to allow the client to organize 
+ the data it requires. In the case of PcVue, it is used to allocate 
+ a rate at which the data will be requested from the field device.
+ 
+
+ 
+This book provides information on the data acquisition drivers for OPC Classic and OPC Xml.
+There is another book on the OPC UA driver if this is what you are looking for.
+ 
+ 
+OPC XML-DA
+ 
+OPC XML is a technology 
+ that makes plant floor data available using SOAP/XML. OPC 
+ XML-DA allows the client and server to communicate using HTTP over an 
+ intranet or internet connection.
+ 
+ 
+Configuring Windows when using DCOM
+ 
+If you are using a remote OPC server (DCOM), it is likely 
+ that you will have to make some configuration changes to Windows before 
+ communication can be established. As the callback mechanism used by OPC 
+ essentially turns the OPC client into a DCOM server and the OPC server 
+ into a DCOM client, the configuration changes must be made on all computers 
+ that contain an OPC server or OPC client.
+ 
+Configuring OPC
+ 
+&#160;PcVue has both OPC client and server capability. To use PcVue as an OPC client you must configure a connection to an OPC server using the tasks available in the Application Explorer.
+
+
+========================================
+TOPIC: opc_overview (2).htm
+========================================
+OPC DA servers overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OPC DA servers overview
+ 
+As an OPC server, PcVue exposes the real-time value and other properties of I/O and internal variables (scope Shared and Local station) to OPC clients. It is registered as a COM server with the Id SV.OPCDAServer.1
+ 
+The following picture shows the the Matrikon OPC Explorer connected to OPC Server. Show picture
+ 
+
+ 
+ 
+ 
+OPC Server options
+ 
+There are several configuration options that affect the operation of PcVue's OPC server. See the topic OPC DA server configuration.
+ 
+Available properties of variables
+ 
+In addition to the real-time value, PcVue exposes the following item properties for each of its variables. Those properties marked as R are read only, whilst those marked as R/W are read and write.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ Text
+ Bit
+ Alm
+ Reg
+ R/W
+ Comment
+ 
+ 
+ 
+ 
+
+ AlarmLevel
+ &#160;
+ &#160;
+ Yes
+ &#160;
+ &#160;
+ &#160;
+ 
+ 
+
+ AlarmState
+ &#160;
+ &#160;
+ Yes
+ &#160;
+ &#160;
+ Binary weighted values - use in conjunction with a mask
+ 
+ 
+
+ AlarmStateLabels
+ &#160;
+ &#160;
+ Yes
+ &#160;
+ &#160;
+ Binary weighted values - use in conjunction with a mask
+ 
+ 
+
+ BinAttr
+ Yes
+ Yes
+ Yes
+ Yes
+ R/W
+ Binary attribute
+ 
+ 
+
+ CloseLabel
+ &#160;
+ Yes
+ Yes
+ &#160;
+ R
+ From the Associated Label
+ 
+ 
+
+ Description
+ Yes
+ Yes
+ Yes
+ Yes
+ R
+ &#160;
+ 
+ 
+
+ Domain
+ Yes
+ Yes
+ Yes
+ Yes
+ R
+ &#160;
+ 
+ 
+
+ ForceOffLabel
+ &#160;
+ Yes
+ &#160;
+ &#160;
+ R
+ From the Associated Label
+ 
+ 
+
+ ForceOnLabel
+ &#160;
+ Yes
+ &#160;
+ &#160;
+ R
+ From the Associated Label
+ 
+ 
+
+ Format
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R
+ &#160;
+ 
+ 
+
+ HiControlLimit
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R
+ Only if register has the Control property set
+ 
+ 
+
+ HiRange
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R
+ &#160;
+ 
+ 
+
+ HiRangeLimit
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R
+ Only if register has scaling enabled
+ 
+ 
+
+ HiValueLimit
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R
+ &#160;
+ 
+ 
+
+ InvalidLabel
+ Yes
+ Yes
+ Yes
+ Yes
+ R
+ Only if register has the Control property set
+ 
+ 
+
+ LOControlLimit
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R
+ &#160;
+ 
+ 
+
+ LoRange
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R
+ &#160;
+ 
+ 
+
+ LoRangeLimit
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R
+ Only if register has scaling enabled
+ 
+ 
+
+ LoValueLimit
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R
+ &#160;
+ 
+ 
+
+ Nature
+ Yes
+ Yes
+ Yes
+ Yes
+ R
+ &#160;
+ 
+ 
+
+ OpenLabel
+ &#160;
+ Yes
+ Yes
+ &#160;
+ R
+ From the Associated Label
+ 
+ 
+
+ SecurityLevel
+ Yes
+ Yes
+ Yes
+ Yes
+ R
+ &#160;
+ 
+ 
+
+ Simulated
+ Yes
+ Yes
+ Yes
+ Yes
+ R/W
+ &#160;
+ 
+ 
+
+ TextAttr03 - 16
+ Yes
+ Yes
+ Yes
+ Yes
+ R/W
+ Text attributes 3 to 16
+ 
+ 
+
+ ThresholdHiValue
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R/W
+ *
+ 
+ 
+
+ ThresholdHiHiValue
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R/W
+ *
+ 
+ 
+
+ ThresholdHiHiHiValue
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R/W
+ *
+ 
+ 
+
+ ThresholdHiHiHiHiValue
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R/W
+ *
+ 
+ 
+
+ ThresholdLoValue
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R/W
+ *
+ 
+ 
+
+ ThresholdLoLoValue
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R/W
+ *
+ 
+ 
+
+ ThresholdLoLoLoValue
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R/W
+ *
+ 
+ 
+
+ ThresholdLoLoLoLoValue
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R/W
+ *
+ 
+ 
+
+ Units
+ &#160;
+ &#160;
+ &#160;
+ Yes
+ R
+ &#160;
+ 
+ 
+ 
+ 
+* Register threshold levels. The properties that are available for each variable will depend on the configuration of its threshold system.
+ 
+
+ 
+Permission to write the value of item properties is dependent on other configuration settings. See the Settings topic in the Variables help book.
+ 
+ 
+Changing the OPC server permissions
+ 
+If you are using PcVue as a remote OPC server, you must change its permissions as you would with any other OPC server (Component Services\Computers\My Computer\DCOM Config). It appears in the DCOM configuration as SV Application. Show picture
+ 
+
+ 
+ 
+ 
+For further details, see the Help book on Configuring Windows when Using a Remote OPC Server.
+
+
+========================================
+TOPIC: opc_server_advanced_properties_tab.htm
+========================================
+The OPC Server Advanced tab
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The OPC Server Advanced Tab
+ 
+The Advanced tab in the OPC Server properties 
+ box is for tuning the OPC Server connection. 
+ 
+
+ 
+With the majority of OPC servers, the default settings 
+ provide the best connection. Before changing any of the properties, check 
+ that the option is supported by the server.
+ 
+ 
+
+ 
+The properties prefixed with * are only available when 
+ using OPC-DA Classic.
+ 
+The properties prefixed with ** are only available when 
+ using OPC-XML.
+ 
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+*Server type
+ 
+ 
+*Automatic detection 
+ - The driver will attempt to detect if the OPC server is 1.0a or 2.0 
+ compliant and make the connection accordingly. This is the default setting.
+ 
+*OPC 1.0A compliant 
+ server - Force the driver to use OPC 1.0A for connection to the server.
+ 
+*OPC 2.0 compliant 
+ server - Force 
+ the driver to use OPC 2.0 for connection to the server.
+ 
+ 
+*Browse server address 
+ space
+ 
+ 
+*Item properties browsing
+*No browsing - No browsing of item properties.
+*Browse standard properties - The driver attempts to get the status of read/write access and the data type of an OPC itemID by using the IOPCItemMgt::ValidateItems method.
+*Browse additional properties - The driver attempts to get the read/write access, the data type, and the description of an OPC itemID by using the IOPCItemProperties interface or IOPCBrowse interface.
+
+ 
+*Default filter 
+ criteria. A string used by the client when browsing the address space 
+ in the server with no filter. Information on which of the options is required 
+ will normally be found in the server documentation.
+ 
+ 
+*Null filter 
+ � A filter string of "" is used. This is the default setting.
+ 
+ 
+ 
+*'*' filter 
+ � A filter string of "*" is used.
+ 
+ 
+ 
+Connection/Reconnection 
+ 
+ 
+ 
+Check server 
+ status period � The period at which PcVue checks 
+ the status of the OPC server. The status is reported in system variables 
+ in the database. See the topic OPC Status Variables in the Database book 
+ for further information. Range 500 to 60 000 ms. The default is 10 000 ms.
+ 
+Try to reconnect 
+ if connection fails � If ticked, PcVue will periodically try to 
+ re-establish a failed connection with the OPC server. 
+ 
+ 
+Reconnection 
+ period � The period at which PcVue will attempt 
+ to re-establish a failed connection. Range 1 000 to 60 000 ms. The default 
+ is 60 000 ms.
+ 
+*Use the advanced reconnection strategy - Used to clean up resources upon reconnection to a server. This is not compliant with the OPC foundation standard, which is why it is an option. The OPC foundation standard is that the OPC server should correctly manage disconnection but this does not always happen.
+ 
+ 
+*Waiting period 
+ before group creation - The wait period after establishing 
+ a connection and before trying to create groups 
+ in the OPC server. The default is 0 ms.
+ 
+Frozen context detection - The status of each OPC server is monitored by a program that periodically checks the OPC server's response. If the server does not respond, it is said to have a frozen context. 
+Level 1 time limit - If the OPC server does not respond to requests for this period or greater a warning message is displayed in the Event Viewer and the OPC system variable <SYSTEM.OPC.ServerAlias>.ERROR is set to 10.
+Level 2 time limit - If the OPC server does not respond to requests for this period or greater a warning message is displayed in the Event Viewer and the OPC system variable <SYSTEM.OPC.ServerAlias>.ERROR is set to 11.
+ 
+ 
+Interoperability issues
+**Browsing
+**Use null string instead of empty string - Activate this property if the OPC server only accepts a null string where the OPC standard specifies the use of an empty string in browsing requests. 
+ 
+Data interpretation - Configure how PcVue interprets value with uncertain or bad quality. See note below.
+Use new values even when the quality is bad - Use new values from the OPC server even if the quality flag is set to bad.
+Quality - Configure how PcVue interprets the uncertain quality flag from the OPC server. 
+As good quality - Uncertain quality is treated as good quality.
+As bad quality - Uncertain quality is treated as bad quality.
+ 
+**Http Basic Authentication - Tick to activate the use of Http Basic Authentication.
+**Username - The user name to send to the OPC server. Max length is 255 characters. The Username cannot include the double-quote character (").
+**Password - The password to send to the OPC server. Max length is 255 characters. The Password cannot include the double-quote character (").
+ 
+Servers - A 
+ drop down list box used in multi-station applications to start the OPC 
+ server only on a specific station or list of stations. For standalone 
+ applications, the list box will be empty.
+ 
+ 
+About OPC quality
+ 
+An OPC server provides a minimum of three properties for each of its variables, Value, Quality and Timestamp. The Quality provides information about the status of the value and is a 16-bit word. The higher 8-bits are vendor specific and the lower 8-bits follow a standard format, QQSSSSLL, where QQ provides the most basic quality information and SSSS is the sub-status.
+ 
+ 
+00SSSSLL - The value is bad for the reason indicated by the sub-status.
+ 
+01SSSSLL - The value is uncertain for reasons indicated by the sub-status.
+ 
+10SSSSLL - Not used.
+ 
+11SSSSLL - The value is good.
+
+
+========================================
+TOPIC: opc_server_traces_activation_tab.htm
+========================================
+The OPC Server Traces tab
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Traces Tab
+ 
+The Traces tab in the OPC Server properties 
+ box allows the communication between the OPC server and PcVue to 
+ be monitored (traced) in the event of a problem. 
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+The result of any traces that are enabled is displayed 
+ in the event viewer. You should only change the selection 
+ of properties in this tab if advised to do so by your support agency.
+ 
+&#160;
+
+
+========================================
+TOPIC: opc_settings.htm
+========================================
+OPC settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OPC settings
+ 
+The OPC Settings are accessed from the Application Explorer by selecting <Project>.Communication.Data acquisition.OPC and choosing the Settings command from the task list. Show picture
+
+ 
+ 
+Variable status
+Consider bad quality as - How PcVue treats OPC items with any of the bad quality flags set.
+Unavailable (NS) - The quality of a linked variable is set to NS. 
+Non accessible (NS COM) - The quality of a linked variable is set to NS COM.
+ 
+Invalidate variables - Defines if variable status should be set to invalid upon connection failure.
+Never - The variables are never made invalid. This can be used when there is intermittent communication with the server.
+Immediately - The variables are made invalid immediately on a communication failure. This is the default value.
+After a delay - The variables are made invalid after the specified delay.
+ 
+Monitoring
+Use the local timestamp upon device reconnection - Use PcVue�s timestamp for the first value received after a device is re-connected.
+
+
+========================================
+TOPIC: opc_using_a_remote_OPC_server.htm
+========================================
+Configuring Windows when using a remote OPC server (DCOM)
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring Windows when using a remote OPC server (DCOM)
+ 
+If you are using a remote OPC server (DCOM), it is likely 
+ that you will have to make some configuration changes to Windows before 
+ communication can be established. As the callback mechanism used by OPC 
+ essentially turns the OPC client into a DCOM server and the OPC server 
+ into a DCOM client, the configuration changes must be made on all computers 
+ that contain an OPC server or OPC client.
+ 
+
+ 
+The information contained in this book is only applicable 
+ to a Workgroup based network. Information about using DCOM on a Domain 
+ based network may be found on the OPC Foundation's website.
+
+
+========================================
+TOPIC: opcua_configure_network_server.htm
+========================================
+How to configure an OPC UA network and server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to configure an OPC UA network and server
+ 
+OPC UA servers can be configured in PcVue via the Application Explorer. The configuration starts with creating an OPC UA network and adding a server to the network.
+ 
+Adding an OPC UA network
+ 
+ 
+
+ 
+Go to Configure.Application Explorer and expand Communication then Data acquisition nodes.
+ 
+ 
+
+ 
+Expand the OPC UA node then click Networks. Once added, your OPC UA network appears in the right pane.
+ 
+ 
+
+ 
+Click on the Add a network button on the toolbar. The OPC UA network creation dialog appears. Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Enter a name for your network and a description (optional).
+ 
+ 
+
+ 
+(Optional) Check Activate at start-up if you wish the network to be activated upon launching PcVue&#160;.
+ 
+ 
+
+ 
+(Optional) Select the Advanced tab, here you can add a server list and a security certificate. See below for more information about network advanced properties.
+ 
+ 
+
+ 
+(Optional) In the Traces tab, you can activate the trace messages you wish PcVue to generate when performing a diagnostic. The trace messages are logged in PcVue Trace files and displayed in Event Viewer dialog (F7).
+ 
+ 
+
+ 
+Click Ok to save the configured network and close the window.
+ 
+ 
+ 
+
+ 
+The use of a certificate is highly recommended as it is a base to ensure communication security.
+ 
+ 
+
+ 
+You can start, stop, remove, edit, or duplicate the networks you added using the toolbar on top or the task pane on the left.
+ 
+ 
+
+ 
+You can check network state via system variables in the System.OPCUA branch. Refer to the topic OPC UA client status Variables for more information.
+ 
+ 
+OPC UA network advanced properties
+ 
+ 
+ 
+ 
+ 
+
+ Properties
+ Description
+ 
+ 
+
+ Networking
+ 
+ 
+
+ Servers
+ Allows to select the name of the servers list when configuring a multi-station application. The network will only be activated on those stations named in that list. Refer to the topic How to configure station lists to learn more.
+ 
+ 
+
+ Secure connection
+ 
+ 
+
+ Certificate
+ Allows to select the security certificate that PcVue (as an OPC UA client) will transmit to OPC UA servers associated to the selected network. Refer to the topic How to create a security certificate to learn more.
+ 
+ 
+ 
+ 
+
+ 
+Windows store certificates are not supported by OPC UA.
+ 
+ 
+Adding an OPC UA server to a network
+ 
+ 
+
+ 
+Double-click on the OPC UA network created, then click on the Add an OPC UA server button on the toolbar. The OPC UA server creation dialog appears. Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Enter a name for your server and a description (optional).
+ 
+ 
+
+ 
+Enter a Server URI which is generally composed of the OPC UA server host name and server port number.
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+opc.tcp://HostName:Port_number/
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+From the drop-down list, select the security policy required to connect to the server. Once you click OK or Apply buttons, a pop-up appears prompting you trust the server certificate by clicking Yes. 
+ 
+
+ 
+The security policy you select shall follow recommendations defined in your company security policy. Connection will fail if the policy you select is not supported by the OPC UA server.
+ 
+ 
+ 
+
+ 
+(Optional) Check Activate at start-up if you wish the server to be activated upon startup of the network.
+ 
+ 
+
+ 
+(Optional) Select the Advanced tab, here you can configure session timeouts, variable synchronization and more. See below for more information about server advanced properties.
+ 
+ 
+
+ 
+(Optional) In the Traces tab, you can activate the trace messages you wish PcVue to generate when performing a diagnostic. The trace messages are logged in PcVue Trace files and displayed in Event Viewer dialog (F7).
+ 
+ 
+
+ 
+Click Ok to save the configured server and close the window.
+ 
+ 
+
+ 
+Select the OPC UA server created, then use either the buttons on the toolbar or on the task pane and click Activate server then Start OPC UA Server. 
+ 
+
+ 
+You can also activate all servers created on the same network by starting the network.
+ 
+You can start, stop, activate, remove, edit, or duplicate the servers you added using the toolbar on top or the task pane on the left.
+ 
+ 
+
+ 
+You can check server state via system variables in the System.OPCUA branch. Refer to the topic OPC UA client status Variables for more information.
+ 
+ 
+ 
+ 
+Connecting to an OPC UA server for the first time
+ 
+Upon first connection to an OPC UA server, PcVue and the server exchange their certificates (if any) to establish the trust between them. During this phase, for example upon starting an OPC UA server for the first time, a popup is displayed in the Application Explorer providing you with the OPC UA server certificate details.
+ 
+ 
+
+ 
+If the certificate details match those of the server you are connecting to, accept it and the connection will be established
+ 
+ 
+
+ 
+If you have doubts about the legitimacy of the certificate, refuse it and the connection will not be established
+ 
+ 
+ 
+If you accept the certificate from the server upon first connection and if the setting Accept new server certificate is enabled (default), any subsequent certificate presented by the OPC UA server will be accepted by PcVue (upon server certificate renewal for example).
+ 
+OPC UA server advanced properties
+ 
+OPC UA server advanced properties configuration applies to the selected server. You can change defaults applicable to all servers in the OPC UA settings.
+ 
+ 
+ 
+ 
+ 
+
+ Properties
+ Description
+ 
+ 
+
+ Session management
+ 
+ 
+ 
+
+ Secure channel lifetime
+ 
+ 
+Duration in which the key pair exchanged during secure channel establishment are valid. Renewal starts after 75% of the lifetime elapsed to assure new keys are obtained when change occurs.
+ 
+Range: 5 mins..1 hour
+ 
+Overrides the global settings default value.
+ 
+ 
+ 
+
+ Timeouts
+ 
+ 
+ 
+
+ Session timeout 
+ 
+ 
+Timeout for the sessions. The driver ensures that the session does not timeout unless a disconnection is to be performed.
+ 
+Range: 30 sec..1 hour
+ 
+ Requested parameter: The server might send back a revised value meeting it owns constraints. 
+ 
+Overrides the global settings default value.
+ 
+ 
+ 
+
+ Connect timeout
+ 
+ 
+Timeout for the connection calls.
+ 
+Range: 0..1 hour
+ 
+Overrides the global settings default value.
+ 
+ 
+ 
+
+ Publish timeout
+ 
+ 
+Time out for the publish request calls. PcVue provide one or more request to the server (that queues them) for it to transmit back as notification. If no notification after a period of MaxKeepAliveCount * PublishingInterval, then a KeepAlive message is sent, thus requests must not timeout before this interval elapsed.
+ 
+Range: 0..1 hour
+ 
+Overrides the global settings default value.
+ 
+ 
+ 
+
+ Service calls timeout
+ 
+ 
+Timeout for service calls.
+ 
+Range: 10 sec..1 hour
+ 
+Overrides the global settings default value.
+ 
+ 
+ 
+
+ Server state watch timeout
+ 
+ 
+Timeout for watchdog checks calls. After one unsuccessful call the value is doubled for the next call.
+ 
+Range: 0..1 hour
+ 
+Overrides the global settings default value.
+ 
+ 
+ 
+
+ Reconnection
+ 
+ 
+ 
+
+ Server state watch period
+ 
+ 
+Background polling period of the server state. It is also the period at which a reconnection is attempted.
+ 
+Range: 1 sec..1 hour
+ 
+Overrides the global settings default value.
+ 
+ 
+ 
+
+ Limits
+ 
+ 
+ 
+
+ Maximum operations per service call
+ 
+ 
+Maximum number of operation used in a service call. The driver manages requests splitting if needed. In practice, the server have its own limitations to what it can supports too. A value of 0 indicates no limitation.
+ 
+Range: 0..4294967295
+ 
+Overrides the global settings default value.
+ 
+ 
+ 
+
+ Security
+ 
+ 
+ 
+
+ Authentication
+ 
+ 
+Defines the type of authentication to use with the server:
+ 
+ 
+
+ 
+Anonymous - No authentication
+ 
+ 
+
+ 
+By user and password - This enables the verification and validation of the credentials when connecting to the server.
+ 
+ 
+ 
+ 
+ 
+
+ Control
+ 
+ 
+ 
+
+ Update the variable immediately with the written value
+ 
+ 
+If set, the variable value is updated immediately after the write rather than waiting for it to be read from the OPC UA server.
+ 
+ 
+ 
+
+ Synchronize values after writing
+ 
+ 
+Used to synchronize the client and server after a write has been performed.
+ 
+ 
+
+ 
+No synchronization � No action taken. This is the default selection.
+ 
+ 
+
+ 
+Synchronize by read � The value in the client is read back from the server.
+
+
+========================================
+TOPIC: opcua_configure_polling_group_subscriptions.htm
+========================================
+How to configure OPC UA Polling groups and Subscriptions
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to configure OPC UA Polling groups and Subscriptions
+ 
+OPC UA Polling groups and Subscriptions enable you to gather data from OPC UA servers. Polling groups allow a cyclic collection of data, whereas, subscriptions allow a triggered, change-oriented collection of data.
+ 
+Adding a Polling group 
+ 
+ 
+
+ 
+Go to Configure.Application Explorer and expand Communication then Data acquisition nodes.
+ 
+ 
+
+ 
+Expand the OPC UA node, then click Monitoring. Once added, your OPC UA polling groups and subscriptions appear in the content pane.
+ 
+ 
+
+ 
+ Click the Add a polling group button on the toolbar. The polling group creation dialog appears. Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Enter a name for your polling group and a description (optional).
+ 
+ 
+
+ 
+Set the Polling period at which server variables are to be read.
+ 
+ 
+
+ 
+(Optional) Check Activate at start-up if you wish the polling group to be activated upon launching PcVue&#160;.
+ 
+ 
+
+ 
+(Optional) Select the Advanced tab, here you can indicate if PcVue is to use timestamps provided by the OPC UA server or set timestamps on data reception.
+ 
+ 
+
+ 
+(Optional) In the Traces tab, you can activate the trace messages you wish PcVue to generate when performing a diagnostic. The trace messages are logged in PcVue Trace files and displayed in Event Viewer dialog (F7).
+ 
+ 
+
+ 
+Click Ok to save the configured polling group and close the window.
+ 
+ 
+ 
+
+ 
+You can edit, remove, or duplicate the polling groups you added using the toolbar on top or the task pane on the left.
+ 
+ 
+Adding a Subscription
+ 
+&#160;PcVue's Subscriptions are configured in the same way as Polling groups.
+ 
+ 
+
+ 
+Go to Configure.Application Explorer and expand Communication then Data acquisition nodes.
+ 
+ 
+
+ 
+Expand the OPC UA node, then click Monitoring. Once added, your OPC UA subscriptions appear in the content pane.
+ 
+ 
+
+ 
+Click the Add a subscription button on the toolbar.Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Enter a name for your subscription and (optional) a description.
+ 
+ 
+
+ 
+Set the Publishing interval at which data is requested to be returned for the monitored variables. A value of 0 indicates that the Server will publish at the fastest interval it can support.
+ 
+ 
+
+ 
+(Optional) Check Activate at start-up if you wish the subscription to be activated upon launching PcVue&#160;.
+ 
+ 
+
+ 
+(Optional) Select the Advanced tab, here you can configure priority of subscriptions, publish intervals, data change triggers and more. See below for more information about Subscription advanced properties.
+ 
+ 
+
+ 
+(Optional) In Traces tab, you can activate the trace messages you wish PcVue to generate when performing a diagnostic. The trace messages are logged in PcVue Trace files and displayed in Event Viewer dialog (F7).
+ 
+ 
+
+ 
+Click Ok to save the configuration and close the window.
+ 
+ 
+ 
+
+ 
+You can edit, remove, or duplicate the subscriptions you added using the toolbar on top or the task pane on the left.
+ 
+ 
+OPC UA Subscription advanced properties
+ 
+ 
+ 
+ 
+ 
+
+ Properties
+ Description
+ 
+ 
+
+ Subscription
+ 
+ 
+
+ Monitoring parameters
+ 
+ 
+
+ Priority
+ 
+ 
+Determines priority of subscription within the session. If multiple subscriptions have to send notifications to PcVue, the server first sends notifications for the subscription with the highest priority.
+ 
+A value of 0 indicates that no special priority is required by PcVue.
+ 
+ Range: [0..255]
+ 
+ 
+ 
+
+ Max data notifications per publish
+ 
+ 
+Indicates the maximum number of notifications PcVue wants to receive in a single Publish response.
+ 
+A value of 0 indicates that there is no limit.
+ 
+ Range: [0..4294967295]
+ 
+ 
+ 
+
+ Requested monitoring parameters
+ 
+ 
+ 
+
+ Max publish intervals before end of life
+ 
+ 
+If connection with the server is lost for a period of time greater than (Max publish intervals before end of life * publishing interval), the subscription on the server side will be deleted.
+ 
+Range: [0, 4294967295] 
+ 
+Requested parameter: The server might send back a revised value meeting it owns constraints.
+ 
+ 
+ 
+
+ Max publish intervals before keep-alive
+ 
+ 
+If the server has no notifications pending to send for a period of time defined as (Max publish intervals before keep-alive * Publishing Interval), the server will send a keep alive message.
+ 
+A value of 0 indicates that the server will use the smallest supported keep-alive interval.
+ 
+Range: [0..4294967295] 
+ 
+Requested parameter: The server might send back a revised value meeting it owns constraints.
+ 
+ 
+ 
+
+ Queue
+ 
+ 
+ 
+
+ Size
+ 
+ 
+Size of the queue to store monitored items data changes notifications. If set to 0 or 1, the server uses the default queue size which should be 1.
+ 
+Range: [1..4294967295]
+ 
+Requested parameter: The server might send back a revised value meeting it owns constraints.
+ 
+ 
+ 
+
+ Discard oldest
+ 
+ 
+Determines what is expected from the server when its publishing queue is full:
+ 
+ 
+
+ 
+If ticked, the oldest notification (first in queue) is discarded. The new notification is added at the end of the queue.
+ 
+ 
+
+ 
+If not ticked, the last notification added to the queue gets replaced with the new one.
+ 
+ 
+ 
+ 
+ 
+
+ Datachange filter
+ 
+ 
+
+ Trigger
+ 
+ 
+Determines what changes result in publishing a data change.
+ 
+ 
+
+ 
+Status: A notification occurs if the StatusCode associated with the value changes.
+ 
+ 
+
+ 
+Status and value: A notification occurs if either the StatusCode or the value change (deadband can be applied).
+ 
+ 
+
+ 
+Status, value and timestamp: A notification occurs if either the StatusCode, value or the SourceTimestamp change.
+ 
+ 
+ 
+ 
+ 
+
+ Deadband type
+ 
+ 
+Defined the type and behavior of deadband used for data changes determination by the server:
+ 
+ 
+
+ 
+None: No deadband calculation is requested
+ 
+ 
+
+ 
+Absolute: The deadband is requested based on an absolute value that you set.
+ 
+ 
+
+ 
+Value percent: The deadband is requested based on a percent value that you set.
+ 
+ 
+ 
+ 
+ 
+
+ Data interpretation
+ 
+ 
+
+ Timestamp
+ 
+ 
+ 
+
+ Use time provided by the server
+ If selected, the timestamp for each value change of an item is the one provided by the OPC UA server (default).
+If not selected, the timestamp is set by PcVue upon reception.
+ 
+ 
+
+ Timestamp origin
+ 
+ 
+If timestamps provided by the server are used, defines which timestamps the server should return with the data, either a timestamp from the underlying source of the server, or from the server itself.
+ 
+ 
+ 
+
+ Connection parameters
+ 
+ &#160;
+ 
+ 
+
+ Without flow regulation
+ If enabled, allows a disconnected server to record value changes locally and then send them in a block when communication is re-established. The default is not ticked.
+
+
+========================================
+TOPIC: opcua_create_redundant_server.htm
+========================================
+How to configure an OPC UA redundant server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to configure an OPC UA redundant server
+ 
+OPC UA redundant servers can be configured in PcVue via the Application Explorer. The configuration starts with adding an OPC UA network and a server.
+ 
+Redundant server operation
+ 
+When PcVue starts, it will attempt to communicate with the main and redundant servers to check their presence. If the primary server is available, it will retrieve data for any mapped variables from it.
+ 
+If the primary server is not available at startup, or if it fails later, value retrieval for the mapped variables automatically switches to an available redundant server.
+ 
+&#160;PcVue will continue to try and establish communication with the failed primary server, but it will not automatically switch back when communication is re-established.
+ 
+You can force a switch back to the primary server using the following methods.
+ 
+ 
+
+ 
+Restarting PcVue&#160;.
+ 
+ 
+
+ 
+Manually, using the Activate server task in the Application Explorer.
+ 
+ 
+
+ 
+Using a SCADA Basic script using the instruction OPCUA mode SWITCHOVER.
+ 
+ 
+ 
+There is no variable mapping specific to redundant servers. It is the same as for the primary server.
+ 
+Prerequisites:
+ 
+ 
+
+ 
+You have configured an OPC UA network and server.
+ 
+ 
+ 
+Configuring an OPC UA redundant server
+ 
+ 
+
+ 
+Go to Configure.Application Explorer and expand the Communication then Data acquisition nodes.
+ 
+ 
+
+ 
+Expand the OPC UA node, then select a Network. All servers created for a particular network are displayed in the right pane.
+ 
+ 
+
+ 
+Select the server for which you want to add a redundant server. The behavior pane appears at the bottom. Click on the Add an OPC UA redundant server icon. Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Configure the redundant server following the same steps used to configure an OPC UA server (primary).
+ 
+
+ 
+You can activate, remove, or edit the redundant servers you added using the toolbar of the behavior bottom pane.
+ 
+ 
+ 
+ 
+
+ 
+You can check redundant server state via system variables in the System.OPCUA branch. Refer to the topic OPC UA client status Variables for more information.
+
+
+========================================
+TOPIC: opcua_mapping_variables.htm
+========================================
+How to map variables to OPC UA elements
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to map variables to OPC UA elements
+ 
+In PcVue, OPC UA server variables can be linked to existing variables in the project or can be added as new variables. This linking process can be carried out from the server mapping dialog.
+ 
+
+ 
+You can also map variables via the source tab of the variables configuration dialog. Refer to the topic Linking variables to an OPC UA server to learn more.
+ 
+ 
+Prerequisites:
+ 
+ 
+
+ 
+You have configured an OPC UA network and server.
+ 
+ 
+
+ 
+You have created a polling group or a subscription.
+ 
+ 
+ 
+Mapping variables
+ 
+ 
+
+ 
+Go to Configure.Application Explorer and expand Communication then Data acquisition nodes.
+ 
+ 
+
+ 
+Expand the OPC UA node, then click Networks. The OPC UA networks configured appears on the right pane.
+ 
+ 
+
+ 
+Select the network you want to map variables to, then click Mapping button on the toolbar. The Mapping dialog appears. Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Select the appropriate server and expand it to find the item you wish to map. The variables appear in the content pane of the mapping dialog.
+ 
+ 
+
+ 
+Right-click the variable and select whether to map a new variable or to link the OPC UA element to an existing variable.
+ 
+(map new variable selection) Click Map new variable, define a variable name and monitoring parameters in the creation dialog. Once created, the new variable can be found in the Variables tree. Show picture
+ 
+
+ 
+ 
+ 
+(Map existing variable selection) Click Map existing variable and select the variable you wish to map to, then click Apply. A pop-up might appear warning you that the variable you are trying to map to is not an OPC UA variable, you can click Yes to dismiss it. Show picture
+ 
+
+ 
+ 
+ 
+
+ 
+You can check the mapping by right-clicking on the variable in the OPC UA mapping dialog and selecting Variable properties, then the Source tab.
+ 
+ 
+Unmapping variables
+ 
+ 
+
+ 
+On the OPC UA node, select the network for which you want to unmap variables from, then click Mapping in the left pane.
+ 
+ 
+
+ 
+Go to the mapped variable you want to unmap, and right-click on it, then click Unmap variable.
+ 
+ 
+ 
+ 
+ 
+Using the OPC UA helper to call a method
+ 
+The OPC UA helper allows you to send call method requests to a server with specified input arguments. Calling a method from the OPC UA helper is designed to be used for testing while configuring the project. You can use the SCADA Basic instruction OPCUA mode METHOD to call OPC UA methods at runtime.
+ 
+From the OPC UA mapping dialog, right-click a node class of type method identified by this icon then select Call. The OPC UA helper dialog appears. Show picture
+ 
+
+ 
+ 
+ 
+Once opened, the OPC UA helper dialog displays a list view of all browsed input arguments along with their name and a property grid in the right panel showing details per category:
+ 
+ 
+
+ 
+General category shows basic details like input's name and description.
+ 
+ 
+
+ 
+Type category shows data type details like name and definition type of the data (Simple, enumeration, structure, optionSet). The field Data type displays the BrowseName of the data type referenced by the NodeId or the default name for Built-in types.
+ 
+ 
+
+ 
+Value category shows all fields required according to the structure of the input's value. Value checking is applied in each field according to the data type required.
+ 
+ 
+ 
+To send a call, click on the Call method button in the helper toolbar. The status bar at the bottom of the dialog shows details about the operation status (success or failure).
+ 
+
+ 
+You can copy all input arguments by clicking the Copy to clipboard button in the helper main toolbar. You can also copy selected input arguments only by clicking the Copy to clipboard in the Operation pane toolbar. The input arguments are put in the clipboard as a Json-formatted string.
+
+
+========================================
+TOPIC: opcua_overview.htm
+========================================
+OPC UA overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OPC UA overview
+ 
+OPC UA (Open Platform Communications Unified Architecture) is an industrial communication standard developed by the OPC Foundation. It is designed as a platform independent, scalable and a modular service-oriented communication with strong security mechanisms. This makes it an ideal solution for the IoT (Internet of Things) and Industry 4.0. Visit OPC Foundation to learn more.
+ 
+The OPC UA communication driver is accessed and configured in PcVue using the Application Explorer and the Application Architect. The following are all relevant concepts to the OPC UA driver in PcVue.
+ 
+
+ 
+Projects that use the Unified Automation Gateway will not take advantage of the built-in driver automatically.
+A tool is available for a straightforward conversion, please contact the Technical Support for more information.
+ 
+ 
+Network
+ 
+In PcVue, OPC UA servers are configured attached to a network. An OPC UA network serves the purpose of defining which station or association of stations manage the connections to the OPC UA servers of the network. It is also at the network level that you configure the certificate PcVue exposes to servers to secure the connection. Refer to the topic How to configure an OPC UA network and server to learn more.
+ 
+Server
+ 
+A server is configured attached to a network. It serves the purpose of defining connection parameters to an actual OPC UA server in the system, including the server Uri, the security policy, authentication etc.
+ 
+Monitoring groups
+ 
+The built-in OPC UA driver offers two methods to monitor data exposed by OPC UA servers:
+ 
+ 
+
+ 
+Polling groups - Allow a non-discriminatory, cyclic collection of data
+ 
+ 
+
+ 
+Subscriptions - Allow a server-triggered, change-oriented collection of data
+ 
+ 
+ 
+Refer to the topic How to configure OPC UA Polling groups and Subscriptions to learn more.
+ 
+Redundant server
+ 
+&#160;PcVue provides the possibility to connect to redundant OPC UA servers for applications where high availability is of prime importance. Redundant OPC UA servers can prove useful as a backup in case an error occurs with the primary OPC UA server used to open the communication. In PcVue, OPC UA redundant servers are configured in exactly the same way as OPC UA primary servers. Refer to the topic How to configure an OPC UA redundant server to learn more.
+ 
+Variable mapping 
+ 
+Mapping is the process of linking a variable to its source for value, quality, and timestamp. In PcVue, OPC UA elements can be linked to existing variables in the project or to new variables. This linking process can be carried out from the source tab of the variables configuration dialog or from the OPC UA server mapping dialog. Refer to the topic How to map variables to OPC UA elements and Linking variables to an OPC UA server to learn more.
+ 
+Security certificates 
+ 
+&#160;PcVue provides the possibility to create security certificates that enable secure exchange of information between OPC UA servers and PcVue. Certificate management is centralized in the Application Explorer, behind the Security node. It offers the possibility to create and manage security certificates. Refer to the topic How to create a security certificate to learn more.
+ 
+SCADA Basic
+ 
+&#160;PcVue provides a SCADA Basic instruction for controlling the OPC UA client driver by script. Refer to the topic OPC UA to learn more.
+ 
+Rules and behavior of cut, copy and paste
+ 
+The following table describes the rules and behavior, and in particular any restrictions, when using cut or copy and paste on configuration objects in the OPC UA folder.
+ 
+ 
+ 
+ 
+ 
+
+ OPC UA object
+ Behavior
+ 
+ 
+
+ Network
+ The pasted Network is given a unique name.
+Any subordinate servers are duplicated using the original name.
+The mapping of any variables is not duplicated.
+ 
+ 
+
+ Server
+ 
+ 
+The pasted server is given a unique name.
+ 
+Any subordinate redundant servers are duplicated using the original name.
+ 
+ 
+ 
+
+ Polling group
+ The pasted polling group is given a unique name.
+ 
+ 
+
+ Subscription
+ The pasted subscription is given a unique name.
+
+
+========================================
+TOPIC: opcua_settings.htm
+========================================
+OPC UA settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OPC UA settings
+ 
+OPC UA settings are accessed from the Application Explorer by selecting <Project>.Communication.Data acquisition.OPC UA and choosing the Settings command from the task list.
+ 
+ 
+ 
+ 
+ 
+
+ Settings
+ Description
+ 
+ 
+
+ Client connection
+ 
+ 
+ 
+
+ Ignore overridable client connection errors
+ Allows to ignore connection errors originating from the PcVue driver.
+ 
+ 
+
+ Secure channel lifetime
+ 
+ 
+Duration in which the key pair exchanged during secure channel establishment are valid. Renewal starts after 75% of the lifetime elapsed to assure new keys are obtained when change occurs.
+ 
+Range: 5 min..1 hour
+ 
+ 
+ 
+
+ Timeouts
+ 
+ 
+ 
+
+ Session timeout
+ 
+ 
+Timeout for the sessions. The driver ensures that the session does not timeout unless a disconnection is to be performed.
+ 
+Range: 30 sec..1 hour
+ 
+Requested parameter: The server might send back a revised value meeting it owns constraints.
+ 
+ 
+ 
+
+ Connect timeout
+ 
+ 
+Timeout for the connection calls.
+ 
+Range: 0..1 hour
+ 
+ 
+ 
+
+ Publish timeout
+ 
+ 
+Time out for the publish request calls. PcVue provide one or more request to the server (that queues them) for it to transmit back as notification. If no notification after a period of MaxKeepAliveCount * PublishingInterval, then a KeepAlive message is sent, thus requests must not timeout before this interval elapsed.
+ 
+Range: 0..1 hour
+ 
+ 
+ 
+
+ Service calls timeout
+ 
+ 
+Timeout for service calls.
+ 
+Range: 10 sec..1 hour
+ 
+ 
+ 
+
+ Server state watch timeout
+ 
+ 
+Timeout for watchdog checks calls. After one unsuccessful call the value is doubled for the next call.
+ 
+Range: 0..1 hour
+ 
+ 
+ 
+
+ Reconnection
+ 
+ 
+ 
+
+ Server state watch period
+ 
+ 
+Background polling period of the server state. It is also the period at which a reconnection is attempted.
+ 
+Range: 1 sec..1 hour
+ 
+ 
+ 
+
+ Limits
+ 
+ 
+ 
+
+ Restrict maximum operations per service call
+ 
+ 
+Maximum number of operations used in a service call. The driver manages requests splitting if needed. In practice, the server has its own limitations to what it can supports too. A value of 0 indicates no limitation (splitting disabled).
+ 
+ Range: 0..4294967295
+ 
+ 
+ 
+
+ Certificates
+ 
+ 
+ 
+
+ Accept invalid server certificate
+ Allows to accept a server certificate identified as invalid.
+ 
+ 
+
+ Accept new server certificate
+ Allows to accept a server certificate provided through communication with the server than differs from the one specifically accepted initially.
+ 
+ 
+
+ Ignore server certificate verification errors
+ Allows to ignore errors when verifying server certificates.
+ 
+ 
+
+ Checks
+ 
+ 
+ 
+
+ Ignore certificate error from validity period
+ 
+ 
+If set, server certificate validation errors due to bad validity period (BadCertificateTimeInvalid) are ignored.
+ 
+ 
+ 
+
+ Ignore issuer certificate error from validity period
+ If set, server certificate validation errors due to bad issuer validity period (BadCertificateIssuerTimeInvalid) are ignored.
+ 
+ 
+
+ Ignore certificate error from unknown revocation
+ If set, server certificate validation errors due to unknown revocation (BadCertificateRevocationUnknown) are ignored.
+ 
+ 
+
+ Ignore issuer certificate error from unknown revocation
+ If set, server certificate validation errors due to unknown issuer revocation (BadCertificateIssuerRevocationUnknown) are ignored.
+ 
+ 
+
+ Ignore certificate error from invalid hostname
+ If set, server certificate validation errors due to a mismatch between the declared hostname and the actual one are ignored.
+ 
+ 
+
+ Disable password encryption check
+ If set, no verification is performed for proper encryption of a password provided in an identity token.
+ 
+ 
+
+ Disable application URI check
+ If set, no verification is performed to ensure that the ApplicationUri in the server certificate matches the ApplicationUri the server uses in its EndpointDescription.
+ 
+ 
+
+ Disable nonce length check
+ If set, no verification is performed to ensure that the ServerNonce has the correct length of minimum 32 bytes.
+ 
+ 
+
+ Disable trusted certificate requirement for user token
+ If set, the certificate used to encrypt a password does not need to be trusted.
+ 
+ 
+
+ Disable session id check
+ If set, no verification is performed to ensure the server returned a non-null SessionId.
+ 
+ 
+
+ Disable certificate usage check
+ 
+ 
+If set, no verification is performed to ensure the certificate structure and key usage are adequate.
+ 
+Certificate fields: SubjectAlternativeName, KeyUsage, ExtendedKeyUsage.
+
+
+========================================
+TOPIC: ua_administration.htm
+========================================
+OPC UA gateway configuration - Administration Tool
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OPC UA Gateway Configuration - Administration Tool
+ 
+The Administration Tool can be opened by right clicking the OPC UA gateway icon in the system tray or from the Windows' Start menu. Many of the settings are either pre-configured as defaults or provided by the OEM.ini file. It is not recommended to modify the OEM.ini file manually.
+ 
+
+ 
+For information on settings other than those mentioned in this topic, see the help documentation supplied with the gateway.
+ 
+ 
+General tab - Launching user
+ 
+The Launching User settings are used to set the user context in which the UA gateway service runs. The default settings are the interactive user that installed and first started the gateway, but an alternative can be selected using the Domain and User drop down list boxes. Show picture
+ 
+
+ 
+ 
+ 
+To confirm the settings for the launching user, click the Apply button. You will be prompted for the password for the selected user. Show picture
+ 
+
+ 
+ 
+ 
+If successful, a message is displayed confirming that the selected user has been added to the UaGatewayUsers group.
+ 
+
+ 
+The accounts used to run PcVue shall belong to the UaGatewayUsers group of users to ensure proper DCOM connections between PcVue and the UA Gateway.
+ 
+ 
+UA Endpoints tab
+ 
+The UA endpoint configuration is used for the UA Gateway's OPC UA server. Even if your architecture does not include a third party OPC UA Client, these settings are important, as the UA gateway's own Configuration Tool communicates with the gateway as an OPC UA client. The pre-configured settings should suffice for most installations. However, you may have to change the port number should another device already use it. Show picture
+ 
+
+ 
+ 
+ 
+
+ 
+If you change the settings in the UA Endpoints tab, you will also have to change the equivalent settings of the Configuration Tool so it can still connect to the UA gateway service.
+ 
+ 
+Certificates tab
+ 
+OPC UA communicates using a secure connection over TCP/IP, which requires the use of certificates. The UA Gateway automatically generates two certificates during the installation process. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Trusted - Used when the UA gateway is communicating with the Configuration Tool, itself an OPC UA client.
+ 
+Own Certificate - Used when the OPC UA gateway is communicating with a third party OPC UA server fulfilling its main purpose as an OPC UA gateway.
+ 
+ 
+These automatically generated certificates may, or may not, be sufficient to satisfy the end user's security policy. For further information, see the UA gateway's documentation.
+ 
+Using the UA Gateway when PcVue is running as a Service
+ 
+The UA gateway can be used with PcVue running as a service. Show picture
+
+ 
+Configuration of the gateway is the same as if running PcVue as a desktop application. In particular, the account used to run PcVue must be added to the UaGatewayUsers group. Show picture
+
+ 
+By default, the account used when running PcVue as a service is LOCAL SERVICE. This can be used when the application requires that the PcVue OPC DA client be connected to the UA Gateway's OPC DA server. However, if the application requires that the PcVue OPC DA server be connected to the UA Gateway OPC DA client, thereby exposing PcVue variables as an OPC UA server, then the NETWORK ACCOUNT must be used.
+
+
+========================================
+TOPIC: ua_installation.htm
+========================================
+OPC UA gateway installation
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OPC UA Gateway Installation
+ 
+Prerequisites
+ 
+ 
+You have an account with administrator privileges on the UA Gateway host computer.
+ 
+ 
+Installation
+ 
+The gateway is supplied as a self-installing executable file, and a license file named OEM.ini. The license file contains the license and the default configuration settings necessary for the gateway to work correctly with PcVue. The OEM license file must be in the same folder as the executable. Running the executable starts the installation process. 
+ 
+
+ 
+ 
+ 
+
+ 
+The gateway supplied with PcVue installation media will only work with the PcVue OPC Client and Server. It will not work with any other OPC client or server.
+ 
+ 
+The gateway automatically starts, using default settings, after installation but there are two further configuration steps to complete before it is fully functional.
+ 
+ 
+Use the Administration Tool to confirm settings including the user account, endpoints, and certificates. See the topic OPC gateway configuration.
+ 
+Use the Configuration Tool to add and configure OPC UA servers, as well as the OPC DA server. See the topic Adding an OPC UA server to the gateway.
+ 
+ 
+The configuration tools can be opened by right clicking the OPC UA gateway icon in the system tray or from the Windows' Start menu.
+
+
+========================================
+TOPIC: ua_mapping.htm
+========================================
+Mapping variables to the UA Gateway
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mapping Variables to the UA Gateway
+ 
+With the majority of OPC DA Servers, the address space, as seen in the left pane of the PcVue OPC Mapping dialog, has a one-to-one match with the OPC Item Id. This is not a mandatory requirement; it is just something that is commonplace. For example, in the following screenshot of a mapping dialog and a Kepware OPC DA server. Show picture
+
+ 
+The ItemId Simulation Examples.Functions.Ramp1 is the same as its location within the address space as seen in the left pane of the mapping dialog. 
+ 
+When using the UA Gateway, the Address Space is similar to, but not the same as, the ItemId. This is normal behavior for the UA Gateway to avoid potential conflicts would two OPC servers expose items having the same Id. Show picture
+
+ 
+The ItemId um:W10-TOLS-RM1:Kepware.KEPServerEX.V5:UAServer/KEPServerEX|Simulation.Functions.Ramp1 is different from its location in the Address Space (different prefix).
+ 
+The setting Use alias as prefix in ItemId in the OPC COM ItemIDs tab of the UA Gateway's Administration Tool can be used to simply the ItemId replacing the prefix with a much simpler alias. However, the Address Space remains unchanged. 
+ 
+Deepening the UA Gateway browsing
+ 
+Depending on the complexity of the connected OPC UA server, the UA Gateway may not fully expose the objects through its OPC DA Server. This can be improved using the setting Browse Next Level for Variables in the OPC DA (COM) tab of the UA Gateway's Administration Tool.
+ 
+Timestamp setting
+ 
+The UA Gateway allows the selection of the timestamp source for OPC UA objects it exposes through its OPC DA Server. 
+ 
+The selection is made using the setting Timestamp Source in the OPC DA (COM) tab of the UA Gateway's Administration tool. Show picture
+
+ 
+The table below summarizes the resulting timestamping behavior depending on this UA gateway parameter combined with the configuration of the PcVue OPC DA client:
+ 
+ 
+ 
+ 
+ 
+ 
+
+ &#160;PcVue OPC DA Client timestamp configuration
+ UA Gateway timestamp source
+ Mapped variables� resulting timestamp
+ 
+ 
+
+ Default
+ Internal
+ OPC DA Client / SCADA host computer
+ 
+ 
+
+ Provided by server
+ Internal
+ OPC DA Client / SCADA host computer
+ 
+ 
+
+ Default
+ ServerTimestamp
+ OPC DA Client / SCADA host computer
+ 
+ 
+
+ Provided by server
+ ServerTimestamp
+ OPC UA Server / UA host computer
+ 
+ 
+
+ Default
+ SourceTimestamp
+ OPC DA Client / SCADA host computer
+ 
+ 
+
+ Provided by server
+ SourceTimestamp
+ OPC UA Server / UA host computer
+
+
+========================================
+TOPIC: ua_opc_server.htm
+========================================
+Adding an OPC UA server to the gateway
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding an OPC UA Server to the Gateway
+ 
+The Configuration tool is used to add OPC UA Servers to the UA gateway. After a UA server has been successfully added, its address space is exposed to any OPC DA client connected to the UA gateway. The Configuration Tool can be started by right clicking the UA gateway's icon in the system tray or from the Windows' Start menu. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+The UA gateway must be running before the Configuration Tool can be used. To start the UA gateway, right click its icon in the system tray and select Start.
+ 
+ 
+About the OPC UA Discovery Service
+ 
+The OPC UA specification includes a service called the Discovery Service. This service allows prospective OPC UA clients to discover OPC UA servers on the network. A discovery service can be:
+ 
+ 
+
+ 
+Global - All devices on the network
+ 
+ 
+
+ 
+Local - Just the local device
+ 
+ 
+
+ 
+Custom - For a specific OPC UA server.
+ 
+ 
+ 
+If your architecture includes a local or global discovery service, any installed OPC UA server can register with it, or it may just rely on its own discovery service.
+The Configuration Tool is able to browse the Discovery Service for available UA server endpoints (connections).
+ 
+How to add an OPC UA Server to the gateway using a custom discovery service
+ 
+The following is for the Kepware OPC UA Server. Other servers will be similar, even if the process differs in detail.
+ 
+ 
+Open the Configuration Tool and, in the Device Address Space tab, select OPC UA Servers. The OPC UA Servers tab opens in the right pane.
+ 
+Select Add server. The Add UA Server dialog opens. Show picture
+
+ 
+Double click on the plus sign under the Custom Discovery node. A dialog opens from where you enter the URL of the discover service of the OPC UA server you want to add. The URL is usually available from the server documentation or from the configuration of the OPC UA Server itself. Show picture
+
+ 
+Expand the node representing the Url just added. Normally there will be an entry for each of the encryption methods that the server supports. Select the appropriate encryption method then click Add and Close. Show picture
+
+ 
+The selected OPC UA server now appears in the gateway configuration. Show picture
+
+ 
+ 
+The configuration of the gateway is now basically complete but, at this point, it may be unable to connect to the server. During the above process, a certificate from the UA gateway has been transmitted to the OPC UA Server. Before the server will communicate with the gateway this certificate must be trusted. 
+ 
+Trusting the gateway certificate
+ 
+The process to trust the gateway certificate will vary depending on the OPC UA Server in use. The following is for the Kepware OPC UA Server. Other servers will be similar, even if the process differs in detail.
+ 
+ 
+Open the OPC UA Configuration Manager of the server. For Kepware, you right click its icon in the system tray and select OPC UA Configuration.
+ 
+Locate the UA gateway certificate. Select it and click Trust. Show picture
+
+ 
+Close the configuration manager. The UA gateway is now able to communicate with the OPC UA Server.
+ 
+ 
+
+ 
+If you are trying to connect an OPC DA server to the gateway, you have to launch PcVue using the interactive user identity with the proper DCOM configuration allowed by the UaGatewayUsers group.
+
+
+========================================
+TOPIC: ua_overview.htm
+========================================
+OPC UA gateway overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+OPC UA Gateway Overview
+ 
+
+ 
+A built-in OPC UA client driver is provided in PcVue 16 and later. We recommend using the UA gateway only for the server facet. Refer to OPC UA driver documentation to learn more.
+ 
+ 
+What is OPC UA?
+ 
+OPC Unified Architecture (UA) integrates the benefits of OPC-DA, OPC-AE and OPC-HDA into a single platform whilst at the same time addressing the issues and limitations users face with the OPC Classic technology.
+ 
+ 
+Based on TCP/IP and Https technologies rather than COM / DCOM.
+ 
+Able to communicate through a firewall.
+ 
+Platform independent - can be used on non-Windows platforms, for example embedded directly on a PLC.
+ 
+Support for complex data structures (Alarm, event, historical data).
+ 
+Redundant capability and protection against data loss.
+ 
+Built in security features - encryption, authentication, and auditing.
+ 
+ 
+What is the OPC UA Gateway?
+ 
+The OPC UA gateway is used as a bridge between the PcVue OPC DA client and server and third party OPC UA clients and servers. It enables the use of PcVue as an OPC UA client or OPC UA server for Data Access.
+ 
+
+ 
+ 
+ 
+
+ 
+This book summarizes information about the features and settings of the gateway that are required for use with PcVue. For detailed information on all other features and settings, see the documentation supplied with the gateway.
+
+

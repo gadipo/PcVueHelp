@@ -1,0 +1,273 @@
+========================================
+TOPIC: Embedding_a_New_Object.htm
+========================================
+Embedding a new object
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Embedding a New Object
+ 
+ 
+Open or select the 
+ window in which the object is to be embedded.
+ 
+From the Insert menu, select the Insert OLE Object command.
+ 
+In the Object Type 
+ box, select the type that describes the application in which you want 
+ to create the object.
+ 
+Click the OK button.
+ 
+A new object of the 
+ selected type will be created embedded in your window and the associated 
+ application opened to allow you to edit the new object. The application�s 
+ toolbars will appear within the Workspace.
+ 
+Move and size the 
+ object as required.
+ 
+Enter the information 
+ you want to display in the new object. When you have finished click anywhere 
+ outside of the object. The associated application will close and the HMI�s 
+ window will be updated. 
+ 
+ 
+Show picture
+
+
+========================================
+TOPIC: Embedding_an_Object.htm
+========================================
+Overview of embedding an object
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Embedding an Object
+ 
+Embedding means inserting information such as an Excel 
+ chart or a Word document into a window. Once embedded, the information, 
+ or object, becomes part of the window. When you double-click an embedded 
+ object in Edit mode, you open the application in which the object was 
+ created; the object is displayed and ready for editing. 
+ 
+When you return to the HMI, the window reflects any changes 
+ you have made to the object. You can embed an object using an existing file, 
+ or you can create and embed a new object.
+ 
+
+ 
+To edit an embedded object created in another application, 
+ you must have the other application installed on your computer.
+
+
+========================================
+TOPIC: Embedding_an_Object_Using_an_Existing_File.htm
+========================================
+Embedding an object using an existing file
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Embedding an Object Using an Existing File
+ 
+ 
+Open or select the 
+ window in which the object is to be embedded.
+ 
+From the Insert sub-menu, 
+ select the Insert OLE Object command.
+ 
+Select the Create 
+ from File option button.
+ 
+In the File dialog, type 
+ or select the name of the object that you want to embed. You can use the 
+ Browse button to select a different drive or directory.
+ 
+Click the OK button. 
+ 
+ 
+ 
+Show picture
+
+
+========================================
+TOPIC: Embedding_an_Object_Using_Copy_and_Paste.htm
+========================================
+Embedding an object using copy and paste
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Embedding an Object Using Copy & Paste
+ 
+ 
+Open the application 
+ (Word, Excel etc.) with which the object is associated.
+ 
+Open the application 
+ file.
+ 
+Copy all or part 
+ of the application file to the Windows Clipboard (usually done using 
+ the Copy command on the Edit menu or Ctrl+C on the keyboard).
+ 
+Close the application.
+ 
+Open or select the 
+ HMI window in which the object is to be embedded.
+ 
+Paste the contents 
+ of the Clipboard into the window (using the Paste command from the Edit 
+ menu or Ctrl+V on the keyboard).
+
+
+========================================
+TOPIC: Embedding_VBA_scripts_symbols.htm
+========================================
+Embedding VBA scripts in Symbols
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Embedding VBA scripts in symbols
+ 
+A graphic symbol designed with PcVue can embed VBA code to extend its behavior. This topic explains how to turn a graphic symbol into a VBA project so that you can add generic VBA code to it and how the VBA code will be executed for each instance of the symbol you have added in mimics. 
+ 
+To allow the development of code on a symbol, right-click on the symbol to display the pop-up menu and select Symbol project in VBA.
+ 
+A new SymbolProject appears in the VBA editor and any code you add in this VBA project will automatically be executed for any instance of the symbol. The symbol is automatically saved each time you edit the code.
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Using drawing elements within a symbol as VBA controls
+ 
+To use a drawing element within a symbol as a VBA control you must select VBA control for it before it is grouped and saved within a symbol (unless you use Dim WithEvents as explained below). It is then be visible as a control within the symbol and appears in the left combo box of the code window for that symbol. 
+ 
+
+ 
+Any code attached to the drawing element before it becomes part of a symbol becomes a function of the mimic project, it does not become part of the symbol.
+ 
+ 
+Example of how to create a symbol containing a VBA control
+ 
+ 
+Draw a rectangle 'Shape1' and select VBA control using the right-click pop-up.
+ 
+Draw a rectangle 'Shape2'.
+ 
+Group 'Shape1' and 'Shape2'.
+ 
+Right-click on the group and select Create symbol.
+ 
+Give the symbol a name and save it.
+ 
+Right click on the newly created symbol and select Symbol project in VBA.
+ 
+Display the VBA editor (Alt+F11), the symbol appears in its own SymbolProject project.
+ 
+ 
+If you modify a Symbol by ungrouping it, you will lose any code attached to drawing elements within the symbol.
+ 
+
+ 
+To avoid this, first duplicate the symbol in any open mimic to keep at least one instance of the symbol in a mimic. The VBA project automatically reattaches the code to the modified symbol.
+ 
+ 
+Understanding how symbol events are fired
+ 
+By default, the EnableEvents property of the symbol itself is set to false and the symbol callback scripts on events are not executed. However, any drawing elements within the symbol that are VBA controls are able to respond to events (assuming that their EnableEvents property is set to True).
+ 
+If you set the EnableEvent property of the symbol to true then the symbol itself will respond to events, but any VBA control within it will not. You will still be able to change the properties of any VBA control within the symbol by code.
+ 
+The Symbol object has two special events, BeforeEvent and AfterEvent. These are fired even if the EnableEvents property of the symbol is false.
+ 
+ 
+The BeforeEvent event occurs before each event is fired from any drawing element in the symbol with the EnableEvents property set to true.
+ 
+The AfterEvent event occurs after each event is fired from any drawing element in the symbol with the EnableEvents property set to true.
+ 
+ 
+Using BeforeEvent with the Dim WithEvents statement allows you to code events on a drawing element within a symbol without first selecting it as VBA control.
+ 
+This is best illustrated with an example. Within a symbol, Shape1 exists and has the EnableEvents property set to true but has not been selected as a VBA control.
+ 
+'------ The following line must be placed in General Declarations
+Dim WithEvents objGraphic as Graphic
+'------ Assign the object when using the BeforeEvent Event
+Private Function Symbol_BeforeEvent () As Boolean
+Set objGraphic = Graphics("Shape1")
+End Function
+'------ Code to execute when Shape1 is clicked
+Private Sub objShape_Click
+MsgBox "Click"
+End Sub
+
+

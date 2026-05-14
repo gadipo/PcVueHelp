@@ -1,0 +1,4139 @@
+========================================
+TOPIC: Link_61850_tab_properties_dialog.htm
+========================================
+Linking a variable to an IEC 61850 data object or data attribute
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a variable to an IEC 61850 data object or data attribute
+ 
+The following properties appear in the Variable Properties dialog when a variable is mapped to an IEC 61850 data object or data attribute. Show picture
+ 
+
+ 
+ 
+ 
+The Source tab
+ 
+ 
+Device - The selected device. Clicking the down arrow adjacent to the field displays a list of all configured devices.
+ 
+Monitoring object - The selected monitoring object. Clicking the down arrow adjacent to the field displays a list of all monitoring objects (data groups, datasets, and data reports).
+ 
+Mapping - The type of data to map to, either Data object, Data attribute or Control block.
+ 
+Member - The reference of the member of the data set or data report. Clicking the down arrow adjacent to the field displays the list of available members, either by browsing the physical device or by discovery in the referenced SCL file. See below.
+ 
+Field - The reference of any sub-object and attribute of the selected member. Clicking the down arrow adjacent to the field displays the list of available sub-objects and attributes, either by browsing the physical device or by discovery in the referenced SCL file. See below.
+ 
+Common data class - The Common Data Class for the selected member and field. Clicking the down arrow adjacent to the field displays a list of relevant CDC's.
+ 
+ 
+
+ 
+Mapping can be done offline or online:
+ 
+ 
+If SCL files have been associated to the network configuration element, you are doing offline mapping and the values proposed for the mapping properties are based on what is defined in the SCL files.
+ 
+If no SCL file is associated to the network configuration element, you are doing online mapping. PcVue must be connected to the actual network, physical devices must be operational, and the discovery services must be enabled so that drop-down lists can be filled. Other than that, you can also fill property values manually, in which case no consistency verification can be done until the actual physical device is connected.
+ 
+ 
+ 
+Mapping with a dataset group or a report group
+ 
+The Member and Field properties are concatenated to provide the full reference of the data attribute or data object. Two fields are required because when mapping with a Dataset or a Report group, PcVue initially retrieves the names of the top-level Data objects only. These are made available for selection in the Members drop down list box.
+ 
+In general, monitoring requires mapping of variables on Data objects to take advantage of the timestamp and quality provided by the IED. In that case, selecting the Member and the Common data class properties is enough. Show picture
+ 
+
+ 
+ 
+ 
+For mapping on a sub-object or a Data attribute, the Field property must be used. Once the member is selected, PcVue can then retrieve the names of any sub-objects and attributes which are made available for selection in the Field drop down list box. Show picture
+
+ 
+In the above screenshot, the full reference is A1_MEASMeasurements/MMXU1$MX$A$phsA.cVal.mag.f.
+ 
+Mapping with a data group
+ 
+When mapping with a Data group, PcVue retrieves the entire Data object and Data attribute tree at once. Show picture
+ 
+This is made available directly in the Members drop down list box and it is not necessary to use the Field.
+ 
+
+ 
+ 
+ 
+Mapping a variable for control
+ 
+Mapping a variable to handle a control requires the Command property to be checked in the General tab.
+ 
+In addition, the following steps are required in the Source tab: Show picture
+ 
+ 
+Select the network and device,
+ 
+Select the monitoring group. Use a data group if the controllable Data object is not available in any existing dataset or data report group,
+ 
+In the Member property, select the Data object under the functional constraint ST,
+ 
+Select the controllable Common data class matching the Data object (as behind the CO functional constraint), typically SPC, DPC...
+ 
+Adjust the Advanced properties, in particular if you want to force PcVue to use a specific control model and validate.
+ 
+ 
+
+ 
+While selecting the Data object for control under the functional constraint ST may seem counter-intuitive, PcVue will automatically find the corresponding controllable data object in the Logical node, and act on it using the proper control services.
+ 
+ 
+
+ 
+ 
+ 
+Mapping with a setting group
+ 
+When mapping with a setting group, you can map a variable onto a data object or a data attribute within a Setting Group Control Block, and also directly on the SGCB.
+ 
+The Extended attributes tab
+ 
+You can configure the project to handle raw IEC 61850 information via the text extended attributes of variables: Quality validity, quality details, AddCause, TextError, orIdent, orCat etc.
+ 
+Refer to the document describing the format of the file VarConf.dat in the Extra documentation for more information.
+ 
+The Advanced tab
+ 
+ 
+Control model - The control model to use when forcing the value of the variable. Only displayed for a variable mapped on a controllable Common data class.
+Automatic detection - Control will use the control model as configured in the physical device (or SCL file). Default.
+Direct execute, Direct execute with enhanced security, Select before operate, Select before operate with enhanced security) - PcVue will force the use of the selected control model. Please note that controls may fail at run-time, for example if you force the use of a Direct execute where the IED requires an SBO or SBOw.
+
+ 
+Data object options - Only displayed for a variable mapped on a Data object or Sub-object.
+Use time provided by device - If ticked, PcVue uses the timestamp provided by the device.
+Use quality provided by device - If ticked, PcVue uses the quality send by the device. Information is logged in the client diagnostic traces if the quality is configured to be processed as invalid. The IEC 61850 quality can be stored in variable's extended attributes for further application-specific processing.
+
+
+========================================
+TOPIC: Link_bacnet.htm
+========================================
+Linking a variable to a BACnet object property
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to a BACnet Object, Property or Event/Alarm
+ 
+There are two methods by which devices are added to PcVue's BACnet network configuration.
+ 
+ 
+If you are connected to the BACnet network, you can scan the network and select the devices from those that are discovered. These are known as Classic devices.
+ 
+You can load one or more EDE files containing the BACnet configuration. Devices can be selected from the contents of the EDE files. These are known as EDE devices.
+ 
+ 
+The configuration required to link a variable to a classic device or an EDE device is different.
+ 
+
+ 
+You can also link a variable to a BACnet object property using the BACnet Mapping dialog. See the topic on BACnet Mapping in the book on Data Acquisition for more information.
+ 
+ 
+How to link a variable to a BACnet object from a classic device
+ 
+ 
+Display the variable's Source tab.
+In the Application Explorer expand the variables tree and select the variable. 
+Select the Properties task. The Variable Properties dialog opens. 
+Select the Source tab.
+ 
+Select the BACnet network, Device, Object-Type and Object Identifier (instance).
+Using the Source list box select a BACnet network. A BACnet network is referenced using the alias that was entered when it was configured in PcVue. Once you have selected a network as the source the BACnet tab appears in the dialog.
+Using the Device list box select the BACnet device. The Type field will indicate if it is a Classic or EDE device. The rest of this explanation assumes it is a Classic device. Show picture
+Using the Object type and Object identifier drop down list boxes select the object type and instance.
+ 
+Select the Variable type.
+To link the variable to the object's real time value this property can be left at the default setting of Object.
+To link the variable to a specific property use the drop down list box to select it. The properties that are available will depend on the variable type (bit, register or text) and the Object type previously selected.
+To link the variable to an Alarm/Event use the drop down list box to select it. For binary objects there will only be one choice Alarm/Event. For analog objects there are two choices Alarm/Event - High and Alarm/Event - Low.
+ 
+Select any advanced options.
+Select any advanced properties using the Advanced tab. See the topic Advanced properties specific to BACnet variables for details.
+ 
+Select OK to confirm the configuration and close the dialog.
+
+ 
+ 
+How to link a variable to a BACnet object from an EDE device
+ 
+ 
+Display the variable's Source tab.
+In the Application Explorer expand the variables tree and select the variable. 
+Select the Properties task. The Variable Properties dialog opens. 
+Select the Source tab.
+ 
+Select the BACnet network and Device.
+Using the Source list box select a BACnet network. A BACnet network is referenced using the alias that was entered when it was configured in PcVue. Once you have selected a network as the source the BACnet tab appears in the dialog.
+Using the Device list box select the BACnet device. The Type field will indicate if it is a Classic or EDE device and the EDE file field will show the name of the file from which the device configuration was imported. The rest of this explanation assumes it is an EDE device.
+ 
+Select the Keyname. 
+Using the Keyname list box select the appropriate keyname. The corresponding object type and instance are displayed in the rear-only field below it. See the note below for more information on keynames. Show picture
+ 
+Select the Variable type. This is the same as for classic devices.
+ 
+Select any other advanced options in the Advanced tab. See the topic Advanced properties specific to BACnet variables for details.
+ 
+Select OK to confirm the configuration and close the dialog.
+
+ 
+ 
+About the Keyname property
+ 
+The Keyname is a unique identifier for a BACnet object instance. It is only found in EDE files - it is not a property that can be retrieved from the BACnet network. PcVue uses the combination of the EDE file name and the Keyname to identify the BACnet object instance.
+ 
+About the Alarm/Event variable type
+ 
+If you select the Variable type as either Alarm/Event, Alarm/Event-High or Alarm/Event-Low, then the variable is configured to reflect the status of the BACnet Object's Alarm/Event Notification. At this stage, PcVue does not check that the configuration of the Alarm/Event notification of the BACnet object in the device is correct. To assist the developer to check the configuration, an Alarm Helper dialog can be displayed. The Alarm Helper dialog does not modify the configuration, but it does display the status (valid, warning or not checked). For further information, see the BACnet book in the Data Acquisition help.
+
+
+========================================
+TOPIC: Link_bacnet_adv_prop.htm
+========================================
+Advanced properties specific to BACnet variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Advanced Properties Specific to BACnet Variables
+ 
+The Advanced tab of the variable's properties dialog contains a number of properties only available when a BACnet source has been selected. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Monitoring type
+ - The mechanism used to obtain a BACnet variable's value.
+Polling - The variable value is obtained by polling the device at the rate configured in the polling interval. This is the default setting.
+Confirmed change of value (C-COV) - The variable value is obtained using the BACnet C-COV mechanism whereby the device sends changes of value as they occur without the need for polling. The driver confirms that the change in value has been received. 
+Unconfirmed change of value (U-COV) - The variable value is obtained using the BACnet U-COV mechanism whereby the device sends changes of value as they occur without the need for polling. The driver does not confirm that the change in value has been received.
+ 
+Write priority- The BACnet write priority, range 1 to 16, where 1 is the highest priority. The default is 16.
+ 
+Fields - Used to specialize the mapping, including extraction of values from structured data types, specific deserialization or to specify how to map to a proprietary property. See below for more information.
+ 
+Property - Used to define the name of the BACnet proprietary property to map to.
+ 
+ 
+Using the Fields property for advanced mapping
+ 
+The table below describes syntax elements that helps you configure ad'hoc BACnet value deserialization for the most advanced mapping needs.
+ 
+ 
+ 
+ 
+ 
+
+ Type
+ Description
+ 
+ 
+
+ OctetString(x)
+ Return the value of the byte at position x in property of type Octet_String. Can be used with text, register and bit variables. If the specified byte does not exist in the string, the variable will have the quality NS FMT.
+ 
+ 
+
+ BitString(x)
+ Return the value of the bit at position x in a property of type Bit_String. Can be used with text, register and bit variables. If the specified bit does not exist in the string, the variable will have the quality NS FMT.
+ 
+ 
+
+ Reference(Object_Type, Property_Id)
+ 
+ 
+Return the content of proprietary property in XML format that has a type already defined in the BACnet standard. 
+ 
+Object_type is the Id of the type of object.
+ 
+Property_ID is the Id of the property within the object.
+ 
+Can only be used with text variables only. The result is returned in XML format.
+ 
+If the referenced type does not correspond with the format of the value, then the quality of the variable will be NS FMT.
+ 
+ 
+ 
+
+ BACnetObjectIdentifier(x)
+ 
+ 
+BACnetObjectIdentifier is a specific BACnet type. Generally used for the property Object_Identifier that identifies the BACnet object instance identified by two elements Object type and instance number.
+ 
+This type is defined as a data type in the BACnet specification and it is necessary to specify this type (using the position �x�) to return one of these elements. Can be used with text variables only. If the specified instance does not exist in the string, the variable will have the quality NS FMT.
+ 
+ 
+ 
+
+ BACnetObjectIdentifier
+ Similar to BACnetObjectIdentifier(x) above except you cannot specify the instance. Can be used with text variables only.
+ 
+ 
+
+ BACnetArray(x)
+ 
+ 
+Returns the value at the position �x� in a property of type BACnetArray encoded as an integer. The range for �x� is linked to the property value. If the position is defined out of the range of array, the variable will be NS FMT. 
+ 
+The syntax is : BACnetArray ([Position]) where Position is the position or index in the BACnet array. 
+ 
+ 
+ 
+
+ IsBACnetArrayNull(x)
+ 
+ 
+Returns the state of the value defined at the position �x� ( NULL (1) or not (0), encoded as an Integer.
+ 
+The syntax is: IsBACnetArrayNull ([Position]) where Position is the position or index in the BACnet array. If the position is out of the range of the array, the variable quality will be NS FMT.
+ 
+ 
+ 
+
+ FormattedXML()
+ Returns a string in XML format, including indentation. Used to deserialize structured BACnet properties such as Weekly-Schedule into a text variable. Can only be used with text variables.
+ 
+ 
+
+ XML()
+ Similar to FormattedXML() except the deserialized string is in a raw XML format (no indentation).
+ 
+ 
+ 
+ 
+Syntax example:
+ 
+To use the property action-text (ID = 3 as defined in the BACnet standard ) of the object Command (ID= 7 as defined in the BACnet standard) you could use either:
+ 
+Reference(command,action-text)
+ 
+or
+ 
+Reference(7,3)
+ 
+Using the Fields property to handle priority
+ 
+The table below describes syntax elements that helps you handle the priority mechanism of BACnet for commandable objects.
+ 
+ 
+ 
+ 
+ 
+
+ Type
+ Description
+ 
+ 
+
+ SetPriority(ValueOrVariableName, Priority)
+ 
+ 
+Applied to a commandable bit variable mapped on a BACnet object supporting the priority mechanism, it allows setting or resetting the value at a given priority for the object on which the bit variable is mapped.
+ 
+The parameter ValueOrVariableName is either the numeric value to set or the name of a register variable that holds the numeric value to set.
+ 
+The parameter Priority is the priority for writing to set or reset (1 to 16).
+ 
+When the bit variable is set to 0, the value NULL will be written to the BACnet item at the Priority.
+ 
+When the bit variable is set to 1, the value of the parameter ValueOrVariableName will be written to the BACnet item at the Priority.
+ 
+ 
+ 
+
+ IsPrioritySet(Priority)
+ 
+ 
+Applied to a bit variable mapped on a BACnet object supporting the priority mechanism, it allows retrieving if the value at a given priority is set for the object on which the bit variable is mapped.
+ 
+The parameter Priority is the priority for writing to check (1 to 16).
+ 
+If the value for Priority is NULL, the bit variable is set to 0 (priority value not defined), otherwise it is set to 1 (priority value set).
+ 
+ 
+ 
+
+ ActivePriorityValue(Priority)
+ 
+ 
+Applied to a bit, register or text variable mapped on a BACnet object supporting the priority mechanism, it allows retrieving the value at a given priority for the object on which the variable is mapped.
+ 
+The parameter Priority is the priority for writing to check (1 to 16).
+ 
+If of type register or text, the value of the mapped variable is set with the value defined for the Priority.
+ 
+If of type bit, the value of the mapped variable is set to 0 if no value is defined for the Priority (NULL), and it is set to 1 if a value is defined.
+ 
+ 
+ 
+
+ ActivePriority()
+ 
+ 
+Applied to a register variable mapped on a BACnet object supporting the priority mechanism, it allows retrieving the currently active priority for the object on which the variable is mapped.
+ 
+The return value is a priority in the range [1..16].
+ 
+ 
+ 
+
+ IsActivePriority(Priority)
+ 
+ 
+Applied to a bit variable mapped on a BACnet object supporting the priority mechanism, it allows checking if the priority passed as parameter is the highest written priority for the object on which the variable is mapped.
+ 
+The parameter Priority is the priority for writing to check (1 to 16).
+ 
+The value of the bit variable is set to 1 if Priority is the highest written priority, otherwise it is set to 0
+ 
+If the value at Priority is NULL, the value of the bit variable is also set to 0.
+ 
+ 
+ 
+ 
+ 
+Using the Fields property to map on a proprietary property
+ 
+Manufacturers sometimes define a property that is not in the BACnet standard. These are called proprietary properties. There are three possibilities with proprietary properties.
+ 
+ 
+Basic type - A simple type like boolean, unsigned integer, real, or a string of values (like byte string or bit string or character string).
+ 
+Structured type defined in the BACnet standard. - For example, a character string array as defined for the property �action-text� of the BACnet object �command�,
+ 
+Structured type not defined in the BACnet standard. It is currently not possible to use such proprietary properties with PcVue.
+ 
+ 
+The format of a proprietary property can be defined by the Fields property to make it possible to map a variable on a proprietary property.
+ 
+
+ 
+Since version 11.2, mapping to proprietary properties based on BACnet standard types is supported by a built-in mechanism of PcVue. Using the Fields property for this purpose is obsolete and only necessary if your project was designed with a version earlier than 11.2.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Type
+ Description
+ 
+ 
+
+ Boolean()
+ Return the value of a proprietary property encoded as a Boolean. It can be used with bit, text and register variables.
+ 
+ 
+
+ Double() 
+ Return the value of a proprietary property, encoded as a Double. It can be used with bit, text and register variables.
+ 
+ 
+
+ Real()
+ Return the value of a proprietary property, encoded as a Real. It can be used with bit, text and register variables.
+ 
+ 
+
+ Signed()
+ Return the value of a proprietary property encoded as an Signed integer. It can be used with bit, text and register variables.
+ 
+ 
+
+ Unsigned()
+ Return the value of a proprietary property encoded as an Unsigned integer. It can be used with bit, text and register variables.
+ 
+ 
+
+ Date()
+ Return the value of a proprietary property encoded as a Date. It can be used with text variables only.
+ 
+ 
+
+ Time()
+ Return the value of a proprietary property encoded as a Time. It can be used with text variables only.
+ 
+ 
+
+ OctetString()
+ Return the value of a proprietary property encoded as an Octet_String in a raw format, each byte value is separated by a comma. It can be used with text variables only.
+ 
+ 
+
+ BitString()
+ Return the contents of a proprietary property encoded as a Bit_String, in a raw format, each bit value is separated by a comma. It can be used with text variables only.
+
+
+========================================
+TOPIC: Link_bacnet_object_properties.htm
+========================================
+How variable properties are linked to BACnet object properties
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How Variable Properties are Linked to BACnet Object Properties
+ 
+Each BACnet device contains one or more objects. Each object contains one or more properties. There can be several instances of an object type within a device. The BACnet standard specifies the object types and their properties. The standard also specifies that each device must contain a Device object. Show picture
+
+ 
+When you link a variable to a BACnet object you specify the device, the object-type and the object instance. You can optionally also specify a particular object property, or if the device configuration includes an Alarm/Event Notification, the Alarm/Event status. If you do not specify a particular property then the variable's value is linked to the BACnet object's present_value property and the variable's timestamp and quality are produced by PcVue.
+ 
+
+ 
+To enable the variable's timestamp to be linked to the BACNet object's change_of_state_time property you must also tick Use time provided by the device in the Advanced tab of the BACNet Device Properties dialog.
+ 
+ 
+
+ 
+You can configure the project so that raw BACnet alarm information are reflected in the variables' text extended attributes: Event_Value, Event_Type, From_State, To_State, Message_Text...
+ 
+Please refer to the document describing the format of the file VarConf.dat for more information.
+ 
+ 
+Special case for the binary_input, binary_output and binary_value objects
+ 
+A special case exists for the BACnet objects binary_input, binary_output and binary_value. If you do not specify a particular property when linking to a variable, then, not only is the variable's real-time value is linked to object's present_value, but the timestamp is linked to the property change_of_state_time and the quality to status_flags.
+ 
+The BACnet status flags are converted into the variable's quality property as follows. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Status Flags
+ Variable
+ 
+ 
+
+ Fault
+ In alarm
+ Overridden
+ Out of service
+ Quality
+ 
+ 
+
+ 0
+ 0
+ 0
+ 0
+ OK
+ 
+ 
+
+ 0
+ 0
+ 0
+ 1
+ OK
+ 
+ 
+
+ 0
+ 0
+ 1
+ 0
+ OK
+ 
+ 
+
+ 0
+ 0
+ 1
+ 1
+ OK
+ 
+ 
+
+ 0
+ 1
+ 0
+ 0
+ OK
+ 
+ 
+
+ 0
+ 1
+ 0
+ 1
+ OK
+ 
+ 
+
+ 0
+ 1
+ 1
+ 0
+ OK
+ 
+ 
+
+ 0
+ 1
+ 1
+ 1
+ OK
+ 
+ 
+
+ 1
+ 0
+ 0
+ 0
+ NS
+ 
+ 
+
+ 1
+ 0
+ 0
+ 1
+ NS
+ 
+ 
+
+ 1
+ 0
+ 1
+ 0
+ NS
+ 
+ 
+
+ 1
+ 0
+ 1
+ 1
+ NS
+ 
+ 
+
+ 1
+ 1
+ 0
+ 0
+ NS
+ 
+ 
+
+ 1
+ 1
+ 0
+ 1
+ NS
+ 
+ 
+
+ 1
+ 1
+ 1
+ 0
+ NS
+ 
+ 
+
+ 1
+ 1
+ 1
+ 1
+ NS
+
+
+========================================
+TOPIC: Link_DDE_server.htm
+========================================
+Linking a variable to a DDE server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to a DDE Source
+ 
+Before you can link a variable to a DDE item a DDE conversation must have been added to the DDE folder in Data acquisition. For further information, see the help book on Data Acquisition. 
+ 
+How to link a variable to a DDE item
+ 
+ 
+Display the variable's Source tab.
+In the Application Explorer expand the variables tree and select the variable. 
+Select the Properties task. The Variable Properties dialog opens. 
+Select the Source tab.
+ 
+Select the DDE conversation and Item.
+Using the Source list box select a DDE conversation. The DDE conversation is referenced using the Alias that was entered when it was configured in PcVue. Once you have selected a DDE conversation the DDE tab appears in the dialog. Show picture
+
+Enter the item name in the Item text box. 
+ 
+Select OK to confirm the configuration and close the dialog.
+
+ 
+ 
+Using the Auto property
+ 
+If you tick the Auto property, 
+ the name of the variable is used as the item name. The Item field is dimmed and you cannot manually enter the value.
+ 
+Selecting the data format
+ 
+By default, the format of the data from the DDE conversation is treated as an unsigned byte. To change this you use the DDE format property in the Advanced tab. This is only available if a DDE conversation has been selected as the source. The following formats are available.
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Format
+ 
+ 
+ 
+Range
+ 
+ 
+ 
+
+ 
+ 
+UBYTE
+ 
+ 
+ 
+Unsigned byte
+ 
+ 
+ 
+0 to 256
+ 
+ 
+ 
+
+ 
+ 
+BYTE
+ 
+ 
+ 
+Byte
+ 
+ 
+ 
+-128 to 128
+ 
+ 
+ 
+
+ 
+ 
+UWORD
+ 
+ 
+ 
+Unsigned word
+ 
+ 
+ 
+0 to 65536
+ 
+ 
+ 
+
+ 
+ 
+WORD
+ 
+ 
+ 
+Word
+ 
+ 
+ 
+-32768 to 32768
+ 
+ 
+ 
+
+ 
+ 
+ULONG
+ 
+ 
+ 
+Unsigned long
+ 
+ 
+ 
+0 to 4294967296
+ 
+ 
+ 
+
+ 
+ 
+LONG
+ 
+ 
+ 
+Long
+ 
+ 
+ 
+-2147483648 to 2147483648
+ 
+ 
+ 
+
+ 
+ 
+FLOAT
+ 
+ 
+ 
+Float
+ 
+ 
+ 
+-3.37E38 to 3.37E38
+ 
+ 
+ 
+
+ 
+ 
+DOUBLE
+ 
+ 
+ 
+Double
+ 
+ 
+ 
+-1.67D308 to 1.67D308
+ 
+ 
+ 
+
+ 
+ 
+STRING0
+ 
+ 
+ 
+Null terminated string
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+ 
+STRINGN
+ 
+ 
+ 
+\N 
+ (CRLF) terminated string
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+ 
+
+ 
+If you would like to try the example of using Excel as 
+ a DDE server, the cell format for the sheet must be set up as R1C1.
+
+
+========================================
+TOPIC: Link_DNP3.htm
+========================================
+Linking a variable to a DNP3 source
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to a DNP3 Source
+ 
+Before you can link a variable to a DNP3 source, the DNP3 network and one or more devices must have been added to the DNP3 folder in Data acquisition. For further information, see the help book on Data Acquisition.
+ 
+
+ 
+You can also link a variable to a DNP3 source using the DNP3 Mapping dialog. See the topic DNP3 Inputs and Output Mapping in the book on Data Acquisition for information.
+ 
+ 
+How to link a variable to a DNP3 input or output
+ 
+ 
+Display the variable's Source tab.
+In the Application Explorer expand the variables tree and select the variable. 
+Select the Properties task. The Variable Properties dialog opens. 
+Select the Source tab.
+ 
+Select the Device, Object type and Point address.
+Using the Source list box select a DNP3 network. The network is referenced using the Alias that was entered when it was configured in PcVue. Once you have selected a DNP3 network as the source the DNP3 tab appears in the dialog. Show picture
+
+Select the Device and Object type using the drop down list boxes. 
+Enter the Point address. The point address range starts at zero.
+ 
+If you are linking a register with the Command attribute set, to an Analog Output object, select the Variation type.
+ 
+Select OK to confirm the configuration and close the dialog.
+ 
+ 
+
+ 
+When mapping a commandable register variable to an Analog Output object, it is important to select the Variation type so that it fits what the DNP3 field device expects for this particular AO. Otherwise, commands are likely to fail or result in an undefined behavior due to a conversion error in the field device.
+ 
+ 
+DNP3 object types and variable types
+ 
+The following table lists the DNP3 Object types and variable types to which they correspond.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Object type
+ Default variable type
+ Command
+ 
+ 
+
+ Binary inputs
+ Bit
+ No
+ 
+ 
+
+ Binary outputs
+ Bit
+ Yes
+ 
+ 
+
+ Running counters
+ Register
+ No
+ 
+ 
+
+ Frozen counters
+ Register
+ No
+ 
+ 
+
+ Analog inputs
+ Register
+ No
+ 
+ 
+
+ Analog outputs
+ Register
+ Yes
+ 
+ 
+
+ Attributes 211 & 242 to 252
+ Text
+ No
+ 
+ 
+
+ Attributes 212 to 241
+ Register
+ No
+ 
+ 
+
+ Internal indicators
+ Bit
+ No
+ 
+ 
+ 
+ 
+With the exception of the Attributes and Internal Indicators, PcVue allows the mapping of data points to any of variable types. For example, you could map a Binary Input to a register variable. PcVue will convert the value as follows.
+ 
+ 
+If the default type for the data point is a register and it is mapped to a bit, the value will be 0 if the data point is less than or equal to 0, or 1 if it is greater than 0.
+ 
+If the default type for the data point is a register and it is mapped to a text, it will be converted to a string.
+ 
+If the default type for the data point is a bit and it is mapped to a register, the value will be 0 if the data point is false or 1 if it is true.
+ 
+If the default type for the data point is a bit and it is mapped to a text, the value will be "0" if the data point is false or "1" if it is true.
+
+
+========================================
+TOPIC: Link_DNP3_adv_props.htm
+========================================
+Advanced properties specific to DNP3 variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Advanced Properties Specific to DNP3 Variables
+ 
+The Advanced tab of the variable's properties dialog contains a number of properties only available when a DNP3 source has been selected. 
+ 
+Additional properties common to all DNP3 variables
+ 
+ 
+Time tagging
+- The method used to generate the timestamp for the variable. 
+Default - Use the default method as configured in the DNP3 general settings.
+Time tagged - Use the time tag from the device.
+Not time tagged - Do not use the time tag from the device and use PcVue's timestamp instead.
+ 
+ 
+Additional properties for a bit variable when the command attribute is set
+ 
+See the topic Using advanced properties to configure a CROB.
+ 
+Additional properties for a register variable when the command attribute is set
+ 
+See the topic Using advanced properties to configure an AOB.
+
+
+========================================
+TOPIC: Link_DNP3_AOB.htm
+========================================
+Using advanced properties to configure a DNP3 AOB
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using Advanced Properties to Configure a DNP3 AOB
+ 
+The DNP3 protocol uses a command structure called an AOB (Analog Output Block) to force the value of an analog output. 
+ 
+An AOB can be sent using either SCADA Basic, or by forcing the value of a register variable using a Send register animation. When sending an AOB using an animation, the AOB parameters are configured in the Advanced properties of the corresponding register variable.
+ 
+Configuring the AOB using a register variable's advanced properties
+ 
+The following properties are used to configure the AOB. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Control parameters
+- The method used to execute the AOB. 
+Default - Use the default method configured in the DNP3 Network Settings dialog.
+Direct operate - The master sends a message to the Device containing the necessary parameters. The message is acted on by the Device and an acknowledge is sent back.
+Direct operate no ack - The master sends a message to the Device containing the necessary parameters. The message is acted on by the Device but no acknowledge is sent back.
+Select before operate - The master sends a select request message to the Device containing all the necessary parameters. The Device replies with a copy of the parameters. When the master has successfully compared the request and reply parameters, the operate message, also containing the parameters, is sent.
+ 
+AOB - The configuration of the AOB.
+Enable a different address - Allows the AOB to reference a different analog output point to the one from which it is being sent.
+ 
+ 
+Behavior
+ 
+The behavior of a register variable that is forced using a Send Register animation and that is using an AOB is as follows.
+ 
+ 
+The value of the register variable is immediately set to that requested by the Send Register animation.
+ 
+The value of the register will be updated to reflect that of the actual value of analog output in the Device either by exception or by the next background poll. The exact mechanism and how long it will take depend on the configuration of the Device and of PcVue.
+ 
+If the AOB fails, the register is set to invalid (NS).
+ 
+An AOB will not be sent if the register variable is invalid.
+
+
+========================================
+TOPIC: Link_DNP3_CROB.htm
+========================================
+Using advanced properties to configure a DNP3 CROB
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using Advanced Properties to Configure a DNP3 CROB
+ 
+The DNP3 protocol uses a command structure called a CROB (Control Relay Output Block) to force the value of a binary output. A CROB does not just force a bit to 0 or 1 - it sends one of a selection of functions that is then interpreted by the Device as to the precise action. For example, set an output to 1 for a pre-defined length of time (pulse).
+ 
+A CROB can be sent using either SCADA Basic, or by forcing the value of a bit variable using a Send bit animation. When sending a CROB using an animation, the CROB parameters are configured in the Advanced properties of the corresponding bit variable. You can configure two CROB's, one that is sent when using an animation to force the bit to zero and the other that is sent when using an animation to force the bit to one.
+ 
+
+ 
+The CROB parameters that can be sent by a send bit animation are limited to those considered to be most common. If you require something different, you can use the MDNP3 SCADA Basic instruction that is fully configurable.
+ 
+ 
+Configuring the CROB using a bit variable's advanced properties
+ 
+The following properties are used to configure the CROBs. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Control parameters
+- The method used to execute the CROBs. 
+Default - Use the default method configured in the DNP3 Network Settings dialog.
+Direct operate - The master sends a message to the Device containing the necessary parameters. The message is acted on by the Device and an acknowledge is sent back.
+Direct operate no ack - The master sends a message to the Device containing the necessary parameters. The message is acted on by the Device but no acknowledge is sent back.
+Select before operate - The master sends a select request message to the Device containing all the necessary parameters. The Device replies with a copy of the parameters. When the master has successfully compared the request and reply parameters, the operate message, also containing the parameters, is sent.
+ 
+CROB - The configuration of the CROB.
+Bit write to 0 - Configuration of the CROB that is sent when an animation is used to force the bit to zero.
+Enable a different address - Allows the CROB to reference a different binary output point to the one from which it is being sent.
+Function - Selection of the CROB function. See the table below.
+On-time - A period in seconds that is required by some of the CROB functions. Range 0 to 60 seconds.
+Bit write to 1 - Configuration of the CROB that is sent when an animation is used to force the bit to one. The parameters are the same as for Bit write to 0.
+ 
+ 
+The CROB functions supported by PcVue when using a send bit animation are as follows.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Function in PcVue&#160;
+ Trip close code
+ Operation type
+ On-time
+ 
+ 
+
+ Latching relay ON*
+ NULL (0)
+ Latch On (3)
+ Always zero
+ 
+ 
+
+ Latching relay OFF*
+ NULL (0)
+ Latch Off (4)
+ Always zero
+ 
+ 
+
+ Unpaired momentary
+ NULL (0)
+ Pulse On (1)
+ Configurable 0 to 60 sec
+ 
+ 
+
+ Trip breaker/relay 
+ Trip (2)
+ Pulse On (1)
+ Configurable 0 to 60 sec
+ 
+ 
+
+ Close Breaker/relay 
+ Close (1)
+ Pulse On (1)
+ Configurable 0 to 60 sec
+ 
+ 
+ 
+* Default setting.
+ 
+Behavior
+ 
+The behavior of a bit variable that is forced using a Send Bit animation and that is using a CROB is as follows.
+ 
+ 
+The value of the bit variable is immediately set to that requested by the Send Bit animation. For example, if you used Send Bit to 1, the value of the bit is set to 1.
+ 
+The value of the bit will be updated to reflect that of the actual value of binary output in the Device either by exception or by the next background poll. The exact mechanism and how long it will take will depend on the configuration of the Device and of PcVue.
+ 
+If the CROB fails, the bit is set to invalid (NS).
+ 
+A CROB is not be sent if the bit variable is invalid.
+
+
+========================================
+TOPIC: Link_equipment_source.htm
+========================================
+Linking a variable to an equipment source
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to an Equipment Item
+ 
+Before you can link a variable to an equipment item, the equipment networks, devices and frames must be configured.
+ 
+How to link a variable to an equipment item
+ 
+ 
+Display the variable's Source tab.
+In the Application Explorer expand the variables tree and select the variable.
+Select the Properties task. The Variable Properties dialog opens.
+Select the Source tab. Show picture
+
+ 
+Select the Network, Device and Frame.
+Using the Source list box, select the network. The network is referenced using the network name that was entered when it was configured in PcVue. Once you have selected the network, the attached devices and frames appear in the dialog.
+Using the Device list box, select the device.
+Using the Frame list box, select the frame.
+ 
+Click on the Link... button to open the dialog box where you will be able to select the address in the frame.
+ 
+Double click in the right pane on the row corresponding to the address you want to map the variable to in the frame. The Equipment Mapping dialog closes and the chosen device, frame, and offset appear in the variable's Source tab.
+ 
+You can also define the mapping manually by entering the offset within the frame and data format directly.
+ 
+Select OK to confirm the configuration and close the dialog.
+ 
+ 
+
+ 
+See the topic How to map variables to frames for more information about how to use the Mapping dialog.
+ 
+ 
+Supported data formats
+ 
+ 
+ 
+
+ Format
+ Size (bits)
+ Var type
+ Comment
+ 
+ 
+
+ Unsigned integer
+ 2
+ Register
+ &#160;
+ 
+ 
+
+ Signed integer
+ 4
+ Register
+ &#160;
+ 
+ 
+
+ Unsigned integer
+ 4
+ Register
+ &#160;
+ 
+ 
+
+ Signed integer
+ 16
+ Register
+ &#160;
+ 
+ 
+
+ Unsigned integer
+ 16
+ Register
+ &#160;
+ 
+ 
+
+ Signed integer
+ 32
+ Register
+ &#160;
+ 
+ 
+
+ Unsigned integer
+ 32
+ Register
+ &#160;
+ 
+ 
+
+ Signed byte
+ 8
+ Register
+ &#160;
+ 
+ 
+
+ Signed float
+ 32
+ Register
+ &#160;
+ 
+ 
+
+ Signed float
+ 64
+ Register
+ &#160;
+ 
+ 
+
+ Bit (positive logic)
+ 1
+ Bit
+ 1 in the PLC = 1 in PcVue&#160;
+ 
+ 
+
+ Bit (negative logic)
+ 1
+ Bit
+ 0 in the PLC = 1 in PcVue&#160;
+ 
+ 
+
+ Delimited string
+ &#160;
+ Text
+ Variable length string delimited by \0
+ 
+ 
+
+ Fixed length string
+ &#160;
+ Text
+ Fixed length string of Size/8 characters
+ 
+ 
+ 
+ 
+Manually calculating the offset
+ 
+
+ 
+If you use the Equipment Mapping dialog to establish the link between the variable and the item in the frame, the offset properties are calculated automatically.
+ 
+ 
+The offset determines the location of the item in the frame, to which a variable is linked. For register and text variables, it is determined by the Byte offset property. For bits, both the Byte offset and Bit offset properties are used.
+ 
+For registers and text variables, the byte offset is calculated as the position of the item in the frame (starting at 0) multiplied by the number of bytes dictated by the format. For example if you wanted the tenth item (position = 9) and you were using a 16 bit integer format the byte offset would be 18.
+ 
+For bit variables, the byte offset is the calculated as the bit position (starting at 0) divide by 8. The bit offset is the bit position minus the byte offset multiplied by 8. For example, if you wanted the fourteenth bit (position = 13) the byte offset would be 1 and the bit offset 5.
+
+
+========================================
+TOPIC: Link_external_source.htm
+========================================
+Linking a variable to an external source
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to an External Source
+ 
+
+ 
+From version 6.05 onwards External variables are no longer 
+ used. External variables, and this topic, are included for backwards compatibility only.
+ 
+ 
+The value of a variable can be linked to the value of 
+ a variable with the same name in another PcVue on a different computer. 
+ The computers are connected using a local area network. The station on which the value is produced, i.e. the variable has an equipment, OPC etc. source, is called the server. The station on which the value is consumed is called the client. In practice, a station can be both client and server, consuming some values and producing others.
+ 
+To configure a variable so that it consumes a value from another station the Source property (in the Source tab) is set to External and you enter the number of the station from where the value is produced in the Station number field.
+
+
+========================================
+TOPIC: Link_important_note_.htm
+========================================
+!! Important note about linking/mapping a variable to its source !!
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Important Note About Linking or Mapping a Variable to its Source
+ 
+There are two methods to link (also known as mapping) a variable to the source of its value. It is important to understand the difference.
+ 
+From the Source tab of the variable's configuration dialog
+ 
+The Source tab, in the configuration of each variable, allows you to link a variable to its source one variable at a time. This is generally considered the more time consuming method to link variables. However, this method gives you direct access to the advanced properties sometimes required when linking variables.
+ 
+The help topics for this method are found in the Variables help book.
+ 
+From the mapping dialog for each data acquisition object
+ 
+Each data acquisition object (OPC, Equipment, DNP3 etc) has its own mapping dialog. The mapping dialogs allow you to link many variables to their source at the same time and even allow you to create the variables automatically. This is generally considered the quickest method to link variables. However, it does not give you direct access to the advanced properties sometimes required when linking variables.
+ 
+The help topics for this method are found in Data Acquisition help book.
+
+
+========================================
+TOPIC: Link_lonworks_adv_prop.htm
+========================================
+Advanced properties specific to LonWorks variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Advanced Properties Specific to LonWorks Variables
+ 
+The Advanced tab of the variable's properties dialog contains a number of properties only available when a LonWorks source has been selected. Show Picture 
+ Before changing the properties it is important to understand the two options 
+ for monitoring a LonWorks variable.
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Bind this variable 
+ - Selecting this option means that each time the value of the variable 
+ changes in the LonWorks node it is automatically sent to PcVue. 
+ This option should be avoided if possible because of its potential for 
+ loading the LonWorks network. Also, the binding takes place during the 
+ startup of PcVue adding considerably to the time that it takes 
+ to start. As a guideline, you should not exceed 100 variables that have 
+ this option selected.
+ 
+Polled - PcVue 
+ polls the LonWorks node at a pre-defined interval for the value of the 
+ variable. It is important that the polling rate reflects the speed at 
+ which the variable changes. For example, a room temperature might be polled 
+ every five minutes. Good polling rate selection will help reduce the traffic 
+ on the network and hence improve its performance.
+ 
+ 
+LonWorks properties in the Advanced tab
+ 
+ 
+Use default parameters 
+ - The selection of Bind this variable property and the value of the Poll 
+ interval property is taken from the default set in the LonWorks Network 
+ configuration.
+ 
+Bind this variable 
+ - If selected the PcVue variable is bound to the LonWorks 
+ node when PcVue starts.
+ 
+Poll interval - The 
+ interval at which the LonWorks node is polled if the variable is not bound.
+ 
+ 
+Using the Permanent scan for mimics property to reduce 
+ network traffic
+ 
+In addition to regulating the network traffic using carefully 
+ selected poll intervals, you can also reduce network traffic by de-selecting 
+ the property Permanent scan for mimics in the Advanced options of a 
+ variables configuration. In general (but see table below), when this property 
+ is de-selected polling only takes place when a mimic displaying 
+ the value of the variable is open.
+ 
+Variable type versus monitoring mode
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Variable use
+ Monitoring mode
+ Permanent scan for mimic
+ Behavior
+ 
+ 
+
+ 
+ 
+Mimic only
+ 
+ 
+ 
+Polled
+ 
+ 
+ 
+De-selected
+ 
+ 
+ 
+The variable is only monitored if a mimic displaying it 
+ is open.
+ 
+ 
+ 
+
+ 
+ 
+Trend
+ 
+ 
+ 
+Polled
+ 
+ 
+ 
+N/A
+ 
+ 
+ 
+When a variable has trend recording enabled the variable 
+ is always scanned. The property, Permanent scan for mimics, has no effect.
+ 
+ 
+ 
+
+ 
+ 
+Log
+ 
+ 
+ 
+Polled or Bind
+ 
+ 
+ 
+Selected
+ 
+ 
+ 
+If polled then it is possible that some transitions will 
+ not be logged.
+ 
+ 
+ 
+
+ 
+ 
+Alarm
+ 
+ 
+ 
+Bind
+ 
+ 
+ 
+N/A
+ 
+ 
+ 
+Alarms must be bound if all transitions are to be detected. 
+ The property, Permanent scan for mimics, has no effect.
+ 
+ 
+ 
+
+ 
+ 
+Variable linked to node configuration property (SCPT or 
+ UCPT)
+ 
+ 
+ 
+N/A
+ 
+ 
+ 
+Selected
+ 
+ 
+ 
+The variable is read once when PcVue is started. 
+ To refresh the variable you must use the LNS instruction in SCADA BASIC.
+
+
+========================================
+TOPIC: Link_lonworks_node.htm
+========================================
+Linking a Variable to a LonWorks Variable
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to a LonWorks Variable
+ 
+Before you can link one of PcVue's variables to a LonWorks variable the LonWorks network and one or more nodes must have been added to the LonWorks folder in Data acquisition. For further information, see the help book on Data Acquisition.
+ 
+LonWorks variables are frequently (but not always) structured. 
+ That is the same variable can contain a number of different fields. For 
+ example, a variable of type SNVT_switch contains two fields, value and 
+ state.
+ 
+How to link one of PcVue's variables to a LonWorks variable
+ 
+ 
+Display the variable's Source tab.
+In the Application Explorer expand the variables tree and select the variable. 
+Select the Properties task. The Variable Properties dialog opens. 
+Select the Source tab.
+ 
+Select the LNS network, Node, Variable and Field.
+Using the Source list box select a LonWorks network. A LonWorks network is referenced using the Alias that was entered when it was configured in PcVue. Once you have selected a LonWorks network as the source the LNS tab appears in the dialog. Show picture
+
+Using the Node list box select the LonWorks node. After you select the node there 
+ will be a brief pause whilst PcVue interrogates the LonDB for 
+ a list of variables available for that node.
+Select the LonWorks 
+ variable using the Variable drop down list box. When it has been selected, the type of variable is displayed in the read only field, Type.
+If you have selected 
+ a structured variable, use the Field drop down list box to select the 
+ field to which you are linking. Alternatively, you can use an expression 
+ as the Field property. See the topic How 
+ to use an expression with a structured LonWorks variable for details.
+ 
+Select OK to confirm the configuration and close the dialog.
+
+
+========================================
+TOPIC: Link_lonworks_use_expression.htm
+========================================
+How to use an expression with a structured LonWorks variable
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Use an Expression with a Structured LonWorks 
+ Variable
+ 
+As LonWorks variables sometimes have a complex structure 
+ the facility has been added to use an expression to select the correct 
+ data to be linked to PcVue's variables. The expression is entered 
+ in the Field property of the variable's configuration dialog. The following 
+ expressions may be used.
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Expression
+ 
+ 
+ 
+Variable
+ 
+ 
+ 
+Result 
+ 
+ 
+ 
+
+ 
+ 
+BIT(x,y)
+ 
+ 
+ 
+Bit
+ 
+ 
+ 
+Extract the yth bit of the xth byte of the network variable.
+ 
+ 
+ 
+
+ 
+ 
+UI1(x)
+ 
+ 
+ 
+Register
+ 
+ 
+ 
+Extract 1 byte from the xth byte of the network variable 
+ and treat as an unsigned integer.
+ 
+ 
+ 
+
+ 
+ 
+UI2(x)
+ 
+ 
+ 
+Register
+ 
+ 
+ 
+Extract 2 bytes from the xth byte of the network variable 
+ and treat as an unsigned integer.
+ 
+ 
+ 
+
+ 
+ 
+UI4(x)
+ 
+ 
+ 
+Register
+ 
+ 
+ 
+Extract 4 bytes from the xth byte of the network variable 
+ and treat as an unsigned integer.
+ 
+ 
+ 
+
+ 
+ 
+I1(x)
+ 
+ 
+ 
+Register
+ 
+ 
+ 
+Extract 1 byte from the xth byte of the network variable 
+ and treat as a signed integer.
+ 
+ 
+ 
+
+ 
+ 
+I2(x)
+ 
+ 
+ 
+Register
+ 
+ 
+ 
+Extract 2 byte from the xth byte of the network variable 
+ and treat as a signed integer.
+ 
+ 
+ 
+
+ 
+ 
+I4(x)
+ 
+ 
+ 
+Register
+ 
+ 
+ 
+Extract 4 bytes from the xth byte of the network variable 
+ and treat as a signed integer.
+ 
+ 
+ 
+
+ 
+ 
+R4(x)
+ 
+ 
+ 
+Register
+ 
+ 
+ 
+Extract 4 bytes from the xth byte of the network variable 
+ and treat as a IEEE real.
+ 
+ 
+ 
+
+ 
+ 
+RAW()
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+Display a network variable in raw format. In this case, 
+ no formatting is applied.
+ 
+ 
+ 
+
+ 
+ 
+#SWITCH_VALUE()
+ 
+ 
+ 
+Register
+ 
+ 
+ 
+Applies only to SNVT_switch network variables. PcVue 
+ variable represents the value field of the network variable. Writing this 
+ variable (value: i) also updates the state field as follows:
+ 
+ 
+If i is greater than 
+ zero, the state field is sent to 1 and the value field to i.
+ 
+If i is less than 
+ or equal than zero, the state and value fields are written to 0.
+ 
+ 
+ 
+ 
+
+ 
+ 
+#SWITCH_STATE(x)
+ 
+ 
+ 
+Register
+ 
+ 
+ 
+Applies only to SNVT_switch network variables. PcVue 
+ variable is the state field of the network variable. Writing this variable 
+ (value: i) also updates the value field as follows:
+ 
+ 
+If i is equal to 
+ 1, the state field is written to 1 and the value field is written to x.
+ 
+If i is equal to 
+ 0, the state and value field are written to 0.
+ 
+ 
+ 
+ 
+ 
+
+ 
+Network variables or fields that are numeric can be displayed 
+ either as a string (by linking to a text variable) or as a number 
+ (by linking to a register variable).
+
+
+========================================
+TOPIC: Link_M104.htm
+========================================
+Linking a variable to an IEC 60870-5 object
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to an IEC 60870-5 Object
+ 
+Before you can link a variable to an IEC 60870-5 object, the IEC 60870-5 network, one or more devices as well as sectors must have been added to the IEC 60870-5 folder in Data acquisition. For further information, see the help book on Data Acquisition.
+ 
+
+ 
+You can also link a variable to an IEC 60870-5 object using the IEC 60870-5 Mapping dialog. See the topic Mapping IEC 60870-5 information objects to variables in the book on Data Acquisition for information.
+ 
+ 
+How to link a variable to IEC 60870-5 object
+ 
+ 
+Display the variable's Source tab.
+In the Application Explorer expand the variables tree and select the variable. 
+Select the Properties task. The Variable Properties dialog opens. 
+Select the Source tab.
+ 
+Select the Device, Sector and Object type.
+Using the Source list box select an IEC 60870-5 network. The network is referenced using the Alias that was entered when it was configured in PcVue. Once you have selected an IEC 60870-5 network as the source the IEC 60870-5 tab appears in the dialog. Show picture
+
+Select the Device and Sector using the drop down list boxes. The list boxes are populated according to the IEC 60870-5 configuration. 
+Select the Object type. See below for a list of object types and corresponding variable types in PcVue. If you are mapping a bit variable to a Bitstream object, you must also select the Bit rank. 
+ 
+Enter the Information object address. If the variable is read and write (has the control property set), you must also enter a Write information object address. IEC 60870-5 objects use a separate address for read and write. For information on how the address is formatted, see the note on Using a structured address format below.
+ 
+Select OK to confirm the configuration and close the dialog.
+ 
+ 
+IEC 60870-5 object types and variable types
+ 
+ 
+ 
+ 
+ 
+
+ Information Object type
+ Variable
+ 
+ 
+
+ Single point
+ Bit
+ 
+ 
+
+ Double point
+ Bit or Register
+ 
+ 
+
+ Step position
+ Register
+ 
+ 
+
+ Bitstream
+ Bit or Register
+ 
+ 
+
+ Measured value, normalized
+ Register
+ 
+ 
+
+ Measured value, scaled
+ Register
+ 
+ 
+
+ Measured value, short floating point 
+ Register
+ 
+ 
+
+ Integrated total
+ Register
+ 
+ 
+ 
+ 
+Please refer to the PICS IEC 101 and the PICS IEC 104 for more information about the supported ASDU.
+ 
+Using the double-point data type
+ 
+In the equipment, the double point data type has two bits. It is typically used for equipment that has two discreet positions but may not move from one to the other instantly - for example a large circuit breaker. In PcVue, a double-point data type can be mapped to either a single bit or register. The values produced are as follows.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Equipment
+ 
+ &#160;PcVue&#160;
+ 
+ 
+ 
+
+ B2
+ B1
+ Bit
+ Register
+ 
+ 
+
+ 0
+ 0
+ Invalid
+ 0
+ 
+ 
+
+ 0
+ 1
+ 0
+ 1
+ 
+ 
+
+ 1
+ 0
+ 1
+ 2
+ 
+ 
+
+ 1
+ 1
+ Invalid
+ 3
+ 
+ 
+ 
+ 
+Using a structured address format
+ 
+When using a structured address format the three address fields each represent one byte. One, two or three fields are available depending on if you are using one, two or three byte addressing. To convert a decimal address into the three byte oriented fields required for PcVue configuration, use the following method.
+ 
+ 
+Convert the decimal address into a hexadecimal number. Pad out the number with zero's until the number has six digits. For example 210010 > 00083416.
+ 
+Split the hexadecimal number into three sets of two digits. Each two digits represents one byte. For example 00083416 > 0016 0816 3416.
+ 
+Convert each of the three two digit numbers back to decimal. For example 0016 0816 3416 > 010 810 5210. These numbers are entered in the three address fields.
+ 
+ 
+
+ 
+ 
+ 
+The maximum value in each field is 255.
+ 
+Using an unstructured address format
+ 
+If using unstructured addressing only one address field is available. The address is entered as it is. The maximum value for the address is 16777215.
+ 
+Advanced properties
+ 
+The Advanced tab of the variable's properties dialog contains a number of properties only available when an IEC 60870-5 source has been selected. The exact list of properties depends on the type of variable, the type of ASDU it is mapped to and the fact that it is controllable or not.
+ 
+ 
+Monitoring
+Time tagging
+- The method used to generate the timestamp for the variable. 
+Default - Use the default method as configured in the IEC 60870-5 settings.
+Time tagged - Use the time tag from the device.
+Not time tagged - Do not use the time tag from the device and use PcVue's timestamp instead.
+ 
+Control
+Control parameters - The control model to be used.
+Default - Use the default control model as configured in the IEC 60870-5 settings for the corresponding ASDU.
+Direct execute (DE) - Use the Direct execute control model.
+Select before operate (SBO) - Use the Select before operate control model.
+Qualifier (QU or QL) - The control qualifier to be used, or Default to apply the qualifier as defined in the IEC60870-5 settings for the corresponding ASDU.
+Time tagging
+- Defines if commands for the variable have to be time-tagged or not.	
+Default - Use the default method as configured in the IEC 60870-5 settings for the corresponding ASDU.
+Time tagged - If enabled, commands for the variable will be time-tagged.
+Not time tagged - If enabled, commands for the variable will not be time-tagged.
+ 
+Format
+Unsigned - If enabled, the value received from the device is interpreted as unsigned.
+Signed - If enabled, the value received from the device is interpreted as signed. Default.
+
+
+========================================
+TOPIC: Link_opc_server.htm
+========================================
+Linking a variable to an OPC server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to an OPC Item
+ 
+Before you can link a variable to an OPC item, the OPC server and one or more OPC groups must have been added to the OPC folder in Data acquisition. For further information, see the help book on Data Acquisition.
+ 
+
+ 
+You can also link a variable to an OPC item using the OPC Mapping dialog. See the OPC mapping topic in the book on Data Acquisition for information.
+ 
+ 
+How to link a variable to an OPC item
+ 
+ 
+Display the variable's Source tab.
+In the Application Explorer expand the variables tree and select the variable. 
+Select the Properties task. The Variable Properties dialog opens. 
+Select the Source tab.
+ 
+Select the OPC server, Group and Item ID.
+Using the Source list box select an OPC server. An OPC server is referenced using the Alias that was entered when it was configured in PcVue. Once you have selected an OPC server as the source the OPC tab appears in the dialog. Show picture
+
+Using the Group name list box select the OPC group. 
+Enter the item name in the Item ID text box. You can either type in the item name or select it using the OPC Mapping dialog, which is displayed using the ellipsis button adjacent to the text box. 
+ 
+Select OK to confirm the configuration and close the dialog.
+
+ 
+ 
+Using the Access Path property
+ 
+The 
+ Access path property has a relationship with the item name that is similar to using 
+ a branch with a variable name. For example, you could use Channel_0_User_defined.User 
+ as the access path and Setpoint as the item name, or have no access path 
+ and use Channel_0_User_defined.User.Setpoint as the item name.
+
+
+========================================
+TOPIC: Link_opcua_server.htm
+========================================
+Linking variables to an OPC UA server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking variables to an OPC UA server
+ 
+ In PcVue, OPC UA elements can be linked to existing variables in the project. This linking process can be carried out from the Source tab of the variable configuration dialog.
+ 
+
+ 
+You can also map variables from the server mapping dialog. Refer to the topic How to map variables to OPC UA elements to learn more.
+ 
+ 
+Prerequisites:
+ 
+ 
+
+ 
+You have configured an OPC UA network and server.
+ 
+ 
+
+ 
+You have created a polling group or a subscription.
+ 
+ 
+
+ 
+You have created variables to map.
+ 
+ 
+ 
+ 
+
+ 
+Go to Configure.Application Explorer and expand Variables, then Variables tree nodes.
+ 
+ 
+
+ 
+Go to the branch containing the variable you want to map and open the properties window, then select the Source tab.
+ 
+ 
+
+ 
+Select the OPC UA network, server and monitoring group, then click the Mapping button. Show picture
+ 
+
+ 
+ 
+ 
+
+ 
+You can also map the OPC UA variables manually by selecting or editing the mapping properties individually.
+ 
+ 
+ 
+
+ 
+Go to the OPC UA variable you want to map and double click it. The variable's mapping details appear in the Manual mapping properties in the Source tab.
+ 
+ 
+
+ 
+Click Ok to save the configuration and close the window.
+
+
+========================================
+TOPIC: Link_scaling_registers.htm
+========================================
+Scaling and Adding a Deadband to Register Variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Scaling and Adding a Deadband to Register Variables
+ 
+Register variables that have a value sourced from outside PcVue have additional properties to scale and bias the value and to incorporate a deadband. These properties are found in the Advanced tab.
+ 
+Scaling a register variable
+ 
+When using analog values it is frequently the case that the representation 
+ of the value in the equipment is not in engineering units. For example, 
+ a temperature that has a range from -10 to 40 DegC might be represented by 
+ a value of 0 to 4096.
+ 
+To scale and bias the value of a register variable, so that it is in engineering units, you enter the Minimum value and Maximum value in engineering units in the General tab and the Device minimum value and Device maximum value in the Advanced tab. PcVue automatically performs the scale and bias calculation each time the value in the equipment changes. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Adding a deadband
+ 
+The deadband is how much the value of the variable must change before it is recognized as a change by the rest of PcVue. The use of a deadband is essential to remove the jitter (constant changing in value) caused by the primary transducer and/or the A to D converter used by the equipment to convert the analog signal to its digital equivalent. As PcVue is change driven, if you do not use a deadband a lot of processing time will be wasted dealing with insignificant changes in value.
+ 
+The deadband is configured for each variable in the Advanced tab of the variable's properties dialog. Show picture
+
+ 
+The value for the deadband can be entered in three ways selected by the Type drop down list box. The three options for Type are Absolute, Range percent and Value percent.
+ 
+ 
+Absolute - The deadband is entered in engineering units. For example, if the deadband was 10 the value would have to change by 10 or more before it was recognized.
+ 
+Range percent - The deadband is entered as a percentage of the range. For example, if the range was 0 - 4000 and the deadband was 10, the value would have to change by 400 or more before it was recognized.
+ 
+Value percent - The deadband is entered as a percentage of the value. For example, if the deadband was 10 and the current value of the variable was 400, the value would have to change by 40 or more before it was recognized.
+ 
+ 
+At runtime, the deadband processing has precedence over the out-of-bounds handling (according to the min/max range configuration) to determine the status of a variable. In practice, upon a value change, deadbanding is applied before checking if the new value is within the range or out-of-bounds. This means that:
+ 
+ 
+
+ 
+If the value of a register is close to its minimum or maximum value and changes by less than the deadband, the new value will be discarded and the variable will remain within the range.
+ 
+ 
+
+ 
+If the value of a register is close to its minimum or maximum value and changes by more than the deadband, the new value will be taken into account and the variable may become NSL if the new value is out-of-bounds.
+ 
+ 
+ 
+The same is true when a variable is out-of-bounds:
+ 
+ 
+
+ 
+If the value changes by less than the deadband, the new value will be discarded and the variable will remain with status NSL (out-of-bounds).
+ 
+ 
+
+ 
+If the value changes by more than the deadband, the new value will be taken into account and the variable may become valid again if the new value is within the range.
+ 
+ 
+ 
+
+ 
+In a networking architecture, the Deadband property is distributed. The behavior only depends on how the deadband is configured on the producer station of a variable. Changing it on a client station that is only a consumer of a variable has no effect.
+
+
+========================================
+TOPIC: Link_snmp.htm
+========================================
+Linking a variable to an SNMP source
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to an SNMP Source
+ 
+Before you can link a variable to an SNMP source, an SNMP network and one or more devices must be added to the SNMP folder in Data acquisition. If you intend to periodically poll for data you must also create at least one Polling Group. For further information, see the help book for SNMP in Data Acquisition. 
+ 
+
+ 
+You can also link a variable to an SNMP source using the SNMP Mapping dialog. See the topic The SNMP Mapping Dialog in the book on Data Acquisition for information.
+ 
+ 
+How to link a variable to a SNMP source
+ 
+ 
+Display the variable's Source tab.
+In the Application Explorer expand the variables tree and select the variable. 
+Select the Properties task. The Variable Properties dialog opens. 
+Select the Source tab.
+ 
+Select the Network, Device and Data type.
+Using the Source list box select an SNMP network. The network is referenced using the Alias that was entered when it was configured in PcVue. Once you have selected an SNMP network as the source the SNMP tab appears in the dialog. Show picture
+
+Select the Device and Data type using the drop down list boxes. See below for the range of data types.
+ 
+If you selected OID as the data type:
+Enter the OID. You can either type it in directly or use the OID Browser dialog to select it. See the topic OID Selector dialog. If you are entering a scalar OID, it must end with .0 (representing instance 0). If you are entering a tabular OID, it must end with the instance number.
+Select the Polling Group using the Updated By property. As an alternative to a Polling Group you can also choose (Trap only and adhoc synchronization). This will update the variable only when there is a trap or when communication is started. See Refresh Mechanism table below.
+ 
+If you selected a Ping as the data type.
+
+Select the Polling Group using the Updated By property.
+ 
+If you selected a Trap as the data type there is nothing more to configure.
+ 
+Select OK to confirm the configuration and close the dialog.
+ 
+ 
+
+ 
+The OID Browser does not know if an OID is scalar or tabular. It assumes the more common scalar type and appends a .0 to the OID. If the OID is tabular, you must manually remove the .0 before confirming the variable's configuration.
+ 
+ 
+About the SNMP data type
+ 
+There are three main data types available within PcVue's SNMP driver.
+ 
+ 
+OID - Object IDentifier. The method used to access the majority of the data available from an SNMP device. Normally (but not always) accessed by the driver by periodic polling.
+ 
+Trap - Unsolicited messages from a device as the result of some significant event. 
+ 
+PING - SNMP provides no support for unmanaged devices. However, PcVue's SNMP driver also supports unmanaged devices by making use of the PING request.
+ 
+ 
+SNMP data type and refresh mechanism
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Data type
+ Polling group
+ Synchronization and trap
+ 
+ 
+
+ Ping
+ Polled at the scan rate of the selected polling group.
+
+ NA
+ 
+ 
+
+ Trap
+ N/A
+ Trap data type can only be refreshed by a trap message.
+ 
+ 
+
+ OID
+ Polled at the scan rate of the selected polling group.
+ 
+ 
+Read at project start-up and on communication recovery.
+ 
+Also refreshed if the OID is received in a trap message.
+ 
+Used for trap OIDs and preferred, for performance, for those OIDs that change very infrequently or have a static value.
+ 
+ 
+ 
+ 
+ 
+&#160;PcVue variable type versus SNMP data type
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Variable type
+ Data types
+ 
+ 
+
+ Register
+ OID, Ping:Status code, Ping:Round-trip time
+ 
+ 
+
+ Bit
+ OID, Ping:Status, Trap#0 to Trap#6*
+ 
+ 
+
+ Text
+ OID
+ 
+ 
+ 
+ 
+
+ 
+Trap #2 and Trap #3 are combined into a single item called Trap#2#3.
+
+
+========================================
+TOPIC: Link_snmp_adv_prop.htm
+========================================
+Advanced Properties Specific to SNMP Variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Advanced Properties Specific to SNMP Variables
+ 
+The Advanced tab of the variable's properties dialog contains properties only available when an SNMP source has been selected. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Extraction fields - Used to specify how special OIDs are treated. The following options are available:
+ 
+ 
+Enum(x) - Used when linking an enumerated OID to a bit. The value in brackets (x) specifies which of the enumerated value represents true. Any other enumerated value is treated as false. The bit is set to 1 if the received value equals x. Otherwise, the bit is forced to 0.
+ 
+NotEnum(x$y$z...) - Sets the bit to 1 if the received value is not equal to any of x, y, z, etc. Otherwise, sets it to 0. 
+ 
+BitString(x) - Used when a bit value is contained in a string. (x) is the character index with (0) for the first (rightmost) character. If the character at the specified offset is 0, the bit is set to 0. If the character is 1, the bit is set to 1. Any character other than "0" or "1" in the indexed character will result in the mapped variable being assigned the quality NS FMT.
+ 
+The BitString(x) can be mapped to a bit, register, or text variable:
+ 
+ 
+Bit Variable - Set to 0 or 1.
+ 
+Register Variable - Set to 0 or 1.
+ 
+Text Variable - Set to "0" or "1".
+ 
+ 
+The following option is available for bit and register variables only:
+ 
+StrCompare(string) - Sets the bit to 1 if the received string matches the specified string. Otherwise, sets it to 0. Example:
+ 
+ 
+Input: "toto", StrCompare(toto) &#8594; Bit value: 1.
+ 
+Input: "toti", StrCompare(toto) &#8594; Bit value: 0.
+ 
+ 
+The following options are available for bit variables only:
+ 
+HexStrBitValue(x$y) - Extracts a specific bit from a hexadecimal string, where x represents the byte offset in the received string, and y specifies the bit offset within the byte (ranging from 0 to 7). For example:
+ 
+ 
+Input: "07 DF 0B 03 0A 28 22 00 2B 00 00", HexStrBitValue(4$1) &#8594; Bit value: 1.
+ 
+ 
+RawStrBitValue(x$y) - Extracts a specific bit from a raw string. In this function, x represents the byte offset within the received string, and y specifies the bit offset within the byte (ranging from 0 to 7). For example:
+ 
+ 
+Input: "07 DF 0B 03 0A 28 22 00 2B 00 00", RawStrBitValue(4$2) &#8594; Register value = 0x30, Bit value = 0 (the bit at offset 2 is 0).
+ 
+ 
+The following options are available for register variables only:
+ 
+Div(x) - Divides the received value by x and stores the result in the register. For example, If the received value is 100 and the function call is Div(5), the register value will be 20.
+ 
+HexStrIntValue(x$y) -Extracts a value from a hexadecimal string and stores it in the register variable. x represents the byte offset in the string, and y specifies the number of characters to extract (between 1 and 4). For example:
+ 
+ 
+Input: "07 DF 0B 03 0A 28 22 00 2B 00 00", HexStrIntValue(4$2) &#8594; Register value = 0x0A28 = 2600.
+ 
+ 
+RawStrIntValue(x$y) - Extracts the binary code of characters from a raw string and stores it in the register variable. x represents the byte offset, and y specifies the number of characters to extract (between 1 and 4). For example:
+ 
+ 
+Input: "07 DF 0B 03 0A 28 22 00 2B 00 00", RawStrIntValue(4$2) &#8594; Register value = 0x3042 = 12354.
+ 
+ 
+The following option is available for text and register variables only:
+ 
+HexStrASCII([x$y]) - Extracts ASCII characters corresponding to hexadecimal values from a string and stores them in the register variable. x is the byte offset, and y is the number of characters to extract. Extraction stops at the first occurrence of 00. For example:
+ 
+ 
+Input: "32 34 33 00", HexStrASCII() &#8594; Register value = 243.
+ 
+Input: "32 52 33 00", HexStrASCII() &#8594; Register value = NS FMT (invalid ASCII character encountered).
+ 
+ 
+Text variable example:
+ 
+ 
+Input: "52 75 6E 6E 69 6E 67 00 73 6D 6F 6F 74 68 00", HexStrASCII() &#8594; Text variable = "Running".
+ 
+Input: "52 75 6E 6E 69 6E 67 00 73 6D 6F 6F 74 68 00", HexStrASCII(8$7) &#8594; Text variable = "smooth".
+ 
+ 
+ 
+Disable reading (unreachable OID) - Only apply to variables updated by trap only and ad'hoc synchronization. If the underlying OID cannot be read, enabling this property disables any attempt to send a read request.
+With inital value - Check to set a default initial value.
+
+
+========================================
+TOPIC: Link_snmp_oid_browse.htm
+========================================
+The SNMP OID Selector Dialog
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The SNMP OID Selector Dialog
+ 
+The OID Selector dialog is used to browse and select an OID. The OID Selector dialog is opened from the ellipsis button adjacent to the OID field in the Variable Properties dialog, Source tab. The operation and appearance of the OID Selector dialog depends if offline (default) or online operation has been selected in the SNMP Mapping dialog.
+ 
+ 
+If offline was selected in the SNMP Mapping dialog, then both standard OIDs and those from any manufacturer's MIBs that the project has loaded, are displayed. Show picture
+
+ 
+If online mode was selected in the SNMP Mapping dialog, only those symbolic OIDs for which a corresponding numeric OID has been discovered, are displayed. Discovered OID nodes are displayed in green. Show picture
+
+ 
+ 
+
+ 
+If online mode was selected in the SNMP Mapping dialog, but the device had not been browsed, there will be a delay when opening the OID Browser while the browsing is executed.
+ 
+ 
+The dialog contains two panes. 
+ 
+ 
+The upper pane displays the available OIDs for the device in a tree format. Adjacent to the final branch (leaf) of each OID is an icon indicating the corresponding variable type for PcVue (Register or Text - there are no bit OIDs). Some register variables are enumerated. See the topic Advanced properties specific to SNMP variables on how to treat these.
+ 
+The lower pane displays supplementary OID information from the MIB file including a description, range, access and data type.
+ 
+ 
+SNMP Data Types
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Data Type
+ variable type
+ Notes
+ 
+ 
+
+ Integer
+ Register
+ Range = -2e31 to 2e31 - 1. Allows enumerations.
+ 
+ 
+
+ Integer32
+ Register
+ Range = -2e31 to 2e31 - 1.
+ 
+ 
+
+ Octet string
+ Text
+ Can be used to specify bytes of binary or textual information. Length 0 to 65535 bytes
+ 
+ 
+
+ Object identifier
+ Text
+ &#160;
+ 
+ 
+
+ IpAddress
+ Text
+ Used to specify an IPv4 address in the format x.x.x.x. Example 192.168.99.10.
+ 
+ 
+
+ Counter
+ Register
+ Used to represent a count. Range 0 to 4294967295.
+ 
+ 
+
+ Counter32
+ Register
+ Used to represent a count. Range 0 to 4294967295.
+ 
+ 
+
+ Gauge
+ Register
+ Non-negative integer which holds the maximum or minimum value specified in a range when the actual value goes over or below the range.
+ 
+ 
+
+ Gauge32
+ Register
+ Non-negative integer which holds the maximum or minimum value specified in a range when the actual value goes over or below the range.
+ 
+ 
+
+ Unsigned32
+ Register
+ Range = 0 to 2e31 - 1
+ 
+ 
+
+ TimeTicks
+ Register
+ Elapsed time in units of hundredth of a second. Range is 0 to 2e32 - 1. PcVue automatically converts to milliseconds.
+ 
+ 
+
+ Counter64
+ Register
+ Used to represent a count. Range 0 to 2e64 -1.
+ 
+ 
+
+ UInteger32
+ Register
+ &#160;
+
+
+========================================
+TOPIC: Link_sqlquery_read.htm
+========================================
+Linking a variable to a Sql read query
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to a Sql Read Query
+ 
+A variable can be linked to the result of a Sql read query by choosing the Sql Variables source. See the topic Data Connections Overview. When a variable is linked in this way its real-time value, and optionally its timestamp and quality, are sourced from a third party database such as Microsoft's SQL Server. Read queries can be configured so that they are polled periodically and / or on event.
+ 
+A Sql read query returns a list of rows or a scalar value. In the case of a list of rows, you must be able to select the row(s) and the column(s) to be mapped to the variable and its metadata. The configuration is in three steps (or four steps if the query contains parameters) each with its own configuration tab.
+ 
+ 
+Data selection - Selects the Sql Connection and its subordinate Sql Read Query.
+ 
+Row selection - Selection of a particular row or all rows from the table of results.
+ 
+Mapping - Selection within the row of the field that contains the value and, optionally, the field that contains the timestamp and the status of the variable.
+ 
+Parameters - Configuration of any parameters that the query contains. Parameters add flexibility to a Sql Query by allowing the value of one or more fields to be provided by the configuration of the linked variable.
+ 
+ 
+See the topic Sql variables Read query mapping examples for a detailed explanation and examples.
+ 
+Mapping variables to a Sql read query is subject to scope-related constraints:
+ 
+ 
+
+ 
+The scope of the Sql read query and the scope of the mapped variable must match,
+ 
+ 
+
+ 
+When using a variable to set the value of an input parameter, constraints related to scope apply to avoid user-specific data to be used as inputs in a context where the query results will be accessible to other users.
+ 
+ 
+ 
+ The following matrix summarizes the list of valid combinations of scopes:
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Scope of the mapped variable
+ Scope of the Sql read query
+ Scope of the variables used to set input parameters
+ 
+ 
+
+ Local
+ Local
+ Local, Shared
+ 
+ 
+
+ Shared
+ Shared
+ Local, Shared
+ 
+ 
+
+ Session
+ Session
+ Local, Shared, Session
+ 
+ 
+
+ Client-context
+ Client-context
+ Local, Shared, Session, Client-context
+ 
+ 
+ 
+ 
+How to configure the Data Selection
+ 
+ 
+Open the configuration dialog for the variable and select the Sources tab. 
+ 
+Select Sql Variables as the Source. Sql Variables is only available if one or more Sql connections have been configured.
+A new tab Reading appears for configuration of the data selection. 
+ Show picture
+
+ 
+Select the Sql connection and the subordinate Sql query. The appearance of the Source tab is now modified to display three more sub-tabs, Row selection, Mapping and Parameters.
+ Show picture
+
+ 
+Even though the configuration is only partially completed, it is possible to test the query using the Execute button. If the query requires any parameters, you are prompted to enter them. The results from the query are displayed in the result field. Testing the Sql Query has the advantage of discovering the Field Names that are returned by the query. The field names are used in the other configuration tabs. In the following screen shot the field name that has been discovered is BIT. It is followed, in parenthesis, by the field type.
+ Show picture
+
+ 
+ 
+The Traces button is used to enable trace information in the Event Viewer (F7) that can be useful when debugging a particular query.
+ 
+
+ 
+If the variable has the command property set, a Writing tab also appears. See the topic Linking a variable to a Sql write query.
+ 
+ 
+How to configure the Row selection
+ 
+The row selection can be either by Position, Field value, or All rows. Show picture
+
+ 
+ 
+By position - Typically used with wide table format where each data variable appears in a separate column. Selects a row by its actual position in the query results. You can enter a position (1 by default to select the first record), or select Last row to select the last returned row.
+ 
+By field value - Typically used with a narrow table format where one column contain the values and other columns the metadata of the values. Selects a row by the value of a particular column (lookup). If the Sql read query has been tested using the Execute button, the Field name and Value list boxes are populated with the possible values. The selected field must be of type boolean, integer or string. Double, float, decimal, dates or structured data types cannot be used.
+ 
+All rows - Typically used with a wide table format where the Sql read query has been configured to return several rows of the same value. Selects and processes all data rows.
+ 
+Selection filter - Allows you to define an expression that will sort out returned rows you want to exclude. If for a given row, the result of the expression is True, the row is taken into account. If the result is False, the row is ignored. For example, if you want to exclude rows returning the value Null in the column called Temperature, you could add the following Selection Filter: =if(IsDbNull(FieldValue("Temperature")) == false, true, false)
+ 
+When row selection is empty - Allows you to control how the variable VTQ is updated if the query does not return any row.
+ 
+If set to Preserve variable state, the VTQ of the variable is maintained.
+If set to Set variable as invalid, the variable quality is set to NS.
+If set to Replace variable value by, the variable value is set to the specific value you enter.
+ 
+ 
+
+ 
+When using the By position option, keep in mind that any ORDER BY clause in your Sql query affects the result you will obtain. In most cases, changing the ORDER BY clause in the query requires changing the value of Position in the variable mapping.
+ 
+ 
+How to configure the Mapping
+ 
+The Mapping tab is used to map the fields containing the value, and optionally the timestamp and the status (quality) to the variable. Mapping is achieved with an expression taking advantage of the FieldValue() function with the name of the column of interest as argument. The expression is entered using the Expression Editor dialog. See the topic Using the Expression Editor. If the Sql read query has been tested using the Execute button, clicking the button at the top left of the dialog displays a list of the available fields. Show picture
+
+ 
+The expression must contain the function FieldValue(), which selects the field. In addition, it can also contain other expression elements should there be any requirement to manipulate the value before it is used to update the variable value (resp. timestamp or quality).
+ 
+Mapping the status (quality) of the variable can be achieved by using any of the following constants:
+ 
+ 
+VAR_QUALITY_GOOD - To set the variable status to valid
+ 
+VAR_QUALITY_NS - To set the variable status to invalid
+ 
+VAR_QUALITY_NSCOM - To set the variable status to invalid due to communication error
+ 
+ 
+
+ 
+As an example, the typical expression you will use for mapping the quality is:
+ 
+if(FieldValue(�col_Quality�) == 192, VAR_QUALITY_GOOD, VAR_QUALITY_NS)
+ 
+where col_Quality is the name of the field where the quality is stored in the data source.
+The value 192 is an example if the data source stores qualities with values similar to OPC.
+ 
+ 
+If the Timestamp variable property is not mapped to a field from the query result, it will be set by PcVue and managed accordingly. The same goes for the Quality property.
+ 
+
+ 
+Because there is a huge variety of timestamp formats, mapping the timestamp will eventually requires a conversion.
+ 
+See the topic Expression functions for timestamp manipulation for more information about the expression functions available for date and time conversions.
+ 
+ 
+ 
+
+ 
+Preserve variable's state on error - If enabled, the VTQ of the variable will be maintained if the mapping cannot be performed. For example if an expected field is missing in the returned rows, if a data type conversion error occurs or if the query fails. If not enabled, the variable is set invalid in such a situation.
+ 
+ 
+ 
+
+ 
+The function IsDbNull() can be used to accommodate the fact that a returned field could be null for some rows.
+ 
+For example to control how the quality property of the variable will be set if the col_Quality field is null, you could use an expression such as:
+ 
+If(IsDbNull(FieldValue("col_Quality")), VAR_QUALITY_NS, FieldValue("col_Quality"))
+ 
+ 
+
+ 
+You can also use the function IsFieldExists() to test if a field exists in the requested table.
+ 
+ 
+How to configure the Parameters
+ 
+If one or more parameters are found in the Sql read query, they are listed in the Parameters tab and must be substituted using an expression. A parameter can only be substituted once. If the Sql read query is subsequently used in another variable, the parameter substitution is pre-configured and the field is dimmed indicating it is read only.
+ 
+A parameter defined by an expression can reference a property of the variable (domain, Extended attribute etc.) and use the functions and operators of the expression engine. The button at the top left of the expression editor dialog displays a list of the variable properties that can be substituted. Show picture
+
+ 
+Parameters can only be set once - the first variable in which a Read Query is used will set the value of the parameter. 
+ 
+For example, Register01 has the domain Security. Register01 uses a Read Query containing ?Param01 configured to use the Domain. The value substituted for ?Param01 will be Security. Register02 uses the same Read Query. Irrespective of the domain of Register02, Security will be used as the value for ?Param01.
+ 
+If a parameter is mapped with an indirection on a Text extended attribute so that it is set with a variable value, the adequacy of the scope of the variable with regards to the scope of the Sql query is only verified at run-time. It is not checked at configuration time, nor at start-up time.
+ 
+Expression functions exclusively for Sql query variable mapping
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Operation
+ 
+ 
+
+ FieldValue(QueryResultFieldName)
+ 
+ 
+Return the value of the field QueryResultFieldName that belong to the result of a Sql Read Query. The format of the returned value is the same as that of the field.
+Example: FieldValue("Temperature")
+ 
+ 
+ 
+
+ IsDbNull
+ Function to evaluate a returned field value against NULL.
+ 
+ 
+
+ Row_Num
+ Return the number of the row in the dataset returned by the query.
+ 
+ 
+ 
+ 
+Functions exclusively for Sql query substitution parameters
+ 
+The following functions all return a particular property of the concerned variable.
+ 
+ 
+ 
+ 
+ 
+
+ Function and syntax
+ Variable property
+ 
+ 
+
+ AlarmLevel
+ 
+ 
+Alarm level. Type VT_I2.
+Example: 1
+ 
+ 
+ 
+
+ AssocLabel
+ Value of the variable in terms of its associated label. Type VT_BSTR
+Example: "Running"
+ 
+ 
+
+ BinAttr
+ Complete extended binary attribute. Type VT_UI4.
+Example: 128
+ 
+ 
+
+ BinAttrXX (01 to 30)
+ The value of the specific bit of the extended binary attribute. Type VT_BOOL.
+Example: BinAttr01 > 0
+ 
+ 
+
+ Description
+ Description. Type VT_BSTR.
+Example: "Room 101 measured temperature"
+ 
+ 
+
+ Domain
+ Domain. Type VT_BSTR.
+Example: "BUILDING01"
+ 
+ 
+
+ Name
+ Name. Type VT_BSTR.
+Example: "Building01.Floor01.Room01.Temperature"
+ 
+ 
+
+ Nature
+ Nature. Type VT_BSTR.
+Example: "HEATING"
+ 
+ 
+
+ Quality
+ Quality. Type VT_UI2.
+Example: 192
+ 
+ 
+
+ TextAttrXX (03 to 16)
+ Extended text attribute 03 to 16. Type VT_BSTR.
+Example 1: TextAttr05 > "Building01.Floor01.Room01.Temperature"
+Example 2: TextAttr06 > "Help.PDF"
+ 
+ 
+
+ TextIndAttrXX (03 to 16) 
+ Deferred extended text attribute 03 to 16. Type VT_BSTR.
+Example: "21.75"
+ 
+ 
+
+ TS
+ Timestamp. Type VT_R8. 
+Example: 43895.647743055553
+ 
+ 
+
+ Units
+ Units. Type VT_BSTR.
+Example: "Deg �C"
+ 
+ 
+
+ UserName
+ User name. Type VT_BSTR.
+ 
+ 
+
+ Value
+ Value. The type is either VT_BSTR (Text variable) or VT_R8 (Register or Bit variable).
+Example: 21.75
+ 
+ 
+ 
+ 
+Traces
+ 
+The Traces button allows you to enable diagnostic trace messages. Each trace generates specific messages that are logged in the Trace Files and displayed in the Event Viewer dialog (F7).
+ 
+ 
+Trace 1: All drivers - General - Enable general traces related to the activity between the Variable Manager and the Sql variable driver.
+ 
+Trace 2: All drivers - Details - Enable detailed traces related to the activity between the Variable Manager and the Sql variable driver.
+ 
+Trace 3: All drivers - Performances - Enable traces related to performances of the Sql variable driver.
+ 
+Trace 4: Sql variable driver - Performances - Enable traces related to performances of the Sql query results processing.
+
+
+========================================
+TOPIC: Link_sqlquery_read_ex.htm
+========================================
+Sql variables Read query mapping examples
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Sql variables Read query mapping examples
+ 
+See the topic Supported Table Formats for more information on table formats.
+ 
+
+ 
+The row position number starts at zero.
+ 
+ 
+Wide table format
+ 
+Each data appears in a separate field. A typical Sql read query returns the following table.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_Ts	
+ field_Temperature	
+ field_Humidity	
+ field_Wind	
+ �
+ 
+ 
+
+ 11/01/2019 10h02	
+ 22.5	
+ 64	
+ 17 
+ �
+ 
+ 
+ 
+ 
+We want to map the variable @Temperature to the data in the field field_Temperature.
+ 
+In the Row Selection tab, the row is selected as By position.
+ 
+
+ 
+ 
+ 
+In the Mapping tab, only the Value is mapped. As the timestamp is not mapped, it is provided by PcVue.
+ 
+
+ 
+ 
+ 
+Narrow table format
+ 
+One field contains the values and other fields the context of the value. A typical Sql read query returns the following table.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_Ts	
+ field_Name	
+ field_Value	
+ field_Quality
+ 
+ 
+
+ 11/01/2019 10h00	
+ Wind	
+ 39	
+ 192
+ 
+ 
+
+ 11/01/2019 10h03	
+ Temperature	
+ 22,5	
+ 192
+ 
+ 
+
+ 11/01/2019 10h05	
+ Humidity	
+ 64	
+ 192
+ 
+ 
+ 
+ 
+We want to map the variable @Temperature to the data in the field field_Name in the row that contains "Temperature".
+ 
+In the Row Selection tab, the row is selected as by field value.
+ 
+
+ 
+ 
+ 
+In the above example, this will use the data in row two. If we had chosen "Humidity" this would use the data in row three etc.
+ 
+In the Mapping tab, the Value is mapped. As the timestamp is not mapped, it is provided by PcVue.
+ 
+
+ 
+ 
+ 
+Wide table format 
+ 
+Each data variable appears in a separate field. The Sql read query has been configured to return several values for the same variable producing the following table. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_Id
+ field_Ts
+ field_Temperature
+ 
+ 
+
+ 1
+ 2020/06/23 10:00:00
+ 20
+ 
+ 
+
+ 2
+ 2020/06/23 11:00:00
+ 22
+ 
+ 
+
+ 3
+ 2020/06/23 12:00:00
+ 25
+ 
+ 
+ 
+ 
+We want to map the variable @Temperature to the data in field field_Temperature. As the variable is trend recorded, we also want to use the timestamps in field field_Ts.
+ 
+In the Row selection tab, the row is selected as All rows.
+ 
+
+ 
+ 
+ 
+In the Mapping tab, both the Value and Timestamp are mapped. 
+ 
+
+ 
+ 
+ 
+Each time the query is executed, all rows are browsed and recorded. The above example would produce three lines in the archive unit.
+ 
+20 with the timestamp 2020/06/23 10:00:00
+22 with the timestamp 2020/06/23 11:00:00
+25 with the timestamp 2020/06/23 11:00:00
+
+
+========================================
+TOPIC: Link_sqlquery_write.htm
+========================================
+Linking a variable to a Sql write query
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to a Sql Write Query
+ 
+A variable, that has the Command property set, can be linked to a Sql write query by choosing the Sql Variables source. See the topic Data Connections Overview. When a variable is linked in this way, its properties including the real-time value can be stored in a third party data source such as Microsoft's SQL Server. Write queries can be configured so that they are executed periodically, on event and/or when the variable changes (either due to a command or a change of the value).
+ 
+ The configuration is in two steps. 
+ 
+ 
+Selects the Sql Connection and its subordinate Sql Write query.
+ 
+Parameters - Configuration of any parameters that the query contains. Parameters are used, instead of the mapping used in a Sql read query, to write the variable value to the database.
+ 
+ 
+See the topic Sql variables Write query mapping examples for a detailed explanation and examples.
+ 
+Using variables with a Sql write query is subject to scope-related constraints:
+ 
+ 
+
+ 
+The scope of the Sql write query and the scope of the mapped variable must match,
+ 
+ 
+
+ 
+When using a variable to set the value of an input parameter, constraints related to scope apply to avoid user-specific data to be used as inputs in a context where the query results will be accessible to other users.
+ 
+ 
+ 
+ The following matrix summarizes the list of valid combinations of scopes:
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Scope of the variable
+ Scope of the Sql write query
+ Scope of the variables used to set input parameters
+ 
+ 
+
+ Local
+ Local
+ Local, Shared
+ 
+ 
+
+ Shared
+ Shared
+ Local, Shared
+ 
+ 
+
+ Session
+ Session
+ Local, Shared, Session
+ 
+ 
+
+ Client-context
+ Client-context
+ Local, Shared, Session, Client-context
+ 
+ 
+ 
+ 
+How to configure the Data selection
+ 
+ 
+Open the configuration dialog for the variable and select the Source tab. 
+ 
+Select Sql Variables as the Source. Sql Variables is only available if one or more Sql connections have been configured.
+The new tabs Reading and Writing appear for configuration of the data selection. Select the Writing tab. 
+ Show picture
+
+ 
+Select the Sql connection and the subordinate Sql query. Any parameters required by the Sql write query appear in the Parameters list.
+ Show picture
+
+ 
+Select, if any, the conditions under which the query will be triggered. You can trigger the query when a command is sent by a user for the variable (Trigger query on variable command) and / or the value changes (Trigger query on value change). If you do not select either of these, the query will only be triggered under the conditions configured in the query itself. See the Execution tab in the topic How to configure Sql queries.
+ 
+ 
+
+ 
+Trigger query on value change is only triggered if the value change is the consequence of processing a read query. It's purpose is to allow the execution of a write query on completion of a read query that has changed the value.
+ 
+ 
+
+ 
+To enable the trigger of a query on either variable command or value change, the corresponding property must also be set in the write query configuration.
+ 
+ 
+How to configure the Parameters
+ 
+If one or more parameters are found in the Sql write query, they are listed must be substituted using an expression. A parameter can only be substituted once. If the query is subsequently used in another variable, the parameter substitution is pre-configured and the field is dimmed indicating it is read only.
+ 
+A parameter defined by an expression can reference a property of the variable (domain, Extended attribute etc.) and use the functions and operators of the expression engine. The button at the top left of the expression editor dialog displays a list of the variable properties that can be substituted. Show picture
+
+ 
+A description of the available variable properties can be found in the topic Linking a Variable to a Sql Read Query.
+ 
+Parameters can only be set once - the first variable in which a query is used will set the value of the parameter.
+ 
+For example, Register01 has the domain Security. Register01 uses a query containing ?Param01 configured to use the Domain. The value substituted for ?Param01 will be Security. Register02 uses the same query. Irrespective of the domain of Register02, Security will be used as the value for ?Param01.
+ 
+If a parameter is mapped with an indirection on a Text extended attribute so that it is set with a variable value, the adequacy of the scope of the variable with regards to the scope of the Sql query is only verified at run-time. It is not checked at configuration time, nor at start-up time.
+ 
+Traces
+ 
+The Traces button allows you to enable diagnostic trace messages. Each trace generates specific messages that are logged in the Trace Files and displayed in the Event Viewer dialog (F7).
+ 
+ 
+Trace 1: All drivers - General - Enable general traces related to the activity between the Variable Manager and the Sql variable driver.
+ 
+Trace 2: All drivers - Details - Enable detailed traces related to the activity between the Variable Manager and the Sql variable driver.
+ 
+Trace 3: All drivers - Performances - Enable traces related to performances of the Sql variable driver.
+ 
+Trace 4: Sql variable driver - Performances - Enable traces related to performances of the Sql query results processing.
+
+
+========================================
+TOPIC: Link_sqlquery_write_ex.htm
+========================================
+Sql variables Write query mapping examples
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Sql variables Write query mapping examples
+ 
+See the topic Supported Table Formats for more information on table formats.
+ 
+Narrow table format
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_Ts	
+ field_Name	
+ field_Value	
+ field_Quality
+ 
+ 
+
+ 11/01/2019 10h00	
+ Wind	
+ 39	
+ 192
+ 
+ 
+
+ 11/01/2019 10h03	
+ Temperature	
+ 22,5	
+ 192
+ 
+ 
+
+ 11/01/2019 10h05	
+ Humidity	
+ 64	
+ 192
+ 
+ 
+ 
+ 
+To exploit this table, a write query similar to the following can be constructed.
+ 
+ 
+ 
+ 
+
+ 
+ 
+INSERT INTO [NarrowTable] ([field_Ts],[field_Name],[field_Value],[field_Quality]) VALUES (?param1,'Temperature',?param2,?param3)
+ 
+ 
+ 
+ 
+ 
+Each ?param must be substituted in a unique SQL Variable� using property substitution.
+ 
+ 
+ 
+ 
+ 
+
+ Parameter
+ Substitution
+ 
+ 
+
+ ?param1
+ Ts
+ 
+ 
+
+ ?param2
+ Quality
+ 
+ 
+
+ ?param3
+ Value
+ 
+ 
+ 
+ 
+Wide table format with one timestamp
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_Ts	
+ field_Temp	
+ field_Humidity
+ field_Wind
+ ...
+ 
+ 
+
+ 11/01/2019 10h00	
+ 22.5
+ 63
+ 39
+ &#160;
+ 
+ 
+
+ 11/01/2019 10h03	
+ 22.5
+ 64
+ 12
+ &#160;
+ 
+ 
+
+ 11/01/2019 10h05	
+ 22.5
+ 64
+ 17
+ &#160;
+ 
+ 
+ 
+ 
+To exploit this table, a write query similar to the following can be constructed.
+ 
+ 
+ 
+ 
+
+ 
+ 
+INSERT INTO[WideTable] ([field_Ts],[field_Temperature],[field_Humidity],[field_Wind]) VALUES (?param1,?param2,?param3,?param4) 
+ 
+ 
+ 
+ 
+ 
+Each ?param must be substituted in a different SQL Variable using property substitution.
+ 
+Temperature variable
+ 
+ 
+ 
+ 
+ 
+
+ Parameter
+ Substitution
+ 
+ 
+
+ ?param1
+ Ts
+ 
+ 
+
+ ?param2
+ Value
+ 
+ 
+
+ ?param3
+ Empty
+ 
+ 
+
+ ?param4
+ Empty
+ 
+ 
+ 
+ 
+Humidity variable
+ 
+ 
+ 
+ 
+ 
+
+ Parameter
+ Substitution
+ 
+ 
+
+ ?param1
+ Empty
+ 
+ 
+
+ ?param2
+ Empty
+ 
+ 
+
+ ?param3
+ Value
+ 
+ 
+
+ ?param4
+ Empty
+ 
+ 
+ 
+ 
+Wind variable
+ 
+ 
+ 
+ 
+ 
+
+ Parameter
+ Substitution
+ 
+ 
+
+ ?param1
+ Empty
+ 
+ 
+
+ ?param2
+ Empty
+ 
+ 
+
+ ?param3
+ Empty
+ 
+ 
+
+ ?param4
+ Value
+ 
+ 
+ 
+ 
+Wide table format with multiple timestamps
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_Ts
+
+ field_TsTemperature	
+ field_ValueTemperature
+ 
+ 
+field_TsHumidity
+ 
+ field_ValueHumidity
+ 
+ 
+
+ 11/01/2019 10h00	
+ 11/01/2019 10h00
+ 22.5
+ 11/01/2019 10h00
+ 63
+ 
+ 
+
+ 11/01/2019 10h01
+ 11/01/2019 10h01
+ 23.0
+ 11/01/2019 10h01
+ 64
+ 
+ 
+
+ 11/01/2019 10h02	
+ 11/01/2019 10h02
+ 23.5
+ 11/01/2019 10h02
+ 65
+ 
+ 
+ 
+ 
+To exploit this table, a write query similar to the following can be constructed.
+ 
+ 
+ 
+ 
+
+ 
+ 
+INSERT INTO [WideTable] ([field_Ts], [field_TsTemperature], [field_ValueTemperature], [field_TsHumidity], [field_ValueHumidity]) VALUES (?param1,?param2,?param3,?param4,?param5)
+ 
+ 
+ 
+ 
+ 
+Each ?param must be substituted in a different SQL Variable using property substitution.
+ 
+Temperature variable
+ 
+ 
+ 
+ 
+ 
+
+ Parameter
+ Substitution
+ 
+ 
+
+ ?param1
+ TsUtcToLocal(�ts�)
+ 
+ 
+
+ ?param2
+ Ts
+ 
+ 
+
+ ?param3
+ Value
+ 
+ 
+
+ ?param4
+ Empty
+ 
+ 
+
+ ?param5
+ Empty
+ 
+ 
+ 
+ 
+Humidity variable
+ 
+ 
+ 
+ 
+ 
+
+ Parameter
+ Substitution
+ 
+ 
+
+ ?param1
+ Empty
+ 
+ 
+
+ ?param2
+ Empty
+ 
+ 
+
+ ?param3
+ Empty
+ 
+ 
+
+ ?param4
+ Ts
+ 
+ 
+
+ ?param5
+ Value
+ 
+ 
+ 
+ 
+Wide table format without no timestamp
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ field_BatchId
+ field_Failed
+ field_Score
+ field_Operator
+ 
+ 
+
+ 4012
+ 0
+ 965
+ AD
+ 
+ 
+
+ 4013
+ 0
+ 1093
+ AD
+ 
+ 
+
+ 4014
+ 0
+ 85
+ AD
+ 
+ 
+
+ 4015
+ 1
+ 15
+ AD
+ 
+ 
+ 
+ 
+To exploit this table, a write query similar to the following can be constructed.
+ 
+ 
+ 
+ 
+
+ 
+ 
+INSERT INTO [WideTable] ([field_BatchId],[field_Failed],[field_Score],[field_Operator]) VALUES (?param1,?param2,?param3,?param4)
+ 
+ 
+ 
+ 
+ 
+Each ?param can be substituted in one or more SQL Variables with variable property or variable values.
+ 
+Batch variable
+ 
+ 
+ 
+ 
+ 
+
+ Parameter
+ Substitution
+ 
+ 
+
+ ?param1
+ TextAttr10
+ 
+ 
+
+ ?param2
+ BinAttr05
+ 
+ 
+
+ ?param3
+ Value
+ 
+ 
+
+ ?param4
+ TextAttr11
+ 
+ 
+ 
+ 
+Fixed table format
+ 
+ 
+ 
+ 
+ 
+
+ field_Day
+ field_Production
+ 
+ 
+
+ Monday
+ 10005
+ 
+ 
+ 
+ 
+To exploit this table, a write query similar to the following can be constructed.
+ 
+ 
+ 
+ 
+
+ 
+ 
+UPDATE [FixTable] SET [field_Production]=?param1 WHERE [field_Day]=�Monday�
+ 
+ 
+ 
+ 
+ 
+Each ?param can be substituted in one or more SQL Variables with variable property or variable values.
+ 
+MondayProduction variable
+ 
+ 
+ 
+ 
+ 
+
+ Parameter
+ Substitution
+ 
+ 
+
+ ?param1
+ Value
+
+
+========================================
+TOPIC: Link_variable_to_its_source_overview.htm
+========================================
+About linking a variable to its source overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Linking a Variable to its Source Overview
+ 
+The source of a variable defines where its real-time value comes from. The selection of a variable's source, and the properties that define how it is linked to that source, are found in the Source tab of the variable's configuration dialog. The available sources are listed in the Source drop down list box. Show picture
+
+ 
+The following sources are always available.
+ 
+ 
+Internal - The value is generated by PcVue itself. The value can be generated by the application - an expression, a 
+ program (SCADA Basic or VBA), a threshold, a chronometer or a counter - or by the internal processes of the software - alarm counters, network status etc. The name of variables generated by the internal processes generally start with the branch SYSTEM. 
+ 
+External - The value 
+ comes from another PcVue station. Included for backward compatibility only. Used in multi-station projects prior to version 7.0.
+ 
+ 
+The following sources depend on the configuration of the project's data acquisition. The name that appears in the Source list box is the Alias that was given to the communication media when it was configured in PcVue.
+ 
+ 
+Equipment - One of the native drivers. 
+ 
+OPC - A third party OPC server. 
+ 
+OPC UA - A third party OPC server.
+ 
+LonWorks - A LonWorks network. 
+ 
+BACnet - The BACnet client communication driver.
+ 
+IEC 60870-5 - The IEC 60870-5 communication driver.
+ 
+IEC 61850 - The IEC 61850 communication driver.
+ 
+DDE - A third party DDE server.
+ 
+SNMP- The SNMP Manager communication driver.
+ 
+Sql variables - The driver to map variables onto Sql query results.
+
+

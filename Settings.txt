@@ -1,0 +1,4083 @@
+========================================
+TOPIC: Settings_AA.htm
+========================================
+Application Architect Settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Application Architect Settings
+ 
+The Application Architect's settings can be displayed either from the project settings in the Application Explorer or from Tasks.Settings in the Application Architect menu. Show picture
+
+ 
+ 
+Show generation option box - Show the Options dialog when generating the configuration elements.
+ 
+Consistency checking
+ Check consistency at startup - If enabled, the consistency check is performed during the startup of PcVue. While it comes with a performance penalty and is not recommended in production, it can be helpful on an engineering station.
+Treat warning as error - If enabled, the occurrence of a warning has the same effect as the occurrence of an error. Saving is blocked and other actions may be interrupted.
+Allow blank branch - Allows an empty (blank) branch at instantiation.*
+Allow duplicate branch - Allows the use of duplicate branches within the same tree.*
+Allow recursive property - Allows one property to be used in the expression of another parameter. See below. Must also be enabled if a parameter or expression is used in the Description property of any of the elements.
+ 
+Type of synchronization
+ Full synchronization - Uses full synchronization when generating the application. See the topic on Generation for details.
+Fast synchronization - Uses fast synchronization when generating the application. See the topic on Generation for details.
+ 
+Time optimization - Options to improve the responsiveness of the Application Architect's HMI.
+Skip reference calculations in the Application Architect's HMI - This setting affects the templates tab. Selecting it means that the calculation of properties requiring access to an Excel function (by parameter, expression, combination of two etc.) are not made. The properties are displayed as empty.
+Skip reference calculations for generation - This setting affects the generation of properties requiring access to an Excel function. The properties are not generated in the output from the Application Architect. The affected properties do not exist - they are not just empty. This is to ensure the correct synch when de-selecting the option.**
+Expand template composition one level only - This setting affects the templates tab. When displaying the composition of a template, if this setting is selected, the tree view is only expand to one level. So, for example, you will see variables but not the trends associated with the variables. This is used to improve the display of the Application Architect's HMI when the template contains many elements for which and the user does not need to see the entire expanded tree.
+Do not display detail of included templates for instances - This setting affects the instances tab. If not selected when you click on a template instance, the inputs, input parameters and expressions appear in the lower part of the screen for both the selected instance and any child objects particularly those from included templates. If set, inputs, inputs parameters and expressions for the included templates are not displayed. This is used to improve the display of the Application Architect's HMI, particularly for templates including other templates that have many parameters to evaluate.
+ 
+ 
+
+ 
+* If you enable these settings it may result in the generation of duplicate variables.
+ 
+ 
+
+ 
+** If you select, and then at a later time, de-select the Skip reference calculations for generation and then do a synchronization, it can be equivalent to a full synchronization if there are many properties affected. 
+ 
+ 
+Allow recursive property
+ 
+The Allow recursive property setting should be used with caution as it can cause an infinite loop during generation. This is best explained by two examples.
+ 
+Example 1 - The following can only be evaluated if Allow recursive property were enabled.
+ 
+Parameter01: "=3 + 4"
+ 
+Parameter02: "=Params["Parameter01"] + 7"
+ 
+Example 2 - The following would cause an infinite loop if Allow recursive property is enabled.
+ 
+Parameter01: "= Params ["Parameter02"] + 4 "
+ 
+Parameter02: "= Params ["Parameter01"] + 7 "
+ 
+Bilingualism and the Application Architect
+ 
+If the Enable bilingual text strings setting, in Project Settings dialog, is ticked the Description property found in many Application Architect configuration elements becomes bilingual. Show picture
+
+ 
+The Description property is found in the following configuration elements.
+ 
+ 
+Instances tree
+Tree root
+Instances
+Topological elements
+Global parameters
+ 
+Templates
+Categories
+Templates (simple, inherited and included)
+ 
+Parameters
+Categories
+Parameters
+ 
+ 
+
+ 
+If bilingual is used the Description must be entered text, it cannot be defined by an expression or parameter. 
+ 
+ 
+Displaying thumbnails of the graphic elements
+ 
+ Use the View.Display thumbnails command in the menu to enable the display of any graphic elements configured in the Application Architect as thumbnails. Show picture
+
+ 
+By doing so, you will be able to graphically preview any mimic or symbol.
+ 
+ 
+In the Templates tab, for each template.
+In the Properties sub-tab, clicking on the Graphic elements node will display all configured graphic elements as thumbnails. Show picture 
+Clicking on an individual element under the Graphic Elements node will display a thumbnail for just that element.
+
+In the Documentation sub-tab, all graphics elements are always displayed except for mimics that are only displayed as a thumbnail if they use a mimic template. Show picture
+
+ 
+In the Instances tab for each instance. 
+Clicking on any single graphic element (symbol or mimic) will display the corresponding thumbnail. Show picture For mimics that have been generated the thumbnail is of the actual generated mimic including any symbols. For mimics that have not been generated the thumbnail is of the mimic template.
+
+
+========================================
+TOPIC: Settings_actions.htm
+========================================
+Actions settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Actions Settings
+ 
+The actions settings can be displayed from the Actions folder in the Application Explorer's Main settings dialog or by using the Settings task when the Actions folder is selected in the Application Explorer's configuration tree. Show picture
+
+ 
+ 
+Messages
+Email 
+ - See the Settings topic in the Message Profiles and Templates book. 
+SMS - See the Settings topic in the Message Profiles and Templates book.
+ 
+Events 
+ - See the Settings topic in the Event actions book.
+ 
+Cyclics 
+ - See the Settings topic in the Cyclic actions book.
+
+
+========================================
+TOPIC: Settings_alarms_mobile.htm
+========================================
+Mobile Server settings - Alarms tab
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mobile Server Settings - Alarms Tab
+ 
+The Mobile Server advanced settings can be displayed from the Communication folder of the Application Explorer's Main Settings dialog or by using the Settings task when the Mobile Server folder is selected in the Application Explorer's configuration tree. The settings are divided into Alarms and Properties. This topic is for Alarms. Show picture
+ 
+
+ 
+ 
+ 
+The Alarms' properties are divided into two main categories.
+ 
+ 
+Alarm notification - Configuration of the filter for alarm notifications sent to mobile devices.
+ 
+Alarm list - Default configuration for the TouchVue Alarms List.
+ 
+ 
+The properties are the same for both categories except that you can enable/disable Alarm Notifications and configure the refresh rate.
+ 
+Alarms tab properties
+ 
+ 
+Alarm notification - Configuration of the alarm notification.
+Enabled - Enable notification of eligible alarms to connected devices.
+Refresh period - The period at which notifications are send.
+Alarm priority - The minimum and maximum priority for alarms to be eligible for notification. 
+Allow filtering - Allow the TouchVue user to change the alarm filter.
+Notification events - Selection of the alarm transitions eligible for notification.
+ 
+Alarm list - Configuration of the Alarms List. The configuration properties are identical to those for Alarm Notification except that Enabled and Refresh are not available. It defines a default filter, imposed by the server, and applied by mobile devices when accessing the Alarm view.
+
+
+========================================
+TOPIC: Settings_archives.htm
+========================================
+Archives settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Archives Settings
+ 
+The archives settings can be displayed from the Archives folder in the Application Explorer's Main settings dialog or by using the Settings task when the Archives is selected in the Application Explorer's configuration tree. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Log lists recording
+ 
+Log only alarm on/off changes in log lists - Selecting this property causes the acknowledged condition of an alarm to be ignored - see explanation below. You must restart PcVue after changing this property before it takes effect.
+Log on device timestamp change - If selected, an event will be recorded in log lists if the source timestamp of a variable changes, even if the value and quality remain the same.
+Log on unavailable to available change - If selected, an event will be recorded in log lists if the status of a variable changes from unavailable to available.
+Log on mask to unmask change - If selected, an event will be recorded in log lists if an alarm the status of a variable changes from masked to unmasked.
+ 
+Storage folder for archive units - Select the location of the folder used for proprietary, ODBC and VCR archive units. You must restart PcVue after changing this property before it takes effect.
+Default - Use the default folder (the TH folder of the project).
+Custom folder - Enter and use a specific folder. You can only use an absolute path, relative paths are not allowed. The folder must always be accessible. The default setting is the TH folder of the project.
+ 
+Proprietary archive units
+Secure records to
+ prevent tampering - Adds a CRC (Cyclic Redundancy Check) to proprietary
+ format archive units to protect the data from being tampered with.
+Trend recording fast exit - Reduces the time taken to flush the trend recording buffers to hard disk on shutdown by writing all the data in one shot. The disadvantage of this method is that it is more prone to data loss should there be any problems during shutdown. 
+ 
+Trend recording mode
+On change - Enable on-change (exception) trend recording. The trend Period property is used as a time filter. Applies to the entire project.
+Force one record per period - Enable periodic trend recording. The trend Period property is used as a sampling period. Applies to the entire project.
+ 
+ 
+Using the Only
+ log alarm on/off changes property
+ 
+Selecting this property causes the acknowledged condition
+ of an alarm to be ignored as follows.
+ 
+ 
+ 
+ 
+ 
+
+ Alarm state
+ Logged as
+ 
+ 
+
+ On, On - Not Ack. and On - Ack
+ On
+ 
+ 
+
+ Off and Off - Not Ack.
+ Off
+ 
+ 
+
+ Unavailable
+ Unavailable
+ 
+ 
+ 
+ 
+Selecting this property changes the behavior of the
+ Log Viewer and the appearance of the log list Event Filter tab but it does not change the operation of the Alarm Viewer. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+
+ &#160;PcVue must be restarted after changing this property
+ before it takes effect.
+
+
+========================================
+TOPIC: Settings_audit.htm
+========================================
+Audit & diagnostics settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Audit & Diagnostics Settings
+ 
+Audit file configuration
+ 
+The number of audit files and the frequency at which they are created can be configured using the following properties. Show picture
+
+ 
+ 
+Rotating files
+Number of rotating audit files - 
+The maximum number of audit files that can exist at any one time in the Log Files folder. When the limit is reached, each time a new audit file is created the oldest file is discarded. The default value is 1000, minimum value = 100 and maximum value = 9999.
+Write period for the Audit.Coumtersxxxx.txt files - The period at which each new general audit file is created. The default value is 30 minutes, minimum value 1 minute, maximum value 24 hours.
+Audit Specific Counters period - The period at which each new memory specific audit file is created. The default value is 10 minutes, minimum value 1 minute, maximum value 24 hours.
+ 
+Trace files
+Max size for the Trace.Log file - The maximum size of the Trace.Log file in megabytes. When the file reaches this size, it is backed up and a new file is created.
+Max size for the MacroTrace.log file - The maximum size of the MacroTrace.Log file in megabytes. When the file reaches this size, it is backed up and a new file is created.
+ 
+Dump files
+
+The maximum number of dump files that are persisted at any one time in the Log Files folder (in addition to the last one). When the limit is reached, each time a new dump file is created, the oldest file is discarded. The default value is 2 for large dumps (max 9) and 9 for small dumps (max 20). Because dump files can be large, it is not recommended to use a large value, in particular for large dump files. 
+ 
+ 
+Enabling the audit system variables
+ 
+If you want to use any of the audit system variables in the application, they must be enabled using the System Variables tab of the Audit Settings dialog. For each variable, you can use the default name or choose your own. The Create all system variables tick box can be used to create all the variables, but before you do this you should consider the impact on system performance. There are over 1000 variables. Show picture
+
+
+========================================
+TOPIC: Settings_Blinking_rates.htm
+========================================
+Blinking rates
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Blinking Rates
+ 
+In most of the drawing elements and many of the animations, 
+ you can select a blinking color for one or more of the properties. A 
+ blinking color alternates between two selected colors at a pre-defined 
+ rate. You can change the rate from a dialog by selecting the menu Preferences.Blinking.
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+There are 16 blink rates each of which has two configurable 
+ periods, one for each of the colors. To change either period, click and 
+ drag the appropriate slider control. If you are using blinking colors 
+ to attract the operator's attention it is recommended that you use a ratio 
+ of approximately 2 to 1 for the periods.
+ 
+Each period may be configured within the range of 150ms 
+ to 2000 ms.
+
+
+========================================
+TOPIC: Settings_color_preferences.htm
+========================================
+Color preferences
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Color Preferences
+ 
+The Color Preferences dialog is opened from the menu using the command Configure.Preferences.Colors. Show picture
+
+ 
+The Color Preferences dialog contains five tabs that are used to select the colors for certain objects and features in PcVue's HMI. Some of the color preferences are used as is - that is the color defined in the preferences is the color that is used. Others are used as a default that can optionally be changed in each instance of the object. Changing a color in the Color Preferences dialog automatically changes the colors in the HMI's objects where it is used as is.
+ 
+Each color preference defines a pair of colors, one for the background and the other for the text (or border depending on the use). Non-indexed or indexed colors can be used.
+ 
+Alarm on text tab
+ 
+Used to color alarms in the alarm viewer and log viewer, and the text drawing element when animated using color-alarm on text.
+ 
+ 
+In an alarm viewer or log viewer, the background color is only used if the Advanced color mode property is selected. The text color is always used to color the text of alarms. The colors are used as is.
+ 
+In a text drawing element, both the background and text colors are used. The colors are used as a default.
+ 
+ 
+Alarm tab
+ 
+Used as the default colors whenever a shape is animated using a color-alarm animation. For a solid shape, rectangle, polygon, b�zier shape ..., both background and border colors are used. For a line, polyline or b�zier curve only the border color is used.
+ 
+Bit tab
+ 
+Used to color bit transitions in the log viewer, and a shape drawing element when using a color-bit animation.
+ 
+ 
+In a log viewer, the text color is always used to color the text of bit transitions. The background color is unused. The colors are used as is.
+ 
+For a solid shape, rectangle, polygon, b�zier shape ..., both background and text colors are used. For a line, polyline or b�zier curve only the border color is used. The colors are used as a default.
+ 
+ 
+Action tab
+ 
+Used to color user actions in the log viewer. The colors are used as is. Only the text colors are used.
+ 
+Thresholds tab
+ 
+Used to color the cells of the grid, when used in historical mode, when the register values exceed their thresholds. The colors are used as a default.
+ 
+Navigator
+ 
+Used to color the borders of the navigator, run-time navigator and mimic navigator.
+ 
+Trends
+ 
+Used to color the traces in a trend viewer. The colors are used as a default.
+ 
+Chart Control
+ 
+Used to provide the default palette colors for the Pie Chart.
+
+
+========================================
+TOPIC: Settings_communications.htm
+========================================
+Communication settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Communication Settings
+ 
+The communications settings are displayed from the Communications entry in the Application Explorer Main settings dialog or from the Settings task when the Communications folder is selected in the Application Explorer configuration tree. The communications settings affect the operation of Data Acquisition, Network applications, and PcVue server interfaces. Show picture
+
+ 
+ 
+Data acquisition - See the topic Data acquisition settings
+ 
+Networking - See the topic Networking settings
+ 
+Servers - See the topic Servers settings
+ 
+Regulation - See the topic Data Flow Regulation Settings.
+
+
+========================================
+TOPIC: Settings_compatibility.htm
+========================================
+Compatibility settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Compatibility Settings
+ 
+The compatibility settings are displayed from the Compatibility entry in the Application Explorer's Main settings dialog. The settings affect the compatibility of projects developed with earlier versions of the PcVue software. Show picture
+
+ 
+
+ 
+If you disable the syntax check in the edit fields, text that you then enter in those fields may cause erroneous operation of PcVue.
+ 
+ 
+ 
+Configuration files
+Variables
+Write the variables persistence files in the PER directory (saved.dat and alarmsaved.dat) - Store the persistence files in the PER directory instead of the C directory.
+Auto-number internal identifiers - If enabled, the tagnames associated to variables are numbered automatically at start-up. This setting must not be enabled if the project takes advantage of the legacy report feature.
+VAREXP.DAT format
+Use 6 + 1 fields for storing variable names - The six additional branches available from version 10 onwards are stored in a single (spare) field. The format is compatible to that of earlier versions of PcVue.
+Use 12 fields for storing variable names - The six additional branches available from version 10 onwards are stored in six new fields with all fields to the right of them shifted six places. The format is not compatible with that from earlier versions of PcVue.
+Archives
+
+Proprietary, free and ODBC log lists recording
+Record only loaded variables and local actions (execute program and Logon/Logoff) - Allow you to control the behavior of log list recording in networked architecture. If selected, only those events having their origin on the local station (archive producer) are recorded.
+Record all variables and local actions (execute program and Logon/Logoff) from any stations - Allow you to control the behavior of log list recording in networked architecture. If selected, all events are recorded, those originating from the local station (archive producer) and also those coming from other stations.
+Scheduler
+
+Delete temporary schedules when reloading the Cron.dat file � If enabled, all Cron items are deleted upon reload, even those created dynamically via a SCADA Basic script. Otherwise, only those coming from the configuration file being reloaded are deleted.
+ 
+Syntax
+Format separator (first and second languages) - The character used to separate the format of the first and second language when used with text variables.
+
+Mimics and symbols
+Limit substitution of the 6 first branch levels � Support for mimic & symbol branch substitution strings up to 6 branch segments only (#1 to #6, #B1 to #B6, #S1 to #S6�). Those greater than 6 are interpreted as plain text and not as substitution string.
+Substitution of the 12 branch levels - Support for mimic & symbol branch substitution strings up to 12 (#1 to #12, #B1 to #B12, #S1 to #S12�). Those between 7 and 12 are not interpreted as plain text but substituted.
+Variable naming
+Space allowed at end of variable name - Variable names are allowed to end with a space character.
+Number allowed at start of variable name - Variable names are allowed to start with a number.
+Syntax check
+Enable - If selected, the syntax check for variable names is enforced: Alphanumeric characters plus dollar ($), star (*), full stop (.), underscore (_), plus the character specified for the Domain and Nature separator accepted.
+Enable - No checking at loading time - If selected, the syntax check for variable names is enforced upon configuration change, but no verification is done at loading time.
+Disable - If selected, the syntax check for variable names is not enforced.
+ 
+Associated labels
+Allow use of mismatched label type - If enabled, it is possible to use alarm associated labels with Bit variables.
+
+
+========================================
+TOPIC: Settings_cyclic.htm
+========================================
+Cyclic Actions Settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Cyclic Actions Settings
+ 
+The cyclic actions settings are displayed from the Settings task when the Cyclics folder is selected in the Application Explorer's configuration tree. These settings affect the general operation 
+ of the cyclic function handling within PcVue. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Networking
+Execute action only on active servers
+ - If selected, cyclic actions produced by a server association are only executed on the active servers of the association.
+Execute action on both active and passive servers
+ - If selected, cyclic actions produced by a server association are executed on all servers of the association.
+
+
+========================================
+TOPIC: Settings_dataexport.htm
+========================================
+Data Export settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data Export Settings
+ 
+The Data Export settings are displayed from the Settings task when the Data Exports folder is selected in the Application Explorer's configuration tree. Show picture
+
+ 
+ 
+Data Export wizard - Settings specific to the Data Export wizard.
+Working folder - The folder in which output from the wizard is saved. This is displayed, but cannot be changed, in the wizard.
+Max number of raw data - The maximum number of raw data values. See explanation below.
+Max number of generated data - The maximum number of generated data values. See explanation below.
+ 
+General - General setting for Data Export.
+Default export folder - The default folder in which all the files generated by the export process are saved. See Configuring Alternative Folders below. The export folder can be overridden when configuring a data export item.
+Default template folder - The default folder in which any Excel workbook templates, specified in the data export configuration, are located. See Configuring Alternative Folders below. The template folder can be overridden when configuring a data export item.
+Characters for insignificant data - The characters that will be generated for a variable's value if its quality is NS.
+Characters for unknown data - The characters that will be generated for a variable's value if the data is unknown.
+Enable traces for ad hoc export generation - Enable export trace for when a user, without export rights, runs an export using either the SCADA Basic instruction Export, or the Data Export Wizard.
+Max number of raw data - The maximum number of raw data values. See explanation below.
+Max number of generated data - The maximum number of generated data values. See explanation below.
+ 
+ 
+
+ 
+The operation of Data Export is also affected by the settings:
+ 
+ 
+
+ 
+First day of week.
+ 
+ 
+
+ 
+First week of year.
+ 
+ 
+
+ 
+Date and time format.
+ 
+ 
+ 
+Refer to the topic Languages settings for more information.
+ 
+ 
+Configuring alternative folders
+ 
+The default folders used by Data export are:
+ 
+ 
+USR\<project>\DataExports 
+ 
+USR\<project>\DataExportTemplates
+ 
+ 
+ 
+where <project> is the name of the project. You can specify alternative folders using either an absolute or relative path (to the default folder as defined in the settings).
+ 
+ 
+ 
+ 
+ 
+
+ Examples of absolute path
+ Examples of relative path
+ 
+ 
+
+ C:\MyExportFolder
+ MyExportFolder
+ 
+ 
+
+ \\MyExportFolder
+ .\MyExporFolder
+ 
+ 
+
+ &#160;
+ ..\MyExportFolder
+ 
+ 
+ 
+ 
+How the max count properties are used
+ 
+The max count properties are used to limit the size of the output file by limiting either the number of input values (raw data) and/or the number of generated output values. If the limit is reached the output is still produced but with limited data. The limits vary depending on whether the export is from a trend page or a log page:
+ 
+Trend page export: 
+ 
+ 
+Raw data limit - 300..300000 (default: 60000).
+ 
+Generated data limit - 60..60000 (default: 12000).
+ 
+ 
+Log page export:
+ 
+ 
+Raw data limit - 300..300000 (default: 60000). Setting the value to 0 removes the limit, but this can result in very long generation times and high resource usage.
+ 
+Generated data limit - 60..60000 (default: 12000).
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Max count for
+ Raw data
+ Sample data
+ Statistics
+ Aggregate
+ 
+ 
+
+ Raw data
+ Not used
+ Used for Trend page only
+ Used
+ Used for Trend page only
+ 
+ 
+
+ Generated data
+ Used
+ Used for Trend page only
+ Not used
+ Used for Trend page only
+
+
+========================================
+TOPIC: Settings_event.htm
+========================================
+Event Actions Settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Event Actions Settings
+ 
+The event actions settings are displayed from the Settings task when the Events folder is selected in the Application Explorer's configuration tree. These settings affect the general operation 
+ of the event handling within PcVue. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Networking
+Execute action only on active servers
+ - If selected, event actions produced by a server association are only executed on the active servers of the association.
+Execute action on both active and passive servers
+ - If selected, event actions produced by a server association are executed on all servers of the association.
+
+
+========================================
+TOPIC: Settings_File_format_options.htm
+========================================
+File format options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+File Format Options
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Ascii Format reading 
+ with check � Checks the integrity of the file format for windows and symbols 
+ each time they are opened.
+ 
+Mimics
+ 
+ 
+User can select 
+ the format � Allow the user to select the format in which a mimic is saved.
+ 
+ 
+ 
+Default Format
+ 
+ 
+Binary Format 
+ � Use the binary format as default when saving a mimic.
+ 
+ 
+ 
+Ascii Format 
+ � Use the ASCII format as the default when saving a mimic.
+ 
+ 
+ 
+Original 
+ Format � Use the current format as default when saving a mimic.
+ 
+ 
+ 
+Symbols
+ 
+ 
+User can select 
+ the format � Allow the user to select the format in which a symbol is 
+ saved.
+ 
+ 
+ 
+Default Format
+ 
+ 
+Binary Format 
+ � Use the binary format as default when saving a symbol.
+ 
+ 
+ 
+Ascii Format 
+ � Use the ASCII format as the default when saving a symbol.
+ 
+ 
+ 
+Original 
+ Format � Use the current format as default when saving a symbol.
+
+
+========================================
+TOPIC: Settings_General_options.htm
+========================================
+General options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+HMI General Options
+ 
+Show picture
+ 
+ 
+
+ 
+ 
+ 
+ 
+Colors Palette
+Display All Colors - Shows both the non-indexed and indexed colors.
+Display Indexed Colors Only - Disables display of the non-indexed
+ colors in the palette.
+Display Base Colors Only - Disables display of the indexed
+ colors in the palette.
+ 
+Mimics Open Mode
+Design
+ Mode - Mimics are opened in design mode.
+Run Mode
+ - Mimics are open in run-time mode. This is the default selection.
+ 
+Menus commands access
+Disable Reference set execution mode - Disable the reference set run time operation mode. The corresponding tools on the Mode tool bar are greyed out.
+Disable Test
+ Set execution mode - Disable the test set run time operation mode. The corresponding tools on the Mode tool bar are greyed out.
+ 
+Automatic User Logoff
+ - Activates the automatic logoff of users after a period of inactivity.
+ If enabled, the Warning time-out (in seconds) can be defined. The automatic logoff, including the maximum time of inactivity can be tuned on a per-profile basis. For more information, see the topic Using automatic logoff in the Application Explorer book.
+ 
+Design tools
+Polyline & B�zier curve selection - Choose the way in which selection of polylines and B�zier curves are selected in design mode.
+ 
+Runtime tools
+Polyline and B�zier curve selection - Choose the way in which control zones based on polylines and B�zier curves are selected in run mode.
+ 
+Mouse commands (2D) (See the topic IntelliMouse support.)
+Mimic zoom - Default: Ctrl + wheel.
+Mimic hand tool panning - Default: Shift + middle button down.
+Mimic automatic panning - Default: Ctrl + middle button down.
+Mimic and Workspace scroll - Default vertical: Wheel, Default horizontal: Shift + wheel.
+Workspace automatic panning - Default: Shift + middle button click.
+ 
+Mouse inputs - Configuration of the HMI's response to the mouse over and button clicks. 
+Display control zone - Display a button style highlight whenever the mouse is over any drawing element that has a control zone animation.
+Open context mimics on - Select which button click(s) and key combination(s) that a context mimic opens on.
+Support legacy behavior for alarm & log viewers - Enable the legacy behavior of the alarm and log viewers in which a context mimic is opened by either right or left mouse button clicks.
+Process associated actions on - Select which button click(s) and key combination(s) that cause an associated action to be processed by the alarm viewer.
+Process command animations on - Select which button click(s) and key combination(s) that cause a command animation to be processed.
+ 
+ 
+
+ 
+The Mouse Input key options are cumulative. For example, if you select With Shift key down and With Ctrl key down then both the Shift and Ctrl keys must be pressed as well as the mouse button before the mouse input is processed.
+ 
+ 
+Examples of B�zier curve selection
+ 
+The red areas and the red line in the pictures below indicate where you can click to select a drawing element. They are not marked in the graphic editor.
+ 
+ 
+Bounding rectangle area. Show picture
+
+ 
+Shape area. Show picture
+
+ 
+Edges. Show picture
+
+ 
+ 
+
+ 
+The B�zier curve's bounding rectangle does not include the deformation handles.
+
+
+========================================
+TOPIC: Settings_geodata.htm
+========================================
+Geographical data settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Geographical Data Settings
+ 
+The geographical data settings can be displayed from the Geographical Data entry in the Application Explorer's Main settings dialog or from the Settings task when the Geographical Data folder is selected in the Application Explorer's configuration tree. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Zones
+ 
+Zone detection criteria when no geo-tag defined - This setting controls if a zone with no associated geo-tag shall be displayed or not in the SnapVue app:
+Always display - Such a zone will always be displayed in SnapVue app as soon as you are connected.
+Never display -Such a zone will not be displayed in SnapVue.
+
+A zone without a geo-tag associated makes a perfect sticky zone users can always access for actions of general interest such as displaying a production line status of energy dashboard.
+ 
+Geo-tags
+ 
+Default remanence - The remanence settings to be used by client app of PcVue unless overwritten by its own local settings. The remanence is the period of time, after receiving a signal from a geo-tag, that it will be considered as detected. The value set for remanence depends on the type of geo-tag. For example, Bluetooth beacons emit a signal about every second so the remanence can be low. NFC and QR codes are detected once only, so the remanence means how much time these tags should be considered part of remain in the user environment.
+ 
+Unlimited - The remanence period is unlimited. That is once it has been scanned it is to be permanently considered part of the user environment stored in client's memory.
+During time interval - The remanence period in hours, minutes and seconds.
+
+
+========================================
+TOPIC: Settings_hmi_Options_Overview.htm
+========================================
+Overview of the HMI options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the HMI Options
+ 
+Select the menu Configure.HMI 
+ Options to display the HMI Options Tree.
+ 
+The tree contains a large number of properties, listed 
+ by category. They can be used for fine-tuning of the HMI. In most projects, 
+ very few of the HMI options will need to be changed.
+ 
+The following categories are available.
+ 
+ 
+General
+ 
+ 
+Mimics
+ 
+ 
+File formats
+ 
+ 
+Regions
+ 
+ 
+Scripting
+ 
+ 
+Compatibility 
+ from 16 to 32 bit version
+ 
+ 
+Soft 
+ keypad management
+ 
+ 
+Low 
+ resource warnings
+
+
+========================================
+TOPIC: Settings_iec104.htm
+========================================
+IEC 60870-5-104 Server settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IEC 60870-5-104 Server Settings
+ 
+The IEC 60870-5-104 Server settings can be displayed by using the Settings task when the IEC 60870-5-104 Server node is selected in the Application Explorer's configuration tree. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Client connections
+Max number of connections - The maximum number of concurrent connections the IEC 60870-5-104 server will accept from clients. The default is five.
+ 
+Spontaneous event queue - The behavior of the queue in PcVue that is used to buffer spontaneous (unsolicited) events before they are sent to a client. 
+When the event queue if full
+Delete the oldest
+Keep the oldest and ignore new events
+Default values - The following setting are used by default. They can be overridden by the properties of specific sectors or information objects. 
+Max number of spontaneous events queued - The default is 100.
+For a given point if the value changes
+Buffer all changes
+Keep only the last value change
+Timestamp format
+No timestamp
+24 bit format
+54 bit format
+ 
+Select Before Operate - Settings that affect the server behavior when receiving a select before operate command from a client.
+Select command timeout - The SBO command timeout. Default 5 seconds.
+ 
+IOA definition - Settings that affect the way in which the IO are addressed.
+Address format
+Unstructured
+Structured 3 bytes (MSB first)
+Starting addresses - The start address for each of the supported Information Object type.
+ 
+Interoperability issues
+Ack time sync request from clients - If enabled, the IEC 104 outstation will acknowledge positively the reception of clock synchronization requests.
+The clock synch should be based on a system-wide master clock. Because setting the Microsoft Windows system clock requires privileges higher than those usually given to the account used to run PcVue, the IEC 104 outstation never sets the system clock upon reception of such a clock synch command.
+Timestamp
+UTC - If enabled, all timestamps send by the selected sector are expressed in UTC.
+Local - If enabled, all timestamps send by the selected sector are expressed in the Local time zone.
+ 
+ 
+
+ 
+While the IEC 104 standard assumes the use of timestamps expressed in the local time zone, many devices supports the use of either local or UTC timestamps. The Timestamp interop setting allows you to set how the IEC104outstation should interpret timestamps. This setting must be carefully set in accordance with the behavior of the installed devices.
+ 
+In case of a discrepancy on this setting, and in addition to monitored data being wrongly timestamped, any received time-tagged command will be ignored if the timestamp is in the past compared to the current time. This occurs if there is a behavior discrepancy between the devices and the IEC 104 outstation and can be fixed by changing the Timestamp setting.
+
+
+========================================
+TOPIC: Settings_libraries.htm
+========================================
+Library settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Libraries Settings
+ 
+There are no settings specific to the Libraries.
+
+
+========================================
+TOPIC: Settings_Low_resource_warnings.htm
+========================================
+Low resource warnings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Low Resource Warnings
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Monitor GDI objects usage - Monitor the number of GDI (Graphic Device Interface) objects used 
+ by the HMI. The warning threshold can be customized, even if it is recommended to keep the default value of 90%. The result is placed in the system variable SYSTEM.LOCALHOST.RESOURCE.GDI. 
+ 
+ 
+Monitor User objects 
+ usage - Monitor the number of User objects used by the HMI. The warning threshold can be customized, even if it is recommended to keep the default value of 90%. The result 
+ is placed in the system variable SYSTEM.LOCALHOST.RESOURCE.USER. 
+ 
+Monitor global system 
+ memory load - Monitor the global system memory load. The result is placed 
+ in the system variable SYSTEM.LOCALHOST.RESOURCE.RAM. 
+ 
+Monitor opened mimics 
+ count - Monitor the number of mimics currently opened in the HMI. The 
+ result is placed in the system variable - SYSTEM.LOCALHOST.MIMIC.OPENCOUNT
+ 
+ 
+
+ 
+The operating system settings affecting the maximum number of GDI and User objects a process can allocate can be set using the SV Core Management Console. See the Deployment book for more information.
+
+
+========================================
+TOPIC: Settings_message.htm
+========================================
+Message settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Message Settings
+ 
+The message settings are displayed from the Settings task when the Messages folder is selected in the Application Explorer's configuration tree. These settings affect the general operation 
+ of the message system within PcVue. Show picture
+
+ 
+ 
+E-mail
+Default e-mail profile 
+ - The e-mail profile used as a default when configuring 
+ a message. The default is None.
+Default 
+ attachment encoding - The default encoding type for attachments. In version 10.0 
+ of PcVue, only MIME encoding is supported.
+Prohibited 
+ file extensions - Any file extensions that are prohibited for attached 
+ files, as a comma separated list.
+Maximum 
+ attachment size - The maximum size of any attached file in KB. The default is 1000 KB.
+ 
+SMS
+Default SMS profile 
+ - The SMS profile used as a default when configuring 
+ a message. The default is None.
+
+
+========================================
+TOPIC: Settings_Mimic_options.htm
+========================================
+Mimic options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mimic Options
+ 
+Show picture
+ 
+ 
+
+ 
+ 
+ 
+ 
+Mimics
+ 
+ 
+Default title
+ 
+ 
+Automatic 
+ - The name that appears in the mimic title bar is of the form Mimic<n> 
+ where <n> is a number that automatically increments each time a 
+ new mimic is created.
+ 
+File name 
+ - The name that appears in the mimic title bar is the name of the file 
+ in which the mimic is saved.
+ 
+ 
+Printing
+Mapping full screen to printer - Scale the output to the printer so that the entire screen (the actual screen, not the Workspace) fits the printer paper. This affects the following printing methods:
+Menu command File.Print, Log Report printing, SCADA Basic instruction WINDOW mode PRINT.
+Warning - Using this option can result in different X and Y scaling thereby distorting the printed output.
+ 
+Popup 
+ 
+ 
+Close on 
+ <esc> key - Allow context windows to be closed by the escape key.
+ 
+Open by program. Enable mimic popup behavior when a mimic is opened as a child of another mimic using the SCADA Basic instruction WINDOW.
+If this property is not selected, even if the mimic is configured as a popup, it will not exhibit popup behavior.
+ 
+Close container mimic on link close animation using "*" - If enabled, a click on a link close animation using the wildcard "*" in a popup mimic also closes the parent mimic.
+ 
+Persistent context variables after close - If enabled, the name of the context variable is persisted after closing the context mimic and is only reset when opening another context mimic. Otherwise, the name of the context variable is no longer available (to scripts or for pasting the variable in a trend legend for example) as soon as the context mimic is closed.
+ 
+ 
+Animation
+ 
+ 
+Hide old 
+ Grid control V7 from Menu and Toolbar -Hides 
+ the version 7 Grid Display command and tool.
+ 
+No warning 
+ box <animation not connected> in run-time mode - The normal warning 
+ dialog that appears at run-time when an animation refers to a non-existent 
+ variable is not displayed.
+ 
+Do not clip 
+ display register - If a value is (numerically) too large to display in 
+ a formatted Display Register animation, display the replacement character 
+ instead. The default replacement character is the # but may be changed 
+ if required.
+ 
+Command not 
+ authorized when Interlock Condition variable is invalid - when an interlock 
+ condition applies and its variable is in the Invalid state, disable the 
+ animation.
+ 
+Enable case sensitivity for animations that compare text strings - Enable case sensitivity in string comparisons for the following animations. Color - Text value, Image - Text value, Symbol - text value and Visibility - Text value.
+ 
+Register 
+ value invalidity display
+ 
+ 
+Display 
+ invalidity symbol - If the value of a register value is invalid a question 
+ mark is displayed.
+ 
+Display 
+ last valid value - If the value of a register is invalid the last valid 
+ value is displayed.
+ 
+ 
+Text value 
+ invalidity display
+ 
+ 
+Display 
+ invalidity symbol - If the value of a text variable is invalid a question 
+ mark is displayed.
+ 
+Display 
+ last valid value - If the value of a text variable is invalid the last 
+ valid value is displayed.
+ 
+ 
+Replacement symbol if alarm timestamp does not exist - When displaying alarms on a single line in an alarm viewer, the character specified here is used to replace timestamps related to future transitions of the alarm.
+ 
+Send Bit
+ 
+ 
+Handled 
+ & Pulse Execution - Behavior of handled or pulse operation of the Send Bit animation. See also tables below.
+ 
+ 
+Standard 
+ - If the bit value at the start of the mouse down event is the same as 
+ that requested by the animation; no action will take place when the mouse 
+ up event is received. 
+ 
+ 
+ 
+Write 
+ Bit Initial Value When Execution Ends - The bit value requested by the 
+ animation is always written on the mouse up event, even if the bit value 
+ at the time of the mouse down event was already the same as that requested 
+ by the animation. 
+ 
+ 
+ 
+Write 
+ Opposite Value (of requested one) when Execution Ends - The opposite bit 
+ value requested by the animation is always written on the mouse up event, 
+ even if the bit value at the time of the mouse down event was already 
+ the same as that requested by the animation.
+ 
+ 
+Accelerator 
+ Keys Behavior for Handled Execution
+ 
+ 
+Disable 
+ HMI & VBA - VBA and HMI events are disabled whilst an animation using 
+ the Handled option is executed using a keyboard accelerator key. 
+ 
+ 
+ 
+Do 
+ Not Disable HMI & VBA - VBA and HMI events are not disabled whilst 
+ an animation using the Handled option is executed using a keyboard accelerator 
+ key. 
+ 
+ 
+ 
+Variable 
+ Warning Display
+ 
+ 
+Display 
+ Missing Variable Only.
+ 
+Display 
+ According to Variable Quality.
+ 
+ 
+Bit Invalidity 
+ Status for Masked Alarm
+ 
+ 
+Display 
+ Bit as Invalid.
+ 
+Display 
+ Bit as Valid.
+ 
+ 
+ 
+Direct send for register and text
+ 
+ 
+Send value only when pressing "Return" key - The entered value will only be sent if the "Return" key is pressed.
+ 
+Send value when pressing "Return" key or when control loses focus - The entered value will be sent if the "Return" key is pressed or if the window prompting an entry loses focus and another window is selected.
+ 
+ 
+Symbols
+"Original size" selected when inserting symbol - If activated, the size of the newly inserted symbol is set to its original size.
+ 
+Operator Dialog 
+ Boxes 
+ 
+ 
+Use system 
+ message font - Use the Windows� system font for text in any dialogs 
+ displayed at run time. 
+ 
+ 
+Tab mimics
+Close container mimic when closing a tab using link animation or scripting - If enabled, closing a mimic in a tab also closes the parent mimic that contains the tab strip.
+ 
+Inhibit mimic background color for hardcopy - If set, the background color of a mimic is considered transparent for hardcopy printing.
+ 
+Sound Warning 
+ (Advanced Windows Properties) � Enables the generation of a sound using 
+ the PC�s loudspeaker when the Beep option in a window�s properties is 
+ selected. The frequency and duration of the sound may be entered in the 
+ parameters area.
+ 
+Authorize ActiveX content magnification - Allow the content of an ActiveX control to zoom if the mimic is zoomed. Ticked by default for new projects. This option is included for compatibility as zooming was not allowed on ActiveX controls in version 9.0 and earlier.
+ 
+Check ActiveX controls when loading mimic (double instantiation) - If enabled, ActiveX are loading in a 2-pass process so that some interop issues can be bypassed.
+ 
+ActiveX controls: Always save properties as text (ASCII mimics only) - If enabled, the property Save property as text of an ActiveX is ignored and its properties are always saved as text if the mimic is saved in ASCII.
+ 
+Authorize large 3D models containing more than 1 000 000 vertices (not recommended) - If set, large DirectX 3D models are loaded. If not, such models are not loaded and an error is raised.
+ 
+Authorize closing child mimics in cache - If set, a child mimic in cache will be closed if closing the parent mimic.
+ 
+Apply command levels in graphic controls - Defines the default behavior for enforcement of variable command level permissions in graphic controls that can be operated via variables values (including the Form controls). If not set, variables command level enforcement is not enabled. The default behavior can be overridden as part of the configuration of each graphic control using properties in the Operations tab.
+ 
+Magnifying Glass 
+ mode : Open Zoomed Mimic in 
+ 
+ 
+Same Window 
+ - The zoomed mimic is displayed in the original window.
+ 
+ 
+ 
+Current Region 
+ - The zoomed mimic is displayed in a new window opened in the same region.
+ 
+ 
+ 
+Previous 
+ Region - The zoomed mimic is displayed in a new window opened in the previous 
+ region.
+ 
+ 
+ 
+Next Region 
+ - The zoomed mimic is displayed in a new window opened in the previous 
+ region.
+ 
+ 
+ 
+Region 1 
+ - The zoomed mimic is displayed in a new window opened in region 1.
+ 
+ 
+ 
+Region 2 
+ - The zoomed mimic is displayed in a new window opened in region 2.
+ 
+ 
+ 
+Region 3 
+ - The zoomed mimic is displayed in a new window opened in region 3.
+ 
+ 
+ 
+Region 4 
+ - The zoomed mimic is displayed in a new window opened in region 4. 
+ 
+ 
+Screen resolution 
+ 
+ 
+ 
+Adapt Mimic 
+ Size to Screen Resolution - See the topic on The 
+ Window Properties Dialog.
+ 
+ 
+Context menus - Disable the right click context menus that appear, by default, at run-time when right clicking on a mimic or mimic title bar.
+Disable title bar right click popup menu in <Run> mode
+Disable mimic right click popup menu in <Run> mode
+Disable workspace right click popup menu
+ 
+ 
+ 
+
+ 
+The option Inhibit Mimic Backcolor for Hardcopies only applies to the HARDCOPY instruction in SCADA Basic and the PrintOut method of VBA. The menu command File.Print in the HMI always applies a white background.
+ 
+ 
+Detailed explanation of handled command
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Initial
+value
+ Command
+ Standard
+ Write bit initial value
+ Write opposite value
+ 
+ 
+
+ 0
+ Command to 1 
+(Press and release)
+ Send 1 to var
+ Send 1 to var
+ Send 1 to var
+ 
+ 
+
+ Send 0 to var
+ Send 0 to var
+ Send 0 to var
+ 
+ 
+
+ Command to 0 
+(Press and release)
+ No send
+ Send 0 to var*
+ Send 0 to var*
+ 
+ 
+
+ No send
+ Send 0 to var*
+ Send 1 to var
+ 
+ 
+
+ 1
+ Command to 1 
+(Press and release)
+ No send
+ Send 1 to var*
+ Send 1 to var*
+ 
+ 
+
+ No send
+ Send 1 to var*
+ Send 0 to var
+ 
+ 
+
+ Command to 1 
+(Press and release)
+ Send 0 to var
+ Send 0 to var
+ Send 0 to var
+ 
+ 
+
+ Send 1 to var
+ Send 1 to var
+ Send 1 to var
+ 
+ 
+ 
+ 
+*Write command not executed as previous value is the same.
+ 
+ 
+Detailed explanation of pulse command
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Initial
+value
+ Command
+ Standard
+ Write bit initial value
+ Write opposite value
+ 
+ 
+
+ 0
+ Command to 1
+ Send 1 to var
+ Send 1 to var
+ Send 1 to var
+ 
+ 
+
+ Delay
+ Delay
+ Delay
+ 
+ 
+
+ Send 0 to var
+ Send 0 to var
+ Send 0 to var
+ 
+ 
+
+ Command to 0
+ Send 0 to var*
+ Send 0 to var*
+ Send 0 to var*
+ 
+ 
+
+ Delay
+ Delay
+ Delay
+ 
+ 
+
+ Send 1 to var
+ Send 0 to var*
+ Send 1 to var
+ 
+ 
+
+ 1
+ Command to 1
+ Send 1 to var*
+ Send 1 to var*
+ Send 1 to var*
+ 
+ 
+
+ Delay
+ Delay
+ Delay
+ 
+ 
+
+ Send 0 to var
+ Send 1 to var*
+ Send 0 to var
+ 
+ 
+
+ Command to 0
+ Send 0 to var
+ Send 0 to var
+ Send 0 to var
+ 
+ 
+
+ Delay
+ Delay
+ Delay
+ 
+ 
+
+ Send 1 to var
+ Send 1 to var
+ Send 1 to var
+ 
+ 
+ 
+ 
+*Write command not executed as previous value is the same.
+
+
+========================================
+TOPIC: Settings_misc.htm
+========================================
+Miscellaneous settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Miscellaneous Settings
+ 
+The miscellaneous settings are displayed from the Miscellaneous entry in the Application Explorer's Main settings dialog. Show picture
+
+ 
+ 
+Configuration files
+Configuration backup (files) - The number of previous versions of configuration files that are kept. Previous versions are stored in the project folder CTEMP\BAK.
+Check configuration files � The database configuration file is checked for errors as it is loaded and any errors are reported in the file FORM.ERR.
+Merge communication objects � The communication frames are renumbered each time PcVue is started.
+Enable reading PARAM.DAT from LIB � The global library directory (LIB in the project root) will be searched for a PARAM.DAT file. Any parameters found in the file will be used together with those in the normal PARAM.DAT (in the project�s C directory). When PcVue is shut down, all parameters are saved in the normal PARAM.DAT.
+Enable configuration change recording in MDF.DAT in the PER folder - If enabled, the MDF.DAT file is stored in the PER folder of the project instead of the C folder.
+ 
+Configuration interfaces
+Reference number in old dialog box title � Displays a unique reference number in each dialog box.
+ 
+Graphics
+Cache size - The number of windows that may be cached in memory at any one time. Windows that are cached in memory will open more quickly than those from hard disk. The maximum number of windows that may be cached is 999. Each cached window takes a significant amount of memory (a simple window taking about 100 Kb of memory and a complex window, or one using large bitmaps, 300 Kb or more) and this must be taken into account when specifying this property.
+
+
+========================================
+TOPIC: Settings_network.htm
+========================================
+Networking settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Networking Settings
+ 
+The networking settings can be displayed from the Communication folder of the Application Explorer's Main Settings dialog or by using the Settings task when the Networking folder is selected in the Application Explorer's configuration tree. Show picture
+
+ 
+ 
+Invalidate variables - The time in seconds after failure of communication 
+ to another PcVue station before any associated variables become 
+ invalid.
+Never - An infinite time-out, which can be useful 
+ for example, when using dial-up networking.
+Immediately - Invalidate variable immediately.
+Delay value - Invalidate variables after the given period.
+ 
+Configuration defaults - Defaults used when creating the network configuration either manually or using the wizard.
+Wizard - Networking wizard configuration defaults.
+First server station number - The first server station number to be used when generating the network configuration.
+First association number - The first association number to be used when generating the network configuration.
+First client station number - The first client station number to be used when generating the network configuration.
+Base IP address - The IP address pre-configured in the Node Configuration dialog. The default is 10.0.0.1.
+Port number - The Port Number pre-configured in the Node Configuration dialog. The default is 1981.
+Create all links - If ticked, automatically create all possible links between clients and servers. The default is ticked.
+
+
+========================================
+TOPIC: Settings_overview.htm
+========================================
+Project settings overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Project Settings Overview
+ 
+The Project Settings dialog collects together properties that affect the general operation of a project in one convenient tree style dialog. Project Settings are accessed from the Application Explorer by selecting the topmost folder in the configuration tree and using the Settings task. The properties are arranged in groups that, in general, correspond to the main items in the configuration tree. Show picture
+ 
+
+ 
+ 
+Station startup - The behavior of the station at startup.
+ 
+Security - Settings to control security-related behaviors. Security settings are only accessible to users having a profile with the Security administration permission set. Refer to the topic Security settings for more information.
+ 
+Languages - Language selection.
+Settings - Languages parameters configuration.
+Default languages - Default languages for a new project.
+ 
+Advanced
+Variables
+Archives - Historical data recording.
+Programs - Programing environments and execution.
+Recipes
+Actions - SMS and Email, events and cyclics.
+User accounts - Including Active Directory integration.
+Communication - Including Data Acquisition, Networking, server interfaces (Web & Mobile back ends, OPC server, Mobile server and IEC 104 outstation) and flow regulation.
+Printers
+Application Architect
+Compatibility - Compatibility of projects developed with earlier versions of the software.
+Miscellaneous
+Audit diagnostics
+
+
+========================================
+TOPIC: Settings_printers.htm
+========================================
+Printers settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Printers Settings
+ 
+The printers settings are displayed from the Printers entry in the Application Explorer's Main settings dialog. The printer settings affect the operation of packet printing within PcVue. Show picture
+
+ 
+ 
+Printing period - The period between packets of messages sent to the printer.
+ 
+Number of lines per period - The maximum number of lines in each packet of messages.
+ 
+ 
+These properties determine the maximum rate at which PcVue prints to a line (text) printer if the Packet printing option was selected in the printer configuration. For example if the printing period was set to 5 (seconds) and the number of lines per period was set to 10, PcVue will be able to print up to 10 lines once every 5 seconds. The properties are used to avoid congestion in the printing mechanism when attempting to print an excessive number of lines - for example on recovery from a communication failure.
+ 
+This option is included for compatibility only as the packet printing mechanism has been superseded by PcVue print spooler.
+
+
+========================================
+TOPIC: Settings_program.htm
+========================================
+Program settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Program Settings
+ 
+The program settings are displayed from the Programs entry in the Application Explorer's Main settings dialog. The program settings affect the operation of the programing environments and operation within PcVue. Show picture
+
+ 
+ 
+SCADA Basic
+Errors and warnings
+Program infinite loop threshold - The maximum period for which a SCADA Basic program can run continuously before it is stopped. Used to prevent infinite loops in SCADA Basic programs. The default value is 30 seconds.
+Message on discarded function in a program with delay - Display an error message if a program is called again whilst still executing a delay instruction from the previous call.
+Only log program errors once in the Event Viewer � Repetitive errors appearing in the trace window from program language are only logged once after which they do not appear again until PcVue is restarted or the trace window is cleared.
+Compatibility
+Use register variables as double in SCADA basic script � Treats register variables as type double in a SCADA BASIC script. Set to True by default but can be changed to False for compatibility with projects created with early versions of PcVue where a register was treated as a single.
+Working variables scope control - See the Working Variables topic in the SCADA Basic book for full information on the behavior.
+Strict control - Use strict control for the scope of SCADA Basic variables. This is the default setting for new projects. 
+Legacy control with warning - As below but with additional warning messages when the rules enforced by Strict Control are broken.
+Legacy control - Use the rules for the scope of SCADA Basic variables that were used prior to version 11.2. This is the default setting after migration of existing projects.
+'Return' instruction scope - Control the behavior of the 'Return' instruction
+Exit the function (Sub) - Executing the 'Return' instruction causes the function to exit even if the 'Return' is in a nested set of statements (if condition, loop, etc.)
+Behave like 'Break' when declare in a loop (For/While) - Executing the 'Return' instruction from within a For or While loop only causes an exit from the loop (equivalent of a call to 'break'). It does not causes the function to exit.
+
+
+========================================
+TOPIC: Settings_properties_mobile.htm
+========================================
+Mobile Server settings - Properties tab
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mobile Server Settings - Properties Tab
+ 
+The Mobile Server advanced settings can be displayed from the Communication folder of the Application Explorer's Main Settings dialog or by using the Settings task when the Mobile Server folder is selected in the Application Explorer's configuration tree. The settings are divided into Alarms and Properties. This topic is for Properties. Show picture
+ 
+
+ 
+ 
+ 
+Variable properties
+ 
+The Properties tab configures which properties are displayed when a TouchVue user opens the details area for a variable (bit, alarm, register or text), or for an individual logged event.
+ 
+For a property to be displayed in the TouchVue Variable Details screen, the application designer must tick the corresponding property in the Mobile Server Settings dialog.
+
+ 
+The following properties can be selected for display in TouchVue.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ Bit
+ Alarm
+ Register
+ Text
+ Log
+ 
+ 
+
+ Domain (Attribute 1)
+ Yes
+ Yes
+ Yes
+ Yes
+ Yes
+ 
+ 
+
+ Nature (Attribute 2)
+ Yes
+ Yes
+ Yes
+ Yes
+ Yes
+ 
+ 
+
+ Variable name
+ Yes
+ Yes
+ Yes
+ Yes
+ Yes
+ 
+ 
+
+ Maximum value
+ No
+ No
+ Yes
+ No
+ No
+ 
+ 
+
+ Minimum value
+ No
+ No
+ Yes
+ No
+ No
+ 
+ 
+
+ Maximum control value
+ No
+ No
+ Yes
+ No
+ No
+ 
+ 
+
+ Minimum control value
+ No
+ No
+ Yes
+ No
+ No
+ 
+ 
+
+ Maximum variable name
+ No
+ No
+ Yes
+ No
+ No
+ 
+ 
+
+ Minimum variable name
+ No
+ No
+ Yes
+ No
+ No
+ 
+ 
+
+ Maximum control variable
+ No
+ No
+ Yes
+ No
+ No
+ 
+ 
+
+ Minimum control variable
+ No
+ No
+ Yes
+ No
+ No
+ 
+ 
+
+ Units
+ No
+ No
+ Yes
+ No
+ No
+ 
+ 
+
+ Format
+ No
+ No
+ Yes
+ No
+ No
+ 
+ 
+
+ Comment
+ No
+ No
+ No
+ No
+ Yes
+ 
+ 
+
+ Alarm level
+ No
+ Yes
+ No
+ No
+ No
+ 
+ 
+
+ Binary attribute
+ Yes
+ Yes
+ Yes
+ Yes
+ Yes
+ 
+ 
+
+ Text attributes 2 - 16
+ Yes
+ Yes
+ Yes
+ Yes
+ Yes
+ 
+ 
+
+ Deferred attributes 3 - 16
+ Yes
+ Yes
+ Yes
+ Yes
+ Yes
+ 
+ 
+ 
+ 
+Configuring a text attribute to have special meaning
+ 
+You can configure the content of a variable's text attribute, or deferred text attribute, to have a special meaning in the context of TouchVue. The following options are available.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Content
+ Icon
+ Attribute
+ Action in TouchVue when touching the attribute value
+ 
+ 
+
+ None
+ &#160;
+ &#160;
+ No action - The attribute is used as a raw piece of text information.
+ 
+ 
+
+ Email
+ 
+ 
+ 
+ Email address
+ Generate an email. Subject is the variable description. Contents is the variable value.
+ 
+ 
+
+ Web address
+ 
+ 
+ 
+ Web Url
+ Open a Web Browser using the supplied Url.
+ 
+ 
+
+ Phone number
+ 
+ 
+ 
+ Phone number
+ Call the phone number
+ 
+ 
+
+ SMS
+ 
+ 
+ 
+ SMS (phone) number
+ Send an SMS to the phone number
+ 
+ 
+
+ SMS/Phone
+ 
+ 
+ 
+ 
+ SMS number, phone number
+ Send an SMS to the SMS number and call the phone number
+
+
+========================================
+TOPIC: Settings_Quality_Configuring.htm
+========================================
+Configuring quality sequences
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring Quality Sequences
+ 
+Select the menu 
+ Configure.Preferences.Quality Sequences to open the Sequence Editor. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+How to create a new sequence
+ 
+ 
+Right-click on the 
+ Sequences icon in the left pane and from the context menu, select New Sequence.
+ 
+Enter a name for 
+ the sequence.
+ 
+ 
+How to add a condition to a sequence
+ 
+ 
+Select the sequence 
+ to which the condition is to be added.
+ 
+In the right pane 
+ right, click the New Alias icon. From the context menu, select New.
+ 
+Enter a name for 
+ the condition.
+ 
+Click in the Mask field and select the small button next to the field. Select the mask and value bits. Remember that the mask is added with the quality and if equal to the value, the condition is valid. 
+ 
+Select the color 
+ for the Line and Fill fields. If a color change is not required, right 
+ click and from the context menu select No change. 
+ 
+Enter the string 
+ in the Text field. If a text change is not required, right click and from 
+ the context menu select No change.
+ 
+Select the symbol 
+ in the Symbol field. If a symbol change is not required, right-click and 
+ from the context menu select No change. 
+ 
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+To create a new sequence based on an existing one
+ 
+ 
+Select an existing 
+ sequence.
+ 
+Right-click on its 
+ name and from the context menu, select the Copy command.
+ 
+Click anywhere in 
+ left hand pane and from the context menu select the Paste command.
+ 
+ 
+How to save the configuration
+ 
+ 
+To save a new sequence or changes 
+ to an existing sequence. Click the OK button. 
+ 
+Clicking the Cancel button will 
+ discard any changes.
+
+
+========================================
+TOPIC: Settings_Quality_How_Works.htm
+========================================
+How a quality sequence works
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How a Quality Sequence Works
+ 
+A previously configured sequence is assigned to the animation 
+ in question. For example, the sequence Standard is assigned to a Color 
+ On Bit animation. At Run time, when the quality of any variable in the 
+ animation changes each row in the sequence is checked in turn. The quality 
+ value is ANDed with the Mask and the result checked against the Value. 
+ 
+ 
+If there is a match the properties defined in the condition 
+ are substituted for those of the animation, otherwise the next row is 
+ checked and so on. If there are no matches then the properties configured 
+ in the animation are used.
+ 
+The properties that are used from the sequence will depend on the animation type.
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Animation type
+ 
+ 
+ 
+Example
+ 
+ 
+ 
+Properties used
+ 
+ 
+ 
+
+ 
+ 
+Color change 
+ 
+ 
+ 
+Color on Bit 
+ 
+ 
+ 
+Line Color and Fill Color
+ 
+ 
+ 
+
+ 
+ 
+Text 
+ 
+ 
+ 
+Register Display 
+ 
+ 
+ 
+Text
+ 
+ 
+ 
+
+ 
+ 
+ Symbol 
+ 
+ 
+ 
+Symbol on Bit 
+ 
+ 
+ 
+Symbol
+ 
+ 
+ 
+
+ 
+ 
+ Visibility 
+ 
+ 
+ 
+Visibility on Bit 
+ 
+ 
+ 
+Visibility
+ 
+ 
+ 
+ 
+
+ 
+The order in which the conditions are checked is important, on the animation type.
+
+
+========================================
+TOPIC: Settings_Quality_Overview.htm
+========================================
+Overview of OPC quality
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of OPC Quality
+ 
+An OPC server provides a minimum of three properties 
+ for each of its variables, known as Value, Quality and Timestamp.
+ 
+ 
+The Value is the 
+ real-time value of the variable, for example the level of a tank.
+ 
+The Timestamp is 
+ the time at which the value last changed.
+ 
+The Quality provides 
+ information about the reliability and status of the value.
+ 
+ 
+The Quality is provided as a 16-bit word. The higher 
+ 8 bits are vendor specific and the lower 8 bits always follow a standard 
+ format.
+ 
+The extent to which the Quality property is supported 
+ depends on the server you are using. For further information on the server 
+ you are using see the vendor documentation.
+ 
+The standard quality flags
+ 
+The lowest 8 bits of the Quality flags are defined in 
+ the form of three bit fields: Quality, Sub-status and Limit status arranged 
+ in the form of QQSSSSLL as follows.
+ 
+The quality (QQ) field
+ 
+The quality field provides the most basic information 
+ about the quality of the variable.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+QQ
+ 
+ 
+ 
+ 
+Bit Value
+ 
+ 
+ 
+Defines
+ 
+ 
+ 
+Description
+ 
+ 
+ 
+
+ 
+ 
+0
+ 
+ 
+ 
+00SSSSLL
+ 
+ 
+ 
+Bad
+ 
+ 
+ 
+Value is not useful for reasons indicated by the Sub-status.
+ 
+ 
+ 
+
+ 
+ 
+1
+ 
+ 
+ 
+01SSSSLL
+ 
+ 
+ 
+Uncertain
+ 
+ 
+ 
+The quality of the value is uncertain for reasons indicated 
+ by the Sub-status.
+ 
+ 
+ 
+
+ 
+ 
+2
+ 
+ 
+ 
+10SSSSLL
+ 
+ 
+ 
+N/A
+ 
+ 
+ 
+Not used.
+ 
+ 
+ 
+
+ 
+ 
+3
+ 
+ 
+ 
+11SSSSLL
+ 
+ 
+ 
+Good
+ 
+ 
+ 
+The Quality of the value is Good.
+ 
+ 
+ 
+ 
+If the OPC server does not provide Quality information 
+ then this value is always set to 3.
+ 
+The Substatus (SSSS) field
+ 
+The Sub-status field provides information specific to 
+ the basic Quality. For example if the Quality was uncertain, the status 
+ may indicate that the value is outside of its configured range. The meaning 
+ of the values in the Sub-status field depends on the value of the Quality 
+ field.
+ 
+Substatus for Bad quality
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+SSSS
+ 
+ 
+ 
+Bit Value
+ 
+ 
+ 
+Defines
+ 
+ 
+ 
+Description
+ 
+ 
+ 
+
+ 
+ 
+0
+ 
+ 
+ 
+000000LL
+ 
+ 
+ 
+Non-specific
+ 
+ 
+ 
+The value is bad but no specific reason is known.
+ 
+ 
+ 
+
+ 
+ 
+1
+ 
+ 
+ 
+000001LL
+ 
+ 
+ 
+Configuration Error
+ 
+ 
+ 
+There is some server-specific problem with the configuration. 
+ For example, the variable in question may have been deleted from the configuration.
+ 
+ 
+ 
+
+ 
+ 
+2
+ 
+ 
+ 
+000010LL
+ 
+ 
+ 
+Not Connected
+ 
+ 
+ 
+The input is required to be logically connected to something but is not. This quality may reflect that no value is available at this time, for reasons such as that the value not having been provided by the data source.
+ 
+ 
+ 
+
+ 
+ 
+3
+ 
+ 
+ 
+000011LL
+ 
+ 
+ 
+Device Failure
+ 
+ 
+ 
+A device failure has been detected.
+ 
+ 
+ 
+
+ 
+ 
+4
+ 
+ 
+ 
+000100LL
+ 
+ 
+ 
+Sensor Failure
+ 
+ 
+ 
+A sensor failure had been detected. (The Limits field can 
+ provide additional diagnostic information in some situations.)
+ 
+ 
+ 
+
+ 
+ 
+5
+ 
+ 
+ 
+000101LL
+ 
+ 
+ 
+Last Known Value
+ 
+ 
+ 
+Communications have failed. However, the last known value 
+ is available.
+ 
+ 
+ 
+
+ 
+ 
+6
+ 
+ 
+ 
+000110LL
+ 
+ 
+ 
+Comm Failure
+ 
+ 
+ 
+Communications have failed. No last known value 
+ is available.
+ 
+ 
+ 
+
+ 
+ 
+7
+ 
+ 
+ 
+000111LL
+ 
+ 
+ 
+Out of Service
+ 
+ 
+ 
+The block is off-scan or otherwise locked. This quality 
+ is also used when the active state of the variable or the group containing 
+ the item is inactive.
+ 
+ 
+ 
+
+ 
+ 
+8-15
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+N/A
+ 
+ 
+ 
+Not used by OPC
+ 
+ 
+ 
+ 
+Substatus for Uncertain quality
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+SSSS
+ 
+ 
+ 
+ 
+Bit Value
+ 
+ 
+ 
+Defines
+ 
+ 
+ 
+Description
+ 
+ 
+ 
+
+ 
+ 
+0
+ 
+ 
+ 
+010000LL
+ 
+ 
+ 
+Non-specific
+ 
+ 
+ 
+The value is uncertain but no specific reason is known.
+ 
+ 
+ 
+
+ 
+ 
+1
+ 
+ 
+ 
+010001LL
+ 
+ 
+ 
+Last usable value
+ 
+ 
+ 
+Whatever was writing this value has stopped doing so. 
+ The returned value should be regarded as stale. Note that this differs 
+ from a Bad value with Substatus 5 (Last Known Value). That status is associated 
+ specifically with a detectable communications error on a fetched value. 
+ This error is associated with the failure of some external source to put 
+ something into the value within an acceptable period of time.
+ 
+ 
+ 
+
+ 
+ 
+2-3
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+N/A
+ 
+ 
+ 
+Not used by OPC.
+ 
+ 
+ 
+
+ 
+ 
+4
+ 
+ 
+ 
+010100LL
+ 
+ 
+ 
+Sensor not accurate
+ 
+ 
+ 
+Either the value has reached one of the sensor limits 
+ (in which case the limit field should be set to 1 or 2) or the sensor 
+ is otherwise known to be out of calibration via some form of internal 
+ diagnostics (in which case the limit field should be 0).
+ 
+ 
+ 
+
+ 
+ 
+5
+ 
+ 
+ 
+010101LL
+ 
+ 
+ 
+Engineering units exceeded
+ 
+ 
+ 
+The returned value is outside the limits defined for this 
+ parameter. Note that in this case the Limits field indicates which limit 
+ has been exceeded but does not necessarily imply that the value cannot 
+ move farther out of range.
+ 
+ 
+ 
+
+ 
+ 
+6
+ 
+ 
+ 
+010110LL
+ 
+ 
+ 
+Sub-normal
+ 
+ 
+ 
+The value is derived from multiple sources and has less 
+ than the required number of good sources.
+ 
+ 
+ 
+
+ 
+ 
+7-15
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+N/A
+ 
+ 
+ 
+Not used by OPC.
+ 
+ 
+ 
+ 
+Substatus for Good quality
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+SSSS
+ 
+ 
+ 
+ 
+Bit Value
+ 
+ 
+ 
+Defines
+ 
+ 
+ 
+Description
+ 
+ 
+ 
+
+ 
+ 
+0
+ 
+ 
+ 
+110000LL
+ 
+ 
+ 
+Non-specific
+ 
+ 
+ 
+The value is good. There are no special conditions.
+ 
+ 
+ 
+
+ 
+ 
+1-5
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+N/A
+ 
+ 
+ 
+Not used by OPC.
+ 
+ 
+ 
+
+ 
+ 
+6
+ 
+ 
+ 
+110110LL
+ 
+ 
+ 
+Local override
+ 
+ 
+ 
+The value has been Overridden. Typically this means 
+ that the input has been disconnected and a manually entered value has been 
+ forced. 
+ 
+ 
+ 
+
+ 
+ 
+7-15
+ 
+ 
+ 
+&#160;
+ 
+ 
+ 
+N/A
+ 
+ 
+ 
+Not used by OPC.
+ 
+ 
+ 
+ 
+
+ 
+If the server does not provide Sub-status information then this field is always set to 0.
+ 
+ 
+The Limit field
+ 
+The Limit field provides an indication of the value of the variable with respect to its limits and is valid regardless of the Quality and Sub-status.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+LL
+ 
+ 
+ 
+ 
+Bit Value
+ 
+ 
+ 
+Defines
+ 
+ 
+ 
+Description
+ 
+ 
+ 
+
+ 
+ 
+0
+ 
+ 
+ 
+QQSSSS00
+ 
+ 
+ 
+Not limited
+ 
+ 
+ 
+The value is free to move up or down.
+ 
+ 
+ 
+
+ 
+ 
+1
+ 
+ 
+ 
+QQSSSS01
+ 
+ 
+ 
+Low limited
+ 
+ 
+ 
+The value has reached, and is limited by, a lower limit.
+ 
+ 
+ 
+
+ 
+ 
+2
+ 
+ 
+ 
+QQSSSS10
+ 
+ 
+ 
+High limited
+ 
+ 
+ 
+The value has reached, and is limited by, an upper limit.
+ 
+ 
+ 
+
+ 
+ 
+3
+ 
+ 
+ 
+QQSSSS11
+ 
+ 
+ 
+Constant
+ 
+ 
+ 
+The value is constant and cannot move.
+ 
+ 
+ 
+ 
+
+ 
+If the server does not provide Limit information then this field is always set to 0.
+
+
+========================================
+TOPIC: Settings_Quality_What_are_Used_For.htm
+========================================
+What are the quality sequences used for?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+What are the Quality Sequences Used For?
+ 
+The Quality Sequences are used to customize 
+ the visual indication provided by an animation at run-time when an OPC 
+ variable has a quality other than good. The indication may take the form 
+ of a color change, the display of a text string or the selection of a symbol, depending on the animation type.
+ 
+You can create any number of Quality 
+ Sequences, which may then be assigned to each animation as required.
+
+
+========================================
+TOPIC: Settings_recipe.htm
+========================================
+Recipe settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Recipe Settings
+ 
+The recipe settings can be displayed from the Recipes entry in the Application Explorer's Main settings dialog or from the Settings task when the Recipes folder is selected in the Application Explorer's configuration tree. The recipe settings affect the general operation of the recipe system within PcVue. Show picture
+
+ 
+ 
+Enable overwriting recipes by program � Allows the SCADA Basic recipe instruction to overwrite existing recipes.
+ 
+Send recipe even if a variable is unavailable � Allows a recipe to be sent even if one of the variables is invalid or does not exist.
+ 
+User action log mode
+Log write actions for all variables except internal - When the recipe is sent the change in value of variables is logged (except for internal variables).
+Write actions are not logged - When the recipe is sent the change in value of variables is not logged.
+ 
+Maximum number of variables in a recipe - The maximum number of variables that can be configured in a recipe. Default 2000.
+
+
+========================================
+TOPIC: Settings_Region_options.htm
+========================================
+Region options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Region Options
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Advanced Mode � Enable 
+ advanced multiple region operation with the following options.
+ 
+ 
+Multi open capability 
+ of the same mimic � Allow a copy of a mimic to be opened concurrently 
+ in each region.
+ 
+ 
+ 
+Previous mimic 
+ (#P)
+ 
+ 
+Global to 
+ the project � The previous mimic substitution is global to the entire 
+ project, independent of any regions.
+ 
+ 
+ 
+Local to 
+ each region � The previous mimic substitution is local to the region.
+ 
+ 
+ 
+ 
+Link Open <Close 
+ Caller> Mode
+ 
+ 
+Open in Caller 
+ Region
+ 
+ 
+Close 
+ the Caller � The calling mimic is closed (if enabled) when invoking a 
+ Link Open Mimic animation at run time.
+ 
+ 
+ 
+Close 
+ all Region Mimics � All open mimics in the calling mimic region are closed 
+ when invoking a Link Open Mimic animation at run time.
+ 
+ 
+Open in other 
+ Region than the caller one
+ 
+ 
+ 
+ 
+Close 
+ the Caller � The calling mimics are closed (if enabled) when using a Link 
+ Open Mimic animation.
+ 
+ 
+ 
+Close 
+ all target Region Mimics - All open mimics in the target region (the one 
+ in which the mimic is being opened) are closed when invoking a Link Open 
+ Mimic animation at run time.
+
+
+========================================
+TOPIC: Settings_Scripting_options.htm
+========================================
+Scripting options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Scripting Options
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Disable VBA - VBA scripting is disabled and the PcVue software behaves as though it were a non-VBA version. The VBA editor is disabled and any existing VBA scripts do not run. If a mimic or symbol containing a VBA script is saved, the script is lost.
+ 
+Variable Value returns alarm value if variable is an alarm - If enabled, the Value property of Variable object is handled in scripts as an alarm value instead of a bit value. Otherwise, the bit value is returned even if the variable is configured as alarm.
+ 
+Script Editor - Configures the behavior of the VBA and ENA (Enable) scripting engines.
+Show VBA Only - Only the VBA tool is shown on the toolbar. 
+Show both VBA and 
+ Enable, shortcuts to VBA - Both VBA and ENA tools are shown on the toolbar. Shortcuts (View script on the drawing element context menu and any events in the Properties List) are directed to the VBA editor.
+Show both VBA and 
+ Enable, shortcuts to Enable - Both VBA and ENA tools are shown on the toolbar. Shortcuts (View script on the drawing element context menu and any events in the Properties List) are directed to the ENA editor.
+ 
+Rename mimic template 
+ object IDs - See explanation below.
+ 
+ 
+Using the Rename mimic template object ID's option
+ 
+When selected, this option will cause the ID of any mimic template objects that are identical to the ID of mimic objects inherited from the template, to be automatically renamed. Not only is the object ID modified, 
+but also any references to the ID in any Enable script.
+ 
+This is necessary when using the Enable scripting language as each object ID must be unique. If you script objects with identical IDs, the script of the object loaded first will work but subsequent objects with the same ID that are loaded will generate an error message.
+ 
+If possible, it's better to plan in advance and set-up a naming scheme that 
+will avoid duplicate ID as the automatic renaming system will penalize 
+the mimic loading performance.
+ 
+
+ 
+This option must not be used in the VBA version of PcVue.
+ 
+ 
+
+ 
+VBA allows duplicate object IDs.
+ 
+ 
+
+ 
+VBA does not support object renaming.
+
+
+========================================
+TOPIC: Settings_Servers.htm
+========================================
+Servers settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Servers Settings
+ 
+The settings for all server types can be displayed by using the Settings task when the Servers folder is selected in the Application Explorer's configuration tree. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Windows Remote Desktop Session Host server
+Check NTFS folders permissions for PcVue's folder, the project folder using -b and the project versions central folder - If ticked PcVue checks that the client users have the correct NTFS permissions (Full Control) for the folders before starting an RDS session. If the permissions are found to be incorrect, an error message is displayed and the session is not started. 
+Windows Remote Desktop session starting timeout - This timeout is only used if the property Use same working folder for all Remote Desktop sessions is selected in a client's network configuration. As only one RDS client is able to start at a time in a host server, the next client must wait either until the previous client has completed its startup, or this delay, before it can start. The default is 10 minutes.
+ 
+Web & Mobile back ends - See the Settings topic in the Web & mobile back ends book.
+ 
+Mobile server - See the Alarms and Properties settings topics in the Mobile Server book.
+ 
+IEC 61870-5-104 - See the Settings topic in the IEC 104 Server book.
+ 
+ 
+
+ 
+When basing the architecture on a RDS Host Server, only one PcVue instance can act as a Web & Mobile back end, and such an architecture is not recommended.
+
+
+========================================
+TOPIC: Settings_Soft_keypad_management.htm
+========================================
+Soft keypad management
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Soft Keypad Management
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Use of soft keypads
+ with Send - register and Send - text animations
+ 
+ 
+Use previous
+ virtual keypads - Use the old style (Version 7) virtual keypads.
+ 
+Use the new virtual
+ keypads - Use the new (Version 8) virtual keypads.
+
+ 
+ 
+Touch screen
+ 
+ 
+Use soft keypad
+ for Login dialog and Security animations.
+ 
+Use soft keypad
+ for Send - register and Send - text animation for all sending modes.
+ 
+Use soft keypad
+ for min and max in the Trend Viewer trace toolbox.
+ 
+Use soft keypad to modify comment from log viewer.
+ 
+ 
+There is a parameter for use with the new keypads:
+ 
+ 
+Process date and time input formats like the previous keypad.
+ 
+ 
+ 
+
+ 
+See also the topic Configuring the soft keypads.
+
+
+========================================
+TOPIC: Settings_touch_screen.htm
+========================================
+Using a touch screen
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using a Touch Screen
+ 
+PcVue has a number of features designed to make 
+ the use of a touch screen easier and more ergonomic for the user.
+ 
+Soft numeric and alphanumeric keypads
+ 
+The soft (screen based) keypads are used for number 
+ and text entry with the following animations.
+ 
+ 
+Send Register 
+ animation
+ 
+Send Text 
+ animation
+ 
+Security 
+ animation
+ 
+Security - Login
+ 
+Security - Password modification
+ 
+Security - User confirmation
+ 
+Security - Double signature
+ 
+Trend viewer trace toolbox
+ 
+Log Viewer
+ 
+ 
+To find out more about configuring the soft keypads, 
+ see the topic Configuring the Soft Keypads.
+ 
+To find out more about enabling the use of a soft keypad in the various animations, graphic controls and viewers, see the topic Soft Keypad Management. 
+ 
+Trend viewer display configuration
+ 
+The Trend Viewer has a configuration tab specific to 
+ the use of a touch screen. Using the properties on this tab, you can choose 
+ to display large toolbars, large dialogs and large scroll bars. See the topic Configuring the Trend Viewer's Touch Screen Features for more information.
+ 
+Other useful features
+ 
+ 
+You can use an accelerator 
+ key with the majority of send animations.
+ 
+You can disable the 
+ use of the mouse using the property Disable mouse click on any of the 
+ animations supporting an accelerator key.
+ 
+ 
+Limitations
+ 
+The following is a list of some of the limitations you 
+ may encounter when using a touch screen.
+ 
+ 
+The Send - Recipe 
+ animation can only be used with the direct send property selected.
+ 
+The Send - Region 
+ animation can only be used with the direct send property selected.
+ 
+The Link - Note animation 
+ does not support accelerator keys and can only be used with the read only 
+ property selected.
+ 
+The properties displayed 
+ in the legend of a Trend Viewer must be read-only.
+
+
+========================================
+TOPIC: Settings_touch_screen_Configuring.htm
+========================================
+Configuring the soft keypads
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the Soft Keypads
+ 
+The soft numeric and alphanumeric keypads allow the user 
+ to enter numeric values and text strings at run time using a displayed 
+ keypad and the pointing device (mouse or touch screen). 
+ 
+There are two versions of the soft keypads available, the current one Show picture, and for compatibility with older systems the previous one Show picture. 
+ You select which version to use in the HMI Settings.
+
+ 
+The soft keypads are displayed under the following conditions.
+ 
+ 
+From a Send Register 
+ animation when the option keypad is selected.
+ 
+From a Send Text 
+ animation when the option keypad is selected. 
+ 
+From the Security 
+ animation when the option Use virtual keyboard for login and security 
+ is selected.
+ 
+From the Login dialog
+ when the option Use virtual keyboard for login and security is selected.
+ 
+From the Trend viewer trace toolbox to change min and max when the option Use soft keypad
+ for min and max in the Trend Viewer trace toolbox is selected.
+ 
+From the Log Viewer to modify the comment when the option Use soft keypad when modifying the comment in the log viewer is selected.
+ 
+ 
+The look and feel of the soft keypads is configured from 
+ a dialog displayed from the menu using the Configure 
+ Preferences.Soft Keypad command. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+The dialog contains two tabs, one for the configuration 
+ of the numeric keypad, the other for the alphanumeric keypad. Many of 
+ the properties are common to both keypads. It is recommended that you 
+ select the option, Identical configuration for both numeric and alphanumeric 
+ keypads, which will ensure the two keypads have a similar appearance.
+ 
+How to configure the keypad display
+ 
+ 
+Select the button 
+ style from one of the following.
+Standard - Displays standard Windows (pre XP) style buttons.
+XP Look - Display XP style buttons.
+Flat - Displays buttons without a 3D effect.
+ 
+Select the border 
+ style. If you select None, the keypad will be displayed without a border 
+ and title bar and you will be unable to move it within the screen.
+ 
+Select the color 
+ for the background and the keys.
+System - Uses the standard Windows colors.
+Custom - Allows you to select a color using the color picker.
+ 
+Select the Opacity. 
+ The opacity determines the visibility of any display beneath the keypad. 
+ With the default of 100% the keypad is solid. The minimum opacity setting 
+ is 30%. Show picture
+
+ 
+ 
+Displaying information about the variable in the keypad 
+ dialog
+ 
+If required you can provide the User with further information 
+ about the variable used in the animation by ticking the option Display 
+ variable information. The following further options then become available.
+ 
+ 
+Select Name to display 
+ the variable's name or Label to display its description.
+ 
+Tick the option 
+ Minimum - maximum value to display the variable's range (Numeric keypad 
+ only)
+ 
+Tick the option 
+ Current value to display the variable's current value.
+ 
+ 
+Displaying a dialog to confirm the value
+ 
+Selecting the option User send confirmation will display 
+ a dialog in which the user is allowed to confirm or cancel the new value 
+ for the variable.
+ 
+Selecting the display mode for the numeric keypad
+ 
+Using the mode options, you can choose different styles 
+ of keypad that allows the User to enter a number in decimal, hexadecimal 
+ or binary. 
+ 
+ 
+To allow the User 
+ to enter a number in decimal format select the Standard mode.
+ 
+To allow the user 
+ to enter the number in hexadecimal or binary format select Advanced mode 
+ and then choose the appropriate option from the drop down list box. The 
+ All option allows the user to select the format when displaying the numeric 
+ keypad at run time.
+ 
+ 
+Selecting the display mode for the alphanumeric keypad
+ 
+The display mode options for the alphanumeric keypad 
+ allow the selection of a keyboard layout relevant to the language in use.
+ 
+ 
+Standard - Allows 
+ the selection of a QWERTY or AZERTY keyboard, or Automatic where the keyboard layout is selected from QWERTY or AZERTY whichever is closest to the project language.
+ 
+Advanced - Allows 
+ the selection of a keyboard in a specific language (see below), or Automatic where the keyboard layout is selected from one of the following whichever is closest to the project language.
+ English (US)
+French
+Spanish
+German
+Italian
+Russian
+
+ 
+ 
+If you choose to display the alphanumeric keypad in any language other than English, an extra key is provided to select an English keyboard. This is to allow the user to enter a mix latin and non-latin characters. For example, you may want to enter the name of an instrument or an identifier using latin characters in the middle of a Russian phrase. Show picture
+
+ 
+
+ 
+See also the topic Soft keypad management.
+
+
+========================================
+TOPIC: Settings_user_accounts.htm
+========================================
+User accounts settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+User Accounts Settings
+ 
+The User Accounts settings are displayed from the Settings task when the User Accounts folder is selected in the Application Explorer's configuration tree. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Encrypt user accounts configuration file - Encrypt the User Accounts configuration file so that it cannot be read with a text editor.
+ 
+Use the advanced security strategy - See the topic What is the Advanced Security Strategy for more information.
+
+Number of login attempts - The number of login attempts before an account is locked. Range 1 to 10. Default 3.
+ 
+Enable networking-dependent profile association - Enable User Accounts to use different profiles depending on which station the account is being used.
+
+ 
+Built-in user accounts directory
+
+Impose strong password - Force the use of a strong password. See the topic Choosing a Strong Password for more information.
+
+'Display name' property - Select the manner in which the Display Name is constructed from the First Name and Last name properties.
+ 
+External user accounts directory
+Enable connection to the Microsoft Windows� directory - Enable the configuration of user accounts using Windows User Group users. See the topic Using Windows Domain User Groups for more information.
+
+Auto logon with current user - If activated, the current Windows user is automatically logged in to PcVue at startup if it is allowed to (matching Windows user groups/profile). If it is not, the login dialog box is displayed.
+Account properties update
+Display name - use the Full Name property from the external user account as PcVue Display Name property.
+Description - Use the Description property from the external user account as PcVue Description property.
+Title - Use the Job title property from the external user account as PcVue Title property.
+Mobile phone number - Use the Telephone number property from the external user account as PcVue Mobile phone number property.
+E-mail address - Use the Email address property from the external user account as PcVue E-mail address property.
+Directory connection
+Domain name - Allow authentication of Users on a specific domain.
+Defaults to empty to indicate that users should be authenticated against the domain to which the computer belongs.
+Set a value corresponding to a domain name if you need users to be authenticated against another specific domain.
+
+Domain controller name - For large networks the domain can have several controllers. This setting allows the selection of a specific controller (normally the fastest). In some projects, this can bring significant performance improvements.
+Defaults to empty to indicate that the first available Domain Controller will be used.
+Set a value corresponding to a Domain Controller name if you need the authentication feature to rely on a specific Domain Controller.
+Logon type - Depending on the security strategy of the domain, some logon types do not work. Do not cache the credentials requires a weaker strategy than Cache the credentials.
+Cache the credentials, when allowed by the domain, allows a User to logon to a computer, if he had already done so in the past, even if the controller is not accessible (LOGON32_LOGON_INTERACTIVE).
+Do not cache credentials is intended for high performance servers to authenticate with plaintext passwords and does not cache credentials (LOGON32_LOGON_NETWORK).
+
+Buffer size to retrieve information - The size of the buffer used to retrieve the configuration of the domain controller (list of user groups...). When a large number of user groups are declared in the domain controller, increasing the value of this property can help to improve performance if the Domain Controller is set accordingly. Range 1 to 1000 - Defaults to 100.
+
+Secure connection - Enabled by default. Disable this setting if your AD-FS deployment does not include the use of a certificate for securing connection to the AD-FS server when browsing groups using LDAPS services.
+ 
+ 
+
+ 
+If the Domain controller name is left empty, PcVue will use the first accessible domain controller as evaluated by the local Windows host operating system.
+
+
+========================================
+TOPIC: Settings_variable.htm
+========================================
+Variables settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Variables Settings
+ 
+The variables settings can be displayed from the Variables entry in the Application Explorer's Main settings dialog or from the Settings task when the Variables folder is selected in the Application Explorer's configuration tree. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+Persistence
+Save period for variables - The period at which variables with the Saved property enabled are persisted on hard disk. The default is 1 minute.
+ 
+Internal variables
+Internal variable initialization - Defines the default initial value for internal bit and alarm variables. Can be overridden on a per variable basis.
+Initial value for internal bits
+Invalid - Internal bits are by default set to invalid.
+To 0 - Internal bits are by default set to 0.
+To 1 - Internal bits by default all set to 1.
+Initial value for internal alarms
+Invalid - Alarms are by default set to invalid.
+Alarm off - Alarms are by default set to off.
+Alarm on - Alarms are by default set to on.
+Behavior
+ No producer list assigned behavior - The following two options only affect variables that have not been assigned to a producer list.
+Local association - The saved value behaves normally.
+User context - The saved (and restored) value is dependent on the User that is logged on. See the book Deploying PcVue on a Remote Desktop Session (RDS) Host for more information.
+ 
+Permanent scan
+ Permanent scan for all variables � Causes PcVue to permanently scan all communication frames linked to one or more variables. If this property is not selected then the scanning can be disabled if none of the variables linked to it are displayed in a window.
+Invalidate variable if no scan for mimic � When a communication frame is not scanned because none of the linked variables are displayed in a mimic, all the linked variables are set to invalid.
+ 
+Attributes and properties
+Extended attributes � Enable the extended attributes for all inventory variables.
+Binary attribute
+Behavior
+Static - The attribute value can only be changed using the variable configuration dialog.
+Dynamic - The attribute can be changed at run-time using the SCADA Basic instruction VARIABLE.
+Distributed - When used in a multi-station project, changes in the value of the attribute are propagated to all interested stations.
+Commandable - The value of an attribute can be changed by any of PcVue sub-systems that have access to it.
+ Command level - The command level that the User must have in order to write the attribute value.
+Browsing level -The browsing level that the User Account must have in order to see the variable when using a browsing service of PcVue.
+Persistent - The value of the attribute is saved when PcVue is shut down and restored when it is restarted. The variable itself must be configured to be Saved for this setting to take effect.
+Text attribute 3 (to 16)
+Behavior
+Static - The attribute value can only be changed using the variable configuration dialog.
+Dynamic - The attribute can be changed at run-time using the SCADA Basic instruction VARIABLE.
+Distributed - When used in a multi-station project, changes in the value of the attribute are propagated to all interested stations.
+Commandable - The value of an attribute can be changed by any of PcVue sub-systems that have access to it.
+Command level - The command level that the User must have in order to write the attribute value.
+Browsing level -The browsing level that the User Account must have in order to see the variable when using a browsing service of PcVue.
+Persistent - The value of the attribute is saved when PcVue is shut down and restored when it is restarted. The variable itself must be Saved for this setting to take effect.
+Simulated property
+Behavior
+Distributed - When used in a multi-station project, changes in the value of the property are propagated to all interested stations.
+Commandable - The value of the simulated property can be changed by any of PcVue sub-systems that have access to it.
+Command level - The command level that the User must have in order to change this property.
+Browsing level -The browsing level that the User Account must have in order to see the variable when using a browsing service of PcVue.
+Persistent - The value of the property is saved when PcVue is shut down and restored when it is restarted. The variable itself must be Saved for this setting to take effect.
+Thresholds
+Behavior
+Trigger on strict going beyond of the threshold - The threshold bit is only set if the register value exceeds that of the threshold. Else the threshold bit is set if the value exceeds OR equals the threshold.
+Commandable - The value of a threshold can be changed by any of PcVue sub-systems that have access to it.
+Command level - The command level that the User must have in order to write the threshold value.
+Browsing level - The browsing level that the User Account must have in order to see the variable when using a browsing service of PcVue.
+ 
+Expressions
+Do not make expression result invalid when a member is invalid - If set, when a variable, member of an expression, is invalid, its last known valid value is used to calculate the expression. If no such value exists (variable not yet initialized), then its minimum value as per the configuration is used.
+ 
+Alarms
+Alarm acknowledge of both ON and OFF status change - If selected an alarm must be acknowledged on the transition to both the on state and the off state. Show picture
+
+Enable the end of maintenance when alarm is On Ack - Allows an alarm to be taken out of maintenance even if it is on and acknowledged. By default, an alarm can only be taken out of maintenance when it is off.
+Enable alarm timestamp modification on its acknowledgement - Enable the timestamp of an alarm to be modified to that of when it was acknowledged. By default, it is the time at which it came on or went off.
+Domain/nature separator for alarm counter - The character used to separate domain and nature in the name of a variable used as an alarm counter. By default, the separator is _ (underscore).
+Alarm priority
+Behavior
+Static - The property value can only be changed using the variable configuration dialog.
+Dynamic - The property can be changed at run-time using the SCADA Basic instruction ALARM.
+Distributed - When used in a multi-station project, changes in the value of the property are propagated to all interested stations.
+Commandable
+Use alarm priority as command level - For alarms with the Command attribute set, use the alarm level as the command level.
+ 
+Write
+Send write request even if the value to write is the same as the current value - If enabled, a write request is made when the variable value is forced, even if the variable already has that value.
+ 
+Status
+Display value even if out of range - Allows a register variable's value to be displayed even if its quality is flagged as out of range (NS L< or NS L>). Applies to animations that display the register value, the Trend Viewer when in real time mode, and the Trend Viewer in historical mode if the historical data source is the HDS.
+ 
+Simulation
+Enable alarm delay - If set, any configured alarm delay is applied even if the alarm is simulated, else the alarm delay is not applied.
+ 
+ 
+
+ 
+Settings named Browsing level define the browsing level that the User Account must have in order to see the variable (items) when using a browsing service of PcVue.
+See the topic Properties that affect access by 3rd party applications for further information about interfaces for which this privilege is enforced.
+See the topic OPC DA server configuration for further information about OPC Security.
+
+
+========================================
+TOPIC: Settings_web.htm
+========================================
+Web & Mobile back ends Settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Web & Mobile back ends Settings
+ 
+The Web and Mobile back ends settings can be displayed from the Communication folder of the Application Explorer's Main Settings dialog or by using the Settings task when the Web & Mobile back ends node is selected in the Application Explorer's configuration tree. Show picture
+ 
+
+ 
+ 
+ 
+
+ 
+These settings apply to all core back ends that are configured. They can be overridden using the Advanced Properties tab in each configured core back end.
+ 
+ 
+ 
+Default core back end connection properties. The default connection properties for each configured core back end. 
+Channel port - The TCP port used for communication between the IIS Web Server and PcVue core back end. If a firewall is operating, it may be necessary 
+ to add an exception for PcVue and the incoming port that it is using. The default is 8090.
+Client session timeout - If there is no request from the client (IIS Web Server) after this period has elapsed, the core back end assumes that the client is disconnected, removes the client's context and releases any server resources allocated to the client. The default is 1 minute.
+
+

@@ -1,0 +1,4234 @@
+========================================
+TOPIC: web_adding_a_core_backend.htm
+========================================
+How to add a core back end
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Add a Core Back End
+ 
+ 
+Select the Web & Mobile back ends node in the Application Explorer and select Add a core back end from the task list. The Core back end creation dialog opens. Show picture
+
+ 
+Enter the name for the back end in the Name text box. You can accept the suggested default or enter one of your own.
+ 
+Select the First Window. This is the mimic and branch that are displayed on a WebVue
+ client when it first connects to PcVue via this back end. This is ignored if a mimic and
+ branch are defined in configuration of the user that is logging in.
+ 
+Select the Project Language. The Project Language is the language in which the WebVue mimics will appear. This setting can be overridden at the user profile level.
+ 
+Click Apply to confirm the configuration.
+ 
+ 
+Advanced properties
+ 
+Advanced properties are configured in the Advanced tab. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Connection
+Override default channel port - Override the default channel port configured in Web & Mobile back ends settings.
+Override default client session timeout - Override the default client session timeout configured in Web & Mobile back ends settings.
+Logon / Logout script - Enable the user logon / logout script to be run.
+ 
+Behavior
+Immediate release of WebVue authentication subscription - Release the authentication subscription immediately after the last web browser tab, that is running a particular WebVue session, is closed. Activated by default for WebVue but may be deactivated, if required, for custom web applications.
+Enable automatic logoff (advanced security strategy for user rights) - Enable automatic logging off after a period of inactivity. The period is defined in the user's profile.
+Associated Action on left click - In an Alarm Viewer, enable the action associated with an alarm to be directly executed when the user left-clicks on the alarm. This property affects the behavior when using a desktop browser; actions on left click are not supported in mobile browsers.
+Fit rendering to web browser viewport - The mimic's graphic rendering is adjusted to the available area within the web browser. See note below.
+ 
+Graphical properties
+Image quality - Images are normally displayed at 100% quality - that is no reduction in quality. However, should the application be using very large images, or the connection to the web client has limited bandwidth, you can reduce the image quality to improve performance.
+Enable WebGL� graphic acceleration - WebGL� is a technology used to accelerate graphic performance supported by the majority of web browsers. However, if the web browser in use does not support it, or you are using a custom web application, you can disable it. WebGL� is used for the graphic rendering of the trend viewer in WebVue. If disabled, a fallback to HTML5 Canvas is used for rendering.
+ 
+
+ 
+Networking
+ 
+ 
+Servers - Select the server list, which determines on which servers stations the core back end will be active. If no list is selected it will be activated on all stations.
+ 
+ 
+ 
+ 
+Using the property Fit rendering to the web browser viewport
+ 
+The property Fit rendering to the web browser viewport drives how mimic rendering is adjusted with regards to the available space in the web browser (the viewport).
+ 
+ 
+What if this property is disabled (default and recommended)?
+Graphics are rendered at scale 1:1 compared to the size of your mimics as they have been designed with the PcVue desktop application. If the viewport of your web browser is small, you will be able to visualize the top-left part of your mimic at scale 1:1 (with scrollbars on desktop browsers), and you can easily maximize the web browser to visualize the whole mimic.
+When your web browser is maximized, you will most probably be able to visualize the whole mimic.
+ 
+ 
+ 
+What if this property is enabled?
+Graphics are scaled automatically, so that you can visualize the whole mimic whatever the size of your web browser viewport. While this seems an interesting feature, it will quickly prove to be painful for users because any change in the size of the web browser window causes a different scaling to be applied and therefore requires user's eyes to adapt.
+ 
+ 
+
+ 
+It is important to note that this property's value is ignored when WebVue is open in a mobile web browser - The graphic rendering is always fitted to the viewport on mobile web browsers.
+ 
+
+ 
+Because the main window of a web browser is always full screen on a mobile device, it is important that the user get an overview of its mimic at first sight. Moreover, because zooming and panning are much easier and usual on a mobile device - with 2-finger gestures compared to desktop mouse gestures - it is straight and painless for the user to zoom and pan to get mimic details.
+ 
+If necessary, a client-side setting allows the WebVue user to change this forced behavior. It is available in the WebVue client settings and is named Do not fit rendering to the web browser viewport.
+ 
+ 
+
+ 
+Proper calculation of rendering scales and ratios requires that the web back end is able to guess the size, in pixels, needed to render a typical full screen mimic (or typical full screen arrangement of mimics).
+ 
+This typical size is calculated when creating the project, based on your PcVue workspace size. However, it may become inaccurate once you have set up your final mimic layout, reviewed the workspace size... 
+ 
+If this size is inaccurate, WebVue users face a degraded experience, being displayed useless scroll bars, or not being able to visualize parts of their mimics (grey or inaccessible stripes on the right-hand side or bottom side for example).
+ 
+You can adjust the width and height used as inputs to calculate WebVue rendering scales and ratios by manually changing the file Properties.xml located in the \Web folder of your project. The closer these values are to the overall size of your mimic layout in the PcVue desktop application, the better will be the fitting of WebVue rendering in the web browser.
+ 
+Example:
+ 
+<?xml version="1.0"?>
+ 
+<!---->
+ 
+<properties>
+ 
+ <workspace width="1920" height="984"/>
+ 
+</properties>
+ 
+You must restart the web back end station for the changes to take effect.
+
+
+========================================
+TOPIC: web_adding_a_geolocation_backend.htm
+========================================
+How to add a geolocation back end
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Add a Geolocation Back End
+ 
+ 
+Select the Web & Mobile Back Ends node in the Application Explorer and select Add a geolocation back end from the task list. The Geolocation back end creation dialog opens. Show picture
+
+ 
+Enter the name for the back end in the Name text box. You can accept the suggested default or enter one of your own.
+ 
+Enter the optional Description.
+ 
+Click Apply to confirm the configuration.
+ 
+ 
+Advanced properties
+ 
+Advanced properties are configured in the Advanced tab. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Connection
+Override default channel port - Allow customization of the default TCP port (8811).
+ 
+Networking
+Servers - Select the server list, which determines on which servers stations the geolocation back end will be active. If no list is selected it will be activated on all stations.
+ 
+ 
+
+ 
+The SV Mobile Services Host service runs as a child process of the main PcVue executable, SV Core Application. It is launched on all stations from the selected list of servers. 
+ 
+You must restart PcVue for configuration changes to take effect.
+
+
+========================================
+TOPIC: web_adding_a_messaging_backend.htm
+========================================
+How to add an instant messaging back end
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Add an Instant Messaging Back End
+ 
+ 
+Select the Web & Mobile Back Ends node in the Application Explorer and select Add an instant messaging back end from the task list. The Instant messaging back end creation dialog opens. Show picture
+
+ 
+Enter the name for the back end in the Name text box. You can accept the suggested default or enter one of your own.
+ 
+Enter the optional Description.
+ 
+Configure the server endpoint. This informs PcVue where to reach the Instant Messaging server and can be one of the following.
+Station - The PcVue Station name and Node in the case of a multi-station project. 
+IP address - The IP Address of the computer on which the PcVue station hosting the Instant Messaging server is located. If more than one IP address is available on that computer, the IP address you enter must be the one by which other stations will be able to reach it.
+Hostname - The hostname of the computer on which the PcVue station hosting the Instant Messaging server, and by which it can be reached over the network.
+ 
+Configure the TCP port number or use the suggested default (8810).
+ 
+Click Apply to confirm the configuration.
+ 
+ 
+A single instance of the Instant Messaging server must run in a multistation system. It is started under any of the following conditions.
+ 
+ 
+The Station name matches the local station name.
+ 
+The IP address matches a local IP address, even if this address is not used as part of the multistation configuration.
+ 
+The IP address is 127.0.0.1.
+ 
+The Hostname matches that of the local computer, even if the hostname is not used as part of the multistation configuration.
+ 
+The Hostname is localhost.
+ 
+ 
+
+ 
+The use of the IP address 127.0.0.1 or the hostname 'localhost' is only provided as a convenience for testing in a setup with a single computer. Such a configuration is ineffective in a multistation system and should not be used as-is in production.
+ 
+ 
+
+ 
+The SV Instant Messaging Host runs as a child process of the main PcVue executable, SV Core Application. It is launched on the computer matching the Server endpoint configuration that you have defined here.
+ 
+You must restart PcVue for configuration changes to take effect.
+
+
+========================================
+TOPIC: web_overview.htm
+========================================
+Overview of Web & Mobile back ends
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the Web & Mobile Back Ends
+ 
+The topics in this book explain how to configure web back ends, which provides the services and data required by PcVue Web & Mobile client applications, and instant messaging.
+ 
+ 
+Core back end: Required to take advantage of any Web & Mobile client applications, including WebVue, Touchvue, SnapVue, the WebScheduler and Web Services Toolkit clients. It exposes the interface for core services such as authentication.
+ 
+Geolocation back end: Required to take advantage of the geolocation and tracking features with SnapVue. It hosts the geolocation server.
+ 
+Instant messaging back end: Required to take advantage of the Instant Messaging feature with SnapVue and the Messaging control in mimics. It hosts the Instant Messaging server.
+ 
+ 
+
+ 
+Depending on your network architecture and the level of segmentation in place, back ends can be on the same computer as the IIS web server, or be hosted on another server.
+ 
+ 
+For more information on how to deploy the Web Server, see the Deployment help book.
+ 
+For more information on how to configure and use WebVue, see the WebVue help book.
+ 
+For more information on how to configure and use the TouchVue mobile app, see the TouchVue help book.
+ 
+For more information on how to configure and use the SnapVue mobile app, see the SnapVue help book.
+ 
+Why do I need to configure a Core back end
+ 
+The Core back end exposes the interface used by the IIS web server for the core services including authentication, real time data, alarms, historical data and graphic rendering.
+ 
+A Core back end must be configured to use any of the Web & Mobile client applications.
+ 
+When deploying the IIS web server with the Web Deployment Console, you will configure the endpoint of the Core back end so that the deployed web services can connect to the main PcVue process.
+ 
+Why do I need to configure a Geolocation back end
+ 
+The Geolocation back end exposes the interface used by the IIS web server and the main PcVue process for the geolocation and tracking services.
+ 
+A Geolocation back end must be configured to use the geolocation and tracking features in SnapVue and in PcVue.
+ 
+If a Geolocation back end is configured, the Geolocation server is launched at start-up on the station configured as producer. It runs as a child process of the main PcVue executable.
+ 
+When deploying the IIS web server with the Web Deployment Console, you will configure the endpoint of the Geolocation back end so that the deployed geolocation and tracking web services can connect to the Geolocation server process.
+ 
+Why do I need to configure an Instant Messaging back end
+ 
+The Instant Messaging back end exposes the interface used by the IIS web server and the main PcVue process for the Instant Messaging services.
+ 
+An Instant Messaging back end must be configured to use the instant messaging feature in SnapVue and in PcVue mimics.
+ 
+If an Instant Messaging back end is configured, the Instant Messaging server is launched at start-up on the station configured as producer. It runs as a child process of the main PcVue executable.
+ 
+When deploying the IIS web server with the Web Deployment Console, you will configure the endpoint of the Instant Messaging back end so that the deployed instant messaging web service can connect to the Instant Messaging server process.
+ 
+
+ 
+While the Core and Geolocation back ends are only required if using Web & Mobile client applications, configuring an Instant Messaging back end is also required even if users only take advantage of the Instant Messaging via mimics in the desktop application.
+ 
+ 
+Characteristics and file formats:
+ 
+ 
+Text messages can have a maximum of 500 characters.
+ 
+Attachments, irrespective of type, can be a maximum of 200 Mb.
+ 
+Video recording (mobile apps only) is limited to a maximum of 30 seconds. Pre-recorded videos can be longer as long as they are less than 200 Mb.
+ 
+Attached files are managed as follows.
+.3gp, .aac, .wav, .mp3, .aiff are treated as audio (voice) messages.
+.png, .jpg, .jpeg, .gif, .bmp are treated as images.
+.mp4, .mov are treated as video.
+Any other file extension has no special treatment and is downloaded.
+ 
+ 
+
+ 
+The Instant Messaging is licensed. If it has not been license-enabled, it operates as if in trial mode.
+
+
+========================================
+TOPIC: webbrowser_configuration.htm
+========================================
+How to configure the Web browser control
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to configure the Web browser control
+ 
+How to insert a Web browser control in a mimic
+ 
+ 
+Open the mimic in which you want to insert the Web browser control and select Design mode.
+ 
+Select Insert.Web browser control from the menu.
+ 
+A Web browser control is inserted and its properties dialog automatically opened. Show picture
+ 
+
+ 
+ 
+ 
+Click OK to close the dialog and create a Web browser control with default properties.
+ 
+ 
+Once you have inserted a Web browser control , 
+ and closed its properties dialog, it can be moved, sized and copied the same 
+ as any other drawing element. The Web browser control configuration dialog contains two tabs to configure the basic and advanced properties and a further tab to configure run-time traces.
+ 
+The General tab
+ 
+ 
+
+ 
+Startup Uri - The address to which the Web browser will navigate on mimic open, either the Url of a web page or the name of a Pdf file. This Uri can be static or be the value of a text variable. If a variable is used, the Web browser is notified of any changes and will automatically navigate to the Uri based on the new variable value.
+Examples: https://example.com, file://C:\MyFolder\MyFile.pdf or file://MyFile.pdf
+The filesystem syntax with an absolute or relative path is also supported, for example C:/MyFolder/MyFile.pdf
+If the path is relative, it is relative to the TP folder.
+ 
+ 
+
+ 
+Enable JavaScript - Tick to enable JavaScript execution. Enabled by default.
+ 
+ 
+
+ 
+Enable zoom - Tick to enable zoom-in and zoom-out using the keyboard accelerators or the mouse. See the topic Using the Web browser control at run-time for details. Enabled by default.
+ 
+ 
+
+ 
+Enable default context menu - Tick to enable the default context menu.
+ 
+ 
+
+ 
+Display status bar - Tick to display the status bar in the lower left corner of the control. The status bar displays the Uri of any links in the current web browser content, upon mouse-over.
+ 
+ 
+
+ 
+Enable sounds - Tick to enable audio to be played by the control. Enabled by default.
+ 
+ 
+
+ 
+Enable download - Tick to allow the Web browser to download content. After download, the name of the download is displayed in a pop-up from where it may be opened. Enabled by default.
+ 
+ 
+ 
+
+ 
+Some of the commands from the context menu permit access to the host computer resources - Windows Explorer, social media accounts etc. For security purposes you may want to disable this.
+ 
+ 
+The Advanced tab
+ 
+ 
+
+ 
+Enable Web browser specific accelerator keys - Tick to enable the browser specific accelerator keys. Disabled by default.
+ 
+ 
+
+ 
+Allow access to host objects - Tick to allow host objects to be accessible from the page in browser. Enabled by default.
+ 
+ 
+
+ 
+Enable built-in error pages - Tick to enable built-in error pages for navigation failure and rendering process failure. Enabled by default.
+ 
+ 
+
+ 
+Enable general auto-fill - Tick to enable general auto-fill. Auto-fill includes information like names, street and email addresses, but excludes password information. Disabled by default.
+ 
+ 
+
+ 
+Enable password auto-save - Tick to enable password auto-save. Disabled by default.
+ 
+ 
+
+ 
+Enable pinch zoom and swipe navigation - Tick to enable the use of the swipe and pinch gestures on devices with touch screens, to navigate or change zoom factor. Enabled by default.
+ 
+ 
+
+ 
+Enable DevTools window - Tick to allow the user to use the context menu or keyboard accelerators to open the DevTools window. Disabled by default.
+ 
+ 
+
+ 
+Delete cookies on mimic close - Tick to enable the automatic deletion of cookies when the mimic is closed. Disabled by default.
+ 
+ 
+
+ 
+Clear cache on mimic close - Tick to enable the automatic clearing of the cache when the mimic is closed. Disabled by default.
+ 
+ 
+ 
+
+ 
+The same cache and user data folder is common to all instances of the Web browser control for a given installation of PcVue. Clearing the cache or deleting the cookies in one instance of the Web browser control will affect all instances.
+ 
+ 
+The Traces tab
+ 
+The Traces tab is used to enable trace messages from the Web browser control. Useful when diagnosing errors or if you want to track the browsers use at run-time. Trace messages appear in the Trace window and are logged in the trace file. The following messages can be generated.
+ 
+ 
+
+ 
+System errors - If enabled, a trace is logged when an unexpected error such as a processing or frame creation occurs.
+ 
+ 
+
+ 
+Navigation starting - If enabled, a trace is logged when the browser starts to load the contents from a new Uri.
+ 
+ 
+
+ 
+Navigation completed - If enabled, a trace is logged when the browser has completed loading the contents of a new Uri.
+ 
+ 
+
+ 
+Title changed - If enabled, a trace is logged when the page title changes. Typically when moving from page to page on a web site.
+ 
+ 
+
+ 
+Delete cookies - If enabled, a trace is logged when cookies are deleted.
+ 
+ 
+
+ 
+Clear cache - If enabled, a trace is logged when the cache is cleared.
+ 
+ 
+
+ 
+Verbose - All of the above plus additional information such as a download starts, the cache is cleared etc.
+ 
+ 
+
+ 
+Activate on mimic open - Activate the selected traces on mimic open. If enabled, the selection of traces is persisted and applied each time the mimic is open.
+ 
+ 
+ 
+By default, only system errors are logged.
+
+
+========================================
+TOPIC: webbrowser_overview.htm
+========================================
+Web browser control overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Web browser control overview
+ 
+The Web browser control allows you to embed a standard web browser in a mimic to render web content. Show picture
+
+ 
+The Web browser control is implemented using the Microsoft's Edge WebView2 redistributable component which allows displaying web content in your application using the same rendering engine as the Microsoft Edge web browser. In addition to displaying web content, Edge WebView2, and hence the Web browser control, can also display files in Pdf format.
+ 
+A predefined animation is available to dynamically control a Web browser instance without scripting, see the topic Web browser control commands for more information.
+ 
+
+ 
+Note that Edge WebView2 and WebVue are two completely different and unrelated components.
+ 
+ 
+Installing the Edge WebView2 component
+ 
+If Edge WebView2 is not pre-installed on the host platform, it must be installed for the Web browser control to work. If necessary, Edge WebView2 will be installed if you select Web browser control during the installation of PcVue. In all cases, it can be found as a feature when performing a custom installation. Show picture
+
+ 
+Differences between a typical web browser and the Web browser control
+ 
+The main difference between a typical web browser and the Web browser control is that there is no navigation bar. This means that the contents is strictly controlled by the application, as are the browser settings.
+ 
+The Web browser control supports a limited set of the Microsoft Edge shortcut keys. See the topic Using the Web browser control at run-time for details.
+ 
+Cache and user data
+ 
+The Web browser control stores data, such as cookies, permissions, and cached resources in the Etc\EBWebView folder which is located in the PcVue installation root. This folder can be quite large, up to 200 Mb, and you must ensure the host computer has sufficient storage space available.
+ 
+
+ 
+The same cache and user data folder is common to all instances of the Web browser control for a given installation of PcVue. Clearing the cache or deleting the cookies in one instance of the Web browser control will affect all instances.
+ 
+ 
+SCADA Basic
+ 
+The instruction WEBBROWSER can be used in a SCADA Basic script to control the behavior of an instance of the Web browser control.
+
+
+========================================
+TOPIC: webbrowser_runtime.htm
+========================================
+Using the Web browser control at run-time
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Web browser control at run-time
+ 
+For security, the Web browser control does not include the open navigation and setting features of a standalone web browser app. The only ways for the run-time user to interact with the control are SCADA Basic scripting (if used), the keyboard accelerators, and the context menu.
+ 
+Keyboard accelerators
+ 
+If enabled in the Web browser control configuration, the following accelerators are available.
+ 
+ 
+ 
+ 
+ 
+
+ Key
+ Description
+ 
+ 
+
+ Escape
+ 
+ 
+Stop	content loading
+ 
+ 
+ 
+
+ 
+ 
+Ctrl+F
+ 
+ Find on Page
+ 
+ 
+
+ 
+ 
+Ctrl+G
+ 
+ Find Next
+ 
+ 
+
+ 
+ 
+Ctrl+Shift+G
+ 
+ Find Previous
+ 
+ 
+
+ 
+ 
+Ctrl+P
+ 
+ Print
+ 
+ 
+
+ Ctrl+R, F5, Reload Key
+ Reload page
+ 
+ 
+
+ Ctrl+Shift+R, Ctrl+F5, Shift+F5, Ctrl+Refresh, Shift+Refresh
+ Reload page and refresh cache
+ 
+ 
+
+ Ctrl+-
+ Zoom out
+ 
+ 
+
+ Ctrl++
+ Zoom in
+ 
+ 
+
+ Ctrl+0
+ 
+ 
+Reset zoom
+ 
+ 
+ 
+
+ 
+ 
+F3
+ 
+ Find next
+ 
+ 
+
+ 
+ 
+Shift+F3
+ 
+ Find previous
+ 
+ 
+
+ Alt+left arrow
+ Back
+ 
+ 
+
+ Alt+right arrow
+ Forward
+ 
+ 
+
+ Ctrl+Shift+I
+ Open / Close DevTools
+ 
+ 
+
+ 
+ 
+Ctrl+Shift+J
+ 
+ Open DevTools console
+ 
+ 
+
+ Ctrl+Shift+C
+ Open DevTools inspect
+ 
+ 
+ 
+ 
+Context menu
+ 
+If enabled in the Web browser control configuration, the following context menu commands are available. Show picture
+
+ 
+The commands correspond to accelerators, plus the following.
+ 
+ 
+
+ 
+Save as - Allows you to save the web browser contents as an HTML file.
+ 
+ 
+
+ 
+Create QR code for this page - Generates and download a QR code for the page Url.
+ 
+ 
+
+ 
+Share - Share the Url of the page using various communication and social media apps. Outlook, twitter, Facebook, etc.
+ 
+ 
+ 
+
+ 
+Some of the commands from the context menu permit access to the host computer resources - Windows Explorer, social media accounts etc. For security purposes you may want to disable this.
+
+
+========================================
+TOPIC: WebVue_Alarm_viewer.htm
+========================================
+Alarm Viewer in WebVue
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Alarm Viewer in WebVue
+ 
+Display tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Display Toolbar
+ Partial - It is not possible to hide delimiters
+ 
+ 
+
+ Use context menu
+ No - The context menu is not supported
+ 
+ 
+
+ Toolbar position
+ Yes
+ 
+ 
+
+ Line font
+ See Drawing - General - Font
+ 
+ 
+
+ Background
+ Yes
+ 
+ 
+
+ Scrollbar width
+ Yes
+ 
+ 
+
+ Scrollbar height
+ Yes
+ 
+ 
+
+ Scroll bars
+ Yes
+ 
+ 
+
+ Display Header
+ Yes
+ 
+ 
+
+ Alternate color of text
+ Yes
+ 
+ 
+
+ Column titles
+ Yes
+ 
+ 
+
+ Column display format
+ Yes
+ 
+ 
+ 
+ 
+Aspect tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Position
+ Yes
+ 
+ 
+
+ Size
+ Yes
+ 
+ 
+
+ Border
+ Partial - Border style is not taken into account.
+ 
+ 
+
+ Appearance
+ No - Appearance is not taken into account.
+ 
+ 
+
+ Locked
+ N/A - Affect the design mode behavior
+ 
+ 
+ 
+ 
+Execution tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Number of Lines
+ Yes
+ 
+ 
+
+ Printing
+ No
+ 
+ 
+
+ Start Mode (Online or List)
+ Yes
+ 
+ 
+
+ Display new items bottom or top
+ Yes
+ 
+ 
+
+ Move alarm to bottom when status changes
+ Yes
+ 
+ 
+
+ Move alarm to top when status changes
+ Yes
+ 
+ 
+
+ Scroll display to the oldest
+ Yes
+ 
+ 
+
+ Advanced color mode
+ Yes
+ 
+ 
+
+ Line selection mode
+ Yes
+ 
+ 
+
+ Acknowledgment
+ Yes
+ 
+ 
+
+ Mask/Unmask
+ Yes
+ 
+ 
+
+ Filtering
+ Partial - See Using GPCONF.DAT to Create Alarm and Log Viewer Filters
+ 
+ 
+
+ Multi-Selection
+ Yes
+ 
+ 
+
+ Size of columns
+ Yes
+ 
+ 
+
+ Toolbar position
+ Partial - Only available at design time
+ 
+ 
+
+ Toolbar modification
+ No
+ 
+ 
+
+ Context
+ Yes
+ 
+ 
+
+ Enable sorting
+ Yes
+ 
+ 
+
+ Sort modification
+ Yes
+ 
+ 
+ 
+ 
+Filters tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Domain
+ Yes - See Using GPCONF.DAT to Create Alarm and Log Viewer Filters
+ 
+ 
+
+ Nature
+ Yes - See Using GPCONF.DAT to Create Alarm and Log Viewer Filters
+ 
+ 
+
+ SQL filter
+ No
+ 
+ 
+
+ Alarm status
+ Yes
+ 
+ 
+
+ Alarm Level
+ Yes
+ 
+ 
+ 
+ 
+Menu tab
+ 
+The context menu is not supported and therefore none of the properties available from the Menu tab is applicable.
+
+
+========================================
+TOPIC: WebVue_Animation_Properties.htm
+========================================
+Animation Properties in WebVue
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Animation Properties in WebVue
+ 
+This topic outlines the extent to which the WebVue client supports the display of animations as configured in the PcVue desktop application.
+ 
+For details of how to configure animations in PcVue, please refer to the Animation book in the main Help.
+ 
+The following animations are not supported or not relevant in WebVue contexts:
+ 
+ 
+Color - Legend animation - Not supported
+ 
+Send - Recipe animation - Not supported
+ 
+Send - Region animation - Not applicable
+ 
+Send - Languages animation - Not applicable, the Display language is taken from the web browser language, and the Project language from the Web back end and user profile configuration
+ 
+Send - Timetable animation - Not applicable - Use the WebScheduler instead
+ 
+Run - Macro animation - Not supported
+ 
+Security device - PTZ - Not supported
+ 
+Web browser - Commands - Not supported
+ 
+Security - Password animation - Not applicable - Users can change their password from the WebVue login page
+ 
+ 
+In addition, the following animations are partially supported or have a specific behavior in WebVue contexts.
+ 
+Multiline comment displayed as tooltip at runtime is supported in WebVue.
+ 
+
+ 
+Display text
+ 
+ 
+ 
+ 
+ 
+
+ Animation
+ WebVue support
+ 
+ 
+
+ Displaying time information
+ If in any display text animation a timestamp is used (e.g. displaying the @TIME variable) WebVue will show the time in the time zone of the server, not the time zone of the client.
+ 
+ 
+ 
+ 
+Visibility
+ 
+ 
+ 
+ 
+ 
+
+ Animation
+ WebVue support
+ 
+ 
+
+ 
+ 
+Visibility on variable value
+ 
+Visibility on variable presence
+ 
+ Supported for graphic elements, not supported for symbols and graphic controls.
+ 
+ 
+ 
+ 
+Send text
+ 
+ 
+ 
+ 
+ 
+
+ Animation
+ WebVue support
+ 
+ 
+
+ Send text with default Value
+ The setting Show default value on Mouseover is not supported. This option allows the user to see the configured default value before sending it. Since it is not available, the user cannot see which value the variable will have after triggering the animation.
+ 
+ 
+ 
+ 
+Send register
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Animation
+ WebVue support
+ 
+ 
+
+ Send register with default Value
+ The setting Show default value on Mouseover is not supported. This option allows the user to see the configured default value before sending it. Since it is not available, the user cannot see which value the variable will have after triggering the animation.
+ 
+ 
+
+ Send register with Step mode
+ In the PcVue desktop application, the field shows the current register value and on MouseOver the next step (after triggering the animation) will be displayed. As MouseOver is not supported in WebVue, it will directly show the value that would be sent to the variable if the animation were triggered.
+ 
+ 
+ 
+ 
+Link note
+ 
+ 
+ 
+ 
+ 
+
+ Animation
+ WebVue support
+ 
+ 
+
+ Link note
+ Partial - Only supports the read-only mode, notes cannot be modified via WebVue. Rtf formatting is not supported.
+If executed in a WebVue session context this animation is processed by the computer that hosts the web back end and the file must exist on that computer.
+
+
+========================================
+TOPIC: WebVue_Drawing_Element_Properties.htm
+========================================
+Drawing Element Properties in WebVue
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Drawing Element Properties in WebVue
+ 
+General
+ 
+This summary is not exhaustive as there is some interaction between properties. Therefore, it is important to always check precisely how a mimic behaves in WebVue.
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Visibility Bound
+ N/A - Affects the visibility of a drawing element when zooming. WebVue zooming capabilities are only based on web browser zooming and therefore these properties have no effect
+ 
+ 
+
+ Locked	
+ N/A - Affect the design mode behavior
+ 
+ 
+
+ Colors
+ Yes
+ 
+ 
+
+ Fonts
+ Yes - The fonts supported by Web browsers may be limited. The browser uses a substitute font if the one specified is not available
+ 
+ 
+
+ Position
+ Yes
+ 
+ 
+
+ Size
+ Yes
+ 
+ 
+ 
+ 
+Rectangle - Base
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Background color
+ See General - Colors
+ 
+ 
+
+ Background Style
+ Yes
+ 
+ 
+
+ Line
+ Yes
+ 
+ 
+ 
+ 
+Rectangle - Appearance
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Regular
+ Yes
+ 
+ 
+
+ Shadow
+ Yes
+ 
+ 
+
+ Button
+ Partial - System style is not available
+ 
+ 
+
+ Colored Button
+ Yes
+ 
+ 
+
+ Relief
+ Yes
+ 
+ 
+
+ Inverse Relief
+ Yes
+ 
+ 
+ 
+ 
+RoundedRectangle - Base
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Background color
+ See General - Colors
+ 
+ 
+
+ Background Style
+ Yes
+ 
+ 
+
+ Line
+ Yes
+ 
+ 
+ 
+ 
+RoundedRectangle - Appearance
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Regular
+ Yes
+ 
+ 
+
+ Shadow
+ Yes
+ 
+ 
+
+ Button
+ Partial - System style is not available
+ 
+ 
+
+ Colored Button
+ Yes
+ 
+ 
+
+ Relief
+ Yes
+ 
+ 
+
+ Inversed Relief
+ Yes
+ 
+ 
+ 
+ 
+Ellipse - Base
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Background color
+ See General - Colors
+ 
+ 
+
+ Background Style
+ Yes
+ 
+ 
+
+ Line
+ Yes
+ 
+ 
+ 
+ 
+Ellipse - Appearance
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Regular
+ Yes
+ 
+ 
+
+ Shadow
+ Yes
+ 
+ 
+
+ Button
+ Yes
+ 
+ 
+
+ Colored Button
+ Yes
+ 
+ 
+
+ Relief
+ Yes
+ 
+ 
+
+ Inversed Relief
+ Yes
+ 
+ 
+ 
+ 
+� Ellipse, � Ellipse, Arc, & Pie - Base
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Background color
+ See General - Colors
+ 
+ 
+
+ Background Style
+ Yes
+ 
+ 
+
+ Line
+ Yes
+ 
+ 
+ 
+ 
+� Ellipse, � Ellipse, Arc, & Pie - Appearance
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Regular
+ Yes
+ 
+ 
+
+ Background Style
+ Yes
+ 
+ 
+
+ Line
+ Yes
+ 
+ 
+ 
+Polygon - Base
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Background color
+ See General - Colors
+ 
+ 
+
+ Background Style
+ Yes
+ 
+ 
+
+ Line
+ Yes
+ 
+ 
+ 
+ 
+Polygon - Appearance
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Regular
+ Yes
+ 
+ 
+
+ Shadow
+ Yes
+ 
+ 
+
+ Button
+ Yes
+ 
+ 
+
+ Colored Button
+ Yes
+ 
+ 
+
+ Relief
+ Yes
+ 
+ 
+
+ Inversed Relief
+ Yes
+ 
+ 
+ 
+ 
+Bezier - Base
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Background color
+ See General - Colors
+ 
+ 
+
+ Background Style
+ Partial - Only solid style is available
+ 
+ 
+
+ Line
+ Partial - Only solid style is available
+ 
+ 
+ 
+ 
+Open bezier - Base
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Background color
+ N/A
+ 
+ 
+
+ Background style
+ N/A
+ 
+ 
+
+ Line
+ Yes
+ 
+ 
+ 
+ 
+Line & Polyline
+ 
+ 
+ 
+ 
+
+ Drawing property
+ WebVue support
+ 
+ 
+
+ Line
+ Yes
+ 
+ 
+ 
+Text - Base
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Font
+ Yes - The selected font will not be transferred to the client therefore, it must be installed already on the client system. If the font is not available at the client, the browser's default font is used.
+ 
+ 
+
+ Text color
+ Yes
+ 
+ 
+
+ Background color
+ See General - Colors
+ 
+ 
+
+ Rotation
+ Yes
+ 
+ 
+ 
+ 
+Text - Aspect
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Do not autosize
+ Yes
+ 
+ 
+
+ Alignment
+ Yes
+ 
+ 
+
+ Multiline
+ Yes
+ 
+ 
+
+ Margin
+ Yes
+ 
+ 
+
+ Appearance
+ Yes
+ 
+ 
+ 
+ 
+Image - Base
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Image Types
+ Yes - All image types supported by the PcVue desktop application are supported by WebVue. But Bmp and MetaFiles are converted to Png for use in WebVue. This means that vector graphics are rendered in the display size and cannot be scaled without quality loss within WebVue.
+ 
+ 
+
+ Pattern
+ N/A
+ 
+ 
+
+ Line
+ N/A
+ 
+ 
+
+ Mouse hover / Mouse down
+ N/A
+ 
+ 
+
+ Appearance
+ N/A
+ 
+ 
+
+ Transparent
+ Partial - Only supported on Gif, Bmp, Jpg and Metafile formats. For Png, the transparency must defined in the original file and cannot be based on a color substitution as for the other formats
+ 
+ 
+
+ PNG Opacity
+ Yes
+ 
+ 
+
+ PNG Background blend
+ N/A
+ 
+ 
+
+ Rotation
+ N/A
+ 
+ 
+ 
+ 
+Images - Aspect
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Regular
+ Yes
+ 
+ 
+
+ Shadow
+ Yes
+ 
+ 
+
+ Button
+ Yes
+ 
+ 
+
+ Colored Button
+ Yes
+ 
+ 
+
+ Relief
+ Yes
+ 
+ 
+
+ Inversed Relief
+ Yes
+
+
+========================================
+TOPIC: WebVue_FormControls.htm
+========================================
+Form Controls and other controls in WebVue
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Form Controls and other controls in WebVue
+ 
+This topic outlines the extent to which the WebVue Client supports the controls. The following are not supported:
+ 
+ 
+Grid control
+ 
+Chart control
+ 
+Pie/doughnut/pyramid control
+ 
+Text-box form control
+ 
+Messaging control
+ 
+Web browser control
+ 
+BIM control
+ 
+ONVIF control
+ 
+Video control
+ 
+Third party ActiveX controls
+ 
+ 
+Whilst the functionality provided by the graphic controls is very similar in WebVue there may be differences in appearance due to the web browser environment.
+ 
+
+ 
+This summary is not exhaustive as there is some interaction between properties. Therefore, it is important to always check precisely how a mimic behaves in WebVue.
+ 
+ 
+Combo-box - Aspect
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Position
+ Yes
+ 
+ 
+
+ Size
+ Yes
+ 
+ 
+
+ Border
+ N/A
+ 
+ 
+
+ Appearance
+ N/A
+ 
+ 
+
+ Control font and colors
+ See Drawing - General-Font 
+ 
+ 
+
+ Smart mode
+ Yes
+ 
+ 
+ 
+ 
+Combo-box - Content
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Source
+ Yes
+ 
+ 
+ 
+ 
+Combo-box - Operation
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Initialization
+ Yes
+ 
+ 
+
+ Selection value
+ Yes
+ 
+ 
+
+ Selection notification
+ Yes
+ 
+ 
+ 
+ 
+Combo-box - Advanced
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Smart mode
+ Yes
+ 
+ 
+ 
+ 
+List-box - Aspect
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Position
+ Yes
+ 
+ 
+
+ Size
+ Yes
+ 
+ 
+
+ Border
+ N/A
+ 
+ 
+
+ Appearance
+ N/A
+ 
+ 
+
+ Control font and colors
+ See Drawing - General - Font
+ 
+ 
+ 
+ 
+List-box - Content
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Source
+ Yes
+ 
+ 
+ 
+ 
+List-box - Operation
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Initialization
+ Yes
+ 
+ 
+
+ Selection value
+ Yes
+ 
+ 
+
+ Selection notification
+ Yes
+ 
+ 
+ 
+ 
+Check-box list - Aspect
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Position
+ Yes
+ 
+ 
+
+ Size
+ Yes
+ 
+ 
+
+ Border
+ N/A
+ 
+ 
+
+ Appearance
+ N/A
+ 
+ 
+
+ Control font and colors
+ See Drawing - General - Font
+ 
+ 
+ 
+ 
+Check-box list - Content
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Source
+ Yes
+ 
+ 
+ 
+ 
+Check-box list - Operation
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ List state change
+ Yes
+ 
+ 
+
+ Notification
+ Yes
+ 
+ 
+ 
+ 
+Option-button list - Aspect
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Position
+ Yes
+ 
+ 
+
+ Size
+ Yes
+ 
+ 
+
+ Border
+ N/A
+ 
+ 
+
+ Appearance
+ N/A
+ 
+ 
+
+ Control font and colors
+ See Drawing - General - Font
+ 
+ 
+ 
+ 
+Option-button list - Content
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Source
+ Yes
+ 
+ 
+ 
+ 
+Option-button list - Operation
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Initialization
+ Yes
+ 
+ 
+
+ List state change
+ Yes
+ 
+ 
+
+ Notification
+ Yes
+ 
+ 
+ 
+ 
+Tree-view - Aspect
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Position
+ Yes
+ 
+ 
+
+ Size
+ Yes
+ 
+ 
+
+ Border
+ N/A
+ 
+ 
+
+ Appearance
+ N/A
+ 
+ 
+
+ Control font and colors
+ See Drawing - General - Font
+ 
+ 
+
+ Default icons
+ No
+ 
+ 
+ 
+ 
+Tree-view - Content
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Source
+ Yes
+ 
+ 
+
+ Collapsed and expanded icons
+ No
+ 
+ 
+ 
+ 
+Tree-view - Operation
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Initialization
+ Yes
+ 
+ 
+
+ Selection value
+ Yes
+ 
+ 
+
+ Notification
+ Yes
+
+
+========================================
+TOPIC: WebVue_GPCONF.DAT_to_create_Display_filters.htm
+========================================
+Using GPCONF.DAT to Create Alarm and Log Viewer Filters
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using GPCONF.DAT to Create Alarm and Log Viewer Filters
+ 
+
+ 
+To avoid overwriting a manually created file, PcVue only creates GPCONF.DAT on startup if it does not already exist. If you configure additional Domains and/or Natures using the Application Explorer, they will only appear in GPCONF.DAT if PcVue is shut down, the existing GPCONF.DAT is deleted, and PcVue is restarted.
+ 
+ 
+When used in WebVue, the filters in the Log and Alarm
+ Viewers operate differently to when they are used in PcVue.
+ 
+ 
+When used in PcVue, the filters only allow you to filter by a single Domain and/or
+ Nature. Show picture
+
+ 
+When used in WebVue,
+ the filters can be configured in the file GPCONF.DAT. This allows you to create
+ simple expression-based filters based on Domain, Nature and other extended
+ attributes. You click on the same button in the Log Viewer 
+ but it opens a different dialog, Events and Filters with an Events Selector tab
+ Show picture and Filters Selector tab. Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+GPCONF.DAT syntax
+ 
+GPCONF.DAT is a text file that is stored in the project's
+ C folder. It can be edited with a text editor such as Windows Notepad. It must not be edited while PcVue is running.
+ 
+Each filter in GPCONF.DAT uses the following syntax.
+ 
+[FILTER\Name]
+DESCRIPTION=Description
+LABEL_0=Description for language 0
+LABEL_1=Description for language 1
+MASK_0=Mask for language 0
+MASK_1=Mask for language 1
+Sql Cmde=SQL expression
+ 
+ 
+ 
+ 
+
+ Property
+ Description
+ 
+ 
+
+ 
+ 
+Name
+ 
+ 
+ 
+ 
+The name of the filter that will appear in the Alarm and
+ Log Viewer if DESCRIPTION and LABEL are not given.
+ 
+ 
+ 
+
+ 
+ 
+Description
+ 
+ 
+ 
+ 
+The name of the filter that will appear in the Alarm and
+ Log Viewer if LABEL is not given. Optional.
+ 
+ 
+ 
+
+ 
+ 
+Description for language 0
+ 
+ 
+ 
+ 
+The name of the filter that will appear in the Alarm and
+ Log Viewer for language 0. Optional.
+ 
+ 
+ 
+
+ 
+ 
+Description for language 1
+ 
+ 
+ 
+ 
+The name of the filter that will appear in the Alarm and
+ Log Viewer for language 1. Optional.
+ 
+ 
+ 
+
+ 
+ 
+Mask for language 0
+ 
+ 
+ 
+ 
+Determines whether the filter will be available when WebVue
+ is used in language 0. Optional.
+ALARM|LOG = Available in both Alarm and Log Viewers.
+ALARM = Available in Alarm Viewer only.
+LOG = Available in Log Viewer only.
+Null = Not available in either viewer.
+ 
+ 
+ 
+
+ 
+ 
+Mask for language 1
+ 
+ 
+ 
+ 
+Determines whether the filter will be available when WebVue
+ is used in language 1. Optional.
+ 
+ 
+ 
+
+ 
+ 
+SQL expression
+ 
+ 
+ 
+ 
+See below.
+ 
+ 
+ 
+ 
+Creating the SQL expression
+ 
+The SQL expression takes the following format.
+ 
+[Attributen] Operator Value
+ 
+ 
+ 
+ 
+
+ Property
+ Description
+ 
+ 
+
+ 
+ 
+n
+ 
+ 
+ 
+ 
+The number of a variable's extended attribute. Range 01
+ to 16. Attribute01 is Domain, Attribute02 is Nature.
+ 
+ 
+ 
+
+ 
+ 
+Operator
+ 
+ 
+ 
+ 
+Either = (equality) or != (inequality).
+ 
+ 
+ 
+
+ 
+ 
+Value
+ 
+ 
+ 
+ 
+The value against which the attribute is to be tested,
+ contained within quotation marks.
+ 
+ 
+ 
+ 
+Expressions may be joined using the OR and AND operators.
+ Round brackets may be used to determine the order of execution.
+ 
+The following are all examples of valid SQL expressions.
+ 
+Sql Cmde=[Attribute02] = 'HVAC'
+ 
+Sql Cmde=[Attribute01] = 'ZONE1' and [Attribute02] = 'FIRE'
+ 
+Sql Cmde=[Attribute01] = 'ZONE1' or [Attribute01] = 'ZONE2' and [Attribute02] = 'FIRE' 
+ 
+Sql Cmde=[Attribute03] != 'Out of service'
+ 
+Creating a default GPCONF.DAT
+ 
+If GPCONF.DAT is deleted, a new file will be created
+ the next time PcVue is started, containing one entry for each
+ of the configured Domains and Natures.
+
+
+========================================
+TOPIC: WebVue_Log_viewer.htm
+========================================
+The Log Viewer in WebVue
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Log Viewer in WebVue
+ 
+Display tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Display Toolbar
+ Yes
+ 
+ 
+
+ Use context menu
+ No - The context menu is not supported
+ 
+ 
+
+ Toolbar position
+ Yes
+ 
+ 
+
+ Line font
+ See Drawing - General - Font
+ 
+ 
+
+ Background
+ Yes
+ 
+ 
+
+ Scrollbar width
+ Yes
+ 
+ 
+
+ Scrollbar height
+ Yes
+ 
+ 
+
+ Scroll bars
+ Yes
+ 
+ 
+
+ Display Header
+ Yes
+ 
+ 
+
+ Alternate color of text
+ Yes
+ 
+ 
+
+ Column titles
+ Yes
+ 
+ 
+
+ Column display format
+ Yes
+ 
+ 
+
+ Without blinking
+ Yes
+ 
+ 
+ 
+ 
+Aspect tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Position
+ Yes
+ 
+ 
+
+ Size
+ Yes
+ 
+ 
+
+ Border
+ Partial - Border style is not taken into account
+ 
+ 
+
+ Appearance
+ No - Appearance is not taken into account
+ 
+ 
+
+ Locked
+ N/A - Affect the design mode behavior
+ 
+ 
+ 
+ 
+Execution tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Number of Lines
+ Yes
+ 
+ 
+
+ Printing
+ No
+ 
+ 
+
+ Comment modification
+ Yes
+ 
+ 
+
+ Filtering
+ Yes
+ 
+ 
+
+ List choice
+ Yes
+ 
+ 
+
+ Size of columns
+ Yes
+ 
+ 
+
+ Toolbar position
+ Partial - Is only available at design time
+ 
+ 
+
+ Toolbar modification
+ No
+ 
+ 
+
+ Context
+ Yes
+ 
+ 
+
+ Enable Sorting
+ Yes
+ 
+ 
+
+ Sort modification
+ Yes
+ 
+ 
+
+ Restrict navigation to selected time range
+ No
+ 
+ 
+ 
+ 
+Filters tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ List name
+ Yes
+ 
+ 
+
+ Domain / Nature
+ Yes - See Using GPCONF.DAT to Create Alarm and Log Viewer Filters
+ 
+ 
+
+ Alarm changes
+ Yes
+ 
+ 
+
+ Bit changes
+ Yes
+ 
+ 
+
+ User actions
+ Yes
+ 
+ 
+ 
+ 
+Advanced tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Display new events at bottom / Top
+ Yes
+ 
+ 
+
+ Advanced color mode
+ Yes
+ 
+ 
+
+ Automatic refresh
+ Yes
+ 
+ 
+
+ Buffer length
+ Yes
+ 
+ 
+ 
+ 
+Menu tab
+ 
+The context menu is not supported and therefore none of the properties available from the Menu tab is applicable.
+
+
+========================================
+TOPIC: WebVue_Logging_in_to_the_server.htm
+========================================
+Starting, Logging in to, and logging out of, WebVue
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Starting, Logging In To, and Logging Out Of, WebVue
+ 
+Starting WebVue
+ 
+To start WebVue enter the Url https://<Hostname>/webclient into the web browser address bar. The <Hostname> is the identity of the computer on which the web server is hosted and can either be:
+ 
+ 
+The hostname of the web server. To use the hostname, the network must have NetBIOS or DNS name resolution capability.
+ 
+The IP address of the web server. To use the IP address, you must have used IP address binding during deployment. Connection using an IP address will always be seen as insecure by browsers.
+ 
+The Fully Qualified Domain Name of the web server. To use the FQDN, the network must have DNS name resolution capability.
+ 
+ 
+
+ 
+When the web server is updated and re-deployed, it is of prime importance to make sure WebVue users empty the cache of their web browser. This ensure that they are using up-to-date resources and JavaScript modules. 
+ 
+ 
+If the web browser is able to successfully resolve the Url and connect to the web server the Login screen is displayed. Show picture
+
+ 
+
+ 
+In addition to running in a web browser, WebVue can be installed as a Progressive Web App. See the topic Using WebVue as a PWA for more information.
+ 
+ 
+Logging in to WebVue
+ 
+To be able to log in to WebVue, a user must have been assigned WebVue access rights 
+ as described in the help book User Accounts. You log in, in the normal manner, entering the Username and Password and selecting the OK button.
+ 
+ 
+Remember me - Next time you open WebVue you will be logged in automatically.
+ 
+Change password - Opens the Change Password screen. See below.
+ 
+ 
+
+ 
+WebVue uses the same authentication procedure to that of the PcVue desktop application. If the Advanced Security Strategy is activated in the PcVue configuration, the login procedure modified (password strength, control of login attempts) - See the main help for details.
+ 
+ 
+After a successful login, there are a number of possible steps.
+ 
+ 
+If this is the first ever login by a particular user on a particular browser and you are using a self-signed certificate the browser will display a screen indicating that the connection is not secure. See the section below about adding an exception for a self-signed certificate.
+ 
+If this is the first ever login by a particular user on a particular browser you will be prompted to grant access to the GraphicalData service by the WebVue app. GraphicalData is the service on PcVue that provides data to WebVue. The grant is remembered and this screen will not appear again unless the grant is revoked.
+ 
+The WebVue app is loaded. If this is the first time that WebVue has been loaded in a particular browser, this may take several seconds depending on the speed of the network. The browser will normally cache the app and subsequent loading is much faster. Show picture
+
+ 
+A green message indicating successful login is displayed followed immediately by the first mimic as configured in the PcVue project.
+ 
+ 
+Logging out of WebVue
+ 
+To log out from WebVue you use the Logout tool on the WebVue toolbar. You are automatically returned to the Login screen.
+ 
+
+ 
+You will be logged out from the visible session plus any other sessions opened in additional tabs of the same web browser.
+ 
+ 
+Automatic session closing
+ 
+The WebVue session can be automatically closed under the following circumstances:
+ 
+ 
+User inactivity - If there has been no activity for a period exceeding that configured in the user's profile Enable automatic logout property.
+ 
+Connection failure - If there is a connection failure between WebVue and the PcVue Web back end.
+ 
+ 
+A closed session is indicated by a message box giving the reason. The mimic displayed at the time of closure remains visible but is blurred. To restart the session, you can use the toolbar to select logout that returns you to the login screen, or have your web browser reload the web page. 
+ 
+Creating an exception for a self-signed certificate
+ 
+If you are using a self-signed certificate, the first time that you start WebVue the browser will display a message indication that the connection is not secure. Show picture
+
+ 
+To load WebVue you must add an exception in the browser for the website and its certificate. The following procedure is for Firefox, other web browsers should be similar but may differ in detail.
+ 
+ 
+Click the Advanced button. Details of the exception are displayed. Show picture
+
+ 
+Click Add Exception. The Add Security Exception dialog opens. Show picture
+
+ 
+To make a once only exception click Confirm Security Exception. To make a permanent exception select Permanently store this exception and then click Confirm Security Exception. 
+ 
+ 
+
+ 
+You should only make this change if it conforms to your company's IT security policy.
+ 
+ 
+How to change password
+ 
+A user can change his/her password directly from WebVue. The change is saved in the PcVue user directory.
+ 
+ 
+Open the Change Password screen from the main Login screen. You do not have to enter the Username and original password first.
+ 
+Enter the Username.
+ 
+Enter the Old password.
+ 
+Enter the New password.
+ 
+Confirm the New password.
+ 
+Click OK to confirm the change. WebVue returns to the main Login screen from where you can login with the Username and new password.
+
+
+========================================
+TOPIC: WebVue_map_control.htm
+========================================
+Map control in WebVue
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Map control in WebVue
+ 
+The Map control is partially supported in WebVue.
+ 
+
+ 
+You cannot use a local map cache if the mimic containing the Map control is to be displayed in WebVue. Only a selection of online providers are supported.
+
+
+========================================
+TOPIC: WebVue_overview.htm
+========================================
+WebVue Overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+WebVue Overview
+ 
+WebVue is a web portal designed to display 
+ PcVue mimics in a Web browser.
+ 
+See Web and Mobile Client Applications Overview for an overview of Web & Mobile client applications, including their common requirements and deployment steps.
+ 
+The configuration steps specific to WebVue access to PcVue are as follows:
+ 
+ 
+Make sure mimics and SCADA Basic scripts are designed in a suitable way for WebVue, not employing features that are either not supported, or not-applicable,
+ 
+Make sure you have used the scope of variables appropriately to manage concurrent access to some features or mimics, in particular for user inputs in mimics.
+ 
+ 
+This book includes detailed information about how to design your project so that users can successfully take advantage of the WebVue client:
+ 
+ 
+For information about developing a project for WebVue, see the book Configuring a project for WebVue.
+ 
+For information about WebVue user configuration, see the topic Properties that affect access to Web Apps and Web Services in the Application Explorer book.
+ 
+For information about using WebVue, see the book Using WebVue.
+ 
+ 
+
+ 
+For security reasons, the OAuth database password and encryption key are unique per deployment, meaning websites cannot be copied from one server to another.
+ 
+ 
+Run time environment
+ 
+WebVue provides 
+ a run time environment only. The configuration that determines its 
+ operation is the PcVue project, including the mimic files and user configuration, and is supplied by PcVue Web back end along with the real-time data. 
+ WebVue clients communicate with PcVue Web back end via the web server. 
+ 
+
+ 
+The PcVue desktop application must be used to configure the mimics. The PcVue web back end
+ and the web server must be running for WebVue to connect.
+ 
+Each WebVue client that is connected and in use imposes 
+ a workload on the PcVue Web back end and on the web server. These computers 
+ require sufficient resources to support WebVue clients.
+ 
+ 
+Licensing WebVue
+ 
+The components necessary to run WebVue are included either 
+ on the PcVue distribution media or on the Windows distribution media. 
+ 
+The maximum number of simultaneous WebVue client sessions that the PcVue Web back end manages is license-protected. There is no licensing requirement for the web server or for any computer that is running the WebVue client in a web browser.
+
+
+========================================
+TOPIC: WebVue_Overview_Functionality_Checklist.htm
+========================================
+Functionality checklist overview 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the Functionality Checklist 
+ 
+WebVue is a light runtime client. Most of the functionality provided by PcVue mimics at runtime is available to a WebVue client. Generally, WebVue does not include features related to design, configuration and diagnostics of the PcVue project. Due to the Web Browser environment in which WebVue is rendered, there are some restrictions and also behavioral differences compared to the PcVue desktop application.
+ 
+The topics in this book describe the extent to which the graphic rendering and user interaction features of the PcVue desktop application are available on the WebVue Client. They list the properties configured in PcVue for a window, a drawing element, an animation or a control. For each of these, they specify whether a property is:
+ 
+ 
+Supported, in which case it is fully effective,
+ 
+Partially supported, in which case it is effective with restrictions or behavioral differences,
+ 
+Not supported, in which case it is ineffective when used in a WebVue context, 
+ 
+Not applicable to WebVue rendering and user interactions, for example if it affects design-time behavior or is designed for a feature which is not applicable to WebVue.
+ 
+ 
+This part of the Help book does not explain the functions or how to configure them in PcVue. That is covered in the main Help books, to which cross-references are provided in the Help topics here.
+ 
+
+ 
+There may also be rendering differences between different web browsers. For example, the Alarm Viewer has small differences in appearance in Firefox and in Edge.
+ 
+ 
+Main behavioral differences
+ 
+ 
+The pan and zoom behaviors are different as WebVue takes advantage of the web browser built-in pan and zoom capabilities instead of relying on the PcVue web back end for these. The advantage is a better user experience, in particular on touch devices, and limited risks linked to web browser updates.
+ 
+Within the WebVue client, shortcuts handled by the web browser have precedence. As a consequence, the usage of functions keys customizable for the desktop client is very limited.
+ 
+The online help is not accessible.
+ 
+Central Project Management is not accessible.
+ 
+Fonts are generally supported if they are installed on the browser of the WebVue Client's device. The fonts Arial, Courier, Times New Roman, and System are widely supported.
+ 
+When using the automatic logoff of users, no warning box is displayed to the inactive WebVue user prior to logoff.
+ 
+Password modification is only available from the login page.
+ 
+ 
+Main restrictions 
+ 
+ 
+The following animations and controls are not supported or not applicable.
+Color - Legend animation
+Send - Recipe animation
+Send - Region animation
+Send - Languages animation
+Send - Timetable animation
+Run - Macro animation
+Security device - PTZ
+Web browser - Commands
+Security - Password animation
+Grid control
+Chart control
+Pie/doughnut/pyramid control
+Messaging control
+Text-box form control
+Third party ActiveX controls
+Web browser control
+BIM control
+ONVIF control
+Video control
+ 
+User account management is not accessible, including profile configuration.
+ 
+The user interface for the Data export is not supported (data export via SCADA Basic is supported).
+ 
+Variable linking is only supported for form controls.
+ 
+The use of substitution strings for opening mimics is not supported (#I, #P, #U, #M11 to #M20).
+ 
+The form controls are supported except the text box. Their appearance is slightly different, in particular, the intermediate state of a check-box list or option-button list control is not available. You cannot use variables linking with Form Controls for mimics displayed in WebVue, use SCADA Basic scripting instead.
+ 
+The Trend, Alarm and Log Viewers have some limitations. 
+ 
+AVI (multimedia) files not supported.
+ 
+If a mimic is repeated in the PcVue Workspace, only the first instance appears in the WebVue Client.
+ 
+No feature associated with multi-screen and region management is supported.
+ 
+Control zone animation accelerator keys not supported.
+ 
+OLE objects in mimics not supported.
+ 
+VBA and Enable scripts not supported.
+ 
+Partial support for SCADA Basic instructions and modes. The SCADA Basic help contains detailed information for each instruction and mode.
+ 
+3D mimics not supported.
+ 
+VCR mode not supported.
+ 
+Visibility of graphic objects according to layers is supported, but no layer selection toolbar is available for the user.
+ 
+Because zooming rely on the web browser built-in capabilities and is processed on client side, zooming via SCADA Basic and decluttering features are not supported.
+ 
+ 
+SCADA Basic scripting
+ 
+You can execute SCADA Basic programs in the context of a WebVue session. They are executed on the computer that is the web back end station. The level of support of the SCADA Basic instructions and modes, and noticeable difference in behavior when scripts are executed in a WebVue client context (compared to behavior on the desktop application), are noted in the book on SCADA Basic.
+ 
+General points for designing a project when deploying WebVue clients
+ 
+ 
+Keep in mind that WebVue content will be delivered over the internet or intranet which will almost certainly not be as fast as a dedicated network. Mimic content must be optimized, in particular minimizing the use of large images and the number of graphic elements.
+ 
+If screen sizes and resolutions vary across the network and any remote stations, design or adapt the parts of the application that the WebVue Clients will display to fit the most limited visible area in any of the browser windows. In particular, mimic scaling and rendering are directly impacted by the Web back end property called Fit rendering to the web browser viewport. See the Application Explorer help for more information.
+ 
+If a browser is only (or often) used to run the WebVue Client, its default address can be set to the WebVue Server's Url.
+ 
+Check the elements of the mimics to be accessed against the information in this book so as to avoid unavailable features and incompatible behaviors.
+ 
+Avoid a mimic structure that allows all the mimics to be closed at one time, since then the user will have to disconnect and reconnect to re-display the initial mimic.
+ 
+Mimics can be larger than the window. Scroll bars are then automatically added. This feature is compatible with the newly supported auto-sizing. For this feature to work, the option Allow mimic to be larger than window must be enabled for each mimic.
+ 
+Due to the web browser environment, the <Esc> key is not effective to close context mimics, so your pop-up mimics shall include a button or the title bar for the user to close them.
+ 
+Security animations, in particular Login, Logout and Change password, as well as the corresponding SCADA Basic instructions (System mode Login, Logout and ChangePassword) are designed for PcVue desktop application and must not be made available to WebVue users in a mimic. Execution by a WebVue user has no effect.
+ 
+User access via web & mobile apps are subject to authorization defined at the profile level. See the topic Properties That Affect Access to Web Services in the Application Explorer book for more information.
+ 
+ 
+Restrictions related to web browsers
+ 
+Each web browser can come with its own restrictions, in particular when security is at stake. Below is a list of known behaviors, specific to one or the other web browser available on the market at the time of writing. These restrictions may be cleared and others appear depending on web browser updates and their publisher's strategy.
+ 
+ 
+Safari on iOS - When the Safari web browser is closed without logging out from WebVue, WebVue is re-open by default the next time the user opens Safari, but the user will not be able to successfully login, and will be stuck on the WebVue loading page. This is due to the Safari snapshot of the last visited page where Safari display the web page without actually requesting the web server. The solution is to go to the address bar and click the Go button, or ask Safari to reload the page.
+ 
+Safari on iOS - For the beep on alarm to work properly, the Safari setting called Allow All Auto-Play must be enabled.
+ 
+Google Chrome - The password manager of Chrome does not store credentials if the connection to the web server is insecure. As a consequence, if you do not have a proper certificate on the web server, users will not be able to use the Chrome password manager to store their credentials.
+ 
+Microsoft Edge - Edge in versions prior to 79 (Jan 2020) does not store the session cookie when using the local computer as a web server with a binding on the computer name at the IIS level. As a consequence, you cannot successfully log in, and can see a warning message indicating that the version of the client is not compatible with the server. The solution is to add .local to the computer name when setting up the web site binding with the Web Deployment Console (for example, https://mycomputername.local instead of https://mycomputername).
+ 
+ 
+
+ 
+When the web server is updated and re-deployed, it is of prime importance to make sure WebVue users empty the cache of their web browser. This ensure that they are using up-to-date resources and JavaScript modules.
+
+
+========================================
+TOPIC: webvue_pwa.htm
+========================================
+Using WebVue as a PWA
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using WebVue as a PWA
+ 
+PWA is an acronym for Progressive Web Application. A PWA can run like a normal web page accessing it by entering the URL in the web browser. But in addition it can be installed directly onto a device, similar to an app from the app store, but without the requirement for the developer to deploy the app to the store. Instead the app includes the tools to instal itself, and the web browser controls its installation on the device. 
+ 
+WebVue supports PWA, installing it as a PWA typically adds an icon on the desktop from where it can be started directly without the need to launch the web browser and enter a URL.
+ 
+Pre-requisites for installing WebVue as a PWA
+ 
+ 
+
+ 
+The setting Enable PWA must be set to True in the WebClient settings at the time of deployment with the Web Deployment Console, .
+ 
+ 
+
+ 
+The certificate selected for the HTTPS connection, in the Web Deployment Console, must be trustful. That means it must be issued by a trusted certificate authority. A self-signed certificate cannot be used.
+ 
+ 
+
+ 
+The web browser in use must support PWA.
+ 
+ 
+ 
+How to install WebVue as a PWA
+ 
+ 
+
+ 
+Start WebVue by entering the Url in a web browser.
+ 
+ 
+
+ 
+Assuming Enable PWA is set to True, an install button appears in the browser. Click the button to install WebVue as an app. 
+ 
+ 
+
+ 
+A desktop shortcut is created as part of the process from where the WebVue app can be directly started.
+ 
+ 
+ 
+
+ 
+How to install a PWA in step 2 varies depending on the web browser. See the documentation for the web browser in use for more information.
+Managing the currently installed PWA is the responsibility of the web browser used to install it. In particular, uninstalling a PWA is available in any web browser supporting PWA.
+ 
+ 
+
+ 
+The first time you start the WebVue app you will have to enter the login credentials. If you want to allow a user to start the WebVue app without the need to enter credentials then select the Remember me setting in the Login screen.
+
+
+========================================
+TOPIC: WebVue_Trend_viewer.htm
+========================================
+Trend Viewer in WebVue
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Trend Viewer in WebVue
+ 
+Display tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Display Toolbar
+ Yes
+ 
+ 
+
+ Toolbar Position
+ Partial - Is only available at design time
+ 
+ 
+
+ Flat
+ Yes
+ 
+ 
+
+ Scrollbar
+ Yes
+ 
+ 
+
+ Scrollbar Width
+ Yes
+ 
+ 
+
+ Background
+ Yes
+ 
+ 
+
+ Refresh period
+ N/A
+ 
+ 
+
+ Buffer size
+ Yes
+ 
+ 
+
+ Time capacity
+ Yes
+ 
+ 
+
+ Start mode
+ Yes
+ 
+ 
+
+ Period
+ Yes
+ 
+ 
+
+ Start date
+ No
+ 
+ 
+
+ Display time scale
+ Yes
+ 
+ 
+
+ Display grid lines
+ Yes
+ 
+ 
+
+ Display time information
+ Yes
+ 
+ 
+
+ Display small curve scales
+ Yes
+ 
+ 
+ 
+ 
+Aspect tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Position
+ Yes
+ 
+ 
+
+ Size
+ Yes
+ 
+ 
+
+ Border
+ Partial - Border style is not taken into account
+ 
+ 
+
+ Appearance
+ No - Appearance is not taken into account
+ 
+ 
+
+ Locked
+ N/A - Affect the design mode behavior
+ 
+ 
+ 
+ 
+Execution tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Auto open Trace toolbox
+ Yes
+ 
+ 
+
+ Enable trace toolbox
+ Partial - The trace toolbox has limited features, in particular, variable selection is not supported
+ 
+ 
+
+ Historic data request
+ Yes
+ 
+ 
+
+ Toolbar position
+ Partial - Is only available at design time
+ 
+ 
+
+ Toolbar modification
+ No
+ 
+ 
+
+ Right click popup
+ N/A
+ 
+ 
+
+ Save run-time properties
+ N/A
+ 
+ 
+
+ Lock legend position
+ Yes
+ 
+ 
+
+ Remove a curve from the legend tab
+ N/A
+ 
+ 
+
+ Include variables when restoring configuration
+ No
+ 
+ 
+ 
+ 
+Curves tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ General
+ Yes
+ 
+ 
+
+ Draw
+ Yes
+ 
+ 
+
+ Scales
+ Yes 
+ 
+ 
+ 
+ 
+Advanced curves tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Invalid
+ Yes
+ 
+ 
+
+ Unit
+ Yes
+ 
+ 
+
+ Thresholds
+ No
+ 
+ 
+
+ Minimum
+ No
+ 
+ 
+
+ Maximum
+ No
+ 
+ 
+
+ Time shift
+ No
+ 
+ 
+ 
+ 
+Legend tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Columns
+ Partial - All Columns are available except Paste Variable, Configure Thresholds, Low value limit, High value limit, Time left and Time right
+ 
+ 
+
+ Column Display Name
+ Yes
+ 
+ 
+
+ Column Size
+ Yes 
+ 
+ 
+
+ User Data
+ Partial - Substitution strings are not supported 
+ 
+ 
+
+ Lock size
+ Yes
+ 
+ 
+
+ Editable color
+ Yes
+ 
+ 
+
+ Read only Color
+ Yes
+ 
+ 
+ 
+ 
+Grid tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Aspect
+ Yes
+ 
+ 
+
+ Time scale
+ Yes
+ 
+ 
+ 
+ 
+Print tab
+ 
+Partial - Printing is supported, the background color for the printout is always the background color of the viewer.
+ 
+Format tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Time displayed in
+ Yes
+ 
+ 
+
+ Value
+ Yes
+ 
+ 
+
+ Scientific notation
+ Yes
+ 
+ 
+
+ Time scale titles
+ Yes
+ 
+ 
+ 
+ 
+Touch Screen tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Display large toolbar
+ Yes
+ 
+ 
+
+ Display large historical request dialog box
+ Yes
+ 
+ 
+
+ Display large period and time scale management dialog box
+ Yes
+ 
+ 
+
+ Display large scrollbar
+ Yes
+ 
+ 
+ 
+ 
+Advanced tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Historical requests advanced properties
+ No
+ 
+ 
+ 
+ 
+
+ 
+The Data export wizard available from the Trend viewer toolbar in the PcVue desktop application is not supported in WebVue.
+
+
+========================================
+TOPIC: WebVue_Window_Properties.htm
+========================================
+Window Properties in WebVue
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Window Properties in WebVue
+ 
+Display tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Positioning on Workspace
+ Yes
+ 
+ 
+
+ Background color
+ Yes
+ 
+ 
+
+ Link mimic with window size
+ Yes
+ 
+ 
+
+ Allow mimic to be larger than window
+ Yes
+ 
+ 
+
+ Scale mimic to fit window
+ Yes
+ 
+ 
+
+ Title
+ Partial - Only static strings are supported, the use of substitution strings may have limitations.
+ 
+ 
+
+ System menu
+ Yes
+ 
+ 
+
+ Iconizable
+ Partial - If a mimic is minimized in the PcVue desktop application, it is displayed as a small square in the upper right corner. In WebVue, it is minimized to only the small title bar and shown in the upper left corner. The title bar is moveable to position the minimized window wherever needed.
+ 
+ 
+
+ Maximize
+ Yes
+ 
+ 
+
+ Sizeable
+ Partial - Sizeable is only available if Border is also enabled. If mimic is larger than window, it is possible to shrink and grow the window.
+ 
+ 
+
+ Moveable
+ Yes
+ 
+ 
+
+ Foreground
+ Partial - The foreground property is effective except in one special case.
+If a mimic which has the foreground flag opens another mimic that does not have it, the new opened mimic is in the Background in the PcVue desktop application, in WebVue the new opened mimic will be in foreground.
+ 
+ 
+
+ Small caption
+ No
+ 
+ 
+
+ Border
+ Yes
+ 
+ 
+
+ Client Border
+ Yes
+ 
+ 
+
+ Static Border
+ Yes
+ 
+ 
+
+ Cache
+ N/A
+ 
+ 
+
+ Modal
+ Yes
+ 
+ 
+
+ Layers
+ Yes
+ 
+ 
+
+ Title bar
+ Yes
+ 
+ 
+
+ Grid
+ N/A - Affect the design mode behavior.
+ 
+ 
+ 
+ 
+Access rights tab
+ 
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Level
+ Yes
+ 
+ 
+
+ Zoom
+ N/A - WebVue zooming capabilities are only available based on web browser zooming.
+ 
+ 
+
+ Layers
+ Partial - No Layer selector is available in WebVue
+ 
+ 
+
+ Unauthorized Signal
+ Partial - Only the warning box is available, the beep is not played in WebVue
+ 
+ 
+ 
+ 
+Included Mimic tab
+ 
+Supported in WebVue.
+ 
+Links tab
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ M1-M10
+ Yes
+ 
+ 
+ 
+Tab control tab
+ 
+Supported in WebVue.
+ 
+Template tab
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Template properties
+ Yes
+ 
+ 
+
+ Command priority
+ Yes
+ 
+ 
+ 
+Advanced tab
+ 
+ 
+ 
+ 
+
+ Property
+ WebVue support
+ 
+ 
+
+ Beep
+ No - Beeping in WebVue is only possible via SCADA Basic
+ 
+ 
+
+ Screen resolution
+ Yes
+ 
+ 
+ 
+Navigator tab
+ 
+Not supported in WebVue.
+
+
+========================================
+TOPIC: WebVue_Workspace.htm
+========================================
+The WebVue workspace
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The WebVue Workspace 
+ 
+Toolbar
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Click and drag to move, or double click to dock, the toolbar.
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ Reload WebVue. Can be used to restart WebVue after a disconnection or to return to the first mimic with a single click.
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+Show the settings view. Note that the settings are saved in the browser itself and are therefore common to different tabs, and instances, of the same browser.
+ 
+ 
+Do not fit rendering to the web browser viewport - Disable the automatic scaling of mimics that may be imposed by default by the Web back end.
+ 
+Automatically hide the toolbar when docked - The system menu is hidden if it is docked at the top. Move the cursor to the top to show the menu again.
+ 
+
+ 
+Keep WebGL buffer for printing - For Firefox users only. Enable this setting if you face issues when printing a Trend viewer with Firefox (black area instead of curves). Because this setting can have a significant impact on performance, it is recommended to activate it only if necessary.
+ 
+ 
+
+ 
+UI scaling - Selection of the scaling factor to apply:
+ 
+ 
+
+ 
+Auto - Apply the UI scaling settings of the operating system (at least on Microsoft Windows and Apple macOS).
+ 
+ 
+ 
+ 
+
+ 
+100% - Override the system UI scaling settings to favor a rendering at the scale mimics were designed on the PcVue desktop application. On 2k or 4k screens, mimics may become too small.
+ 
+ 
+ 
+ 
+
+ 
+125% - 175% - Similar behavior as 100%, mimics are just rendered a bit...larger.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Show the window list. Clicking on a window name will move it to the foreground or restore it if it has been minimized.
+ 
+ 
+
+ 
+ 
+ 
+ Show the WebVue event viewer.
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+Opens the SimuLock view.
+ 
+The SimuLock view shows the list of variables used as part of animations in the current mimic.
+It provides variable filtering and allows the user to control variable simulation:
+ 
+ 
+
+ 
+Set and Reset variable value simulation
+ 
+ 
+
+ 
+Set simulation value
+ 
+ 
+
+ 
+Set simulation expiration time
+ 
+ 
+ 
+The exact behavior of the SimuLock view depends on variable simulation properties. Refer to the topic Properties common to all variable types for more information.
+ 
+
+ 
+By making it easy to set the value of any variable, the SimuLock view can be useful for mimic testing.
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+ Full screen mode. The same as if using the F11 keystroke.
+ 
+ 
+
+ 
+ 
+ 
+ Logout.
+ 
+ 
+
+ 
+ 
+ 
+ Collapse / expand the toolbar if it is not docked.
+ 
+ 
+ 
+ 
+
+ 
+You can hide the WebVue menu by setting the disableSystemMenu option to true in the Index.cshtml file of WebClient.
+ 
+ 
+Opening WebVue in additional browser tabs, or another instance of the same browser
+ 
+A successful login to WebVue starts a WebVue session. In general, further copies of WebVue using the same Url in additional tabs in the same browser instance, or in further instances of the same browser on the same computer, use the same session. One WebVue session uses one WebVue license.
+ 
+ 
+You do not need to login when starting WebVue in each additional tab.
+ 
+Logging out of WebVue, on any tab or browser instance on the same computer, logs you out of the WebVue session and hence logs you out of WebVue in all tabs or browser instances.
+ 
+ 
+
+ 
+This behavior depends on the way that a web browser manages session cookies and may be different in different web browsers or in future versions of a web browser.
+ 
+ 
+Display language and Project language
+ 
+The Display language is taken from the web browser language. If not suitable, users can always change the order of priority at the web browser level to ensure they are displayed the WebVue generic text in the language they prefer. This affects the following elements:
+ 
+ 
+Login page, Change password page
+ 
+Messages related to connection status and failure
+ 
+The workspace toolbar
+ 
+Setting dialog etc.
+ 
+ 
+The Project language is taken from the Web back end and user profile configuration and cannot be switched from the WebVue client.
+
+

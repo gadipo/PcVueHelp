@@ -1,0 +1,1214 @@
+========================================
+TOPIC: bim_config_editor.htm
+========================================
+The BIM configuration editor
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The BIM configuration editor
+ 
+The BIM configuration editor is opened from the Edit button in the General tab of the BIM control configuration dialog. It is used to configure animations, cut planes and camera presets, to the loaded BIM model file. Show picture
+
+ 
+The configurator editor has three panes.
+ 
+ 
+
+ 
+3D viewer - Right pane. Renders the 3D geometry of the loaded .Ifc file. The user can navigate in the 3D scene, cut the model and select objects. Selecting an object in the 3D viewer will also select the object in the Object Browser, expanding the tree as necessary.
+ 
+ 
+
+ 
+Object browser - Top left pane. Displays the objects, groups and presets of the .Ifc file. Selecting an object in the Object browser will highlight it in the 3D viewer and display its properties in the Object properties pane.
+ 
+ 
+
+ 
+Object properties - Bottom left pane. Displays the properties and any animations of the selected object, and any groups to which it belongs.
+ 
+ 
+ 
+Animating an object
+ 
+To animate an object, right click on it in the Object browser and, from the context menu select Create animation and the type of animation to create. Show picture
+
+ 
+The animations are similar to those that are used to animate the HMI's drawing elements, albeit with some small differences. The following animations are available:
+ 
+ 
+
+ 
+Color on bit - Only fill colors are applicable
+ 
+ 
+
+ 
+Color on register
+ 
+ 
+
+ 
+Color on alarm - Only fill colors are applicable
+ 
+ 
+
+ 
+Run program
+ 
+ 
+
+ 
+Link open - No included in properties
+ 
+ 
+ 
+In addition, all animations include a Propagate to children property which, if selected, propagates the animation to all of the object's children.
+ 
+Any animations on an object are displayed in both the Object browser and Object properties panes. Show picture
+
+ 
+An animation can also be added to an entire group of objects in a similar manner by selecting the group in the Group tab of the Object browser pane.
+ 
+Adding an object to a group
+ 
+The main purpose of a group is to be able to create an animation on several objects without having to create each animation one by one.
+ 
+To add an object to a group, right click on it in the Object browser and, from the context menu select Add in group. A combo box is displayed where an existing group can be selected, or the name of a new group entered.
+An entire group can be deleted by selecting it in the Group tab of the Object browser pane and right clicking to display the context menu from where it can be deleted.
+An object can be removed from a group by selecting the group in the Groups tab of the properties pane and clicking remove.
+ 
+Configuring presets
+ 
+There are two types of presets, a run-time preset created using a SCADA Basic script and a configuration preset created using the configuration editor and saved in the configuration file. Configuration presets have priority over run-time presets, so if run-time presets have been loaded, and then a configuration is created with a preset of the same name, the corresponding run-time preset is replaced with that of the configuration.
+ 
+To create a preset with the configuration editor, first create a cut plane using the 3D viewer, and then save it using the New preset button in the Presets tab of the Object browser pane. Show picture
+
+ 
+A preset can be a cut plane, a camera or a combination of both. Note that a preset can only be called at run-time using a SCADA Basic script.
+ 
+After a preset has been configured it appears in the Presets tab from where it can be edited and or deleted.
+ 
+Closing the BIM configuration editor and saving changes
+ 
+The editor is closed using the OK button. Using the Cancel button closes the editor but does not save any changes. To save the configuration in the configuration file, you must then use the Save button in the BIM control configuration dialog.
+
+
+========================================
+TOPIC: bim_configuration.htm
+========================================
+How to configure the BIM control
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to configure the BIM control
+ 
+How to insert a BIM control in a mimic
+ 
+ 
+Open the mimic in which the BIM control is to be inserted and select Design mode.
+ 
+Select Insert.BIM control from the menu.
+ 
+A BIM control is inserted, and its properties dialog opens automatically. Show picture
+
+ 
+Click OK to close the dialog and create a BIM control with default properties.
+ 
+ 
+
+ 
+You can specify more properties to control the graphical element visibility. From the Aspect tab, behind the down arrow at the bottom of the Properties dialog box:
+ 
+ 
+
+ 
+Specify zoom visibility bounds so that the graphic control is only visible for predefined zoom levels.
+ 
+ 
+
+ 
+Specify layers so that the graphic control is only visible if one of the selected layers is displayed.
+ 
+ 
+ 
+These are even more useful when combined with user permissions and decluttering templates.
+ 
+ 
+Once you have created a BIM control, 
+ and closed its properties dialog, it can be moved, sized and copied the same 
+ as any other drawing element. The BIM control configuration dialog contains two further tabs General and Advanced.
+ 
+The General tab
+ 
+ 
+
+ 
+.Ifc model - The name of the .Ifc file that the BIM control displays when the mimic is opened. It is recommended that BIM files are located in the project's BIM folder, although the file browser displayed by clicking the down arrow button adjacent to the .Ifc file field allows selection of any location accessible to the current user.
+The .Ifc file property can be left empty in which case the file must be specified using SCADA Basic.
+ 
+ 
+
+ 
+Configuration file - The name of the .dat file in which PcVue will save the model-specific configuration (including animation, cut planes and cameras). It is recommended that files are located in the project's BIM folder, although the file browser displayed by clicking the down arrow button adjacent to the Configuration file field allows selection of any location accessible to the current user.
+The Configuration file property can initially be left empty, and specified when you add and save the first configuration elements.
+ 
+ 
+
+ 
+Edit - Opens the BIM configuration editor and loads the contents of the .Ifc file to allow the configuration of animations, plane and camera presets, for the BIM control. If the name of a configuration file has already been entered, any configuration it contains is loaded.
+ 
+ 
+
+ 
+Save - Save the current configuration in the specified configuration file.
+ 
+ 
+
+ 
+Load - Load the configuration from the specified configuration file.
+ 
+ 
+ 
+The Advanced tab
+ 
+ 
+
+ 
+File settings
+ 
+ 
+
+ 
+Enable geometry cache file - Enable the use of the XBIM cache file when loading Ifc files. If not enabled, no cache of the mesh will be generated and if a cache file already exists, it is not loaded. Enabling caching boosts rendering performances at run-time.
+ 
+ 
+ 
+ 
+
+ 
+View
+ 
+ 
+
+ 
+Simplified rendering - Simplify rendering of the 3D meshes of the model in order to increase performances.
+ 
+ 
+
+ 
+Display FPS - Display, in the top right corner of the BIM control, the number of frames per second that are being rendered at run-time.
+ 
+ 
+ 
+ 
+
+ 
+Camera
+ 
+ 
+
+ 
+Enable pan - Enable pan at run-time.
+ 
+ 
+
+ 
+Enable zoom - Enable zoom at run-time. Sensitivity defines how the model responds to zoom requests.
+ 
+ 
+
+ 
+Enable rotation - Enable rotation at run-time. Sensitivity defines how the model responds to pan requests.
+ 
+ 
+ 
+ 
+
+ 
+Ifc properties window
+ 
+ 
+
+ 
+Enable - Enable display of the Ifc properties window. The default keyboard shortcut Tab can be changed using the Accelerator property.
+ 
+ 
+
+ 
+Accelerator - The keyboard shortcut for the user to open the Ifc properties window at run-time. Click into the field and then press the keystroke to be used (or the Del key to remove the configured accelerator).
+ 
+ 
+ 
+ 
+ 
+
+ 
+Loading a model for the first time typically takes longer because, if enabled, this is when the cache is generated.
+While the cache is created and managed automatically, it is only valid for the computer where it was generated. When deploying a project with a mimic that contains a BIM control in a multi-station system, you may notice the cache creation delay upon mimic first opening on each station.
+ 
+ 
+
+ 
+The Ifc properties window is not modal. You can keep it open, it is refreshed upon object selection change.
+ 
+ 
+The Traces tab
+ 
+The Traces tab is used to enable trace messages from the BIM control. Useful when diagnosing errors or if you want to track the BIM control use at run-time. Trace messages appear in the Trace window and are logged in the trace file. The following messages can be generated.
+ 
+ 
+
+ 
+System errors - If enabled, a trace is logged when an unexpected error such as a processing or rendering issue occurs.
+ 
+ 
+
+ 
+Verbose - All of the above plus additional information.
+ 
+ 
+
+ 
+Activate on mimic open - Activate the selected traces on mimic open. If enabled, the selection of traces is persisted and applied each time the mimic is open.
+ 
+ 
+ 
+By default, only system errors are logged.
+
+
+========================================
+TOPIC: bim_overview.htm
+========================================
+BIM control overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BIM control overview
+ 
+BIM is the acronym for Building Information Modeling. The BIM control displays, and allows the user to interact with, a 3D BIM model defined by a .Ifc file. Show picture
+
+ 
+The BIM control is based on the XBIM toolkit, which supports the BuildingSmart data model, that is the Industry Foundation Classes. XBIM supports reading, creating and viewing BIM models in the Ifc format and is capable of recognizing .Ifc and .Ifczip formats for IFC2x3 and IFC4 versions.
+ 
+The BIM control configuration allows defining animations to be added to the BIM model's objects. See the topic The BIM configuration editor for details.
+ 
+More advanced functionality can be added with SCADA Basic scripting. See the instruction BIMDISPLAY for details.
+ 
+
+ 
+Think BIMOps
+Ifc models as used for the design and construction phases can be loaded with details that are never going to be useful for operations and maintenance with PcVue. You will achieve the best user experience and operational effectiveness by using a suitable Ifc model, loaded with data useful to operations, and not loaded with design details.
+ 
+ 
+
+ 
+Illustrations in this book are based on an Ifc model provided by the XBIM team and available under the Common Development and Distribution License (CDDL).
+The original "Sample house" model can be downloaded at https://github.com/xBimTeam/XbimEssentials/.
+Credits: The XBIM team.
+
+
+========================================
+TOPIC: bim_runtime.htm
+========================================
+Using the BIM control at run-time
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the BIM control at run-time
+ 
+At run-time the BIM control renders the selected Ifc file generating a navigable 3D scene. When an Ifc file is loaded for the first time, the BIM control parses it, calculates the geometry required for rendering the scene, and saves it in a cache file (.xbim). This can take several seconds depending on the size of the Ifc file. Subsequently, when the Ifc file has already been loaded in the past, the scene is rendered using the .xbim file which is much quicker.
+ 
+Once the scene has been rendered, the user can interact directly with it using the below listed mouse actions and keystrokes, plus any Link Open or Run Program animations that have been added during the configuration.
+ 
+Mouse actions and keyboard shortcuts
+ 
+The following mouse actions and shortcuts can be used to interact with the BIM control:
+ 
+ 
+
+ 
+Tilt - Right click and drag to tilt around the click point
+ 
+ 
+
+ 
+Zoom - Mouse wheel or Ctrl + right click + mouse drag
+ 
+ 
+
+ 
+Pan - Wheel click and drag or Shift + right click + drag
+ 
+ 
+
+ 
+Create and orientate a cut plane - Shift + left click to create a cut plane in the default X and Y axis. Once a cut plane has been created, Shift displays a 3D cursor that can be used to orientate the cut plane in the 3D space by clicking and dragging the arrows or circles. Release the Shift key to cut the model. Show picture
+
+ 
+ 
+
+ 
+Display the Ifc properties window - Tab + left click on an object opens the property window. Show picture
+
+ 
+ 
+
+ 
+Move right - A or right arrow
+ 
+ 
+
+ 
+Move left - Z or left arrow
+ 
+ 
+
+ 
+Move down - Q or down arrow
+ 
+ 
+
+ 
+Move left - D or left arrow
+ 
+ 
+
+ 
+Zoom out - S or PgUp
+ 
+ 
+
+ 
+Zoom in - W or PgDn
+ 
+ 
+ 
+To remove a cut plane you can drag it outside of the model.
+
+
+========================================
+TOPIC: BIMDISPLAY_Example.htm
+========================================
+BIMDISPLAY example
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BIMDISPLAY Example
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ Applies to
+ 
+ 
+This program illustrates the use of the BIMDISPLAY instruction.
+ 
+
+ 
+Illustrations in this book are based on an Ifc model provided by the XBIM team and available under the Common Development and Distribution License (CDDL).
+The original "Sample house" model can be downloaded at https://github.com/xBimTeam/XbimEssentials/.
+Credits: The XBIM team.
+
+ 
+ 
+Example prerequisites
+ 
+ 
+
+ 
+ A mimic containing a BIM control and a List-box control must be open. Show picture
+ 
+ 
+
+ 
+The BIM control is used to visualize the contents of a .Ifc file. This example requires the file to be located in the project's BIM folder.
+ 
+ 
+
+ 
+A text variable, @SB_EXAMPLES.PresetName, is required. This variable must have the Command property set.
+ 
+ 
+
+ 
+A register variable, @SB_EXAMPLES.LabelValue, is required. This variable must have the Command property set.
+ 
+ 
+
+ 
+An Xml file is used to save and load the presets. This file is created the first time the SAVEPRESETS mode is used. In this example it is located in project's BIM folder.
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+DIM sWindow AS STR;
+ 
+ 
+ 
+
+ 
+DIM sBranch AS STR;
+ 
+ 
+ 
+
+ 
+DIM sIdentity AS STR;
+ 
+ 
+ 
+
+ 
+DIM sPresetListBox AS STR;
+ 
+ 
+ 
+
+ 
+DIM sPresetFileName AS STR;
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Must be ran once to initialize variables
+ 
+ 
+ 
+
+ 
+SUB Main ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;sWindow = "Mimic3"; ' Name of the mimic comtaining the BIM control
+ 
+ 
+ 
+
+ 
+&#160;&#160;sBranch = "";
+ 
+ 
+ 
+
+ 
+&#160;&#160;sIdentity = "BimControl1"; 'Identity of the BIM control
+ 
+ 
+ 
+
+ 
+&#160;&#160;sPresetListBox = "AIListBox1"; 'Identity of the list box used to display presets
+ 
+ 
+ 
+
+ 
+&#160;&#160;sPresetFilename = "UserPresets.xml"; 'Name of the file used to save presets
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Load an Ifc file in the BIM control. File name passed as an argument.
+ 
+ 
+ 
+
+ 
+SUB Exec_LoadIFC ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM lReturn AS LONG;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM cIfcFileName AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;cIfcFileName = GETARG("ARG1");
+ 
+ 
+ 
+
+ 
+&#160;&#160;lReturn = BIMDISPLAY("LOADIFC", sWindow, sBranch, sIdentity, cIfcFileName);
+ 
+ 
+ 
+
+ 
+&#160;&#160;PRINT("Result from mode LOADIFC = ", lReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Open the BIM control Ifc properties dialog
+ 
+ 
+ 
+
+ 
+Sub Exec_OpenPropertiesWindow ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM lReturn AS LONG;
+ 
+ 
+ 
+
+ 
+&#160;&#160;lReturn = BIMDISPLAY("OPENPROPERTIESWINDOW", sWindow, sBranch, sIdentity);
+ 
+ 
+ 
+
+ 
+&#160;&#160;PRINT("Result from mode OPENPROPERTIESWINDOW = ", lReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Add a user preset. The preset name comes from the variable @SB_EXAMPLES.PresetName
+ 
+ 
+ 
+
+ 
+SUB Exec_AddPreset()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM lReturn AS LONG;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM cPresetName AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST CAMERA = 2; 'To add a camera preset
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST CUTPLANE = 1; 'To add a cutplane preset
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST BOTH = 0; 'To add both a camera and cutplane preset
+ 
+ 
+ 
+
+ 
+&#160;&#160;cPresetName = @SB_EXAMPLES.PresetName;
+ 
+ 
+ 
+
+ 
+&#160;&#160;lReturn = BIMDISPLAY("ADDPRESET", sWindow, sBranch, sIdentity, cPresetName, CAMERA);
+ 
+ 
+ 
+
+ 
+&#160;&#160;PRINT("Result from mode ADDPRESET = ", lReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Go to a preset. The preset name comes from the list box populated by Exec_GetPresets
+ 
+ 
+ 
+
+ 
+SUB Exec_GoToPreset()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM lReturn AS LONG;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM cPresetName AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iIndex AS Integer;
+ 
+ 
+ 
+
+ 
+&#160;&#160;iIndex = TOI(LISTBOX("GETSELECTEDINDEX", sWindow, sBranch, sPresetListBox));
+ 
+ 
+ 
+
+ 
+&#160;&#160;cPresetName = LISTBOX("GETUSERDATA", sWindow, sBranch, sPresetListBox, iIndex);
+ 
+ 
+ 
+
+ 
+&#160;&#160;@SB_EXAMPLES.PresetName = cPresetName;
+ 
+ 
+ 
+
+ 
+&#160;&#160;lReturn = BIMDISPLAY("GOTOPRESET", sWindow, sBranch, sIdentity, cPresetName);
+ 
+ 
+ 
+
+ 
+&#160;&#160;PRINT("Result from mode GOTOPRESET ", cPresetName, " = ", lReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Go to a preset. The preset name is passed as an argument
+ 
+ 
+ 
+
+ 
+SUB Exec_GoToStandardPreset()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM lReturn AS LONG;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM cPresetName AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;cPresetName = GETARG("ARG1");
+ 
+ 
+ 
+
+ 
+&#160;&#160;lReturn = BIMDISPLAY("GOTOPRESET", sWindow, sBranch, sIdentity, cPresetName);
+ 
+ 
+ 
+
+ 
+&#160;&#160;PRINT("Result from mode GOTOPRESET ", cPresetName, " = ", lReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Get the BIM control user added presets and display them in a list box
+ 
+ 
+ 
+
+ 
+SUB Exec_GetPresets()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iPresetCount AS Integer, iIndex AS Integer, i AS Integer;
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST INDEXEND = -1; ' Used AS the ListBox index adds to the end of the list.
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM cText AS STR, cUserData AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;ListBox("CLEAR", sWindow, sBranch, sPresetListBox);
+ 
+ 
+ 
+
+ 
+&#160;&#160;iPresetCount = TOI(BIMDISPLAY("GETPRESETCOUNT", sWindow, sBranch, sIdentity));
+ 
+ 
+ 
+
+ 
+&#160;&#160;PRINT(iPresetCount, " presets found");
+ 
+ 
+ 
+
+ 
+&#160;&#160;FOR (iIndex=0; iIndex < iPresetCount; iIndex++)
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;cText = BIMDISPLAY("GETPRESETNAME", sWindow, sBranch, sIdentity, iIndex);
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;cUserdata = cText;
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;ListBox("INSERT", sWindow, sBranch, sPresetListBox, cText, cUserData, INDEXEND);&#160;
+ 
+ 
+ 
+
+ 
+&#160;&#160;NEXT
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Save BIM Control user added presets in an Xml file
+ 
+ 
+ 
+
+ 
+SUB Exec_SavePresets ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM lReturn AS LONG;
+ 
+ 
+ 
+
+ 
+&#160;&#160;lReturn = BIMDISPLAY("SAVEPRESETS", sWindow, sBranch, sIdentity, sPresetFileName);
+ 
+ 
+ 
+
+ 
+&#160;&#160;PRINT("Result from mode SAVEPRESETS = ", lReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Load BIM control user added presets from an Xml file
+ 
+ 
+ 
+
+ 
+SUB Exec_LoadPresets ()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM lReturn AS LONG;
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST ADDPRESETS = 1; 'Adds presets. Using this sub-mode presets may be duplicated.
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST REPLACEPRESETS = 0; 'Adds presets replacing any already existing that have the same name.
+ 
+ 
+ 
+
+ 
+&#160;&#160;lReturn = BIMDISPLAY("LOADPRESETS", sWindow, sBranch, sIdentity, sPresetFileName, REPLACEPRESETS);
+ 
+ 
+ 
+
+ 
+&#160;&#160;PRINT("Result from mode LOADPRESETS = ", lReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Show/hide object according to its type. Show(1) or hide(0) is passed as an argument.
+ 
+ 
+ 
+
+ 
+SUB&#160;&#160;Exec_ShowObjectByType()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM lReturn AS LONG;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iShow AS INTEGER;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM sIfcTypeValue AS STR;
+ 
+ 
+ 
+
+ 
+&#160;&#160;iShow = IVAL(GETARG("ARG1"));
+ 
+ 
+ 
+
+ 
+&#160;&#160;sIfcTypeValue = @SB_EXAMPLES.ObjectType;
+ 
+ 
+ 
+
+ 
+&#160;&#160;lReturn = BIMDISPLAY("SHOWOBJECTBYTYPE", sWindow, sBranch, sIdentity, sIfcTypeValue, iShow);
+ 
+ 
+ 
+
+ 
+&#160;&#160;PRINT("Result from mode SHOWOBJECTBYTYPE = ", lReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+'-------- Zoom in on a specifc object using its unique LabelValue. The object is highlighted and the other Ifc elements are set to transparent.
+ 
+ 
+ 
+
+ 
+SUB Exec_ZoomObject()
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM lReturn AS LONG;
+ 
+ 
+ 
+
+ 
+&#160;&#160;DIM iIfcLabelValue AS INTEGER;
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST SELECTOBJECT = 1;
+ 
+ 
+ 
+
+ 
+&#160;&#160;CONST CHANGEMODEOPACITY = 1;
+ 
+ 
+ 
+
+ 
+&#160;&#160;iIfcLabelValue = TOI(@SB_EXAMPLES.LabelValue);
+ 
+ 
+ 
+
+ 
+&#160;&#160;lReturn = BIMDISPLAY("ZOOMOBJECT", sWindow, sBranch, sIdentity, iIfcLabelValue, SELECTOBJECT, CHANGEMODEOPACITY );
+ 
+ 
+ 
+
+ 
+&#160;&#160;PRINT("Result from mode ZOOMOBJECT = ", lReturn);
+ 
+ 
+ 
+
+ 
+END SUB
+
+

@@ -1,0 +1,2668 @@
+========================================
+TOPIC: mqtt_installation.htm
+========================================
+Installation and configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Installation and Configuration
+ 
+The MQTT Add-on of PcVue comprises of a single dll file that must be copied to the \Bin folder. The file is named:
+ 
+ 
+
+ 
+svmgrMQTT.dll
+ 
+ 
+ 
+The Add-on was developed using the SV Manager Toolkit. In order for PcVue to load the Add-on at startup, a text file USRMGR.DAT must also be added to the \Bin folder. The file must contain the following lines.
+ 
+[USRMGR\svmgrMQTT]
+ 
+DLL=svmgrMQTT.dll
+ 
+MQTT Add-on configuration file
+ 
+The Add-on is configured using a file called svmgrMQTT.ini that must be created in the C folder of the project. The file has the following structure.
+ 
+Please note that if an entry is omitted or if the file is not present in the project then its default value will be applied by the task. The file format is:
+ 
+[TaskParameters]
+ 
+AttributeNumber = 16
+ 
+AttributeSeparator = #
+ 
+InitialPublishNS = No
+ 
+LastPublishNS = No
+ 
+AssociationName = Association01
+ 
+WaitForInitialSub = No
+ 
+DefaultDecimalPlaces = 3
+ 
+UserName =
+ 
+[Broker1]
+ 
+Name = mydevice
+ 
+HostAddress = mqtt-broker.example.com
+ 
+ListeningPort = 1883
+ 
+KeepAlive = 60
+ 
+ReconnectionPeriod = 30
+ 
+GenericRootTopic = devices/mydevice/messages/devicebound/#
+ 
+BrokerStateVarName = 
+ 
+VerboseTraces = Yes
+ 
+VarNameVerboseTrigger = VerboseActivate
+ 
+CleanSession = Yes
+ 
+[Broker1/Security]
+ 
+Login = MyLogin
+ 
+Password = MyPwd
+ 
+ClientId = 
+ 
+CertificateAuthorityFileName = E:\Certificates\root_cert.pem
+ 
+ClientCertificateFileName = E:\Certificates\client_cert.pem
+ 
+ClientKeyFileName = E:\Certificates\client_key.key
+ 
+[Extractors]
+ 
+Extractor1 = StrExtract(value, '=', 8)
+ 
+Extractor2 = HexStrToInt16(StrExtract(value, '=', 8),10)
+ 
+[Filters]
+ 
+Filter1 = StrEqualNoCase(StrLeft(StrExtract(value, '=', 8), 2), 49)
+ 
+Filter2 = StrEqualNoCase(StrLeft(StrExtract(value, '=', 3), 2), 02)
+ 
+Filter3 = StrEqualNoCase(StrLeft(StrExtract(value, '=', 3), 2), 01)
+ 
+[Timestamps]
+ 
+Timestamp1 = JsonGetValue(value, 'metrics[0].timestamp')
+ 
+[Qualities]
+ 
+Quality1 = JsonGetValue(value, 'metrics[0].quality')
+ 
+[PublishFormats]
+ 
+PublishFormat1 = unit#description#source
+ 
+ 
+[TaskParameters]
+ 
+
+AttributeNumber: Specify the extended attribute used for the configuration of a MQTT variable.
+Type: Integer from 3 to 16. If omitted, default value is 16.
+
+AttributeSeparator: Specify the character used to separate the extended attribute parameters of a MQTT variable.
+Type: char. If omitted, default value is �|�.
+
+InitialPublishNS: Enable to send messages with quality = 0 (valid) for every PUB variable when starting PcVue.
+Type: String. Must be Yes or No. If omitted, default value is No.
+
+LastPublishNS: Enable to send messages with quality = 129 (invalid) for every PUB variable when stopping PcVue.
+Type: String. Must be Yes or No. If omitted, default value is No.
+
+AssociationName: Specify the association name in a redundant architecture.
+Type: String. If omitted, default is an empty string.
+
+The task is active on all servers of the specified association, they subscribe to topics and consume the received MQTT messages. But only active servers distribute the received values to variables. Passive servers do not distribute the received values to variables.
+
+WaitForInitialSub: Applicable to PUB-SUB variables only. Disable any publication as long as no value is received on the variable.
+Type: String. Must be Yes or No. If omitted, default value is No.
+
+DefaultDecimalPlaces: Specify the default number of decimal places when publishing register variables.
+Type: Integer from 1 to 9. If omitted, default value is 3.
+
+UserName: Specify the string that will be used as user name for logging command user actions.
+Type: String. Max length 20 characters. If omitted, default value is an empty string.
+When a value change is received by the MQTT subscriber for a variable with the Command property set, then the value change is processed as a command. It includes user command logging if a log list is configured to log user commands, and sending the new value as a command to the underlying data acquisition driver if it is an I/O variable.
+ 
+
+ 
+[BrokerX]: Definition of the parameters of broker X. 
+X: Number. If multiples brokers are configured, the values must be contiguous starting from 1.
+ 
+ 
+
+ 
+Name: Optional parameter. Specify the broker name.
+Type: String. If omitted from the file, the broker�s name is BrokerX.
+ 
+ 
+
+ 
+HostAddress: Specify the address of the MQTT broker. The address can be either an IP address or a host name.
+Type: String. If omitted from the file, default value is an empty string.
+ 
+ 
+
+ 
+ListenningPort: Specify the TCP port used to communicate with the broker.
+Type: Integer. If entry omitted from the file, default value is 1883. If MQTT over TLS, default value is 8883.
+ 
+ 
+
+ 
+KeepAlive: Specify the keep alive period in seconds. Keep alive ensures that the connection in between the broker and client remains open.
+Type: Integer from 1 to 65535. If omitted, default value is 60.
+ 
+ 
+
+ 
+ReconnectionPeriod: Specify the time to wait between each reconnection attempt if a connection is lost (in seconds).
+Type: Integer from 1 to 65535. If omitted, default value is 30.
+ 
+ 
+
+ 
+GenericRootTopic: Specify the generic root topic name. It can be seen as a topic prefix for both publish and subscribe operations. See the topic Using MQTT topics for more information on how to configure and use topics.
+Type: String. If omitted from the file, default value is an empty string.
+ 
+ 
+
+ 
+BrokerStateVarName: Specify the name of the register variable used to reflect the connection status between PcVue and the broker. See the topic MQTT Add-on traces for more information on error codes.
+ 
+ 
+
+ 
+VerboseTraces: Enable to display verbose traces in the event viewer.
+Type: String. Must be Yes or No. If omitted, default value is No.
+ 
+ 
+
+ 
+VarNameVerboseTrigger: Specify the name of the bit variable that can turn on or off verbose traces.
+Type: String. If omitted, default is an empty string.
+ 
+ 
+
+ 
+CleanSession: Enable the clean session mode. Yes = clean session. No = persistent session. With a clean session, the broker does not store any subscription information or undelivered messages for the subscriber. This mode is ideal when the Add-on only publishes messages. If set to No, topics are not unsubscribed when the Add-on stops.
+Type: String. Must be Yes or No. If omitted, default value is Yes.
+ 
+ 
+ 
+ 
+[BrokerX/Security]: Definition of the security parameters of broker X in case the broker requires specific security. See below for more information.
+ 
+
+Login: Specify the login to connect to the MQTT broker.
+Type: String. If omitted from the file, default value is an empty string.
+
+Password: Specify the password to connect to the MQTT broker.
+Type: String. If omitted from the file, default value is an empty string.
+
+ClientId: Specify the Id of the MQTT Add-on to be sent to the broker upon connection.
+Type: String. If omitted from the file, default value is an empty string.
+The predefined value ComputerName can be used to send the hostname of the computer where the Add-on is running.
+
+CertificateAuthorityFileName: Used for secure TLS connection. Specify the full path and filename of the Certificate Authority (CA) file for the server certificate (broker).
+Type: String. If omitted from the file, default value is an empty string.
+
+ClientCertificateFileName: Used for secure TLS connection with client certificate validation by the server (broker). Specify the full path and filename of the client certificate file (the Add-on itself).
+Type: String. If omitted from the file, default value is an empty string.
+
+ClientKeyFileName: Used for secure TLS connection with client certificate validation by the server (broker). Specify the full path and filename of the client certificate key file.
+Type: String. If omitted from the file, default value is an empty string.
+ 
+
+ 
+[Extractors] Extractors are used in the variable definition.
+ 
+ 
+
+ 
+ExtractorX: Applicable to SUB and PUB-SUB variables. Optional parameter used to define how to extract a data value out of the message payload and apply it to a mapped variable. The syntax of the extraction formula follows the Expression engine specification. See Json parsing reference and refer to the Expression Engine book in the Application Explorer help for details about the available functions and operators.
+Type: String. If omitted, default value is an empty string.
+ 
+ 
+ 
+ 
+
+ 
+[Filters] Filters used in the variable definition.
+ 
+ 
+
+ 
+FilterX: Applicable to SUB and PUB-SUB variables. Optional parameter used to check a specific part of the message payload. The filter condition must return a boolean value. If the filter condition is true, the payload will be extracted as specified in the extractor formula. If the condition is false, the payload will not be processed.
+The syntax of the filter follows the Expression engine specification. See Json parsing reference and refer to the Expression Engine book in the Application Explorer help for details about the available functions and operators.
+The If () function cannot be used as a filter condition as it may not return a boolean. For example, using If((StrEqualNoCase(JsonGetValue(value, 'sensorID'),A8F5L9B3Z5)),True, False) is ineffective. You should directly use the condition StrEqualNoCase(JsonGetValue(value, 'sensorID'),A8F5L9B3Z5) instead.
+Type: String. If omitted, default value is an empty string.
+ 
+ 
+ 
+ 
+[Timestamps]
+TimestampX: Applicable to SUB and PUB-SUB variables. Optional parameter used to extract a data timestamp out of the message payload and apply it to a mapped variable.
+Type: String. If omitted from the file, default value is an empty string.
+ 
+[Qualities]
+QualityX: Applicable to SUB and PUB-SUB variables. Optional parameter used to extract a data quality out of the message payload and apply it to a mapped variable.
+Type: String. If omitted from the file, default value is an empty string.
+ 
+[PublishFormats]
+PublishFormatX: Applicable to PUB and PUB-SUB variables. Optional parameter used to specify the list of additional properties to publish in each message sent to the broker. Each property must be separated by the �#� character. See How to customize the MQTT publish format for more information about the syntax.
+Type: String. If omitted from the file, default value is an empty string.
+ 
+ 
+MQTT security
+ 
+MQTT supports security of the transport layer, as well as client authentication. Security is set-up in the [BrokerX/Security] section, which includes the following provisions:
+ 
+ 
+
+ 
+Transport confidentiality and integrity are based on TLS, and require the broker to be set-up with a server certificate.
+Validation of such a certificate by the Add-on requires that the following parameter is properly defined in the .ini file:
+ 
+ 
+CertificateAuthorityFileName: The broker (server) .pem certificate file
+ 
+ 
+ 
+Authentication is based on:
+ 
+Either a client login & password provided with parameters Login and Password.
+Or a client certificate defined with parameters ClientCertificateFileName (.pem certificate file) and ClientKeyFileName (.key certificate file)
+
+
+========================================
+TOPIC: mqtt_Json_parsing.htm
+========================================
+Json parsing reference
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Json parsing reference
+ 
+Json parsing in PcVue relies on the Expression engine and its JsonGetValue() function.
+This topic includes typical examples of Jsonpayloads parsing useful in the context of the MQTT Add-on.
+
+ 
+
+ 
+Refer to the Expression Engine book in the Application Explorer help for more information about the Expression engine and the JsonGetValue() function.
+ 
+ 
+
+ 
+Pay attention to the fact that the Json syntax is case sensitive.
+ 
+ 
+Example 1 - Basic parsing and filtering
+ 
+For this example, let's assume we receive the following Json stream on a topic:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"sensorID":"A8F5L9B3Z5",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"location":"Room7",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"floor":1,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"installed":2016,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"batterylevel":37,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"connected":true,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"metrics":[
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"value":39,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"timestamp":"2008-04-22T06:12:40Z",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"quality":1
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;}
+ 
+ 
+ 
+
+ 
+&#160;]
+ 
+ 
+ 
+
+ 
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to extract the value of location without any filtering?
+ 
+ 
+Filtering expression: None
+ 
+Extraction expression: JsonGetValue(value,'location') -> "Room7"
+ 
+ 
+How to extract the value of value in the array called metrics if sensorID is equal to A8F5L9B3Z5?
+ 
+ 
+Filtering expression: StrEqualNoCase(JsonGetValue(value,'sensorID'),A8F5L9B3Z5)
+ 
+Extraction expression: JsonGetValue(value,'metrics[0].value') -> 39
+ 
+ 
+Example 2 - Advanced parsing in Json arrays
+ 
+Json streams can contain fixed-size arrays, but they can also contain a varying number of values in dynamic size arrays. The Json parser and expression engine allows you to retrieve elements from either a predefined fixed index in the array and from a dynamic index if necessary. This feature can also be used for filtering.
+ 
+For this example, let's assume we receive the following Json stream on a topic:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"sensorID":"A8F5L9B3Z5",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"location":"Room7",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"floor":1,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"installed":2016,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"batterylevel":37,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"connected":true,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"metrics":[
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"value":26,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"timestamp":"2020-01-13T08:10:00.123Z",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"quality":0
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;},
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"value":27,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"timestamp":"2020-01-13T08:20:00.123Z",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"quality":0
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;},
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"value":28,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"timestamp":"2020-01-13T08:30:00.123Z",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"quality":0
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;}
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;]
+ 
+ 
+ 
+
+ 
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+You can retrieve a specific array element by specifying its index, for example the second one:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Extractors]
+ 
+ 
+ 
+
+ 
+ExtractValue = JsonGetValue(value, 'metrics[1].value')
+ 
+ 
+ 
+
+ 
+[Timestamps]
+ 
+ 
+ 
+
+ 
+ExtractTimestamp = JsonGetValue(value, 'metrics[1].timestamp')
+ 
+ 
+ 
+
+ 
+[Qualities]
+ 
+ 
+ 
+
+ 
+ExtractQuality = JsonGetValue(value, 'metrics[1].quality')
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The variable will be set with the 2nd element of the array:
+ 
+ 
+Value = 27
+ 
+Timestamp = 13/01/2020 08:20:00.123
+ 
+Quality = 0
+ 
+ 
+You can retrieve all elements of the array by specifying the index X:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Extractors]
+ 
+ 
+ 
+
+ 
+ExtractValue = JsonGetValue(value, 'metrics[X].value')
+ 
+ 
+ 
+
+ 
+[Timestamps]
+ 
+ 
+ 
+
+ 
+ExtractTimestamp = JsonGetValue(value, 'metrics[X].timestamp')
+ 
+ 
+ 
+
+ 
+[Qualities]
+ 
+ 
+ 
+
+ 
+ExtractQuality = JsonGetValue(value, 'metrics[X].quality')
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The variable will be set with all values received in the array.
+ 
+Please note that for any given variable mapping, the choice of a fixed index or dynamic one must match across the parameters you define.
+ 
+This combination of parameters is correct and will work properly:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Extractors]
+ 
+ 
+ 
+
+ 
+ExtractValue = JsonGetValue(value, 'metrics[1].value')
+ 
+ 
+ 
+
+ 
+[Timestamps]
+ 
+ 
+ 
+
+ 
+ExtractTimestamp = JsonGetValue(value, 'metrics[1].timestamp')
+ 
+ 
+ 
+
+ 
+[Qualities]
+ 
+ 
+ 
+
+ 
+ExtractQuality = JsonGetValue(value, 'metrics[1].quality')
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+These combinations of parameters are inconsistent and will not work properly:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Extractors]
+ 
+ 
+ 
+
+ 
+ExtractValue = JsonGetValue(value, 'metrics[X].value')
+ 
+ 
+ 
+
+ 
+[Timestamps]
+ 
+ 
+ 
+
+ 
+ExtractTimestamp = JsonGetValue(value, 'metrics[1].timestamp')
+ 
+ 
+ 
+
+ 
+[Qualities]
+ 
+ 
+ 
+
+ 
+ExtractQuality = JsonGetValue(value, 'metrics[1].quality')
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+or
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Extractors]
+ 
+ 
+ 
+
+ 
+ExtractValue = JsonGetValue(value, 'metrics[1].value')
+ 
+ 
+ 
+
+ 
+[Timestamps]
+ 
+ 
+ 
+
+ 
+ExtractTimestamp = JsonGetValue(value, 'metrics[X].timestamp')
+ 
+ 
+ 
+
+ 
+[Qualities]
+ 
+ 
+ 
+
+ 
+ExtractQuality = JsonGetValue(value, 'metrics[1].quality')
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Json parsing - Typical expression engine errors
+ 
+ 
+ 
+ 
+ 
+
+ Error code
+ Description
+ 
+ 
+
+ 1
+ Unknown error
+ 
+ 
+
+ 2
+ Syntax error
+
+ 
+ 
+
+ 3
+ Wrong number of parameters
+ 
+ 
+
+ 4
+ Wrong parameter type
+ 
+ 
+
+ 10
+ Unknown function
+ 
+ 
+
+ 21
+ Invalid parameter
+ 
+ 
+
+ 22
+ Json unknown error
+ 
+ 
+
+ 23
+ Json invalid format
+ 
+ 
+
+ 24
+ Json invalid path
+
+
+========================================
+TOPIC: mqtt_overview.htm
+========================================
+Overview of the MQTT Add-on
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the MQTT Add-on
+ 
+MQTT (Message Queuing Telemetry Transport) is a lightweight publish / subscribe messaging transport protocol. It was originally designed and specified as part of an OASIS technical committee, and is now available as the ISO/IEC 20922 standard.
+ 
+MQTT is commonly used with low power sensors and is also applied to other scenarios requiring message transport across enterprise software systems, and in particular in cloud-based architectures. 
+ 
+The MQTT protocol is based on the principle of publishing messages (PUB) and subscribing to topics (SUB), or "pub/sub" operations. MQTT Clients connect to a broker and subscribe to the topics they are interested in. MQTT Clients can also publish messages on topics. Any client can subscribe to the same topics. The broker act as a message relay for client/devices to connect to. The message payload is usually publisher-specific.
+ 
+
+ &#160;PcVue can act as an MQTT subscriber and as an MQTT publisher in architectures comprising one or more brokers. Show picture
+ 
+
+ 
+ 
+ 
+For a given variable, PcVue can behave:
+ 
+ 
+As a pure subscriber, in which case the variable value, and optionally the timestamp and quality are extracted from an MQTT message payload,
+ 
+As a pure publisher, in which case the variable value, and optionally the timestamp, quality and other variable attributes are put together in a message and sent to a broker,
+ 
+As a combined subscriber and publisher, allowing PcVue to keep the variable up-to-date based on messages it receives as a subscriber, and re-publish the variable (including other attributes) so that other MQTT subscribers can benefit from a normalized information thanks to a clean and standardized payload.
+ 
+ 
+There are no configuration dialog's specific to the MQTT Add-on. At the time of writing, it uses a dedicated .ini file and regular configuration features.
+
+
+========================================
+TOPIC: mqtt_publish_format.htm
+========================================
+How to customize the MQTT publish format
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to customize the MQTT publish format
+ 
+The MQTT Add-on publishes variables by sending payloads similar to those specified in Sparkplug. It also offers the possibility to customize the payload format, in particular by adding metadata such as the description, domain, nature, alarm level...
+ 
+Raw publish payload
+ 
+When using the keyword 'Raw' as the PayloadType value, the driver publishes unformatted messages. The message consists solely of the raw variable value, encoded as ASCII, on the MQTT topic:
+ 
+ 
+Bit values are sent as 0 or 1.
+ 
+Register values are sent as numeric values, e.g., 123.5.
+ 
+Text values are sent as plain strings, e.g., Hello world.
+ 
+ 
+Generic publish payload
+ 
+When using the keyword 'Generic' as the PayloadType value, payloads sent for published variables have the following default fixed format.
+ 
+Register variables:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"metrics":[
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"name":"MQTT.PUB_TEMP",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"value":37,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"timestamp":"2008-04-22T06:00:11Z",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"quality":0
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;}
+ 
+ 
+ 
+
+ 
+&#160;&#160;]
+ 
+ 
+ 
+
+ 
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Text variables:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+{
+ 
+ 
+ 
+
+ 
+"metrics":[
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"name":"MQTT.PUB_TXT",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"value":"mydata",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"timestamp":"2019-10-29T16:14:40.284Z",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"quality":0
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;}
+ 
+ 
+ 
+
+ 
+&#160;&#160;]
+ 
+ 
+ 
+
+ 
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Bit variables:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+{
+ 
+ 
+ 
+
+ 
+"metrics":[
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"name":"MQTT.PUB_BIT",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"value":true,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"timestamp":"2019-10-29T16:14:21.024Z",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"quality":0
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;}
+ 
+ 
+ 
+
+ 
+&#160;]
+ 
+ 
+ 
+
+ 
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Where:
+ 
+ 
+name: Name of the published variable,
+ 
+value: Current value of the variable at the time of sending the Publish message,
+ 
+timestamp: Timestamp of the variable at the time of sending the Publish message. The format follows the ISO 8601 standard (UTC time).
+ 
+quality: Quality of the variable at the time of sending the Publish message. See below for the list of possible values
+ 
+ 
+
+ 
+For all register variables:
+ 
+ 
+
+ 
+If the Format property is specified in the variable configuration, the MQTT applies it. For example, if the format property is "#.##", the MQTT Add-on will publish a value with 2 decimal places.
+ 
+ 
+
+ 
+If the Format property is not specified in the variable configuration, the MQTT Add-on applies the number of decimal places as specified by the DefaultDecimalPlaces parameter in the file svmgrMQTT.ini.
+ 
+ 
+ 
+The same applies to the following metadata: minimumValue, maximumValue, controlMinimum and controlMaximum.
+ 
+ 
+
+ 
+This default format can be customized by defining the PublishFormat parameter. See Customizing Publish payloads with additional metadata for more information.
+ 
+ 
+Predefined custom publish payload
+ 
+One or more custom formats for publish payloads can be predefined in a file named PubTemplates.txt, located in the project's C directory.
+Each custom format is given a name, that you use as the value of the PayloadType parameter.
+ 
+Example of PubTemplates.txt file:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[Format0]
+ 
+ 
+ 
+
+ 
+Name = TestFormat
+ 
+ 
+ 
+
+ 
+BeginFormat
+ 
+ 
+ 
+
+ 
+{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"name":"&varname",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"metrics": [
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"value":"&value"&#160;&#160;&#160;&#160;
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"timestamp":"&tsType",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"quality": &quality
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;]
+ 
+ 
+ 
+
+ 
+}
+ 
+ 
+ 
+
+ 
+EndFormat
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[Format1]
+ 
+ 
+ 
+
+ 
+Name = OtherFormatForTest
+ 
+ 
+ 
+
+ 
+BeginFormat
+ 
+ 
+ 
+
+ 
+Myformat1: &varname - &value - &timestamp - &quality
+ 
+ 
+ 
+
+ 
+EndFormat
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[Format2]
+ 
+ 
+ 
+
+ 
+Name = Full
+ 
+ 
+ 
+
+ 
+BeginFormat
+ 
+ 
+ 
+
+ 
+&varname - &value - &timestamp - &quality -
+ 
+ 
+ 
+
+ 
+&#160;&tsType - &unit - &description - &source - &alarmLevel -
+ 
+ 
+ 
+
+ 
+&#160;&domain - &nature - &textAttr03 - &textAttr04 - &textAttr05 - &textAttr06 - &textAttr07 - &textAttr08 - &textAttr09 -
+ 
+ 
+ 
+
+ 
+&#160;&textAttr10 - &textAttr11 - &textAttr12 - &textAttr13 - &textAttr14 - &textAttr15 - &textAttr16 -
+ 
+ 
+ 
+
+ 
+&#160;&binAttr - &textSize
+ 
+ 
+ 
+
+ 
+EndFormat
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Customizing Publish payloads with additional metadata
+ 
+When using the Generic payload type, It is possible to add extra information in the Publish payloads by using the PublishFormat parameter. In this case, a metadata section will be added to the payload with the specified additional information.
+ 
+The syntax of the PublishFormat parameter is: keyname1#keyname2#keyname3
+ 
+As any optional parameter, the PublishFormat can be specified:
+ 
+ 
+Directly in the MQTT mapping extended attribute,
+ 
+In a different extended attribute,
+ 
+In the svmgrMQTT.ini file.
+ 
+ 
+For example, if you want to publish a register variable named Mqtt.Pub_Temp with the following additional information:
+ 
+ 
+Unit,
+ 
+Description,
+ 
+Source,
+ 
+Minimum value,
+ 
+Maximum value.
+ 
+ 
+The PublishFormat syntax will be: unit#description#source#minimumValue#maximumValue
+ 
+And a typical published payload will be:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"metrics": [
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;{
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"name":"MQTT.PUB_TEMP",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"value":29,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"timestamp":"2020-01-13T08:00:00.123Z",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"quality":0
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"metaData": {
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"unit":"Celsius degrees",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"description":"Value sent from ",
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"source":1,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"minimumValue":0,
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;"maximumValue":45
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;}
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;}
+ 
+ 
+ 
+
+ 
+&#160;&#160;]
+ 
+ 
+ 
+
+ 
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+This table gives the list of metadata and corresponding keyname that can be added to the PublishFormat parameter.
+ 
+The same keynames are used to predefine custom payload styles in the PubTemplates.txt file.
+ 
+ 
+ 
+ 
+ 
+
+ Keyname
+ Description
+ 
+ 
+
+ datatype
+ Datatype of the variable. See below.
+ 
+ 
+
+ varname
+ Name of the variable.
+Present by default when using the Generic payload type.
+ 
+ 
+
+ value
+ Value of the variable.
+Present by default when using the Generic payload type.
+ 
+ 
+
+ timestamp
+ Timestamp of the variable.
+Present by default when using the Generic payload type.
+ 
+ 
+
+ quality
+ Quality of the variable.
+Present by default when using the Generic payload type.
+ 
+ 
+
+ tsType
+ Quality of the timestamp: SV, PLC or PLC?.
+ 
+ 
+
+ unit
+ Unit of the variable, only for register variables.
+ 
+ 
+
+ description
+ Description of the variable.
+ 
+ 
+
+ source
+ Source of the variable. See below.
+ 
+ 
+
+ alarmLevel
+ Alarm level, only for alarm variables.
+ 
+ 
+
+ domain
+ Domain of the variable.
+ 
+ 
+
+ nature
+ Nature of the variable.
+ 
+ 
+
+ textAttr03 to textAttr16
+ Text attribute 03 to 16 of the variable.
+ 
+ 
+
+ binAttr
+ Binary attribute 1 to 32, in decimal. Example: If binary attributes 1, 4 and 8 are true, then binAttr = 137.
+ 
+ 
+
+ minimumValue
+ Minimum value of the variable, only for register variables.
+ 
+ 
+
+ maximumValue
+ Maximum value of the variable, only for register variables.
+ 
+ 
+
+ controlMinimum
+ Minimum control value of the variable, only for register variables.
+ 
+ 
+
+ controlMaximum
+ Maximum control value of the variable, only for register variables.
+ 
+ 
+
+ threshold1Value
+ Value of threshold1, only for register variables.
+ 
+ 
+
+ threshold2Value
+ Value of threshold2, only for register variables.
+ 
+ 
+
+ threshold3Value
+ Value of threshold3, only for register variables.
+ 
+ 
+
+ threshold4Value
+ Value of threshold4, only for register variables.
+ 
+ 
+
+ textSize
+ Length, only for Text variables.
+ 
+ 
+ 
+ 
+Datatype values
+ 
+ 
+ 
+
+ dataType
+ Key value
+ 
+ 
+
+ Bit
+ 1
+ 
+ 
+
+ Alarm
+ 2
+ 
+ 
+
+ Register
+ 3
+ 
+ 
+
+ Text
+ 4
+ 
+ 
+ 
+ 
+Source values
+ 
+ 
+ 
+
+ source
+ Key value
+ 
+ 
+
+ Internal
+ 1
+ 
+ 
+
+ External
+ 2
+ 
+ 
+
+ Equipment
+ 3
+ 
+ 
+
+ DDE
+ 4
+ 
+ 
+
+ OPC
+ 6
+ 
+ 
+
+ LNS
+ 7
+ 
+ 
+
+ BACnet
+ 8
+ 
+ 
+
+ IEC 61850
+ 9
+ 
+ 
+
+ IEC 60870-5
+ 10
+ 
+ 
+
+ DNP3
+ 11
+ 
+ 
+
+ SNMP
+ 12
+ 
+ 
+
+ OPC&#160;UA
+ 13
+ 
+ 
+
+ SQL
+ 14
+ 
+ 
+ 
+ 
+Quality values
+ 
+ 
+ 
+
+ quality
+ Key value
+ 
+ 
+
+ Quality_Good
+ 0
+ 
+ 
+
+ Quality_Bad
+ 128
+ 
+ 
+
+ Quality_Bad_CommunicationFailure
+ 129
+ 
+ 
+
+ Quality_Bad_BadFormattingValue
+ 130
+ 
+ 
+
+ Quality_Bad_WatchdogFailure
+ 132
+ 
+ 
+
+ Quality_Bad_LowLimitExceeded
+ 133
+ 
+ 
+
+ Quality_Bad_HighLimitExceeded
+ 134
+
+
+========================================
+TOPIC: mqtt_topic.htm
+========================================
+Using MQTT topics
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using MQTT topics
+ 
+Topics are at the heart of MQTT. They are a hierarchical tree-like structure, and MQTT subscribers subscribe to messages associated to a given topic.
+ 
+For example, an MQTT system could be based on a topic structure such as BuildingId/FloorId/ZoneId/DataId, which would lead to handling messages associated to the following topics:
+ 
+ 
+
+ 
+BuildingA/Floor7/ConferenceRoom/Temperature
+ 
+ 
+
+ 
+BuildingA/Floor7/ConferenceRoom/Humidity
+ 
+ 
+BuildingA/Floor7/ConferenceRoom/Light
+ 
+ 
+MQTT includes a variety of mechanisms for handling topics, in particular the ability to subscribe to message based on wild cards.
+In addition, the MQTT Add-on of the product PcVue implements a series of mechanisms to make topic handling and configuration even easier:
+ 
+ 
+The ability to define a global generic root topic, so that variable mapping consists in setting the relative topic leaf only.
+ 
+The ability to define a variable mapping with an absolute topic name (full topic name), and bypass the global generic root topic. This makes it possible to handle messages that are exceptions because they do not follow a general topic naming system applied across your MQTT system.
+ 
+The ability to map variables to topics one-to-one. This makes variable mapping on topics very easy if the MQTT topic naming system is aligned with the variable naming system.
+ 
+ 
+
+ 
+Topics names, wild cards and GenericRootTopic are case sensitive.
+ 
+ 
+Wild cards
+ 
+When a client subscribes to a topic, it can subscribe to the exact topic of a published message or it can use wild cards to simultaneously subscribe to multiple topics. There are two different kinds of wild cards. Please note that only one wild card can be used at a time.
+ 
+ 
+
+ 
+Single level wild card '+' - A single-level wild card replaces one topic level. The plus '+' symbol represents a single-level wild card in a topic name.
+Example - An MQTT client subscribing to topic BuildingA/Floor7/+/Temperature will receive all Temperature-related messages for all Zones of Floor7 in BuildingA.
+ 
+ 
+
+ 
+Multi-level wild card '#' - The multi-level wild card covers 1 or more topic levels. The hash '#' symbol represents the multi-level wild card in the topic name. For the broker to determine which topics match, the multi-level wild card can only be placed at the end and preceded by a forward slash (/).
+Example - An MQTT client subscribing to topic BuildingA/Floor7/ConferenceRoom/# will receives all messages for the Zone ConferenceRoom of Floor7 in BuildingA.
+ 
+ 
+ 
+
+ 
+The use of wild cards to address topics only makes sense in the context of MQTT Subscribe messages. It does not makes sense in the context of MQTT Publish.
+ 
+ 
+Generic root topic
+ 
+The Generic root topic mechanism was designed to take advantage of a naming scheme with a certain level of genericity for topic names, similar to recommendations related to designing the variable naming scheme (branches and leaves). It is best illustrated using an example. 
+ 
+If you want to link 3 variables with the following topics:
+ 
+ 
+BuildingA/Floor7/ConferenceRoom/Temperature
+ 
+BuildingA/Floor7/ConferenceRoom/Humidity
+ 
+BuildingA/Floor7/ConferenceRoom/Light
+ 
+ 
+If you are interested in processing and mapping all data related to this conference room, a good practice is to use the GenericRootTopic parameter (defined in svmgrMQTT.ini) with the following content, to predefine a "default branch" applicable to topics in the variable mapping:
+ 
+ 
+BuildingA/Floor7/ConferenceRoom/#
+ 
+ 
+Then you can specify only the "leaf" topics names in the variable mapping as follows:
+ 
+ 
+
+ 
+Temperature
+ 
+ 
+
+ 
+Humidity
+ 
+ 
+
+ 
+Light
+ 
+ 
+ 
+Absolute topic name
+ 
+If you want to link another variable, which is not using the same root, you can bypass the GenericRootTopic parameter using '@' before the whole topic name you want subscribe to as follows:
+ 
+ 
+@BuildingA/Floor7/Hall/Light
+
+ 
+ 
+These topics are called absolute topics. If no GenericRootTopic parameter is defined in the svmgrMQTT.ini file, all topic names used must be preceded by �@� symbol. The quality of service of the subscription is the highest quality of service of all leaf topics configured on a broker.
+ 
+Generic root and Absolute topic names for Publish
+ 
+The GenericRootTopic is also used for published variables. For instance, if the GenericRootTopic parameter is defined with the following:
+ 
+ 
+BuildingA/Floor7/ConferenceRoom/#
+ 
+ 
+And if the variable topic name defined in the attribute is:
+ 
+ 
+SetAC
+ 
+ 
+The variables will be published on the topic:
+ 
+ 
+BuildingA/Floor7/ConferenceRoom/SetAC
+ 
+ 
+As for a subscribed variable, if you want to bypass the GenericRootTopic and use an absolute topic name, then, the topic name of the variable must be preceded by �@� in the mapping of the published variable.
+ 
+Using the variable name as topic name automatically
+ 
+Because the MQTT topic naming scheme and the variable naming scheme concept are very similar, there is a very easy way to configure the variable mapping when both naming schemes match. It consists in using the keyword VarName as the SubTopicName or PubTopicName.
+ 
+If prefixed with the �@� character, the full variable name will be used as topic name; if not prefixed with an '@', the GenericRootTopic is appended at the beginning of the topic name.
+ 
+Example:
+ 
+If the GenericRootTopic is defined as CampusNorth/# in the svmgrMQTT.ini file.
+ 
+For a variable which full name is BuildingA.Room3.Temp, defined with the following MQTT mapping parameters:
+ 
+ 
+MQTT|Generic|MyBroker|SUB|0|VarName
+The MQTT Add-on subscribes to messages having the topic CampusNorth/BuildingA/Room3/Temp that matches the GenericRootTopic concatenated with the variable name.
+ 
+MQTT|Generic|MyBroker|SUB|0|@VarName
+The MQTT Add-on subscribes to messages having the topic BuildingA/Room3/Temp that matches the full variable name.
+ 
+ 
+The same applies to Publication. For a variable which full name is BuildingA.Room3.Temp with the following MQTT mapping parameters:
+ 
+ 
+MQTT|Generic|MyBroker|PUB|0|0|VarName
+The MQTT Add-on will publish messages with the topic CampusNorth/BuildingA/Room3/Temp
+ 
+MQTT|Generic|MyBroker|PUB|0|0|@VarName
+The MQTT Add-on will publish messages with the topic BuildingA/Room3/Temp
+
+
+========================================
+TOPIC: mqtt_traces.htm
+========================================
+MQTT Add-on traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+MQTT Add-on traces
+ 
+Information regarding the MQTT Add-on are logged in the traces and displayed in the Event Viewer with lines starting with '[MQTT]'.
+ 
+Additional traces can be triggered using the SCADA Basic instruction TRACE as follows.
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+TRACE(Mode, ManagerID, HexFlag);
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mode - Turn the additional trace on or off
+ 1 - On
+0 - Off
+ 
+ManagerID - The identifier of the MQTT Add-on task. Set to 11 if MQTT is the only Add-on in use.
+ 
+HexFlag	- Hexadecimal combination flag
+001	- To trace received payloads only
+002 -	To trace sent payloads only
+ 
+ 
+Example of use of SCADA Basic TRACE instruction 
+ 
+ 
+ 
+ 
+ 
+
+ TRACE(1,11,�001�);
+ 
+ 
+ Turn on additional trace for received payloads
+ 
+ 
+ 
+
+ TRACE(1,11,�002�);
+ 
+ 
+ Turn on additional trace for sent payloads
+ 
+ 
+ 
+
+ TRACE(1,11,�003�);
+ Turn on additional trace for received and sent payloads
+ 
+ 
+
+ TRACE(0,11,�002�);
+ Turn off additional trace for sent payloads
+ 
+ 
+
+ 
+ 
+TRACE(0,11,�003�); 
+ 
+ Turn off additional trace for received and sent payloads
+ 
+ 
+ 
+ 
+Error codes 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Error code
+ Enum
+ Description
+ 
+ 
+
+ -4
+ ERR_AUTH_CONTINUE
+ Authentication in progress (not an error)
+ 
+ 
+
+ -3
+ ERR_NO_SUBSCRIBERS
+ &#160;
+ 
+ 
+
+ -2
+ ERR_SUB_EXISTS
+ &#160;
+ 
+ 
+
+ -1
+ ERR_CONN_PENDING
+ Connection to the broker is pending
+ 
+ 
+
+ 0
+ ERR_SUCCESS
+ No error
+ 
+ 
+
+ 1
+ ERR_NOMEM
+ A memory allocation error occurred
+ 
+ 
+
+ 2
+ ERR_PROTOCOL
+ Protocol error communicating with the broker
+ 
+ 
+
+ 3
+ ERR_INVAL
+ Invalid input parameters
+ 
+ 
+
+ 4
+ ERR_NO_CONN
+ No connection to the broker
+ 
+ 
+
+ 5
+ ERR_CONN_REFUSED
+ Connection refused by the broker
+ 
+ 
+
+ 6
+ ERR_NOT_FOUND
+ &#160;
+ 
+ 
+
+ 7
+ ERR_CONN_LOST
+ The connection to the broker was lost
+ 
+ 
+
+ 8
+ ERR_TLS
+ A TLS error occurred
+ 
+ 
+
+ 9
+ ERR_PAYLOAD_SIZE
+ Payload too large
+ 
+ 
+
+ 10
+ ERR_NOT_SUPPORTED
+ Function not supported
+ 
+ 
+
+ 11
+ ERR_AUTH
+ Authentication failed
+ 
+ 
+
+ 12
+ ERR_ACL_DENIED
+ Access was not granted
+ 
+ 
+
+ 13
+ ERR_UNKNOWN
+ Application specific error
+ 
+ 
+
+ 14
+ ERR_ERRNO
+ A system call returned an error
+ 
+ 
+
+ 15
+ ERR_EAI
+ &#160;
+ 
+ 
+
+ 16
+ ERR_PROXY
+ &#160;
+ 
+ 
+
+ 17
+ ERR_PLUGIN_DEFER
+ The plugin does not wish to handle the check
+ 
+ 
+
+ 18
+ ERR_MALFORMED_UTF8
+ The topic name is not valid UTF-8
+ 
+ 
+
+ 19
+ ERR_KEEPALIVE
+ Keep alive error
+ 
+ 
+
+ 20
+ ERR_LOOKUP
+ &#160;
+ 
+ 
+
+ 21
+ ERR_MALFORMED_PACKET
+ A malformed packet was received
+ 
+ 
+
+ 22
+ ERR_DUPLICATE_PROPERTY
+ A property is duplicated where it is forbidden
+ 
+ 
+
+ 23
+ ERR_TLS_HANDSHAKE
+ TLS handshake failed
+ 
+ 
+
+ 24
+ ERR_QOS_NOT_SUPPORTED
+ The QoS is greater than that supported by the broker
+ 
+ 
+
+ 25
+ ERR_OVERSIZE_PACKET
+ The resulting packet would be larger than supported by the broker, the message is not published
+ 
+ 
+
+ 26
+ ERR_OCSP
+ OCSP checking failed
+ 
+ 
+
+ 99
+ ERR_BROKER_DISCONNECTED
+ The broker was disconnected
+
+
+========================================
+TOPIC: mqtt_variables.htm
+========================================
+Configuration of the variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuration of the Variables
+ 
+To define a variable as having an MQTT mapping, you can add the MQTT mapping definition in the variable's extended attribute, as configured in the svmgrMQTT.ini file.
+ 
+The mapping takes the form of a string using the following syntax, where [] denotes optional parameters:
+ 
+For a Subscribe-only variable: 
+ 
+MQTT|PayloadType|BrokerName|SUB|QoS|SubTopicName[|Extraction|Filter|Timestamp|Quality]
+ 
+For a Publish-only variable:
+ 
+MQTT|PayloadType|BrokerName|PUB|QoS|Retain|PubTopicName[|PublishFormat]
+ 
+For a combined Subscribe and Publish variable:
+ 
+MQTT|PayloadType|BrokerName|PUB-SUB|QoS|Retain|PubTopicName|[PublishFormat]|SubTopicName[|Extraction|Filter|Timestamp|Quality]
+ 
+The definition of parameters can be done in a variety of ways. This one is the most straightforward, others are described in the Mastering configuration section.
+ 
+
+ 
+The configuration and mapping definitions are case sensitive.
+ 
+ 
+Parameters common to SUB, PUB and PUB-SUB
+ 
+ 
+MQTT - The key that defines the variable as having an MQTT mapping.
+ 
+PayloadType - Specifies the type of the payload. Use the value Generic for SUB variables. For PUB-SUB variables, you can choose from three options:
+ 
+ 
+Raw - Publishes only the value in the payload. The parameter PubFormat is ignored.
+ 
+Generic - The default format, which publishes the payload as JSON. The parameter PubFormat can be used to customize the payload on a per variable basis.
+ 
+CustomName - Publishes a payload with a predefined custom format specified in the file PubTemplates.txt. Useful if several variables needs to be published with the same custom format.
+ 
+ 
+BrokerName - The name of the broker as defined in the svmgrMQTT.ini file. Please refer to the parameter Name in the [BrokerX] section.
+ 
+QoS - The quality of service to apply to messages. Applies to both the subscriber and the publisher. Possible values are:
+�0� - At most once,
+�1� - At least once,
+�2� - Exactly once.
+ 
+
+ SubTopicName and PubTopicName - The name of the topic you want your variable to subscribe from or publish to respectively. See Using MQTT topics for more information on how to handle topic names.
+ 
+ 
+ 
+Parameters specific to SUB
+ 
+
+ 
+They also apply to subscription for PUB-SUB variables.
+ 
+ 
+ 
+
+ 
+Extraction - An optional parameter used to extract the value of the variable from the message received. If the Extraction parameter is empty, the full payload is used to set the variable value.
+ 
+ 
+
+ 
+Filter - Optional parameter used to filter messages that have to be processed and their payload extracted. If a message does not matching the filter, it is ignored and not processed. The filter syntax complies with the Expression Engine specification.
+ 
+ 
+Timestamp - Optional parameter used to retrieve the timestamp of the variable from the message received. If empty, the timestamp is set locally by the Add-on.
+ 
+Quality - Optional parameter used to retrieve the quality of the variable from the message received. If empty, the quality is set locally by the Add-on. See How to customize the MQTT publish format for more information on how quality values are mapped.
+ 
+ 
+
+ 
+The syntax of the Extraction and Filter parameters follows the Expression engine specification. See Json parsing reference and refer to the Expression Engine book in the Application Explorer help for details about the available functions and operators. 
+ 
+ 
+Parameters specific to PUB
+ 
+
+ 
+They also apply to publication for PUB-SUB variables.
+ 
+ 
+ 
+Retain - If enabled, messages are published with the retained flag set to true. As a consequence, the broker stores the last retained message and the corresponding QoS for that topic. The value must be one of the following.
+�0� if you don�t want a retained message (default),
+�1� if you want your message to be retained.
+ 
+PublishFormat - A string describing the list of metadata to be published in sent messages along the value. Optional.
+See How to customize the MQTT publish format for more information on the format used for publish and how to customize it.
+ 
+ 
+
+ 
+See below for more information on how the Retain, CleanSession and QoS parameters affect the message processing when combined together.
+ 
+ 
+Understanding how the parameters Retain, CleanSession and QoS affect message processing
+ 
+These 3 parameters combined together modify how messages are processed, and in particular, if and what messages will be received (as a subscriber) or sent (as a publisher) upon connection. The table below details if initialization messages will be received/sent upon connection.
+ 
+When the Add-on is used as subscriber on a topic:
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Clean session
+ Subscribe QoS
+ Message received by the Add-on subscribing to a topic after a reconnection
+ 
+ 
+
+ False
+ 0
+ No
+ 
+ 
+
+ False
+ 1
+ No
+ 
+ 
+
+ True
+ 0
+ No
+ 
+ 
+
+ True
+ 1
+ Last message only
+ 
+ 
+ 
+ 
+When the Add-on is used as publisher on a topic:
+ 
+ 
+ 
+
+ Retain
+ Publish QoS
+ Message sent to 3rd party subscriber upon reconnection
+ 
+ 
+
+ False
+ 0
+ No
+ 
+ 
+
+ False
+ 1
+ All messages
+ 
+ 
+
+ True
+ 0
+ No
+ 
+ 
+
+ True
+ 1
+ No
+ 
+ 
+ 
+ 
+
+ 
+Note that QoS = 1 (at least once) and QoS = 2 (exactly once) produce the same result for both publish and subscribe.
+ 
+As a subscriber, the requested QoS can vary from one variable to another one. For a given topic subscription, the Add-on requests the broker for the highest QoS of all leaf topics configured on the broker.
+ 
+ 
+Mastering configuration
+ 
+Defining the MQTT mapping of variables requires configuration of:
+ 
+ 
+How to parse message payloads to extract the variable value,
+ 
+Optionally, how to parse payloads to extract the variable timestamp,
+ 
+Optionally, how to parse payloads to extract the variable quality,
+ 
+Optionally, how to parse payloads to filter and skip useless messages.
+ 
+ 
+As explained above, such configuration is done via the parameters called Extraction, Timestamp, Quality and Filter and can be achieved in a variety of ways.
+ 
+Parameter definition all directly in one extended attribute:
+ 
+As explained above, the mapping of a given variable can be defined in one of its Text extended attribute. The attribute used must be known by the Add-on, and thus needs to be predefined in the file svmgrMQTT.ini.
+ 
+For example, you can predefined that the Text extended attribute 16 (TATT16) is used for MQTT mapping and set it at a value such as: Show picture
+ 
+MQTT|Generic|Broker1|SUB|0|@MyTopic|JsonGetValue(value, 'metrics[0].value')
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Parameter definition spread over more than one extended attribute:
+ 
+Because extended attributes are limited to a length of 100 characters, it is also possible to spread the mapping definition over more than extended attribute.
+ 
+For example, you can predefined that the Text extended attribute 16 (TATT16) is used for MQTT mapping and set it at a value such as:
+ 
+MQTT|Generic|Broker1|SUB|0|@MyTopic|TATT10|TATT11|TATT12|TATT13
+ 
+You will notice that this mapping definition refers to attributes 10 to 13 (TATT10 to TATT13), which should then be defined with values such as:
+ 
+JsonGetValue(value, 'metrics[0].value')
+ 
+StrEqualNoCase(JsonGetValue(value, 'sensorID'),A8F5L9B3Z5)
+ 
+JsonGetValue(value, 'metrics[0].timestamp')
+ 
+JsonGetValue(value, 'metrics[0].quality')
+ 
+
+ 
+MQTT mapping defined via one or more extended attributes is dynamic. It can be changed on the fly while running, and it is taken into account immediately by the MQTT Add-on.
+ 
+ 
+Referencing parameter definition from the file svmgrMQTT.ini:
+ 
+If you have several sensors sending the same kind of payload, it is recommended to predefine the parsing parameters in the file svmgrMQTT.ini, and reference these definitions in the mapping.
+ 
+For example, you can predefine the following parameters in the file svmgrMQTT.ini:
+ 
+[Extractors]
+ 
+ExtractValueSensorTypeXY= JsonGetValue(value, 'metrics[0].value')
+ 
+[Filters]
+ 
+FilterSensorTypeXY= StrEqualNoCase(JsonGetValue(value, 'sensorID'),A8F5L9B3Z5)
+ 
+[Timestamps]
+ 
+ExtractTSSensorTypeXY= JsonGetValue(value, 'metrics[0].timestamp')
+ 
+[Qualities]
+ 
+ExtractQSensorTypeXY= JsonGetValue(value, 'metrics[0].quality')
+ 
+Then use the following syntax in the variable mapping definition:
+ 
+MQTT|Generic|Broker1|SUB|0|@MyTopic|ExtractValueSensorTypeXY|FilterSensorTypeXY|ExtractTSSensorTypeXY|ExtractQSensorTypeXY
+ 
+
+ 
+The same goes for the PublishFormat parameter. It can be defined directly in the Extended attribute, be defined in another Extended attribute you refer to, or globally in the file svmgrMQTT.ini.
+ 
+ 
+
+ 
+If you map a text value on a register variable, the variable quality is set to NS FMT to indicate that the format is incorrect.
+
+

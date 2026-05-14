@@ -1,0 +1,458 @@
+========================================
+TOPIC: onvif_configuration.htm
+========================================
+How to configure the ONVIF control
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to configure the ONVIF control
+ 
+How to insert an ONVIF control in a mimic
+ 
+ 
+Open the mimic in 
+ which the ONVIF control will be inserted and select Design mode.
+ 
+Select Insert.ONVIF control from the menu.
+ 
+An ONVIF control is inserted and its properties dialog opened. Show picture
+
+ 
+Click OK to close the dialog and create an ONVIF control with default properties.
+ 
+ 
+
+ 
+You can specify more properties to control the graphical element visibility. From the Aspect tab, behind the down arrow at the bottom of the Properties dialog box:
+ 
+ 
+
+ 
+Specify zoom visibility bounds so that the graphic control is only visible for predefined zoom levels.
+ 
+ 
+
+ 
+Specify layers so that the graphic control is only visible if one of the selected layers is displayed.
+ 
+ 
+ 
+These are even more useful when combined with user permissions and decluttering templates.
+ 
+ 
+Once you have inserted the control, and closed its properties dialog, it can be moved, sized and copied the same 
+ as any other drawing element. The ONVIF control configuration dialog contains six further tabs, Camera, Advanced, PTZ control, Snapshot, Execution and Traces.
+ 
+The Camera tab
+ 
+ 
+
+ 
+Device - Selection of the Security device Network and Camera alias. These properties can be left empty and then specified at run time using SCADA Basic.
+ 
+ 
+
+ 
+Connect on mimic open - Select to connect to the device when the mimic is opened in run-time mode, otherwise connection must be made using SCADA Basic.
+ 
+ 
+ 
+The Advanced tab
+ 
+ 
+
+ 
+Network caching - The length of time, in milliseconds, that the video stream is buffered to ensure continued playback in the event of a streaming lag. The larger the buffer the less likely that there will be an interruption to the video stream. However, the displayed video is delayed by the size of the buffer. For example, a buffer of 10,000 ms will delay the displayed video by 10 seconds. The default is 1000.
+ 
+ 
+
+ 
+Hardware decoding - Enable hardware decoding using the computer's GPU to process video data. The results are dependent on the video codec, graphic card model and operating system. In most cases it frees the main processor (CPU) of some of the most computationally heavy tasks involved digital video processing. The default is enabled.
+ 
+ 
+ 
+The PTZ control tab
+ 
+ 
+
+ 
+PTZ control - The pan, tilt and zoom speed as a percentage between 1 and 100. The default is 100.
+ 
+ 
+ 
+The Snapshot tab
+ 
+The Snapshot tab contains properties that define how snapshots are taken. The image format is always .jpg.
+ 
+ 
+
+ 
+Folder - The folder in which a snapshot will be saved. The default is the project's TP folder.
+ 
+ 
+
+ 
+Prefix - The prefix given to the image. The default is 'Snapshot' followed by a number starting a 1.
+ 
+ 
+
+ 
+Accelerator - A keyboard shortcut for the user to take a snapshot at run-time. Click into the field and then press the keystroke to be used (or the Del key to remove a configured accelerator).
+ 
+ 
+ 
+The Execution tab
+ 
+The Execution tab contains properties that define what is available to the user in run-time mode. See the topic Using the ONVIF control at run-time.
+ 
+ 
+
+ 
+Enable context menu - If enabled, a context menu is available on right-click to the user in run-time mode.
+ 
+ 
+
+ 
+Selection of the actions available in the context menu at run-time.
+ 
+ 
+ 
+ 
+ 
+The Traces tab
+ 
+The Trace tab is used to enable trace messages from the ONVIF control. Useful when diagnosing errors or if you want to track the activity run-time. Trace messages appear in the Trace window and are logged in the trace file. The following messages can be generated.
+ 
+ 
+
+ 
+System errors - If enabled, a trace is logged when an unexpected error such as a stream processing failure occurs.
+ 
+ 
+
+ 
+Verbose - All activity associated with the ONVIF control.
+ 
+ 
+
+ 
+Activate on mimic open - Activate the selected traces on mimic open.
+ 
+ 
+ 
+By default, only system errors are logged.
+
+
+========================================
+TOPIC: onvif_overview.htm
+========================================
+ONVIF control overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ONVIF control overview
+ 
+The ONVIF control displays the video stream from an ONVIF compatible camera that has been previously configured in the Security device node in the Application Explorer. Show picture
+
+ 
+The ONVIF standard defines the available features using a Profile. PcVue supports the profile S in which the client (PcVue) can configure, request and control video streaming over an IP network.
+ 
+At run-time the ONVIF control has a context menu that can be used to change the camera properties. A predefined animation is available to dynamically control an ONVIF instance without scripting, see the topic Camera PTZ for more information. More advanced functionality can be added with SCADA Basic scripting. See the instruction CAMERADISPLAY for details.
+ 
+The acronym PTZ is often used when explaining camera control. It means Pan, Tilt and Zoom which are the three main adjustments you can make to the view provided by the camera.
+
+
+========================================
+TOPIC: onvif_runtime.htm
+========================================
+Using the ONVIF control at run-time
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the ONVIF control at run-time
+ 
+The ONVIF control will automatically connect to the configured video stream when the mimic is opened in run-time mode. The video stream is automatically scaled according to its resolution and the size of the ONVIF control within the mimic.
+ 
+The context menu has the following commands. The ability to display the context menu, and the available commands, are selected in the ONVIF control's configuration.
+ 
+ 
+
+ 
+PTZ control - Display the PTZ control from where the camera position and zoom can be controlled by the user. Show picture
+
+ 
+ 
+
+ 
+Disconnect - Stop the video stream playing, close the PTZ control if it was open, and stop all the PTZ commands.
+ 
+ 
+
+ 
+Home - Move the camera to its home position.
+ 
+ 
+
+ 
+Go to preset - Display a list of camera presets and move the camera to the one the user selects.
+ 
+ 
+
+ 
+Set resolution - Display all possible resolutions supported by the camera and sets the one the user selects.
+ 
+ 
+
+ 
+Snapshot - Take a snapshot of the video stream and save it in the location configured at design time.
+ 
+ 
+ 
+Zooming is only supported with cameras equipped with an optical zoom.
+
+
+========================================
+TOPIC: video_configuration.htm
+========================================
+How to configure the Video control
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to configure the Video control
+ 
+How to insert a Video control in a mimic
+ 
+ 
+Open the mimic in 
+ which the Video control will be inserted and select Design mode.
+ 
+Select Insert.Video control from the menu.
+ 
+A Video control is inserted and its properties dialog opened. Show picture
+
+ 
+Click OK to close the dialog and create an Video control with default properties.
+ 
+ 
+
+ 
+You can specify more properties to control the graphical element visibility. From the Aspect tab, behind the down arrow at the bottom of the Properties dialog box:
+ 
+ 
+
+ 
+Specify zoom visibility bounds so that the graphic control is only visible for predefined zoom levels.
+ 
+ 
+
+ 
+Specify layers so that the graphic control is only visible if one of the selected layers is displayed.
+ 
+ 
+ 
+These are even more useful when combined with user permissions and decluttering templates.
+ 
+ 
+Once you have inserted the control, and closed its properties dialog, it can be moved, sized and copied the same 
+ as any other drawing element. The Video control configuration dialog contains five further tabs, General, Advanced, Snapshot, Playback and Execution.
+ 
+The General tab
+ 
+ 
+
+ 
+Media - The source of the AV stream when the containing mimic is opened, selected from either a File or a Network stream. The AV stream can also be specified using SCADA Basic and the VIDEODISPLAY instruction.
+ 
+ 
+File - The location of a media file on the filesystem. The supported formats are .mp4, .avi, .mp2 and .wmv.
+ 
+Network stream - The Uri of an Rtsp network stream. The common format of an Rtsp Uri is as follows:
+
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+rtsp://[username:password@]ip_address[:rtsp_port]/server_URL[[?param1=val1[?param2=val2]�[?paramN=valN]]
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Title - Sets how to display the video title
+ 
+ 
+Display title - Defines the location where to display the video title.
+ 
+Duration - Defines for how long to display the video title (in seconds).
+ 
+ 
+ 
+ 
+The characters "!" $ & ' ( ) * + , ; = are permitted by the Uri syntax as delimiters for the user information, host, and path. Other characters including : / , "?", #, [ ], @ will cause decoding problems and generate warning messages such as Invalid Uri or Unable to parse hostname.
+ 
+The Advanced tab
+ 
+ 
+Volume - The audio volume as a percentage from 0 to 100.
+ 
+Network caching - When the source is a network stream, the length of time, in milliseconds, that the stream is buffered to ensure continued playback in the event of a streaming lag. The larger the buffer the less likely that there will be an interruption to the stream. However the displayed video is delayed by the size of the buffer. For example, a buffer of 10,000 will delay the displayed stream by 10 seconds. The default is 1000.
+ 
+File caching - As for Network caching for when the source is a file.
+ 
+Decoding - Enable hardware decoding using the computer's GPU (graphical processing unit) to process video data instead of CPU. The results are dependent on the video codec, graphic card model and operating system. In most cases, it frees the main processor (CPU) of some of the most computationally heavy tasks involved in playing digital video. The default is enabled.
+ 
+ 
+The Snapshot tab
+ 
+The Snapshot tab contains properties that define how snapshots are taken. The image format is always .jpg.
+ 
+ 
+Snapshots - Defines how snapshots are taken. The image format is always .jpg.
+Directory - The folder in which a snapshot will be saved. The default is the project's TP folder.
+Prefix - The prefix given to the image. The default is 'Snapshot' followed by a number starting a 1.
+Accelerator - A keyboard shortcut for the user to take a snapshot at run-time. Click into the field and then press the keystroke to be used (or the Del key to remove a configured accelerator).
+ 
+ 
+The Playback tab
+ 
+ 
+Playback - The Seek to, Jump forward and Jump backward periods in seconds. Used at run-time with the corresponding commands from the context menu.
+ 
+ 
+The Execution tab
+ 
+The Execution tab contains properties that define what is available to the user in run-time mode. See the topic Using the Video control at run-time.
+ 
+ 
+Enable context menu - If enabled, a context menu is available on right-click to the user in run-time mode.
+Selection of the actions available in the context menu at run-time.
+
+
+========================================
+TOPIC: video_overview.htm
+========================================
+Video control overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Video control overview
+ 
+The Video control displays a general-purpose audio-video stream (AV) from either a network stream or a file. The supported formats are Rtsp, .mp4, .avi, .mp2 and .wmv
+ 
+At run-time the Video control has a context menu that can be used to control the AV stream. More advanced functionality can be added with SCADA Basic scripting. See the instruction VIDEODISPLAY for details.
+ 
+While the Video control can display the RTSP stream from an ONVIF source, it cannot be used to control a camera (PTZ commands in particular). For this purpose, use the ONVIF control instead.
+
+
+========================================
+TOPIC: video_runtime.htm
+========================================
+Using the Video control at run-time
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the Video control at run-time
+ 
+The Video control will automatically connect to the configured AV stream or load the configured file when the mimic is opened in run-time mode.
+ 
+The context menu has the following commands. The ability to display the context menu, and the available commands, are configured at design time.
+ 
+ 
+Play - Play the media file or AV stream.
+ 
+Pause - Pause playback of the stream while allowing any streaming to continue.
+ 
+Stop - Stop playback of the video stream and of any streaming.
+ 
+Loop - Play the media file again when the end is reached.
+ 
+Snapshot - Take a snapshot of the video stream and save it in the location selected at design time.
+ 
+Mute- Toggle muting of the video stream sound.
+ 
+Seek to - Seek to the position, specified in seconds, in the Video control's configuration.
+ 
+Jump forward - Jump forward the number of seconds specified in the Video control's configuration.
+ 
+Jump backward - Jump backward the number of seconds specified in the Video control's configuration.
+
+

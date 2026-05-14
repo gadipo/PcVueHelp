@@ -1,0 +1,2392 @@
+========================================
+TOPIC: snmp_agent_config.htm
+========================================
+Installation and Configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Installation and Configuration
+ 
+The SNMP Agent Add-on of PcVue comprises of two dll files that are installed in the \Bin folder as part of the installation. The files are named:
+ 
+ 
+svmgrSNMPAgent.dll
+ 
+svSNMPAgent.dll
+ 
+ 
+The file named svmgrSNMPAgent.dll was developed using the SV Manager Toolkit. In order for PcVue to load the Add-on at startup, a text file USRMGR.DAT must also be added to the BIN folder. The file must contain the following lines:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[USRMGR\svmgragent]
+ 
+ 
+ 
+
+ 
+DLL=svmgrSNMPAgent.dll
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SNMP Agent Add-on configuration file
+ 
+The Add-on is configured using a file called SNMPAgent.ini which must be created in the PER folder of the PcVue project. The file has the following structure:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[TaskParameters]
+ 
+ 
+ 
+
+ 
+AttributeNumber = 8
+ 
+ 
+ 
+
+ 
+SnapshotPeriod = 400
+ 
+ 
+ 
+
+ 
+BrowsingLevel = 10
+ 
+ 
+ 
+
+ 
+NbTrapFormat = 1
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[Generic1]
+ 
+ 
+ 
+
+ 
+Params = Oid#TimeStamp#Description#AlarmLevel#TextAttr03#TextAttr12
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[TaskParameters]
+AttributeNumber - A variable's text extended attribute that is used to identify the corresponding variable as being exposed via SNMP. A number from 3 to 16. Defaults to 16.
+
+SnapshotPeriod - The period in milliseconds at which the task refreshes the shared memory and hence the variable values that are exposed to SNMP. A number representing the number of milliseconds. Default to 500 (in milliseconds).
+
+BrowsingLevel - The variable browsing level that identifies it as being exposed via SNMP. A number from 1 to 29. If omitted a default of 99 is used making no variable eligible based on the browsing level criteria.
+NbTrapFormat - The number of generic trap formats than can be used in the application. A number. If omitted a default of 0 is used (no generic trap).
+AssociationName - Send traps only from the active station of the association. If omitted a default of 0 is used (all stations in the association send traps).
+ 
+[GenericX] - Where X is the trap format number.
+Params - The list of parameters attached to the generic trap. The maximum number of parameters cannot exceed 18. Any parameters above 18 are discarded. See below for a table of the supported parameters, and examples.
+ 
+ 
+Generic trap parameters
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Key
+ OID suffix
+ Description
+ 
+ 
+
+ Oid
+ 1
+ Oid of the variable that triggered the trap
+ 
+ 
+
+ Value
+ 2
+ Value of the variable that triggered the trap
+ 
+ 
+
+ TimeStamp
+ 3
+ Timestamp at which the trap occurred
+Format dd/mm/yyyy hh:mm:ss.llll
+ 
+ 
+
+ Description
+ 4
+ Description of the trigger variable*
+ 
+ 
+
+ AlarmLevel
+ 5
+ Alarm level of the trigger variable
+ 
+ 
+
+ TextAttr03
+ 6
+ Text attribute 03 of the trigger variable*
+ 
+ 
+
+ TextAttr04
+ 7
+ Text attribute 04 of the trigger variable*
+ 
+ 
+
+ TextAttr05
+ 8
+ Text attribute 05 of the trigger variable*
+ 
+ 
+
+ TextAttr06
+ 9
+ Text attribute 06 of the trigger variable*
+ 
+ 
+
+ TextAttr07
+ 10
+ Text attribute 07 of the trigger variable*
+ 
+ 
+
+ TextAttr08
+ 11
+ Text attribute 08 of the trigger variable*
+ 
+ 
+
+ TextAttr09
+ 12
+ Text attribute 09 of the trigger variable*
+ 
+ 
+
+ TextAttr10
+ 13
+ Text attribute 10 of the trigger variable*
+ 
+ 
+
+ TextAttr11
+ 14
+ Text attribute 11 of the trigger variable*
+ 
+ 
+
+ TextAttr12
+ 15
+ Text attribute 12 of the trigger variable*
+ 
+ 
+
+ TextAttr13
+ 16
+ Text attribute 13 of the trigger variable*
+ 
+ 
+
+ TextAttr14
+ 17
+ Text attribute 14 of the trigger variable*
+ 
+ 
+
+ TextAttr15
+ 18
+ Text attribute 15 of the trigger variable*
+ 
+ 
+
+ TextAttr16
+ 19
+ Text attribute 16 of the trigger variable*
+ 
+ 
+ 
+ 
+* Text attribute value and description must not contain the # or any accentuated characters.
+ 
+Example 1: Oid#TimeStamp#TextAttr12
+ 
+Example 2: Oid#TimeStamp#Description#AlarmLevel#TextAttr03#TextAttr04
+
+
+========================================
+TOPIC: snmp_agent_overview.htm
+========================================
+Overview of the SNMP Agent Add-on
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the SNMP Agent Add-on
+ 
+The SNMP Agent Add-on allows you to make PcVue data available to third party SNMP Managers. It is designed as an agent extension for the Microsoft Windows SNMP service and supports SNMP v1, v2 and v2c.
+ 
+The SNMP Agent Add-on can:
+ 
+ 
+Expose the value of I/O and internal variables (scope Shared and Local station) as SNMP data.
+ 
+Send traps.
+ 
+Create and maintain an up-to-date MIB file comprising the list of exposed data.
+ 
+ 
+The Add-on fulfills the following two requirements:
+ 
+ 
+Expose system variables via SNMP so that standard IT monitoring tools can obtain information about how PcVue main components are behaving and report any major change: Start, stop, network connection states, database connection states�,
+ 
+Use PcVue as an SNMP gateway between automation devices and SNMP-capable enterprise systems.
+ 
+ 
+There are no configuration dialog's specific to the SNMP Agent Add-on. At the time of writing, it uses a combination of dedicated text files (.dat) and regular configuration features. The Add-on automatically generates a MIB file containing the OID's of variables that are configured as exposed to SNMP.
+
+
+========================================
+TOPIC: snmp_agent_trace.htm
+========================================
+SNMP Agent Add-on Traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SNMP Agent Add-on Traces
+ 
+Information regarding the SNMP Agent Add-on are logged in the traces and displayed in the Event Viewer with lines starting with usrmgrSNMPAgent.
+ 
+Additional traces can be triggered using the SCADA Basic instruction TRACE as follows.
+ 
+TRACE(Mode, ManagerID, HexFlag);
+ 
+ 
+Mode - Turn the additional trace on or off
+1 - On
+0 - Off
+ 
+ManagerID - The identifier of the SNMP Agent Add-on task. Set to 11 if the SNMP Agent is the only Add-on in use.
+ 
+HexFlag	- Hexadecimal combination flag
+001 - Display traps sent by the SNMP Agent.
+ 
+ 
+Example of use of SCADA Basic TRACE instruction
+ 
+TRACE(1,11,�1�); �Turn on additional trace for traps
+ 
+TRACE(0,11,�1�); �Turn off all traces.
+
+
+========================================
+TOPIC: snmp_agent_variables.htm
+========================================
+Configuring the PcVue variables exposed by the SNMP Agent Add-on
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the PcVue variables exposed by the SNMP Agent Add-on
+ 
+There are two methods by which a variable can be exposed by the SNMP Agent Add-on.
+ 
+By Browse Level
+ 
+Variables whose Browsing Level property match that configured in SNMP Agent Add-on configuration file. Show picture
+ 
+If the variable is an alarm, its transitions are automatically sent as traps.
+
+ 
+By Extended Attribute
+ 
+Variables whose extended attribute number, as configured in the SNMP Agent Add-on configuration file, contains either of the following text.
+ 
+ 
+SNMPAgent# - Expose the variable via SNMP making it available for reading by third-party SNMP Managers.
+ 
+SNMPAgent#Trap - Expose the variable as an SNMP Trap.
+ 
+SNMPAgent#Trap#GenericX - Expose the variable as an SNMP Generic Trap. The format of the item linked to the trap, corresponds to the parameters defined for GenericX.
+ 
+ 
+MIB file generation
+ 
+The SNMP Agent Add-on automatically generates a MIB file comprising the list of data exposed as SNMP items. The MIB file is named after the PcVue project name <Project Name>-V2-MIB and is located in the project's PER directory.
+ 
+The MIB file includes both numerical OIDs and symbolic names (corresponding to variable names).
+ 
+To ensure consistency, once an OID has been used for a particular variable it is never used for another one even if the original is no longer exposed as an SNMP item or is deleted.
+ 
+
+ 
+The SNMP Write method is willingly not implemented by the Add-on. Therefore, an SNMP Manager does not have the option to change PcVue variable values.
+
+
+========================================
+TOPIC: snmp_agent_windows.htm
+========================================
+Deploying the SNMP Agent Add-on in Windows
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Deploying the SNMP Agent Add-on in Windows
+ 
+
+ 
+The deployment process requires Administrator privileges.
+ 
+ 
+Registry configuration for the PcVue SNMP Agent Add-on
+ 
+The SNMP Agent Add-on must be registered as an agent extension before the Windows SNMP service can load it.
+ 
+This is achieved by adding specific keys to the Windows Registry. These keys are described in the detailed documentation supplied with the Add-on.
+ 
+Checking that the Microsoft Windows SNMP Agent is installed and configuring the Community String
+ 
+The following example is for Windows 7. Other versions of Windows, particularly Windows Server, may be different (SNMP Agent role).
+ 
+ 
+Open the Windows Service Control Manager. Control Panel.Administrative tools.Services.
+ 
+Check that the SNMP Service is present and running. If it is not present, it must be added using Control Panel.Programs and features.Turn Windows features on or off. 
+ 
+Configure the Community String if required.
+Open the SNMP Service configuration by double clicking the entry in the Services dialog.
+Select the Security tab. 
+Click the accepted community string Add button and enter your string. Show picture
+
+Click OK to confirm the configuration and then close the Services dialog.
+
+
+========================================
+TOPIC: snmp_device_advanced.htm
+========================================
+Device advanced properties
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Device Advanced Properties
+ 
+The Device advanced properties are accessed from the Device configuration dialog, Advanced tab. Show picture.
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+The Device advanced tab allows you to override the network default settings for individual devices as required. See the SNMP network advanced properties topic for an explanation of the properties.
+ 
+Note that the SNMP Port, Number of OIDs per request and Community properties are not available for unmanaged devices.
+ 
+Optimizing the number of OIDs per request
+ 
+For optimum performance, it is important to correctly configure the property Number of OIDs per request. The default value for all devices is inherited from the property of the same name in the SNMP Network Advanced Properties tab, but it is important to set it for each device. If the information is not supplied by the device manufacturer, you can find it by trial and error (most devices time out if you make a request containing too many OIDs).
+ 
+The Maximum number of OID's per request affects both Polling and Browsing (Getbulk) requests and it is very important to set it correctly. The default value of 25 is for an average device and should be increased if the actual device supports it.
+
+
+========================================
+TOPIC: snmp_device_config.htm
+========================================
+Adding a device to an SNMP network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding a Device to an SNMP Network
+ 
+The process to add a managed (SNMP) or unmanaged device (PING only) to an SNMP network is broadly similar.
+ 
+A device is identified by its IP Address. In PcVue, it is known by the Name that you give it during the configuration.
+ 
+Adding a Device
+ 
+ 
+Select an SNMP network in the Application Explorer. From the task pane, select either Add unmanaged device or Add SNMP device as appropriate. The Device dialog opens. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+In the Name box, enter a name for the device. You can either accept the default or enter one of your own.
+ 
+Enter the optional descriptive text in the Description box. The description is only used in the Application Explorer.
+ 
+Select either By IP or By host name and enter either the IP address or the Host Name properties as appropriate. The Ellipsis button adjacent to the Host Name field opens a dialog that allows you to browse the local network.
+ 
+For SNMP devices, select the appropriate SNMP version. This property is not available for unmanaged devices.
+ 
+Click on OK to confirm the configuration and close the dialog.
+ 
+ 
+The Advanced tab
+ 
+See the topic SNMP Device advanced properties.
+ 
+The Traces tab
+ 
+The Traces tab is used to enable debugging traces in the event of any problems with the device. Only use this if advised to do so by your support agency.
+
+
+========================================
+TOPIC: snmp_device_trace.htm
+========================================
+SNMP device traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SNMP device traces
+ 
+The SNMP Device Properties dialog contains a Trace tab that can be used to enable additional messages for the Event Viewer (F7). Show picture
+
+ 
+ 
+Error level 1 to Error level 4 - Internal use only. Only enable if asked to do so by your support authority.
+ 
+Full details - Adds additional information to any trace messages.
+ 
+Polling (Get) - Display a trace message for each device poll. (SNMP Get message)
+ 
+Polling (Ping/ICMP) - Display a trace message for each ICMP poll.
+ 
+Writing (Set) - Display a trace message for each write message. (SNMP Set message)
+ 
+OIDs browsing (GetBulk) - Display a trace message when browsing OIDs. (SNMP GetBulk message)
+ 
+EngineID discovery - Display a trace message when discovering the EngineID of the SNMP agent.
+ 
+Trap / Inform - Display a trace message each time a Trap / Inform message is received. In particular can be used in conjunction with Full details to discover the OIDs associated with Trap#6.
+ 
+Save - Saves the trace configuration so that the same configuration will be used even after PcVue has been restarted.
+ 
+OK - Starts the trace and closes the dialog. The trace configuration is temporary and is not remembered when PcVue is restarted.
+
+
+========================================
+TOPIC: snmp_device_tree.htm
+========================================
+Understanding the SNMP device tree
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Understanding the SNMP Device Tree
+ 
+The Device Tree displays the configured devices and the known OID's. All SNMP devices follow a similar tree structure. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+iso.org.dod.internet - All OID's, standard and manufacturer specific, are located here. Only the following are likely to be of interest to PcVue.
+mgmt - Standard OID's as approved by the IAB. The configuration of the standard OIDs is defined by the standard MIB files installed with PcVue.
+private - Manufacturer specific OID's. The configuration of the manufacturer specific OIDs is defined by MIB files supplied by the manufacturer and which have been copied to the project. See the topic Managing MIB files.
+ 
+Trap/inform - Trap notifications.
+ 
+Unmanaged - Data resulting from a Ping command. This is the only data available from an unmanaged device.
+ 
+ 
+Selecting offline or online modes
+ 
+You can toggle the Device Tree between offline and online modes by clicking in the status bar. The mode is remembered even when the Application Explorer has been closed, but it is reset to the default (offline) if PcVue is shut down. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+When changing between modes, the device tree is only refreshed when expanding the iso.org.dod.internet node. If the node is already expanded, it must be collapsed and expanded again.
+ 
+ 
+Using the Device Tree in offline mode
+ 
+In offline mode all OIDs, both standard and those from any manufacturer's MIBs that the project has loaded, are available to all devices. It is up to the developer to know which are relevant and which are not. In the following screen shot, you can see both Wago and Moxa specific OIDs appear under the Moxa node.Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+Using the Device Tree in online mode
+ 
+
+ 
+You can only use online mode for a particular device if its status is Connected. For a device to have the Connected status, it must be online and have at least one variable mapped to it.
+ 
+ 
+In online mode, PcVue discovers the OID's for each device by issuing a GetBulk request. The GetBulk request is only available for devices that support SNMP V2 or V3.
+ 
+The request is made the first time that you expand the iso.org.dod.internet node of a device. The discovered OIDs are remembered until PcVue is shut down even if you return to offline mode. The request can take between a few seconds and several minutes during which time the cursor will show a busy icon. 
+ 
+The discovery process returns the numeric OIDs. In online mode, only those symbolic OIDs for which a corresponding numeric OID has been found, are displayed. Discovered OID nodes are displayed in green. Show picture
+
+
+========================================
+TOPIC: snmp_extension_addon.htm
+========================================
+SNMP dynamic table management extension
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SNMP dynamic table management extension
+ 
+&#160;PcVue provides a way to access and retrieve information that are managed in tables by certain devices, in most cases to expose a dynamic list of alarms. This works by enabling the dynamic table management SNMP extension. A dynamic table is an OID exposing a tabular value, a table having a varying number or elements (rows). The dynamic table management extension works along the SNMP Manager of PcVue.
+ 
+Activating dynamic table management
+ 
+To activate the dynamic table management extension, rename the file svmgrSnmpExtensions_UsrMgr.dat located in the BIN directory of PcVue into UsrMgr.dat.
+ 
+
+ 
+If the file svmgrSnmpExtensions_UsrMgr.dat is missing, you can simply create a text file named UsrMgr.dat with the following content:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[USRMGR\svmgrSnmpExtensions]
+ 
+ 
+ 
+
+ 
+DLL=svmgrSnmpExtensions.dll
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Go to the C directory of your PcVue project and create a file named svmgrSnmpExtensions.ini. You are going to use this file to configure the dynamic table management extension.
+ 
+Configuring the svmgrSnmpExtensions.ini file
+ 
+
+ 
+If an optional entry is omitted from the file, then its default value is used.
+If the file or a mandatory entry is missing, then the task is disabled.
+ 
+ 
+The following is the file format of the svmgrSnmpExtensions.ini file. Configure this file to define the dynamic table structure and the columns that you would like to access in your project from the device. If a dynamic table is for alarms, columns usually contain the alarm description, severity etc.
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[TaskParameters]
+ 
+ 
+ 
+
+ 
+AttributeNumber = 16
+ 
+ 
+ 
+
+ 
+AssociationName = MyServerAssoc
+ 
+ 
+ 
+
+ 
+AttributeSeparator = |
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[VariablesPool]
+ 
+ 
+ 
+
+ 
+NamePrefix = POOL.ALARM
+ 
+ 
+ 
+
+ 
+Number = 20
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[ColumnsTemplate1]
+ 
+ 
+ 
+
+ 
+Name = AlarmColTemplate1
+ 
+ 
+ 
+
+ 
+DeviceName = Attribute3
+ 
+ 
+ 
+
+ 
+Column0 = NotUsed
+ 
+ 
+ 
+
+ 
+Column1 = Timestamp&#160;
+ 
+ 
+ 
+
+ 
+Column2 = Attribute4
+ 
+ 
+ 
+
+ 
+Column3 = Attribute5
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The parameters in this file are:
+ 
+ 
+
+ 
+AttributeNumber: Specifies the extended attribute used for configuring variables for the dynamic SNMP pieces of information. Format: Number from 3 to 16. If omitted, default is 16.
+ 
+ 
+
+ 
+AssociationName: Specifies the association name in a redundant architecture. The task is only active on the active server. Generally, it is the same association as the one that manages the connection to SNMP devices and produces the SNMP I/O variables. Format: String. If omitted, default is an empty string.
+ 
+ 
+
+ 
+AttributeSeparator: Specifies the separator used in the extended attribute when defining the table subscription variable. Format: String. If omitted, default to '|'.
+ 
+ 
+
+ 
+[VariablesPool]: Specifies the pool of variables that will be used to pass an element of the dynamic table received.
+ 
+ 
+
+ 
+NamePrefix: Specifies the prefix of variable names. Format: String. If omitted, default is empty.
+ 
+ 
+
+ 
+Number: Specifies the number of variables configured in the application for the pool (with the given prefix). Format: Number. If entry omitted, default is 0. This number must be greater than the maximum number of dynamic elements you expect to receive at any given time across all dynamic table OIDs of all SNMP Agent devices configured in your application.
+ 
+ 
+ 
+ 
+
+ 
+[ColumnsTemplateX]: Specifies the columns of interest for a given table. The numbers X must be contiguous if you want to specify multiple column templates. Each template is composed of:
+ 
+ 
+
+ 
+Name: Specifies the name of the template that will be used at the table subscription variable. Format: String. If omitted, the variable template name is ColumnsTemplateX where X is the template instance number.
+ 
+ 
+
+ 
+DeviceName: Specifies in which variable extended attribute the device name shall be stored.
+ 
+ 
+
+ 
+ColumnX: Specifies the mapping of the column X of the table. The template must define contiguous column numbers starting at 0. Format: String. The possible column values are:
+ 
+ 
+
+ 
+NotUsed: The column will not be passed to the variable in the variable pool.
+ 
+ 
+
+ 
+Timestamp: The column value will be interpreted as the timestamp of the variable in the variable pool.
+ 
+ 
+
+ 
+Attribute3 to Attribute16: The column value will be written on the specified extended attribute of the variable in the variable pool.
+ 
+
+ 
+The Column0 represent the instance of the row within the table received.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring the variables of the variable pool
+ 
+Once the Add-on is configured, you need to create and configure the variables associated to the variable pool. As an example, the logic is that if you have defined the variable pool as having the prefix POOL.ALARM and the number of variables in the pool to 20, you need to configure 20 internal variables named POOL.ALARM1, POOL.ALARM2..., POOL.ALARM20, typically of type bit or alarm.
+ 
+Customize the variable properties as appropriate to fit your requirements: Domain, nature, alarm, alarm level...
+ 
+Configuring the variables for the table OIDs
+ 
+For each dynamic table OID you need to use, an internal variable must be configured and its extended attribute, the one specified in the task parameters, filled with the necessary information for the dynamic table management add-on to process it. This variable is used to retrieve the table elements and dynamically set properties of the variables in the variable pool.
+ 
+ 
+
+ 
+Configure the SNMP driver, at least a network and a device.
+ 
+ 
+
+ 
+Create a new internal variable.
+ 
+ 
+
+ 
+Select the Extended attributes tab and tick Enable extended attributes.
+ 
+ 
+
+ 
+Click Apply to activate the extended attributes editing.
+ 
+ 
+
+ 
+In the extended attribute specified in the [TaskParameters] section of the svmgrSnmpExtensions.ini file, enter the following information:
+ 
+ 
+
+ 
+SNMPTABLE: Keyword to define that this variable is linked to a table handled with the SNMP manager extension.
+ 
+ 
+
+ 
+Network: Name of the SNMP network.
+ 
+ 
+
+ 
+Device: Name of the SNMP device.
+ 
+ 
+
+ 
+PollingGroup: Name of the polling group to use to read the table cyclically.
+ 
+ 
+
+ 
+TableOid: OID of the table you would like to read elements from.
+ 
+ 
+
+ 
+ColumnsTemplate: Name of the template to apply to the specified table to map columns. It must correspond to one of the templates defined in the .ini file.
+ 
+ 
+ 
+For example, if you have specified the separator '|' in the .ini file, an example of value for the extended attribute is:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+SNMPTABLE|Network01|Device01|PollingGroup01|.1.3.6.1.2.1.1.9|AlarmColTemplate1
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Click OK to close the dialog box.
+ 
+ 
+
+ 
+Repeat steps 2 to 6 for each table OID you need to process.
+ 
+ 
+ 
+
+ 
+To get information regarding the svmgrSnmpExtensions task while running the application, check the Event viewer for lines starting with [SnmpExtensions].
+
+
+========================================
+TOPIC: snmp_in_the ae.htm
+========================================
+Managing SNMP in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing SNMP in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks applicable to SNMP
+ 
+When the SNMP folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Settings
+ Display the general SNMP settings dialog.
+ 
+ 
+ 
+ 
+When the Networks folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a network
+ Add and configure a new a SNMP network.
+ 
+ 
+ 
+ 
+When an SNMP network is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add an unmanaged device
+ Add an unmanaged device to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Add an SNMP device
+ Add an SNMP device to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Start network
+ Start the connection to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Stop network
+ Stop the connection to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the network.
+ 
+ 
+
+ 
+ 
+ 
+ Mapping
+ Open the mapping dialog used to link variables to SNMP OIDs. All devices on the selected network are displayed.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the network connection.
+ 
+ 
+ 
+ 
+When a device is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start device
+ Start the connection to the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Stop device
+ Stop the connection to the selected device.
+ 
+ 
+
+ &#160;
+ Ping
+ Send a Ping to the device to check its status. A command dialog opens during the Ping process displaying the results.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the selected device.
+ 
+ 
+ 
+ 
+When the Polling Groups folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add polling group
+ Add a new polling group.
+ 
+ 
+ 
+ 
+When a Polling Group is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the selected polling group.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the selected polling group.
+ 
+ 
+ 
+ 
+Rules and behavior of cut, copy and paste
+ 
+The following table describes the rules and behavior, and in particular any restrictions, when using cut or copy and paste on configuration objects in the SNMP folder.
+ 
+ 
+ 
+ 
+ 
+
+ SNMP object
+ Behavior
+ 
+ 
+
+ Device
+ 
+ 
+The pasted Device is given a unique name.
+
+
+========================================
+TOPIC: snmp_mapping_dialog.htm
+========================================
+SNMP mapping dialog
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The SNMP Mapping Dialog
+ 
+The SNMP Mapping dialog is opened from the Application Explorer by using the Mapping task whenever an SNMP Network or Device is selected. It contains four display panes plus a status line. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+[A] Device Tree
+ 
+See the topic Understanding the SNMP device tree.
+ 
+[B] Variable mapping
+ 
+The Variable Mapping pane displays the OID's belonging to the selected branch of the Device Tree. Right clicking in the pane displays a context menu with the following commands.
+ 
+ 
+Variable selector - Opens the Variable Selector from where you can map an existing variable to the selected OID.
+ 
+Create variable - Creates a new variable and maps it to the selected OID. See the topic Mapping an OID, Trap or PING.
+ 
+Unmap item - Removes the variable mapping from the select OID.
+ 
+View variable - Open the properties dialog for the variable mapped to the selected OID.
+ 
+Select columns - Select the columns displayed in the Variable Mapping pane from the following.
+Name - The symbolic name of the OID (or numeric identifier if the symbolic name is not available). This column is mandatory.
+Mapped variable - The name of the variable that is mapped to the OID.
+Native type - The SNMP native data type.
+Access - Access type.
+Read only - for read-only OIDs.
+Read-write - for read-write OIDs.
+Accessible-for-notify - For OIDs that cannot be read but can be sent in a trap
+Full numeric OID.
+Snapshot value - The value of the OID when it came on-line.
+ 
+ 
+[C] Enumerated variable mapping
+ 
+List of the mapped variables for the selected enumerated OID. Empty if the selected OID is not enumerated. See the topic Mapping an enumerated OID.
+ 
+[D] OID information
+ 
+Detailed OID information from the MIB file including the description, range, access and data type.
+ 
+[E] Status bar
+ 
+Displays the branch that is currently selected in the Device Tree and allows you to change the browsing method from Offline to Online (and vice versa).
+
+
+========================================
+TOPIC: snmp_mapping_enum.htm
+========================================
+Mapping an enumerated OID
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mapping an Enumerated SNMP OID
+ 
+An enumerated OID can be mapped to several bit variables, one for each of its enumerations. Each bit variable is set to 1 when its configured enumerated value is present in the OID (else it is 0). In the Mapping dialog, an enumerated IOD is indicated by a special icon. The first mapped variable is displayed normally in the upper right pane. Further variables are displayed in the central pane. Show picture
+
+ 
+Generating and mapping a variable to an Enumerated OID in one operation
+ 
+ 
+Open the Application Explorer and expand the configuration tree to select either an SNMP network or device. Using the task bar, open the Mapping dialog. 
+ 
+Expand the Device Tree until the enumerated OID name is visible in the top right pane. Select the OID by left clicking on it. 
+
+ 
+In the center right pane, click the Enumeration tool in the tool bar and select which of the enumerations is to be represented by the mapping. Show picture 
+
+ 
+The Create Variable dialog opens. Complete the process as explained in the topic Mapping an OID.
+ 
+ 
+What is different about the configuration of the mapped variable?
+ 
+A variable mapped to an Enumerated OID has the SNMP Extraction field property configured to specify the appropriate enumerated value. Show picture
+
+
+========================================
+TOPIC: snmp_mapping_oid.htm
+========================================
+Mapping a variable to SNMP
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mapping a Variable to SNMP Using the Mapping Dialog
+ 
+Using the following procedure, you can generate a variable and map it to an OID, Trap or PING (unmanaged device) in one operation.
+ 
+ 
+Open the Application Explorer and expand the configuration tree to select either an SNMP network or device. Using the task bar, open the Mapping dialog. 
+ 
+Expand the Device Tree until the OID, Trap name, or PING is visible in the top right pane. Show picture
+
+ 
+In the top right pane, right click on the row containing the OID name, and select Create Variable. The Create Variable dialog opens. Show picture
+
+ 
+Select the Polling Group using the drop down list box. This property is not required for a Trap.
+ 
+The variable name is generated automatically.
+ 
+Click OK to close the dialog and confirm the mapping.
+ 
+ 
+The variable type that is generated will depend on the data type. See the topic SNMP variable data types.
+ 
+How the variable name is generated if Use full hierarchical name as variable name is selected
+ 
+ 
+For scalar variables - The variable name = Network Alias + Device Alias + Symbolic OID
+ 
+For tabular variables - The variable name = Network Alias + Device Alias + Numerical OID
+ 
+ 
+
+ 
+Because of the structure used by OID names it is possible that the calculated variable name will exceed either the number of characters (255) or branches (12) allowed by PcVue naming convention. 
+ 
+ 
+
+ 
+If the number of branches is exceeded PcVue automatically merges the rightmost branches by replacing the separators (full stop) with underscores.
+ 
+ 
+
+ 
+In the number of characters is exceeded you must select Customize the variable name and manually edit the variable name.
+ 
+ 
+ 
+ 
+How the OID property in the variable configuration is generated
+ 
+ 
+If the property Use numerical OID in the SNMP Settings dialog is set, then the OID will be in the numeric format. Show picture
+
+ 
+If the property Use numerical OID in the SNMP Settings dialog is not set, then the OID will be in the symbolic format. Show picture
+
+ 
+ 
+In either case:
+ 
+ 
+For a scalar variable, the OID is appended with a 0 (instance zero).
+ 
+For a tabular variable, the OID is appended with the instance number.
+ 
+ 
+Other variable properties that are generated
+ 
+ 
+The Min and Max of a register variable will be taken from the OID supplementary information if available.
+ 
+The Command property will be set if the OID is read/write.
+ 
+The Maximum size (maximum number of characters) of a text variable will be taken from the OID supplementary information if available.
+ 
+ 
+How does the polling option Trap only and ad-hoc synchronization affect the polling
+ 
+In addition to any Polling Groups you have configured the Polling Group list box also contains an entry called Trap only and ad-hoc synchronization. If you choose this then the variable will only be updated when PcVue receives a trap from the device, or on ad-hoc synchronization (project start-up or communication recovery).
+ 
+Limitations of mapping if the device is offline
+ 
+If the device is offline, you cannot map tabular variables using the mapping dialog. This is because the MIB file does not contain information about the available instances.
+
+
+========================================
+TOPIC: snmp_mib_files.htm
+========================================
+Managing MIB files
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing MIB Files
+ 
+MIB is an acronym for Management Information Base. The MIB files describe the data available from a device using a hierarchical structure containing object identifiers (OID) and similar to that of PcVue variables.
+ 
+The installation package includes a set of standard MIB files that describe the OIDs approved by the Internet Activities Board. These are installed in a sub-folder called SNMP\MIBs.
+ 
+Additional, manufacturer specific MIB files can be located in any of the following folders.
+ 
+ 
+Local to the project in the sub-folder MIBs.
+ 
+Local to the project, in any of the Project Libraries, in the library sub-folder MIBs.
+ 
+In the Common Library in the folder MIBs,
+ 
+In any of the Shared Libraries in the sub-folder MIBs.
+ 
+ 
+
+ 
+MIB files are only loaded when the application starts. If you add more files to any of the folders, then PcVue must be re-started before they are taken into account.
+ 
+ 
+
+ 
+Any errors resulting from the loading of manufacturer specific MIB files are reported in the Event Viewer (F7).
+ 
+ 
+Offline and online browsing
+ 
+Configuration of an SNMP device is possible whether it is online or not. In either case, data extracted from the MIB files is used to translate the numerical OID to a symbolic OID subject to the following limitations.
+ 
+ 
+Offline browsing and configuration based on MIB files may not be 100% accurate as it's not possible to check if the OID selected from a MIB file is actually available on the device.
+ 
+Online browsing, that is get OIDs using OID discovery and display the symbolic OID from the MIB files, may not always be possible if the MIB files are missing or do not correspond exactly to the installed devices. In that case, the numerical OID is used.
+ 
+ 
+
+ 
+Only OID's that can be polled are displayed. Not those that can only be refreshed by trap.
+
+
+========================================
+TOPIC: snmp_net_advanced.htm
+========================================
+SNMP network advanced properties
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SNMP Network Advanced Properties
+ 
+The SNMP Network advanced properties are accessed from the SNMP Network configuration dialog, Advanced tab. The majority of properties in this tab are defaults that are propagated to sub-ordinate devices.Show picture.
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Trap/inform
+Listening port - The port number on which devices must send any traps. Default 162.
+ 
+Device default properties - The properties to be used for each sub-ordinate device unless configured otherwise in the device configuration Advanced tab.
+SNMP port - The port used by the device to communicate using SNMP.
+Number of retries - The number of retries after a timeout. Default 2.
+Number of OID's per request - The maximum number of OIDs that the device supports in one SNMP request. Default value is 25. 
+Timeout (ms) - Device timeout in milliseconds. Default 1000.
+Host name resolution mechanism
+Resolution period (ms) - When devices are addressed based on their host name, resolved names may be reset at runtime due to external actions. Setting a resolution period forces host name resolution to be executed periodically. Default to 1 hour.
+Enable dynamic resolution upon reconnection - In addition, enabling this setting forces a device's host name to be resolved upon reconnection to avoid failure if the resolved name was reset during the disconnection.
+SNMP V1 and V2/2c
+Community - The read community string. If the manager does not have the same string as the device, any request times out.
+SNMP V3
+User name - The V3 User Name
+string. The default is null.
+Authentication properties
+Type - The Type when using AuthNoPriv. Either MD5 or SHA. The default is MD5.
+Key - The password string when using AuthNoPriv.
+Default is empty.
+Privacy properties
+Type - The Type when using AuthPriv. Either AES or DES. The default is DES.
+Key - The password string when using AuthPriv.
+Default is empty.
+Interoperability issues
+Reset persistent Engine Time upon reconnection - Because many SNMP Agent devices do not persist the Engine Boots counter correctly, the SNMP v3 hand check may fail upon reconnection. Enabling this setting allows for working around the issue by resetting the Engine Time upon reconnection. 
+ 
+Networking
+Servers - The name of the Servers List when configuring a multi-station application. The network will only be activated on those stations named in that list.
+
+
+========================================
+TOPIC: snmp_network_config.htm
+========================================
+Adding an SNMP network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding an SNMP Network
+ 
+A SNMP Network Object in PcVue configuration is used to configure network wide properties. If required, you can create several Network objects, each with different properties. When you add a Device, it will be sub-ordinate to a particular Network Object, inheriting properties from that object. The configuration is accessed from the Application Explorer - Project.Communication.Data acquisition.SNMP.Networks.
+ 
+Adding a network
+ 
+ 
+Select the Networks folder (sub-ordinate to the SNMP folder) in the Application Explorer and, from the task list, select Add a Network. The SNMP Network dialog opens. Show picture
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+In the Name text box, enter the name of the network. You can accept the suggested default or enter one of your own.
+ 
+Enter a description of the network. The description appears in the contents pane of the Application Explorer and can be useful to identify the network later. The description is optional.
+ 
+To activate the network connection at startup, tick Activate at start-up.
+ 
+If you are configuring a multi-station application, select the Advanced tab and select the Servers list. The network will only be activated on those stations named in that list.
+ 
+Click on OK to confirm the configuration and close the dialog. 
+ 
+ 
+The Advanced tab
+ 
+See the topic SNMP network advanced properties.
+
+
+========================================
+TOPIC: snmp_overview.htm
+========================================
+Overview of SNMP
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of SNMP
+ 
+SNMP is an acronym for Simple Network Management Protocol. Its primary use is the management of devices on an IP network. Devices that typically support SNMP include routers, switches, servers, printers etc.
+ 
+SNMP exposes device management data as a number of variables. These variables can be read, and sometimes written, by managing applications.
+ 
+
+ 
+This book is for the PcVue SNMP Manager driver. If what you are looking for is exposing PcVue data to a third party SNMP Manager, refer to the SNMP Agent Add-on sub-book.
+ 
+ 
+An SNMP managed network has three key components.
+ 
+ 
+The managed device - The physical hardware and software/firmware that together make the device.
+ 
+Agent - The software/firmware on the device that is responsible for exposing the managed data as variables.
+ 
+Network management station - The hardware and software used to manage the network. For the purpose of this help, a PC running MS Windows and PcVue.
+ 
+ 
+SNMP uses the UDP protocol. Port 161 is used by the SNMP agent to receive the request sent by the Network Management Station (SNMP manager). Port 162 is reserved for the manager to receive traps. The following messages are used by the driver:
+ 
+ 
+GET - To obtain information from the agent about an attribute of a managed object.
+ 
+GETBULK - To obtain information about a group of data from the agent. SNMP V1 does not support GETBULK.
+ 
+SET - To set the value of an attribute of a managed object.
+ 
+TRAP - An unsolicited message from the agent to PcVue telling it about some event on the managed device.
+ 
+ 
+Management Information Base (MIB)
+ 
+SNMP itself does not define the variables that a device should provide. Instead, SNMP uses an extensible design where the available information is defined by management information bases (MIBs). MIBs describe the data available from a device using a hierarchical structure containing object identifiers (OID) and similar to that of variables.
+ 
+Each OID is unique. The format that defines it is a sequence of numbers separated with full stops. There are two roots (starting points), iso (which is .1) and ccit (which is .0). In practice, most OIDs start with .1.3.6.1 (where 1 = iso, 3 = org, 6 = dod, 1 = Internet). Below Internet, there are several branches, the most commonly used being mgmt (.2) and private (.4). All standard OIDs (those that have been approved by the Internet Activities Board (IAB)) reside under mgmt. OIDs defined by equipment and software vendors reside under private. In fact, they are found under a sub-tree of private, called enterprises (.1).
+ 
+A branch, within the private.enterprises sub-tree, is allocated to each vendor that registers for an enterprises object identifier. For example Wago has the enterprise OID .13576. So all the variables we define for an application using a Wago device would fall under .1.3.6.1.4.1.13576 (.iso.org.dod.internet.private.enterprise.wago). Up unto the enterprise number, the uniqueness is maintained by the committee, after this, the uniqueness is maintained by each enterprise. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+SNMP provides a mechanism by which the management station can query the device for its supported OID's. However, this is seldom convenient as only the most basic information is provided (numerical identifier and data type) and it means you can only obtain the information if the device is on-line. Instead, it is normal to make use of MIB files, which describe the OIDs in more detail and can be loaded by the management station to provide information about a device even if it is off-line. There are several MIB files that describe the standard OIDs, plus each device manufacturer supplies an MIB file specific to the device.
+ 
+One of the most useful pieces of information that the MIB files provide is the symbolic name. Instead of a management station referring to an OID using numerical notation, it can use symbolic notation that is much easier for a user to understand. For example, when using a Wago PLC:
+.1.3.6.1.4.1.13576.1.1
+ becomes
+ .iso.org.dod.internet.private.enterprises.wago.wagoCompany.wagoName
+ 
+Scalar and Tabular Objects
+ 
+An object that always has a single instance is called a scalar object. An object that has multiple instances is called a tabular object. When referencing an instance, the instance number is appended to the OID.
+ 
+With scalar objects, the instance number is always 0. For example:
+.iso.org.dod.internet.private.enterprises.wago.wagoCompany.wagoName.0
+ 
+With tabular objects, you append the instance of the object.
+.iso.org.dod.internet.private.enterprises.wago.wagoIOProducts.wioCommon.wioPlcData.wioPlcDataTable.wioPlcDataEntry.wioPlcDataReadArea.101
+ 
+Only the types of objects on the managed device are specified by the MIB, not the actual instances.
+ 
+
+ 
+&#160;PcVue provides a way to access and retrieve data that are managed in tables by certain equipments, in most cases to expose a dynamic list of alarms. This works by enabling the dynamic table management SNMP extension. Refer to the topic SNMP dynamic table management extension to learn more.
+ 
+ 
+Polling mechanism
+ 
+The polling mechanism used by the driver uses separate processes to send and receive a message. This allows the driver to make multiple concurrent requests. The limitation is set by the property Maximum number of concurrent requests in the SNMP General Settings (default 150, maximum 500), and also that only one request can be sent to one device at a given time. The polling mechanism can be thought of as parallel across all devices but serial within one.
+ 
+Polling is supported for managed (SNMP) and unmanaged (PING) devices.
+ 
+Trap notifications
+ 
+In addition to supplying information about a device as a result of a request from a management station, agents also send unsolicited messages when they detect some significant event. An unsolicited message of this sort is called a trap notification.
+ 
+There are just five standard traps (ColdStart, WarmStart, LinkUp, LinkDown, AuthenticationFalure and egpNeighborLoss), plus a sixth that is enterprise specific.
+ 
+SNMP Versions
+ 
+There are three SNMP versions.
+ 
+ 
+V1: This is the first protocol version defined by RFC1157. The security level of this version is very basic as the only check is based on the community string.
+ 
+V2c (RFC 1441): This version is known as community string based SNMPv2. Its key advantage is the support of GETBULK function, which supports a multiple item read in one request speeding up the reading process. It also support the Inform command that unlike a trap notification, requires the manager to positively acknowledge with a response message.
+ 
+V3 (RFC 3411): This version enhances exchange security by implementing the following features.
+
+Authentication is used to ensure that traps are read by only the intended recipient.
+
+Privacy encrypts the payload of the SNMP message to ensure that it cannot be read by unauthorized users. 
+ 
+ 
+Support for Unmanaged Devices
+ 
+SNMP provides no support for unmanaged devices. However, the PcVue SNMP driver also supports unmanaged devices by making use of ICMP requests.
+ 
+The ICMP (Internet Control Message Protocol), more commonly known as PING, is used by network devices to send error messages. For example, that a host or router could not be reached. ICMP differs from protocols such as TCP and UDP in that it is not typically used to exchange data between systems. The PING function, within the SNMP driver, is implemented using the ICMP "Echo request" and "Echo reply" messages.
+ 
+SNMP driver licensing
+ 
+The SNMP driver is a chargeable option and its use is protected by the license. The number of running devices is limited to 1000.
+ 
+As for any driver, the user can test the SNMP Manager in demo mode (without any license) with a time limitation fixed to one hour and a number of communication variables limited to 25.
+
+
+========================================
+TOPIC: snmp_polling_group.htm
+========================================
+Adding a Polling Group to the SNMP configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding a Polling Group to the SNMP Configuration
+ 
+Polling Groups are used to define the period at which PcVue requests data from either managed or unmanaged devices. A polling group can be used for one or more SNMP networks. When you map a Variables Tree variable to an OID or Ping you specify a Polling Group - PcVue will then use the period defined in the group as the scan rate.
+ 
+By default, the driver creates one request, per Polling Group, per device. If you are reading a large number of variables from a device, using a single polling group, there is the possibility of exceeding the maximum number of OID's per request. In that case, a number of requests are created all at the same rate.
+ 
+Adding a Polling Group
+ 
+ 
+Using the Application Explorer, select the Polling folder sub-ordinate to SNMP. From the task pane, select Add polling group. The Polling Group dialog opens. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+In the Name box, enter a name for the Polling Group. You can either accept the default or enter one of your own.
+ 
+Enter the optional descriptive text in the Description box. The description is only used in the Application Explorer.
+ 
+Enter the Update Rate in milliseconds. Range 1000 (1 second) to 86400000 (24 hours). The default is 60000 (1 minute).
+ 
+Click on OK to confirm the configuration and close the dialog.
+ 
+ 
+Using multiple Polling Groups to segregate OIDs in a single device
+ 
+In some devices, particularly those supporting SNMP V1, if one OID in a request is bad the device reports all OIDs in the same request as bad. You can improve this situation by using more than one polling group, and hence more than one request, for a device. Consider the following simple example.
+ 
+You want to read OIDs 10, 20, 30 and 40 from a device with the above characteristic.
+ 
+ 
+If you use a single polling group then, if the event OID 10 is bad, all the other OIDs also become bad.
+ 
+If you use two polling groups, one for OIDs 10 and 20 and the other for OIDs 30 and 40, if OID 10 is bad then OID 20 will also be bad but OIDs 30 and 40 will be OK.
+
+
+========================================
+TOPIC: snmp_redundancy.htm
+========================================
+SNMP redundancy management
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SNMP Redundancy Management
+ 
+Redundancy is managed at the Network level with the Network configuration including the option of a Server List. Show picture.
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+All the devices configured under a given network effectively inherit the server list defined for the network. This allows for all redundancy architecture (both single active server and multi active servers).
+ 
+
+ 
+The same device cannot be configured on more than one network. 
+ 
+ 
+Polled data
+ 
+The variables belonging to a given device are only produced on the server listed in the Server List selected in the Network's advanced properties.
+ 
+ 
+Single active server association - The variables for a given device are polled only by the active server of the association. Passive servers and clients are updated in the normal manner.
+ 
+Multiple active server association - The variables for a given device are polled by all servers belonging to the association. Clients are updated in the normal manner by the LAN manager.
+ 
+ 
+Trap data
+ 
+Variables mapped to traps or OIDs refreshed by Trap only and ad-hoc synchronization are updated when the active servers receive a trap message. However, traps are not broadcast by the agent across the entire network, they are sent to a specific machine or machines. Therefore, it is up to the agent's capability if it can send a trap to more than one machine.
+ 
+If an agent can only send to one machine that means that in a redundant architecture only one of the redundant machines will be able to receive traps. Therefore, redundancy cannot be managed correctly by PcVue.
+ 
+If an agent can send a trap to more than one machine there are two possibilities.
+ 
+ 
+Single active server association - The trap is received on both servers and only the active one produces its value. There is a theoretical possibility of losing an event if a trap occurs when a server switches from passive to active.
+ 
+Multiple active server association - The trap is received by all servers. Clients are updated in the normal manner. In the event of a server failure, there is a theoretical possibility of losing an event on a client that was still subscribed to that server.
+ 
+ 
+To prevent event loss the SNMP driver uses a list mechanism. 
+ 
+ 
+ Each trap has a unique time identifier. Both machines receive the trap and acknowledge reception to the agent.
+ 
+For each trap it receives, the active server sends a trap notification to the passive server and the passive server removes the relevant trap from its list.
+ 
+When the passive server switches to active, it empties its list processing the traps that have not been already processed by the active server. In a controlled changeover, the passive server list should be empty but in case of a failure, the mechanism minimizes the chance of losing trap information.
+
+
+========================================
+TOPIC: snmp_settings.htm
+========================================
+SNMP network settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SNMP general settings
+ 
+The SNMP General Settings are accessed from the Application Explorer by selecting Project.Communication.Data acquisition.SNMP and choosing the Settings command from the task list. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Communication
+Maximum number of concurrent requests - The maximum permitted number of pending requests, across all the configured networks, at any given time. Default 150, maximum 500.
+ 
+Data
+Convert timetick values to milliseconds - The SNMP timetick unit is 100 milliseconds. Ticking this box converts any timetick values to milliseconds, which is PcVue's standard time unit. The default is ticked.
+ 
+Configuration
+Use numerical OID in variable configuration - If ticked use the numerical OID format in the OID property of the Variable Configuration dialog (source tab) and in the trace. 
+If un-ticked the symbolic OID used.
+Changes to this property are only taken into account after network or equipment start. The default value is ticked.
+MIB browser sorting
+Using the symbolic OID - If selected, the MIB browser displays data sorting according to their symbolic OIDs.
+Using the numerical OID - If selected, the MIB browser displays data sorting according to their numerical OIDs.
+Maximum number of port displayed - The number of link status displayed in the mapping.
+ 
+ 
+SNMP Traces tab
+ 
+The SNMP Traces tab contains properties to enable additional error messages that can be useful when diagnosing errors. The errors appear in the Event Viewer (F7). You should only select properties in this tab if advised to do so by your support authority.
+
+
+========================================
+TOPIC: snmp_trap0_var_behavior.htm
+========================================
+Mapping traps #0, #1, #4 and #5
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mapping Traps #0, #1, #4, #5 and #6
+ 
+Trap messages #0, #1, #4, #5 & #6 can each be mapped to one bit variables. PcVue generates the value of the bit itself using the following mechanism.
+ 
+ 
+Under quiescent conditions, the bit value is set to 0.
+ 
+When a trap is received, the mapped variable value is immediately set to 1.
+ 
+1 millisecond later, variable value is reset to 0, ready for the next trap.
+ 
+ 
+As the bit is only set to 1 for a very brief period, it is not suitable for animating a mimic other than it could be logged and displayed in a Log Viewer. The solution is to configure the bit as an alarm and set the Latch Behavior (until acknowledged) property. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+That way any of the Alarm animations (color on alarm, symbol on alarm etc.) can be used to animate a mimic.
+
+
+========================================
+TOPIC: snmp_trap2_var_behavior.htm
+========================================
+Mapping traps #2 and #3
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mapping Traps #2 and #3
+ 
+Instead of dealing with the LinkUp(#3) and LinkDown(#2) traps separately, both traps are merged into one logical item called Trap#2#3. When a bit variable is linked to a link status trap, its behavior is as follows.
+ 
+At start-up, or on device synchronization, PcVue reads the port status and initializes the bit linked to Trap#2#3 accordingly.
+ 
+ 
+1 - A connection is active on the port
+
+ 
+0 - No connection is active on the port.
+
+ 
+ 
+After the initialization sequence, the bit status is updated by trap and set to 1 when a LinkUp(#3) is received and 0 when a LinkDown(#2) is received.
+
+
+========================================
+TOPIC: snmp_trap6_var_behavior.htm
+========================================
+Mapping trap#6
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mapping The Enterprise Trap Supplementary OIDs
+ 
+Trap#6 is the enterprise specific trap. The conditions under which it is generated are customized by the manufacturer and will be specific to a particular device type. Typically, a Trap#6 will be generated under a number of different conditions. To differentiate between them, when a Trap#6 message is sent it includes one or more supplementary OIDs providing more information about the condition.
+ 
+Finding the supplementary OID's sent with Trap#6 using the Event Viewer
+ 
+If you are able to reproduce the conditions under which Trap#6 is generated you can use the Event Viewer, to discover the supplementary OIDs that have been sent with the trap, using the following procedure. The following example is from a Moxa Industrial Ethernet Switch.
+ 
+ 
+In the Device dialog Trace tab enable Trace 5: Full details and Trace 11: Trap/Inform.
+ 
+Reproduce the conditions that are known to generate the trap.
+ 
+Examine the trace in the Event Viewer. In it, you will see something similar to the following.
+
+ 
+ 
+ 
+The up-time of the device (SysUpTime).
+ 
+A generic OID that specifies the identity of the trap.
+ 
+The specific trap OID.
+ 
+The supplementary OIDs, their data types and values. Only one in this example.
+ 
+ 
+How to map the supplementary OIDs so they can be logged
+ 
+The following method allows the values supplied by the supplementary OID's to be logged, which is the most common requirement when receiving a trap. Once the data is logged, it can be played back through the Log Viewer in the normal manner.
+ 
+ 
+Map the specific trap OID to a bit variable, for example MOXA.TRAP.POWER1. Set the Updated By property to Trap and ad-hoc synchronization. The Log property should be selected if it is to be logged.
+ 
+Map the supplementary OID to a register variable. For example MOXA.TRAP.POWER1_VAL1. Set the Updated By property to Trap and ad-hoc synchronization.
+ 
+Enter the name of the register variable in one of the extended text attributes (say TATT#3) of the bit variable.
+ 
+Configure the Log List through which the bit variable is to be logged so that it records the deferred extended attribute TATT#3. Recording the deferred extended attribute means that the value of the variable named in the text attribute is recorded.
+ 
+ 
+It is not essential to know the complete OID configuration for a device if you use this method. However if you open the OID Selector, from the Source tab of the Variable Configuration dialog, after the configuration is complete it will automatically navigate to the location of the OID. Show picture
+
+
+========================================
+TOPIC: snmp_trap_behavior.htm
+========================================
+SNMP trap variable behavior
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SNMP Trap Variable Behavior
+ 
+SNMP trap messages behave differently to the normal master slave communication messages that PcVue deals with.
+ 
+ 
+They are unsolicited. That is they can occur at any time triggered by an event in the device. They do not occur as a result of a request from PcVue.
+ 
+They do not supply a state or value that can be usefully translated into a variable value. For example, Trap#0 occurs at a cold start up. Receiving a Trap#0 just means that the device has made a cold start but there is no particular variable or value involved. Because of this, the mapped variable behaves in a special way and may require particular configuration.
+ 
+ 
+There are seven traps in total denoted trap#0 to trap#6. 
+ 
+Trap#0, #1 , #4, #5 and #6 are treated as bits. See the topic Mapping traps #0, #1, #4, #5 and #6.
+ 
+Trap#2 and #3 are combined and mapped to a single bit. See the topic Mapping traps #2 and #3.
+ 
+Trap#6, known as the enterprise trap, can be customized by the device manufacturer and the message it generates is accompanied by one or more supplementary OIDs. See the topic Mapping the Enterprise Trap supplementary OIDs.
+
+
+========================================
+TOPIC: snmp_types.htm
+========================================
+SNMP and Ping Data Types
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SNMP and Ping Data Types
+ 
+ 
+ 
+ 
+ 
+ 
+
+ SNMP
+data type
+ Variable type
+ Notes
+ 
+ 
+
+ Integer
+ Register
+ Range -2E31..2E31-1. Allows enumerations.
+ 
+ 
+
+ Integer32
+ Register
+ Range -2E31..2E31-1.
+ 
+ 
+
+ Byte string
+ Text
+ Can be used to specify bytes of binary or textual information. Length 0..65535 bytes
+ 
+ 
+
+ Object identifier
+ Text
+ &#160;
+ 
+ 
+
+ IpAddress
+ Text
+ Used to specify an IPv4 address in the format x.x.x.x. Example 192.168.99.10.
+ 
+ 
+
+ Counter
+ Register
+ Used to represent a count. Range 0..4294967295.
+ 
+ 
+
+ Counter32
+ Register
+ Used to represent a count. Range 0..4294967295.
+ 
+ 
+
+ Gauge
+ Register
+ Non-negative integer which holds the maximum or minimum value specified in a range when the actual value goes over or below the range.
+ 
+ 
+
+ Gauge32
+ Register
+ Non-negative integer which holds the maximum or minimum value specified in a range when the actual value goes over or below the range.
+ 
+ 
+
+ Unsigned32
+ Register
+ Range 0..2E31-1
+ 
+ 
+
+ TimeTicks
+ Register
+ Elapsed time in units of hundredth of a second. Range 0..2E32-1. PcVue automatically converts to milliseconds.
+ 
+ 
+
+ Counter64
+ Register
+ Used to represent a count. Range 0..2E64-1.
+ 
+ 
+
+ UInteger32
+ Register
+ &#160;
+ 
+ 
+
+ Trap#0
+ Bit
+ Cold start. See the topic Mapping traps #0, #1, #4, #5 and #6.
+ 
+ 
+
+ Trap#1
+ Bit
+ Warm start. See the topic Mapping traps #0, #1, #4, #5 and #6.
+ 
+ 
+
+ Trap#2#3
+ Bit
+ Link status. See the topic Mapping traps #2 and #3.
+ 
+ 
+
+ Trap#4
+ Bit
+ Authentication failure. See the topic Mapping traps #0, #1, #4, #5 and #6.
+ 
+ 
+
+ Trap#5
+ Bit
+ Neighbor loss. See the topic Mapping traps #0, #1, #4, #5 and #6.
+ 
+ 
+
+ Trap#6
+ Bit
+ Enterprise specific. See the topics Mapping traps #0, #1, #4, #5 and #6 and Mapping the Enterprise Trap supplementary OIDs.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Ping
+data type
+ Variable type
+ Notes
+ 
+ 
+
+ Status
+ Bit
+ 1 if the device is on-line, else 0.
+ 
+ 
+
+ StatusCode
+ Register
+ Status code returned from the ping action.
+ 
+ 
+
+ RoundTripTime
+ Register
+ Ping round trip time in milliseconds.
+
+

@@ -1,0 +1,764 @@
+========================================
+TOPIC: RDS_Changes_to_the_trace_files.htm
+========================================
+Changes to the management of trace files when running PcVue in a RD Session Host session
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Changes to the Management of Trace Files When Running 
+ PcVue in a RD Session Host Session
+ 
+On a single user installation of PcVue, the 
+ trace files that are a record of what appears in the trace window (F7), 
+ are found under in the folder \Bin\Log Files.
+ 
+When running a networked application on a RD Session Host server, the behavior is modified. The trace files for instances of PcVue running in RD Session Host sessions are found in a sub-folder of \bin\<Log Files\WTS\<station_name>, where the sub-folder name is that of the station name (from PcVue's network configuration) of the instance that created them.
+
+
+========================================
+TOPIC: RDS_Issues_related_to_sharing_the_same_project.htm
+========================================
+Issues related to sharing the same project
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Issues Related to Sharing the Same Project
+ 
+
+ 
+If you use the recommended method of configuring PcVue stations (Use a different working folder for each Remote Desktop session) then many of the following points are not applicable.
+ 
+ 
+If you are running more than one instance of PcVue 
+ on the same PC, sharing the same project, you must take into account the 
+ following limitations caused by the possibility of more than one process 
+ trying to access project files at the same time.
+ 
+Development mode
+ 
+It is recommended that you do not allow PcVue 
+ to be operated in development mode when running in a Remote Desktop session. 
+ The best way to prevent this is ensure that the license used by PcVue, 
+ when run from a Remote Desktop session, is run-time only.
+ 
+Archive Units
+ 
+In general, it is not recommended that instances of PcVue running in a Remote Desktop session archive data directly because 
+ you could have several sessions running contiguously each trying to access 
+ the same archive files. Instead, it is recommended that you use Client-Server 
+ archiving where any PcVue running from a Remote Desktop session behaves as 
+ an archive client and PcVue running from the local session 
+ behaves as the archive server.
+ 
+File access from SCADA Basic or VBA
+ 
+If you are running SCADA Basic or VBA programs that have 
+ file access you must take into consideration that more than one instance 
+ of a program may attempt to access the files at the same time.
+ 
+Dynamic configuration using SCADA Basic
+ 
+It is recommended that you do not use the features of 
+ SCADA Basic that allow dynamic configuration (for example Temporary_DB). 
+ If these features are essential to your project, please contact Technical 
+Support before you use them.
+ 
+Persistence of internal variables
+ 
+The Saved property causes PcVue to remember the value of internal variables either periodically or when PcVue is shut down. 
+ 
+ 
+To save a separate value for each of the variables on each station, enable the option Variables.Internal variables.Behavior.Usr context in Application Explorer.Variables.
+ 
+ 
+For details, see the Help topic on Application Explorer.Variable Settings.Settings.
+
+
+========================================
+TOPIC: RDS_optimizing_project_size.htm
+========================================
+Optimizing the project size
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Optimizing the Project Size
+ 
+To help keep the project size to a minimum you can configure the number of backup copies kept of the project configuration files. Project configuration files are those in the C folder. Backup copies are kept in the CTEMP folder.
+ 
+By default, the number of backup copies is nine and is configured in the Miscellaneous section of the Project Settings dialog. However, you can configure this per station using the Configuration backup files property in the advanced tab of the Station dialog. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Default means that the setting from the Project Settings dialog is used. 
+ 
+0 to 9 specifies the number of backup copies for a particular station.
+
+
+========================================
+TOPIC: RDS_persistent_vars.htm
+========================================
+Managing Persistent variables when running PcVue in a RD Session Host Session
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing Persistent Variables When Running PcVue in a RD Session Host Session
+ 
+Internal variables are configured as persistent using the Saved property in the variable's properties dialog. If the variables configured as such are not assigned to a Server Station list (no producer list), the value is saved when a project is stopped and restored on re-start. The values are saved in the following files.
+ 
+ 
+VariableSaved.dat for variables other than alarms
+ 
+ AlarmSaved.dat for bit variables configured as alarms
+ 
+ 
+The files are normally located in the project's PER folder although, for backwards compatibility, this can be changed to the C folder by un-ticking the property Write the persistent files in the Per directory in the project's compatibility settings.
+ 
+Behavior when running in a Remote Desktop session and using the Use the same working folder for all Remote Desktop sessions property
+ 
+The location of the files is modified and depends on the behavior properties in the Variables Settings dialog. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Local association - The saved variables files are found in the folder:
+<ProjectPath>\USR\<ProjectName>\PER\WTS\<StationName>
+ 
+User context - The saved variables files are found in the folder:
+<ProjectPath>\USR\<ProjectName>\PER\WTS\<UserName>
+ 
+ 
+Behavior when running in a Remote Desktop session and using the Use a different working folder for each Remote Desktop sessions property
+ 
+ 
+Local association - The saved variables files are found in the folder:
+<ProjectPath>\USR\WTS\<ProjectName>_<StationName>\PER
+ 
+User context - The saved variables files are found in the folder:
+<ProjectPath>\USR\<ProjectName>\PER\WTS\<UserName>
+This folder is not suffixed or prefixed by <StationName> because the value of these variables is dependent on the user name rather than the station name. A user is only allowed to log on at one station at any one time on the same project.
+
+
+========================================
+TOPIC: RDS_Printing.htm
+========================================
+Printing when running PcVue in a RD Session Host session
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Printing When Running PcVue in a RD Session Host Session
+ 
+There are two main mechanisms for printing within PcVue.
+ 
+ 
+Graphical. You can 
+ print the contents of a window or the entire screen on the Windows' default 
+ printer. This mechanism is used when producing screen dumps from SCADA 
+ Basic, using the built-in program Hardcopy, when printing 
+ a report and when printing from the Print command on the file menu.
+ 
+Text only. You can 
+ print information in text format on any printer configured in the operating 
+ system, either locally or over a network. This mechanism is used when 
+ printing events through the Log Filters, Alarm and Log Viewers and when 
+ using the SCADA Basic instruction LPRINT. 
+ 
+ 
+Graphic printing
+ 
+The mechanisms for graphical printing on PcVue 
+ that print to the Window's default printer operate normally. Output appears 
+ on the printer configured as the default for the RD Session Host session. 
+ 
+Report printing does not work, as it does not use the 
+ default printer.
+ 
+Text only
+ 
+The mechanisms for text printing only works if the printer 
+ configuration within PcVue is set to print to a file. Show picture. 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+In this case, for each event that is eligible for printing, 
+ there will be one line in the file for each PcVue session running 
+ the same project.
+
+
+========================================
+TOPIC: RDS_project_path.htm
+========================================
+Project path when using a RD Session Host server
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Project Path When Using a RD Session Host Server
+ 
+If the property Use a different working folder for each Remote Desktop session has been selected in a station's configuration then a different working folder is used for each station name. By working folder, we mean both the project folder and the library folder.
+ 
+
+ 
+If the property Use same working folder for all Remote Desktop sessions is chosen, the project and libraries on the host PC are shared by each PcVue station running in a Remote Desktop session of the PC.
+ 
+ 
+Reminder about the project path for applications not running in a RD Session Host session
+ 
+The project path, which for the sake of this explanation we will call <HostProjectPath> is either <PcVue Path>\USR or, if the -b <ProjectPath> command line argument is used, <ProjectPath>\USR.
+ 
+Project path, local library folders, and the custom project library folder
+ 
+The project path that we will call <SessionFullProjectPath> is calculated as follows.
+ 
+<HostProjectPath>\WTS\<ProjectName>_<StationName>
+ 
+The local library comprising of the folders, B, P, S, W and WT, is located under the <SessionProjectPath>.
+ 
+The custom project library folder, LIB, is also located under the <SessionFullProjectPath>.
+ 
+The common library folder and custom common library folder
+ 
+The common library, comprising of the folders BMP, PRG, SYM, WIN and WTP normally found under PcVue root, is relocated to:
+ 
+ <Path>\WTS_LIBS\<ProjectName>_<StationName>
+ 
+Where <Path> is either the <PcVue Root> or <ProjectPath> if using the -b command line argument.
+ 
+The custom common library folder LIB is also relocated to this path.
+ 
+Example 1: Command line = �wts AP, WTSClientList
+ 
+
+ &#160;PcVue is installed in C:\SV and the name of the station within the list WTSClientList, is WTSClient1.
+ 
+ 
+The path for the project, local library folders and custom project library folder is:
+C:\SV\USR\WTS\AP_WTSClient1
+ 
+The path for the common library folders and custom common library folder is:
+C:\SV\WTS_LIBS\AP_WTSClient1
+ 
+ 
+Example 2: Command line = -b D:\SV\Projects\10.0SP1 �wts AP, WTSClientList
+
+ 
+The project path is D:\SV\Projects\10.0SP1 and the name of the station within the list WTSClientList, is WTSClient1.
+ 
+ 
+The path for the project, local library folders and custom project library folder is:
+D:\SV\Projects\10.0SP1 \USR\WTS\AP_WTSClient1 
+ 
+The path for the common library folders and custom common library folder is:
+D:\SV\Projects\10.0SP1\WTS_LIBS\AP_ WTSClient1
+ 
+ 
+Example 3: Command line = 
+-r -b D:\SV\Projects\10.0SP1 -wts AP, WTSClientList
+
+ 
+The project path is D:\SV\Projects\10.0SP1 and the name of the station within the list WTSClientList, is WTSClient1. The -r option specifies the use of Central Version Management and to download the reference version if necessary.
+ 
+ 
+The path for the project, local library folders and custom project library folder is:
+D:\SV\Projects\10.0SP1 \USR\WTS\AP_WTSClient1
+ 
+The path for the common library folders and custom common library folder is:
+D:\SV\Projects\10.0SP1\WTS_LIBS\AP_ WTSClient1
+ 
+ 
+Additional important notes
+ 
+If the version in the project folder is not the reference version, or the folder is empty, then the reference version of the project is copied from the central location.
+ 
+ 
+If the version in the libraries folder is not the reference version, or the folder is empty, then the reference version of the libraries is copied from the central location. 
+ 
+If the name of the station has changed, a new project and new libraries are created with a new path. The old project and libraries are not deleted. 
+ 
+If the station is deleted the project and libraries are not deleted.
+
+
+========================================
+TOPIC: RDS_specific_properties.htm
+========================================
+RD Session Host session related properties in station configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+RD Session Host Session Related Properties in Station Configuration
+ 
+The following properties in the station configuration that are specific to using PcVue in a Windows RD Session Host session.
+ Show picture
+
+ 
+ 
+Run only in Remote Desktop session - If ticked then PcVue will only run this station in a Remote Desktop Session. When starting, if PcVue identifies it is not in a Remote Desktop Session and that this option is selected, it will display an error message and exit.
+ 
+Use the same working folder for all Remote Desktop sessions - The same working (project) folder is used for all Remote Desktop sessions. This is the same behavior as with versions prior to 10.0 SP1.
+ 
+Use a different working folder for each Remote Desktop session - A different working folder is used for each Remote Desktop session. See the topic Project Path When Using a RD Session Host Server for more information.
+ 
+ 
+
+ 
+These modifications were introduced to resolve issues related to sharing the same project between several instances of PcVue. The use of Use a different working folder for each Remote Desktop Session is highly recommended for all new projects.
+ 
+ 
+Allocating Port Numbers When Running in a RD Session Host Session
+ 
+Networked stations that are to run in a Remote Desktop session environment must have unique port numbers in the network configuration. It is recommended that the port number is based on the simple calculation of 1981 (the default port number) + the station number. Show picture
+
+ 
+
+ 
+We recommend using the networking wizard to configure your RDS architecture. For more information, see the section Communication.Networked applications.Using the Network Wizard to configure the network architecture.With remote desktop session host server in the Application Explorer book.
+
+
+========================================
+TOPIC: RDS_start_timeout.htm
+========================================
+Settings related to running PcVue in a RD Session Host session
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Settings Related to Running PcVue in a RD Session Host Session
+ 
+These settings are found in the Servers Settings dialog.Show picture
+ 
+
+ 
+ 
+Check NTFS folders permissions for PcVue folder, the project folder using -b and the project versions central folder - Check the folder permissions on startup of PcVue. If the folders do not have the correct permissions, a message is displayed and the startup aborted.
+ 
+Windows Remote Desktop session starting timeout (sec) - This property is the delay that is applied to starting PcVue in a Windows Terminal Session when, at startup, another session is found to be starting up. A pop-up message informs the user of the time remaining. If the property Use a different working folder for each remote desktop session has been selected the timeout is not used.
+
+
+========================================
+TOPIC: RDS_Startup.htm
+========================================
+The startup process when running PcVue in an RDS Host session
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+The Startup Process When Running PcVue in an RD Session Host Session
+ 
+The following flow chart describes the PcVue startup process when running in a RD Session Host session.
+ 
+At the startup of PcVue&#160;
+ 
+
+ 
+ 
+ 
+On the start of the project
+
+
+========================================
+TOPIC: RDS_SV_command_line.htm
+========================================
+Changing the PcVue Command Line When Running in a Remote Desktop Session
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Changing the PcVue Command Line When Running in a Remote Desktop Session
+ 
+The PcVue command line must be changed to run it in a remote desktop session.
+ 
+
+ 
+It is recommended that you do not use PcVue in 
+ development mode when running in a remote desktop session.
+ 
+ 
+The command line argument-WTS 
+ 
+The -WTS command line argument informs PcVue that 
+ it is to run in a remote desktop session on Windows Server. There are two syntaxes as follows.
+ 
+-WTS ProjectName,ClientStationListName
+ 
+ 
+ProjectName 
+ The name of the project with which PcVue will start.
+ 
+ClientStationListName 
+ The name of a client station list (from Application Explorer.Communication.Networking.Stations.Lists). The station number for the instance of PcVue is selected automatically. The station number in the 
+ file INI.DAT is ignored.
+ 
+ 
+-WTS <ProjectName>,<StationName>
+ 
+ 
+ProjectName The name of the project with which PcVue will start.
+ 
+StationName The name of a specific station (from Application Explorer.Communication.Networking.Stations). The station number for the instance of PcVue is the one defined in the configuration. The station number in the file INI.DAT is ignored.
+ 
+ 
+
+ 
+If ProjectName or ClientStationListName contain spaces they must be placed within quotation marks "".
+ 
+ 
+The command line argument -station_number 
+ 
+The command line argument -station_number MUST NOT be used when PcVue is run in a Remote Desktop session on Windows Server. 
+ 
+For further information, see the topic Command Line Arguments.
+
+
+========================================
+TOPIC: RDS_sv_on_RDS_host.htm
+========================================
+Overview of deploying PcVue using a RDS Host
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Deploying PcVue Using a RD Session Host
+ 
+
+ 
+From Windows Server 2008 R2 onwards, Microsoft renamed many of the terms associated with the long established Terminal Server. In particular, Windows Terminal Server has become Windows Remote Desktop Session Host. This help frequently uses RD Session Host as a shortened form of this term.
+ 
+ 
+What is a Remote Desktop Session Host server (RD Session Host server)
+ 
+Traditional PC are essentially single user. Each PC has a single monitor, keyboard
+ and mouse from which one user at a time interacts with the PC
+ and any running applications. 
+ 
+Windows Server, when configured with Remote Desktop Services, allows several users to concurrently use the resources of a single server and to execute applications installed on the server. A user interacts with applications using a thin terminal connected to the server using a network. The process of a user connected to Windows Server in this manner is called a Remote Desktop Session and uses a standard known as the Remote Desktop Protocol (RDP). Thin terminals supporting RDP come in a variety of forms the most common of which is now a program running on another computer. Under Windows desktop for example, an RDP client is available from the Start menu (Start.Programs.Accessories.Remote Desktop Connection).
+ 
+In addition to running sessions using a remote desktop, Windows Server also runs a session using the local monitor, keyboard and mouse. This is referred to as the local session (or sometimes as a console session or interactive session).
+ 
+Running PcVue on Windows Server configured with Remote Desktop Services
+ 
+When running PcVue on a RD Session Host server, an instance of PcVue can be run from each Remote Desktop Session and/or from the local session. Only a single copy of PcVue is installed, but a license is required for each instance of PcVue that is running. 
+ 
+
+ 
+The deployment of PcVue on a Remote Desktop Server will be as a Desktop Application (as opposed to a Windows Service), so that Remote Desktop sessions can run it interactively. If deployed as a Windows Service, users in Remote Desktop Sessions will not be able to interact with PcVue.
+ 
+ 
+ 
+When an instance of PcVue runs from a local session it behaves in much the same way as it would on a desktop operating system, such as Windows 7, and obtains its license from the dongle plugged into the local PC.
+ 
+When an instance of PcVue runs in a Remote Desktop Session it cannot obtain its license directly from the dongle, instead it must acquire it via another instance of PcVue that has been configured for that purpose. PcVue supplying the license is the license owner and PcVue acquiring the license is the license renter.
+ 
+ 
+A typical example of networking architecture can consist in an instance of PcVue running in the local session configured as a data acquisition server, and instances running in Remote Desktop Sessions configured as data clients. It is likely that the instance running in the local session is also configured as the license owner.
+
+ 
+Another example of networking architecture is that the data acquisition server runs on a standalone PC to which the dongle is connected. In such a case, the Remote Desktop Session Host server would only host data clients instances.
+ 
+The SYSTEM.WTS system variable 
+ 
+The register variable SYSTEM.WTS is set to zero when an instance of PcVue
+ is running in the local session and one when running in a Remote Desktop Session.
+
+
+========================================
+TOPIC: RDS_user_permissions.htm
+========================================
+Configuring user permissions for PcVue's folders
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring User Permissions for PcVue's Folders When Running on an RD Session Host Session
+ 
+The Windows user account that runs PcVue must have the Modify Permission for the installation folders, including:
+ 
+ 
+The root folder of BIN, ETC, USR and LIB. That is the topmost folder of the <PcVue Path>
+ 
+The topmost folder of the <ProjectPath> if the -b<ProjectPath> command line argument is used
+ 
+The Central Versions folder if Central Project Management is being used
+ 
+ 
+You can change the permissions for individual users but the recommended method of doing this is to configure permissions for the user group Remote Desktop Users that includes all Remote Desktop users.
+ 
+
+ 
+When you change the user permissions of a folder, the permissions of all sub-ordinate folders are also changed.
+ 
+ 
+See the topic Operating system related considerations for more information about general requirements related to user permissions.
+ 
+How to configure the permissions
+ 
+ 
+Using Windows Explorer, locate the PcVue folder. Right-click on it and select Properties. The Properties dialog is displayed. Select the Sharing tab. Show picture
+
+ 
+ Click the Share button to open the File Sharing dialog. Enter the name Remote Desktop Users and click the Add button. The name appears in the list of names. Show picture
+
+ 
+Change the permissions to Read/Write and then click Share. Assuming the process is successful the dialog will close and will be replaced by a dialog displaying the message Your folder is shared. Click the Done button to close it.
+ 
+Select the Advanced Sharing button in the Properties dialog and, in the Advanced Sharing dialog, check that the Share this folder property is ticked. Close the Advanced Sharing dialog.
+ 
+Select the Security tab of the Properties dialog. Check that the entry for Remote Desktop Users has Full control allowed. Show picture
+
+ 
+Click Close to confirm the configuration.
+ 
+Repeat the steps for all folders that require the permissions changing.
+ 
+ 
+
+ 
+You can find more information about configuring the Remote Desktop Users Group on the Microsoft website using the following Url: http://technet.microsoft.com/library/cc743161.aspx.
+
+
+========================================
+TOPIC: RDS_Using_the_SV_Terminal_Server_service.htm
+========================================
+Using the PcVue SV Core Session Host service
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the PcVue SV Core Session Host service
+ 
+Starting with version 11.2, the former SV Terminal Server service application named svTS.exe is no longer used. The services it provided are now implemented by the SV Core Session Host service, which is installed and deployed as part of PcVue installation and deployment tools. See Using the Core Management Console to run PcVue as a Windows Service for more information.
+ 
+You must start the service SV Core Session Host to run PcVue when used in a Remote Desktop Session.
+ 
+Running the Component Registration Utility resets all system settings associated with PcVue processes to their installation defaults. Includes: 
+ 
+ 
+
+ 
+Settings associated to the SV Core Daemon, SV DbConnect and SV Core Session Host services: Startup type, Recovery mode, Service account, Service dependencies.
+ 
+ 
+
+ 
+Configuration of the 3 DCOM applications associated to PcVue.
+ 
+ 
+ 
+We recommend you to document these settings as part of your project documentation so that you are able to set them again each time you update the PcVue version, replace a computer or in any other situation requiring that you run the Component Registration Utility.
+
+
+========================================
+TOPIC: RDS_why_cpm.htm
+========================================
+Why use Central Project Management when deploying PcVue using a RDS host?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Why Use Central Project Management When Deploying PcVue Using a RDS Host?
+ 
+The following text explains why the use of Central Project Management is essential when deploying PcVue on a RDS Host and using the recommended option Use a different working folder for all Remote Desktop Sessions in the station configuration.
+ 
+With Central Project Management
+ 
+If Central Project Management is used one of the command line arguments -r, -x or -d is added to the command line that starts PcVue. The command line argument controls the behavior at startup.
+ 
+ 
+The -r command line argument causes the Reference versions (REF) of the project and libraries to be automatically loaded. 
+ 
+The -x and -d command line arguments cause a dialog to be displayed at startup from where you can select the version before starting.
+ 
+ 
+In either case the project folder specific to the station, the common library, and the shared libraries are automatically updated with the selected version of the project before PcVue starts.
+ 
+ 
+Project folder - USR\WTS\<ProjectName>_<StationName>
+ 
+Common library - WTS_LIBS\<ProjectName>_<StationName>\BMP, PRG, SYM, WIN, WTP & TEMPLATES
+ 
+Shared libraries - WTS_LIBS\<ProjectName>_<StationName>\LIB
+ 
+ 
+Without Central Project Management
+ 
+If you do not use Central Project Management then the project folders and files, and library folders and files, must be manually copied from the base project folder to the project folders specific to each station. As there is nothing to indicate which folders are in use this can only be done safely with all instances of PcVue shut down. Moreover, this must be repeated after any modifications to the project or libraries.
+ 
+Conclusion
+ 
+Without using Central Project Management:
+ 
+ 
+It is necessary to duplicate the project for every instance of networking station. 
+ 
+It is necessary to duplicate the project before startup of the individual clients. 
+
+ 
+It is necessary to duplicate the project after every modification.
+ 
+ 
+
+ 
+Using Central Version Management should be considered essential to avoid errors managing the project in this environment.
+
+

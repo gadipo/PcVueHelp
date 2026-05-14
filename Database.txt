@@ -1,0 +1,5910 @@
+========================================
+TOPIC: Database_maintenance_plan_create.htm
+========================================
+How to create a maintenance plan
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Create a Maintenance Plan
+ 
+This topic is an overview of configuring a Maintenance Plan. See the topic related to each task for detailed information about it.
+ 
+ A Maintenance Plan consists of a schedule and a list of tasks.
+ 
+ 
+The schedule decides when and how often the Maintenance Plan runs.
+ 
+The list of tasks determines what the Maintenance plan does. The tasks are executed in a configured sequence. The first task in the sequence starts when the Maintenance Plan runs, the second task starts when the first has finished and so on.
+ 
+ 
+Each task is attached to either a specific database or the default database. Configuring a Maintenance plan takes place in three steps.
+ 
+ 
+Create the plan and configure the schedule.
+ 
+Select and configure the tasks.
+ 
+Define the sequence in which those tasks are executed.
+ 
+ 
+Creating the Maintenance Plan and configuring the schedule
+ 
+ 
+Open the Application Explorer and select the Maintenance Plan folder.
+ 
+From the task list, select Add a maintenance plan. The Maintenance Plan dialog opens with a default configuration. 
+ Show picture
+
+ 
+Edit the Name and Description as required and select the Apply button to create a new Maintenance Plan.
+ 
+Edit the schedule on which the Maintenance Plan operates. The schedule is edited by selecting the ellipsis button adjacent to the schedule description. For information on editing the schedule, see the book on the Task Scheduler.
+ 
+Enter the name of bit variable to be used to indicate the status of the Maintenance Plan. The bit will be set to 1 while the plan is executing, otherwise it will be 0. The status variable is optional.
+ 
+If the Maintenance Plan is running in a multi-station environment, select the Server Network List that will determine on which server it is operational. The Server Network List property is found in the Networking tab. 
+ 
+Select the OK button to apply the change to the schedule and close the Maintenance Plan dialog.
+ 
+ 
+
+ 
+You have to create a Maintenance Plan with a default schedule before you are able to edit and save a schedule specific to your requirements.
+ 
+ 
+Selecting and configuring the tasks
+ 
+ 
+Select a previously configured Maintenance Plan and from the task list select Add a maintenance task. The Maintenance task dialog opens. Show picture
+
+ 
+Select the type of task and the database on which it will operate. You can select the default database by ticking the Use default database option.
+ 
+Some tasks require further configuration in which case an additional tab will be displayed. For information on task specific options, see the following topics.
+Export task
+Purge task
+Defrag task
+Shrink task
+Custom task
+ 
+Select the OK button to confirm the configuration and close the dialog.
+ 
+ 
+Defining the sequence in which the tasks are executed
+ 
+Making sure that the tasks are executed in the correct sequence is important. For example, you would probably want to Export before you Purge and then possibly finish with a Defrag and a Shrink. By default, tasks are executed in the sequence in which they are configured. To change the order of execution you can use the task's Sequence property. All tasks, except the last, are sequenced by selecting the previous task name. The last task to be executed has the sequence of Last. For this reason, it is easiest leave the task sequencing until you have configured all the tasks for a particular Maintenance Plan.
+ 
+This is best illustrated using the example of four tasks just mentioned.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Task type
+ Task name
+ Sequence
+ 
+ 
+
+ Export
+ EXPORT
+ &#160;
+ 
+ 
+
+ Purge
+ PURGE
+ EXPORT
+ 
+ 
+
+ Defrag
+ DEFRAG
+ PURGE
+ 
+ 
+
+ Shrink
+ SHRINK
+ Last
+ 
+ 
+ 
+ 
+The order in which the tasks are executed is indicated by a number in the configuration dialog. In the following picture, the EXPORT task has been configured last but it is to be executed first and hence the order of execution is not the same as that of configuration. Show picture
+ 
+
+ 
+ 
+ 
+Other Maintenance Plan options
+ 
+ 
+Stop maintenance plan if task fails - Stops the current execution of the Maintenance Plan in case of error. PcVue will attempt to run the Maintenance Plan again at the next scheduled time. 
+ 
+ 
+
+ 
+There is no indication that the Maintenance Plan has stopped due to a failure.
+
+
+========================================
+TOPIC: Database_maintenance_plan_custom_task.htm
+========================================
+Maintenance Plan - Custom task
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Maintenance Plan - Custom task
+ 
+The Custom Task allows a Transact-SQL script to be run on the selected database. Transact-SQL is Microsoft's proprietary extension to the SQL language.
+ 
+How to configure a custom task
+ 
+ 
+Open the Application Explorer and from the configuration tree select the Maintenance Plan to which the maintenance task is to be attached.
+ 
+ From the task list, select Add a maintenance task. The Maintenance Task Configuration dialog opens. 
+ 
+Using the Task drop down list box select Custom. A Custom tab appears in the dialog. Select the tab.
+ Show picture
+
+ 
+Enter the Transact-SQL script in the Custom script text box.
+ 
+Click OK 
+ to confirm the configuration and close the dialog.
+ 
+ 
+
+ 
+
+ 
+The syntax or contents of the script is not checked, the software just acts as a pipe to deliver the script to the SQL Database where it is actually executed.
+
+
+========================================
+TOPIC: Database_maintenance_plan_defrag_task.htm
+========================================
+Maintenance Plan - Defrag Task
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Maintenance Plan - Defrag Task
+ 
+The Defrag Task defragments a database's indexes. Fragmentation exists when indexes have pages in which the logical ordering does not match the physical ordering inside the data file. When indexes are first built, no fragmentation exists but over time, as data is inserted, updated and deleted, fragmentation begins to rise.
+ 
+The Defrag Task is only available with SQL Server databases and has no configurable options.
+
+
+========================================
+TOPIC: Database_maintenance_plan_export_task.htm
+========================================
+Maintenance Plan - Export Task
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Maintenance Plan - Export Task
+ 
+The Export Task is for the 
+ export of records for backup purposes or for use in a 3rd party product such 
+ as Microsoft Excel. Exporting records does not remove them from the database. When 
+ an export takes place, only tables that have the property Can 
+ be exported set are included.
+ 
+Records can be exported as text, XML, or in Microsoft's 
+ ADTG (advanced Data TableGram) format. 
+ 
+
+ 
+There is no mechanism in the HDS to import previously 
+ exported records.
+ 
+ 
+
+ 
+
+ 
+ 
+How to configure an export task
+ 
+ 
+Open the Application Explorer and from the configuration tree select the Maintenance Plan to which the maintenance task is to be attached.
+ 
+From the task list, select Add a maintenance task. The Maintenance Task Configuration dialog opens.
+ 
+Using the Task drop down list box select Export. An Export tab appears in the dialog. Select the tab.Show picture
+
+ 
+Select the period of data for export. You can select the units from minutes, hours, days, weeks, months or years. For information about the Export time shift field see below.
+ 
+Either tick the Use 
+ default folder property or enter the path to which the export files will 
+ be sent. You can type in the path or select it using the browse 
+ button. 
+ 
+Select the export format. If text format is selected, there are some further options that can be configured - see below.
+ 
+Click OK 
+ to confirm the configuration and close the dialog.
+ 
+ 
+
+ 
+The default export folder, EXPORT, is located in the Databases folder.
+ 
+ 
+
+ 
+The time used by the scheduler to trigger a Maintenance Plan is local time, whereas the time in records of the database is UTC (Coordinated Universal Time).
+ 
+ 
+Exporting data in text Format
+ 
+The following options are available when exporting data 
+ in text format.
+ 
+ 
+Include column headers 
+ - If selected the first line of the text file contains the names of the 
+ tables column headers.
+ 
+Delimiter - The character 
+ used to separate fields on each line. The default is a semi-colon.
+ 
+Substitution string 
+ for null value - A string that is substituted for any fields that are 
+ blank.
+ 
+ 
+Text format records are exported as follows.
+ 
+ 
+A sub-folder with 
+ the same name as the database is created under the export path.
+ 
+One sub folder for 
+ each configured table is created under the database folder. 
+ 
+One text file, with 
+ the name constructed from the time at which the export was initiated, 
+ is created under each table folder.
+ 
+Each text file contains 
+ a number of lines, each line representing one record in a table.
+ 
+Each line will contain 
+ a number of fields, separated by a delimiter, representing the values 
+ in a record.
+ 
+ 
+The file name is constructed as follows: YYYYMMDDHHMM.EXT
+ 
+Where YYYY is the year as four digits, MM is the month 
+ number as two digits, DD is the day number as two digits, HH is the hour 
+ as two digits and MM is the minute as two digits. EXT is the configured 
+ file extension. For example, 200205191200.dat, would represent a file 
+ created on the 19th of May 2002 at midday.
+ 
+
+ 
+ 
+ 
+
+ 
+The property Substitution string 
+ for null value must be left empty if you export data in text format in order to re-import it using the Database Import tool.
+ 
+ 
+Using the Export time shift option
+ 
+The data that is exported can be offset using the Export time shift option. For example if you export 7 days of data with an Export time shift of 5 days the export run from 00:00 12 days ago to 00:00 5 days ago.
+ 
+
+ 
+ 
+ 
+Offsetting the data that is exported can be very useful under certain conditions. Take for example the situation where the system is just recovering after a failure. If the schedule requires that an export is executed immediately, and there is no offset, there is no opportunity to replace any missing data using the Database Manager replication process. If however, a 5 day offset was configured the user has up to 5 days to replace missing data before it is due for export.
+
+
+========================================
+TOPIC: Database_maintenance_plan_overview.htm
+========================================
+Overview of database maintenance plans
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Database Maintenance Plans
+ 
+A Maintenance Plan is used to automatically execute maintenance tasks on one or more of the database's used by PcVue.
+ 
+Each Maintenance Plan consists of a schedule and a list of tasks.
+ 
+ 
+The schedule decides when and how often the Maintenance Plan runs.
+ 
+The list of tasks determines what the Maintenance plan does. The tasks are executed in a configured sequence. The first task in the sequence starts when the Maintenance Plan runs, the second task starts when the first has finished and so on.
+ 
+ 
+The following tasks are available.
+ 
+ 
+Purge - Limits the age of records in the database by deleting those older than a defined period. Equivalent to the functionality provided by the Database Purge tab in version 8.10.
+ 
+Export - Exports data from the database, for a defined period, in either text, ADTG or XML formats. Equivalent to the functionality provided by the Database Export tab in version 8.10.
+ 
+Defrag - Defragments the database's index. Only available for SQL Server databases.
+ 
+Custom - Executes a custom Transact-SQL script. Only available for SQL Server databases.
+ 
+Shrink - Removes unused space allocated in the Database's files reducing the space occupied on the storage device. Only available for SQL Server databases.
+ 
+ 
+Each task is attached to a particular database. A single Maintenance Plan can execute tasks on one or more databases.
+ 
+For multi-station applications, a Maintenance Plan may be attached to a server station list thereby selecting the stations on which it is executed.
+ 
+Typical uses of the Maintenance plan are:
+ 
+ 
+Ensuring that the database does not reach its maximum size (at which point data recording would stop).
+ 
+Making sure that the database operates at maximum efficiency by regular defragmentation and shrinking (removing unused allocated space).
+ 
+Periodically exporting the data for archive purposes or access by another application.
+ 
+ 
+The functionality provided by Database Maintenance Plans replaces that of the Maintenance and Export tabs of the Database configuration dialog in versions of PcVue earlier than 8.2. If a project created by version 8.10, is opened in 8.2 or later, the database maintenance and export configuration is converted to the equivalent Maintenance Plan.
+ 
+From version 11.2 onwards, when a maintenance plan is produced by an association of redundant servers, it is only executed on the active servers of the association. Prior to 11.2 such maintenance plans were executed on all servers of the association, irrespective of their current status (active or passive) at the time of execution.
+ 
+
+ 
+If you shutdown the software whilst a Maintenance Plan is running, the current task is completed but any remaining tasks are not started.
+
+
+========================================
+TOPIC: Database_maintenance_plan_purge_task.htm
+========================================
+Maintenance Plan - Purge Task
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Maintenance Plan - Purge Task
+ 
+The Purge Task limits the size of the database by purging (deleting) older records. The space that those records occupied is then available to the database for new records. The space is not released to the operating system unless the database is shrinked. You configure the oldest data that remains as a number of hours, days, weeks etc. For example 3 months. 
+ 
+
+ 
+Only tables that have the property Can be purged set will be included when a purge takes place.
+ 
+ 
+How to configure a purge task
+ 
+ 
+Open the Application Explorer and from the configuration tree select the Maintenance Plan to which the maintenance task is to be attached.
+ 
+From the task list, select Add a maintenance task. The Maintenance Task Configuration dialog opens.
+ 
+Using the Task drop down list box select Purge. A Purge tab appears in the dialog. Select the tab.
+ Show picture
+
+ 
+Configure the time limit by entering a value for the Oldest data. You can select the units from minutes, hours, days, weeks, months or years. 
+ 
+Click OK 
+ to confirm the configuration and close the dialog.
+
+
+========================================
+TOPIC: Database_maintenance_plan_shrink_task.htm
+========================================
+Maintenance Plan - Shrink Task
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Maintenance Plan - Shrink Task
+ 
+The Shrink Task compacts the database, physically reorganizing the data, so that any space that is allocated and no longer used is released to the operating system. Shrinking the database 
+ can also result in an improvement in performance as it reduces the size 
+ of the database and increases its efficiency.
+ 
+The Shrink Task is only available with SQL Server databases and has no configurable options.
+ 
+Shrinking a SQL Server database
+ 
+With a SQL Server database, a built-in mechanism evaluates 
+ unused space and compacts the database automatically. This has the advantage 
+ of taking place as a background activity whenever system time is available, 
+ but does not completely release of all the unused space.
+ 
+The Shrink Task performs a more thorough compaction process releasing the maximum amount of space. However, this can be very time consuming and is only recommenced where database performance is critical.
+
+
+========================================
+TOPIC: Database_wizard_overview.htm
+========================================
+Overview of the database creation wizard
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the Database Creation Wizard
+ 
+The Database Creation Wizard guides you through the process 
+ of configuring data recording using the Historical Data Server. For more 
+ information on how HDS works, see the topic About 
+ the HDS. 
+ 
+To start the Database Creation Wizard open the Application Explorer and expand the configuration tree to select the Archives folder. Select Database 
+ creation wizard from the task list. The five main steps when using 
+ the Database Creation Wizard are:
+ 
+ 
+Database configuration
+ 
+Default data connection 
+ 
+ 
+Table configuration
+ 
+Trend group configuration
+ 
+Archive unit and 
+ log list configuration
+ 
+ 
+Step 2 - Default Data Connection, is only required if 
+ you have not already created a default data connection. See the topic 
+ Databases Settings.
+ 
+After step 2 (or step 1 if a default data connection 
+ has already been configured) you can use the Finish 
+ button and the remainder of the configuration will be automatically completed 
+ using default settings.
+ 
+
+ 
+The use of the Database Creation Wizard is highly recommended, 
+ particularly for those unfamiliar with the Historical Data Server module, 
+ as it simplifies configuration considerably. 
+ 
+ 
+
+ 
+Starting with version 11.2, SQL Server Database is created with a recovery model set to Simple. This should be adequate for many projects, in particular in scenario when emergency purge is enabled.
+ 
+Depending on your policy for replication and purge, the recovery model may need to be changed. Pay attention to the fact that with the default settings for the emergency purge, there is the possibility of data corruption and data loss if the backup-model of the SQL Server database is set to Full-Backup.
+
+
+========================================
+TOPIC: Database_wizard_Step_1.htm
+========================================
+Step 1 - database configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step 1 - Database Configuration
+ 
+In the first step of the Database Creation Wizard, you 
+ choose the name by which the database will be known and optionally select 
+ client and server lists. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+When you have completed this step click Next 
+ to proceed to Step 2 - 
+ default data connection, or Finish 
+ to complete the configuration using default settings.
+ 
+
+ 
+If you have already configured a default data connection, 
+ clicking Next 
+ will take you straight to Step 3 - table configuration.
+ 
+ 
+Entering the name for the database
+ 
+The wizard suggests a name for the database in the form 
+ of DATABASEn where n is a number from 1 upwards. You can accept the standard 
+ name or choose one of you own. The database name should be limited to 
+ nine characters as it is used later in the wizard to construct the archive 
+ unit name by prefixing it with DB_. The archive unit name is limited to 
+ 12 characters.
+ 
+Selecting client and server lists
+ 
+The client and server lists only need to be configured 
+ if you are using client-server archive units. For more information, see 
+ the book Using 
+ client-server archive units.
+
+
+========================================
+TOPIC: Database_wizard_Step_2.htm
+========================================
+Step 2 - Default data connection
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step 2 - Default Data Connection
+ 
+In the second step of the Database Creation Wizard, you 
+ configure the default data connection properties. Show picture 
+ If you have already created a default data connection, this step is omitted.
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+In the Data 
+ source drop down list box, select either Microsoft Access or Microsoft 
+ SQL Server. If you select Microsoft SQL Server then you must also click 
+ the Configure 
+ button to configure the connection - see below. When you have completed 
+ this step click Next 
+ to proceed to Step 3 - table 
+ configuration.
+ 
+How to configure the connection to a Microsoft SQL 
+ Server
+ 
+ 
+Enter the server 
+ path. In version 8.10 of PcVue you must type in the name as the 
+ server browse capability is not enabled. 
+If you are using a local server, you must use a relative path, for example 
+ .\SQLEXPRESS. 
+If you are using a remote server then you must use an absolute path, 
+ for example PIPPIN2\SQLEXPRESS.
+ 
+By default, the HDS 
+ uses Windows authentication. If required you can change to SQL Server 
+ authentication in which case you must enter a user name and password.
+ 
+Confirm the configuration 
+ by clicking the OK 
+ button.
+
+
+========================================
+TOPIC: Database_wizard_Step_3.htm
+========================================
+Step 3 - table configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step 3 - Table Configuration
+ 
+In the third step of the Database Creation Wizard, you 
+ choose the name of the database tables in which the HDS will record 
+ data. You must choose the name for two tables, a trend table used to record 
+ trend (historic) data and a log table used to record events. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+Each table has a number of columns in which data is recorded. 
+ Some columns are mandatory and are pre-selected, while others are optional. 
+ When you have completed this step click Next 
+ to proceed to Step 4 - 
+ trend group configuration, or Finish 
+ to complete the configuration using default settings.
+ 
+Choosing the table names
+ 
+The wizard suggests a name for the two tables in the 
+ form of TRENDTABLEn and LOGTABLEn where n is a number from 1 upwards. 
+ You can accept the suggested name or choose one of your own. Table names 
+ are limited to 32 characters.
+ 
+Selecting what properties are recorded
+ 
+The properties that are recorded in each table can be 
+ chosen using the Select 
+ columns button adjacent to the table name. Show picture 
+ For more information on what can be recorded, see the topic What 
+ can you record in the book about configuring database tables. 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+The table configuration determines what properties are 
+ recorded for each eligible event (for example domain, nature etc.). The 
+ events that are eligible to be recorded are configured elsewhere.
+
+
+========================================
+TOPIC: Database_wizard_Step_4.htm
+========================================
+Step 4 - trend group configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step 4 - Trend Group Configuration
+ 
+In the fourth step of the Database Creation Wizard, you 
+ configure the trend group. The trend group determines the rate at which 
+ trend data is recorded. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+When you have completed this step click Next 
+ to proceed to Step 
+ 5 - archive unit and log list configuration, or Finish 
+ to complete the configuration using default settings.
+ 
+
+ 
+If a trend group already exists this stage is omitted.
+ 
+ 
+Choosing the trend group name
+ 
+The wizard suggests a name for trend group in the form 
+ of TRENDGROUPn where n is a number from 1 upwards. You can accept the 
+ suggested name or choose one of your own. Trend group names are limited 
+ to 32 characters.
+ 
+Selecting the trend group properties
+ 
+The trend group properties affect the rate at which trend 
+ data is recorded. For more information, see the topic Configuring 
+ a trend group.
+
+
+========================================
+TOPIC: Database_wizard_Step_5.htm
+========================================
+Step 5 - archive unit and log list configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Step 5 - Archive Unit and Log List Configuration
+ 
+In the fifth and final step of the Database Creation 
+ Wizard, you choose the name of the archive unit and the name and configuration 
+ of the Log List. Show picture
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+The configuration of the Log List determines what types 
+ of events are recorded in the particular database. When you have completed 
+ this step click Finish 
+ to complete the configuration and close the wizard.
+ 
+Choosing the archive unit name
+ 
+The wizard suggests a name for the archive unit in the 
+ form of DB_<Database Name> where <Database Name> is the name 
+ of the database previously configured. You can accept the suggested name 
+ or choose one of your own. Archive unit names are limited to 12 characters.
+ 
+Configuring the log list
+ 
+The wizard suggests a name for the log list in the form 
+ of LISTn where n is a number from 1 upwards. You can accept the suggested 
+ name or choose one of your own. Log list names are limited to 12 characters.
+ 
+To select the types of events that will be recorded in 
+ the database using the log list click the Select 
+ events button and tick the corresponding tick box in the Select 
+ events dialog. Show picture
+
+
+========================================
+TOPIC: Databases_conf_connection.htm
+========================================
+Configuring a database
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a Database 
+ 
+The configuration of a database creates the physical files in which it records data and specifies how to connect to it. For the connection, you can choose to use the default data connection, or configure a specific Microsoft Jet (Access) or Microsoft SQL Server data connection.
+ 
+
+ 
+For information on how to configure an ODBC database, see the topic Configuring an ODBC database.
+ 
+ 
+
+ 
+Starting with version 11.2, SQL Server Database is created with a recovery model set to Simple. This should be adequate for many projects, in particular in scenario when emergency purge is enabled.
+ 
+Depending on your policy for replication and purge, the recovery model may need to be changed. Pay attention to the fact that with the default settings for the emergency purge, there is the possibility of data corruption and data loss if the backup-model of the SQL Server database is set to Full-Backup.
+ 
+ 
+How to a configure a database using the default database connection
+ 
+ 
+Open the Application Explorer and expand the configuration tree to select the Databases folder.
+ 
+From the task list, select Add a database. The Database Configuration dialog appears. Show picture
+
+ 
+Enter the name by which the database will be known. You can enter an optional description about the database in the Description field.
+ 
+Tick Use default data connection. For information on how the default connection is configured see the topic Databases settings.
+ 
+Click the OK button to confirm the configuration and close the dialog.
+ 
+ 
+How to configure a specific Microsoft Jet (Access) database
+ 
+ 
+Repeat steps 1 to 3 above.
+ 
+In the Data source drop down list box, select Microsoft Access.
+ 
+Click the OK button to confirm the configuration and close the dialog.
+ 
+ 
+How to a configure a specific Microsoft SQL Server database
+ 
+ 
+Repeat steps 1 to 3 above.
+ 
+In the Data source drop down list box, select the Microsoft SQL Server driver you want to use
+ 
+
+Microsoft SQL Server MSOLEDBSQL to connect to an SQL Server database using the MSOLEDBSQL driver (recommended).
+
+Microsoft SQL Server SQLOLEDB to connect to an SQL Server database using the SQLOLEDB driver.
+ 
+Click the Configure button to open the Connection dialog. Show picture
+
+Select or enter the server name. The browse button adjacent to this field opens a list of available local and network servers. If you are using a local server, you must use a relative path, for example .\SQLEXPRESS. If you are using a remote server then you must use an absolute path, for example MyComputerHost\SQLEXPRESS.
+By default, the HDS uses Windows authentication. Using the Authentication list box you can alternatively select SQL Server authentication in which case you must also enter a User name and Password.
+Check the configuration using the Test connection button that attempts to establish a temporary connection to the server.
+In the Connection properties tab, select an existing database if you want it to be used, or enter a new database name.
+(MSOLEDBSQL driver) Tick Encrypt connection if you want to ensure confidentiality and integrity.
+Click the OK button to confirm the configuration and close the dialog.
+ 
+Click the OK button to confirm the configuration and close the Database Configuration dialog.
+ 
+ 
+
+ 
+Version 19 or earlier of the MSOLEDBSQL driver is supported.
+ 
+Depending on your specific setup, the driver may already be installed on the computer thanks to the installation of SQL Server or the SQL Server Management Studio, or you may need to install it.
+In all cases, make sure it is installed on the target host computers prior to using it with HDS.
+For more information and download, refer to https://learn.microsoft.com/sql/connect/oledb/release-notes-for-oledb-driver-for-sql-server
+ 
+ 
+
+ 
+To take advantage of an encrypted communication channel, SQL Server must be setup to work with TLS and digital certificates.
+For more information, refer to https://learn.microsoft.com/sql/database-engine/configure-windows/certificate-overview
+ 
+ 
+Where are the database stored and how are they named?
+ 
+By default, the database files are created in a folder called Databases, stored under PcVue's root folder. You can change the database location using the Database Properties dialog. See the topic Database Settings for more information.
+ 
+By default, the name of the database file follows the form <Project name>_<Database name>. If you de-select the property Prefix database name with project name then the project name is not used. The file type depends on the type of database selected and will be .MDB for Microsoft Jet and .MDF for Microsoft SQL Server.
+ 
+
+ 
+To ensure archiving of data, it is important to monitor database connection status using HDS Status Variables and have an alarm accessible to operators should a connection issue occurs at runtime.
+ 
+In particular, you should be warned that while a built-in mechanism exists to buffer data and re-establish a connection automatically, this built-in mechanism is only activated after a first connection is successful. It means that if the initial connection at PcVue startup fails, one need to act to fix the issue - the database may not exist, the RDBMS service may not be running or the network setup including firewall rules may have changed - and restart PcVue.
+
+
+========================================
+TOPIC: Databases_configuring_trend_or_log_table.htm
+========================================
+Configuring a trend or log table
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a Trend or Log Table
+ 
+You can configure one or more Trend Tables and/or Log Tables for 
+ each configured database. Each table has a number of columns in which 
+ data is recorded. Some columns are mandatory and are pre-selected, while 
+ others are optional. 
+ 
+Show picture
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+How to create a Trend Table
+ 
+ 
+Open the Application Explorer and expand the configuration 
+ tree selecting the Databases folder. Select a folder representing a previously configured database.
+ 
+Expand the database 
+ folder and select the Trend tables folder.
+ 
+From the task list, 
+ select Add 
+ a trend table or Add a log table. The Trend Table Configuration 
+ dialog appears.
+ 
+Enter a name for 
+ the table.
+ 
+The tables have a 
+ number of mandatory columns plus some optional ones. Only the optional columns are displayed by default. Select the columns 
+ corresponding to any optional data you want to record. See the topic What 
+ properties can you record for more information about what columns are available. 
+ 
+Select Set 
+ as default if the table will be used as the default.
+ 
+Select Can 
+ be exported if you want the table to be included when exporting 
+ the database.
+ 
+Select Can 
+ be purged if you want the table to be purged when purging the 
+ database. If ticked, records will be deleted from the table when a maintenance plan including a purge is executed, and also in case of an emergency purge of the database.
+ 
+Click the OK 
+ button to confirm the configuration and close the dialog.
+ 
+ 
+The process for creating a Log Table is the same except that it takes place within the Log Tables folder.
+ 
+
+ 
+&#160;PcVue must be restarted before any modifications 
+ to tables become available.
+ 
+ 
+Modifying a table
+ 
+You can add columns after a table is created, but you cannot remove any. The only means to remove a column is to delete the table and recreate a new configuration. Any data already stored is lost.
+
+
+========================================
+TOPIC: Databases_deleting_connection_to_a_database_file.htm
+========================================
+Deleting a database
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Deleting a Database
+ 
+You can delete a connection to a database file by clicking 
+ on its name in the Application Explorer and, from the task list, 
+ selecting the Remove 
+ task, A dialog will appear asking you confirm deletion of the database. 
+ Clicking Yes 
+ will complete the operation, clicking No 
+ will close the dialog without any action.
+ 
+Deleting the database files
+ 
+Deleting a connection to a database does not delete the 
+ database itself. 
+ 
+ 
+To delete a Jet database 
+ you just need to delete the physical files (.MDB) in the Database folder. 
+ 
+ 
+To delete an SQL 
+ Server database you must use a database management tool such as SQL Server 
+ Management Studio Express or PcVue's Database Manager. These 
+ tools delete both the physical files and the registration of the database 
+ in SQL Server.
+
+
+========================================
+TOPIC: Databases_in_the_ae.htm
+========================================
+Managing databases in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing Databases in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks available when the Databases folder is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a database
+ Add a database to the archives configuration.
+ 
+ 
+
+ 
+ 
+ 
+ Add an ODBC database
+ Add an ODBC database to the archives configuration.
+ 
+ 
+
+ 
+ 
+ 
+ Settings
+ Display the Databases general settings dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Database wizard
+ Run the Database Wizard.
+ 
+ 
+ 
+ 
+Tasks available when a database is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected database.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Database Properties dialog
+ 
+ 
+ 
+ 
+Tasks available when the Trend Table folder is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a trend table
+ Add a trend table to the database.
+ 
+ 
+ 
+ 
+Tasks available when a trend table selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected trend table.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the Trend Table Properties dialog.
+ 
+ 
+ 
+ 
+Tasks available when the Log Table folder is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a log table
+ Add a log table to the database.
+ 
+ 
+ 
+ 
+Tasks available when a log table selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected log table.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the Log Table Properties dialog.
+ 
+ 
+ 
+ 
+Tasks available when the Maintenance Plan folder is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a maintenance plan
+ Add a maintenance plan to the Databases folder.
+ 
+ 
+ 
+ 
+Tasks available when a maintenance plan is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected maintenance plan.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the Maintenance Plan Properties dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Add a task
+ Add a task to the selected maintenance plan.
+ 
+ 
+ 
+ 
+Tasks available when a maintenance task is selected
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Remove the selected maintenance task.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Display the Maintenance Task Properties dialog.
+ 
+ 
+ 
+ 
+Rules and behavior of cut, copy and paste
+ 
+The following table describes the rules and behavior when using cut and paste, or copy and paste, on configuration objects in the Databases folder.
+ 
+ 
+ 
+ 
+ 
+
+ Databases object 
+ Notes
+ 
+ 
+
+ Log table
+ The pasted Log Table must have a unique name within the particular database.
+
+ 
+ 
+
+ Trend table
+ 
+ 
+The pasted Trend Table must have a unique name within the particular database.
+ 
+ 
+ 
+
+ Database
+ 
+ 
+Any subordinate Log tables are duplicated with the same name.
+ 
+Any subordinate Trend Tables are duplicated with the same name.
+ 
+ 
+ 
+
+ Trend groups
+ The pasted Trend Group must have a unique name.
+ 
+ 
+ 
+ 
+
+ 
+Pasting any of the configuration objects from the Databases folder only creates the configuration. It does not paste any historical data that may have been recorded by the original object.
+ 
+If you cut and paste a Database the data recorded in the original Database will be lost.
+
+
+========================================
+TOPIC: Databases_limiting_SQL_Server_database_size.htm
+========================================
+Limiting the Size of an SQL Server Database
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Limiting the Size of an SQL Server Database
+ 
+The main mechanism for controlling database growth is 
+ by limiting the age of its records. In addition, in the SQL Server tab, 
+ you can configure a maximum size for the database. When the 
+ database reaches this size, recording will temporarily stop. If the maximum 
+ database size is set to zero then the maximum size limit is inoperative.
+ 
+What happens if a database reaches its maximum size?
+ 
+If a database reaches its maximum size recording is stopped. 
+ However, the HDS is still able to retrieve data for the display in the 
+ Trend and Log Viewers. 
+ 
+Recording starts again as soon as the database drops 
+ below its maximum size. This will happen at the next background shrink 
+ or the next scheduled purge of older records. 
+ 
+What happens if I change the size of an already configured database?
+ 
+The following behavior occurs if you change the Maximum size property, in the SQL Server Tab, for an already configured database.
+ 
+ 
+
+ 
+The size of the database is not actually changed but the new size is taken into account when executing an emergency purge.
+ 
+ 
+
+ 
+If the Autogrow setting on the SQL instance is set to its default, the database will progressively grow up to the new size (if the new configured size is larger than the old one).
+ 
+ 
+ 
+If the new size is smaller you will make the chance of an emergency purge occurring more likely, or at least sooner, than with the old size.
+ 
+Using the emergency purge mechanism
+ 
+When using an SQL Server database you can configure an emergency purge whereby a percentage of the oldest records are automatically 
+ deleted before the database reaches the maximum size. 
+ 
+
+ 
+The emergency purge cycle is for emergency use only. It is optimized for speed and during the cycle the system will become very busy and access to the database may be blocked. A better way to limit the database size is by purging, that is to use the maintenance purge task, which is designed not to block access.
+ 
+The Data volume to purge (in %) is applied individually on each table of the database having the Can be purged property ticked. If you have configured 4 tables in a database, including only 3 that are configured to be subject to purge, and a Data Volume to purge at 20%, the 20% eldest records will be deleted from these 3 tables upon an emergency purge of the database; the 4th table that cannot be purge will not be affected by any record deletion.
+ 
+ 
+ 
+Select the database 
+ SQL 
+ server tab. Show picture
+
+ 
+Enter a value for 
+ the maximum size of the database in megabytes. A value of zero means there 
+ will be no size limitation.
+ 
+Tick the property, Enable emergency purge.
+ 
+Enter a value, in 
+ percent, for how full the database must be before the purge takes place. 
+ 
+ 
+Enter the percentage 
+ of records that will be deleted when an emergency purge takes place.
+ 
+Click OK to confirm the configuration.
+
+
+========================================
+TOPIC: Databases_properties_can_you_record.htm
+========================================
+What properties can you record?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+What Properties can you Record?
+ 
+The following table lists the mandatory and optional data columns that you can select when configuring the database tables for log and trend data in the HDS.
+ 
+Trend table
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Column
+ Data type
+ Size in bytes
+ Mandatory
+ Description
+ 
+ 
+
+ Chrono
+ Bigint
+ 8
+ Yes
+ The timestamp of the record in numeric format in the form of a FILETIME* data structure. The time is always in UTC.
+ 
+ 
+
+ Name
+ 
+ Varchar
+ 255
+ Yes
+ The name of the variable.
+ 
+ 
+
+ Value
+ Float
+ 8
+ Yes
+ The value of the variable if it is of type bit or register.
+ 
+ 
+
+ Quality
+ Smallint
+ 2
+ Yes
+ The quality flags for the variable.
+ 
+ 
+
+ AlarmLevel
+ Smallint
+ 2
+ Yes
+ The priority level for an alarm variable in the range 0 to 29.
+ 
+ 
+
+ AssocLabel
+ Varchar
+ 255
+ Yes
+ The name of the associated label.
+ 
+ 
+
+ BinAttr
+ Int
+ 4
+ No
+ The variable's extended binary attribute.
+ 
+ 
+
+ Description
+ Varchar
+ 255
+ No
+ The description (title) of the variable (depends on the language selected).
+ 
+ 
+
+ Domain
+ Varchar
+ 100
+ No
+ The variable's domain.
+ 
+ 
+
+ Nature
+ Varchar
+ 100
+ No
+ The variable's nature.
+ 
+ 
+
+ NumParam
+ Float
+ 8
+ Yes
+ Complimentary numeric format information.
+ 
+ 
+
+ StationNumber
+ Smallint
+ 2
+ No
+ Either the number of the active producer station for the variable (e.g. for Bit transition) or the number of the station on which the event occurred (e.g. for Command Send).
+ 
+ 
+
+ TextAttr03 to 16
+ Varchar
+ 100
+ No
+ The variable's extended text attributes (A3 to A16).
+ 
+ 
+
+ TextIndAttr03 to 6
+ Varchar
+ 255
+ No
+ The variable's deferred extended text attributes. When using a deferred extended text attribute the value of the variable named in the attribute is recorded.
+ 
+ 
+
+ TextParam
+ Varchar
+ 255
+ Yes
+ Complimentary text format information. The value sent for a text send, the name of the function for a program send or the recipe title for a recipe send.
+ 
+ 
+
+ TS
+ Datetime
+ 8
+ No
+ The time at which the recorded value last changed in date and time format. The time is always in UTC.
+ 
+ 
+
+ TStype
+ Smallint
+ 2
+ No
+ 
+ 
+The type of timestamp in the TS column.
+0 = Timestamped by PcVue.
+ 
+1 = Timestamped at the source (using a timestamped protocol).
+ 
+2 = Timestamp from source was invalid, PcVue's timestamp used instead.
+Null = PcVue shutdown.
+ 
+ 
+ 
+
+ VarType
+ Smallint
+ 2
+ No
+ The type of variable. See table of values below.
+ 
+ 
+ 
+Log table
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Column
+ Data type
+ Size in bytes
+ Mandatory
+ Description
+ 
+ 
+
+ Chrono
+ Bigint
+ 8
+ Yes
+ The timestamp of the record in numeric format in the form of a FILETIME* data structure. The time is always in UTC.
+ 
+ 
+
+ Loglist
+ Varchar
+ 100
+ Yes
+ The name of the Log List that was the source of the data.
+ 
+ 
+
+ AssocLabel
+ Varchar
+ 255
+ Yes
+ The name of the associated level.
+ 
+ 
+
+ EvtNumber
+ Bigint
+ 8
+ Yes
+ A number representing the event type. See table of values below.
+ 
+ 
+
+ EvtTitle
+ Varchar
+ 255
+ Yes
+ The event description from the associated label.
+ 
+ 
+
+ Name
+ Varchar
+ 255
+ Yes
+ The name of the variable.
+ 
+ 
+
+ Value
+ Float
+ 8
+ Yes
+ The value of the variable if it is of type bit or register.
+ 
+ 
+
+ ValueT
+ Varchar
+ 255
+ Yes
+ The value of the variable if it is of type text.
+ 
+ 
+
+ Quality
+ Smallint
+ 2
+ Yes
+ The quality flags for the variable.
+ 
+ 
+
+ AlarmLevel
+ Smallint
+ 2
+ Yes
+ The priority level for an alarm variable in the range 0 to 29.
+ 
+ 
+
+ AlarmState
+ Smallint
+ 2
+ Yes
+ The state for an alarm variable. See table of values below.
+ 
+ 
+
+ UserComment
+ Varchar
+ 40
+ Yes
+ The user comment (added using the Log Viewer).
+ 
+ 
+
+ Threshold
+ Float
+ 8
+ Yes
+ The threshold value for an alarm variable.
+ 
+ 
+
+ NumParam
+ Float
+ 8
+ Yes
+ Complimentary numeric format information. The value sent for a register send or the recipe identifier for a recipe send.
+ 
+ 
+
+ TextParam
+ Varchar
+ 255
+ Yes
+ Complimentary text format information. The value sent for a text or a register send, the name of the function for a program send or the recipe title for a recipe send.
+ 
+ 
+
+ Domain
+ Varchar
+ 100
+ No
+ The variable's domain.
+ 
+ 
+
+ Nature
+ Varchar
+ 100
+ No
+ The variable's nature.
+ 
+ 
+
+ Description
+ Varchar
+ 255
+ No
+ The description (title) of the variable (depends on the language selected).
+ 
+ 
+
+ StationNumber
+ Smallint
+ 2
+ No
+ Either the number of the active producer station for the variable (e.g. for Bit transition) or the number of the station on which the event occurred (e.g. for Command Send).
+ 
+ 
+
+ UserName
+ Varchar
+ 20
+ No
+ The name of the user on the station concerned.
+ 
+ 
+
+ TS
+ Datetime
+ 8
+ No
+ The time at which the recorded value last changed in date and time format. The time is always in UTC.
+ 
+ 
+
+ VarType
+ Smallint
+ 2
+ No
+ The type of variable. See table of values below.
+ 
+ 
+
+ TSType
+ Smallint
+ 2
+ No
+ 
+ 
+The type of timestamp in the TS column.
+0 = Timestamped by PcVue.
+ 
+1 = Timestamped at the source (using a timestamped protocol).
+ 
+2 = Timestamp from source was invalid, PcVue's timestamp used instead.
+Null = PcVue shutdown.
+ 
+ 
+ 
+
+ ThresholdValue
+ Float
+ 8
+ No
+ The threshold value for an alarm variable.
+ 
+ 
+
+ BinAttr
+ Int
+ 4
+ No
+ The variable's extended binary attribute.
+ 
+ 
+
+ TextAttr03 to 16
+ Varchar
+ 100
+ No
+ The variable's extended text attributes (A3 to A16).
+ 
+ 
+
+ TextIndAttr03 to 6
+ Varchar
+ 255
+ No
+ The variable's deferred extended text attributes. When using a deferred extended text attribute the value of the variable named in the attribute is recorded.
+ 
+ 
+ 
+* FILETIME is a 64 bit value representing the number of 100-nanosecond intervals since January 1, 1601.
+ 
+The EvtNumber column
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Event
+ Data value (Hex)
+ Data value (Dec)
+ 
+ 
+
+ No event
+ 0x00000000
+ 0
+ 
+ 
+
+ Alarm On, not acknowledged
+ 0x00000001
+ 1
+ 
+ 
+
+ Alarm On, acknowledged
+ 0x00000002
+ 2
+ 
+ 
+
+ Alarm Off, not acknowledged
+ 0x00000004
+ 4
+ 
+ 
+
+ Alarm Off, acknowledged
+ 0x00000008
+ 8
+ 
+ 
+
+ Alarm NS
+ 0x00000010
+ 16
+ 
+ 
+
+ Alarm masked by operator
+ 0x00000040
+ 64
+ 
+ 
+
+ Bit transition to 0
+ 0x00000200
+ 512
+ 
+ 
+
+ Bit transition to 1
+ 0x00000400
+ 1024
+ 
+ 
+
+ Command to 0
+ 0x00000800
+ 2048
+ 
+ 
+
+ Command to 1
+ 0x00001000
+ 4096
+ 
+ 
+
+ Bit transition to NS
+ 0x00001800
+ 6144
+ 
+ 
+
+ Alarm masked by program
+ 0x00008000
+ 32768
+ 
+ 
+
+ Alarm masked by a variable
+ 0x00010000
+ 65536
+ 
+ 
+
+ Alarm masked by an expression
+ 0x00020000
+ 131072
+ 
+ 
+
+ Send register
+ 0x00040000
+ 262144
+ 
+ 
+
+ Send text
+ 0x00080000
+ 524288
+ 
+ 
+
+ Forced by program
+ 0x00100000
+ 1048576
+ 
+ 
+
+ Alarm acknowledged by operator
+ 0x00200000
+ 2097152
+ 
+ 
+
+ Alarm not accessible
+ 0x00400000
+ 4194304
+ 
+ 
+
+ Alarm inhibited
+ 0x00800000
+ 8388608
+ 
+ 
+
+ User logon
+ 0x01000000
+ 16777216
+ 
+ 
+
+ User logoff
+ 0x02000000
+ 33554432
+ 
+ 
+
+ Attempt to log in
+ 0x04000000
+ 67108864
+ 
+ 
+
+ Operator action to mask an alarm
+ 0x08000000
+ 13421728
+ 
+ 
+
+ Operator action to unmask an alarm
+ 0x10000000
+ 268435456
+ 
+ 
+
+ Recipe send
+ 0x20000000
+ 536870912
+ 
+ 
+
+ Begin maintenance mode
+ 0x40000000
+ 1073741824
+ 
+ 
+
+ End maintenance mode
+ 0x80000000
+ 2147483648
+ 
+ 
+
+ Alarm On
+ 0x100000000
+ 4294967296
+ 
+ 
+
+ Alarm Off
+ 0x200000000
+ 80589934593
+ 
+ 
+ 
+ 
+The VarType column
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Type
+ 
+ 
+Data value (Hex)
+ 
+ Data value (Dec)
+ 
+ 
+
+ Bit
+ 0x0001
+ 1
+ 
+ 
+
+ Register
+ 0x0002
+ 2
+ 
+ 
+
+ Text
+ 0x0004
+ 4
+ 
+ 
+
+ Alarm
+ 0x0008
+ 8
+ 
+ 
+
+ Bit command
+ 0x0010
+ 16
+ 
+ 
+
+ Threshold
+ 0x0020
+ 32
+ 
+ 
+
+ Register command
+ 0x0040
+ 64
+ 
+ 
+
+ Counter
+ 0x0080
+ 128
+ 
+ 
+
+ Chrono
+ 0x0100
+ 256
+ 
+ 
+
+ Text command
+ 0x0200
+ 512
+ 
+ 
+ 
+ 
+The AlarmState column
+ 
+ 
+ 
+ 
+ 
+
+ Type
+ 
+ 
+Data value (Dec)
+ 
+ 
+ 
+
+ On and acknowledged
+ 2
+ 
+ 
+
+ On and not acknowledged
+ 3
+ 
+ 
+
+ Off 
+ 4
+ 
+ 
+
+ Off and not acknowledged
+ 5
+ 
+ 
+
+ Masked by user
+ 6
+ 
+ 
+
+ Invalid (NS)
+ 8
+ 
+ 
+
+ Inaccessible
+ 9
+ 
+ 
+
+ Inhibited
+ 10
+ 
+ 
+
+ Masked by program
+ 11
+ 
+ 
+
+ Masked by variable
+ 12
+ 
+ 
+
+ Masked by expression
+ 13
+ 
+ 
+
+ In maintenance mode
+ 14
+
+
+========================================
+TOPIC: Databases_settings.htm
+========================================
+Databases settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Databases Settings
+ 
+The databases settings are displayed by using the Settings task when the Databases folder is selected in the Application Explorer's configuration tree. Show picture
+
+ 
+Changing the location used for any HDS databases
+ 
+The default location for the folders and files used by an HDS database is the Databases folder located under the installation root folder. This location can be changed by deselecting Use default folder and entering the new location in the Folder field. PcVue must be shut down and restarted before the change is taken into account.
+ 
+
+ 
+Once an SQL database is created, the SQL Server handles the location of the files. Therefore changing the database path in the Archives Configuration Explorer will have no effect on an existing database. To change the location of an existing SQL database you must use the Database Manager to detach the database from the SQL Server, move the database files and use the Database Manager once again to reattach the database.
+ 
+ 
+Configuring the default database connection
+ 
+When you configure a database, you have the option to use a default database connection. Configuring and using a default database connection has two advantages.
+ 
+ 
+
+ 
+You only have to configure the default connection once but it can be used for any number of databases.
+ 
+ 
+
+ 
+If you change the default connection, it automatically changes everywhere it is used.
+ 
+ 
+ 
+How to configure the default database connection
+ 
+ 
+In the Data source drop down list box, select the data source and its associated driver:
+ 
+
+Microsoft SQL Server MSOLEDBSQL to connect to an SQL Server database using the MSOLEDBSQL driver (recommended).
+
+Microsoft SQL Server SQLOLEDB to connect to an SQL Server database using the SQLOLEDB driver.
+
+Microsoft Access.
+ 
+
+ 
+If you select a Microsoft SQL Server data source, then you must configure the connection using the Configure button that opens the Connection dialog. Show picture
+
+ 
+ 
+
+ 
+Select or enter the server name. The browse button adjacent to this field opens a list of available local and network servers. If you are using a local server, you must use a relative path, for example .\SQLEXPRESS. If you are using a remote server then you must use an absolute path, for example MyComputerHost\SQLEXPRESS.
+ 
+ 
+
+ 
+By default, the HDS uses Windows authentication. Using the Authentication list box you can alternatively select SQL Server authentication in which case you must also enter a User name and Password.
+ 
+ 
+
+ 
+Check the configuration using the Test connection button that attempts to establish a temporary connection to the server.
+ 
+ 
+
+ 
+In the Connection properties tab, select an existing database if you want it to be the default, or enter a new database name.
+ 
+ 
+
+ 
+(MSOLEDBSQL driver) Tick Encrypt connection if you want to ensure confidentiality and integrity.
+ 
+ 
+
+ 
+Confirm the configuration and close the Connection configuration dialog by clicking the OK button.
+ 
+ 
+ 
+ 
+
+ 
+Confirm the configuration and close the Settings dialog by clicking the OK button.
+ 
+ 
+ 
+
+ 
+Version 19 or earlier of the MSOLEDBSQL driver is supported.
+ 
+Depending on your specific setup, the driver may already be installed on the computer thanks to the installation of SQL Server or the SQL Server Management Studio, or you may need to install it.
+In all cases, make sure it is installed on the target host computers prior to using it with HDS.
+For more information and download, refer to https://learn.microsoft.com/sql/connect/oledb/release-notes-for-oledb-driver-for-sql-server
+ 
+ 
+
+ 
+To take advantage of an encrypted communication channel, SQL Server must be setup to work with TLS and digital certificates.
+For more information, refer to https://learn.microsoft.com/sql/database-engine/configure-windows/certificate-overview
+
+
+========================================
+TOPIC: Databases_tables_overview.htm
+========================================
+Database tables overview
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Database Tables Overview
+ 
+Data is recorded in a database in tables. Each 
+ table has a number of columns each representing one of the properties 
+ that is to be recorded. There 
+ are two types of table used by the HDS.
+ 
+Trend Tables
+ 
+Trend Tables are used for the periodic recording of register 
+ and bit variables. You can configure one or more Trend Table in each Database. 
+ Recorded data may be played back through a Trend Viewer. When a variable 
+ is selected for trend recording, you select the database, the table within 
+ that database and the period at which the variable becomes eligible to 
+ be recorded.
+ 
+Log Tables
+ 
+Log Tables are used for the event recording of bit, alarm, 
+ register and text changes of state plus user actions. You can configure 
+ one or more Log Tables in each Database. The configuration of a Log Table 
+ selects which properties are recorded from each eligible variable. The 
+ variables that are eligible are selected by the configuration of a given 
+ Log List. Recorded data may be played back through a Log Viewer.
+
+
+========================================
+TOPIC: SQL_CO_Example.htm
+========================================
+SQL_COMMAND and SQL_CONNECTION example
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SQL_COMMAND and SQL_CONNECTION example
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ Applies to
+ 
+ 
+This example exercises modes of the SQL_COMMAND and SQL_CONNECTION commands.
+ 
+'***********************************************************************************************************************************************
+ 
+'
+ 
+'This example program requires to create 2 Data Connections using the Application Explorer:
+ 
+' - one for a CSV file
+ 
+' - one for a XLSX file
+ 
+'It uses only one connection at a time that can be defined in the Init function of this program
+ 
+'
+ 
+'To use the CSV file connection, create a Data Connection using the provider ".Net Framework Data Provider for OleDb"
+ 
+'and set a connection string similar to this:
+ 
+' provider=Microsoft.Jet.OLEDB.4.0;text;database=E:\;fmt=CSVDelimited;persist security info=True
+ 
+'where E:\ corresponds to the folder where the CSV file is located
+ 
+'
+ 
+'
+ 
+'To use the XLSX file connection, you first need to install the 32-bit version of the Microsoft Access redistribuable database engine that can be found here:
+ 
+'	https://www.microsoft.com/download/details.aspx?id=13255
+ 
+'Then create a Data Connection using ".Net Framework Data Provider for OleDb" and set the a connection string similar to this:
+ 
+'	provider=Microsoft.ACE.OLEDB.12.0;data source=E:\status.xlsx;extended properties="Excel 12.0 Xml;hdr=yes"
+ 
+'where E:\status.xlsx correspond to file to read/write
+ 
+'
+ 
+'Sample CSV or XLSX file:
+ 
+'DeviceName,Capacity,Status,Load,LastUpdate
+ 
+'Device1,100,on,98,2019-03-06 15:42:47
+ 
+'Device2,100,off,12,2019-03-01 10:22:04
+ 
+'Device3,100,on,55,2019-02-27 14:35:05
+ 
+'
+ 
+'***********************************************************************************************************************************************
+ 
+'Global variables that needs to be set in the Init function
+ 
+Dim _Mode as Str; 'CSV or XLSX, depending on the driver to be tested
+ 
+Dim _XLSXConnectionName as Str; 'Name of the Data Connection declared in the project
+ 
+Dim _XLSXFilePath as Str; 'Full path of the XLSX file which contains the values, it must be the same as in the Data Connection
+ 
+Dim _XLSXSheetName as Str; 'Name of the sheet in the XLSX file which contains the values
+ 
+Dim _CSVConnectionName as Str; 'Name of the Data Connection declared in the project
+ 
+Dim _CSVFileName as Str; 'Name of the CSV file which contains the values
+ 
+Dim _CSVDirectory as Str; 'Name of the folder containing the CSV file (it must end by a \)
+ 
+Dim _StatusVariable as Str; 'Name of a register variable used for asynchronous requests execution
+ 
+Dim _ErrorTextVariable as Str; 'Name of a text variable used to return error text
+ 
+'Global variables used and updated by the programm
+ 
+Dim _ProgramName as Str; 'Name of the current program
+ 
+Dim _CSVFilePath as Str;
+ 
+Dim _TableName as Str;
+ 
+Dim _ConnectionName as Str;
+ 
+Dim _ExampleStep as Integer;
+ 
+Dim _CmdId as Integer;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+&#160;
+ 
+Sub Main()
+ 
+&#160;
+ 
+&#160;&#160;Print("--------------------------------------------------");
+ 
+&#160;&#160;Print("Start the SQL_Connection and SQL_Command example");
+ 
+&#160;&#160;Init();
+ 
+&#160;&#160;_ExampleStep = 1;
+ 
+&#160;
+ 
+&#160;&#160;If (OpenConnection()== 0) Then
+ 
+&#160;&#160;&#160;&#160;ExampleSequence();
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+'Initialize the program global working variables
+ 
+&#160;
+ 
+Sub Init()
+ 
+&#160;
+ 
+&#160;&#160;'UPDATE here your values
+ 
+&#160;&#160;_Mode = "CSV"; 'either CSV or XLSX
+ 
+&#160;&#160;_XLSXConnectionName = "XLSXConnection";
+ 
+&#160;&#160;_XLSXFilePath = "E:\\status.xlsx";
+ 
+&#160;&#160;_XLSXSheetName = "Feuil1";
+ 
+&#160;&#160;_CSVConnectionName = "CSVConnection";
+ 
+&#160;&#160;_CSVFileName = "status.csv";
+ 
+&#160;&#160;_CSVDirectory = "E:\\";
+ 
+&#160;&#160;_StatusVariable = "UDC.Status";
+ 
+&#160;&#160;_ErrorTextVariable = "UDC.Error";
+ 
+&#160;&#160;_ProgramName = "UDC_DEMO";
+ 
+&#160;
+ 
+&#160;&#160;'Calculate full path or CSV File
+ 
+&#160;&#160;_CSVFilePath = AddString(_CSVDirectory, _CSVFileName);
+ 
+&#160;
+ 
+&#160;&#160;'Set the ConnectionName and Table name to use
+ 
+&#160;&#160;If (CmpString(_Mode,"XLSX") == 0) Then
+ 
+&#160;&#160;&#160;&#160;Print("Using XLSX file");
+ 
+&#160;&#160;&#160;&#160;_TableName = AddString(_XLSXSheetName,"$");	'Sheet Name must end with a $ character with this ADO.Net provider
+ 
+&#160;&#160;&#160;&#160;_ConnectionName = _XLSXConnectionName;
+ 
+&#160;&#160;Else
+ 
+&#160;&#160;&#160;&#160;Print("Using CSV file");
+ 
+&#160;&#160;&#160;&#160;_TableName = _CSVFileName;
+ 
+&#160;&#160;&#160;&#160;_ConnectionName = _CSVConnectionName;
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'Check if variables exist, otherwise create them
+ 
+&#160;&#160;'Use the scope 'session' is recommended if the script is supposed to be executed in the context of a user session
+ 
+&#160;&#160;If (Variable("STATUS", _StatusVariable, "EXIST") == 0) Then
+ 
+&#160;&#160;&#160;&#160;Variable("ADD_HMIREG", _StatusVariable, 0, "", "", "", -32768, 32767);
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;If (Variable("STATUS", _ErrorTextVariable, "EXIST") == 0) Then
+ 
+&#160;&#160;&#160;&#160;Variable("ADD_HMITXT", _ErrorTextVariable, 0, "", "", "", 1000);
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'Recreate example files
+ 
+&#160;&#160;InitFile();
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+'Creates the samples files used for the demo
+ 
+'It consists in a table having 5 fields
+ 
+' - DeviceName
+ 
+' - Capacity
+ 
+' - Status
+ 
+' - Load
+ 
+' - LastUpdate
+ 
+&#160;
+ 
+Sub InitFile()
+ 
+&#160;
+ 
+&#160;&#160;Dim lHandle as Long;
+ 
+&#160;&#160;Dim sContent as Str;
+ 
+&#160;&#160;sContent = AddString("DeviceName,Capacity,Status,Load,LastUpdate", Chr(10));
+ 
+&#160;&#160;sContent = AddString(sContent, "Device1,100,on,", Toc(IRand(0,100)), ",", DateTimeString(DateTimeValue(), "U"), Chr(10));
+ 
+&#160;&#160;sContent = AddString(sContent, "Device2,100,off,", Toc(IRand(0,100)), ",", DateTimeString(DateTimeValue(), "U"), Chr(10));
+ 
+&#160;&#160;sContent = AddString(sContent, "Device3,100,on,", Toc(IRand(0,100)), ",", DateTimeString(DateTimeValue(), "U"), Chr(10));
+ 
+&#160;
+ 
+&#160;&#160;lHandle = Alloc_Buffer(Len(sContent) + 1);
+ 
+&#160;&#160;Put_Buffer(lHandle, 0, sContent);
+ 
+&#160;
+ 
+&#160;&#160;'Fill-in sample data in the XLSX file
+ 
+&#160;&#160;BufToExcel(lHandle, Chr(10), ",", _XLSXFilePath, _XLSXSheetName, "CLEARSHEET");
+ 
+&#160;&#160;'Fill-in sample data in the CSV file
+ 
+&#160;&#160;BufToFile(lHandle, _CSVFilePath, "USEFULL_PART", "WRITE");
+ 
+&#160;
+ 
+&#160;&#160;Free_Buffer(lHandle);
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+'SQL_Command function being asynchronous, the function helps to advance to next step once one is finished
+ 
+&#160;
+ 
+Sub ExampleSequence()
+ 
+&#160;
+ 
+&#160;&#160;If (_ExampleStep == 1) Then
+ 
+&#160;&#160;&#160;&#160;Print("Step 1: Insert a new record (device)");
+ 
+&#160;&#160;&#160;&#160;InsertRecord("Device4", 100, "on", IRand(0, 100));
+ 
+&#160;&#160;Else If (_ExampleStep == 2) Then
+ 
+&#160;&#160;&#160;&#160;Print("Step 2: Select all records (read all devices)");
+ 
+&#160;&#160;&#160;&#160;SelectRecords("Device%");
+ 
+&#160;&#160;Else If (_ExampleStep == 3) Then
+ 
+&#160;&#160;&#160;&#160;Print("Step 3: Update a record (Device2 value)");
+ 
+&#160;&#160;&#160;&#160;UpdateRecord("Device2", 35);
+ 
+&#160;&#160;Else If (_ExampleStep == 4) Then
+ 
+&#160;&#160;&#160;&#160;Print("Step 4: Select a record (read Device2 value to check if the update was Ok)");
+ 
+&#160;&#160;&#160;&#160;SelectRecords("Device2");
+ 
+&#160;&#160;Else If (_ExampleStep == 5) Then
+ 
+&#160;&#160;&#160;&#160;Print("Step 5: Count records (active devices)");
+ 
+&#160;&#160;&#160;&#160;CountRecords();
+ 
+&#160;&#160;Else If (_ExampleStep == 6) Then
+ 
+&#160;&#160;&#160;&#160;Print("Step 6: Delete a record (Device4)");
+ 
+&#160;&#160;&#160;&#160;DeleteRecord("Device4");
+ 
+&#160;&#160;Else If (_ExampleStep == 7) Then
+ 
+&#160;&#160;&#160;&#160;Print("Step 7: Count records (active devices), to check Device4 was removed from the file");
+ 
+&#160;&#160;&#160;&#160;CountRecords();
+ 
+&#160;&#160;Else If (_ExampleStep == 8) Then
+ 
+&#160;&#160;&#160;&#160;Print("Step 8: Close connection");
+ 
+&#160;&#160;&#160;&#160;CloseConnection();
+ 
+&#160;&#160;&#160;&#160;Print("--------------------------------------------------");
+ 
+&#160;&#160;End If '_ExampleStep = 8
+ 
+&#160;&#160;End If '_ExampleStep = 7
+ 
+&#160;&#160;End If '_ExampleStep = 6
+ 
+&#160;&#160;End If '_ExampleStep = 5
+ 
+&#160;&#160;End If '_ExampleStep = 4
+ 
+&#160;&#160;End If '_ExampleStep = 3
+ 
+&#160;&#160;End If '_ExampleStep = 2
+ 
+&#160;&#160;End If '_ExampleStep = 1
+ 
+&#160;&#160;_ExampleStep = _ExampleStep + 1;
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+' Open the connection
+ 
+&#160;
+ 
+Sub OpenConnection()
+ 
+&#160;&#160;Dim iRet as Integer;
+ 
+&#160;
+ 
+&#160;&#160;iRet = Sql_Connection("START", _ConnectionName);
+ 
+&#160;&#160;Print("- Data Connection [", _ConnectionName, "] started with result ", Toc(iRet));
+ 
+&#160;&#160;If (iRet == 0) Then
+ 
+&#160;&#160;&#160;&#160;iRet = Sql_Command("INITCONNECTION", _ConnectionName, 1);
+ 
+&#160;&#160;&#160;&#160;Print("- Data Command [", _ConnectionName, "] initiated with result ", Toc(iRet));
+ 
+&#160;
+ 
+&#160;&#160;&#160;&#160;'The return value -15 corresponds to the error CONNECTION_ALREADY_INIT, it can be ignored
+ 
+&#160;&#160;&#160;&#160;If (iRet == -15) Then
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;iRet = 0;
+ 
+&#160;&#160;&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;&#160;&#160;If (iRet != 0) Then
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to Init Command");
+ 
+&#160;&#160;&#160;&#160;End If
+ 
+&#160;&#160;Else
+ 
+&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to Start Connection");
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'return the connection result for error handling
+ 
+&#160;&#160;Return iRet;
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+'Close the connection
+ 
+&#160;
+ 
+Sub CloseConnection()
+ 
+&#160;
+ 
+&#160;&#160;Sql_Command("CLOSECONNECTION", _ConnectionName);
+ 
+&#160;&#160;Print("- Data Command closed");
+ 
+&#160;&#160;Sql_Connection("STOP", _ConnectionName);
+ 
+&#160;&#160;Print("- Data Connection Stopped");
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+'Retrieve the error text of a failed command
+ 
+&#160;
+ 
+Sub GetErrorText(iCmdId)
+ 
+&#160;
+ 
+&#160;&#160;Dim lHandle as Long;
+ 
+&#160;&#160;Dim sErrorText as Str;
+ 
+&#160;
+ 
+&#160;&#160;lHandle = Alloc_Buffer(5000);
+ 
+&#160;&#160;If (Sql_Command("GETCOMMANDINFO", "ERROR_TEXT", iCmdId, lHandle)==0) Then
+ 
+&#160;&#160;&#160;&#160;sErrorText = Seq_Buffer("NEXTFIELD", lHandle, CHR(0), "STR");
+ 
+&#160;&#160;Else
+ 
+&#160;&#160;&#160;&#160;sErrorText = "Unable to get the error";
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;Free_Buffer(lHandle);
+ 
+&#160;&#160;Return sErrorText;
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+'Insert a new line in the file
+ 
+&#160;
+ 
+Sub InsertRecord(sDeviceName, iCapacity, sStatus, iLoad)
+ 
+&#160;
+ 
+&#160;&#160;Dim sSqlCmd as Str;
+ 
+&#160;
+ 
+&#160;&#160;'Create the Event action for asynchronous handling
+ 
+&#160;&#160;Event("ADDPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "InsertRecordCallback");
+ 
+&#160;&#160;'Build the SQL request string
+ 
+&#160;&#160;sSqlCmd = AddString("INSERT INTO [", _TableName, "] VALUES(");
+ 
+&#160;&#160;sSqlCmd = AddString(sSqlCmd, " '", sDeviceName, "'");
+ 
+&#160;&#160;sSqlCmd = AddString(sSqlCmd, ",'", Toc(iCapacity), "'");
+ 
+&#160;&#160;sSqlCmd = AddString(sSqlCmd, ",'", sStatus, "'");
+ 
+&#160;&#160;sSqlCmd = AddString(sSqlCmd, ",'", Toc(iLoad), "'");
+ 
+&#160;&#160;sSqlCmd = AddString(sSqlCmd, ",'", DateTimeString(DateTimeValue(), "U"), "'");
+ 
+&#160;&#160;sSqlCmd = AddString(sSqlCmd, ")");
+ 
+&#160;
+ 
+&#160;&#160;'Execute the SQL request
+ 
+&#160;&#160;_CmdId = Sql_Command("EXECNONQUERY", _ConnectionName, sSqlCmd, _StatusVariable, _ErrorTextVariable);
+ 
+&#160;&#160;'Check its immediate result and deal with error code (delete event and move to next step).
+ 
+&#160;&#160;'It can fail if the connection is closed or the instruction is not supported by the provider
+ 
+&#160;&#160;If (_CmdId < 0) Then
+ 
+&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to send Non-Query Insert command with error code: ", _CmdId);
+ 
+&#160;&#160;&#160;&#160;Event("DELPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "InsertRecordCallback");
+ 
+&#160;&#160;&#160;&#160;ExampleSequence();
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'Associated asynchronous callback
+ 
+&#160;
+ 
+Sub InsertRecordCallback()
+ 
+&#160;
+ 
+&#160;&#160;Dim iNbInsertedRows as Integer;
+ 
+&#160;&#160;Dim dStatus as Double;
+ 
+&#160;&#160;Dim sErrorText as Str;
+ 
+&#160;
+ 
+&#160;&#160;'Check the status of the SQL request (in progress or completed)
+ 
+&#160;&#160;dStatus = GETARG("VARVALUE");
+ 
+&#160;&#160;If (dStatus == 1) Then
+ 
+&#160;&#160;&#160;&#160;'SQL request still in progress - do nothing
+ 
+&#160;&#160;&#160;&#160;Return;
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'If request is completed (failed, cancelled or succeeded), delete the event
+ 
+&#160;&#160;Event("DELPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "InsertRecordCallback");
+ 
+&#160;&#160;'SQL request failed
+ 
+&#160;&#160;If (dStatus == 2) Then
+ 
+&#160;&#160;&#160;&#160;sErrorText = GetErrorText(_CmdId);
+ 
+&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Insert request failed with error : ", sErrorText);
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;'SQL request cancelled
+ 
+&#160;&#160;If (dStatus == 3) Then
+ 
+&#160;&#160;&#160;&#160;Print("- Insert request cancelled");
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'SQL request succeeded
+ 
+&#160;&#160;If (dStatus == 0) Then
+ 
+&#160;&#160;&#160;&#160;'Simply display the number of inserted rows
+ 
+&#160;&#160;&#160;&#160;iNbInsertedRows = Sql_Command("READAFFECTEDROW", _CmdId);
+ 
+&#160;&#160;&#160;&#160;Print("- Insert request succeeded with ", Toc(iNbInsertedRows), " rows inserted");
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;'Release the results to free-up resources
+ 
+&#160;&#160;Sql_Command("DISPOSE", _CmdId);
+ 
+&#160;
+ 
+&#160;&#160;'Go to Next step
+ 
+&#160;&#160;ExampleSequence();
+ 
+&#160;&#160;&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+'Read a list of device
+ 
+'the parameter sDeviceName supports wild chars (% and _)
+ 
+&#160;
+ 
+Sub SelectRecords(sDeviceName)
+ 
+&#160;
+ 
+&#160;&#160;Dim sSqlCmd as Str;
+ 
+&#160;
+ 
+&#160;&#160;'Create the Event action for asynchronous handling
+ 
+&#160;&#160;Event("ADDPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "SelectRecordsCallback");
+ 
+&#160;&#160;'Build the SQL request string
+ 
+&#160;&#160;sSqlCmd = AddString("SELECT * FROM [", _TableName, "] WHERE DeviceName LIKE '", sDeviceName, "'");
+ 
+&#160;&#160;'Execute the SQL request
+ 
+&#160;&#160;_CmdId = Sql_Command("EXECREADER", _ConnectionName, sSqlCmd, _StatusVariable, _ErrorTextVariable, Chr(10), ",");
+ 
+&#160;&#160;'Check its immediate result and deal with error code (delete event and move to next step).
+ 
+&#160;&#160;'It can fail if the connection is closed or the instruction is not supported by the provider
+ 
+&#160;&#160;If (_CmdId < 0) Then
+ 
+&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to send Reader request command with error code: ", _CmdId);
+ 
+&#160;&#160;&#160;&#160;Event("- DELPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "SelectRecordsCallback");
+ 
+&#160;&#160;&#160;&#160;ExampleSequence();
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'Associated asynchronous callback
+ 
+&#160;
+ 
+Sub SelectRecordsCallback()
+ 
+&#160;
+ 
+&#160;&#160;Dim iBufferSize as Integer;
+ 
+&#160;&#160;Dim iBufferLines as Integer;
+ 
+&#160;&#160;Dim lBufferHandle as Long;
+ 
+&#160;&#160;Dim iCurrentLine as Integer;
+ 
+&#160;&#160;Dim sLineContent as Str;
+ 
+&#160;&#160;Dim dStatus as Double;
+ 
+&#160;&#160;Dim sErrorText as Str;
+ 
+&#160;&#160;'Check the status of the SQL request (in progress or completed)
+ 
+&#160;&#160;dStatus = GETARG("VARVALUE");
+ 
+&#160;&#160;If (dStatus == 1) Then
+ 
+&#160;&#160;&#160;&#160;'SQL request still in progress - do nothing
+ 
+&#160;&#160;&#160;&#160;Return;
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'If request is completed (failed, cancelled or succeeded), delete the event
+ 
+&#160;&#160;Event("DELPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "SelectRecordsCallback");
+ 
+&#160;&#160;'SQL request failed
+ 
+&#160;&#160;If (dStatus == 2) Then
+ 
+&#160;&#160;&#160;&#160;sErrorText = GetErrorText(_CmdId);
+ 
+&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Read request failed with error : ", sErrorText);
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;'SQL request cancelled
+ 
+&#160;&#160;If (dStatus == 3) Then
+ 
+&#160;&#160;&#160;&#160;Print("- Read request cancelled");
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'SQL request succeeded
+ 
+&#160;&#160;If (dStatus == 0) Then
+ 
+&#160;&#160;&#160;&#160;Print("- Read request succeded, returned lines:");
+ 
+&#160;
+ 
+&#160;&#160;&#160;&#160;'Alloc a buffer to read result
+ 
+&#160;&#160;&#160;&#160;iBufferSize = Sql_Command("BUFFERSIZE", _CmdId);
+ 
+&#160;&#160;&#160;&#160;lBufferHandle = Alloc_Buffer(iBufferSize + 1);
+ 
+&#160;&#160;&#160;&#160;Sql_Command("READBUFFER", _CmdId, lBufferHandle);
+ 
+&#160;
+ 
+&#160;&#160;&#160;&#160;'Get the number of lines
+ 
+&#160;&#160;&#160;&#160;iBufferLines = Sql_Command("BUFFERLINECOUNT", _CmdId);
+ 
+&#160;&#160;&#160;&#160;iCurrentLine = 0;
+ 
+&#160;
+ 
+&#160;&#160;&#160;&#160;'Parse the buffer to display each lines
+ 
+&#160;&#160;&#160;&#160;While (iCurrentLine <= iBufferLines-1)
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;sLineContent = Seq_Buffer("NEXTFIELD", lBufferHandle, Chr(10), "STR");
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;Print(sLineContent);
+ 
+&#160;
+ 
+&#160;&#160;&#160;&#160;&#160;&#160;iCurrentLine = iCurrentLine + 1;
+ 
+&#160;&#160;&#160;&#160;Wend
+ 
+&#160;
+ 
+&#160;&#160;&#160;&#160;Free_Buffer(lBufferHandle);
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;'Release the results to free-up resources
+ 
+&#160;&#160;Sql_Command("DISPOSE", _CmdId);
+ 
+&#160;
+ 
+&#160;&#160;'Go to Next step
+ 
+&#160;&#160;ExampleSequence();
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+'Update the Load value of a Dvice with the input parameter and its LastUpadte value with the current DateTime
+ 
+'/!\ The CSV provider Microsoft.Jet.OLEDB.4.0 does not support Update requests
+ 
+&#160;
+ 
+Sub UpdateRecord(sDeviceName, iNewLoad)
+ 
+&#160;
+ 
+&#160;&#160;Dim sSqlCmd as Str;
+ 
+&#160;&#160;'Create the Event action for asynchronous handling
+ 
+&#160;&#160;Event("ADDPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "UpdateRecordCallback");
+ 
+&#160;&#160;'Build the SQL request string
+ 
+&#160;&#160;sSqlCmd = AddString("UPDATE [", _TableName, "] SET Load='", Toc(iNewLoad), "', LastUpdate='", DateTimeString(DateTimeValue(), "U"), "' WHERE DeviceName='", sDeviceName, "'");
+ 
+&#160;&#160;'Execute the SQL request
+ 
+&#160;&#160;_CmdId = Sql_Command("EXECNONQUERY", _ConnectionName, sSqlCmd, _StatusVariable, _ErrorTextVariable);
+ 
+&#160;&#160;'Check its immediate result and deal with error code (delete event and move to next step).
+ 
+&#160;&#160;'It can fail if the connection is closed or the instruction is not supported by the provider
+ 
+&#160;&#160;If (_CmdId < 0) Then
+ 
+&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to send Non-Query Update command sent with error code: ", _CmdId);
+ 
+&#160;&#160;&#160;&#160;Event("DELPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "UpdateRecordCallback");
+ 
+&#160;&#160;&#160;&#160;ExampleSequence();
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'Associated asynchronous callback
+ 
+&#160;
+ 
+Sub UpdateRecordCallback()
+ 
+&#160;
+ 
+&#160;&#160;Dim iNbUpdatedRows as Integer;
+ 
+&#160;&#160;Dim dStatus as Double;
+ 
+&#160;&#160;Dim sErrorText as Str;
+ 
+&#160;
+ 
+&#160;&#160;'Check the status of the SQL request (in progress or completed)
+ 
+&#160;&#160;dStatus = GETARG("VARVALUE");
+ 
+&#160;&#160;If (dStatus == 1) Then
+ 
+&#160;&#160;&#160;&#160;'SQL request still in progress - do nothing
+ 
+&#160;&#160;&#160;&#160;Return;
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'If request is completed (failed, cancelled or succeeded), delete the event
+ 
+&#160;&#160;Event("DELPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "UpdateRecordCallback");
+ 
+&#160;&#160;'SQL request failed
+ 
+&#160;&#160;If (dStatus == 2) Then
+ 
+&#160;&#160;&#160;&#160;sErrorText = GetErrorText(_CmdId);
+ 
+&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Update request failed with error : ", sErrorText);
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;'SQL request cancelled
+ 
+&#160;&#160;If (dStatus == 3) Then
+ 
+&#160;&#160;&#160;&#160;Print("- Update request cancelled");
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'SQL request succeeded
+ 
+&#160;&#160;If (dStatus == 0) Then
+ 
+&#160;&#160;&#160;&#160;'Simply display the number of updated rows
+ 
+&#160;&#160;&#160;&#160;iNbUpdatedRows = Sql_Command("READAFFECTEDROW", _CmdId);
+ 
+&#160;&#160;&#160;&#160;Print("- Update request succeded with ", Toc(iNbUpdatedRows), " rows updated");
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;'Release the results to free-up resources
+ 
+&#160;&#160;Sql_Command("DISPOSE", _CmdId);
+ 
+&#160;
+ 
+&#160;&#160;'Go to Next step
+ 
+&#160;&#160;ExampleSequence();
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+'Delete a given device from the file
+ 
+'/!\ The CSV provider Microsoft.Jet.OLEDB.4.0 does not support Delete requests
+ 
+'/!\ The XLSX provider Microsoft.ACE.OLEDB.12.0 does not support Delete requests
+ 
+&#160;
+ 
+Sub DeleteRecord(sDeviceName)
+ 
+&#160;
+ 
+&#160;&#160;Dim sSqlCmd as Str;
+ 
+&#160;
+ 
+&#160;&#160;'Create the Event action for asynchronous handling
+ 
+&#160;&#160;Event("ADDPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "DeleteRecordCallback");
+ 
+&#160;&#160;'Build the SQL request string
+ 
+&#160;&#160;sSqlCmd = AddString("DELETE FROM [", _TableName, "] WHERE DeviceName='", sDeviceName, "'");
+ 
+&#160;&#160;'Execute the SQL request
+ 
+&#160;&#160;_CmdId = Sql_Command("EXECNONQUERY", _ConnectionName, sSqlCmd, _StatusVariable, _ErrorTextVariable);
+ 
+&#160;&#160;'Check its immediate result and deal with error code (delete event and move to next step).
+ 
+&#160;&#160;'It can fail if the connection is closed or the instruction is not supported by the provider
+ 
+&#160;&#160;If (_CmdId < 0) Then
+ 
+&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to send Non-Query Delete command sent with error code: ", _CmdId);
+ 
+&#160;&#160;&#160;&#160;Event("DELPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "DeleteRecordCallback");
+ 
+&#160;&#160;&#160;&#160;ExampleSequence();
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'Associated asynchronous callback
+ 
+&#160;
+ 
+Sub DeleteRecordCallback()
+ 
+&#160;
+ 
+&#160;&#160;Dim iNbDeletedRows as Integer;
+ 
+&#160;&#160;Dim dStatus as Double;
+ 
+&#160;&#160;Dim sErrorText as Str;
+ 
+&#160;
+ 
+&#160;&#160;'Check the status of the SQL request (in progress or completed)
+ 
+&#160;&#160;dStatus = GETARG("VARVALUE");
+ 
+&#160;&#160;If (dStatus == 1) Then
+ 
+&#160;&#160;&#160;&#160;'SQL request still in progress - do nothing
+ 
+&#160;&#160;&#160;&#160;Return;
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'If request is completed (failed, cancelled or succeeded), delete the event
+ 
+&#160;&#160;Event("DELPROG", _StatusVariable, "ALL>ALL", _ProgramName, "", "DeleteRecordCallback");
+ 
+&#160;&#160;'SQL request failed
+ 
+&#160;&#160;If (dStatus == 2) Then
+ 
+&#160;&#160;&#160;&#160;sErrorText = GetErrorText(_CmdId);
+ 
+&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Delete request failed with error : ", sErrorText);
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;'SQL request cancelled
+ 
+&#160;&#160;If (dStatus == 3) Then
+ 
+&#160;&#160;&#160;&#160;Print ("- Delete request cancelled");
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'SQL request succeeded
+ 
+&#160;&#160;If (dStatus == 0) Then
+ 
+&#160;&#160;&#160;&#160;'Simply display the number of deleted rows
+ 
+&#160;&#160;&#160;&#160;iNbDeletedRows = Sql_Command("READAFFECTEDROW", _CmdId);
+ 
+&#160;&#160;&#160;&#160;Print("- Delete request succeded: ", Toc(iNbDeletedRows), " rows deleted");
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;'Release the results to free-up resources
+ 
+&#160;&#160;Sql_Command("DISPOSE", _CmdId);
+ 
+&#160;
+ 
+&#160;&#160;'Go to Next step
+ 
+&#160;&#160;ExampleSequence();
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'-----------------------------------------------------------------------------------------------------------
+ 
+'Return a scalar value indicating the number of Devices having the Status parameter set to "on"
+ 
+&#160;
+ 
+Sub CountRecords()
+ 
+&#160;
+ 
+&#160;&#160;Dim sSqlCmd as Str;
+ 
+&#160;
+ 
+&#160;&#160;'Create the Event action for asynchronous handling
+ 
+&#160;&#160;Event("ADDPROG", _StatusVariable, "ALL>S", _ProgramName, "", "CountRecordsCallback");
+ 
+&#160;&#160;'Build the SQL request string
+ 
+&#160;&#160;sSqlCmd = AddString("SELECT Count(*) FROM [", _TableName, "] WHERE Status='on'");
+ 
+&#160;
+ 
+&#160;&#160;'Execute the SQL request
+ 
+&#160;&#160;_CmdId = Sql_Command("EXECSCALAR", _ConnectionName, sSqlCmd, _StatusVariable, _ErrorTextVariable);
+ 
+&#160;&#160;'Check its immediate result and deal with error code (delete event and move to next step).
+ 
+&#160;&#160;'It can fail if the connection is closed or the instruction is not supported by the provider
+ 
+&#160;&#160;If (_CmdId < 0) Then
+ 
+&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to send Non-Query Count command sent with error code: ", _CmdId);
+ 
+&#160;&#160;&#160;&#160;Event("DELPROG", _StatusVariable, "ALL>S", _ProgramName, "", "CountRecordsCallback");
+ 
+&#160;&#160;&#160;&#160;ExampleSequence();
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+End Sub
+ 
+&#160;
+ 
+'Associated asynchronous callback
+ 
+&#160;
+ 
+Sub CountRecordsCallback()
+ 
+&#160;&#160;Dim lHandle as long;
+ 
+&#160;&#160;Dim iNbDevices as Integer;
+ 
+&#160;&#160;Dim dStatus as Double;
+ 
+&#160;&#160;Dim sErrorText as Str;
+ 
+&#160;
+ 
+&#160;&#160;'Check the status of the SQL request (in progress or completed)
+ 
+&#160;&#160;dStatus = GETARG("VARVALUE");
+ 
+&#160;&#160;If (dStatus == 1) Then
+ 
+&#160;&#160;&#160;&#160;'SQL request still in progress - do nothing
+ 
+&#160;&#160;&#160;&#160;Return;
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'If request is completed (failed, cancelled or succeeded), delete the event
+ 
+&#160;&#160;Event("DELPROG", _StatusVariable, "ALL>S", _ProgramName, "", "CountRecordsCallback");
+ 
+&#160;&#160;'SQL request failed
+ 
+&#160;&#160;If (dStatus == 2) Then
+ 
+&#160;&#160;&#160;&#160;sErrorText = GetErrorText(_CmdId);
+ 
+&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Count request failed with error : ", sErrorText);
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;'SQL request cancelled
+ 
+&#160;&#160;If (dStatus == 3) Then
+ 
+&#160;&#160;&#160;&#160;Print("- Count request cancelled");
+ 
+&#160;&#160;End If
+ 
+&#160;
+ 
+&#160;&#160;'SQL request succeeded
+ 
+&#160;&#160;If (dStatus == 0) Then
+ 
+&#160;&#160;&#160;&#160;'Allocate a buffer to store the scalar result (10 bytes is larger than what is needed here)
+ 
+&#160;&#160;&#160;&#160;lHandle = Alloc_Buffer(10);
+ 
+&#160;&#160;&#160;&#160;Sql_Command("READSCALARVALUE", _CmdId, lHandle);
+ 
+&#160;&#160;&#160;&#160;iNbDevices = Seq_Buffer("NEXTFIELD", lHandle, Chr(0), "INT");	'Chr(0) represent the end of usefull data in the buffer
+ 
+&#160;&#160;&#160;&#160;Print("- Count request succeded: ", Toc(iNbDevices), " active devices");
+ 
+&#160;&#160;&#160;&#160;Free_Buffer(lHandle);
+ 
+&#160;&#160;End If
+ 
+&#160;&#160;'Release the results to free-up resources
+ 
+&#160;&#160;Sql_Command("DISPOSE", _CmdId);
+ 
+&#160;
+ 
+&#160;&#160;'Go to Next step
+ 
+&#160;&#160;ExampleSequence();
+ 
+&#160;
+ 
+End Sub
+
+
+========================================
+TOPIC: SQL_COMMAND.htm
+========================================
+SQL_COMMAND
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SQL_COMMAND
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ See also 
+
+Example
+ 
+Sends Sql commands using a pre-configured Sql connection.
+ 
+WebVue support - Yes.
+ 
+
+ 
+The use of pre-configured Sql connections along with the instructions SQL_CONNECTION, SQL_COMMAND and SQL_QUERY is preferred to using the verb SVSQL (based on ODBC).
+ 
+Pre-configured Sql connections are configured in the Application Explorer. See the Data Connections book for information.
+ 
+ 
+
+ 
+Some of the modes are asynchronous. The application developer must ensure that the value of the status variable is monitored and take adequate actions when it changes.
+ 
+ 
+
+ 
+This verb can be executed either locally on the producer station of the Sql connection or from any client station of the producer. In the latter case, commands and returned data are routed transparently through the multi-station messaging system. Multiple connections to the same data source are only allowed if using different Sql Connections. Multiple connections using the same Sql Connection will be refused, however, multiple simultaneous requests using the same Sql Connection is possible.
+ 
+ 
+
+ 
+A connection, and the data associated to it, are managed in the context of user sessions. A connection should only be handled in the context of the session that had originally initiated it; and all related objects must be properly released/closed before the session is ended. For example, it is not possible to initiate a connection at start up and have requests executed in any user context.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Mode
+ Mnemonic
+ Syntax
+ 
+ 
+
+ 1
+ INITCONNECTION
+ 1
+ 
+ 
+ 
+
+ 2
+ CLOSECONNECTION
+ 2
+ 
+ 
+ 
+
+ 3
+ GETCONNECTIONLIST
+ 3
+ 
+ 
+ 
+
+ 4
+ GETCONNECTIONINFO
+ 4
+ 
+ 
+ 
+
+ 5
+ EXECREADER
+ 5
+ 
+ 
+ 
+
+ 6
+ EXECSCALAR
+ 6
+ 
+ 
+ 
+
+ 7
+ EXECNONQUERY
+ 7
+ 
+ 
+ 
+
+ 8
+ GETCOMMANDLIST
+ 8
+ 
+ 
+ 
+
+ 9
+ GETCOMMANDINFO
+ 9
+ 
+ 
+ 
+
+ 10
+ READBUFFER
+ 14
+ 
+ 
+ 
+
+ 11
+ SEEKBUFFER
+ 10
+ 
+ 
+ 
+
+ 12
+ READBUFFERLINE
+ 11
+ 
+ 
+ 
+
+ 13
+ READBUFFERCELL
+ 12
+ 
+ 
+ 
+
+ 14
+ BUFFERLINECOUNT
+ 13
+ 
+ 
+ 
+
+ 15
+ BUFFERFIELDCOUNT
+ 13
+ 
+ 
+ 
+
+ 16
+ BUFFERFIELDNAME
+ 14
+ 
+ 
+ 
+
+ 17
+ BUFFERFIELDTYPE
+ 14
+ 
+ 
+ 
+
+ 18
+ BUFFERSIZE
+ 13
+ 
+ 
+ 
+
+ 19
+ READSCALARVALUE
+ 14
+ 
+ 
+ 
+
+ 20
+ READAFFECTEDROW
+ 13
+ 
+ 
+ 
+
+ 21
+ CANCEL
+ 13
+ 
+ 
+ 
+
+ 22
+ DISPOSE
+ 13
+ 
+ 
+ 
+ 
+ 
+Arguments common to more than one mode
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ SqlConnectionName
+ 
+ The name of the Sql Connection as configured in General.Data connections in the Application Explorer. Type STR.
+ 
+ 
+
+ BufferHandle
+ 
+ The handle of a buffer as returned by ALLOC_BUFFER. Type LONG. All modes require the buffer to be allocated prior to calling the instruction.
+ 
+ 
+
+ SqlCmd
+ 
+ The Sql command to send. Type STR.
+ 
+ 
+
+ StatusVariable
+ 
+ 
+ 
+The name of the register variable used to monitor the status of an asynchronous operation. Type STR.
+ 
+Succeeded = 0
+Running = 1
+Failed = 2
+Canceled = 3
+
+ 
+ 
+ 
+
+ ErrortextVariable
+ 
+ The name of a text variable used to return additional information when the status variable value is set to failed (2). Type STR.
+ 
+ 
+
+ SubstituteNullValueWithEmptyString
+ 
+ 
+ 
+Substitute a null value with an empty string in returned data. Type INTEGER.
+ 
+0 - a null value is represented by <NULL>
+1 - a null value is represented by an empty string
+
+ 
+ 
+ 
+
+ LineNumber
+ 
+ 
+ 
+A line position in the result buffer (first line is LineNumber 0). Type LONG.
+ 
+ 
+ 
+
+ CmdId
+ 
+ The command Id as returned by mode EXECREADER, EXECSCALAR or EXECNONQUERY. Type INTEGER.
+ 
+ 
+ 
+Syntax 1
+ 
+IntVal = SQL_COMMAND(Mode, SqlConnectionName [, MaxSimultaneousCommand]);
+ 
+Return type: INTEGER
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ MaxSimultaneousCommand
+ 
+ 
+ 
+The maximum number of simultaneous asynchronous commands. Type STR.
+ 
+The primary use is to limit the memory used by PcVue for the reply buffer. The default value is 1. The maximum value is 100. If the value is incorrect, the default value is used instead.
+ 
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 1
+ INITCONNECTION
+ 
+ 
+Initialize the runtime object necessary to handle the specified Sql connection. It does not actually establish any end-to-end connection with the RDBMS. The Sql connection must be started prior to using this mode.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+SQLCON_DOES_NOT_EXIST
+CONNECTION_ALREADY_INIT
+MAXIMUM_CONNECTION_REACH
+CONNECTION_INIT_FAILED
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+
+ 
+Multiple connections to the same data source are only allowed if using different Sql Connections. Multiple connections using the same Sql Connection will be refused.
+ 
+ 
+Syntax 2
+ 
+IntVal = SQL_COMMAND(Mode[, SqlConnectionName]);
+ 
+Return type: INTEGER
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 2
+ CLOSECONNECTION
+ 
+ 
+Free-up resources associated to the runtime object corresponding to the specified Sql connection. If the SqlConnectionName argument is omitted, all open connections will be closed.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+CONNECTION_ALREADY_CLOSE_OR_NOT_INIT
+CONNECTION_CLOSE_FAILED
+SQLCON_DOES_NOT_EXIST
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+Syntax 3
+ 
+IntVal = SQL_COMMAND(Mode, BufferHandle);
+ 
+Return type: INTEGER
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 3
+ GETCONNECTIONLIST
+ 
+ 
+Get the name of all open Sql connections and return them in a buffer. Connection names are delimited with the comma character.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE
+RESULT_BUFFER_EMPTY
+RESULT_BUFFER_TOOSMALL
+
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+Syntax 4
+ 
+IntVal = SQL_COMMAND(Mode, ConnectionParam, SqlConnectionName, BufferHandle);
+ 
+Return type: INTEGER
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ ConnectionParam
+ 
+ 
+ 
+The sub mode. Type INTEGER or STR.
+ 
+1 or "NB_COMMAND" Get the number of active commands, e.g. ones that are not yet disposed of using the DISPOSE mode.
+2 or "MAX_COMMAND" Get the maximum number of commands allowed for this connection (as set when calling the INITCONNECTION mode).
+ 
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 4
+ GETCONNECTIONINFO
+ 
+ 
+Return information about the number of commands.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+CONNECTION_PARAM_INVALID
+SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE
+RESULT_BUFFER_TOOSMALL
+CONNECTION_ALREADY_CLOSE_OR_NOT_INIT 
+
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+Syntax 5
+ 
+IntVal = SQL_COMMAND(Mode, SqlConnectionName, SqlCmd, StatusVariable, ErrorTextVariable, LineSeparator, FieldSeparator [, SubstituteNullValueWithEmptyString]);
+ 
+Return type: INTEGER
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ LineSeparator
+ The line separator character to be used in the buffer. Type STR.
+ 
+ 
+
+ FieldSeparator
+ The field separator character to be used in the buffer. Type STR.
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 5
+ EXECREADER
+ 
+ 
+Execute a Sql query designed to return a set of records and store the result in a buffer. The contents are separated by the line and field separator arguments.
+ 
+Return: Either a positive value representing the command Id, or a negative value indicating one of the following errors.
+SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+SQLCMD_PARAM_NOT_STR_OR_NOT_READ
+STATUSVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+ERRORTEXTVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+LINESEPARATOR_PARAM_NOT_STR_OR_NOT_READ_OR_TOOLONG
+FIELDSEPARATOR_PARAM_NOT_STR_OR_NOT_READ_OR_TOOLONG
+STATUSVARIABLE_NOT_REGISTER_OR_DOES_NOT_EXIST
+ERRORTEXTVARIABLE_NOT_TEXT_OR_DOES_NOT_EXIST
+SQLCON_DOES_NOT_EXIST
+MAXIMUM_COMMAND_REACH
+SEND_COMMAND_FAILED
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+
+ 
+This mode is asynchronous. The program must monitor the value of the status variable and use either modes READBUFFER, READBUFFERLINE or READBUFFERCELL to get the buffer result.
+ 
+ 
+Syntax 6
+ 
+IntVal = SQL_COMMAND(Mode, SqlConnectionName, SqlCmd, StatusVariable, ErrorTextVariable [, SubstituteNullValueWithEmptyString]);
+ 
+Return type: INTEGER
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 6
+ EXECSCALAR
+ 
+ 
+Execute a Sql query designed to return a scalar value and store the scalar result in a buffer. The result is a single value.
+ 
+Return: Either a positive value representing the command Id, or a negative value indicating one of the following errors.
+SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+SQLCMD_PARAM_NOT_STR_OR_NOT_READ
+STATUSVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+ERRORTEXTVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+STATUSVARIABLE_NOT_REGISTER_OR_DOES_NOT_EXIST
+ERRORTEXTVARIABLE_NOT_TEXT_OR_DOES_NOT_EXIST
+SQLCON_DOES_NOT_EXIST
+MAXIMUM_COMMAND_REACH
+SEND_COMMAND_FAILED
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+
+ 
+This mode is asynchronous. The program must monitor the value of the status variable and use mode READSCALAR to get the value.
+ 
+ 
+Syntax 7
+ 
+IntVal = SQL_COMMAND(Mode, SqlConnectionName, SqlCmd, StatusVariable, ErrorTextVariable);
+ 
+Return type: INTEGER
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 7
+ EXECNONQUERY
+ 
+ 
+Execute a Sql request that does not query data from the database, but causes a certain operation to be executed on the data source side (as defined by the SqlCmd argument). Such requests usually return the result of the operation execution.
+ 
+Return: Either a positive value representing the command Id, or a negative value indicating one of the following errors.
+SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+SQLCMD_PARAM_NOT_STR_OR_NOT_READ
+STATUSVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+ERRORTEXTVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+STATUSVARIABLE_NOT_REGISTER_OR_DOES_NOT_EXIST
+ERRORTEXTVARIABLE_NOT_TEXT_OR_DOES_NOT_EXIST
+SQLCON_DOES_NOT_EXIST
+MAXIMUM_COMMAND_REACH
+SEND_COMMAND_FAILED
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+
+ 
+This mode is asynchronous. The program must monitor the value of the status variable and use the mode READAFFECTEDROW to get the number of rows affected by the command.
+ 
+ 
+Syntax 8
+ 
+IntVal = SQL_COMMAND(Mode, SqlConnectionName, BufferHandle);
+ 
+Return type: INTEGER
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 8
+ GETCOMMANDLIST
+ 
+ 
+Retrieve the command list associated with a connection. The command Ids are returned in the buffer separated by commas.
+ 
+Return: Either a positive value representing the number of active commands, or a negative value indicating one of the following errors.
+ 
+SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE
+CONNECTION_ALREADY_CLOSE_OR_NOT_INIT
+RESULT_BUFFER_EMPTY
+RESULT_BUFFER_TOOSMALL
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+Syntax 9
+ 
+IntVal = SQL_COMMAND(Mode, RequestParam, CmdId, BufferHandle);
+ 
+Return type: INTEGER
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ RequestParam
+ 
+ 
+ 
+The sub mode. Type INTEGER or STR.
+ 
+1 or "TYPE".
+2 or "STATUS" 
+3 or "ERROR_TEXT"
+4 or "SQL_CMD"
+5 or "STATUS_VARIABLE"
+6 or "ERROR_TEXT_VARIABLE"
+ 
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 9
+ GETCOMMANDINFO
+ 
+ 
+Retrieve information, in a buffer, about a command specified by its CmdId. The information returned depends on the sub mode.
+ 
+TYPE - Retrieves the type of command that has been sent.
+0 = EXECREADER
+1 = EXECSCALAR
+2 = EXECNONQUERY
+STATUS - Retrieves the status of the request.
+0 = Succeeded
+1 =	Running
+2 = Failed
+3 =Canceled
+ERROR_TEXT - Retrieves the error text corresponding to the command. Empty unless the command has failed.
+SQL_CMD - The Sql request that has been sent.
+STATUS_VARIABLE - The name of the status variable.
+ERROR_TEXT_VARIABLE - The name of the error variable.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+COMMAND_PARAM_INVALID
+BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE
+CMDID_DOES_NOT_EXIST
+COMMAND_PARAM_INVALID
+RESULT_BUFFER_TOOSMALL
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+Syntax 10
+ 
+IntVal = SQL_COMMAND(Mode, CmdId, LineNumber);
+ 
+Return type: INTEGER
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 11
+ SEEKBUFFER
+ 
+ 
+Used to seek a line position in the buffer result, once the status variable is set to 0. First line is LineNumber 0.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+LINENUMBER_PARAM_INVALID
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_FINISHED
+RESULT_BUFFER_EMPTY
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+Syntax 11
+ 
+IntVal = SQL_COMMAND(Mode, CmdId, BufferHandle, LineNumber);
+ 
+Return type: INTEGER
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 12
+ READBUFFERLINE
+ 
+ 
+Read a specific line in the buffer, produced as a result of the use of an EXECREADER function, once the status variable is set to 0. First line is LineNumber 0.
+ 
+Return: Either a positive value representing the number of lines read, or a negative value indicating one of the following errors.
+BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE
+LINENUMBER_PARAM_INVALID
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_FINISHED
+RESULT_BUFFER_EMPTY
+RESULT_BUFFER_TOOSMALL
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+Syntax 12
+ 
+IntVal = SQL_COMMAND(Mode, CmdId, BufferHandle, LineNumber, FieldNumber);
+ 
+Return type: INTEGER
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ FieldNumber
+ 
+ 
+ 
+A field position in a line of the result buffer (first field is FieldNumber 0). Type LONG.
+ 
+ 
+ 
+
+ LineNumber
+ 
+ A line position in the result buffer . (first line is LineNumber 0). Type LONG.
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 13
+ READBUFFERCELL
+ 
+ 
+Read a specific field in a specific line of the buffer, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.
+ 
+Return: Either a positive value representing the number of lines read, or a negative value indicating one of the following errors.
+BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE
+LINENUMBER_PARAM_INVALID
+FIELDNUMBER_PARAM_INVALID
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_FINISHED
+RESULT_BUFFER_EMPTY
+RESULT_BUFFER_TOOSMALL
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+ 
+ 
+Syntax 13
+ 
+IntVal = SQL_COMMAND(Mode, CmdId);
+ 
+Return type: INTEGER
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 14
+ BUFFERLINECOUNT
+ 
+ 
+Get the number of lines in the buffer, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.
+ 
+Return: Either zero or a positive value representing the number of lines, or a negative value indicating one of the following errors.
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_FINISHED
+RESULT_BUFFER_REACH_NBLINE_MAX (maximum is 2147483647)
+ 
+See the table below for return values.
+ 
+ 
+ 
+
+ 15
+ BUFFERFIELDCOUNT
+ 
+ 
+Get the number of fields in the buffer, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.
+ 
+Return: Either zero or a positive value representing the number of fields, or a negative value indicating one of the following errors.
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_FINISHED
+ 
+See the table below for return values.
+ 
+ 
+ 
+
+ 18
+ BUFFERSIZE
+ 
+ 
+Get the size of the buffer, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.
+ 
+Return: A positive value representing the number of bytes in the buffer, or a negative value indicating one of the following errors.
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_FINISHED
+RESULT_BUFFER_REACH_SIZE_MAX (maximum 2147483647)
+ 
+See the table below for return values.
+ 
+ 
+ 
+
+ 20
+ READAFFECTEDROW
+ 
+ 
+Read the result of a EXECNONQUERY function, once the status variable is set to 0.
+ 
+Return: A positive value representing the affected row count, or a negative value indicating one of the following errors.
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_FINISHED
+ 
+See the table below for return values.
+
+ 
+ 
+ 
+
+ 21
+ CANCEL
+ 
+ 
+Cancel the request corresponding to the Cmdld.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+ 
+See the table below for return values.
+ 
+ 
+ 
+
+ 22
+ DISPOSE
+ 
+ 
+Release the context of a query including the internal buffer, corresponding to the Cmdld. Must be called after request result is processed to free up resources. The buffer result is no longer usable after the execution of the DISPOSE mode.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_REMOVED
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+
+ 
+Failing to call the mode DISPOSE once you have completed a command and the processing of its result prevents from freeing up memory and may lead to an uncontrolled usage of computer resources.
+ 
+ 
+ Syntax 14
+ 
+IntVal = SQL_COMMAND(Mode, CmdId, BufferHandle);
+ 
+Return type: INTEGER
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 10
+ READBUFFER
+ 
+ 
+Used to read the result of EXEC_READER query once the status variable value is set to 0. It may be necessary to run this function one or more times depending on the size of the buffer and the quantity of data returned.
+ 
+Return: Either a positive value representing the number of lines read, or a negative value indicating one of the following errors.
+BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_FINISHED
+RESULT_BUFFER_EMPTY
+RESULT_BUFFER_TOOSMALL
+ 
+See the table below for return values.
+ 
+ 
+ 
+
+ 16
+ BUFFERFIELDNAME
+ 
+ 
+Get the header names, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_FINISHED
+RESULT_BUFFER_TOOSMALL
+ 
+See the table below for return values.
+ 
+ 
+ 
+
+ 17
+ BUFFERFIELDTYPE
+ 
+ 
+Get the datatypes corresponding to the fields, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_FINISHED
+RESULT_BUFFER_TOOSMALL
+ 
+See the table below for return values.
+ 
+ 
+ 
+
+ 19
+ READSCALARVALUE
+ 
+ 
+Read the scalar value, produced by an EXECSCALAR function, once the status variable is set to 0.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE
+CMDID_DOES_NOT_EXIST
+CMD_TYPE_NOT_VALID
+CMD_NOT_FINISHED
+RESULT_BUFFER_TOOSMALL
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+List of possible return values and meanings
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Return value
+ Enum
+ Description
+ 
+ 
+
+ 0
+ OPERATION_SUCCEEDED
+ Operation completed successfully
+ 
+ 
+
+ -1
+ SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+ The parameter SqlConnectionName is not of type string or could not be read
+ 
+ 
+
+ -2
+ SQLCMD_PARAM_NOT_STR_OR_NOT_READ
+ The parameter SqlCmd is not of type string or could not be read
+ 
+ 
+
+ -3
+ STATUSVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+ The parameter StatusVariable is not of type string or could not be read
+ 
+ 
+
+ -4
+ LINESEPARATOR_PARAM_NOT_STR_OR_NOT_READ_OR_TOOLONG
+ The parameter LineSeparator is not of type string, could not be read or is too long
+ 
+ 
+
+ -5
+ FIELDSEPARATOR_PARAM_NOT_STR_OR_NOT_READ_OR_TOOLONG
+ The parameter FieldSeparator is not of type string, could not be read or is too long
+ 
+ 
+
+ -6
+ BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE
+ The parameter BufferHandle is invalid, Null or of Null size. The buffer allocation using ALLOC_BUFFER is probably missing or failed to execute properly
+ 
+ 
+
+ -7
+ LINENUMBER_PARAM_INVALID
+ The parameter LineNumber is invalid
+ 
+ 
+
+ -8
+ FIELDNUMBER_PARAM_INVALID
+ The parameter FieldNumber is invalid
+ 
+ 
+
+ -9
+ ERRORTEXTVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+ The parameter ErrorTextVariable is not of type string or could not be read
+ 
+ 
+
+ -10
+ CONNECTION_PARAM_INVALID
+ The parameter ConnectionParam is invalid
+ 
+ 
+
+ -11
+ COMMAND_PARAM_INVALID
+ The parameter CommandParam is invalid
+ 
+ 
+
+ -12
+ 
+ 
+SQLCON_DOES_NOT_EXIST
+ 
+ The specified Sql connection does not exist in the configuration
+ 
+ 
+
+ -13
+ 
+ 
+STATUSVARIABLE_NOT_REGISTER_OR_DOES_NOT_EXIST 
+ 
+ The status variable passed as parameter (StatusVariable) is not a register variable or it does not exist
+ 
+ 
+
+ -14
+ 
+ 
+ERRORTEXTVARIABLE_NOT_TEXT_OR_DOES_NOT_EXIST 
+ 
+ The additional information variable passed as parameter (ErrorTextVariable) is not a text variable or it does not exist
+ 
+ 
+
+ -15
+ CONNECTION_ALREADY_INIT 
+ The connection is already initialized
+ 
+ 
+
+ -16
+ CONNECTION_INIT_FAILED 
+ The connection could not be initialized
+ 
+ 
+
+ -17
+ CONNECTION_ALREADY_CLOSE_OR_NOT_INIT 
+ The connection is already closed or not initialized
+ 
+ 
+
+ -18
+ CONNECTION_CLOSE_FAILED 
+ Failed to close the connection
+ 
+ 
+
+ -19
+ SEND_COMMAND_FAILED 
+ Failed to send the Sql command. This error occurs if the underlying Windows service is stopped or if the user does not have enough privileges to execute the command
+ 
+ 
+
+ -20
+ MAXIMUM_COMMAND_REACH 
+ The maximum number of outstanding command is reached
+ 
+ 
+
+ -21
+ MAXIMUM_CONNECTION_REACH 
+ The maximum number of simultaneous connections is reached
+ 
+ 
+
+ -22
+ CMDID_DOES_NOT_EXIST
+ The command CmdId passed as parameter does not exist
+ 
+ 
+
+ -23
+ CMD_TYPE_NOT_VALID
+ The command type is invalid. For example, this error is raised when using the READ_BUFFER with a Command Id corresponding to a request of type non-query or scalar
+ 
+ 
+
+ -24
+ CMD_NOT_FINISHED 
+ The command is not yet completed
+ 
+ 
+
+ -25
+ CMD_NOT_REMOVED 
+ The command could not be removed
+ 
+ 
+
+ -26
+ RESULT_BUFFER_EMPTY 
+ The result buffer is empty
+ 
+ 
+
+ -27
+ RESULT_BUFFER_TOOSMALL 
+ The result buffer is too small
+ 
+ 
+
+ -28
+ RESULT_BUFFER_REACH_NBLINE_MAX 
+ Failure to return information about the number of lines in the bufffer because it exceeds the return value range
+ 
+ 
+
+ -29
+ RESULT_BUFFER_REACH_SIZE_MAX 
+ Failure to return information about the buffer size because it exceeds the return value range
+
+
+========================================
+TOPIC: SQL_CONNECTION.htm
+========================================
+SQL_CONNECTION
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SQL_CONNECTION
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ See also 
+
+Example
+ 
+Manage PcVue's runtime objects used to handle Sql connections.
+ 
+WebVue support - Yes.
+ 
+
+ 
+The use of pre-configured Sql connections along with the instructions SQL_CONNECTION, SQL_COMMAND and SQL_QUERY is preferred to using the verb SVSQL (based on ODBC).
+ 
+Pre-configured Sql connections are configured in the Application Explorer. See the Data Connections book for information.
+ 
+ 
+
+ 
+Some of the modes are asynchronous. The application developer must ensure that the value of the status variable is monitored and take adequate actions when it changes.
+ 
+ 
+
+ 
+This verb can be executed either locally on the producer station of the Sql connection or from any client station of the producer. In the latter case, commands and returned data are routed transparently through the multi-station messaging system. Multiple connections to the same data source are only allowed if using different Sql Connections. Multiple connections using the same Sql Connection will be refused, however, multiple simultaneous requests using the same Sql Connection is possible.
+ 
+ 
+
+ 
+A connection, and the data associated to it, are managed in the context of user sessions. A connection should only be handled in the context of the session that had originally initiated it; and all related objects must be properly released/closed before the session is ended. For example, it is not possible to initiate a connection at start up and have requests executed in any user context.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Mode
+ Mnemonic
+ Syntax
+ 
+ 
+
+ 1
+ TESTCONNECTION
+ 1
+ 
+ 
+ 
+
+ 2
+ START
+ 2
+ 
+ 
+ 
+
+ 3
+ STOP
+ 2
+ 
+ 
+ 
+ 
+ 
+Arguments common to more than one mode
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ SqlConnectionName
+ 
+ The name of a Sql connection as configured in General.Data connections in the Application Explorer. Type STR.
+ 
+ 
+ 
+Syntax 1
+ 
+IntVal = SQL_CONNECTION(Mode, SqlConnectionName, StatusVariable, ErrorTextVariable);
+ 
+Return type: INTEGER
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 
+ 
+StatusVariable
+ 
+ 
+ 
+ 
+The name of the register variable used to monitor the status of an asynchronous operation. Type STR.
+ 
+ Succeeded = 0
+Running = 1
+Failed = 2
+ 
+ 
+ 
+
+ 
+ 
+ErrorTextVariable
+ 
+ 
+ The name of a text variable used to return additional information when the status variable value is set to failed (2). Type STR.
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 1
+ TESTCONNECTION
+ 
+ 
+Test the connection end-to-end with a Data Source using the specified Sql connection. It is equivalent to the Test connection task available in the Application Explorer.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+STATUSVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+STATUSVARIABLE_NOT_REGISTER_OR_DOES_NOT_EXIST
+ERRORTEXTVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+ERRORTEXTVARIABLE_NOT_TEXT_OR_DOES_NOT_EXIST
+SQLCON_DOES_NOT_EXIST
+SEND_COMMAND_FAILED
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+
+ 
+This mode is asynchronous. The program must monitor the value of the status variable. 
+ 
+ 
+Syntax 2
+ 
+IntVal = SQL_CONNECTION(Mode, SqlConnectionName);
+ 
+Return type: INTEGER
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 2
+ START
+ 
+ 
+Change the specified Sql connection object state to 'started'. No action is performed if it is already started.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+SQLCON_DOES_NOT_EXIST
+SEND_COMMAND_FAILED
+ 
+See the table below for integer return values.
+ 
+ 
+ 
+
+ 3
+ STOP
+ 
+ 
+Change the Sql connection state to 'stopped'. No action is performed if it is already stopped.
+ 
+Return: 0 if successful, else a negative number indicating one of the following errors.
+SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+SQLCON_DOES_NOT_EXIST
+SEND_COMMAND_FAILED
+ 
+See the table below for return values.
+ 
+ 
+ 
+ 
+
+ 
+Similar to the state of communication objects, these modes are designed to prevent a Sql connection's producer station to execute actual commands towards the Data Source by giving the application designer the ability to set Sql connections in a state (stopped) in which actual commands are not processed. The modes START and STOP are always executed locally (as opposed to routed to the station producing the Sql connection). As a consequence, they must be executed on producer stations of the Sql connection to be truly effective - as opposed to being executed on stations issuing requests that are routed to the Sql connection producer over the multi-station network.
+ 
+ 
+List of possible return values and meanings
+ 
+ 
+ 
+
+ Return value
+ Enum
+ Description
+ 
+ 
+
+ 0
+ OPERATION_SUCCEEDED
+ Operation completed successfully
+ 
+ 
+
+ -1
+ SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+ The parameter SqlConnectionName is not of type string or could not be read
+ 
+ 
+
+ -2
+ STATUSVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+ The parameter StatusVariable is not of type string or could not be read
+ 
+ 
+
+ -3
+ ERRORTEXTVARIABLE_PARAM_NOT_STR_OR_NOT_READ
+ The parameter ErrorTextVariable is not of type string or could not be read
+ 
+ 
+
+ -4
+ 
+ 
+SQLCON_DOES_NOT_EXIST
+ 
+ The specified Sql connection does not exist in the configuration
+ 
+ 
+
+ -5
+ 
+ 
+STATUSVARIABLE_NOT_REGISTER_OR_DOES_NOT_EXIST 
+ 
+ The status variable passed as parameter (StatusVariable) is not a register variable or it does not exist
+ 
+ 
+
+ -6
+ 
+ 
+ERRORTEXTVARIABLE_NOT_TEXT_OR_DOES_NOT_EXIST 
+ 
+ The additional information variable passed as parameter (ErrorTextVariable) is not a text variable or it does not exist
+ 
+ 
+
+ -7
+ SEND_COMMAND_FAILED 
+ Failed to send the Sql command. This error occurs if the underlying Windows service is stopped or if the user does not have enough privileges to execute the command
+
+
+========================================
+TOPIC: SQL_QUERY.htm
+========================================
+SQL_QUERY
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SQL_QUERY
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ See also 
+
+Example
+ 
+Used to execute a specific Sql Query (read or write). It is essential to manage synchronization problems between substitution parameters and trigger.
+ 
+WebVue support - Yes.
+ 
+
+ 
+The use of pre-configured Sql connections along with the instructions SQL_CONNECTION, SQL_COMMAND and SQL_QUERY is preferred to using the verb SVSQL (based on ODBC).
+ 
+Pre-configured Sql connections are configured in the Application Explorer. See the Data Connections book for information.
+ 
+ 
+
+ 
+This verb can be executed either locally on the producer station of the Sql connection or from any client station of the producer. In the latter case, commands and returned data are routed transparently through the multi-station messaging system. Multiple connections to the same data source are only allowed if using different Sql Connections. Multiple connections using the same Sql Connection will be refused, however, multiple simultaneous requests using the same Sql Connection is possible.
+ 
+ 
+
+ 
+A connection, and the data associated to it, are managed in the context of user sessions. A connection should only be handled in the context of the session that had originally initiated it; and all related objects must be properly released/closed before the session is ended. For example, it is not possible to initiate a connection at start up and have requests executed in any user context.
+ 
+ 
+&#160;
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Mode
+ Mnemonic
+ Syntax
+ 
+ 
+
+ 1
+ EXECUTE
+ 1
+ 
+ 
+ 
+ 
+ 
+&#160;
+ 
+Syntax 1
+ 
+IntVal = SQL_QUERY(Mode, SqlConnectionName, SqlQueryName [,Param01�[,Param10]]);
+ 
+Return type: INTEGER
+ 
+ 
+ 
+ 
+
+ 
+ 
+Argument
+ 
+ 
+ 
+Meaning
+ 
+ 
+ 
+
+ 
+ 
+SqlConnectionName
+ 
+ 
+ 
+ 
+The name of a Sql connection as configured in General.Data connections in the Application Explorer. Type STR.
+ 
+ 
+ 
+
+ 
+ 
+SqlQueryName
+ 
+ 
+ The name of a Sql query subordinate to the Sql connection. Type STR.
+ 
+ 
+
+ Parm01....
+ 
+ 
+ 
+A list of values to overwrite query parameters.
+Parameters are substituted in order:
+?Param1, ?Param2, ?Param3, ?Param4, etc.
+Type STR.
+ 
+If a value is missing, the configured substitution is used.
+ 
+A parameter value can be an expression as supported for pre-defined query configuration.
+ 
+ 
+ 
+ 
+Execution
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Mode
+ 
+ 
+ 
+Mnemonic
+ 
+ 
+ 
+Action
+ 
+ 
+ 
+
+ 1
+ EXECUTE
+ 
+ 
+Execute the name Sql query. It is equivalent to the Trigger query with parameters task available in the Application Explorer.
+ 
+Return: 0 if successful, else a negative number indicating an error. See the table below for return values.
+ 
+ 
+ 
+ 
+
+ 
+The mode EXECUTE is asynchronous. The application developer must ensure that status variables are properly configured for the query and used to follow the execution progress, success or failure.
+ 
+ 
+List of possible return values and meanings
+ 
+ 
+ 
+
+ Return value
+ Enum
+ Description
+ 
+ 
+
+ 0
+ OPERATION_SUCCEEDED
+ Operation completed successfully.
+ 
+ 
+
+ -1
+ SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ
+ The parameter SqlConnectionName is not of type string or could not be read.
+ 
+ 
+
+ -2
+ SQLQUERYNAME_PARAM_NOT_STR_OR_NOT_READ
+ The parameter SqlQueryName is not of type string or could not be read.
+ 
+ 
+
+ -3
+ SQLCON_DONT_EXISTS
+ The specified Sql connection does not exist in the configuration.
+ 
+ 
+
+ -4
+ SQLQUERY_DONT_EXISTS
+ The specified Sql query does not exist in the configuration.
+ 
+ 
+
+ -5
+ SQLQUERY_TOO_MANY_PARAM
+ The maximum number of parameters (21) has been exceeded.
+ 
+ 
+
+ -6
+ SQLQUERY_PARAM_UNSUPPORTED_TYPE
+ The type of a parameter is not supported.
+ 
+ 
+
+ -7
+ SEND_COMMAND_FAILED 
+ Failed to send the Sql command. This error occurs if the underlying Windows service is stopped or if the user does not have enough privileges to execute the command.
+
+
+========================================
+TOPIC: SQL_server_memory_options_Overview.htm
+========================================
+About SQL Server's memory options
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+About SQL Server's Memory Options
+ 
+You use the two server memory options, Min Server Memory 
+ and Max Server Memory, to re-configure the amount of memory (in megabytes, 
+ MB) in the buffer pool used by an instance of the SQL Server.
+ 
+ 
+By default, SQL Server 
+ can change its memory requirements dynamically based on available system 
+ resources. 
+ 
+The default setting 
+ for Min Server Memory is 0. 
+ 
+The default setting 
+ for Max Server Memory is the amount of RAM memory available to the PC. 
+ 
+ 
+The minimum amount 
+ of memory you can specify for Max Server Memory is 4MB.
+ 
+ 
+When SQL Server is using memory dynamically, it queries 
+ the system periodically to determine the amount of free physical memory 
+ available. SQL Server grows or shrinks the buffer cache to keep free physical 
+ memory between 4MB and 10MB depending on server activity. This prevents 
+ Microsoft Windows from paging. 
+ 
+ 
+If there is less 
+ memory free, SQL Server releases memory to Windows that usually goes on 
+ the free list. 
+ 
+If there is more 
+ memory free, SQL Server recommits memory to the buffer cache. 
+ 
+SQL Server adds memory 
+ to the buffer cache only when its workload requires more memory, so a 
+ server at rest does not grow its buffer cache.
+ 
+ 
+The recommended configuration is to allow SQL Server 
+ to use memory dynamically. However, you can override SQL by setting the 
+ memory options manually. 
+ 
+SQL Server's ability to use memory dynamically
+ 
+Before you set the amount of memory for SQL Server, you 
+ should determine the appropriate memory setting by subtracting from the 
+ total physical memory the memory required for:
+ 
+ 
+The Windows operating 
+ system.
+ 
+Any other instances 
+ of SQL Server.
+ 
+Other system purposes, 
+ if the computer is not wholly dedicated to SQL Server
+ 
+ 
+The remainder is the maximum amount of memory you can 
+ assign to SQL Server.
+
+
+========================================
+TOPIC: SQL_server_static_memory_needs.htm
+========================================
+SQL server's static memory needs
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+SQL server's static memory needs
+ 
+The amount of memory you specify must be sufficient for 
+ SQL Server's static memory needs (kernel overhead, open objects, locks 
+ etc.), as well as for the data cache (also called buffer cache).
+ 
+Use the statistics 
+ from the Microsoft System Monitor to help you adjust the memory value 
+ if necessary. Change this value only when you add or remove memory, or 
+ when you change how you use your system.
+ 
+ 
+In the Windows Control 
+ Panel, double-click Administrative Tools then double-click on the Performance 
+ icon.
+ 
+In the Performance 
+ window's Console Root tree, select System Monitor. Show picture
+
+

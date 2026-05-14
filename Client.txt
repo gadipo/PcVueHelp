@@ -1,0 +1,336 @@
+========================================
+TOPIC: Client_server_units_conf.htm
+========================================
+Configuring Client-Server Archive Units
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring Client-Server Archive Units
+ 
+When configuring client-server archive units in a multi-station 
+ project, two station lists are selected as part of the archive unit configuration.
+ 
+ 
+A client list (containing 
+ the name of one or more stations)
+ 
+A historical server 
+ list (containing the name of a single station) 
+ 
+ 
+When the project runs on the station named in the historical 
+ server list, the archive unit is created and records data normally. Note 
+ that the station must be configured as a historic server in the project's 
+ network configuration.
+ 
+When the project runs on a station named in the client 
+ list, the archive unit is not created and historic data is not recorded. 
+ Requests for historic data are redirected to, and processed by, the station 
+ named in the historical server list.
+ 
+
+ 
+If you want to record and play back data on the same station, 
+ its name must be included in both the client and historical server lists.
+ 
+ 
+How to configure a client-server archive unit
+ 
+ 
+Open the Application Explorer and configure an archive 
+ unit in the normal way. You can use client-server with either proprietary 
+ or database type archive units.
+ 
+In the archive unit 
+ configuration dialog select the Networking 
+ tab. 
+ Show picture
+
+ 
+Select the Servers and the Clients networking lists. Note that the lists must have been previously configured 
+ as part of the network station configuration.
+ 
+Select the OK 
+ button to confirm the configuration and close the dialog.
+
+
+========================================
+TOPIC: Client_server_units_conf_issues.htm
+========================================
+Configuration issues when using client-server archive units
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuration Issues When Using Client-Server Archive 
+ Units
+ 
+The following configuration issues should be taken into 
+ account when using client-server archive units.
+ 
+Log Data
+ 
+ 
+It is only possible 
+ to use client-server archive units for events involving variables. Events 
+ associated with user actions such as logging on and off, sending a value 
+ and running a program are excluded. 
+ 
+ 
+When using different projects on the stations with 
+ the networked application
+ 
+In general, when using client server archive units, or 
+ any networked application, the same project should be used on all stations. 
+ However, very occasionally, this might not be possible in which case the 
+ following rules must be followed.
+ 
+ 
+All variables being 
+ recorded must exist on both the station acting as the archive server and 
+ any station that is an archive client. In addition, any variables used 
+ in reports must also have identical variable identifiers.
+ 
+Any log filters must 
+ exist on the station acting as the archive server and on any station that 
+ is an archive client.
+ 
+The report configuration 
+ must be identical on the station acting as the archive server and on any 
+ station that is an archive client.
+ 
+ 
+
+ 
+For reports, it is not sufficient that just the variable 
+ names are the same because, internally within PcVue, the report 
+ configuration identifies the variables it uses by their internal identifiers.
+
+
+========================================
+TOPIC: Client_server_units_overview.htm
+========================================
+Overview of client-server archive units
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of Client-Server Archive Units
+ 
+Normally PcVue records (and retrieves) historical 
+ data in one or more archive units that are part of the local project and 
+ reside on the same station. When historic data is recorded, 
+ it is timestamped with the local time and date. Recording and retrieving
+ data locally in this manner is suitable for many applications. However, 
+ it does have some disadvantages for some multi-station applications.
+ 
+ 
+There is no guarantee 
+ that all the time and date stamps will be precisely the same across different 
+ stations. Therefore, it is possible that the same data will be recorded 
+ on different stations with different timestamps.
+ 
+By recording data 
+ in several places, you are duplicating effort and use of resources.
+ 
+If you intend to 
+ back up the data, which station do you use? 
+ 
+ 
+To eliminate these problems, it is possible to centralize 
+ the recording on one of the stations (the archive server) while still 
+ making it available to other stations (archive clients) for playback. 
+ This is achieved by configuring client-server archive units. Recording 
+ data in this way has a number of advantages.
+ 
+ 
+When the data is 
+ played back, the time and date stamp will be consistent across all the 
+ stations.
+ 
+The data is easier 
+ to back up as all data is on one station.
+ 
+The cost of protecting 
+ the data (for example using redundant disk arrays) is lower as the protection 
+ only has to be implemented on one station. 
+ 
+ 
+
+ 
+A station that has archive units that are servers does 
+ not have to be a real-time data server - for example, it could be a real-time 
+ client.
+
+
+========================================
+TOPIC: Client_server_units_redundancy.htm
+========================================
+Using Redundant Servers with Client-Server Archive 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using Redundant Servers with Client-Server Archive 
+ Units
+ 
+When configuring client-server archive units using redundant 
+ servers, two station lists are selected as part of the archive unit configuration.
+ 
+ 
+A client list (containing 
+ the name of one or more stations)
+ 
+A historical server 
+ list (containing the name of a single historical association) 
+ 
+ 
+When the project runs on either of the two stations named 
+ in the historical association, the archive unit is created and records 
+ data normally.
+ 
+When the project runs on a station named in the server 
+ list, the archive unit is not created and historic data is not recorded. 
+ Requests for historic data are redirected to, and processed by, one of 
+ the two stations named in the historical association.
+ 
+How does a client select which of the redundant historic 
+ servers to request data from?
+ 
+Requests for historic data from the client archive units 
+ are routed to one or other of the historic servers as follows.
+ 
+ 
+If only one of the servers 
+ is available then the request for historic data is sent to that server.
+ 
+If both servers are available, 
+ the request is sent to the server with the greater Available 
+ rate. See below for information about configuring the Available 
+ rate property. If the rates are identical then the request is sent 
+ to the server with the lowest station number.
+ 
+ 
+
+ 
+If you want to record and play back data on the same station, 
+ its name must be included in both the client server list and the historical 
+ association named in the server list.
+ 
+ 
+How to configure a client-server archive unit using 
+ dual redundant servers
+ 
+ 
+Open the Application Explorer and configure an archive 
+ unit in the normal way. You can use client-server with either proprietary 
+ or database type archive units.
+ 
+In the archive unit 
+ configuration dialog select the Networking tab. 
+ Show picture
+
+ 
+Select the Servers and Clients Network lists. Note that the lists must have been previously configured 
+ as part of the network station configuration. The server station list 
+ must contain the name of a single historic association.
+ 
+Select the OK 
+ button to confirm the configuration and close the dialog.
+ 
+ 
+Configuring, displaying and changing the Available 
+ rate property
+ 
+The Available 
+ rate property is configured as part of the station configuration 
+ when configuring the network architecture. Show picture 
+ See the book on Networking for further information.
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+The value of the Available 
+ rate for a particular station in an association is available from 
+ the system variable SYSTEM.<ASSOC_NUM>.<STATION_NUM>.AVAILABLE_RATE 
+ where <ASSOC_NUM> and <STATION_NUM> are the numbers allocated 
+ to the historic association and station respectively.
+ 
+The Available 
+ rate can be changed dynamically using the LAN instruction in a 
+ SCADA Basic program. By changing the Available 
+ rate you can change the server from which clients request their 
+ historic data. You may want to do this for a number of reasons - for example:
+ 
+ 
+If you want data 
+ from a particular time, when you know one of the servers was not running.
+ 
+If one of the servers 
+ is going to be busy (making a back-up for example) or is going to be off-line 
+ for maintenance.
+ 
+ 
+Replacing missing data in a redundant historic server 
+ archive unit
+ 
+It is quite likely that sometime during the life of 
+ a project there will be periods where one or other of the historic servers 
+ will have gaps in the historic data recorded in their archive units. This 
+ could be due to a variety of reasons including routine maintenance, hardware 
+ failure etc. If 
+ you are using a database type archive unit, you can replace the missing 
+ data on one server with the corresponding data on the other. This process 
+ takes place off-line using the Database Manager tool supplied with PcVue. See the help for the Database Manager for more information.
+ 
+
+ 
+You cannot replace missing data in a proprietary archive 
+ unit.
+
+

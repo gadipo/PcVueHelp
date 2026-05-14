@@ -1,0 +1,4893 @@
+========================================
+TOPIC: bacnet_adding_a_port.htm
+========================================
+Configuring a BACnet/IP Network Interface
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring a BACnet/IP Network Interface
+ 
+The configuration of the BACnet/IP Network Interface determines PcVue connection to, and behavior on, the BACnet network. 
+ 
+It includes the exact list of network interfaces each BACnet network producer station will use to access a BACnet network. Each Network Interface includes several BACnet properties, in particular the Device Id that PcVue uses for the BACnet device object it exposes to the other devices on the network.
+ 
+You need to configure one or more Network Interfaces if you are configuring a multi-station (networked) application or require something other than the default connection port properties.
+ 
+This configuration may need to be changed at deployment time if the IP addresses and Network Interface Cards are different on the development system to that of the installed system.
+ 
+The default connection interface
+ 
+If you do not configure a connection, then, as soon as you configure a BACnet Network, a default connection is made using the following properties.
+ 
+ 
+Station name - Local Station.
+ 
+IP properties
+IP address - 127.0.0.1 (the IP loopback address).
+Port number - 47808.
+ 
+BACnet properties
+Network Id - 0.
+Device Id - 62400.
+ 
+ 
+How to configure a Network Interface
+ 
+ 
+Navigate the Application Explorer configuration tree and select a BACnet network.
+ 
+Select the Network Interface task. The Network Interface dialog opens. 
+ 
+ Show picture
+
+ 
+Select Add Network interface from the toolbar. The Network interface properties dialog opens. The following screenshot was taken with the default configuration.
+ 
+ Show picture
+
+ 
+Enter the network interface Name. This is the name by which it will be identified in PcVue. You can accept the proposed name or enter one of your own.
+ 
+Select the Station Name. If configuring a standalone application select Local Station. If configuring a networked application, select the station on which the network interface will be used (the same as the producer of the BACnet network).
+ 
+Enter the IP parameters.
+If configuring a networked application select a node of the chosen networked station, or provide the IP address of the network interface on the station. Show picture
+
+OR
+If configuring a standalone application enter the IP address of the local station in the IP address field. The Node field is not used. Show picture
+
+ 
+Change the UDP Port number if necessary.
+ 
+Configure the BACnet properties. You can change the Network Id and Device Id if necessary.
+ 
+Select OK to confirm the configuration and close the dialog. You must restart the network before the configuration takes effect.
+ 
+ 
+Why is my configured Network Interface dimmed?
+ 
+Configured network interfaces are displayed, one on each line, in the Network Interfaces dialog. Only the active network interface is displayed in a normal font, all others will be dimmed. If you have just configured a network interface, it will be dimmed at least until the network is restarted.
+ 
+Advanced properties
+ 
+A foreign device can be a full-time node on a foreign subnet that does not have a BBMD, or a part-time participant (for example a device accessed via a SLIP or PPP connection). You can configure a foreign device using the Network interface dialog, Advanced tab.
+ Show picture
+
+ 
+ 
+IP address - The IP address of the foreign device.
+ 
+Port number - The port number of the foreign device.
+
+
+========================================
+TOPIC: bacnet_adding_alarmevent_config.htm
+========================================
+How to Configure PcVue to Receive Alarm and Event Notifications
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure PcVue to Receive Alarm and Event Notifications
+ 
+Adding Notification Class objects to the device in PcVue configuration is necessary to ensure a correct behavior at run-time. PcVue can then ensure it receives event notifications from that device and you are able to map the ChangeOfState properties to variables.
+ 
+
+ 
+The process described below does not create the Notification Class object instance in the physical device if it does not exist. Notification Class objects can be created within the physical device using the Alarm helper, or the left pane of the Mapping editor.
+ 
+ 
+
+ 
+Once a Notification Class object has been added to its configuration, PcVue checks to make sure it is in the Recipient List each time it connects or re-connects to the device. It also checks the notification conditions and makes sure the device is configured to send the expected list of transitions during the correct period (time and date). The Notification Class object�s configuration is changed by PcVue if necessary.
+ 
+ 
+A Notification Class object can be added either from the Application Explorer or from the BACnet Mapping dialog. 
+ 
+Adding a Notification Class object using the Application Explorer
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network and device.
+ 
+From the task pane, select Add a Notification Class. The Notification Class configuration dialog opens. Show picture
+
+ 
+Click the Ellipsis button adjacent to the Instance number field. The Object Selection dialog opens containing a list of discovered Notification Class instances for that device. The list can be updated using the Refresh button. Show picture
+
+ 
+Select the Notification Class instance to use. The notification must be the one referenced in the object that you want to receive event notifications from.
+ 
+Click the OK button to close the Object Selection dialog.
+ 
+Check the configuration and click the OK button to close the Notification Class dialog. The notification appears in the configuration tree. 
+ 
+ Show picture
+
+ 
+ 
+Adding a Notification Class object using the BACnet Mapping dialog
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network.
+ 
+From the task pane, select Mapping. The BACnet Mapping dialog opens.
+ 
+Expand the devices and objects tree in the left pane and select an appropriate Notification Class object. Notification Class instances appears in the right pane.
+ 
+Right click on the instance to be mapped and select Map Notification Class from the context menu. The Notification Class configuration dialog opens, populated with information from the selected Notification Class instance. The Notification Class must be the one referenced in the object that you want to receive transitions from. Show picture
+
+ 
+Check the configuration and click OK button to close the Notification Class dialog. A new Notification Class object appears in the Mapping dialog in the Variable/Object column. 
+ 
+ Show picture
+
+ 
+ 
+The Notification Class Configuration dialog - Advanced tab
+ 
+The following properties are available in the Notification Class Configuration dialog - Advanced tab. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Check recipient-list - The period at which the recipient-list property of the Notification Class object is checked. The default is 300 seconds (5 minutes).
+ 
+Automatic re-subscription - If ticked, PcVue re-subscribes automatically to the Notification Class (for example - after a reset). The default is ticked.
+ 
+Notification mode - Use to configure the type of notification.
+Unconfirmed - The notification does not require confirmation. 
+Confirmed - The notification requires confirmation. This is the default value.
+
+
+========================================
+TOPIC: bacnet_adding_alarmevent_vars.htm
+========================================
+Mapping Variables to the Events/Alarms
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mapping Variables to the Events/Alarms
+ 
+Variables are mapped to the Events/Alarms in the same way that you map any variable used for data sharing. See the topic The BACnet mapping dialog and the book BACnet data sharing. 
+ 
+ 
+The Events/Alarms are those of the object that detect the condition to be notified. Show picture
+
+ 
+The mapped variable will only receive a value if the appropriate Notification Class instance has been added to the device in PcVue BACnet configuration. See the topic How to configure PcVue to receive alarm and event notifications.
+ 
+The BACnet Monitoring and Archive Source properties are not available in the variable configuration's Advanced tab as they are not applicable.
+ 
+The variable is always a bit or an alarm. If an alarm is used then its acknowledgement status can be sent to the BACnet device. This behavior depends on the Alarms - Remote Acknowledgment Management setting. See the topic BACnet settings.
+ 
+ 
+
+ 
+The BACnet Alarms helper can be used to visualize, and diagnose problems with, Alarm/Event notification configuration - in both PcVue and the BACnet device itself. See the topic Using the BACnet Alarms helper.
+ 
+ 
+BACnet event transitions and the value of the mapped variables
+ 
+The BACnet standard identifies three event transitions. The following tables illustrate how these are mapped to variables.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ &#160;
+ Variable
+ 
+ 
+
+ BACnet transition
+ Value
+ Timestamp
+ Quality
+ 
+ 
+
+ To Normal
+ 0
+ From the notification
+ Good
+ 
+ 
+
+ To OffNormal
+ 1
+ Good
+ 
+ 
+
+ To Fault
+ Unchanged
+ Bad
+ 
+ 
+ 
+ 
+If the BACnet object has an analog value, the behavior is modified, as there is a high threshold and low threshold to be taken into account. In this case, two of variables are used.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ &#160;
+ Variables
+ 
+ 
+
+ BACnet transition
+ Value (High)
+ Value (Low)
+ Timestamp
+ Quality
+ 
+ 
+
+ To Normal
+ 0
+ 0
+ From the notification
+ Good
+ 
+ 
+
+ To OffNormal (out of range is high limit)
+ 1
+ 0
+ Good
+ 
+ 
+
+ To OffNormal (out of range is low limit)
+ 0
+ 1
+ Good
+ 
+ 
+
+ To Fault
+ Unchanged
+ Unchanged
+ Bad
+ 
+ 
+ 
+ 
+The following BACnet objects support events. Those in a bold typeface are threshold type (high and low limit).
+ 
+ 
+ 
+ 
+ 
+ 
+
+ analog_input
+ 
+ multi_state_input
+ pulse_converter
+ 
+ 
+ 
+
+ analog_output
+ 
+ multi_state_output
+ global_group
+ 
+ 
+
+ analog_value
+ 
+ multi_state_value
+ trend_log_multiple
+ 
+ 
+
+ binary_input
+ trend_log
+ access_door
+ 
+ 
+
+ binary_output
+ life_safety_point
+ access_point
+ 
+ 
+
+ binary_value
+ life_safety_zone
+ access_zone
+ 
+ 
+
+ loop
+ accumulator
+ load_control
+ 
+ 
+ 
+ 
+Acknowledgement of BACnet Alarms
+ 
+&#160;PcVue can acknowledge each of the three possible alarm transitions, To Normal, To OffNormal and To Fault, if required. How the acknowledgement is managed depends on the setting Acknowledge alarm/event notifications. See the topic BACnet settings.
+
+
+========================================
+TOPIC: bacnet_adding_device_config.htm
+========================================
+Adding devices to a BACnet network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding Devices to a BACnet Network
+ 
+A BACnet Device object in PcVue configuration represents and provides access to, a physical BACnet device. The physical BACnet device is known by its Device Id. In PcVue, it is known by the Name that you give it during the configuration.
+ 
+Physical BACnet devices can be discovered online by scanning the network (also known as online configuration). If, at the time of configuration, the developer does not have access to the BACnet network, it is also possible to input devices� properties manually.
+ 
+If the BACnet system engineering process includes the use of EDE files, PcVue is able to discover BACnet devices using those files. This is known as offline configuration. See the topic Using EDE files for configuring BACnet devices for information about how to use EDE files.
+ 
+How to add a device
+ 
+ 
+Select a BACnet network in the Application Explorer. From the task pane, select Add a device to open the BACnet Device dialog. The following screenshot was taken with the default configuration. 
+ Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+Enter the Device Id. You can either type in the Id, or use the Ellipsis button to open the Device List dialog from where the Device Id can be selected. The BACnet Device List dialog has two tabs, one containing a list of online devices (scanned), and the other with a list of offline devices (discovered from EDE files).
+ Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+Select a device from either the Online or Offline tab as appropriate and click the OK button.
+If you select an online device. The Name and Device Id fields are populated with information from the scanned device.
+
+If you select an offline device. The Name, Description and Device Id fields are populated with information from the EDE file and two additional read only fields appear, Keyname and EDE file name, which indicate that the device was configured offline and are used as a reference to an EDE file.
+ 
+ 
+ Show picture
+
+ 
+Enter a name for the device in the Name text box. This is the name by which the device will be known in PcVue. You can accept the suggested name or enter one of your own. If configuring an offline device the name will default to that found in the EDE file.
+ 
+Enter the description of the device in the Description text box. The description appears in the contents pane of the Application Explorer and can be useful to identify the device. If configuring an offline device the description will default to that found in the EDE file. The description is optional.
+ 
+Select Activate at startup if the device is to be activated when the network starts. If this property is not selected then a SCADA BASIC program can be used to activate the device.
+ 
+Click on OK to confirm the configuration and close the dialog.
+ 
+ 
+The Watchdog tab
+ 
+A watchdog mechanism is provided to monitor the presence of the physical device on the BACnet network. The selected property is polled at the configured interval and, if there is no reply, it is assumed that the device is not present. When a device has been detected as not present, the following happens:
+ 
+ 
+The system variable SYSTEM.BACNET.<NetworkId>.<DeviceId>.STATUS is set to 1 (normally 0).
+ 
+A warning icon is displayed in the BACnet configuration. 
+ 
+The property will continue to be polled, but at the rate set in the Bad devices verification period property, until the device is present once again. See the topic BACnet settings.
+ 
+ 
+To configure the watchdog you select an Object type, Instance and Property. Show picture
+ 
+
+ 
+ 
+
+ 
+ 
+By default, the watchdog relies on the ability to access the system-status property of the Device object. The BACnet standard requires one, and only one, instance of the Device object to be exposed by each physical device and therefore when the Device object is used for the watchdog the Instance property is read only and always set to that of the device being configured.
+ 
+However, sometimes you may find a device that is not 100% compliant with the BACnet standard and does not have a Device object. In that case, you must select another Object, Instance and Property that the device does support and expose.
+ 
+The BACnet Device List
+ 
+The BACnet Device List dialog contains a list of all devices known to PcVue. It is displayed from the ellipsis button adjacent to the Device Id field in the Device Configuration dialog. The dialog contains two tabs, one for online devices (discovered on the network) Show picture, and the other for offline devices (discovered in EDE files) Show picture.
+ 
+
+ 
+The Online list can be re-generated using the Refresh button.
+
+
+========================================
+TOPIC: bacnet_alarmevent_supervisor.htm
+========================================
+Using BACnet Notification Class Objects
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using BACnet Notification Class Objects
+ 
+In a BACnet network, a device is able to generate an unsolicited message when a pre-configured condition is met. The mechanism is often referred to as Alarm/Event Notification. 
+ 
+Alarm and event notifications are generated by the Notification Class object within a physical BACnet device. The Notification Class object's properties define how notifications are controlled.
+ 
+ 
+The conditions under which the messages are sent.
+ 
+The list of recipients, on the BACnet network, to which the message is sent.
+ 
+ 
+&#160;PcVue can receive such messages and map the change of state information therein to an alarm or bit variable.
+ 
+A Notification Class object's behavior also includes the ability for the sender to expect an acknowledgement of the notification from recipients. How the acknowledgement is managed depends on the setting Acknowledge alarm/event notifications. See the topic BACnet settings.
+ 
+A physical BACnet device can have any number of Notification Class instances. Messages from the Notification Class object are triggered by other, so-called source, objects in the device and are typically a consequence of a change to the Present Value. For example, an Analog Input can trigger a notification if the Present Value exceeds the High Limit. The notification message always includes information about the change of state of the event, and the Present Value of the triggering object. It may also contain other properties depending on the object type. For example, a notification generated by an Analog Input object also contains the Deadband, High Limit
+and Low Limit.
+ 
+A Notification Class object's recipient list declares which devices are to receive the notification message and hence, if it is to receive such messages, PcVue must be registered in the list. The BACnet driver is able to register itself with an existing Notification Class object, or to create, and register with, an entirely new Notification Class object.
+
+
+========================================
+TOPIC: bacnet_bbmd.htm
+========================================
+BACnet BBMD configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnet BBMD Configuration
+ 
+BACnet device discovery uses services that rely on the use of broadcast messages. As broadcast messages are normally not forwarded by routers, BBMD (BACnet/IP Broadcast Management Device) is a technology to enable BACnet broadcast messages to be sent to other subnets with BACnet IP devices. Each BBMD, in this case PcVue, manages a table that lists any other partner BBMD's on the network it should connect to.
+ 
+
+ 
+In some cases, using static binding can be a good alternative to setting up a BBMD. See BACnet Device Advanced Properties for more information.
+ 
+ 
+How to configure a BBMD table
+ 
+&#160;PcVue BBMD tables are configured from the BBMD task.
+ 
+ 
+
+ 
+Navigate to the Application Explorer configuration tree and select the BACnet node.
+ 
+ 
+
+ 
+Select the BBMD task from the left pane. The BBMD configuration dialog opens.
+
+ 
+ 
+
+ 
+ Click the yellow folder icon on the BBMD configuration dialog. The BBMD list creation dialog opens. Show picture
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+Enter the BBMD list Name. A default name is suggested. Accept the name or enter one of your own. 
+ 
+ 
+
+ 
+Select the Network interface or Station where the list will be active. What you are defining here is the PcVue station that will act as a BBMD on the BACnet network. It can be defined by selecting a network interface that you have configured (associated to a BACnet network configuration item), or a station. In all cases, the PcVue station that is a BBMD must be a BACnet data acquisition server, i.e. it produces communication for a BACnet network item you have configured.
+ 
+
+ 
+BBMD redundancy is not supported. The list selected must be a station name, a list or association containing only a single station.
+ 
+ 
+ 
+
+ 
+Click OK to confirm the configuration. The BBMD list will appear in the right pane of the BBMD creation dialog. 
+ 
+ 
+
+ 
+Select the BBMD list added in the left pane and click the add icon in the right pane of the BBMD configuration dialog to add a partner BBMD. What you are doing here is configuring the IP address and Port number of a device acting as BBMD on another subnet that the PcVue station will have to communicate with (as a BBMD). Show picture
+ 
+
+ 
+ 
+ 
+
+ 
+The icons that appear upon selection of added BBMD lists and BBMDs enable you to remove or view properties of these elements
+ 
+ 
+ 
+
+ 
+Click OK to confirm the configuration. 
+ 
+ 
+
+ 
+Repeat from Step 7 if you need to configure more than one partner BBMD for the selected BBMD list. It is typically the case if you have BACnet devices on more than 2 subnets (there should be a partner BBMD on each subnet).
+ 
+ 
+
+ 
+Repeat from Step 2 if you need to configure more than one BBMD list, e.g. more than one PcVue station that will act as a BBMD. Having more than one PcVue station acting as a BBMD only makes sense if they communicate to different subsets of partner BBMD on other subnets.
+ 
+ 
+ 
+
+ 
+While it is recommended to configure the network interface associated to a BACnet network explicitly, it is not mandatory and you may not have configured them. In such case, the BACnet driver will use the first available network interface card of the computer. And if BBMD lists are configured, the first one will be used which may result in communication failures because nothing guarantee that the first BBMD list is the good one for a given subnet.
+
+
+========================================
+TOPIC: bacnet_calendar_config.htm
+========================================
+How to configure PcVue to use a BACnet Calendar
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure PcVue to use a BACnet Calendar
+ 
+Adding Calendar objects to the device in PcVue configuration is a requirement in order to view and change a BACnet Calendar using the WebScheduler.
+ 
+
+ 
+The process described below does not create a Calendar object instance in the physical device if it does not exist. Calendar objects can be created within the physical device using the Schedules and Calendars helper, or the left pane of the Mapping editor.
+ 
+ 
+Adding a Calendar object using the Application Explorer
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network and device.
+ 
+From the task pane, select Add a Calendar. The Calendar configuration dialog opens. Show picture
+
+ 
+Click the Ellipsis button adjacent to the Instance number field. The Object Selection dialog opens containing a list of discovered Calendar instances for that device. The list can be updated using the Refresh button. Show picture
+
+ 
+Select the Calendar instance to use and click OK to close the Object Selection dialog.
+ 
+Enter the optional Description. The Description appears in the Application Explorer and can be useful to identify the object later.
+ 
+Enter or select the optional Branch. The branch can be used to organize calendars and schedules in the WebScheduler in a hierarchical manner. For example, a branch of XXXX.YYYY would generate a branch XXXX containing the calendar YYYY.
+ 
+Click the OK button to close the Calendar configuration dialog. The Calendar appears in the configuration tree and is available to the WebScheduler. Show picture
+
+
+========================================
+TOPIC: bacnet_device_advanced.htm
+========================================
+BACnet device advanced properties
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnet Device Advanced Properties
+ 
+The following screenshot was taken with the default configuration. Show picture
+
+ 
+ 
+Binding
+Dynamic - Use the classic BACnet binding mechanism based on UDP broadcast messages to browse the devices on the BACnet network. 
+Static - Use the static device binding mechanism to communicate directly with an IP device without soliciting the classic BACnet browsing based on UDP broadcast messages.
+MAC address - The device BACnet MAC address, which can be entered in one of two formats:
+ The socket address under the form IP address:UDP port. For example 10.59.5.151:47808
+
+As the actual BACnet MAC address. For example 0A:3B:05:97:BA:C0
+Note that the BACnet MAC address format, as defined by the standard, is a conversion of the socket address as six bytes, and does not match the MAC address as defined usually.
+IP address: 10.59.5.151 > 0A:3B:05:97
+Port	:	47808 > BA:C0
+Network identifier - The BACnet network number or network Id. By default, 0 is used to indicate the local network (as defined in the BACnet standard). 
+ 
+Monitoring
+BACnet objects
+Status flag management - Configure how the BACnet device status flags are interpreted.
+Process FAULT as invalid quality.
+Process OVERRIDDEN as invalid quality.
+Process OUT_OF_SERVICE as invalid quality.
+Accumulator
+Apply scale on instance value - Calculate the value of a variable mapped to the object by using the PresentValue and the Scale properties.
+ 
+Writing
+Update the variable immediately with the written value - For a variable configured with polling, when a command is sent successfully, setting this property updates the variable value immediately with the written value (otherwise you have to wait for the next poll).
+Synchronize values 
+ after writing � Used to synchronize the client and server after a write 
+ has been performed. 
+No synchronization 
+ � No action taken.
+Synchronize 
+ by read � The value in the client is read back from the server cache. This is the default selection.
+ 
+Alarming
+Timestamp
+Use time provided by device - Use the timestamp included in the event notification.
+ 
+ 
+ 
+Device management
+Password - The password for all services that are password protected, such as ReinitializeDevice and DeviceCommunicationControl.
+Time duration for communication control (hh:mm) - Used for DeviceCommunicationControl to indicate the number of minutes that the remote device shall ignore all APDUs other than DeviceCommunicationControl and, if supported, ReinitializeDevice APDUs. If the �Time Duration� property is 0, then the time duration is considered indefinite, meaning that only an explicit DeviceCommunicationControl or ReinitializeDevice APDU will enable communications.
+Backup and restore
+File transfer max size
+Automatic detection - Automatically detect the file transfer behavior when receiving backup files or sending restore files.
+Customize - Force the number of bytes, or the record count, according to the access mode defined by the BACnet File object (stream or record access).
+Stream access (bytes) - The number of bytes if using stream access.
+Record access - The number of records if using record access.
+Timeout - Configure a specific timeout for the backup/restore process. The backup/restore process can take much longer than other requests.
+Disable - Disable specific timeout.
+Enable - Enable a specific timeout. The value is entered in minutes.
+ 
+Interoperability issues
+Monitoring
+Switch automatically to polling mode if COV not supported - Force monitoring by polling if COV is not supported or if COV subscription limit in the device has been reached.
+On-demand read - Defines which BACnet service shall be used for reading properties on-demand, for example to fill-in property grids in Helpers and other design and diagnostic tools.
+Automatic detection - The driver will determine the most adequate service depending on the BACnet device capabilities. Default selection.
+Use ReadProperty service - The ReadProperty service will be used even if a more suitable service is supported by the device.
+Use ReadPropertyMultiple service - The ReadPropertyMultiple service will be used, and the action may fail if the device does not support this service.
+ 
+ 
+
+ 
+In some cases, using static binding can be a good alternative to setting up a BBMD. See BACnet BBMD Configuration for more information.
+
+
+========================================
+TOPIC: bacnet_device_management.htm
+========================================
+Using the BACnet Device Management Tasks
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the BACnet Device Management Tasks
+ 
+&#160;PcVue BACnet interface provides a number of tasks to assist in the management of devices on your BACnet network.
+ 
+
+ 
+The BACnet Device Management tasks are available to the developer in the Application Explorer only if access to advanced features is activated in the BACnet settings dialog. See the topic BACnet settings.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Cold start
+ Send a message to a device to instruct it to re-boot.
+ 
+ 
+
+ 
+ 
+ 
+ Warm start
+ Send a message to a device to instruct it to reset to a predefined state.
+ 
+ 
+
+ 
+ 
+ 
+ Enable communication
+ Send a message to the device to instruct it to enable communication.
+ 
+ 
+
+ 
+ 
+ 
+ Disable communication initiation
+ Send a message to the device to instruct it to stop initiating messages.
+ 
+ 
+
+ 
+ 
+ 
+ Disable communication
+ Send a message to the device to instruct it to stop responding to requests and stop initiating messages.
+ 
+ 
+
+ 
+ 
+ 
+ Backup
+ Send a message to the device to initiate a backup of its programs and configuration to a file on the PcVue machine.
+ 
+ 
+
+ 
+ 
+ 
+ Restore
+ Send a message to the device to initiate a restore of its programs and configuration from a file on the PcVue machine.
+ 
+ 
+ 
+ 
+
+ 
+The communication related tasks directly affect a device's ability to communicate not only with PcVue but also with other BACnet devices. Use with caution.
+ 
+ 
+Location of the files used by Backup and Restore
+ 
+The files used by backup and restore are located in a sub-folder of that configured in the Advanced tab of the BACnet Network Configuration dialog. See the topic Adding a BACnet network. The files are stored in the sub-folders \[Network Id]\[Device Id].
+
+
+========================================
+TOPIC: bacnet_device_traces.htm
+========================================
+BACnet device traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnet Device Traces
+ 
+
+ 
+The Traces tab contains properties that allow you to enable diagnostic trace messages associated with the BACnet device object. Enabling a trace generates a corresponding message, which is logged in the Trace Files and displayed in the Event Viewer dialog (F7) when the condition occurs. The following screenshot was taken with the default configuration. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+Trace 1: Error level 1 - Unused.
+ 
+Trace 2: Error level 2 - Unused.
+ 
+Trace 3: Binding - Enable traces related to device detection.
+ 
+Trace 4: Full errors from BACnet stack - Enable traces to display more details of errors related to the communication stack.
+ 
+Trace 5: Full details - Enable all traces related to the device, not just error messages.
+ 
+Trace 6: Full errors - Enable more detail for traces related to errors at the device level.
+ 
+Trace 7: Device status - Enable traces related to the state of device objects.
+ 
+Trace 8: Add item - Enable traces related to the creation of items.
+ 
+Trace 9: Create Notification Class - Enable traces related to the creation of Notification Class objects.
+ 
+Trace 10: Delete step - Enable traces related to the deletion of a device.
+ 
+Trace 11: OnWrite method - Enable traces related to the writing to a device by PcVue.
+ 
+Trace 12: OnDataChange method - Enable traces related to change of data values.
+ 
+Trace 13: Connection - Enable traces related to device connection status.
+ 
+Trace 14: Reporting events - Enable traces related to event notifications transmitted by the device.
+ 
+Trace 15: Alarm helper - Enable traces related to the helper tool.
+ 
+Trace 16: Scan - Enable traces related to the BACnet device browsing.
+ 
+
+ 
+Trace 17: Text messages by notification � Enable traces related to notification of text messages from devices.
+
+
+========================================
+TOPIC: bacnet_eventlog_trace.htm
+========================================
+BACnet Event Log traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnet Event Log Traces
+ 
+The Traces tab contains properties that allow you to enable diagnostic trace messages associated with BACnet Event Logs. Enabling a trace generates a corresponding message, which is logged in the Trace Files and displayed in the Event Viewer dialog (F7) when the condition occurs. The following screenshot was taken with the default configuration. 
+ 
+ Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+Trace 5: Full details - More detail for traces related to BACnet Event Logs.
+ 
+Trace 6: Full errors - All traces related to errors related to BACnet Event Logs.
+ 
+Trace 7: Delete step - Traces related to the deletion of BACnet Event Log objects.
+ 
+Trace 8: Log status - Traces related to a change in status of the BACnet Event Log object.
+
+
+========================================
+TOPIC: bacnet_eventlogs.htm
+========================================
+Using BACnet Event Log objects
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using BACnet Event Log Objects
+ 
+In a BACnet network, a device is able to record state changes of an object, locally within the physical BACnet device. The mechanism is often referred to as Event Logging.
+ 
+Event Logging is managed by the Event Log object within the BACnet physical device. The object's properties define how logging is controlled.
+ 
+ 
+Event Logging at the device level. What, and how, properties are recorded.
+ 
+The conditions that lead to informing other devices that logs are available for retrieval.
+ 
+ 
+
+ 
+There is no generally accepted way to identify which state change is handled by one or the other Event Log, and the event log (as per the standard), once retrieved, does not include enough information to match a certain PcVue log list.
+ 
+As a consequence, at the time of writing, PcVue is able to retrieve Event Logs (state changes and timestamps), but does not push them to its own event logging subsystem for archiving.
+ 
+ 
+As a consequence, BACnet Event Log can only be retrieved by using the Helpers for testing.
+
+
+========================================
+TOPIC: bacnet_helpers.htm
+========================================
+Overview of the BACnet helpers
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the BACnet Helpers
+ 
+The helpers are provided to assist the application developer diagnose and troubleshoot automation objects� behavior in a BACnet device available on the network:
+ 
+ 
+Alarms and Event notification using Notification Class objects,
+ 
+Trend and Event logging using Trend Log, Trend Log Multiple or Event Log objects,
+ 
+Scheduling using Schedule and Calendar objects.
+ 
+ 
+The helpers can also be used to manage PcVue configuration objects, related to these interoperability areas, at the design stage, during commissioning and even after commissioning for maintenance. The helpers provide tools to:
+ 
+ 
+Discover existing objects in the physical BACnet device,
+ 
+Create new objects on the fly, including the actual object creation in the end physical device,
+ 
+Read and change any of the object's properties,
+ 
+Retrieve data associated with those objects - notifications, trend records, logged events.
+ 
+ 
+
+ 
+Changes that you make, including changing the value of properties, as well as adding and deleting objects using the left panel, directly affect the configuration of the physical BACnet device. Unintentional changes can have an impact on the BACnet system behavior.
+ 
+ 
+
+ 
+Depending on the physical device's capabilities and configuration, it may be necessary to make configuration changes directly in the device itself using the software from the manufacturer. In particular, not all devices support object creation and deletion, and some properties may not be changed remotely. See the device manufacturer's documentation for more information.
+
+
+========================================
+TOPIC: bacnet_importing_config.htm
+========================================
+Using the BACnet Configuration of a Project Configured With a Previous Version of PcVue&#160;
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the BACnet Configuration of a Project Configured With a Previous Version of PcVue&#160;
+ 
+From version 11.2 onwards, PcVue uses new, enhanced, technology for its BACnet data acquisition driver. The new technology enables many features that were not previously available, including B-AWS compliance, and provides a way forward for any further developments to the BACnet standard.
+ 
+The main difference that the project developer will notice is that the previous technology used an external service that had to be configured separately (mainly for the BACnet network interface).
+ 
+Therefore, if you have a project using BACnet that was created using a version earlier than 11.2, and you want to run it with a newer version, you should first make sure you configure:
+ 
+ 
+The BACnet/IP Network Interfaces, including the BACnet device exposed by PcVue,
+ 
+BACnet settings such as the APDU timeout, the scan timeout and the process identifier.
+ 
+ 
+See Configuring a BACnet/IP Network Interface and BACnet Settings for more information.
+ 
+All other configuration items including Variables mapping, Alarm and Event mapping as well as Notification Class configuration are retained.
+ 
+
+ 
+Starting with version 11.2, the WebScheduler takes advantage of the enhancements to the configuration of BACnet Schedules, Calendars and Enumerated Associated Labels. In particular, the manual editing of the Schedules.dat file is no longer necessary, it is replaced by the configuration performed within PcVue.
+ 
+Please refer to the topic WebScheduler configuration overview for more information.
+
+
+========================================
+TOPIC: bacnet_importing_ede_files.htm
+========================================
+Using EDE files for configuring BACnet devices
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using EDE Files For Configuring BACnet Devices
+ 
+It is not always practical to scan the BACnet network to discover the available devices. For example, the network might not be complete or you could be developing the application at a different location. As an alternative, you can use the device configuration from one or more EDE (Engineering Data Exchange) files. We call this offline configuration as opposed to online configuration when scanning the network for devices.
+ 
+
+ 
+The format of the data in EDE files is defined by the BIG-EU organization. By default, PcVue expects them to be in csv (comma-separated value) format and with a .csv file extension. In order to cope with files generated by vendor-specific tools that are not fully compliant with the standard EDE format, PcVue provides the ability to import a file even if its syntax or format is vendor-customized. See below for more information.
+ 
+ 
+
+ 
+After associating an EDE file with a Network, you also have to configure the devices in which PcVue is interested before they appear in the mapping dialog. See the topic Adding devices to the BACnet network.
+ 
+ 
+How to add an EDE file for use when configuring devices
+ 
+ 
+Select a BACnet network from the Application Explorer configuration tree and, from the task list, select Properties. The BACnet Network Properties dialog opens. 
+ 
+Select the EDE files tab. Show picture
+
+ 
+Click the Add button. A File Select dialog opens. By default, it displays files in the project's TP folder but you can navigate to an alternative location if necessary.
+ 
+Select the file to add and click the Open button. A dialog box opens with which you can define any format or syntax element specific to your EDE file. See below for more information. Once you validate, the selected EDE file is added to the configuration.
+ 
+Repeat steps 2 and 3 if you have more than one file to import.
+ 
+Close the BACnet Network Properties dialog.
+ 
+ 
+&#160;PcVue allows referencing EDE files containing up to 10 000 BACnet objects. If an EDE file contains more objects, it can be split over multiple files.
+ 
+About the Keyname property
+ 
+The Keyname is a property only found in EDE files - it cannot be discovered online from the BACnet network. It represents a unique combination of an Object and Instance.
+ 
+Non-standard EDE files
+ 
+A syntax detection mechanism is available to simplify loading a file that do not fully comply with the EDE standard. This includes detection of the delimiter, some of the usual alternate field names...
+ 
+When this automatic syntax detection is not enough, and in particular if the EDE file does not includes a header row, you can manually customize some of the parsing elements. It is accessible after you have selected an EDE file (step 4) and allows you to define:
+ 
+ 
+File format elements: Delimiter and Code page,
+ 
+File syntax elements: Name of fields required by PcVue. 
+ 
+ 
+Show picture
+ 
+ 
+
+ 
+ 
+ 
+Example:
+ 
+An EDE file may be using the semicolon as separator instead of the standard comma. In this case, simply select Semicolon as the Delimiter when adding the EDE file.
+ 
+The most common use case is due to vendors using non-standard field names. In this case, open the Content tab of the dialog box, spot the expected field name (for example 'hi-limit'), and type-in the field name in the first row called Reference, as it appears in your particular EDE file (for example 'high-limit').
+ 
+The Content tab can be used to check if the EDE file is interpreted correctly. As soon as you click the Apply button, the file is loaded using any parsing customization you may have defined, and its content is shown in the Content tab's grid. Show picture
+ 
+
+ 
+ 
+ 
+
+ 
+Despite efforts to cope with files that are not fully compliant with EDE format guideline, the import will be aborted if a necessary field is missing in the file.
+
+
+========================================
+TOPIC: bacnet_in_the ae.htm
+========================================
+Managing BACnet in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing BACnet in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks applicable to BACnet
+ 
+When the BACnet folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ BBMD
+ Open the BACNet BBMD configuration dialog from where PcVue BBMD table is configured.
+ 
+ 
+
+ 
+ 
+ 
+ Settings
+ Open the BACnet Settings dialog. The settings affect the general operation of the BACnet driver and related data handling.
+ 
+ 
+
+ 
+ 
+ 
+ Add a network
+ Add a connection to a BACnet network.
+ 
+ 
+ 
+ 
+When a BACnet network is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a device
+ Add a device to a BACnet network.
+ 
+ 
+
+ 
+ 
+ 
+ Start network
+ Start a connection to a BACnet network.
+ 
+ 
+
+ 
+ 
+ 
+ Stop network
+ Stop a connection to a BACnet network.
+ 
+ 
+
+ 
+ 
+ 
+ Clock synchronization
+ Generate a time synchronization message on the network.
+ 
+ 
+
+ 
+ 
+ 
+ Network interfaces
+ Open the BACNet Network Interfaces dialog from where PcVue connection to, and behavior on, the BACnet network is configured.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the network.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the network.
+ 
+ 
+
+ 
+ 
+ 
+ Mapping
+ Open the mapping dialog used to link PcVue data to BACnet objects and properties.
+ 
+ 
+ 
+ 
+When a BACnet device is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a Notification Class
+ Add a Notification Class object to the device.
+ 
+ 
+
+ 
+ 
+ 
+ Add a Trend Log
+ Add a Trend Log object to the device.
+ 
+ 
+
+ 
+ 
+ 
+ Add a Trend Log Multiple
+ Add a Trend Log Multiple object to the device.
+ 
+ 
+
+ 
+ 
+ 
+ Add an Event Log
+ Add an Event Log object to the device.
+ 
+ 
+
+ 
+ 
+ 
+ Add a Schedule
+ Add a Schedule object to the device.
+ 
+ 
+
+ 
+ 
+ 
+ Add a Calendar
+ Add a Calendar object to the device.
+ 
+ 
+
+ 
+ 
+ 
+ Start device
+ Start the connection to the device.
+ 
+ 
+
+ 
+ 
+ 
+ Stop device
+ Stop the connection to the device.
+ 
+ 
+
+ 
+ 
+ 
+ Cold start*
+ Send a message to a device to instruct it to re-boot.
+ 
+ 
+
+ 
+ 
+ 
+ Warm start*
+ Send a message to a device to instruct it to reset to a predefined state.
+ 
+ 
+
+ 
+ 
+ 
+ Enable communication*
+ Send a message to the device to instruct it to enable communication.
+ 
+ 
+
+ 
+ 
+ 
+ Disable communication initiation*
+ Send a message to the device to instruct it to stop initiating messages.
+ 
+ 
+
+ 
+ 
+ 
+ Disable communication*
+ Send a message to the device to instruct it to stop responding to requests and stop initiating messages.
+ 
+ 
+
+ 
+ 
+ 
+ Backup*
+ Send a message to the device to initiate a backup of its programs and configuration to a file on the PcVue machine.
+ 
+ 
+
+ 
+ 
+ 
+ Restore*
+ Send a message to the device to initiate a restore of its programs and configuration from a file on the PcVue machine.
+ 
+ 
+
+ 
+ 
+ 
+ Helpers
+ Open the Helpers dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Details
+ Displays information about the device itself (to display information about its configuration in PcVue use the Properties task).
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the device.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Device Properties dialog.
+ 
+ 
+ 
+ 
+*Only available if enabled in the BACnet Settings dialog.
+ 
+When a Notification Class object is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start Notification Class
+ Start the Notification Class object.
+ 
+ 
+
+ 
+ 
+ 
+ Stop Notification Class
+ Stop the Notification Class object.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the Notification Class object.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Notification Class Properties dialog.
+ 
+ 
+ 
+ 
+When a Trend Log or Trend Log Multiple object is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start Trend Log
+ Start the Trend Log object.
+ 
+ 
+
+ 
+ 
+ 
+ Stop Trend Log
+ Stop the Trend Log object.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the Trend Log object.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Trend Log Properties dialog.
+ 
+ 
+ 
+ 
+When an Event Log object is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start Event Log
+ Start the Event Log object.
+ 
+ 
+
+ 
+ 
+ 
+ Stop Event Log
+ Stop the Event Log object.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the Event Log object.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Event Log Properties dialog.
+ 
+ 
+ 
+ 
+When a Schedule object is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start Schedule
+ Start the Schedule object.
+ 
+ 
+
+ 
+ 
+ 
+ Stop Schedule
+ Stop the Schedule object.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the Schedule object.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Schedule Properties dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Add item
+ Add an output item to the selected schedule.
+ 
+ 
+
+ 
+ 
+ 
+ Remove item
+ Remove the selected output from the selected schedule.
+ 
+ 
+ 
+ 
+When a Calendar object is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start Calendar
+ Start the Calendar object.
+ 
+ 
+
+ 
+ 
+ 
+ Stop Calendar
+ Stop the Calendar object.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the Calendar object.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the Calendar Properties dialog.
+ 
+ 
+ 
+ 
+Rules and behavior of cut, copy and paste
+ 
+The following table describes the rules and behavior, and in particular any restrictions, when using cut and paste, or copy and paste, on configuration objects in the BACnet folder.
+ 
+ 
+ 
+ 
+ 
+
+ BACnet object
+ Behavior
+ 
+ 
+
+ Network
+ The pasted Network is given a unique name.
+Any subordinate Devices and Automation Objects are duplicated using the original name.
+The mapping of any variables is not duplicated.
+ 
+ 
+
+ Device
+ 
+ 
+The pasted Device is given a unique name.
+ 
+Any subordinate Automation Objects are duplicated using the original name.
+ 
+ 
+ 
+
+ Notification Class,
+Trend Log, Trend Log Multiple, Event Log,
+Schedule, Calendar
+ The pasted Automation Object is given a unique name.
+
+
+========================================
+TOPIC: bacnet_mapping_existing_var.htm
+========================================
+How to Configure Data Sharing Using an Existing Variable and the Mapping Dialog
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure Data Sharing Using an Existing Variable and the Mapping Dialog
+ 
+The following process is used to configure Data Sharing between a BACnet object and a variable that already exists in the Variables Tree. The same process is used for both Online and Offline modes. 
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network.
+ 
+From the task pane, select the Mapping task. The Mapping dialog opens.
+ 
+Select an object type (left pane) and an instance (upper right pane).
+ 
+Right click on the selected object in the upper right pane and, from the context menu, select Map an existing variable. The Variable Selector dialog opens.
+ 
+Select the variable to be mapped. Click the Apply button and the link between the object and the variable is made. Show picture
+
+ 
+Repeat steps 4 and 5 for each of the variables to be mapped.
+ 
+ 
+
+ 
+The same procedure is used to map a variable to a specific property, or an event/alarm, except that you use the lower right pane.
+ 
+ 
+How to unmap a variable
+ 
+ 
+Open the mapping dialog and select the variable to be un-mapped. 
+ 
+Right-click on the selected variable and, from the context menu, select the command Unmap variable.
+ 
+A dialog will appear asking for confirmation. Click OK to confirm the operation.
+
+
+========================================
+TOPIC: bacnet_mapping_new_var.htm
+========================================
+How to Configure Data Sharing Using a New Variable and the Mapping Dialog
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure Data Sharing Using a New Variable and the Mapping Dialog
+ 
+The following process is used to configure Data Sharing between a BACnet object and a new variable. The same process is used for both Online and Offline modes.
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network.
+ 
+From the task pane, select the Mapping task. The Mapping dialog opens.
+ 
+Select an object type (left pane) and an instance (upper right pane).
+ 
+Right click on the selected object in the upper right pane, and from the context menu select Map a new variable. The Create Variable dialog is opened. Show picture
+
+ 
+Configure the properties in the Create Variable dialog (see below) and click OK to close the dialog, create, and map the new variable.
+ 
+Repeat steps 3, 4 and 5 for each of the variables to be created.
+ 
+ 
+
+ 
+The same process is used to map a particular property or event/alarm, except that you use the lower right pane.
+ 
+ 
+Properties in the Create Variable dialog
+ 
+The properties available in the Create Variable dialog, particularly those that affect variable naming, are dependent on if you are mapping an object, property or keyname.
+ 
+ 
+Variable name
+Use the real name as variable name - Applies to objects only. Use the name of the object as the variable name. For example Temp_SP.
+Use the object type as the variable name - Applies to objects and properties only. Use the object type and instance as the variable name. For example Analog_Input_1. If you are mapping a property, the property name is appended to the object type. For example Analog_Input_1.Present_value.
+Customize the variable name - Applies to objects and properties. Enter your own variable name.
+Use network name as prefix - Applies to objects and properties. Prefix the variable name with the network name. The network name becomes the first branch.
+Use device name as prefix - Applies to objects and properties. Prefix the variable name with the device name. The device name becomes the second branch (or first branch if the network name is not used).
+ 
+Monitor type
+Polling - Applies to objects and properties. The value of the variable is obtained by polling the device. This is the default setting. The poll rate is configured in the variable's advanced properties.
+Confirmed change of value - Applies to objects and properties. The value of the variable is sent by the device each time it changes. PcVue confirms it has received the value.
+Unconfirmed change of value - Applies to objects and properties. The value of the variable is sent by the device each time it changes. PcVue does not confirm it has received the value.
+
+
+========================================
+TOPIC: bacnet_mapping_overview.htm
+========================================
+Overview of the BACnet mapping dialog
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the BACnet Mapping Dialog
+ 
+The BACnet Mapping dialog can be used to map automation objects (Notification Class, Trend Log etc.) to PcVue devices configuration, and to map BACnet objects, properties and events/alarms to PcVue variables and alarms. In addition it has a browsing capability, displaying the available devices, objects, properties and their values (if available), and some BACnet network and device management functions.
+ 
+The Mapping dialog can be used in either Online or Offline mode. You can switch between modes by clicking the indicator in the Mapping dialog status bar.
+ 
+ 
+Online - Used to map BACnet objects from devices that are available on the network. See the topic Adding devices to a BACnet network. Show picture
+
+ 
+Offline - Used to map BACnet objects from devices based on referenced EDE files. See the topic The BACnet device list. 
+ 
+ Show picture
+
+ 
+ 
+Both modes of the dialog allow you to map a variable (or other item) that already exists, or to create a new one as part of the mapping process.
+ 
+
+ 
+Changes that you make, including changing the value of properties, as well as adding and deleting objects using the left panel, directly affect the configuration of the physical BACnet device. Unintentional changes can have an impact on the BACnet system behavior.
+ 
+ 
+Main features of the BACnet Mapping dialog
+ 
+The BACnet Mapping dialog is opened from the Application Explorer when a BACnet network is selected using the Mapping task. The dialog contains three panes.
+ 
+ 
+The left pane - Displays a list of devices and objects types. Right clicking on a network object displays a context menu from where management tasks can be accessed. If the BACnet Mapping dialog is in Online, mode the objects are discovered by sending requests to the device, new objects can be created and existing ones can be deleted directly in the field device. If the BACnet Mapping dialog is in Offline mode, the objects are read from the EDE files. Selecting an object type will display the available instances in the top right pane.
+ 
+The upper right pane - Displays available instances of the object type that is selected in the left pane. If the object instance is mapped to a variable, or an automation object, its name is displayed in the Variable/Object column. Clicking on an object instance refreshes a list of its properties displayed in the lower right pane.
+Right clicking in the pane displays a context menu from which several tasks are available including:
+Mapping and un-mapping variables for data sharing.
+Mapping and un-mapping automation objects to devices.
+Notification Class objects for alarm/event notification.
+Trend Log and Trend Log Multiple for access to trend logging
+Event Log for access to event logging.
+Schedule and Calendar objects for access to schedules.
+ 
+The lower right pane - Displays the list of properties for the object selected in the upper pane. If the property is mapped to a variable or alarm, its name is displayed in the Variable/Object column.
+Right clicking in the pane displays a context menu from which several tasks are available including:
+Mapping and un-mapping BACnet properties to variables for data sharing.
+Mapping and un-mapping BACnet alarm/events to variables for alarm and event notifications.
+ 
+The status bar - Displays, and allows selection, of online or offline mode. Also displays the full name of the currently selected device and object.
+ 
+ 
+
+ 
+For more information on the operation of the Variable Selector, see the book The Variable Selector.
+ 
+ 
+Reading property values
+ 
+The value of a single property can be refreshed by right clicking on it and selecting Read from the context menu. 
+ 
+ Show picture
+
+ 
+Writing property values
+ 
+The value of a single property can be forced by right clicking on it and selecting Write from the context menu. A dialog appears allowing a new value to be entered. The value must conform to the expected syntax for the property. Clicking Execute sends the value to the physical device.
+ 
+ Show picture
+
+ 
+
+ 
+Multi-selection allows executing reading and writing of multiple properties at once using the corresponding BACnet services (ReadPropertiesMultiple and WritePropertiesMultiple)
+ 
+ 
+
+ 
+Not all physical devices and/or properties will permit their value to be changed from another device (in this case PcVue), some may be read-only.
+
+
+========================================
+TOPIC: bacnet_network_config.htm
+========================================
+Adding a BACnet network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding a BACnet Network
+ 
+A BACnet Network object in PcVue configuration represents and provides access to a physical BACnet network. If configuring a multi-station application there must be a corresponding Network Interface for each Network Server List (producer).
+ 
+How to add a network
+ 
+ 
+Select the BACnet node in the Application Explorer and select Add a network from the task list. The BACnet Network dialog opens. The following screenshot was taken with the default configuration. Show picture
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+Enter the name of the network in the Name text box. This is the name by which the network will be known in PcVue. You can accept the suggested default or enter one of your own.
+ 
+Enter a description of the network. The description appears in the contents pane of the Application Explorer and can be useful to identify the network later. The description is optional. 
+ 
+To activate the network when PcVue is started, tick Activate at start-up. Alternatively, a SCADA Basic program can be used to activate the network.
+ 
+Click on OK to confirm the configuration and close the dialog. 
+ 
+ 
+The EDE files tab
+ 
+The EDE files tab contains a list of EDE files referenced for one or the other device that will be configured on the network.
+ 
+See Using EDE files for configuring BACnet devices for more information.
+ 
+The Advanced tab
+ 
+ 
+Networking
+Servers - If the BACnet network is part of a multi-station application, select the name of the Servers List. The BACnet network will only be started on stations that appear in the servers list.
+ 
+Backup and restore
+Storage folder - The storage folder for files used by the Backup and Restore tasks. You can use either a relative or an absolute path. A relative path will be relative to the default, which is the project's TP folder. 
+ 
+ 
+
+ 
+At runtime, a given PcVue station can manage only one BACnet network interface, so for a given station in the Servers list, only one BACnet network can be active at a time.
+ 
+As a consequence, in most cases, only one BACnet network is configured in the project, with the Servers list containing either one station or an association of stations (for data acquisition redundancy). In some rare cases of distributed applications, you may have to configure more than one BACnet network, each produced by different stations or associations. 
+ 
+But in all cases, a station cannot be part of the Servers list for more than one of the configured BACnet network.
+
+
+========================================
+TOPIC: bacnet_network_traces.htm
+========================================
+BACnet network traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnet Network Traces
+ 
+The Traces tab contains properties that allow you to enable diagnostic trace messages associated with the BACnet network object. Enabling a trace generates a corresponding message, which is logged in the Trace Files and displayed in the Event Viewer dialog (F7) when the condition occurs. The following screenshot was taken with the default configuration. 
+ 
+ Show picture
+
+ 
+ 
+Trace 1: Error level 1 - Unused.
+ 
+Trace 2: Error level 2 - Unused.
+ 
+Trace 3: Device binding - Traces related to the configuration of detected devices.
+ 
+Trace 4: Full errors from the BACnet stack- Traces related to the BACnet driver access.
+ 
+Trace 5: Full details - More detail for traces related to errors at the BACnet network level.
+ 
+Trace 6: Scan - Traces related to the BACnet network scanner.
+ 
+Trace 7: Full errors - All traces related to errors at the BACnet network level.
+ 
+Trace 8: Network status - Traces related to the state of BACnet network objects.
+ 
+Trace 10: Create devices - Traces related to the creation of device objects.
+ 
+Trace 11: Delete step - Traces related to the deletion of BACnet network objects.
+ 
+Trace 12: Loading EDE files - Traces related to the loading of EDE files.
+ 
+Trace 13: Start and stop BACnet stack- Traces related to start and stop of the BACnet driver.
+ 
+Trace 14: Add or modify BACnet items (buffering) - Traces related to the items added in buffering for mapping.
+ 
+Trace 15: Global reporting events - Traces related to BACnet services for alarm summary information sent by devices.
+
+
+========================================
+TOPIC: bacnet_notification_helper.htm
+========================================
+Using the BACnet Alarms helper
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the BACnet Alarms Helper
+ 
+The Alarms tab of the Helper dialog provides useful information about, and can be used to manage, PcVue configuration objects related to BACnet Alarms and Event notifications. The tab includes tools to add and delete Notification Class instances, change properties, and to view notifications from those Notification Class objects in which PcVue has been configured as a recipient.
+ Show picture
+
+ 
+
+ 
+Changes that you make, including changing the value of properties, as well as adding and deleting objects using the left panel, directly affect the configuration of the physical BACnet device. Unintentional changes can have an impact on the BACnet system behavior.
+ 
+ 
+The Alarm tab layout
+ 
+ 
+The Left Pane - A list of variables that have been mapped to alarm/event notifications, and Notification Class instances, for the selected device. Each item on a list includes an icon that provides an indication of its status. 
+An icon including a green tick indicates a healthy item.
+An icon including a yellow triangle with an exclamation mark indicates an item with a warning.
+An icon with a dimmed font denotes an object in which PcVue is not included in the Recipient List property.
+An icon including a question mark means that the item properties have yet to be read.
+ 
+The right pane - Displays the properties of the selected item.
+If the item selected is a notification it displays the properties of the Notification Class object.
+It the item selected is a variable it displays the properties of the object that generates the event.
+ 
+The lower pane - Displays warning messages associated with the configuration of the selected item.
+ 
+ 
+How to add a Notification Class instance
+ 
+A new, un-configured, Notification Class instance can be added using the Create Notification tool on the toolbar. This only creates the object in the physical device. To use it in PcVue you must also add the Notification Class instance to the device in PcVue configuration (or map an existing Notification Class to the newly created object). See the topic How to configure PcVue to receive alarm and event notifications.
+ 
+How to delete a Notification Class instance
+ 
+A Notification Class instance can be deleted using the Delete Notification tool on the toolbar.
+ 
+Changing the properties of an object 
+ 
+Properties of the BACnet object, displayed in the right pane, can be changed using the following procedure.
+ 
+ 
+Select the property by clicking on it.
+ 
+Depending on the property type, you can then either directly enter a new value or select a value from a list. A changed value is displayed in a bold font.
+ 
+Write the value to the physical device using the Write tool in the toolbar.
+ 
+ 
+
+ 
+Properties displayed in a dimmed font are read only and cannot be changed.
+ 
+ 
+ Viewing notifications
+ 
+You can view a list of received notifications by using the View Notifications dialog. The notifications list is temporary and the action of closing the Notification Viewer clears the contents unless there are variables mapped to the notified transitions.
+ Show picture
+
+ 
+Troubleshooting notifications
+ 
+The Alarms helper is able to check the following configuration elements related to Alarm and Event notification.
+ 
+ 
+At the Notification Class object level:
+Is PcVue in the list of recipients,
+Is the correct list of transitions to be notified is in place,
+Is the correct time period for the notification is in place.
+ 
+For bit or alarm variables mapped to a BACnet event for the source object (such as a binary or an analog objects) in the same device as the Notification Class:
+Is the Notification Class correctly referenced in the source object,
+Is the Event Enabled property activated (for binary objects),
+Is the Limit Enabled property activated (for analog objects).
+
+
+========================================
+TOPIC: bacnet_notification_traces.htm
+========================================
+BACnet Notification Class traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnet Notification Class traces
+ 
+The Traces tab contains properties that allow you to enable diagnostic trace messages associated with BACnet notifications. Enabling a trace generates a corresponding message, which is logged in the Trace Files and displayed in the Event Viewer dialog (F7) when the condition occurs. The following screenshot was taken with the default configuration. 
+ 
+ Show picture
+
+ 
+ 
+Trace 1: Error level 1 - Unused.
+ 
+Trace 2: Error level 2 - Unused.
+ 
+Trace 3: Error level 3 - Unused.
+ 
+Trace 5: Full details - Enable more detail for traces related to BACnet notifications.
+ 
+Trace 6: Full errors - Enable all traces related to errors related to BACnet notifications.
+ 
+Trace 7: Delete step - Enable traces related to the deletion of BACnet Notification Class objects.
+ 
+Trace 8: Notification status - Enable traces related to a change in status of the BACnet Notification Class objects.
+
+
+========================================
+TOPIC: bacnet_opject_or_property.htm
+========================================
+Using BACnet Objects and Properties
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using BACnet Objects and Properties
+ 
+In a BACnet network, a device is able to expose real time data. By using the Data Sharing related services, PcVue is able to maintain its variables up-to-date. Variables can be refreshed thanks to unsolicited messages sent by devices to notify PcVue when there is a change of value, or by polling if COV is not supported.
+ 
+It is also possible to send commands to a device.
+ 
+If a variable is mapped on an object instance, the value of the variable is supplied by the object's Present Value property and its quality by the Status Flags property. In addition, if using a Binary Input, Binary Output, or Binary Value object, the object's Change Of State Time property supplies the timestamp.
+ 
+If a variable is mapped on a specific property of an object, the value of the variable is provided by the property and the quality and timestamp is provided by the response to the request for the property.
+
+
+========================================
+TOPIC: bacnet_overview.htm
+========================================
+Overview of BACnet
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of BACnet
+ 
+BACnet is the term commonly used to refer to the ANSI/ASHRAE Standard 135, adopted and supported by the American National Standards Institute (ANSI) and the American Society of Heating Refrigeration and Air-Conditioning Engineers (ASHRAE). BACnet stands for Building Automation and Control network. It is a non-proprietary open protocol communication standard designed to handle data exchange in Building Automation Systems (BAS).
+ 
+ 
+The BACnet protocol defines a number of data link / physical layers, including ARCNET, Ethernet, BACnet/IP, Point-To-Point over RS-232, Master-Slave/Token-Passing over RS-485, and LonTalk.
+ 
+A BACnet network contains one or more devices. A device will often correspond to a physical piece of equipment.
+ 
+Each device contains one or more objects. The available objects are defined by the BACnet standard.
+ 
+There can be one or more instances of an object in a device. 
+ 
+A device must always contain at least one instance of the Device object.
+ 
+Each object contains one or more properties. The available properties are defined by the BACnet standard.
+ 
+ 
+
+ 
+You can obtain a copy of the complete BACnet standard The BACnet Standard�Standard 135-2012 from the ASHRAE Organization's book store. 
+ 
+ 
+&#160;PcVue has been validated as a BACnet Advanced Workstation (B-AWS).
+ 
+The BACnet driver supports only BACnet/IP using the host PC's network interface card. See the BACnet PICS for detailed information about BACnet support.
+ 
+The BACnet convention is to specify functionality by describing the following interoperability areas.
+ 
+ 
+Network and Device management
+ 
+Data sharing
+ 
+Alarm and Event notification
+ 
+Trending and Event logging
+ 
+Scheduling
+ 
+ 
+This book covers these interoperability areas and in particular, what is required when configuring BACnet connections, network, and devices, data sharing, and the use of the BACnet automation objects specifically the Alarm Notification Class, Trend Logs, Trend Log Multiple, Event Logs, Schedules and Calendars.
+ 
+BACnet configuration is accessed using the Application Explorer.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Interoperability area
+ Description
+ Primary help topics
+ 
+ 
+
+ 
+ 
+Network and device management
+ 
+ 
+ 
+Connection management and device control including:
+ 
+ 
+The ability to expose PcVue BACnet device to other BACnet physical devices
+ 
+Device and object discovery on a BACnet network
+ 
+ 
+ 
+ 
+Adding a BACnet network
+ 
+ 
+Adding devices to a BACnet network
+ 
+ 
+BACnet device management tasks
+ 
+ 
+ 
+ 
+
+ 
+ 
+Data sharing
+ 
+ The base monitoring and control features, keeping real time values up-to-date, handling commands and command priorities.
+ 
+ 
+The BACnet Mapping dialog
+ 
+ 
+How to configure data sharing
+ 
+ 
+ 
+ 
+
+ 
+ 
+Alarm and event notification
+ 
+ Features related to alarm notification and acknowledgement, including the handling of Notification Class objects.
+ 
+ 
+Using BACnet Notification Class objects
+ 
+ 
+How to configure PcVue to receive alarm and event notifications
+ 
+ 
+ 
+ 
+
+ 
+ 
+Trending and event logging
+ 
+ Features related to trend and event logging, trend and logged events retrieval, including the handling of Trend Log, Trend Log Multiple and Event Log objects.
+ 
+ 
+Using BACnet Trend Log objects
+ 
+ 
+How to configure PcVue to retrieve BACnet trend records
+ 
+ 
+ 
+ 
+
+ 
+ 
+Scheduling
+ 
+ Features related to Scheduling, including the handling of Schedule and Calendar objects.
+ Using BACnet Schedule and Calendar objects
+ 
+How to configure PcVue to use a BACnet Schedule
+ 
+ 
+How to configure PcVue to use a BACnet Calendar
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+The BACnet driver can be used in trial mode. Communication will automatically stop at the end of the trial period.
+ 
+ 
+
+ 
+In order to support both the B-OWS and B-AWS requirements, PcVue BACnet implementation was subject to a major rework in version 11.2. See the topic Using the BACnet configuration of a project configured with a previous version of PcVue for information about the migration path.
+
+
+========================================
+TOPIC: bacnet_port_settings.htm
+========================================
+BACnet Settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnet settings
+ 
+The Settings tab contains those settings associated with the general operation of the BACnet driver. The following screenshot was taken with the default configuration. 
+ 
+ Show picture
+
+ 
+ 
+Communication
+Bad devices verification period - The period at which the device will be checked when trying to re-establish communication after a watchdog error has been detected. The default is 1 minute.
+COV lifetime - The validity period for COV messages from a device. The driver must subscribe to each device within this period or COV notification are no longer sent. The default is 1 hour.
+Number of APDU retries - The number of service requests retries to perform before returning an error. The default is 2.
+APDU timeout - The period allowed for a device to respond to a service request. The default is 3 seconds.
+Scan timeout - The period allowed for a reply when executing a network scan. The default is 10 seconds.
+Process identifier - The identity of PcVue, as a BACnet client, when configuring a notification. The default is 123456.
+Max number of requests per device - The maximum number of concurrent requests that can be made to a device. The default is 2.
+ 
+Alarms
+Acknowledge alarm/event notifications - The mechanism by which PcVue acknowledges the BACnet alarm and events (To Normal, To OffNormal & To Fault) generated by Notification Class objects.
+Never - PcVue never acknowledges notifications.
+Automatic upon reception - PcVues internal mechanisms automatically acknowledge all three alarm transitions as they are received.
+Upon user acknowledgement - To OffNormal notifications are acknowledged when the corresponding alarms are acknowledged by an operator (typically from an Alarm Viewer). To Normal and To Fault transitions are automatically acknowledged upon reception by PcVue's internal mechanisms.
+ 
+Clock synchronization of devices - The method used to synchronize the clock of BACnet devices.
+Automatic at start-up - Clock synchronization is performed automatically when either PcVue or network is (re)started.
+Methods
+By broadcast of the UTC time - Use UTC (Universal Coordinated Time) in the time synchronization broadcast.
+By broadcast of the local time - Use the computers local time in the time synchronization broadcast.
+Multicast clock synchronization - Distribute time synchronization by a multicast of the local time.
+Clock synchronization period (min) - The interval, in minutes, at which TimeSynchronization and UTCTimeSynchronization requests are sent. If set to 0, it is disabled. The default is 0.
+Align synchronization - If the Clock synchronization period is non 0, and is a factor of (divides without remainder) an hour or day, then the beginning of the interval is aligned to the hour or day. Not ticked by default.
+Synchronization offset - The offset, in minutes, from the beginning of the interval specified for time synchronization until the actual time synchronization requests are sent. The offset used is the value of Synchronization offset property modulo the value of Clock synchronization period property. The default is 0.
+Example: If Synchronization Offset is 31 and Clock synchronization period is 30, the offset used is 1. Synchronization offset will have no effect if Align synchronization is disabled.
+ 
+Advanced features
+Enable backup and restore - Enable the backup and restore mechanism (BIBB DM-BR-A).
+Enable communication control - Enable the device communication control mechanism (BIBB DM-DCC-A).
+Enable device reinitialization - Enable the reinitialize device mechanism (BIBB DM-RD-A).
+Enable objects creation and deletion - Enable the object creation and deletion mechanism (BIBB DM-OCD-A).
+
+
+========================================
+TOPIC: bacnet_port_traces.htm
+========================================
+BACnet traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnet Traces
+ 
+The Traces tab enables diagnostic trace messages associated with the BACnet driver. Enabling a trace generates a corresponding message, which is logged in the Trace Files and displayed in the Event Viewer dialog (F7) when the condition occurs. The following screenshot was taken with the default configuration. 
+ 
+ Show picture
+
+ 
+ 
+Trace 1: Error level 1 - Unused.
+ 
+Trace 2: Configuration - Enable traces related to the global configuration.
+ 
+Trace 3: Binding - Enable traces related to the detection of all devices connected to the BACnet network.
+ 
+Trace 4: Full errors - Enable all traces related to errors at the BACnet global level.
+ 
+Trace 5: Full details - Enable more detail for traces related to errors at the BACnet global level.
+ 
+Trace 6: Reserved
+ 
+Trace 7: Data creation
+ 
+Trace 8: Clock synchronization - Traces related to time synchronization.
+
+
+========================================
+TOPIC: bacnet_read_eventlog.htm
+========================================
+How to configure PcVue to retrieve BACnet event records
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure PcVue to Retrieve BACnet Event Records
+ 
+To configure PcVue so it is able to retrieve an Event Log object's records, you add the Event Log object to the device in PcVue BACnet configuration. It is then able to send a read request to the device to retrieve the recorded values. 
+ 
+
+ 
+The following process does not create an Event Log object, within the physical device, if it does not already exist. Event Log objects can be created using the Logs helper, or the left pane of the Mapping editor.
+ 
+ 
+Adding an Event Log object using the Application Explorer
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network and device.
+ 
+From the task pane, select Add an Event Log. The Event Log Creation dialog opens. Show picture
+
+ 
+Click the Ellipsis button adjacent to the Instance number field. The Object Selection dialog opens containing a list of discovered Event Log instances for that device. The list can be updated using the Refresh button. Show picture
+
+ 
+Select the Event Log to use. 
+ 
+Click the OK button to close the Object Selection dialog.
+ 
+Click the OK button to close the Event Log Configuration dialog. The Event Log appears in the configuration tree. 
+ 
+ Show picture
+
+ 
+ 
+Adding an Event Log object using the BACnet Mapping dialog
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network. From the task pane, select Mapping. The BACnet Mapping dialog opens.
+ 
+Expand the devices and objects tree in the left pane and select an appropriate Event Log object. Event Log instances appears in the right pane.
+ 
+Right click on the instance to be mapped and select Map Event Log from the context menu. The Event Log configuration dialog opens, populated with information from the selected Event Log instance. Show picture
+
+ 
+Check the configuration and click OK button to close the Event Log dialog. A new Event Log object appears in the Mapping dialog in the Variable/Object column. 
+ 
+ Show picture
+
+ 
+ 
+The Event Log Configuration dialog - Advanced tab
+ 
+The following properties are available in the Event Log Configuration dialog - Advanced tab. The screenshot shows the default configuration.
+ Show picture
+
+ 
+ 
+Retrieval - The mechanisms used to retrieve records from the Event Log object. The default retrieval mechanism is cyclic every 60 minutes.
+On demand only - A read request is sent to the Event Log object only when using the Event Log helper or a SCADA Basic program.
+By polling - A read request is sent to the Event Log object periodically. The period range is 0 to 4294967295 minutes with a default of 60 minutes. In this mode, a read request is also sent when the BACnet communication starts.
+Upon notification reception - Accept notifications from the Notification Class associated with the Event Log object and generate a read request as a result.
+Max number of records - The maximum number of records for a read request. Range 1 to 10000.
+ 
+ 
+
+ 
+The retrieval mode defaults to On demand only. At the time of writing, the Event Log handling does not permit storage of the retrieved records in PcVue own archives. See Using BACnet Event Log Objects for more information.
+
+
+========================================
+TOPIC: bacnet_read_trendlog.htm
+========================================
+How to Configure PcVue to Retrieve BACnet Trend Records
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure PcVue to Retrieve BACnet Trend Records
+ 
+To configure PcVue so it is able to retrieve a Trend Log object's records, you add the Trend Log or Trend Log Multiple object to the device in PcVue BACnet configuration. It is then able to send a read request to the device to retrieve the recorded values. 
+ 
+The application treats BACnet trend records in the same way as records it has generated itself by recording the real-time value of variables. Records are accessed using the name of a register variable. A Trend Log object will be used as source for PcVue trending of a given variable if the BACnet object and property on which the variable is mapped is found in one of the configured Trend Log object. Otherwise, the real time data source (Data Sharing) is used. See the topic Mapping variables for use with a Trend Log object.
+ 
+If you want to read a Trend Log's recorded values using a notification you must also add the instance of the Notification Class object, as referenced in the Trend Log object, to the device configuration in PcVue BACnet configuration. See the topic How to configure PcVue to receive alarm and event notifications.
+ 
+
+ 
+The following process does not create a Trend Log object, within the physical device, if it does not already exist. Trend Log objects can be created using the Logs helper, or the left pane of the Mapping editor.
+ 
+ 
+Adding a Trend Log object using the Application Explorer
+ 
+
+ 
+The following explanation applies both to Trend Log and Trend Log Multiple objects.
+ 
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network and device.
+ 
+From the task pane, select Add a Trend Log. The Trend Log Creation dialog opens. Show picture
+
+ 
+Click the Ellipsis button adjacent to the Instance number field. The Object Selection dialog opens containing a list of discovered Trend Log instances for that device. The list can be updated using the Refresh button. Show picture
+
+ 
+Select the Trend Log to use. 
+ 
+Click the OK button to close the Object Selection dialog.
+ 
+Click the OK button to close the Trend Log Configuration dialog. The Trend Log appears in the configuration tree. 
+ 
+ Show picture
+
+ 
+ 
+Adding a Trend Log object using the BACnet Mapping dialog
+ 
+
+ 
+The following explanation applies both to Trend Log and Trend Log Multiple objects.
+ 
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network. From the task pane, select Mapping. The BACnet Mapping dialog opens.
+ 
+Expand the devices and objects tree in the left pane and select an appropriate Trend Log object. Trend Log instances appears in the right pane.
+ 
+Right click on the instance to be mapped and select Map Trend Log from the context menu. The Trend Log configuration dialog opens, populated with information from the selected Trend Log instance. Show picture
+
+ 
+Check the configuration and click OK button to close the Trend Log dialog. A new Trend Log object appears in the Mapping dialog in the Variable/Object column. 
+ 
+ Show picture
+
+ 
+ 
+The Trend Log Configuration dialog - Advanced tab
+ 
+The following properties are available in the Trend Log Configuration dialog - Advanced tab. The screenshot shows the default configuration.
+ Show picture
+
+ 
+ 
+Retrieval - The mechanisms used by PcVue to retrieve records from the Trend Log object. The default retrieval mechanism is cyclic every 60 minutes.
+On demand only - A read request is sent to the Trend Log object only when using the Trend Log helper or a SCADA Basic program.
+By polling - A read request is sent to the Trend Log object periodically. The period range is 0 to 4294967295 minutes with a default of 60 minutes. In this mode, a read request is also sent when the BACnet communication starts.
+Upon notification reception - Accept notifications from the Notification Class associated with the Trend Log object and generate a read request as a result.
+Max number of records - The maximum number of records for a read request. Range 1 to 10000.
+
+
+========================================
+TOPIC: bacnet_schedule_config.htm
+========================================
+How to configure PcVue to use a BACnet Schedule
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How to Configure PcVue to use a BACnet Schedule
+ 
+Adding Schedule objects to the device in PcVue configuration is a requirement in order to view and change a BACnet schedule in the WebScheduler.
+ 
+
+ 
+The process described below does not create a Schedule object instance in the physical device if it does not exist. Schedule objects can be created within the physical device using the Schedules and Calendars helper, or the left pane of the Mapping editor.
+ 
+ 
+Adding a Schedule object using the Application Explorer
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network and device.
+ 
+From the task pane, select Add a Schedule. The Schedule configuration dialog opens. Show picture
+
+ 
+Click the Ellipsis button adjacent to the Instance number field. The Object Selection dialog opens containing a list of discovered Schedule instances for that device. The list can be updated using the Refresh button. Show picture
+
+ 
+Select the Schedule instance to use and click OK to close the Object Selection dialog.
+ 
+Enter the optional Description. The Description appears in the Application Explorer and can be useful to identify the object later.
+ 
+Enter or select the optional Branch. The branch can be used to organize calendars and schedules in the WebScheduler in a hierarchical manner. For example, a branch of XXXX.YYYY would generate a branch XXXX containing the schedule YYYY.
+ 
+Click the OK button to close the Schedule configuration dialog. The schedule appears in the configuration tree and is available to PcVue and the WebScheduler.
+ 
+ 
+Use of the Ignore default values setting in the Advanced tab
+ 
+When working with BACnet schedules the Web Scheduler evaluates the value of the schedule-default property of the schedule object. As the Web Scheduler ends each defined interval with a transition to NULL, the schedule-default value becomes active for all the undefined periods on the schedule control. In other words, undefined time periods in the Web Scheduler�s schedule control represent times when the schedule-default value is active. 
+ 
+ 
+However, BACnet devices from some vendors dynamically change the value of the schedule-default during runtime. In this case, Ignore default values can be ticked. The user is then able to select the output value, for all intervals, from the list of available output values except for NULL. For example, for schedules of type �Enumerated� the possible output values of an interval are 0 and 1.
+ 
+ 
+Displaying the Schedule configuration in the lower pane
+ 
+The lower right pane of the Application Explorer shows essential information about the selected Schedule. Show picture
+
+ 
+ 
+Schedule outputs - One line for each of the schedule's outputs.
+Name - The object type, instance and property corresponding to the output.
+Device reference
+If empty, the output is on the same device as schedule object.
+The name of the device if the output is not on the same device as the schedule and the device is configured in PcVue.
+The device id if the output is not on the same device as the schedule and the device is not configured in PcVue.
+Variable name - The name of the variable that is mapped to the output property. 
+Associated label - The name of the associated label used by the variable.
+ 
+Schedule associated label - The name of the associated label that will be used by the WebScheduler. It is taken from the first associated label found in the Scheduled Outputs list.
+ 
+ 
+Adding or deleting an output
+ 
+The Application Explorer can be used to add an output to, or delete an output from, a schedule object on the physical device under the following conditions.
+ 
+ 
+The physical device must be configured to allow such modification.
+ 
+The BACnet setting Enable object creation and deletion must be ticked.
+ 
+The device/object/property to be used must be already mapped to a variable.
+ 
+ 
+How to add an output:
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet Schedule.
+ 
+From the task bar of the lower right pane, select New item. The Variable Selector dialog opens showing only those variables already mapped to a BACnet property.
+ 
+Select the variable corresponding to the BACnet property to be used for the new output and click OK. A new Schedule Output is added to the Schedule object.
+ 
+ 
+How to delete an output:
+ 
+ 
+Open the Application Explorer and expand the configuration tree to display a previously configured BACnet Schedule.
+ 
+Select an output in the lower right pane and, from the lower right pane task bar, select Delete item. The Output is removed from the Schedule object.
+ 
+ 
+
+ 
+ Not all physical devices will permit Schedule Output to be changed from another device (in this case PcVue), some may not support it, or the corresponding property may be read-only.
+
+
+========================================
+TOPIC: bacnet_schedule_traces.htm
+========================================
+BACnet Scheduler and Calendar traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnet Schedules and Calendar Traces
+ 
+Schedule trace
+ 
+The Schedule Traces tab contains properties that allow you to enable diagnostic trace messages associated with BACnet Schedules. Enabling a trace generates a corresponding message, which is logged in the Trace Files and displayed in the Event Viewer dialog (F7) when the condition occurs. The following screenshot was taken with the default configuration. 
+ 
+ Show picture
+ 
+ 
+ 
+Trace 5: Full details - More detail for traces related to BACnet Schedule object.
+ 
+Trace 6: Full errors - All traces related to errors related to BACnet Schedule object.
+ 
+Trace 7: Delete step - Traces related to the deletion of BACnet Schedule objects.
+ 
+Trace 8: Schedule status - Traces related to a change in status of the BACnet Schedule object.
+ 
+ 
+Calendar trace
+ 
+The Calendar Traces tab contains properties that allow you to enable diagnostic trace messages associated with BACnet calendars. Enabling a trace generates a corresponding message, which is logged in the Trace Files and displayed in the Event Viewer dialog (F7) when the condition occurs. The following screenshot was taken with the default configuration. 
+ 
+ Show picture
+ 
+ 
+ 
+Trace 5: Full details - More detail for traces related to BACnet Calendar object.
+ 
+Trace 6: Full errors - All traces related to errors related to BACnet Calendar object.
+ 
+Trace 7: Delete step - Traces related to the deletion of BACnet Calendar objects.
+ 
+Trace 8: Calendar status - Traces related to a change in status of the BACnet Calendar object.
+
+
+========================================
+TOPIC: bacnet_schedules.htm
+========================================
+Using BACnet Schedule and Calendar object
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using BACnet Schedule and Calendar Objects
+ 
+In a BACnet network, a device is able to make time based changes to an object's properties. For example, you might want to change the Present Value of an AnalogValue object representing a temperature controller's set-point, depending on the time of day and/or the day of the week. The object types that manage this behavior are the Schedule and Calendar.
+ 
+ 
+The Schedule object provides a schedule (Weekly Schedule property) for each of the seven days in a week. The Schedule object can, at the field device level, set the value of properties in other objects according the schedule. The object in which the property is set can be in the same or different device to that of the Schedule object. Typically, the property that is set is the Present Value.
+ 
+The Calendar object provides a list of dates (Date List property) that are used as exceptions for one or more Schedule objects. For example annual holidays or weekends.
+ 
+ 
+The main purpose of configuring Schedule and Calendar objects in PcVue is to make them available to the WebScheduler. You can also map their properties to the variables tree for Data Sharing in the same way as any other BACnet object.
+
+
+========================================
+TOPIC: bacnet_schedules_helper.htm
+========================================
+Using the BACnet Schedules and Calendars helper
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the BACnet Schedules and Calendars Helper
+ 
+The Schedules tab of the Helper dialog provides useful information about, and can be used to manage, PcVue configuration objects that are related to BACnet Schedule and Calendar objects. The tab includes tools to add and delete object instances and to change properties.
+ Show picture
+
+ 
+
+ 
+Changes that you make, including changing the value of properties, as well as adding and deleting objects using the left panel, directly affect the configuration of the physical BACnet device. Unintentional changes can have an impact on the BACnet system behavior.
+ 
+ 
+The Schedules tab layout
+ 
+ 
+The Left Pane - A list of the available Schedule and Calendar objects. A dimmed font indicates an object that is not configured in PcVue.
+ 
+The right pane - Displays the properties of the selected item.
+ 
+The lower pane - Displays warning messages associated with the configuration of the selected item.
+ 
+ 
+How to add an object instance
+ 
+A new, un-configured schedule or calendar instance can be added using the Create tool on the toolbar. This only creates the object in the physical device. To use it, you must also add the object instance to the device in PcVue configuration.
+ 
+How to delete an object instance
+ 
+A schedule or calendar object instance can be deleted using the Delete Object tool on the toolbar.
+ 
+Changing the properties of an object 
+ 
+Properties of the BACnet object, displayed in the right pane, can be changed using the following procedure.
+ 
+ 
+Select the property by clicking on it.
+ 
+Depending on the property type, you can then either directly enter a new value or select a value from a list. A changed value is displayed in a bold font.
+ 
+Write the value to the physical device using the Write tool in the toolbar.
+ 
+ 
+
+ 
+Properties displayed in a dimmed font are read only and cannot be changed.
+
+
+========================================
+TOPIC: bacnet_server_examples.htm
+========================================
+Examples
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Examples
+ 
+Analog input object
+ 
+Consider the following Analog Input Object configuration.
+ 
+ 
+Object Name = TemperatureSensor1
+ 
+Instance Number = 1
+ 
+COV Increment = 0.1
+ 
+Description = Main Hall Temperature sensor
+ 
+Units = 62 (Celsius Degree)
+ 
+Min Pres Value = -200
+ 
+Max Pres Value = 200
+ 
+ 
+ 
+Object declaration. The Name attribute is the only one relevant so far and its value TemperatureSensor1 will be transferred to the Object Name at the next start-up of the project. 
+ Show picture
+
+ 
+
+ 
+From the Extended Text Attribute, the Object Identifier Property will be transferred at the next start-up project. The Object Type will be set to Analog Input (AI) and the Instance Number to 1.
+ Show picture
+
+ 
+ 
+
+ 
+The project is restarted again and this object was created. The following properties are now available. 
+ Show picture
+
+The Description property of the variable sets the Description property of the BACnet object to "Main Hall Temperature Sensor".
+The string ��C� is matched to the BACnetEngineeringUnit numeric value 62 and transferred to the Units Property.
+The Minimum value set the Min Pres Value Property and the Maximum value set the Max Pres Value
+ 
+ 
+
+ 
+The Auto Completion String was BACnet:AI:1::::::COV_I and the COV Increment is set to 0.5.
+ Show picture
+
+ 
+ 
+ 
+Binary Input Object
+ 
+Consider the following Binary Input Object configuration:
+ 
+ 
+Object Name = ReedSwitch
+ 
+Description = Emergency Door Open State Switch
+ 
+Instance Number = 11
+ 
+Active Text = Emergency exit #1 open
+ 
+Inactive text = Emergency exit #1 close
+ 
+ 
+ 
+Object declaration. The Name attribute is the only one relevant so far and its value TemperatureSensor1 will be transferred to the Object Name at the next start-up of the project. Show picture
+
+ 
+From the Extended Text attribute, the Object Identifier property will be transferred at the next start-up. The Object Type will be set to Binary Input (BI) and the Instance Number to 11 (11). Show picture
+
+ 
+The Description attribute sets the Description property to Emergency Door Open State Switch. Show picture
+
+ 
+The Auto Completion String was BACnet:BI:11:::::ACT_T:INA_T. The Active Text set to "Emergency exit #1 open". The Inactive Text set to "Emergency exit #1 close". Show picture
+
+
+========================================
+TOPIC: bacnet_server_installation.htm
+========================================
+Installation and configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Installation and Configuration
+ 
+The BACnet Server Add-on is comprised of a single Dll file that must be copied to the Bin folder. The file is named:
+ 
+ 
+
+ 
+svmgrBACnetServer.dll
+ 
+ 
+ 
+The Add-on was developed using the SV Manager Toolkit. In order to load the Add-on at startup, a text file UsrMgr.dat must also be added to the Bin folder. The file must contain the following lines:
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[USRMGR\BACnetServer]
+ 
+ 
+ 
+
+ 
+DLL=svmgrBACnetServer.dll
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+In addition, the configuration of the Add-on is made-up of the following configuration files:
+ 
+ 
+BACnetServerStack.ini - Defines the network interface and network-specific properties,
+ 
+BACnetServerConfig.xml - Defines the BACnet Device object and services to expose,
+ 
+BACnetServerUnits.xml - Defines the correspondence between the units used in PcVue and BACnet standard engineering units.
+ 
+ 
+Network interface configuration file - BACnetServerStack.ini
+ 
+The network interface and network-specific properties are configured using the file BACnetServerStack.ini that must be created in the C folder of the project.
+A sample file, with default settings, is supplied with the Add-on and can be copied to the C folder of the project.
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[general]
+ 
+ 
+ 
+
+ 
+cnt_data_link = 1
+ 
+ 
+ 
+
+ 
+max_msg_req = 100
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[data_link 1]
+ 
+ 
+ 
+
+ 
+port_id = 1
+ 
+ 
+ 
+
+ 
+type = ip
+ 
+ 
+ 
+
+ 
+lan_name = 0.0.0.0
+ 
+ 
+ 
+
+ 
+net_number = 0
+ 
+ 
+ 
+
+ 
+udp_port = 47808
+ 
+ 
+ 
+
+ 
+max_msg_req = 50
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+To avoid potentials conflicts the lan_name should be set to be the same address of as the IP interface used by the server.
+ 
+It is important to note that if the machine hosting the Server has more than one network card, the lan_name should match the IP address allocated to the network card that the Server is using.
+ 
+BACnet Device configuration file - BACnetServerConfig.xml
+ 
+An Xml file, BACnetServerConfig.xml, can be used to define optional configuration properties for the Server. If used, it must be located in the C folder of the project. 
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+<?xml version="1.0" encoding="utf-8"?>
+ 
+ 
+ 
+
+ 
+<BACnetServerConfiguration>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<BACnetObjectParametersExtendedAttribute>3</BACnetObjectParametersExtendedAttribute>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<DeviceInstanceNumber>1990</DeviceInstanceNumber>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<AutoCompletion>TRUE</AutoCompletion>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<ClientsInformation>TRUE</ClientsInformation>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<SegmentationSupport>TRUE</SegmentationSupport>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<MaxADPULengthAccepted>1476</MaxADPULengthAccepted>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<MaxNumberOfObjects>0</MaxNumberOfObjects>
+ 
+ 
+ 
+
+ 
+&#160;&#160;&#160;&#160;<DeviceRestartProcedure>1</DeviceRestartProcedure>
+ 
+ 
+ 
+
+ 
+</BACnetServerConfiguration>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnetObjectParametersExtendedAttribute -The variable's Extended String Attribute number used to set the BACnet objects properties� values (default - 3).
+ 
+DeviceInstanceNumber - The exposed BACNet Device instance number (default - 1990).
+ 
+AutoCompletion - Enable/Disable the Auto-Completion mechanism for the variable extended attribute definition (default - Enabled).
+ 
+ClientsInformation - Enable/Disable the Services Notifications mechanism (default - Enabled).
+ 
+SegmentationSupport - Segmentation support can be set to be supported in both directions (True) or in no case (False) (default - Supported in both directions).
+ 
+MaxADPULengthAccepted - The Maximum ADPU frame length the device can accept (default - 1476).
+ 
+MaxNumberOfObjects - The Maximum number of BACnet objects within the BACnet Server. If set to 0 then no limit is set (default - 0).
+ 
+DeviceRestartProcedure - Enable/disable the Device restart procedure. If set to 1 the Device restart notification is broadcast upon start-up of the software. This notification is not sent if the parameter is set to 0.
+ 
+ 
+
+ 
+Boolean values can be set using the following syntax:
+ 
+ 
+ 0, F, false, FALSE for value false
+ 
+1, T, true, TRUE for true
+ 
+ 
+ 
+The configuration from this file is only loaded during the start-up of the project. Any change requires restarting the project.
+ 
+If the file is not found during the project start-up, a default configuration will be loaded. If a property is missing or set with an incorrect value, the associated default value will be used. In both cases, diagnostic traces are generated.
+ 
+An example is supplied with the Add-on, it can be copied to the C folder of the project and customized.
+ 
+
+ 
+While this file is optional, it is important to have it properly configured in most cases, at least to adapt the DeviceInstanceNumber so that the Device Id exposed by the BACnet Server Add-on suits your need.
+ 
+ 
+Engineering units configuration file - BACnetServerUnits.xml
+ 
+To use the capability of exposing a register variable's Unit property as a valid BACnetEngineeringUnits, an Xml file called BACnetServerUnits.xml must be created in the C folder of the project.
+This file must contain the correspondence between the strings used in the Unit property of variables and the standard BACnetEngineeringUnits numeric Id that shall be exposed.
+ 
+A sample file An XML file, BACnetServerUnits.XML, containing correspondence between strings entered and the BACnetEngineeringUnits is also required to for the server. This file is supplied with the Add-on, and must be copied to the C folder of the project and customized.
+ 
+Foreign device configuration - BACnetServerStack.ini
+ 
+The BACnet Server Add-on can behave as a foreign device on a BACnet network.
+ 
+If a BACnet Client is to interact with the BACnet Server Add-on as a Foreign Device, this BACnet Client must add the server to its Foreign Device Table, and the BACnet Server Add-on must register itself to the BBMD.
+ 
+Configuration of Foreign Device handling is located in the BACnetServerStack.ini file.
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+[general]
+ 
+ 
+ 
+
+ 
+cnt_data_link=1
+ 
+ 
+ 
+
+ 
+max_msg_req=100
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+[data_link 1]
+ 
+ 
+ 
+
+ 
+port_id=1
+ 
+ 
+ 
+
+ 
+type=ip
+ 
+ 
+ 
+
+ 
+lan_name=0.0.0.0
+ 
+ 
+ 
+
+ 
+net_number=0
+ 
+ 
+ 
+
+ 
+udp_port=47808
+ 
+ 
+ 
+
+ 
+max_msg_req=50&#160;
+ 
+ 
+ 
+
+ 
+&#160;
+ 
+ 
+ 
+
+ 
+#Foreign device handling
+ 
+ 
+ 
+
+ 
+foreign_dev_addr = 168.152.32.254:47808
+ 
+ 
+ 
+
+ 
+foreign_dev_reg_timeout = 10
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+foreign_dev_addr - IP address and UDP port of the BBMD to register to,
+ 
+foreign_dev_reg_timeout - Re-register time (in seconds).
+ 
+ 
+
+ 
+The BACnet Server Add-on can behave as a foreign device on a BACnet network and register itself to a BBMD, but BBMD management itself is not supported.
+
+
+========================================
+TOPIC: bacnet_server_otherbehaviors.htm
+========================================
+Other runtime behaviors
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Other runtime behaviors
+ 
+Datatype conversion
+ 
+If the variable type is different to that of the BACnet object, datatype conversion takes place automatically.
+ 
+ 
+Bit variables exposed as Analog objects - The value is converted from the Boolean representation to the numeric representation (0 or 1) for Analog Input, Analog Output and Analog Value objects.
+ 
+Register variables exposed as Binary objects - The value is converted to true if the value is different from zero, and false if its value is equal to zero for Binary Input, Binary Output and Binary Value objects.
+ 
+Text variables exposed as Analog or Binary objects - The value is converted from its string representation into a real value for Analog Input, Analog Output and Analog Value objects. The value is converted from its string representation into 0 or 1 for binary values for Binary Input and Binary Output objects.
+ 
+ 
+Commandable objects
+ 
+Variables can be exposed as commandable objects. Multiple attempts to write to the Present Value property, at the same time, may result in conflicts. Consequently, the standard BACnet arbitration system is used, based on command prioritization. The priority associated with a command is ranged from 1 to 16, with 1 being the highest.
+ 
+The Priority Array property contains the 16 values associated with the prioritized commands and is entirely initialized with null values at startup. Any non-null value is considered a command. The highest priority command in the array is the active command and the value contained in the Present Value property matches this active command.
+ 
+If no command is active, and therefore the Priority Array is completely filled with null values, the Relinquish Default property is used for the Present Value.
+ 
+The supported commandable objects are Analog Output, Binary Output, Analog Value and Binary Value.
+ 
+
+ 
+The property Priority Array of commandable objects is not persisted when shutting down PcVue and is initialized with null values at start-up. It is the responsibility of BACnet clients to ensure setting the priority properly when sending a command.
+ 
+ 
+Clock management
+ 
+Local date and time are provided by the Local Time and Local Date properties of the Device object. The time and date originate from the system running the Add-on and automatically adjust for system and time zone changes.
+ 
+Current Daylight Saving Status and UTC Offset are also provided within the Device object.
+ 
+Default property values
+ 
+ 
+ 
+ 
+ 
+
+ Device object
+ Default value
+ 
+ 
+
+ Instance Number 
+ 1990
+ 
+ 
+
+ Vendor Name
+ See PICS
+ 
+ 
+
+ Vendor Identifier
+ See PICS
+ 
+ 
+
+ Model Name
+ See PICS
+ 
+ 
+
+ Location
+ See PICS
+ 
+ 
+
+ Firmware Revision
+ See PICS
+ 
+ 
+
+ Application Software Version
+ See PICS
+ 
+ 
+
+ Protocol Version
+ 1
+ 
+ 
+
+ Protocol Revision
+ 12
+ 
+ 
+
+ Database Revision
+ 0
+ 
+ 
+
+ Max APDU Length Accepted
+ 1476
+ 
+ 
+
+ Segmentation Supported
+ Transmitted and Received frames
+ 
+ 
+
+ Max Segments Accepted
+ 16
+ 
+ 
+
+ 
+ 
+APDU Segment Time Out
+ 
+ 2000
+ 
+ 
+
+ 
+ 
+APDU Time Out
+ 
+ 3000
+ 
+ 
+
+ Number Of APDU Retries
+ 5
+ 
+ 
+
+ COV, Intrinsic Reporting Process ID
+ 123456
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Analog Input object
+ Default value
+ 
+ 
+
+ Present Value
+ 0
+ 
+ 
+
+ Status Flags 
+ 0000
+ 
+ 
+
+ Event State
+ State normal
+ 
+ 
+
+ Out Of Service
+ False
+ 
+ 
+
+ Units
+ No units
+ 
+ 
+
+ Min Pres Value
+ - Double Max (32 bits)
+ 
+ 
+
+ Max Pres Value
+ Double Max (32 bits)
+ 
+ 
+
+ Resolution
+ Double precision
+ 
+ 
+
+ COV Increment
+ 0.5
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Analog Output and Analog Value object
+ Default value
+ 
+ 
+
+ Present Value
+ 0
+ 
+ 
+
+ Status Flags 
+ 0000
+ 
+ 
+
+ Event State
+ State normal
+ 
+ 
+
+ Out Of Service
+ False
+ 
+ 
+
+ Units
+ No units
+ 
+ 
+
+ Minimum Present Value
+ - Double Max (32 bits)
+ 
+ 
+
+ Maximum Present Value
+ Double Max (32 bits)
+ 
+ 
+
+ Resolution
+ Double precision
+ 
+ 
+
+ Priority Array
+ 16 NULL values
+ 
+ 
+
+ Relinquish Default
+ 0
+ 
+ 
+
+ COV Increment
+ 0.5
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Binary Input object
+ Default value
+ 
+ 
+
+ Present Value
+ 0
+ 
+ 
+
+ Status Flags 
+ 0000
+ 
+ 
+
+ Event State
+ State normal
+ 
+ 
+
+ Out Of Service
+ False
+ 
+ 
+
+ Polarity
+ Normal
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Binary Output and Binary Value object
+ Default value
+ 
+ 
+
+ Present Value
+ 0
+ 
+ 
+
+ Status Flags 
+ 0000
+ 
+ 
+
+ Event State
+ State normal
+ 
+ 
+
+ Out Of Service
+ False
+ 
+ 
+
+ Polarity
+ Normal
+ 
+ 
+
+ Priority Array
+ 16 NULL values
+ 
+ 
+
+ Relinquish Value
+ 0
+
+
+========================================
+TOPIC: bacnet_server_overview.htm
+========================================
+Overview of the BACnet Server Add-on
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of the BACnet Server Add-on
+ 
+The BACnet Server Add-on turns PcVue into a BACnet Server device. The station running the Add-on is exposed on the network as a BACnet Server and selected variables from the project as BACnet objects.
+ 
+The real time value of a variable is exposed as the Present Value property. Other variable properties are also exposed as BACnet properties.
+ 
+The BACnet Server Add-on supports the B-ASC profile. Please refer to the PICS topic for a complete list of supported BACnet services, objects and properties.
+ 
+Variables configured and exposed as BACnet objects are counted as I/O variables and must be taken into account when sizing the license.
+ 
+There is no configuration dialog specific to the BACnet Server Add-on. At the time of writing, it uses a combination of dedicated text files (.dat and .xml) and regular configuration features.
+ 
+
+ 
+The BACnet Server Add-on can be used in trial mode. Communication will stop automatically at the end of the trial period.
+ 
+ 
+
+ 
+The BACnet Client driver and the BACnet Server Add-on must not be used on the same computer. In a way to avoid any conflict, a station running this Add-on to expose BACnet objects shall have no BACnet client configuration set.
+
+
+========================================
+TOPIC: bacnet_server_pics.htm
+========================================
+BACnet Server PICS
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnet Server PICS
+ 
+1.1. Product Description
+ 
+
+ &#160;PcVue is a SCADA Software that can act as a BACnet Application Specific Controller (B-ASC) through a dedicated Add-on. PcVue is able to communicate with BACnet workstations via BACnet/IP.
+ 
+1.2. BACnet Standardized Device Profile
+ 
+o BACnet Operator Workstation (B-OWS)
+ 
+ 
+o BACnet Operator Workstation (B-AWS)
+ 
+ 
+o BACnet Operator Display (B-OD)
+ 
+ 
+o BACnet Building Controller (B-BC)
+ 
+ 
+o BACnet Advanced Application Controller (B-AAC) 
+ 
+X BACnet Application Specific Controller (B-ASC)
+ 
+ 
+o BACnet Smart Sensor (B-SS)
+ 
+ 
+o BACnet Smart Actuator (B-SA)
+ 
+ 
+1.3. BACnet Interoperability Building Blocks Supported
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Data Sharing
+ 
+ 
+ 
+ReadProperty-B
+ 
+ReadPropertyMultiple-B
+ 
+WriteProperty-B
+ 
+WritePropertyMultiple-B
+ 
+COV-B
+ 
+COVP-B
+ 
+ 
+ 
+DS-RP-B
+ 
+DS-RPM-B
+ 
+DS-WP-B
+ 
+DS-WPM-B
+ 
+DS-COV-B
+ 
+DS-COVP-B
+ 
+ 
+ 
+
+ 
+ 
+Device & Network Management
+ 
+ 
+ 
+Dynamic Device Binding-B
+ 
+Dynamic Object Binding-B
+ 
+DeviceCommunicationControl-B
+ 
+ 
+ 
+DM-DDB-B
+ 
+DM-DOB-B
+ 
+DM-DCC-B
+ 
+ 
+ 
+ 
+1.4. Segmentation Capability
+ 
+X Segmented requests supported Window Size: 16 
+ 
+X Segmented responses supported Window Size: 16 
+ 
+1.5. Standard Object Types Supported
+ 
+ 
+
+ &#160;PcVue as BACnet server:
+ 
+ 
+The following table describes all objects that PcVue is able to expose as a BACnet server. That does not mean these objects may be present in a given PcVue project.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+Object Type
+ 
+ 
+ 
+Object Type Supported
+ 
+ 
+ 
+Dynamically
+ 
+Creatable and Deletable
+ 
+ 
+ 
+Optional Properties
+ 
+Supported
+ 
+ 
+ 
+Proprietary
+ 
+Properties
+ 
+ 
+ 
+
+ 
+ 
+Analog-input
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+Description
+ 
+Min_Pres_Value
+ 
+Max_Pres_Value
+ 
+Resolution
+ 
+COV_Increment
+ 
+Profile_Name
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ 
+ 
+Analog-output
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+Description
+ 
+Min_Pres_Value
+ 
+Max_Pres_Value
+ 
+Resolution
+ 
+COV_Increment
+ 
+Profile_Name
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ 
+ 
+Analog-value
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+Description
+ 
+Min_Pres_Value
+ 
+Max_Pres_Value
+ 
+Resolution
+ 
+Priority_Array
+ 
+Relinquish_Default
+ 
+COV_Increment
+ 
+Time_Delay
+ 
+Profile_Name
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ 
+ 
+Binary-input
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+Description
+ 
+Inactive_Text
+ 
+Active_Text
+ 
+Profile_Name
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ 
+ 
+Binary-output
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+Description
+ 
+Inactive_Text
+ 
+Active_Text
+ 
+Profile_Name
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ 
+ 
+Binary-value
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+Description
+ 
+Inactive_Text
+ 
+Active_Text
+ 
+Priority_Array
+ 
+Relinquish_Default
+ 
+Profile_Name
+ 
+ 
+ 
+No
+ 
+ 
+ 
+
+ 
+ 
+Device
+ 
+ 
+ 
+Yes
+ 
+ 
+ 
+No
+ 
+ 
+ 
+Location
+ 
+Description
+ 
+Local_Time
+ 
+Local_Date
+ 
+UTC_Offset
+ 
+Daylight_Savings_Status
+ 
+APDU_Segment_Timeout
+ 
+Active_COV_Subscriptions
+ 
+Max_Segments_Accepted
+ 
+Time_Of_Device_Restart
+ 
+Last_Restart_Reason
+ 
+Restart_Notification_Recipients
+ 
+ 
+ 
+No
+ 
+ 
+ 
+ 
+1.6. Data Link layer Options
+ 
+X BACnet IP, (Annex J)
+ 
+ 
+X BACnet IP, (Annex J), Foreign Device
+ 
+ 
+o ISO 8802-3, Ethernet (Clause 7)
+ 
+ 
+o ANSI/ATA 878.1, 2.5 Mb. ARCNET (Clause 8)
+ 
+ 
+o ANSI/ATA 878.1, RS-485 ARCNET (Clause 8), baud rates ____________
+ 
+ 
+o MS/TP master (Clause 9), baud rates: 
+ 
+ 
+o MS/TP slave (Clause 9), baud rates: 
+ 
+ 
+o Point-To-Point, EIA 232 (Clause 10), baud rates:
+ 
+ 
+o Point-To-Point, modem, (Clause 10), baud rates: 
+ 
+ 
+o LonTalk, (Clause 11), medium: __________
+ 
+ 
+o BACnet/Zigbee (Annex O): __________
+ 
+ 
+o Other: 
+ 
+ 
+1.7. Device Address Binding
+ 
+Is static device binding supported? No. This is currently necessary for two-way communication with MS/TP slaves and certain other devices.
+ 
+1.8. Networking Options
+ 
+o Router, Clause 6 - List all routing configurations, e.g., ARCNET-Ethernet, Ethernet-MS/TP, etc.
+ 
+ 
+o Annex H, BACnet Tunneling Router over IP
+ 
+ 
+o BACnet/IP Broadcast Management Device (BBMD) 
+ 
+ 
+ 
+Does the BBMD support registrations by Foreign Devices? No
+ 
+Does the BBMD support network address translation?
+No
+ 
+ 
+1.9. Character Sets Supported
+ 
+Indicating support for multiple character sets does not imply that they can all be supported simultaneously.
+ 
+X ANSI X3.4
+ 
+ 
+o IBM / Microsoft DBCS
+ 
+ 
+o ISO 8859-1
+ 
+ 
+o ISO 10646 (UCS-2)
+ 
+ 
+o ISO 10646 (UCS-4)
+ 
+ 
+o JIS X 0208
+ 
+ 
+o ISO 10646 (UTF-8)
+ 
+ 
+1.10. Network Security Options
+ 
+X Non-secure Device - is capable of operating without BACnet Network Security
+ 
+ 
+o Secure Device - is capable of using BACnet Network Security (NS-SD BIBB)
+ 
+ 
+ 
+o Multiple Application-Specific Keys
+ 
+ 
+o Supports encryption (NS-ED BIBB)
+ 
+ 
+o Key Server (NS-KS BIBB)
+
+
+========================================
+TOPIC: bacnet_server_troubleshooting.htm
+========================================
+Troubleshooting
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Troubleshooting
+ 
+BACnet Server dll is not loaded
+ 
+If the BACnet server is not loaded at start-up. Check that the file UsrMgr.dat is located in the Bin directory.
+ 
+If the file UsrMgr.dat exists, and a message similar to the following appears, check that the Dll name specified in UsrMgr.dat matches that of the BACnet ServerDll.
+ 
+,11,W,,16504,,1,Manager toolkit number 1, the user DLL (svmgrBACnetServer) cannot be loaded
+ 
+Server start failure
+ 
+If a message similar to the following appears at start-up.
+ 
+,,0,,1,SV,Starting project in MgrToolkit1 ...
+ 
+W,,16510,,1,MgrToolkit1, BACnet server start FAILED
+ 
+W,,16510,,1,Mgrtoolkit1, Reason for initialization failure: Driver can't initialize
+ 
+Verify if the file BACnetServerStack.ini, located in the C folder of the running project, is properly named and configured.
+ 
+If the file is missing completely this message is displayed start-up.
+ 
+W,,16510,,1,MgrToolkit1, Can't find BACnetServerStack.ini file in the Project configuration folder C
+ 
+W,,16510,,1,MgrToolkit1, BACnet server start FAILED
+ 
+W,,16510,,1,Mgrtoolkit1, Reason for initialization failure: Invalid parameter or invalid syntax
+ 
+BACnetServerConfig.xml file issues
+ 
+If a message similar to the following appears at start-up.
+ 
+MgrToolkit1, Cannot load BACnetServer configuration XML file, please check your file.
+ 
+Check that the file BACnetServerConfig.xml is located in the C folder of the running project launched and check, its well formedness using appropriate tools.
+ 
+If the file cannot be loaded, a default configuration is loaded. This also applies if an incorrect parameter or value is used.
+ 
+BACnetEnginnering.xml file issues
+ 
+If a message similar to the following appears at start-up or during operation.
+ 
+,,0,,1,SV,Starting project in MgrToolkit1 ...
+ 
+W,,16510,,1,MgrToolkit1, BACnet server started
+ 
+I,,16510,,1,Mgrtoolkit1, Cannot load BACnetServerUnits XML file, please check your file
+ 
+Check that the file BACnetServerUnits.xml is located in the C folder of the running project launched and check, its well formedness using appropriate tools, that the integrity of the XML format has not been altered by user modification.
+ 
+The following message appears if the unit cannot be found in the BACnetServerUnits.xml:
+ 
+I,,16510,,1,Mgrtoolkit1, Unit %s not part of BACnetServerUnits or misstyped, please refer to documentation or correct your unit name
+ 
+If the file cannot be loaded, the value 95 corresponding to NoUnits is exposed as the Unit property. This also applies if there is an incorrect parameter or value field is used.
+ 
+Network issues
+ 
+Issues might occurs if the computer running the BACnet Server has more than one connection interface, and BACnetServerStack.ini has not been modified. It is necessary to specify in this file the Lan_Name and net_number matching the interface that will expose the server.
+
+
+========================================
+TOPIC: bacnet_server_variables.htm
+========================================
+Configuration of variables
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuration of the Variables
+ 
+To define a variable so that it is exposed as a BACnet object, you enter its BACnet definition in the variable's text extended attribute as defined in the BACnetServerConfig.xml.
+It takes the form of a string with the following syntax.
+ 
+Analog objects - BACnet:<ObjectType>:<InstanceNumber>::::::<COVIncrement>
+ 
+Binary objects - BACnet:<ObjectType>:<InstanceNumber>:::::<ActiveText>:<InactiveText>
+ 
+Where:
+ 
+ 
+BACnet - The keyword that indicates it is a variable exposed as a BACnet object,
+ 
+<ObjectType> - Either AI, AO or AV for analog objects and BI, BO or BV for binary objects,
+ 
+<InstanceNumber> - The object instance number,
+ 
+<COVIncrement> - The minimum change in Present value required to trigger a COV notification for the subscribed COV clients,
+ 
+<ActiveText> - A character string describing the Present value active state,
+ 
+<InactiveText> - A character string describing the Present value inactive state.
+ 
+ 
+Any variable defined as a BACnet object is only exposed after the project has been stopped and re-started. Any errors resulting from invalid object creation (incorrect syntax in the text attribute for example) will be detected and traced at that time.
+ 
+
+ 
+The following shorten syntax can also be used:
+ 
+ 
+For analog objects - BACnet:<ObjectType>:<InstanceNumber>
+ 
+For binary objects - BACnet:<ObjectType>:<InstanceNumber>
+ 
+ 
+ 
+How a variable's real time value is exposed as the BACnet Present Value property
+ 
+Change in value of a variable results in a transfer to the Present Value property for the following object types:
+ 
+ 
+Analog Input
+ 
+Binary Input
+ 
+ 
+Change in value of a variable also results in a transfer to the Present Value property for the following commandable object types but without any Priority Value, thus the Priority Array is left unchanged:
+ 
+ 
+
+ 
+Analog Output
+ 
+ 
+Analog Value
+ 
+
+ 
+Binary Output
+ 
+ 
+Binary Value
+ 
+ 
+The Priority Array property of these objects is entirely initialized with NULL values, and in doing so, the Relinquish Default Property value is given to the Present Value Property on-start up.
+ 
+How a variable's Unit property is exposed as the BACnet object Units property
+ 
+The Unit property of a register variable is a free text representing the unit associated with the value of the variable. For example:
+ 
+ 
+The string can represent the symbol associated with the unit as defined in the SI or Imperial Units System such as "oC" for Celsius degrees or "oF" for Fahrenheit degrees,
+ 
+
+ 
+The string can represent a commonly used abbreviation of a unit such as "mV" for millivolts or "rpm" for revolutions per minute,
+ 
+ 
+
+ 
+The string can represent a complete word describing the unit (such as "meter" for American English or "metre" for British English).
+ 
+ 
+ 
+The correspondence between strings used in the Unit property of exposed register variables and BACnet Engineering Unit numeric Ids has to be pre-defined and stored in the file BACnetServerUnits.xml.
+A sample file is provided and more unit correspondences can be added using the following format:
+ 
+<units tag="correspondence string">BACnetEngineeringUnits numeric Id</units>
+ 
+For example:
+ 
+<units tag="square feet">1</units>
+ 
+
+ 
+The string comparison is case sensitive. By default, or for an invalid string, the value 95 corresponding to NoUnits is exposed as the Unit property. The same applies if the file cannot be found.
+ 
+ 
+Other variable properties exposed as BACnet properties
+ 
+ 
+Name - Directly exposed as the Name property,
+ 
+Description - Directly exposed as the Description property,
+ 
+Minimum value - Directly exposed as the Min Pres Value property. This property is present for the Analog Input, Analog Output and Analog Value objects,
+ 
+Maximum value - Directly exposed as the Max Pres Value property. Those properties are present for the Analog Input, Analog Output and Analog Value objects.
+ 
+ 
+An auto-completion mechanism is available to help you define the BACnet Server mapping via an Extended text attribute
+ 
+ It is enabled via a property in the configuration file BACnetServerConfig.xml.
+ 
+After declaration of a BACnet object and restarting the project, the activated Extended String attribute offer auto-completion for the BACnet server syntax.
+ 
+For instance, an Analog Input object may have the following associated Extended String attribute.
+ 
+BACnet:AI:1::::::COV_I
+ 
+Auto-completion suggests which parameters are available for a specific object depending on its type and by concatenating the declaration string with a string containing the mnemonics of the parameters.
+ 
+The entire auto-completion strings are as follows.
+ 
+ For Analog Input, Analog Output and Analog Value objects:
+ 
+::::::COV_I
+ 
+For Binary Input, Binary Output and Binary Value objects:
+ 
+:::::ACT_T:INA_T
+
+
+========================================
+TOPIC: bacnet_time_synch.htm
+========================================
+Synchronization of device clocks
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Synchronization of Device Clocks
+ 
+BACnet devices maintain their own clock that is used to timestamp data and for other time-based operations. PcVue can be used to synchronize the clock of all BACnet devices on a network by issuing time synchronization commands. A time synchronization command can be initiated in 3 ways.
+ 
+
+ 
+ The time is synchronized according to the method selected in the BACnet Settings dialog (UTC, local or broadcast).
+ 
+ 
+Automatic synchronization at start-up
+ 
+If the property Automatically synchronize at startup is selected, a clock synchronization command will be sent whenever the BACnet network is started.
+ 
+Using the Clock Synchronization task
+ 
+The clock synchronization task is available when a BACnet network is selected in the Application Explorer's configuration tree. It opens the Time Synchronization dialog that contains the following commands. Show picture 
+
+ 
+ 
+Refresh - The Refresh button causes PcVue to read and update the display of the timestamp of all configured devices.
+ 
+Synchronize - The Synchronize button causes PcVue to issue a time synchronization command. 
+ 
+ 
+Using a SCADA Basic script
+ 
+The SCADA Basic instruction BACNET mode TIME_SYNCHRONIZATION can be used to issue a clock synchronization command.
+
+
+========================================
+TOPIC: bacnet_trendlog_helper1.htm
+========================================
+Using the BACnet Logs helper
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using the BACnet Logs Helper
+ 
+The Logs tab of the Helper dialog provides useful information about, and can be used to manage, PcVue configuration objects that are related to BACnet Trend Log, Trend Log Multiple and Event Log objects. The tab includes tools to add and delete object instances, change properties, and to manually retrieve records.
+ Show picture
+
+ 
+
+ 
+Changes that you make, including changing the value of properties, as well as adding and deleting objects using the left panel, directly affect the configuration of the physical BACnet device. Unintentional changes can have an impact on the BACnet system behavior.
+ 
+ 
+The Logs tab layout
+ 
+ 
+The Left Pane - A list of the available Trend Log, Trend Log Multiple and Event Log objects. Each item on a list includes an icon that provides an indication of its status. 
+An icon including a green tick indicates a healthy item.
+An icon including a yellow triangle with an exclamation mark indicates an item with a warning.
+An icon with a dimmed font indicates an object that is not configured in PcVue.
+An icon including a question mark means that the item properties have yet to be read.
+ 
+The right pane - Displays the properties of the selected item.
+ 
+The lower pane - Displays warning messages associated with the configuration of the selected item.
+ 
+ 
+How to add an object instance
+ 
+A new, un-configured log object instance can be added using the Create tool on the toolbar. This only creates the object in the physical device. To use it, you must also add the log object instance to the device in PcVue configuration (or map an existing log to the newly created object). See the topic How to configure PcVue to retrieve BACnet trend records.
+ 
+How to delete an object instance
+ 
+A log object instance can be deleted using the Delete Object tool on the toolbar.
+ 
+Changing the properties of an object 
+ 
+Properties of the BACnet object, displayed in the right pane, can be changed using the following procedure.
+ 
+ 
+Select the property by clicking on it.
+ 
+Depending on the property type, you can then either directly enter a new value or select a value from a list. A changed value is displayed in a bold font.
+ 
+Write the value to the physical device using the Write tool in the toolbar.
+ 
+ 
+
+ 
+Properties displayed in a dimmed font are read only and cannot be changed. 
+ 
+ 
+ Manually reading Trend Log records 
+ 
+You can manually retrieve records from a log object using the Retrieve Records dialog. The records are stored in the archive unit associated with the variable that is mapped to the BACnet object property configured in the log object (if any).
+ Show picture
+
+
+========================================
+TOPIC: bacnet_trendlog_overview.htm
+========================================
+Using BACnet Trend Log Objects
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Using BACnet Trend Log Objects
+ 
+In a BACnet network, a device is able to record changes in value of a property, locally within the physical BACnet device. The mechanism is often referred to as Trending.
+ 
+Trending is managed by the Trend Log and Trend Log Multiple objects within the BACnet physical device. The object's properties define how trending is controlled.
+ 
+ 
+Trend recording at the device level. What, and how, properties are recorded.
+ 
+The conditions that lead to informing other devices that records are available for retrieval.
+ 
+ 
+Frequently the Present Value property is used. Each value is recorded with a corresponding timestamp. Recording can be either polled, on change of value or triggered. Recording can behave either as a circular buffer with the oldest value overwritten if it becomes full, or as a fixed size buffer in which recording stops when it gets full. The Trend Log object can trigger a notification when the number of records reaches a particular value.
+ 
+&#160;PcVue is able to retrieve the Trend records (values and timestamps) and store them in its own archive units. The retrieval can be executed periodically, as the result of a notification, or on-demand. The property that is recorded in the Trend Log object must also be mapped to a register variable. Once the data is saved in an archive unit it can be accessed in the same way as any other recorded trend data (displayed in a Trend Viewer, exported using Data Export or accessed using SCADA Basic etc.).
+ 
+&#160;PcVue supports both Trend Log and Trend Log Multiple objects.
+
+
+========================================
+TOPIC: bacnet_trendlog_traces.htm
+========================================
+BACnet Trend Log Traces
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+BACnet Trend Log Traces
+ 
+The Traces tab contains properties that allow you to enable diagnostic trace messages associated with BACnet Trend Logs. Enabling a trace generates a corresponding message, which is logged in the Trace Files and displayed in the Event Viewer dialog (F7) when the condition occurs. The following screenshot was taken with the default configuration. 
+ 
+ Show picture
+
+Trace 5: Full details - More detail for traces related to BACnet Trend Logs.
+Trace 6: Full errors - All traces related to errors related to BACnet Trend Logs.
+Trace 7: Delete step - Traces related to the deletion of BACnet Trend Log objects.
+Trace 8: Log status - Traces related to a change in status of the BACnet Trend Log object.
+
+
+========================================
+TOPIC: bacnet_trendlog_variables.htm
+========================================
+Mapping Variables For Use With a Trend Log Object
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mapping Variables For Use With a Trend Log Object
+ 
+When using a Trend Log object within PcVue you must map the BACnet property that is recorded by the Trend Log object in the physical device, to one a variable. For example, you might map the Present Value property of an Analog Input object that is referenced by the Trend Log object.
+ 
+In addition, the variable must have Trend Recording behavior configured.
+ 
+ The match between the variable, its trend behavior and the Trend Log is achieved as follow:
+ 
+ 
+The variable's mapping properties (BACnet object and property) are used to match the Trend Log configured to retrieve records for that given BACnet data.
+ 
+The trend behavior configuration defines in which archive unit the Trend Log records are stored.
+ 
+The variable's real time value reflects that of the real time value of the BACnet property, which is used for trend recording if the BACnet Trend Log cannot be found.
+ 
+The variable name identifies the records so that they can be retrieved later in a Trend Viewer, exported using Data Export etc. 
+ 
+ 
+The variable is mapped in the same way that you map a variable to any BACnet property or object. See the topic The BACnet mapping dialog and the book BACnet data sharing.
+ 
+
+ 
+When a Trend Log is used as source for trends, PcVue does not store the invalid record upon shutdown. In such a situation the value of the property Do not record invalid value on shutdown of the trend behavior is ignored.
+ 
+If you are using a Trend Log Multiple object, you will have to map one variable for each of the properties recorded in the object.
+
+

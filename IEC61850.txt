@@ -1,0 +1,2059 @@
+========================================
+TOPIC: 61850_adding_dataset_config.htm
+========================================
+Data group, Dataset, and Setting group configuration
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data group, Dataset, and Setting group configuration
+ 
+A data group provides polled access to all data objects and data attributes of an IEC 61850 device. It is the least efficient way of collecting data from the network as each variable that you map using a data group will be serviced using a separate poll. Data groups should only be used to access data objects or data attributes that are not available from a data set or report.
+ 
+A dataset provides polled access to all data objects and data attributes of an IEC 61850 device dataset. It is more efficient than a data group, as a single poll will return all data objects and data attributes that belong to the dataset.
+ 
+A setting group manages configuration presets within an IEC 61850 device, allowing dynamic switching between operational settings.
+ 
+Prerequisites
+ 
+ 
+You have configured an IEC 61580 network.
+ 
+You have configured an IEC 61580 device.
+ 
+ 
+Add a data group
+ 
+ 
+Open the Application Explorer and select an IEC 61850 network and device.
+ 
+Click Add a monitoring object in the toolbar and select Add a data group from the drop-down. The IEC 61850 data group creation dialog opens. Show picture
+ 
+
+ 
+ 
+ 
+Enter a name and (Optional) a description. The name is the identity of the data group within PcVue.
+ 
+Enter a polling group to enable cyclic data collection at defined intervals.
+ 
+Tick Activate at start-up to enable automatic polling at start-up.
+ 
+Click OK to save the configuration.
+ 
+ 
+Add a dataset
+ 
+ 
+Open the Application Explorer and select an IEC 61850 network and device..
+ 
+Click Add a monitoring object in the toolbar and select Add a dataset from the drop-down. The IEC 61850 dataset creation dialog opens. Show picture
+ 
+
+ 
+ 
+ 
+Enter a name and (Optional) a description. The name is the identity of the dataset within PcVue.
+ 
+Select the dataset type. Static datasets are used for consistent and unchanging data structures, whereas dynamic datasets are used for applications needing flexible configuration that can adapt to different engineering scenarios.
+ 
+Select the dataset name. This is the name as exposed by the physical device. Depending on the device configuration, PcVue obtains a list of the available datasets by browsing the connected physical device or by listing datasets defined in the SCL file associated to the device.
+ 
+(For Dynamic dataset only) Select the dynamic type. If you selected Persistent, the dataset object will be persisted at the physical device level and you are required to select a Logical Device and Logical Node, and enter a Name for the persisted dataset. These properties allow structured data grouping within the device and are essential for configurations that persist across sessions.
+ 
+Enter a polling group to enable cyclic data collection at defined intervals.
+ 
+Tick Activate at start-up to enable automatic polling at start-up.
+ 
+Click OK to save the configuration.
+ 
+ 
+
+ 
+The configuration of a dynamic dataset is sent to the physical device upon connection. You need to restart the IEC 61850 device configuration element if you want such a change to be taken into account.
+ 
+A non-persistent dynamic dataset is automatically deleted and unreferenced by the physical device upon disconnection.
+ 
+Deleting a persistent dataset removes the associated dataset from the physical device. If an error occurs (e.g., if a report still references the dataset), a warning popup is displayed, and the dataset group will remain active until resolved. Such an error can commonly occur, in particular if a report is still referencing the dataset in the physical device.
+ 
+ 
+
+ 
+Buffered reporting with a dynamic dataset requires the dataset to be configured for persistency at the physical device level.
+ 
+ 
+Add a setting group
+ 
+ 
+Open the Application Explorer and select an IEC 61850 network and device.
+ 
+Click Add a monitoring object in the toolbar and select Add a setting group from the drop-down. The IEC 61850 setting group creation dialog opens. Show picture
+ 
+
+ 
+ 
+ 
+Enter a name and (Optional) a description. The name is the identity of the setting group within PcVue.
+ 
+Select a control block from the drop-down. The control block is a structure that manages and organizes the setting groups within a device. PcVue verifies the existence of the selected control block upon startup. If the control block is missing on the device, its status is set to "Invalid control block.�
+ 
+Enter a polling group to enable cyclic data collection at defined intervals.
+ 
+Tick Activate at start-up to enable automatic polling at start-up.
+ 
+Click OK to save the configuration.
+
+
+========================================
+TOPIC: 61850_adding_device_config.htm
+========================================
+Adding a Physical Device to an IEC 61850 network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding a Physical Device to an IEC 61850 Network
+ 
+An IEC 61850 device object in PcVue configuration represents, and provides access to, an IEC 61850 physical device. Within each physical device, may be one or more logical devices. 
+ 
+On the network, an IEC 61850 device is identified by its IP Address. In PcVue, it is known by the Name that you give it during the configuration.
+A device can be configured manually, or based on information available in an SCL file referenced on the IEC 61850 network.
+ 
+Adding a device
+ 
+ 
+Select an IEC 61850 network in the Application Explorer. From the task pane, select Add an IEC 61850 device to open the Device dialog. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+In the Name field, enter a name for the IEC 61850 device. This is the name by which it will be known in PcVue.
+ 
+Enter the optional descriptive text in the Description field (optional).
+ 
+In the IP address field, enter the device's unique IP address.
+ 
+Select Activate at start-up if the device is to automatically start.
+ 
+Select the Device Profile. PcVue is provided with a number of device profiles. Further profiles can be added by editing the device profile catalog. See the topic IEC 61850 device profile catalog.
+ 
+Click on OK to confirm the configuration and close the dialog or Apply to do the same but leave the dialog open.
+ 
+ 
+Adding a device using an SCL file
+ 
+If you have added one or more SCL files to the Network configuration, you can select the device configuration as an alternative to configuring the device properties manually.
+ 
+ 
+Follow steps 1 to 3 as above.
+ 
+Select Use SCL file. You can then select the IED from the SCL File List, using the ellipses button adjacent to the SCL file property. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+The information from the SCL file auto-completes the device configuration: iedName, apName and IP address. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+You cannot change properties of a device configured in this way other than using Override IP address to change that supplied by the SCL file. Click OK to confirm the configuration.
+ 
+ 
+The Advanced tab
+ 
+See the topic IEC 61850 device - advanced properties.
+ 
+The Traces tab
+ 
+The Traces tab is used to enable debugging traces in the event of any problems with the device. Only use this if advised to do so by your support agency.
+
+
+========================================
+TOPIC: 61850_config_settings.htm
+========================================
+IEC 61850 settings
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IEC 61850 settings
+ 
+IEC 61850 settings are accessed from the Application Explorer by selecting <Project>.Communication.Data acquisition.IEC 61850 and choosing the Settings command from the task list. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Invalidate variables � Defines if variable status should be set to invalid upon connection failure.
+ 
+Never - The variables are never made invalid. This can be used when there is intermittent communication with the server.
+Immediately - The variables are made invalid immediately on a communication failure. This is the default value.
+After a delay - The variables are made invalid after the specified delay.
+ 
+Invalidate variables (while producer switchover) � Defines if variable status should be set to invalid upon producer switchover.
+ 
+Monitoring
+Double point
+Off � Defines how Off value should be interpreted by PcVue.
+On � Defines how On value should be interpreted by PcVue.
+ 
+MMS layer configuration
+Maximum size of an assembled MMS message
+Max PDU size � Defines the maximum size of PDUs. Depending on the devices you are communicating with, this setting may need to be changed.
+ 
+Data
+Use timestamp quality � If not enabled, the quality of timestamp associated to data will be ignored.
+Default originator category for select/operate of controls � Defines the value used for the OrCat parameter when sending Controls � Default to station-control.
+Default originator identifier for select/operate of controls � Defines the value used for the OrIdent parameter when sending Controls (max 32 characters). Default to an empty string.
+
+The originator identifier and category can be handled with the extended attributes of variables mapped onto controllable IEC 61850 objects. Refer to the Linking a variable to an IEC 61850 data object or data attribute topic for more information.
+Default Test for select/operate of controls � If ticked, all controls sent will be by default flagged as �Test�.
+Default Check bitstring for select/operate of controls
+Synchrocheck � If ticked, all controls sent will be by default flagged for synchro-check.
+Interlock-check � If ticked, all controls sent will be by default flagged for interlock-check.
+ 
+Interoperability issues
+Enable discovery services. If disabled, the IEC 61850 driver will not attempt to check if the configuration of the physical devices fit the PcVue configuration. This setting only applies to devices configured to use SCL-based offline configuration, it is ignored for the others. 
+ 
+ 
+
+ 
+Disabling the use of discovery services affects elements such as browsing and checking the existence of Logical devices, Logical nodes, Data objects, Data attributes, Datasets, Dataset members...
+If disabled, it is the responsibility of the application designer to make sure that the configuration is consistent system-wide to ensure proper operations of the IEC 61850 driver and data mapping.
+ 
+In particular, when SCL files are associated with the IEC 61850 network for offline configuration, it is strongly recommended to store the SCL files in the TP folder of the project and to add them to the list of files managed as part of Central Project Management (if in use). See the topic IEC 61850 Network - SCL Files for more information.
+ 
+ 
+
+ 
+If in addition to disabling the use of discovery services, you wish to fully disable the use of IEC 61850 services that lead to changes of the configuration of physical devices, you must make sure that none of the following Data report advanced properties are activated:
+ 
+ 
+
+ 
+Send buffer time to the device,
+ 
+ 
+
+ 
+Send dataset configuration to the device,
+ 
+ 
+
+ 
+Send integrity period to the device,
+ 
+ 
+
+ 
+Send optional fields to the device,
+ 
+ 
+
+ 
+Send report identifier to the device,
+ 
+ 
+
+ 
+Send trigger option to the device.
+
+
+========================================
+TOPIC: 61850_data_types.htm
+========================================
+IEC 61850 basic data types
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IEC 61850 Data Types and the Corresponding Variables Tree Data Types
+ 
+The following table lists the IEC 61850 basic data types and PcVue variable type to which they must be mapped.
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Data type
+ Range
+ Variable type
+ Remark
+ 
+ 
+
+ BOOLEAN
+ &#160;
+ Bit
+ &#160;
+ 
+ 
+
+ INT8
+ -128..127
+ Register
+ &#160;
+ 
+ 
+
+ INT16
+ -32768..32767
+ Register
+ &#160;
+ 
+ 
+
+ INT24
+ -8388608..8388607
+ Register
+ &#160;
+ 
+ 
+
+ INT32
+ -2147483648..2147483647
+ Register
+ &#160;
+ 
+ 
+
+ INT8U
+ 0..255
+ Register
+ &#160;
+ 
+ 
+
+ INT16U
+ 0..65535
+ Register
+ &#160;
+ 
+ 
+
+ INT24U
+ 0..6177215
+ Register
+ &#160;
+ 
+ 
+
+ INT32U
+ 0..4294967295
+ Register
+ &#160;
+ 
+ 
+
+ FLOAT32
+ &#160;
+ Register
+ IEEE 754 single precision floating point
+ 
+ 
+
+ FLOAT64
+ &#160;
+ Register
+ IEEE 754 double precision floating point
+ 
+ 
+
+ ENUMERATED
+ Ordered set of values
+ Register
+ Custom extensions allowed
+ 
+ 
+
+ CODED ENUM
+ Ordered set of values
+ Register
+ Custom extensions not allowed
+ 
+ 
+
+ OCTET STRING
+ &#160;
+ Text
+ Max length defined where used
+ 
+ 
+
+ VISIBLE STRING
+ &#160;
+ Text
+ Max length defined where used
+ 
+ 
+
+ UNICODE STRING
+ &#160;
+ Text
+ Max length defined where used
+
+
+========================================
+TOPIC: 61850_datareport_advanced_tab.htm
+========================================
+IEC 61850 Data Report - Advanced tab
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IEC 61850 Data Report - Advanced Tab
+ 
+The Data Report advanced properties are found in the Advanced tab of the Data Report properties dialog. The majority of the properties are directly related to the operation of the Data Report and should only be changed if you fully understand their use and the consequences of changing them. The default values will be adequate for most applications. Show picture
+ 
+
+ 
+ 
+ 
+ 
+Report properties
+Buffer time (BufTm)
+Send buffer time to the device - Tick to enable writing the buffer time parameter to the physical device.
+Buffer time (ms) - Specifies the time interval for the buffering of changes at the physical device level, for inclusion into a single report. See the document IEC61850-7-2 for more information.
+DataSet (DatSet)
+
+Send dataset configuration to the device - Tick to enable writing the dataset parameter to the device. It must be enable if using a dynamic dataset.
+
+Original - Tick to select the datasets associated with the Report Control Block at the physical device level.
+
+Dynamic - Tick to select the dataset groups linked to a dynamic dataset.
+
+General Interrogation (GI)
+
+Send GI after enable report - Tick to enable sending a GI after the enable report command.
+Integrity period (IntgPd)
+Send integrity period to device - Tick to enable writing the integrity period to the physical device.
+Integrity period - An interval at which a report will be sent independent of the trigger conditions. Used to maintain a keep-alive with PcVue even if no data is to be reported (the trigger conditions are not met). If set to 0 then it is disabled.
+Optional fields (OptFlds) - The default settings should not be changed unless advised to do so by the technical support team. Changing them can affect the identification of data and may lead to incorrect variable updates if the configuration of the physical device does not match that of PcVue (including referenced SCL files not matching physical device configuration).
+Send optional fields to device - Tick to enable writing the optional fields to the device.
+Optional fields
+sequence-number - If ticked, the property SqNum is included in the report.
+report-timestamp - Not used.
+reason-for inclusion - If ticked, the property ReasonCode is included in the report.
+data-set-name - If ticked, the property Data-set-name is included in the report.
+data-reference - If ticked, the property DatSet is included in the report.
+conf-revision - If ticked, the property ConfRev is included in the report
+Report identifier (RptID)
+Send report identifier to the device - Tick to enable writing the buffer time parameters to the physical device. The attribute RptID is the client-specified report identifier of the report that has caused the generation of the report.
+Reserve URCB (Resv)
+Use the reservation function - If enabled, PcVue takes an exclusive access to the Report Control Block. This property only applies to un-buffered RCB. For buffered RCB, reservation is used if the device supports it.
+Trigger options (TrgOps) - The conditions under which the report is sent to PcVue. The default setting will be adequate for most applications.
+Send trigger options to the device - Tick to enable writing the trigger options parameters to the physical device.
+Trigger options
+data-change - Generate a report when a data value changes.
+quality-change - Generate a report when a data quality changes.
+data-update - Generate a report on a data update (timestamp change).
+integrity-period - Generate the report periodically using the Integrity period.
+general-interrogation - Generate the report whenever PcVue sends a GI (General Interrogation) request. Used by PcVue when starting the network or device to get the initial value of all variables.
+ 
+Miscellaneous
+Reconnection polling period - The client response when a URCB/BRCB is already reserved. Default 5 sec. Upon connection, the URCB initialization phase includes an attempt to write the RptEna attribute to False and then to True. If the URCB is already reserved, the attempt fails, and the Client tries to set the RptEna attribute to False on a timer, by default every 5 seconds (configurable).
+Upon the first error during this phase, variables are set invalid (NSCOM) immediately.
+General interrogation polling period - The period at which the general interrogation request is made. Default 0 sec (no GI except for initialization).
+
+
+========================================
+TOPIC: 61850_datareport_device_config.htm
+========================================
+Adding a Data Report to an IEC 61850 device
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Adding a Data Report to an IEC 61850 Device
+ 
+A data report provides access to all data objects and attributes of the linked dataset. It is the most efficient method to access data as data changes are sent automatically by the device each time the specified trigger conditions are met. No polling by PcVue is required.
+ 
+To add a data report:
+ 
+ 
+From the Application Explorer select an IEC 61850 network and device.
+ 
+Select the Add a data report task. The Data Report configuration dialog opens. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+Accept the default Name or enter one of your own choice. The Name is the identity of the data report within PcVue.
+ 
+Enter an optional Description (optional).
+ 
+Select the Reporting type as buffered or unbuffered. For an explanation of the difference, see the topic About Data Sets, Data Groups and Data Reports.
+ 
+Select the Original report name. This is the name of the Report Control Block as exposed by the physical device. Depending on the device configuration, PcVue obtains a list of the available data reports by browsing the connected physical device or by listing report control blocks defined in the SCL file associated to the device. See below for more information on how to configure the Original report name in redundant data acquisition architectures.
+ 
+Tick Activate at start-up if the data group is to start automatically at start-up.
+ 
+Click OK to confirm the settings and close the dialog or Apply to leave the dialog open.
+ 
+ 
+
+ 
+Buffered reporting with a dynamic dataset requires the dataset to be configured for persistency at the physical device level.
+ 
+ 
+
+ 
+A newly created report group associated to a dynamic dataset is displayed with a warning icon until the dataset configuration is updated down to the physical device.
+ 
+ 
+Upon device communication start-up, the DatSet field of impacted data-report groups is forced to �� (blank string). If the writing request succeeds, the associated dataset is deleted and recreated to accommodate any potential modification.
+ 
+When deleting a data report associated to a dynamic dataset, PcVue sends a request to the physical device in order to de-reference the dataset by setting the value to �� (blank string).
+ 
+The Advanced tab
+ 
+See the topic IEC 61850 Data Report - Advanced tab. Note that the properties in the advanced tab are important as they determine how the Report Control Block is handled.
+ 
+Configuration for data acquisition redundancy
+ 
+As specified by the IEC 61850 standard, handling reporting requires exclusive access to a Report Control Block. If 2 clients access the same RCB, correct reporting cannot be guaranteed and data may be lost.
+ 
+To cope with this constraint, when 2 or more redundant stations are in charge of data acquisition for a given Data Report, one need to define one RCB (original report name) per redundant data acquisition server. In practice, you have to define one redundant RCB per station in the association producing the IEC 61850 network:
+ 
+ 
+Set the property Original report name to (Network-dependent configuration) on the Data report item.
+ 
+Select the data report in the data report list (top panel of the Application Explorer), go to the behavior panel (bottom panel) and click the Add button.
+ 
+Select the first data acquisition in the Server station list, and select the Original report name this station will be in charge of.
+ 
+Repeat steps 2 and 3 for each data acquisition server in the list, each time selecting another report name.
+ 
+ 
+
+ 
+We recommend avoiding non-persistent datasets in a redundant context because they would be deleted and recreated with each disconnection or station switch. Persistent datasets or redundant reports, however, maintain existing redundancy behavior.
+ 
+ 
+Data acquisition redundancy for reporting requires each IEC 61850 device to expose as many Report Control Block as there are redundant data acquisition servers in the association producing the network.
+ 
+Refer to the device manufacturer documentation for more information about support and configuration of report control blocks, support for multiple client connections and report control block reservation.
+ 
+
+ 
+It is strongly recommended that such 'redundant' report control blocks be attached to the same dataset, which PcVue is able to enforce if the data report is configured to send the dataset configuration at start-up (see IEC 61850 Data Report - Advanced tab).
+
+
+========================================
+TOPIC: 61850_datasets.htm
+========================================
+Data Sets, Data Reports, Data Groups and Setting groups
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Data Sets, Data Reports, Data Groups and Setting groups
+ 
+&#160;PcVue can collect data from an IEC 61850 device by three mechanisms.
+ 
+ 
+Using a Data Set. A Data Set is created as part of the physical device configuration (using the IED configuration tool) and is normally a group of data objects. You can configure PcVue so that it polls a Data Set at regular intervals. A single poll will return all attributes of the Data Set making it a very efficient mechanism. PcVue supports static and dynamic datasets.
+ 
+Using a Data Report. A Data Report or Report Control Block is created as part of the physical device configuration (using the IED configuration tool) and is a set of conditions applied to data belonging to a Data Set. When the conditions are met, the data is sent as an unsolicited report to PcVue. There are two forms of Data Report.
+Buffered. If PcVue is unavailable, Buffered Data Reports are stored locally in the device and then sent once PcVue becomes available.
+Un-buffered. Un-buffered reports are not stored locally in the device if PcVue is unavailable and any data sent will be lost.
+ 
+Using a Data Group. A Data Group is configured in PcVue and defines only a poll rate. The IEC 61850 objects and attributes, mapped to variables allocated to the group, are polled at that rate. As each attribute is polled individually this is a very inefficient method and should only be used if the data cannot be obtained by one of the other mechanisms.
+ 
+Using a Setting group. A Setting group is configured in PcVue and defines only a poll rate. The IEC 61850 attributes of a Setting Group Control Block can then be mapped to variables allocated to the group, and polled at that rate. It allows monitoring and controlling settings groups activation.
+
+
+========================================
+TOPIC: 61850_device_advanced.htm
+========================================
+IEC 61850 device - Advanced properties
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IEC 61850 Physical Device - Advanced Properties
+ 
+The Physical Device advanced properties are found in the Advanced tab of the Physical Device properties dialog. The majority of the properties are directly related to the configuration of the Physical Device and should only be changed if you fully understand their use and the consequences of changing them. The default settings will be adequate for most applications. Show picture
+
+ 
+ 
+Connection type - Connection type. Either Short, Full, Fastbyte or None.
+ 
+Authentication
+Enabled - Enable or disable the use of ACSE authentication.
+Mechanism - The name of the mechanism for ACSE authentication.
+Password - The password to be used for ACSE authentication.
+ 
+Remote configuration � The TCP remote port and MMS parameters that should be used to connect to the physical device. See the manufacturer�s documentation if specific values are to be used.
+ 
+Local configuration - The set of MMS parameters that should be used to connect to the physical device. See the manufacturer�s documentation if specific values are to be used.
+ 
+Watchdog options - See below.
+ 
+Miscellaneous
+Timeout (ms) - Request timeout. Default 3 sec.
+Reconnection period (ms) - Wait time before attempting to reconnect after a connection failure. Default 5 sec.
+ 
+Monitoring
+Double point - Customize the way PcVue interprets the double point data type.
+ 
+File transfer - See the File Transfer topic.
+ 
+Interoperability issues
+Discovery services
+Override global default value - Override the default setting for discovery services as set in the IEC 61850 settings.
+ 
+ 
+Watchdog options
+ 
+IEC 61850 communication can be entirely event driven. That is PcVue does not poll a device, it just waits for the device to send it any changes. This is the most efficient way of communicating. However if communication to the device fails PcVue may be unaware. 
+
+ 
+To overcome this problem a watchdog is polled periodically. If the device responds then it is considered healthy. If the device does not respond then it is considered to be failed. The Polling Period should be set a value applicable to the local conditions. The default is 10 min.
+
+
+========================================
+TOPIC: 61850_device_catalog.htm
+========================================
+IEC 61850 device profile catalog
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IEC 61850 Device Profile Catalog
+ 
+The Device Profile catalog contains the list of Common Data Classes that are recognized by PcVue, organized as one or more profiles. For example IEC 61850 (Substation) and IEC 61400-25 (Wind Power Plants). The data in the catalog is used to make the link between the value, quality and timestamp attributes of IEC 61850 data objects and the corresponding properties of variables.
+ 
+The catalog is defined by an XML file named 61850Catalog.Xml. The file can be located in the Bin folder and/or the project's C folder. Device Profiles from both files will appear in the Device Configuration dialog. Show picture
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+The following CDC's were defined in the catalog, and are therefore recognized by PcVue, at the time of writing this help.
+ 
+ 
+ 
+ 
+ 
+
+ Profile 61850
+ Profile 61400-25
+ 
+ 
+
+ SPS
+ SPS
+ 
+ 
+
+ DPS
+ DPS
+ 
+ 
+
+ INS
+ INS
+ 
+ 
+
+ ACD
+ BCR
+ 
+ 
+
+ SEC
+ MV
+ 
+ 
+
+ BCR
+ CMV
+ 
+ 
+
+ MV
+ SPC
+ 
+ 
+
+ CMV
+ DPC
+ 
+ 
+
+ SAV
+ INC
+ 
+ 
+
+ DPC
+ APC
+ 
+ 
+
+ INC
+ SPV
+ 
+ 
+
+ BSC
+ STV
+ 
+ 
+
+ ISC
+ ALM
+ 
+ 
+
+ APC
+ CTE
+ 
+ 
+
+ LPL
+ TMS
+ 
+ 
+ 
+ 
+Editing the Device Profile Catalog
+ 
+
+ 
+Do NOT attempt to edit this file unless you are familiar with XML, data structures of IEC 61850 and PcVue variable properties.
+ 
+ 
+The Device Profile Catalog can be edited to add new Common Data Classes or to add custom profiles. The file can be edited with any suitable XML editor.
+
+
+========================================
+TOPIC: 61850_functional_constraints.htm
+========================================
+IEC 61850 functional constraints
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IEC 61850 Functional Constraints
+ 
+The IEC 61850 Functional Constraints appear as a node in PcVue's IEC 61850 mapping dialog and so it is useful to understand their meaning. Those most likely to be relevant have been highlighted. A full explanation can be found in the document IEC 61850 part 7-2.
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+
+ ID
+ Semantic
+ Description
+ 
+ 
+
+ ST
+ Status information
+ Binary information whose value can be read, substituted, reported, and logged but not written.
+ 
+ 
+
+ MX
+ Measureand 
+ Analog information whose value can be read, substituted, reported, and logged but not written.
+ 
+ 
+
+ CO
+ Control
+ Binary information whose value can be operated (set) and read.
+ 
+ 
+
+ SP
+ Setpoint
+ Analog information whose value can be controlled (set) and read.
+ 
+ 
+
+ SV
+ Substitution
+ Substitution information whose value can be written to substitute the value attribute and read.
+ 
+ 
+
+ CF
+ Configuration
+ Configuration information whose value can be written and read.
+ 
+ 
+
+ DC
+ Description
+ Description information whose value can be written and read.
+ 
+ 
+
+ SG
+ Setting group
+ Logical devices that implement the SGCB class maintain multiple grouped values of all instances of Data Attributes with functional constraint SG. Each group contains one value for each Data Attribute with functional constraint SG that shall be the current active value.
+ 
+ 
+
+ SE
+ Setting group editable
+ Data Attribute which can be edited by SGCB services.
+ 
+ 
+
+ EX
+ Extended definition
+ Extension information providing a reference to a name space.
+ 
+ 
+
+ BR
+ Buffered report
+ Report control information of a BRCB whose value can be written and read.
+ 
+ 
+
+ RP
+ Unbuffered report
+ Report control information of a URCB whose value can be written and read.
+ 
+ 
+
+ LG
+ Logging
+ Log control information of a LCB whose value can be written and read.
+ 
+ 
+
+ GO
+ GOOSE control
+ Goose control information of a GoCB whose value can be written and read.
+ 
+ 
+
+ GS
+ GSSE control
+ Goose control information of a GsCB whose value can be written and read.
+ 
+ 
+
+ MS
+ Multicast sampled value control
+ Sampled value control information of a MSVCB whose value can be written and read.
+ 
+ 
+
+ US
+ Unicast sampled value control
+ Sampled value control information of an instance of a UNICAST-SVC whose value can be written and read.
+
+
+========================================
+TOPIC: 61850_in_the_ae.htm
+========================================
+Managing IEC 61850 in the Application Explorer
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Managing IEC 61850 in the Application Explorer
+ 
+
+ 
+ 
+ 
+Tasks applicable to IEC 61850
+ 
+When the IEC 61850 folder is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Settings
+ Display the general IEC 61850 settings dialog.
+ 
+ 
+
+ 
+ 
+ 
+ Add a network
+ Configure a connection to an IEC 61850 network.
+ 
+ 
+ 
+ 
+When an IEC 61850 network is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add an IEC 61850 device
+ Add a device to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Start network
+ Start the connection to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Stop network
+ Stop the connection to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the connection to the network.
+ 
+ 
+
+ 
+ 
+ 
+ Mapping
+ Open the mapping dialog used to link variables to IEC 61850 objects.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the network connection.
+ 
+ 
+ 
+ 
+When an IEC 61850 device is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Add a dataset
+ Add a dataset to PcVue configuration.
+ 
+ 
+
+ 
+ 
+ 
+ Add a data report
+ Add an un-buffered or buffered report to PcVue configuration.
+ 
+ 
+
+ 
+ 
+ 
+ Add a data group
+ Create a new data group to PcVue configuration.
+ 
+ 
+
+ 
+ 
+ 
+ Add a setting group
+ Create a new setting group to PcVue configuration.
+ 
+ 
+
+ 
+ 
+ 
+ Start physical device
+ Start the connection to the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Stop physical device
+ Stop the connection to the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Ping
+ Send a Ping to the device to check its status. A command dialog opens during the Ping process displaying the results.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the configuration of the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the selected device.
+ 
+ 
+
+ 
+ 
+ 
+ File transfer Helper...
+ Open the dialog to handle ad-hoc file transfer.
+ 
+ 
+ 
+ 
+When a data set, data report, data group or setting group is selected.
+ 
+ 
+ 
+ 
+ 
+ 
+
+ Icon
+ Task
+ Description
+ 
+ 
+
+ 
+ 
+ 
+ Start
+ Start communication with the data set, data report, data group or setting group.
+ 
+ 
+
+ 
+ 
+ 
+ Stop
+ Stop communication with the data set, data report, data group or setting group.
+ 
+ 
+
+ 
+ 
+ 
+ Remove
+ Permanently remove the selected data set, data report, data group or setting group.
+ 
+ 
+
+ 
+ 
+ 
+ Properties
+ Open the properties dialog for the data set, data report, data group or setting group.
+ 
+ 
+
+ 
+ 
+ 
+ Send GI
+ Send a global interrogation command to the selected report group. Refreshes all variables associated with the group.
+ 
+ 
+ 
+ 
+Rules and behavior of cut, copy and paste
+ 
+The following table describes the rules and behavior, and in particular any restrictions, when using cut or copy and paste on configuration objects in the 61850 folder.
+ 
+ 
+ 
+ 
+ 
+
+ 61850 object
+ Behavior
+ 
+ 
+
+ Network
+ The pasted Network is given a unique name.
+Any subordinate Devices, Data sets, Data Reports and Data Groups are duplicated using the original name.
+The mapping of any variables is not duplicated.
+ 
+ 
+
+ Device
+ 
+ 
+The pasted Device is given a unique name.
+ 
+Any subordinate Data sets, Data Reports and Data Groups are duplicated using the original name.
+ 
+ 
+ 
+
+ Data set
+ The pasted Data set is given a unique name within the context of the Device.
+ 
+ 
+
+ Data Report
+ The pasted Data Report is given a unique name within the context of the Device.
+ 
+ 
+
+ Data Group
+ The pasted Data Group is given a unique name within the context of the Device.
+ 
+ 
+
+ Setting Group
+ The pasted Setting Group is given a unique name within the context of the Device.
+
+
+========================================
+TOPIC: 61850_mapping.htm
+========================================
+Mapping IEC 61850 data objects and data attributes
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Mapping IEC 61850 Data Objects and Data Attributes
+ 
+The procedures required to map data objects or data attributes are very similar. Any differences are noted in the text.
+ 
+The Mapping dialog can be used online and offline:
+ 
+ 
+To use it online, PcVue must be connected to the actual network, physical devices must be operational, and the discovery services must be enabled.
+ 
+To use it offline, SCL files must have been associated to the network and used as part of the PcVue configuration.
+ 
+ 
+You switch from one mode to the other by clicking the Online/Offline button available in the status bar.
+ 
+Behavior and requirements when mapping data objects and data attributes
+ 
+When mapping a variable to a data object, the value, timestamp and quality are all supplied by the object. Therefore, the data object must support these attributes. PcVue uses the object's Common Data Class (CDC) to identify which of its attributes to use. The supported CDC's are defined in the profile that was selected when the Physical Device was configured. See the topics Adding a Physical Device to an IEC 61850 network and IEC 61850 device profile catalog for further information. You can only map data objects that match a CDC PcVue supports.
+ 
+When mapping a variable to a data attribute, only the value is supplied by the attribute. The timestamp and quality are provided by PcVue. All data attributes can be mapped.
+ 
+How to map IEC 61850 data to a variable
+ 
+This paragraph explains the basic mapping procedure. Some details may vary depending on if mapping an attribute or an object and if you map from the node Data, Datasets or Reports.
+ 
+ 
+Open the Application Explorer and expand the configuration tree to select an IEC 61850 network node.
+ 
+Select the Mapping task. The IEC 61850 Mapping dialog opens. For help on how IEC 61850 objects are represented in the mapping dialog see the topic How IEC 61850 objects are represented in the mapping dialog.
+ 
+Expand the configuration tree in the left pane until the object or attribute to be mapped appears in the upper or lower right pane. Where it appears will depend on the level of nesting used in the device.
+ 
+Right click on the line containing the object or attribute and, from the context menu, select either Map new variable or Map existing variable. Show picture
+
+ If you choose Map existing variable, the Variable Selector dialog opens from where a variable can be selected. 
+If you choose map new variable the Create IEC 61850 Variable dialog opens. The name is automatically generated using the name of the IEC 61850 object or attribute. You can either accept this name or enter one of your own.Show picture
+
+ 
+The mapping properties are automatically filled-in.
+ If creating a new variable you must select the variable type.
+If mapping objects or attributes from the Data category, you must select the Data group.
+ 
+
+ 
+The �Control block� mapping type is exclusive to setting groups. With this mapping, a variable can reflect specific attributes:
+ 
+ 
+ActSG - Updates the variable with the active setting group value.
+ 
+LActTm - Sets the timestamp to the last activation time.
+ 
+ 
+Changing the mapped variable�s value directly impacts the active setting group preset in the device.
+ 
+ 
+Click OK to confirm the configuration and close the dialog.
+ 
+ 
+
+ 
+Newly added variables to a dynamic dataset may display a warning icon, indicating that they require a device restart to apply changes.
+ 
+ 
+If the data you have mapped is controllable, you may want to open the variable's properties dialog and confirm the Control model. By default, Automatic detection is selected. See the topic Linking a variable to an IEC 61850 data object or data attribute for further information.
+ 
+How the default variable name is generated
+ 
+The default name that is generated depends on the location of the data object or attribute.
+ 
+ 
+
+ 
+From the Data node- Network name + Device name + MMS variable name
+ 
+ 
+
+ 
+From the DataSet node- Network name + Device name + Dataset Name +MMS variable name
+ 
+ 
+
+ 
+From the Report node - Network name + Device name + DataReport Name + MMS variable name
+ 
+ 
+ 
+Additional features of the Mapping dialog when used in Online mode
+ 
+When in online mode, the context menu, displayed when right clicking on a dataset or dataset member node, has an additional command Read, which allows you to force a read of the data objects.
+
+
+========================================
+TOPIC: 61850_network_advanced.htm
+========================================
+IEC 61850 network - Advanced properties
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IEC 61850 Network - Advanced Properties
+ 
+IEC 61850 network advanced properties are found in the Advanced tab of the Network properties dialog. Show picture
+ 
+
+ 
+ 
+
+ 
+ 
+Command parameters
+Max parallel requests - The maximum number of requests (all requests sent to the device - read, write etc�) that can be processed at the same time. Default 50.
+ 
+Networking
+Servers - For a multi-station application the list of stations that are to behave as producers. If the application is run on any station not in the list, the IEC 61850 network will not be started.
+ 
+Redundancy mode
+
+Cold mode � If selected, the network is stopped on data acquisition servers in passive state.
+
+Warm mode � If selected, the network is not stopped on passive servers.
+
+
+========================================
+TOPIC: 61850_network_config.htm
+========================================
+Configuring an IEC 61850 network
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Configuring an IEC 61850 Network
+ 
+An IEC 61850 Network object in PcVue configuration represents and provides access to the physical connection to an IEC 61850 network. The configuration is accessed from the Application Explorer - <Project>.Communication.Data acquisition.IEC 61850.
+ 
+Adding a network
+ 
+ 
+Select the IEC 61850 folder in the Application Explorer and, from the task list, select New network. The IEC 61850 Network dialog opens. Show picture
+
+ 
+In the Name text box, enter the name of the network. This is the name by which the network will be known in PcVue. You can accept the suggested default or enter one of your own.
+ 
+
+ 
+Select Activate at start-up if the network is to automatically start.
+ 
+ 
+ 
+The SCL Files tab
+ 
+See the topic IEC 61850 Network - SCL Files.
+ 
+The Advanced tab
+ 
+See the topic IEC 61850 Network - Advanced Properties.
+ 
+The Traces tab
+ 
+The Traces tab is used to enable debugging traces in the event of any problems with the network. Only use this if advised to do so by your support agency.
+
+
+========================================
+TOPIC: 61850_network_scl.htm
+========================================
+IEC 61850 network - SCL files
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IEC 61850 Network - SCL Files
+ 
+An SCL file is an Xml file whose content is based on the Substation Configuration Language format as defined in the IEC 61850-6 standard.
+ 
+SCL files are a basic brick of IEC 61850 system engineering and come in a variety of forms: Scd, Cid, Ssd, Sed, Iid etc.
+Although all may contain information about IED's that PcVue is able to extract, each file type has a particular purpose and the use of Scd files is recommended.
+ 
+In PcVue, you can use SCL files to define a variety of configuration elements:
+ 
+ 
+
+ Data acquisition: Devices, dataset groups, data report groups and data groups, 
+ 
+
+ Variable mapping: On Data Objects and Data Attributes. 
+ 
+ 
+SCL files can be added to an IEC 61850 network configuration in PcVue using the SCL Files tab of the IEC 61850 Network Properties dialog. 
+ Show picture
+
+ 
+How to add an SCL file
+ 
+ 
+Open the IEC 61850 Network properties dialog and select the SCL Files tab.
+ 
+ Click the Add tool. A file browser dialog opens. By default, the contents of the project TP folder is displayed but you can navigate anywhere visible to the host PC. 
+ 
+Select the SCL file to be added and click Open. The IEC 61850 SCL file creation dialog opens. 
+ Show picture
+
+ 
+The reference Name under which the file will be added to the network configuration defaults to that of the SCL file but you can edit it to choose one of your own. 
+ 
+Click Apply to read the SCL file and extract the information pertinent to PcVue. This can take a few seconds if the file is large. The information that is extracted is displayed in the Content tab. Show picture
+
+ 
+Click OK to complete the process of adding the SCL file to the network.
+ 
+Repeat steps 2 to 6 to reference additional SCL files (if using Cid files for example).
+ 
+ 
+
+ 
+ When associating SCL files with the IEC 61850 network for offline configuration, it is strongly recommended to store the SCL files in the TP folder of the project and to add them to the list of files managed as part of Central Project Management (if in use).
+ 
+In particular, when the setting Enable discovery services is disabled, PcVue requires the access to the SCL files at runtime to check the configuration consistency (Report Control Block configuration, Dataset members, variable mapping etc.). If in such circumstances, SCL files are not accessible, then the communication with the IEC 61850 devices will be aborted to avoid updating variables without being sure of the configuration consistency.
+
+
+========================================
+TOPIC: 61850_objects_in_the_mapping.htm
+========================================
+How IEC 61850 data are represented in the mapping dialog
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+How IEC 61850 Data are Represented in the Mapping Dialog
+ 
+The Mapping dialog is open by clicking the Mapping task when an IEC 61850 network is selected.
+ 
+IEC 61850 data are displayed in hierarchical trees in the mapping dialog. Under the nodes that represent each physical device, you will find three folders:
+ 
+ 
+Data - All objects.
+ 
+Datasets - Any configured datasets and their associated data known as dataset members.
+ 
+Report - Any configured buffered or un-buffered Report Control Blocks and dataset members of the associated dataset.
+ 
+ 
+The Mapping dialog can be used online and offline:
+ 
+ 
+To use it online, PcVue must be connected to the actual network, physical devices must be operational, and the discovery services must be enabled.
+ 
+To use it offline, SCL files must have been associated to the network and used as part of the PcVue configuration.
+ 
+ 
+You switch from one mode to the other by clicking the Online/Offline button available in the status bar.
+ 
+The Data node
+ 
+Under the Data node, you will find all IEC 61850 data found on the network and known to PcVue. Show picture
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+The hierarchy of the Full item ID is as follows:
+ 
+ 
+
+ 
+Logical device (LD)
+ 
+ 
+
+ 
+Logical node (LN)
+ 
+ 
+
+ 
+Data object (DO)
+ 
+ 
+
+ 
+Data attribute (DA)
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+For example, A1_MEASMeasurements/dmdmmxu1.A.phsA.cVal.mag.f
+ 
+ 
+The lowest level of the hierarchy (the leaf) is known as a data attribute and represents a single item of data. For example, real-time value or quality.
+ 
+A data object can contain both data attributes and sub data objects.
+ 
+ 
+The Dataset node
+ 
+Under the Datasets node, you will find all configured datasets by their name in the physical device (or SCL file), both static datasets (under the node 'Original'), and dynamic datasets. The name by which it is known in PcVue is in square brackets. Datasets are greyed if not mapped. The display of objects under the dataset is shows only the members (top-level objects) and their attributes. Show picture
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+The hierarchy of the Name is as follows:
+ 
+ 
+
+ 
+Logical device (LD)
+ 
+ 
+
+ 
+Logical node (LN)
+ 
+ 
+
+ 
+Functional constraint (FC)
+ 
+ 
+
+ 
+Data object (DO)
+ 
+ 
+
+ 
+Data attribute (DA)
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Objects are identified by a structured name using the following syntax: LD/LN$FC$DO$DA
+ 
+
+ 
+A variable newly mapped on a dynamic dataset is displayed with a warning icon until the dataset configuration is updated down to the physical device.
+ 
+ 
+The Reports node
+ 
+Under the Reports node, you will find all configured report control block by their name in the physical device (or SCL file), both static (under the node 'Original'), and dynamic report groups. The name by which it is known in PcVue is in square brackets. Reports are greyed if not mapped.
+ 
+
+ 
+For more information on the operation of the Variable Selector, see the book The Variable Selector.
+
+
+========================================
+TOPIC: 61850_overview.htm
+========================================
+Overview of IEC 61850
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Overview of IEC 61850
+ 
+IEC 61850 is a communication standard developed for the power substation market. A derivative of it is used in wind farm generation where it is known by the standard IEC 61400-25. The full IEC 61850 standard, comprising of some 20 documents, is available from the IEC website (chargeable).
+ 
+IEC 61850 defines a standardized method for describing power system devices that enables all IED's (Intelligent Electronic Devices - the microprocessor-based controllers of power system
+equipment) to present data using identical structures directly related to their function. The abstract data model defined in IEC 61850 can be mapped to a number of protocols. Current mappings in the standard include MMS (Manufacturing Message Specification), GOOSE and SMV. For Supervisory purpose, MMS over TCP/IP is used and it is PcVue's interface to this that is described in this help book.
+ 
+IEC 61850 modeling
+ 
+The IEC 61850 data model begins with a physical device that connects to the network. The physical device is defined by its network address. Within each physical device may be one or more logical devices. The IEC 61850 logical device model allows a single physical device to behave as a proxy or gateway for multiple devices thereby behaving as a data concentrator.
+ 
+Each logical device contains one or more logical nodes. A logical node is a named grouping of data and services that is logically related to some power system function. The following table represents the XCBR class.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ XCBR Class Logical Node
+ 
+ 
+
+ Data name
+ Common data class
+ Description
+ Mandatory Optional
+ 
+ 
+
+ LNName
+ Secure
+ Inherited from Logical-Node class
+ &#160;
+ 
+ 
+
+ DATA
+ 
+ 
+
+ Common logical node data
+ 
+ 
+
+ &#160;
+ &#160;
+ LN inherits all Mandatory Data from Common Logical Node class
+ Mandatory
+ 
+ 
+
+ Loc
+ SPS
+ Local operation
+ Mandatory
+ 
+ 
+
+ EEHealth
+ INS
+ External equipment health
+ Optional
+ 
+ 
+
+ EEName
+ DPL
+ External equipment name plate
+ Optional
+ 
+ 
+
+ OpCtl
+ INS
+ Operation counter
+ Mandatory
+ 
+ 
+
+ Controls
+ 
+ 
+
+ Pos
+ DPC
+ Switch position
+ Mandatory
+ 
+ 
+
+ BlkOpn
+ SPC
+ Block opening
+ Mandatory
+ 
+ 
+
+ BlkCl
+ SPC
+ Block closing
+ Mandatory
+ 
+ 
+
+ ChaMotEna
+ SPC
+ Charger motor enabled
+ Optional
+ 
+ 
+
+ Metered values
+ 
+ 
+
+ SumSwaRs
+ BCR
+ Sum of switched Amperes, resetable
+ Optional
+ 
+ 
+
+ Status information
+ 
+ 
+
+ CBOpCap
+ INS
+ Circuit breaker operating capability
+ Mandatory
+ 
+ 
+
+ POWCap
+ INS
+ Point On Wave switching capability
+ Optional
+ 
+ 
+
+ MaxOpCap
+ INS
+ Circuit breaker operational capability when fully charged
+ Optional
+ 
+ 
+ 
+ 
+Each logical node has an instance Id as a suffix to the logical node name. For example, a device has two measurement inputs to measure two 3-phase feeders. The standard name of a logical node for measurements in 3-phase is MMXU and so the two logical nodes would be MMXU1 and MMXU2. Each logical node may also have an optional application specific prefix to provide further identification of its purpose. A list of compatible logical nodes can be found in the document IEC61850 part 7-4.
+ 
+Each logical node contains one or more data elements. Each data element has a unique name determined by the standard and related to its purpose. For example, a circuit breaker is modeled as an XCBR node. It contains a variety of data including Loc (local or remote mode), OpCnt (operations count), Pos (position), BlkOpn (block breaker open command), BlkCls (block breaker close command) and CBOpCap (operating capability).
+ 
+Each data element conforms to the specification of a Common Data Class (CDC). The CDC determines the type and structure of the data. For example, there are CDCs for status information, measured information, controllable status information etc. Each CDC has a defined name and set of attributes, also each with a defined name, type and purpose. Each attribute also belongs to a set of functional constraints (FC) that groups the attributes into categories. For example, ST for status attributes. In the following table, representing the SPS class, the status attributes consist of a status value (stVal), a quality flag (q) and a timestamp (t). The list of function restraints can be found in the document IEC 61850-7-2. The list of compatible substation logical nodes can be found in the document IEC 61850-7-3.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ SPS Class
+ 
+ 
+
+ Attribute name
+ Attribute type
+ Functional constraint
+ Value or range
+ Mandatory
+ 
+ 
+
+ DataName
+ Inherited from Data Class
+ &#160;
+ 
+ 
+
+ DATA ATTRIBUTE
+ 
+ 
+
+ Status
+ 
+ 
+
+ stVal
+ Boolean
+ ST
+ True/False
+ Mandatory
+ 
+ 
+
+ q
+ Quality
+ ST
+ &#160;
+ Mandatory
+ 
+ 
+
+ t
+ Timestamp
+ ST
+ &#160;
+ Mandatory
+ 
+ 
+
+ Substitution
+ 
+ 
+
+ subEna
+ Boolean
+ SV
+ True/False
+ PICS_SUBST
+ 
+ 
+
+ subVal
+ Boolean
+ SV
+ True/False
+ PICS_SUBST
+ 
+ 
+
+ subQ
+ Quality
+ SV
+ &#160;
+ PICS_SUBST
+ 
+ 
+
+ subID
+ VisibleString64
+ SV
+ &#160;
+ PICS_SUBST
+ 
+ 
+
+ Configuration, description and extension
+ 
+ 
+
+ d
+ VisibleString255
+ DC
+ Text
+ Optional
+ 
+ 
+
+ dU
+ UnicodeString255
+ DC
+ Unicode text
+ Optional
+ 
+ 
+
+ cdcNs
+ VisibleString255
+ EX
+ Text
+ AC_SLNDA_M
+ 
+ 
+
+ cdcName
+ VisibleString255
+ EX
+ Text
+ AC_SLNDA_M
+ 
+ 
+
+ dataNs
+ VisibleString255
+ EX
+ Text
+ AC_SLNDA_M
+ 
+ 
+ 
+ 
+The IEC 61850 model of a device is a virtualized model that begins with an abstract view of the device and its objects. This abstract model is mapped to a specific protocol stack based on MMS, TCP/IP and Ethernet. The method of transforming the model into an MMS data in a unique and unambiguous reference for each element of data in the model. For example a logical device named "Relay1" consisting of a single circuit breaker logical node XCBR1 for which you want to read the mode of operation (Loc). The object name will be Relay1/XCBR1$ST$Loc$stVal
+
+
