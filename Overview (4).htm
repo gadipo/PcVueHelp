@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Geographical data" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Geographical data overview</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor110"></a>Geographical data Overview</h1>
+        <p class="SVnormal">The Geographical data node includes the configuration elements necessary to configure the behavior of a geolocation client apps such as SnapVue.<br />It supports geolocation, micro-geolocation and tracking features of <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <p class="SVnormal">Geographical data includes:</p>
+        <ul style="list-style-type: disc;">
+            <li>Zones - A zone usually represents a real world location such as a room in a building or the area where a specific piece of equipment is installed. Zones can be organized in a hierarchy with parent and child zones. For example Building1.Floor1.Room1.Chiller1. Zones can also be configured to represent the functional breakdown of a large piece of equipment.</li>
+            <li>Geo-tags - A geo-tag is a beacon, the detection of which determines a corresponding geographical zone. The main property of a geo-tag is its unique ID. By associating a geo-tag with a zone, the <span class="mc-variable OEM.ProductName variable">PcVue</span> server can determine the location of the  connected user. The following geo-tag types are supported.<ul style="list-style-type: disc;"><li>NFC tags (Near Field Communication),</li><li>QR codes,</li><li>Bluetooth Low Energy beacons (BLE),</li><li>Wi-Fi access points,</li><li>GPS location. Not strictly speaking a geo-tag but may be used if geo-tags are found.</li></ul></li>
+            <li>Actions - An action, for example display a Mimic, that the user of a SnapVue client can execute. Actions are added to zones thereby determining what a user can visualize and execute when they have been determined to be in a particular zone. Actions can be cascaded from the parent zone by all child zones.</li>
+        </ul>
+        <h2 class="SVheading2">Using zones to represent the real world</h2>
+        <p class="SVnormal">A zone and the hierarchy of zones can be used in a variety of ways to support operational needs in different types of systems. The table below describes the 3 main drivers for designing the hierarchy of zones.</p>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col style="width: 30%;" />
+            <col style="width: 50%;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Type of system</td>
+                    <td class="SVtableHeading">Operational need</td>
+                    <td class="SVtableHeading">What a zone represents</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Infrastructure monitoring and other geographically distributed systems</td>
+                    <td class="SVtable">Outdoor locations to identify remote sites.<br />Lone workers tracking.<br />Locate users while on site.</td>
+                    <td class="SVtable">
+                        <p>The root part of the hierarchy includes zones corresponding to the different sites, with their GPS coordinates.</p>
+                        <p>Children zones matches a geographical and/or functional breakdown of sites, including associated geo-tags for the micro-geolocation of users by proximity to a given piece of equipment.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Building management systems</td>
+                    <td class="SVtable">Indoor locations to identify areas on a site and within buildings.<br />Locate users while on site or within  buildings.</td>
+                    <td class="SVtable">
+                        <p>Zones matches a physical and logical breakdown of buildings, including associated geo-tags for the micro-geolocation of users by proximity to a given piece of equipment or room (building, floors, zones or rooms).</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Industrial equipment monitoring, manufacturing, factory automation</td>
+                    <td class="SVtable">Indoor locations to identify areas on a site and within a factory.<br />Locate users while on site or within the factory.</td>
+                    <td class="SVtable">
+                        <p>Zones matches a physical and logical breakdown of the industrial site (factory), including associated geo-tags for the micro-geolocation of users by proximity to a given piece of manufacturing. The functional breakdown can go further with zones used to represent equipment pieces such as a control panel, an electrical panel, the front or rear part of a machine, a motor control panel...</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">In a system comprising several geographically distributed sites, the root part of the hierarchy is usually a set of zones corresponding to the different sites, with their GPS coordinates.</p>
+        <h2 class="SVheading2">How the SnapVue client and the  geolocation server operate together</h2>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Geodata/overview.png" />
+        </p>
+        <ul style="list-style-type: disc;">
+            <li>The SnapVue client app runs on a mobile device such as an Android or iOS tablet or smart phone.</li>
+            <li>The <span class="mc-variable OEM.ProductName variable">PcVue</span> server software runs on a computer under Microsoft Windows.</li>
+            <li>SnapVue and the server communicate using the IIS web server and deployed using the Web Deployment Console. </li>
+            <li>SnapVue  sends information to the server about the context of the connected user, detected geo-tags, and its GPS position (if available).</li>
+            <li>The server determines the zone where the user is located using the geo-tags and sends the corresponding actions (for that zone and for any parent zone) to SnapVue.</li>
+            <li>The SnapVue user is then able to visualize data and execute the actions appropriate to the zone context.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">A zone's visibility to a user depends on the user's browsing rights as configured in the User Profile.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

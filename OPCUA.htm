@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Instructions|Instruction reference A to Z|O" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>OPCUA</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="OPCUA_Instruct" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor268"></a>OPCUA</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc188">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="Communication_InstbyCat" />
+            </object><a class="MCConceptLink_seealso_0" href="javascript:mc188.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />See also</a>
+        </p>
+        <p class="SVnormal">Communication control for the OPC UA client driver.</p>
+        <p>WebVue support - Yes. </p>
+        <div class="tip">
+            <p class="SVnormal">You can also use the <a href="SET.htm">SET</a> and <a href="SENDLIST.htm">SENDLIST</a> instructions with OPC UA.</p>
+        </div>
+        <table style="border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col style="width: 60px;" />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Syntax</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">0</td>
+                <td valign="top" class="SVtable">START</td>
+                <td valign="top" class="SVtable"><a href="#Syntax1">1</a>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">1</td>
+                <td valign="top" class="SVtable">STOP</td>
+                <td valign="top" class="SVtable"><a href="#Syntax1">1</a>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">2</td>
+                <td valign="top" class="SVtable">SWITCHOVER</td>
+                <td valign="top" class="SVtable"><a href="#Syntax2">2</a>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">3</td>
+                <td valign="top" class="SVtable">METHOD</td>
+                <td valign="top" class="SVtable"><a href="#Syntax3">3</a>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Common arguments</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 122px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>CommObjectName</i>
+                </td>
+                <td valign="top" class="SVtable">The name of an OPC UA client communication object, under the form “NetworkName”, “NetworkName.ServerName” or “NetworkName.ServerName.RedundantServerName”. Type STR.</td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>Destination</i>
+                </td>
+                <td valign="top" class="SVtable">Destination of the command. Type STR.<br /><ul><li><p>
+						LOCAL - The command is run locally. There is no effect on a station that does not produce the communication object.</p></li><li><p>ACTIVE - The command is routed to the active station of the association that produces the communication object, or run on the local station if no server list is defined.</p></li><li><p>ALLPRODUCERS - The command is routed to all stations of the association that produces the communication object, or run on the local station if no server list is defined.
+					</p></li></ul></td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>ResultVar</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p>The name of a register variable in which information resulting from the instruction will be placed. Type STR.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax1"></a>Syntax 1</h2>
+        <p class="SVnormal">IntVal = OPCUA(<i>Mode</i>, <i>CommObjectName</i>, <i>Destination</i>[, <i>ResultVar</i>]);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr style="height: 0px;">
+                <td valign="top" class="SVtable">0</td>
+                <td valign="top" class="SVtable">START</td>
+                <td class="SVtable">
+                    <p>Starts the OPC UA communication object <i>CommObjectName</i>.</p>
+                </td>
+            </tr>
+            <tr style="height: 0px;">
+                <td valign="top" class="SVtable">1</td>
+                <td valign="top" class="SVtable">STOP</td>
+                <td class="SVtable">
+                    <p>Stops the OPC UA communication object <i>CommObjectName</i>.</p>
+                </td>
+            </tr>
+            <tr style="height: 0px;">
+                <td valign="top" class="SVtable">&#160;</td>
+                <td valign="top" class="SVtable">&#160;</td>
+                <td class="SVtable">
+                    <p>Return:</p>
+                    <ul>
+                        <li>
+                            <p>0: Command sent</p>
+                        </li>
+                        <li>
+                            <p>-1: Invalid mode</p>
+                        </li>
+                        <li>
+                            <p>-2: Syntax error in parameter <i>CommObjectName</i></p>
+                        </li>
+                        <li>
+                            <p>-3: The object <i>CommObjectName</i> could not be found</p>
+                        </li>
+                        <li>
+                            <p>-4: Unknown submode</p>
+                        </li>
+                        <li>
+                            <p>-5: Invalid number of parameters</p>
+                        </li>
+                        <li>
+                            <p>-6: Invalid parameter <i>CommObjectName</i></p>
+                        </li>
+                        <li>
+                            <p>-7: Invalid variable name <i>ResultVar</i></p>
+                        </li>
+                        <li>
+                            <p>-8: The variable <i>ResultVar</i> could not be found</p>
+                        </li>
+                        <li>
+                            <p>-9: HMI variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-10: Inhibited variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-11: Objects limit reached</p>
+                        </li>
+                        <li>
+                            <p>-12: Failed</p>
+                        </li>
+                        <li>
+                            <p>-13: Invalid value type</p>
+                        </li>
+                        <li>
+                            <p>-14: Value out of range</p>
+                        </li>
+                        <li>
+                            <p>-15: Invalid value</p>
+                        </li>
+                        <li>
+                            <p>-16: Variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-17: Context variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-18: Empty list of producers</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">The possible values of <i>ResultVar</i> are:</p>
+        <ul>
+            <li>
+                <p>-1: Command in progress</p>
+            </li>
+            <li>
+                <p>0: Command completed successfully</p>
+            </li>
+            <li>
+                <p>1: Not implemented</p>
+            </li>
+            <li>
+                <p>2: Communication object not found (error returned by the producer)</p>
+            </li>
+            <li>
+                <p>3: Communication object not enabled</p>
+            </li>
+            <li>
+                <p>4: Communication object already enabled</p>
+            </li>
+            <li>
+                <p>5: Communication object already disabled</p>
+            </li>
+            <li>
+                <p>6: Communication object not produced by the local station</p>
+            </li>
+            <li>
+                <p>7: Message lost</p>
+            </li>
+            <li>
+                <p>8: Communication object stopped</p>
+            </li>
+            <li>
+                <p>9: Communication object already stopped</p>
+            </li>
+            <li>
+                <p>10: Producer not started</p>
+            </li>
+            <li>
+                <p>11: Communication object already connected</p>
+            </li>
+            <li>
+                <p>12: Communication object connecting</p>
+            </li>
+            <li>
+                <p>13: Connection lost</p>
+            </li>
+            <li>
+                <p>14: Communication object already disconnected</p>
+            </li>
+            <li>
+                <p>15: Communication object disconnecting</p>
+            </li>
+            <li>
+                <p>16: Produced in error state</p>
+            </li>
+            <li>
+                <p>17: Object undefined</p>
+            </li>
+            <li>
+                <p>18: Command failed</p>
+            </li>
+            <li>
+                <p>19: Insufficient license rights</p>
+            </li>
+            <li>
+                <p>20: Unknown error</p>
+            </li>
+            <li>
+                <p>21: Routing failed</p>
+            </li>
+            <li>
+                <p>22: Trial period elapsed</p>
+            </li>
+            <li>
+                <p>23: Command partially failed</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2"><a name="Syntax2"></a>Syntax 2</h2>
+        <p class="SVnormal">IntVal = OPCUA(<i>Mode</i>, <i>ServerName</i>[, <i>ResultVar</i>];</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 98px;" />
+            <col style="width: 584px;" />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>ServerName</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p>Full name of the OPC UA Server to force active as part of the redundancy. The value must be:</p>
+                    <p>“NetworkName.Server.Name” to activate the main Server</p>
+                    <p>or</p>
+                    <p>“NetworkName.ServerName.RedundantServerName” to activate a Standby Server</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr style="height: 0px;">
+                <td valign="top" class="SVtable">2</td>
+                <td valign="top" class="SVtable">SWITCHOVER </td>
+                <td class="SVtable">
+                    <p> Activates the OPC Server <i>ServerName</i>.</p>
+                </td>
+            </tr>
+            <tr style="height: 0px;">
+                <td valign="top" class="SVtable">&#160;</td>
+                <td valign="top" class="SVtable">&#160;</td>
+                <td class="SVtable">
+                    <p>Return:</p>
+                    <ul>
+                        <li>
+                            <p>0: Command sent</p>
+                        </li>
+                        <li>
+                            <p>-1: Invalid mode</p>
+                        </li>
+                        <li>
+                            <p>-2: Syntax error in parameter <i>CommObjectName</i></p>
+                        </li>
+                        <li>
+                            <p>-3: The object <i>CommObjectName</i> could not be found</p>
+                        </li>
+                        <li>
+                            <p>-4: Unknown submode</p>
+                        </li>
+                        <li>
+                            <p>-5: Invalid number of parameters</p>
+                        </li>
+                        <li>
+                            <p>-6: Invalid parameter <i>CommObjectName</i></p>
+                        </li>
+                        <li>
+                            <p>-7: Invalid variable name <i>ResultVar</i></p>
+                        </li>
+                        <li>
+                            <p>-8: The variable <i>CommObjectName</i> could not be found</p>
+                        </li>
+                        <li>
+                            <p>-9: HMI variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-10: Inhibited variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-11: Objects limit reached</p>
+                        </li>
+                        <li>
+                            <p>-12: Failed</p>
+                        </li>
+                        <li>
+                            <p>-13: Invalid value type</p>
+                        </li>
+                        <li>
+                            <p>-14: Value out of range</p>
+                        </li>
+                        <li>
+                            <p>-15: Invalid value</p>
+                        </li>
+                        <li>
+                            <p>-16: Variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-17: Context variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-18: Empty list of producers</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">The possible values of <i>ResultVar</i> are:</p>
+        <ul>
+            <li>
+                <p>-1: Command in progress</p>
+            </li>
+            <li>
+                <p>0: Command completed successfully</p>
+            </li>
+            <li>
+                <p>1: Command failed</p>
+            </li>
+            <li>
+                <p>2: Object unknown</p>
+            </li>
+            <li>
+                <p>3: Not implemented</p>
+            </li>
+            <li>
+                <p>4: Routing failed</p>
+            </li>
+            <li>
+                <p>5: Invalid parameter</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2"><a name="Syntax3"></a>Syntax 3</h2>
+        <p class="SVnormal">IntVal = OPCUA(<i>Mode</i>, <i>ObjectFullname</i>, <i>UrlFormattedObjectNodeId</i>, <i>UrlFormattedMethodNodeId</i>, <i>InputArgs</i>, <i>OutputVarName</i> [, <i>FieldName</i> ][, <i>ResultVar</i>]);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 98px;" />
+            <col style="width: 584px;" />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>ObjectFullname</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p>Full name of the OPC UA server that is to be called to perform the  method. In the case of redundant servers, the full name has to be the one of the main server. The operation is applied to the active server (either main or standby server).</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>UrlObjectNodeId</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p valign="top">Node identifier of the object providing the method.</p>
+                    <p valign="top">Format: "NSnamespaceIndex|identifierType|identifier".</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>UrlMethodNodeId</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p valign="top">Node identifier of the method to call.</p>
+                    <p valign="top">Format: "NSnamespaceIndex|identifierType|identifier".</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>InputArgs</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p valign="top">All input arguments required by the method as a Json-formatted string.</p>
+                    <p valign="top">Either a string or a text variable containing the Json fragment.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>OutputVarName</i>
+                </td>
+                <td valign="top" class="SVtable">Variable name receiving the output result returned by the server. The variable type must match the type returned by the method.</td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>FieldName</i>
+                </td>
+                <td valign="top" class="SVtable">Optional parameter to get part of the output result by specifying a path name.</td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td valign="top" class="SVtableHeading">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td valign="top" class="SVtableHeading">
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr style="height: 0px;">
+                <td valign="top" class="SVtable">3</td>
+                <td valign="top" class="SVtable">METHOD</td>
+                <td class="SVtable">
+                    <p class="SVnormal">Sends a method call to a server by specifying input arguments in order for the server to perform an operation.</p>
+                    <p class="SVnormal">The server's response contains the result, either a successful operation or a failure indicated by an error code.</p>
+                    <p>Return:</p>
+                    <ul>
+                        <li>
+                            <p>0: Command sent</p>
+                        </li>
+                        <li>
+                            <p>-1: Invalid mode</p>
+                        </li>
+                        <li>
+                            <p>-2: Syntax error in parameter <i>CommObjectName</i></p>
+                        </li>
+                        <li>
+                            <p>-3: The object <i>CommObjectName</i> could not be found</p>
+                        </li>
+                        <li>
+                            <p>-4: Unknown submode</p>
+                        </li>
+                        <li>
+                            <p>-5: Invalid number of parameters</p>
+                        </li>
+                        <li>
+                            <p>-6: Invalid parameter <i>CommObjectName</i></p>
+                        </li>
+                        <li>
+                            <p>-7: Invalid variable name <i>ResultVar</i></p>
+                        </li>
+                        <li>
+                            <p>-8: The variable <i>CommObjectName</i> could not be found</p>
+                        </li>
+                        <li>
+                            <p>-9: HMI variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-10: Inhibited variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-11: Objects limit reached</p>
+                        </li>
+                        <li>
+                            <p>-12: Failed</p>
+                        </li>
+                        <li>
+                            <p>-13: Invalid value type</p>
+                        </li>
+                        <li>
+                            <p>-14: Value out of range</p>
+                        </li>
+                        <li>
+                            <p>-15: Invalid value</p>
+                        </li>
+                        <li>
+                            <p>-16: Variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-17: Context variable not allowed</p>
+                        </li>
+                        <li>
+                            <p>-18: Empty list of producers</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">The possible values of <i>ResultVar</i> are:</p>
+        <ul>
+            <li>
+                <p>1: Command completed successfully</p>
+            </li>
+            <li>
+                <p>-2: Unknown node</p>
+            </li>
+            <li>
+                <p>-3: Timeout</p>
+            </li>
+            <li>
+                <p>-4: Invalid input arguments</p>
+            </li>
+            <li>
+                <p>-5: Command failed</p>
+            </li>
+            <li>
+                <p>-6: Unknown network</p>
+            </li>
+            <li>
+                <p>-7: Unknown client</p>
+            </li>
+            <li>
+                <p>-8: Command aborted</p>
+            </li>
+            <li>
+                <p>-9: Command in progress</p>
+            </li>
+            <li>
+                <p>-10: Offline</p>
+            </li>
+            <li>
+                <p>-11: Communication disabled</p>
+            </li>
+            <li>
+                <p>-12: Not implemented</p>
+            </li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

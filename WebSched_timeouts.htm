@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Web and mobile client applications|WebScheduler" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Understanding the WebScheduler's Time-out Behavior</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Understanding the WebScheduler's Time-out Behavior</h1>
+        <p class="SVnormal">The WebScheduler's timeout behavior is influenced by two timeouts.</p>
+        <ul style="list-style-type: disc;">
+            <li>The Web Service's client session time-out configured in the Application Explorer. (Servers&gt;Settings&gt;Common server properties for WebVue and Web Services toolkit&gt;Client session time-out. Default value 5 minutes.</li>
+            <li>The IIS HTTP session time-out. Default value 20 minutes.</li>
+        </ul>
+        <p class="SVnormal">There are a number of possible timeout scenarios.</p>
+        <ol>
+            <li value="1">If you are actively using the WebScheduler, (using the Calendar, Standard Week or Special Days Behavior pages) the session is held open by the WebScheduler's <a href="WebSched_access_mgmnt.htm">Concurrent Access Management</a>, which sends a message to the server every 30 seconds.
+</li>
+            <li value="2">If  the period of inactivity is greater than the <u>Web Services session time-out</u>, <span class="mc-variable OEM.ProductName variable">PcVue</span> will end the session and there will be a message in the Event Viewer.</li>
+            <li value="3">If the period of inactivity is greater than the <u>Web Services session time-out</u> but less that the <u>IIS HTTP session time-out</u> the session in <span class="mc-variable OEM.ProductName variable">PcVue</span> will be closed but the WebScheduler web application will still be active and remember the username and password. If activity starts again,  the WebScheduler will attempt to reconnect to <span class="mc-variable OEM.ProductName variable">PcVue</span> using these credentials.</li>
+            <li value="4">If the period of inactivity is greater than  the <u>IIS HTTP session time-out</u> then the user will have to log in and start the session again.</li>
+        </ol>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

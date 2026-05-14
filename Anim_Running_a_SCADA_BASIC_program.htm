@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Animation|Run" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Running a SCADA BASIC program</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor184"></a>Running a SCADA BASIC Program</h1>
+        <p class="SVnormal">Programs can do many things from providing a simple increment 
+ to a variable to changing the properties and hence behavior 
+ of some of the macro animations. With careful design and by using techniques 
+ such as passing arguments and a variable branch, generic programs may 
+ be written which may be re-used many times. The Run Program animation 
+ allows a SCADA BASIC program or function to be run from a control zone.</p>
+        <p class="SVnormal">In the Run Program tab, you enter the name of the program 
+ to be run and an optional function name. If you do not specify a function 
+ name, the control zone will always try to start the MAIN function. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/HMI/Animation/run_program.png" style="border-style: none;border: none;float: none;" border="0" title="Animation Run Program tab." />
+            </p>
+            <div class="note">
+                <p class="SVnormal">A program must be pre-loaded before it may be executed 
+ from a control zone.</p>
+            </div>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">Functions are not re-entrant, that is they can only be 
+ run once at any one time. In order to avoid problems with this function's execution time 
+ should be kept short and not blocking. Avoid using instructions that cause delay in 
+ execution (for example DELAY).</p>
+        </div>
+        <h2 class="SVheading2">Using a variable branch</h2>
+        <p class="SVnormal">If you enter a variable branch in the <u>Branch</u> field of 
+ the Send Program tab, any variables names in the program not 
+ preceded by the @ character will be prefixed with the branch. This is 
+ especially useful when developing generic programs.</p>
+        <p class="SVnormal">For example, if in the program you have a variable named 
+ MAX, and you run the program with the branch INLET1.FLOW the program will 
+ actually refer to the variable INLET1.FLOW.MAX.</p>
+        <h2 class="SVheading2">Passing Arguments</h2>
+        <p class="SVnormal">A list of up to 10 arguments, separated by commas, may 
+ be entered in the <u>Arguments</u> field of the Run Program tab. At run-time, 
+ the arguments may be retrieved from within the program using the GETARG 
+ instruction. The maximum number of characters that may be entered in the 
+ <u>Arguments</u> field is 256.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

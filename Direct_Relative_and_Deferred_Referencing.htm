@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Creating and using symbols" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Variable referencing types in symbol animations</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Variable referencing types in symbol animations</h1>
+        <p class="SVnormal">When a symbol is created, you can choose to use direct, relative or deferred referencing to the variables in the symbol’s animations. In fact, it is possible to mix all three types if necessary. These referencing methods provide flexibility in how variables are linked to symbols in <span class="mc-variable OEM.ProductName variable">PcVue</span>, allowing for more efficient and dynamic HMI design. The choice between these methods depends on the specific requirements of your project and how you want to structure your variables and symbols.</p>
+        <p class="SVnormal">Direct referencing - A method where variable names used in an animation are entered in their entirety. For example, you could use the name @Process.Engine1.Compressor1.B1. Note that the name is prefixed with an @ character. This tells the HMI that this is a directly referenced name. Whenever the symbol is reused, the animation will always refer to the same variable irrespective of any branch.</p>
+        <p class="SVnormal">Relative referencing - A method where animation refers to just the last part of the variable name. For example, you might use the name B1. The rest of the variable name is supplied as a branch when the symbol is pasted into a window. The variable names are automatically calculated at runtime by concatenating the branch with the relative name used in the animation. You can only make use of relative referencing if the server you are using has a structured naming scheme.</p>
+        <p class="SVnormal">Deferred referencing - A method where temporary variable names are used in each animation. Temporary variables only exist while an animation using them is displayed and do not appear in the server. Temporary variable names always end with a percent % character, for example TEMPMV1%. </p>
+        <p class="SVnormal">When a symbol containing temporary variables is pasted into a window, a dialog is displayed allowing the temporary variables to be replaced with actual variables in the server. This is done using the Symbol Properties dialog that is displayed by double-clicking on the symbol when in Design mode. Any temporary variable names are indicated by having the text Substitutable in the information field. To change a temporary name to a real one, double-click on its entry in the variable list. The variable selector is then displayed from which a variable name may then be selected. In this example, the temporary variable Open% has been substituted by @Machines.Block2 <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="symbol-props"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p>
+            <img src="../../Resources/Images/HMI/Symbols/properties_dialog_tab_deferred.png" style="border-style: none;border: none;float: none;display: none;" border="0" title="Symbol tab - deferred." MadCap:targetName="symbol-props" />
+        </p>
+        <div class="note">
+            <p class="SVnormal">Changing a reference to a temporary variable name to one in the variables tree only affects the copy of the symbol on which the action is performed. In this way, the same Symbol can be used to display an unlimited number of different variables.</p>
+        </div>
+        <p>The "=" symbol serves as a marker to define the start of an expression or condition used in animations or settings. For instance, an expression like =@test&gt;0 checks if the variable @test is greater than 0 and uses this condition to trigger specific animations, such as changes in visibility or color. By placing = at the beginning of the condition in the animation properties, you can define logical expressions that control when the animation activates based on the variable's value.</p>
+        <div class="tip">
+            <p class="SVnormal">You can use the three buttons: "@", "%", and "=" in the Symbol properties to filter the animation variables by their referencing type.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

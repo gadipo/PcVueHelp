@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Instruction reference A to Z|F" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>FREAD</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="FREAD_Instruct" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor310"></a>FREAD</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc125">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="File_Mgmt_InstbyCat" />
+                <param name="Item3" value="Buffer_Mgmt_InstbyCat" />
+            </object><a class="MCConceptLink_seealso_0" href="javascript:mc125.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />See also</a>
+        </p>
+        <p class="SVnormal">Read a number of data items of the same type from a 
+ file and stores them in a memory buffer.</p>
+        <p class="SVnormal">WebVue support - Yes.</p>
+        <div class="warning">
+            <p class="SVnormal">Before using any of the file management instructions, except FSTAT, RENAME, UNLINK, FILETOBUF or BUFTOFILE, you must first open the file using an FOPEN instruction.</p>
+            <p class="SVnormal">Before any program including the FOPEN instruction ends, it must execute an FCLOSE instruction.</p>
+        </div>
+        <h2 class="SVheading2">Syntax</h2>
+        <p class="SVnormal"><span style="font-style: italic;">LongVal</span> = FREAD(<span style="font-style: italic;">Filename</span>, <span style="font-style: italic;">Handle</span>, 
+ <span style="font-style: italic;">Size</span>, <span style="font-style: italic;">N</span>);</p>
+        <p class="SVnormal">Return type: LONG.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">Filename</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The name of the file from which the data is to be read. 
+ Type STR.<br />If executed in a WebVue session context this instruction is processed by the computer that hosts the web back end and the referenced file is on that computer. </p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">Handle</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The location of the memory buffer into which the data 
+ is read. Type LONG.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">Size</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The size in bytes for each data item. Any numeric type.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">N</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The number of items to be read. Any numeric type.</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <p class="SVnormal">Data items are read into a memory buffer. The buffer 
+ must be previously allocated with ALLOC_BUFFER, which also supplies the 
+ handle.</p>
+        <p class="SVnormal">Return: 1 if successful, else 0.</p>
+        <h2 class="SVheading2">Example</h2>
+        <p class="SVprogramCode">'read 20 data items of 4 bytes</p>
+        <p class="SVprogramCode">i1 = FREAD("histo.fil",handle,4,20);</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

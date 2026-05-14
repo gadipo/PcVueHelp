@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|Equipment" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Message exchange mechanisms in PcVue&#160;</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Message exchange mechanisms in <span class="mc-variable OEM.ProductName variable">PcVue</span>&#160;</h1>
+        <p class="SVnormal">Most of the Equipment drivers are based on the request/response communication pattern where <span class="mc-variable OEM.ProductName variable">PcVue</span> is the master/client that sends requests and the field device is the slave/server that respond to requests.<br />This topic explains how message exchanges are scheduled, what trigger communication errors and what you can do to optimize the request/response flows.</p>
+        <p class="SVnormal">There are three time periods used to control message sending and detect communication errors:</p>
+        <ul>
+            <li class="SVbulleted">Device time-out - Configured at the device level, it is the maximum time <span class="mc-variable OEM.ProductName variable">PcVue</span> waits for a reply from the 
+ field device after having sent a request.</li>
+            <li class="SVbulleted">Polling period - Configured at the frame level, it is the interval at which <span class="mc-variable OEM.ProductName variable">PcVue</span> sends a frame request to the field device (except for write-only frames).</li>
+            <li class="SVbulleted">Message time-out - Configured at the device level, it is the minimum interval that <span class="mc-variable OEM.ProductName variable">PcVue</span> must wait, after receiving 
+ an answer, before sending any other request. This is not used for many of the drivers. It set to 0 except for drivers over a communication media that requires such an inter-request delay (typically radio only).</li>
+        </ul>
+        <h2 class="SVheading2">Request/response and error management</h2>
+        <p class="SVnormal">For each configured frame, the sequence for exchanging messages (not taking into account the message time-out) is as follows: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <ol>
+            <li class="SVnumbered" value="1">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> sends a request message for the frame and waits for a reply.</li>
+            <li class="SVnumbered" value="2">If a reply is received, <span class="mc-variable OEM.ProductName variable">PcVue</span> waits for the polling period and sends the next request. </li>
+            <li class="SVnumbered" value="3">If the field device does not reply within the device time-out period, the request is retried up to three times, in an attempt to get a reply.</li>
+            <li class="SVnumbered" value="4">If, after the third retry, there is still no reply (or an invalid one), the frame is flagged in error and the device is flagged as unhealthy. The frame and device status are updated.</li>
+            <li class="SVnumbered" value="5">Subsequent requests for the frame are processed at the frame polling period, but only tried once. If no reply is received (or an invalid one), the error count is incremented.</li>
+            <li class="SVnumbered" value="6">When a reply is received, the frame is flagged Ok, and the device is flagged as healthy.  The frame and device status are updated.</li>
+        </ol>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Comm_DataAcq/equipment_msg_exchange_diag.png" style="border-style: none;border: none;float: none;display: none;" border="0" MadCap:targetName="t1" />
+        </p>
+        <div class="note">
+            <p class="SVnormal">The counts of attempted exchanges and failures are only reset when the communication is stopped.</p>
+            <p class="SVnormal">See the topic <a href="equipment_comm_status.htm">General communication status</a> for more information about general status and driver-specific status.</p>
+        </div>
+        <h2 class="SVheading2">The read and write queues</h2>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> processes frames using a queue mechanism. Frame requests are added to the end of the queue. Frames requests are 
+ processed from the front of the queue, ensuring frames are processed in strict order. This is known as a first in first out mechanism.</p>
+        <p class="SVnormal">The frame queues are organized in pairs, one for read frames and one for write frames. The Communication Manager toggles between 
+ the two queues processing a read request and then a write request. If one or other of the queues is empty, it is omitted from the sequence.</p>
+        <ul>
+            <li class="SVbulleted">For a serial driver there is one read queue and one write queue for each network. The frames for all devices on a network are managed by the two queues.</li>
+            <li class="SVbulleted">For a TCP/IP driver there is one read queue and one write queue per device.</li>
+        </ul>
+        <p class="SVnormal">Frames that have the Priority mode property ticked go to the front of the queue bypassing the queuing mechanism.</p>
+        <div class="warning">
+            <p class="SVnormal">The Priority mode property should only be used with great caution because of the detrimental effect it has on the processing of 
+ other frames. You are advised not to use it unless it has been recommended by the technical support.</p>
+        </div>
+        <h2 class="SVheading2">What you can do to optimize</h2>
+        <p class="SVnormal">It is necessary that you design the format and tune the handling of messages, to sustain the data flows required, for <span class="mc-variable OEM.ProductName variable">PcVue</span> to function effectively. Tuning consists in playing with:</p>
+        <ul>
+            <li class="SVbulleted">Polling periods - Choose the right polling period in the frames configuration to fit your data freshness needs</li>
+            <li class="SVbulleted">Device timeouts - Choose the right device timeout depending on the field device (and network) responsiveness</li>
+            <li class="SVbulleted">Frame sizes - In general, avoid many small frames, prefer a few large ones</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">If no variable is linked to a frame, polling is suspended automatically and the frame is deactivated.</p>
+            <p class="SVnormal">The drivers' runtime module refreshes its data cache at the rate specified by the frame polling period. Variables are refreshed on event, whenever there is a change in the data.</p>
+        </div>
+        <h3 class="SVheading3">The importance of correctly configured frames</h3>
+        <p class="SVnormal">It is especially important to configure the frames correctly. Incorrectly configured frames (incorrect address, incorrect size etc.) will, depending on the field device and driver, cause an overhead due to error processing. While errors are being processed, communication using healthy frames will be delayed  with a consequential reduction in performance.</p>
+        <ul style="list-style-type: disc;">
+            <li>When using a serial driver, incorrect configuration will have an impact  on the entire network.</li>
+            <li>When using a TCP/IP driver, incorrect configuration will affect a particular device.</li>
+        </ul>
+        <h3 class="SVheading3">Tune the polling period</h3>
+        <p class="SVnormal">The Communication Manager sends out requests to the field devices cyclically. The period at which the requests are sent is specified 
+ by the frame polling rate. The default value is set to 1 second, but you should change it to a value that reflects the rate of change in your process. 
+ If for instance, you were monitoring a temperature setting, a polling period of 1 second would normally be too frequent. You might set the polling period 
+ to 1 minute or more to reduce the message traffic on the network. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t2" style="display: none;">
+            <img src="../../Resources/Images/AE/Comm_DataAcq/equipment_example_of_setting_scan_rate.png" alt="The Communication Manager: example of setting the polling period." style="border-style: none;border: none;float: none;" border="0" />
+        </div>
+        <div class="note">
+            <p class="SVnormal">If you think of a frame on a network as a car on the road, the more cars you have, the busier the road is. If you have too many cars, the traffic can stop altogether.</p>
+        </div>
+        <h3 class="SVheading3">Tune the frame size</h3>
+        <p class="SVnormal">You should minimize the number of frames transferred between field devices and <span class="mc-variable OEM.ProductName variable">PcVue</span>. It is preferable to use one large frame than 
+ several small ones, even if not all frame addresses are mapped to variables. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">However, you must also balance this with the polling period. For example, if just one variable is required at a 1-second rate and the others at a 1-
+ minute rate it is better to have two frames, one small frame scanned once per second and one large frame scanned at once per minute.</p>
+        <div MadCap:targetName="t3" style="display: none;">
+            <img src="../../Resources/Images/AE/Comm_DataAcq/equipment_example_of_frame_size.png" alt="The Communication Manager: example of frame size." style="border-style: none;border: none;float: none;" border="0" />
+        </div>
+        <div class="note">
+            <p class="SVnormal">Again using the traffic analogy, there is less traffic on the road if you put 50 people in one bus rather than 1 person per car.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">See <a href="equipment_mapping.htm#How">How to map a variable to a sub-item</a> to discover how you can minimize the number of frames you need by mapping variables on sub-addresses in a frame. For example, how you can map both register and bit variables on a frame of type Word or Double word.</p>
+        </div>
+        <h2 class="SVheading2"><a name="SCADAopt"></a>SCADA Basic communication optimization</h2>
+        <p class="SVnormal">When you are developing a SCADA Basic script and you want to send several values to equipment variables you must use the SET and SENDLIST 
+ instructions rather than try to write the values directly one by one. So instead of coding commands this way:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: Bash;" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">@VAR1 = 10;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">@VAR2 = 11;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">@VAR3 = 12;</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">It is best practice to code them this way:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: Bash;" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #a71d5d; ">SET</span>(<span style="color: #df5000; ">"VAR1"</span>,10);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #a71d5d; ">SET</span>(<span style="color: #df5000; ">"VAR2"</span>,11);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #a71d5d; ">SET</span>(<span style="color: #df5000; ">"VAR3"</span>,12);</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">Then issue one SENDLIST command:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: Bash;" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #a71d5d; ">SENDLIST</span>(<span style="color: #df5000; ">"BLOC"</span>);</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="note">
+            <p class="SVnormal">Using SET and SENDLIST does not mean there will be a single request to the field device. This happens only in a best-case scenario when all variables you set belong to the same frame and you use the mode SENDLIST("MULTIPLE"). If not all variables belong to the same frame, there will be at least one request per frame, and if you use the mode SENDLIST("BLOC"), the Communication Manager may send one or more requests per frame to accommodate addresses blocks.<br />But in all cases, using SET and SENDLIST is more efficient than the direct assignment as soon as you want to send more than one variable.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

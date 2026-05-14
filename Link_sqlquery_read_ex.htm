@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|The Variables Tree|Configuring variables|Linking a variable to its source|Linking a variable to a Sql variables source" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Sql variables Read query mapping examples</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Sql variables Read query mapping examples</h1>
+        <p class="SVnormal">See the topic <a href="../General/Datacon_sql_tableformat.htm">Supported Table Formats</a> for more information on table formats.</p>
+        <div class="note">
+            <p class="SVnormal">The row position number starts at zero.</p>
+        </div>
+        <h2 class="SVheading2">Wide table format</h2>
+        <p class="SVnormal"><a name="kanchor273"></a>Each data appears in a separate field. A typical Sql read query returns the following table.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">field_Ts	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">field_Temperature	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">field_Humidity	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">field_Wind	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;"> …</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">11/01/2019 10h02	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">22.5	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">64	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">17	 </td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">…</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">We want to map the variable @Temperature to the data in the field field_Temperature.</p>
+        <p class="SVnormal">In the Row Selection tab, the row is selected as <u>By position</u>.</p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Variables/sqlreadquery_row_ex1.png" />
+        </p>
+        <p class="SVnormal">In the Mapping tab, only the Value is mapped. As the timestamp is not mapped, it is provided by <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Variables/sqlreadquery_map_ex1.png" />
+        </p>
+        <h2 class="SVheading2">Narrow table format</h2>
+        <p class="SVnormal">One field contains the values and other fields the context of the value. A typical Sql read query returns the following table.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">field_Ts	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">field_Name	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">field_Value	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">field_Quality</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">11/01/2019 10h00	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Wind	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">39	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">192</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">11/01/2019 10h03	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Temperature	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">22,5	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">192</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">11/01/2019 10h05	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Humidity	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">64	</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">192</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">We want to map the variable @Temperature to the data in the field field_Name in the row that contains "Temperature".</p>
+        <p class="SVnormal">In the Row Selection tab, the row is selected as <u>by field value</u>.</p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Variables/sqlreadquery_row_ex2.png" />
+        </p>
+        <p class="SVnormal">In the above example, this will use the data in row two. If we had chosen "Humidity" this would use the data in row three etc.</p>
+        <p class="SVnormal">In the Mapping tab, the Value is mapped. As the timestamp is not mapped, it is provided by <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Variables/sqlreadquery_map_ex2.png" />
+        </p>
+        <h2 class="SVheading2">Wide table format </h2>
+        <p class="SVnormal">Each data variable appears in a separate field. The Sql read query has been configured to return several values for the same variable producing the following table. </p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 100px;" />
+            <col style="width: 150px;" />
+            <col style="width: 150px;" />
+            <tbody>
+                <tr>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">field_Id</td>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">field_Ts</td>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">field_Temperature</td>
+                </tr>
+                <tr>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">1</td>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">2020/06/23 10:00:00</td>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">20</td>
+                </tr>
+                <tr>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">2</td>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">2020/06/23 11:00:00</td>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">22</td>
+                </tr>
+                <tr>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">3</td>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">2020/06/23 12:00:00</td>
+                    <td style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" class="SVtable">25</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">We want to map the variable @Temperature to the data in field field_Temperature. As the variable is trend recorded, we also want to use the timestamps in field field_Ts.</p>
+        <p class="SVnormal">In the Row selection tab, the row is selected as <u>All rows</u>.</p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Variables/sqlreadquery_row_ex3.png" />
+        </p>
+        <p class="SVnormal">In the Mapping tab, both the Value and Timestamp are mapped. </p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Variables/sqlreadquery_map_ex3.png" />
+        </p>
+        <p class="SVnormal">Each time the query is executed, all rows are browsed and recorded. The above example would produce three lines in the archive unit.</p>
+        <p class="SVnormal">20 with the timestamp 2020/06/23 10:00:00<br />22  with the timestamp 2020/06/23 11:00:00<br />25  with the timestamp 2020/06/23 11:00:00</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

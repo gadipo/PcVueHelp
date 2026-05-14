@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|The Expression Engine" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>How to use variables in expressions</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to use Variables in Expressions</h1>
+        <p class="SVnormal">Normally, when using a variable in an expression, you simply include the variable name in the expression. For example:</p>
+        <p class="SVprogramCode">EXP(LOG(INLET.PRESSURE)/2)</p>
+        <p class="SVnormal">Where INLET.PRESSURE is the variable name.</p>
+        <p class="SVnormal">However, some variations are useful to know.</p>
+        <h2 class="SVheading2">Using variable attributes in an expression</h2>
+        <p class="SVnormal">In addition to using variable values, you can also use extended attributes in an expression. To use an extended attribute you append the attribute reference to the variable name as follows.</p>
+        <ul>
+            <li>To use a text attribute you append :An where n is the numeric reference of the text attribute. Example @MYBRANCH.MYVAR:A3</li>
+            <li>To use a binary attribute you append :Bn where n is the numeric reference of the binary attribute. Example @MYBRANCH.MYVAR:B1</li>
+        </ul>
+        <h2 class="SVheading2">Using the ?.VarName syntax</h2>
+        <p class="SVnormal">Unless prefixed with the @ character, variable names that you include in an expression are relative to any branch being used. However, it is possible to reference variables starting back from the root of the branch hierarchy by using the ?.VarName syntax. For example, the expression is used with the branch ProcessB.Machine2.Engine1 but you need to use the variable ProcessB.NumRunning. In that case, you can use ?.NumRunning in the expression. The question mark tells the expression engine to start from the root level in the branch hierarchy when resolving the variable name and in this example, it would result in the variable name ProcessB.NumRunning being used in the expression at run-time.</p>
+        <p class="SVnormal">You can use more question marks to address all intermediate levels in the branch hierarchy. For example, ?.?.?.VarName would go down three levels from the root. </p>
+        <h2 class="SVheading2">Using the square bracket [] syntax</h2>
+        <p class="SVnormal">A variable name must be enclosed in square brackets if it starts with a number, includes a special character such as the * (star) or starts with a reserved string (such as <i>TS_Local</i> or <i>TS_Utc</i>). This is so that the Expression Engine correctly interprets it as a variable name and is useful when you need to use alarm counters or other variables that do not strictly follow the variable naming rules in expressions.</p>
+        <p class="SVnormal">For example:</p>
+        <p>If <u>01_BranchXYZ.Var1</u> and <u>01_BranchXYZ.Var2</u> are 2 variables in a project, an expression such as <u>[01_BranchXYZ.Var1] + [01_BranchXYZ.Var2]</u> will be parsed properly by the expression engine whereas <u>01_BranchXYZ.Var1 + 01_BranchXYZ.Var2</u> will cause a failure.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

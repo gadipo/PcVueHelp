@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|The Variables Tree|Configuring variables|Linking a variable to its source|Linking a variable to a Sql variables source" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Linking a variable to a Sql read query</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Linking a Variable to a Sql Read Query</h1>
+        <p class="SVnormal">A variable can be linked to the result of a Sql read query by choosing the <u>Sql Variables</u> source. See the topic <a href="../General/Datacon_overview.htm">Data Connections Overview</a>. When a variable is linked in this way its real-time value, and optionally its timestamp and quality, are sourced from a third party database such as Microsoft's SQL Server. Read queries can be configured so that they are polled periodically and / or on event.</p>
+        <p class="SVnormal">A Sql read query returns a list of rows or a scalar value. In the case of a list of rows, you must be able to select the row(s) and the column(s) to be mapped to the variable and its metadata. The configuration is in three steps (or four steps if the query contains parameters) each with its own configuration tab.</p>
+        <ol>
+            <li value="1"><a name="kanchor30"></a>Data selection - Selects the Sql Connection and its subordinate Sql Read Query.</li>
+            <li value="2">Row selection - Selection of a particular row or all rows from the table of results.</li>
+            <li value="3">Mapping - Selection within the row of the field that contains the value and, optionally, the field that contains the timestamp and the status of the variable.</li>
+            <li value="4">Parameters - Configuration of any parameters that the query contains. Parameters add flexibility to a Sql Query by allowing the value of one or more fields  to be provided by the configuration of the linked variable.</li>
+        </ol>
+        <p class="SVnormal">See the topic <a href="Link_sqlquery_read_ex.htm">Sql variables Read query mapping examples</a> for a detailed explanation and examples.</p>
+        <p class="SVnormal">Mapping variables to a Sql read query is subject to scope-related constraints:</p>
+        <ul>
+            <li>
+                <p class="SVnormal">The scope of the Sql read query and the scope of the mapped variable must match,</p>
+            </li>
+            <li>
+                <p class="SVnormal">When using a variable to set the value of an input parameter, constraints related to scope apply to avoid user-specific data to be used as inputs in a context where the query results will be accessible to other users.</p>
+            </li>
+        </ul>
+        <p class="SVnormal"> The following matrix summarizes the list of valid combinations of scopes:</p>
+        <table style="width: 70%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 33%;" />
+            <col style="width: 33%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading" style="text-align: center;">Scope of the mapped variable</td>
+                    <td class="SVtableHeading" style="text-align: center;">Scope of the Sql read query</td>
+                    <td class="SVtableHeading" style="text-align: center;">Scope of the variables used to set input parameters</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Local</td>
+                    <td class="SVtable">Local</td>
+                    <td class="SVtable">Local, Shared</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Shared</td>
+                    <td class="SVtable">Shared</td>
+                    <td class="SVtable">Local, Shared</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Session</td>
+                    <td class="SVtable">Session</td>
+                    <td class="SVtable">Local, Shared, Session</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Client-context</td>
+                    <td class="SVtable">Client-context</td>
+                    <td class="SVtable">Local, Shared, Session, Client-context</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">How to configure the Data Selection</h2>
+        <ol>
+            <li value="1">Open the configuration dialog for the variable and select the Sources tab. </li>
+            <li value="2">Select Sql Variables as the <u>Source</u>. Sql Variables is only available if one or more Sql connections have been configured.
+A new tab <u>Reading</u> appears for configuration of the data selection.			
+			<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div><img src="../../Resources/Images/AE/Variables/register_sqlreadquery_source.png" MadCap:targetName="t1" style="display: none;" /></div></li>
+            <li value="3">Select the <u>Sql connection</u> and the subordinate <u>Sql query</u>. The appearance of the Source tab is now modified to display three more sub-tabs, Row selection, Mapping and Parameters.
+			<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div><img src="../../Resources/Images/AE/Variables/register_sqlreadquery_alltabs.png" MadCap:targetName="t2" style="display: none;" /></div></li>
+            <li value="4">Even though the configuration is only partially completed, it is possible to test the query using the <u>Execute</u> button. If the query requires any parameters, you are prompted to enter them. The results from the query are displayed in the result field. Testing the Sql Query has the advantage of discovering the Field Names that are returned by the query. The field names are used in the other configuration tabs. In the following screen shot the field name that has been discovered is BIT. It is followed, in parenthesis, by the field type.
+			<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div><img src="../../Resources/Images/AE/Variables/register_sqlreadquery_results.png" MadCap:targetName="t3" style="display: none;" /></div></li>
+        </ol>
+        <p>The Traces button is used to enable trace information in the Event Viewer (F7) that can be useful when debugging a particular query.</p>
+        <div class="note">
+            <p class="SVnormal">If the variable has the command property set, a <u>Writing</u> tab also appears. See the topic <a href="Link_sqlquery_write.htm">Linking a variable to a Sql write query</a>.</p>
+        </div>
+        <h2 class="SVheading2">How to configure the Row selection</h2>
+        <p class="SVnormal">The row selection can be either by Position, Field value, or All rows. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Variables/register_sqlreadquery_rowselection.png" MadCap:targetName="t4" style="display: none;" /></p>
+        <ul style="list-style-type: disc;">
+            <li>By position - Typically used with wide table format where each data variable appears in a separate column. Selects a row by its actual position in the query results. You can enter a position (1 by default to select the first record), or select <u>Last row</u> to select the last returned row.</li>
+            <li>By field value - Typically used with a narrow table format where one column contain the values and other columns the metadata of the values. Selects a row by the value of a particular column (lookup). If the Sql read query has been tested using the <u>Execute</u> button, the <u>Field name</u> and <u>Value</u> list boxes are populated with the possible values. The selected field must be of type boolean, integer or string. Double, float, decimal, dates or structured data types cannot be used.</li>
+            <li>All rows - Typically used with a wide table format where the Sql read query has been configured to return several rows of the same value. Selects and processes all data rows.</li>
+            <li>Selection filter - Allows you to define an expression that will sort out returned rows you want to exclude. If for a given row, the result of the expression is True, the row is taken into account. If the result is False, the row is ignored. For example, if you want to exclude rows returning the value Null in the column called Temperature, you could add the following Selection Filter: =if(IsDbNull(FieldValue("Temperature")) == false, true, false)</li>
+            <li>When row selection is empty - Allows you to control how the variable VTQ is updated if the query does not return any row.
+				<ul style="list-style-type: disc;"><li>If set to Preserve variable state, the VTQ of the variable is maintained.</li><li>If set to Set variable as invalid, the variable quality is set to NS.</li><li>If set to Replace variable value by, the variable value is set to the specific value you enter.</li></ul></li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">When using the <u>By position</u> option, keep in mind that any ORDER BY clause in your Sql query affects the result you will obtain. In most cases, changing the ORDER BY clause in the query requires changing the value of <u>Position</u> in the variable mapping.</p>
+        </div>
+        <h2 class="SVheading2">How to configure the Mapping</h2>
+        <p class="SVnormal">The Mapping tab is used to map the fields containing the value, and optionally the timestamp and the status (quality) to the variable. Mapping is achieved with an expression taking advantage of the FieldValue() function with the name of the column of interest as argument. The expression is entered using the Expression Editor dialog. See the topic <a href="Expression_editor.htm">Using the Expression Editor</a>. If the Sql read query has been tested using the <u>Execute</u> button, clicking the button at the top left of the dialog displays a list of the available fields. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t5"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Variables/register_sqlreadquery_mapping.png" MadCap:targetName="t5" style="display: none;" /></p>
+        <p class="SVnormal">The expression must contain the function FieldValue(), which selects the field. In addition, it can also contain other expression elements should there be any requirement to manipulate the value before it is used to update the variable value (resp. timestamp or quality).</p>
+        <p class="SVnormal">Mapping the status (quality) of the variable can be achieved by using any of the following constants:</p>
+        <ul>
+            <li>VAR_QUALITY_GOOD - To set the variable status to valid</li>
+            <li>VAR_QUALITY_NS - To set the variable status to invalid</li>
+            <li>VAR_QUALITY_NSCOM - To set the variable status to invalid due to communication error</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">As an example, the typical expression you will use for mapping the quality is:</p>
+            <p class="SVnormal">if(FieldValue(“col_Quality”) == 192, VAR_QUALITY_GOOD, VAR_QUALITY_NS)</p>
+            <p class="SVnormal">where col_Quality is the name of the field where the quality is stored in the data source.<br />The value 192 is an example if the data source stores qualities with values similar to OPC.</p>
+        </div>
+        <p class="SVnormal">If the Timestamp variable property is not mapped to a field from the query result, it will be set by <span class="mc-variable OEM.ProductName variable">PcVue</span> and managed accordingly. The same goes for the Quality property.</p>
+        <div class="note">
+            <p class="SVnormal">Because there is a huge variety of timestamp formats, mapping the timestamp will eventually requires a conversion.</p>
+            <p class="SVnormal">See the topic <a href="Expression_TS.htm">Expression functions for timestamp manipulation</a> for more information about the expression functions available for date and time conversions.</p>
+        </div>
+        <ul>
+            <li>
+                <p>Preserve variable's state on error - If enabled, the VTQ of the variable will be maintained if the mapping cannot be performed. For example if an expected field is missing in the returned rows, if a data type conversion error occurs or if the query fails. If not enabled, the variable is set invalid in such a situation.</p>
+            </li>
+        </ul>
+        <div class="tip">
+            <p class="SVnormal">The function IsDbNull() can be used to accommodate the fact that a returned field could be null for some rows.</p>
+            <p class="SVnormal">For example to control how the quality property of the variable will be set if the col_Quality field is null, you could use an expression such as:</p>
+            <p class="SVnormal">If(IsDbNull(FieldValue("col_Quality")), VAR_QUALITY_NS, FieldValue("col_Quality"))</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">You can also use the function IsFieldExists() to test if a field exists in the requested table.</p>
+        </div>
+        <h2 class="SVheading2">How to configure the Parameters</h2>
+        <p class="SVnormal">If one or more parameters are found in the Sql read query, they are listed in the Parameters tab and must be substituted using an expression. A parameter can only be substituted once. If the Sql read query is subsequently used in another variable, the parameter substitution is pre-configured and the field is dimmed indicating it is read only.</p>
+        <p class="SVnormal">A parameter defined by an expression can reference a property of the variable (domain, Extended attribute etc.) and use the functions and operators of the expression engine. The button at the top left of the expression editor dialog displays a list of the variable properties that can be substituted. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t6"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Variables/register_sqlreadquery_parameters.png" MadCap:targetName="t6" style="display: none;" /></p>
+        <p class="SVnormal">Parameters can only be set once - the first variable in which a Read Query is used will set the value of the parameter. </p>
+        <p class="SVnormal">For example, Register01 has the domain <u>Security</u>.  Register01 uses a Read Query containing ?Param01 configured to use the Domain. The value substituted for ?Param01 will be <u>Security</u>. Register02 uses the same Read Query. Irrespective of the domain of Register02, <u>Security</u> will be used as the value for ?Param01.</p>
+        <p class="SVnormal">If a parameter is mapped with an indirection on a Text extended attribute so that it is set with a variable value, the adequacy of the scope of the variable with regards to the scope of the Sql query is only verified at run-time. It is not checked at configuration time, nor at start-up time.</p>
+        <h2 class="SVheading2">Expression functions exclusively for Sql query variable mapping</h2>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 300px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Function and syntax</td>
+                    <td class="SVtableHeading">Operation</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">FieldValue(QueryResultFieldName)</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Return the value of the field QueryResultFieldName that belong to the result of a Sql Read Query. The format of the returned value is the same as that of the field.<br />Example: FieldValue("Temperature")</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">IsDbNull</td>
+                    <td class="SVtable">Function to evaluate a returned field value against NULL.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Row_Num</td>
+                    <td class="SVtable">Return the number of the row in the dataset returned by the query.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Functions exclusively for Sql query substitution parameters</h2>
+        <p class="SVnormal">The following functions all return a particular property of the concerned variable.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 300px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Function and syntax</td>
+                    <td class="SVtableHeading">Variable property</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">AlarmLevel</td>
+                    <td class="SVtable">
+                        <p>Alarm level. Type VT_I2.<br />Example: 1</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">AssocLabel</td>
+                    <td class="SVtable">Value of the variable in terms of its associated label. Type VT_BSTR<br />Example: "Running"</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">BinAttr</td>
+                    <td class="SVtable">Complete extended binary attribute. Type VT_UI4.<br />Example: 128</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">BinAttrXX (01 to 30)</td>
+                    <td class="SVtable">The value of the specific bit of the extended binary attribute. Type VT_BOOL.<br />Example: BinAttr01 &gt; 0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">Description. Type VT_BSTR.<br />Example: "Room 101 measured temperature"</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Domain</td>
+                    <td class="SVtable">Domain. Type VT_BSTR.<br />Example: "BUILDING01"</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">Name. Type VT_BSTR.<br />Example: "Building01.Floor01.Room01.Temperature"</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Nature</td>
+                    <td class="SVtable">Nature. Type VT_BSTR.<br />Example: "HEATING"</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Quality</td>
+                    <td class="SVtable">Quality. Type VT_UI2.<br />Example: 192</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TextAttrXX (03 to 16)</td>
+                    <td class="SVtable">Extended text attribute 03 to 16. Type VT_BSTR.<br />Example 1: TextAttr05 &gt; "Building01.Floor01.Room01.Temperature"<br />Example 2: TextAttr06 &gt; "Help.PDF"</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TextIndAttrXX (03 to 16) </td>
+                    <td class="SVtable">Deferred extended text attribute 03 to 16. Type VT_BSTR.<br />Example: "21.75"</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TS</td>
+                    <td class="SVtable">Timestamp. Type VT_R8. <br />Example: 43895.647743055553</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Units</td>
+                    <td class="SVtable">Units. Type VT_BSTR.<br />Example: "Deg °C"</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">UserName</td>
+                    <td class="SVtable">User name. Type VT_BSTR.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Value</td>
+                    <td class="SVtable">Value. The type is either VT_BSTR (Text variable) or VT_R8 (Register or Bit variable).<br />Example: 21.75</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Traces</h2>
+        <p class="SVnormal">The Traces button allows you to enable diagnostic trace messages. Each trace generates specific messages that are logged in the Trace Files and displayed in the Event Viewer dialog (F7).</p>
+        <ul style="list-style-type: disc;">
+            <li>Trace 1: All drivers - General - Enable general traces related to the activity between the Variable Manager and the Sql variable driver.</li>
+            <li>Trace 2: All drivers - Details - Enable detailed traces related  to the activity between the Variable Manager and the Sql variable driver.</li>
+            <li>Trace 3: All drivers - Performances - Enable traces related to performances of the Sql variable driver.</li>
+            <li>Trace 4: Sql variable driver - Performances - Enable traces related to performances of the Sql query results processing.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

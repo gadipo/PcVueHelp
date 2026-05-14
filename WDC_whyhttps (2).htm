@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="WebDeploymentTools.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>What is, and why do I need, a certificate?</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">What is, and Why do I Need, a Certificate?</h1>
+        <h2 class="SVheading2">What is a certificate?</h2>
+        <p>A certificate is a small data file that digitally binds a cryptographic key to an organization’s details. Using a certificate allows a person, computer or organization to exchange information securely over the Internet using a public key infrastructure (PKI). A  certificate can also be referred to as a digital certificate or a public key certificate.</p>
+        <p class="SVnormal">A certificate provides identification information, is forgery resistant and can be verified because it was issued by a trusted party. The certificate contains the name of the certificate holder, a serial number, expiry dates, a copy of the certificate holder's public key (used for encrypting messages and digital signatures) and the digital signature of the certificate-issuing authority (CA) so that a recipient can verify that the certificate is real. To provide evidence that a certificate is genuine and valid, it is digitally signed using a root certificate belonging to a trusted party. Operating systems and browsers maintain lists of trusted CA root certificates so they can easily verify certificates that the CA's have issued and signed. When PKI is deployed internally, certificates are signed by the department operating the internal PKI (usually the IT department).</p>
+        <h2 class="SVheading2">Why do I need a certificate?</h2>
+        <p class="SVnormal">For security, modern web client applications communicate with the web server using the HTTPS protocol. HTTPS is the secure version of HTTP and it means that the identity of the server is verifiable and all communications between client and server is encrypted. When a client requests a HTTPS connection, the server will initially send its  certificate to the client. The certificate contains the public key needed to begin the secure session. Based on this initial exchange the client and browser initiate a handshake, which establishes a uniquely secure connection between client and server.</p>
+        <p class="SVnormal">
+            &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> web client applications all require HTTPS and therefore the web server (IIS) requires a certificate. As each certificate is unique, it must be generated as part of the deployment of the web server.</p>
+        <h2 class="SVheading2">What type of certificates are available?</h2>
+        <ul style="list-style-type: disc;">
+            <li>Self-signed certificate - A self-signed certificate is one that has been signed by the same entity whose identity it certifies. As a self-signed certificate is not issued by an official Certification Authority (CA) or trusted internal party, it is not secure and, must not be used a web server deployed in production. A self-signed certificate also has the disadvantage that it will not be recognized by web browsers and an exception will have to be created in the web browser's configuration. However, a self-signed certificate can be useful at the development and testing stages.</li>
+            <li>Certificate from a Certification Authority (CA) - A certificate requested from, and issued by, a Certification Authority. Anyone with system administrator rights can request a certificate using the IIS web server and it is a process generally managed by a company's IT department. Certificate authorities can be private (internal) or  commercial ventures in which case the certificate is chargeable.</li>
+            <li>Certificate from Let's Encrypt - A free, automated, and open Certification Authority (CA),  provided by the Internet Security Research Group (ISRG).<ul style="list-style-type: disc;"><li>Anyone who owns a domain name can use Let’s Encrypt to obtain a trusted certificate at zero cost.</li><li>Software running on a web server can communicate with Let’s Encrypt to obtain a certificate, configure it for use, and automatically renew it (let's Encrypt certificates are only valid for three months).</li></ul></li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">When the WDC detect that you select a certificate that cannot be validated (a self-signed cert for example), it automatically activates the <u>Ignore certificate errors</u> for WebVue and the WebScheduler. This is to make development and testing possible without a trusted certificate. </p>
+            <p class="SVnormal">This setting is defined automatically by the WDC at the time of 1<sup>st</sup> deployment and when importing a deployment configuration.</p>
+            <p class="SVnormal">It is important that you manually disable this setting from the <a href="WDC_advanced_serviceconfig.htm">Service configuration view</a> if you replace an untrusted certificate by a trusted one on a web server.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

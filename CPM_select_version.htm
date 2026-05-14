@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>How to select a project version at start-up</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to select a project version at start-up </h1>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span>'s command line arguments allow you to select  a particular version of a project or library at start-up on a given computer in your system. These command line arguments are used with the Central project management which is a tool that helps you create and maintain version of your <span class="mc-variable OEM.ProductName variable">PcVue</span> project. To use the command line arguments at start up, you have to configure the Central project management and the project versions. Refer to the topic <a href="central_project_mgmt_conf.htm">How to manage  project and library versions</a> to learn more.</p>
+        <div class="warning">
+            <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> always runs a local copy of the project. When and if necessary, the project or libraries are copied from the central storage to the local file system at startup.</p>
+            <p class="SVnormal">When using Central project management it is essential to make sure that the time is synchronized on all the stations involved.</p>
+        </div>
+        <p class="SVnormal">The following command line arguments can be used to control the project version at startup:</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 322px;" />
+            <col />
+            <thead>
+                <tr>
+                    <td class="SVtableHeading" valign="top">
+                        <p class="SVtable">Argument</p>
+                    </td>
+                    <td class="SVtableHeading" valign="top">
+                        <p class="SVtable">Description</p>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="SVtable" valign="top">
+                        <p class="SVtable">-r or -r_delta</p>
+                    </td>
+                    <td class="SVtable" valign="top">
+                        <p class="SVtable">Starts using the REF version.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" valign="top">
+                        <p class="SVtable">-preref</p>
+                    </td>
+                    <td class="SVtable" valign="top">
+                        <p class="SVtable">Starts using the PREREF version.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" valign="top">
+                        <p class="SVtable">-x</p>
+                    </td>
+                    <td class="SVtable" valign="top">
+                        <p class="SVtable">Allows the interactive user to select any OPE or REF version at startup.</p>
+                        <p class="SVtable">As the use of -x require user interaction at startup, it must not be used when running <span class="mc-variable OEM.ProductName variable">PcVue</span> as a Windows Service with Central project management.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1" rowspan="1" valign="top" class="SVtable">
+                        <p class="SVtable" style="text-align: left;">-d</p>
+                    </td>
+                    <td colspan="1" rowspan="1" valign="top" class="SVtable">
+                        <p class="SVtable">Allows the interactive user to select any version at startup. Example: [InstallDir]\bin\sv32.exe -d</p>
+                        <p class="SVtable">As the use of  -d require user interaction at startup, it must not be used when running <span class="mc-variable OEM.ProductName variable">PcVue</span> as a Windows Service with Central project management.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="top" class="SVtable">
+                        <p class="SVtable">-d tag_proj=myProjTag [tag lib=myLibTag]</p>
+                        <p class="SVtable">-d tag_lib=myLibTag [tag_proj=myProjTag]</p>
+                    </td>
+                    <td valign="top" class="SVtable">
+                        <p class="SVtable">Starts the version of the project and libraries specified by the associated tags.</p>
+                        <p class="SVtable">If tag_lib or tag_proj is omitted, the local project or libraries are used.</p>
+                        <p class="SVtable">In case the specified tag is not associated to any project or library version, a message is logged in the Event viewer.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note">
+            <p class="SVnormal">In all cases, if the version corresponding to the command line argument or choice of the user is not available locally, it is first downloaded from the central store before proceeding with the actual project startup.</p>
+        </div>
+        <h2 class="SVheading2">Using the -r or -r_delta command line argument</h2>
+        <p class="SVnormal">The -r or -r_delta command line arguments force a start with the Reference version (REF) of the project and libraries (if any). It is designed to be used on runtime stations in production.</p>
+        <p class="SVnormal">No version selector dialogs are displayed. On startup,  the local project's version number and creation time are checked against that of the reference project in the central versions folder. The following actions are then taken:</p>
+        <ul>
+            <li class="SVbulleted">If the local and reference versions are different, i.e. if the version information in the local INFOS.DAT is different to that of the reference project in the central versions store.</li>
+            <li class="SVbulleted">If using the -r switch the entire reference project is copied from the central storage to the local station.</li>
+            <li class="SVbulleted">If using the -r_delta switch only those files that have changed are copied from the reference project in the central storage to the local station. This may take some time, as each file is compared in turn.</li>
+            <li class="SVbulleted">If the local and reference versions are the same, the local version is used.</li>
+            <li class="SVbulleted">If there is no reference version, the local version is used.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The central INFOS.DAT file is only updated when using the Central project management dialog to create a new version or update an existing version. It is not updated in any other circumstance. Modifying the local project without then using the Central project management dialog does not update the local INFOS.DAT file.</p>
+        </div>
+        <h2 class="SVheading2">Using the -preref command line argument</h2>
+        <p class="SVnormal">The -preref command line argument force a starts with the Pre-Reference version (PREREF) of the project and libraries (if any). It is designed to be used on validation stations prior to deployment in production.</p>
+        <p class="SVnormal">No version selector dialogs are displayed. On startup,  the local project's version number and creation time are checked against that of the pre-reference project in the central versions folder. The following actions are then taken:</p>
+        <ul>
+            <li class="SVbulleted">If the local and pre-reference versions are different, i.e. if the version information in the local INFOS.DAT is different to that of the pre-reference project in the central versions store, the version is copied to the local project folder.</li>
+            <li class="SVbulleted">If the local and pre-reference versions are the same, the local version is used.</li>
+            <li class="SVbulleted">If there is no pre-reference version, the local version is used.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">When a version is copied from the central project store to the local project folder, the folders of the selected project are copied to a local temporary storage then the required folders are copied to the local station's project storage, overwriting the previous one if any. In case the copying fails, a network error message is displayed.</p>
+            <p class="SVnormal">If the file system is damaged or the storage space is full, an error message is displayed. Any copies made are deleted, the previous folders are restored, copies with the '.OLD' suffix are deleted, and the original project is started.</p>
+            <p class="SVnormal">If the error message is ignored, start-up may continue on a version of the project other than the one intended.</p>
+        </div>
+        <h2 class="SVheading2">Using the -x command line argument</h2>
+        <p class="SVnormal">The -x command line argument causes the project version selection, and library version selection, dialogs to appear at start-up. The dialogs display information about the version currently available in the local project folder plus a list of the Operational (OPE) and Reference (REF) versions available in the central folder.</p>
+        <ol>
+            <li class="SVbulleted" value="1">The Project Version Selector dialog opens first. You can check the local project version details in the upper pane.</li>
+            <li class="SVbulleted" value="2">Select a version from the list and click the <b>Download</b> button. The version is copied to the local project folder.</li>
+            <li class="SVbulleted" value="3">Click <b>Next</b> to copy libraries or <b>Start</b> to start without selecting a library version.</li>
+            <li class="SVbulleted" value="4">If you have clicked <b>Next</b>, the Libraries Version Selector dialog opens. You can check the local version of the libraries in the upper pane.</li>
+            <li class="SVbulleted" value="5">Select the required version from the list and click the <b>Download</b> button. The version is copied to the local folder. A time-bar shows the progress of copying the files.</li>
+            <li class="SVbulleted" value="6">Click the <b>Startup</b> button.  The start-up process continues with whichever versions of the project and/or libraries are now loaded.</li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">To use the existing  local version of the project and libraries, click the <b>Startup</b> button of the selector dialog. Start-up continues using the local version of the project and libraries.</p>
+        </div>
+        <h2 class="SVheading2">Using the -d command line argument</h2>
+        <p class="SVnormal">Using the -d command line argument, without including a particular version, has similar behavior to the -x switch except that development versions (DEV) and pre-reference version (PREREF) of the project and libraries can be selected as well as reference and operational.</p>
+        <p class="SVnormal">Using the -d command line argument with a specific version, for example -d "proj=1.0.0, lib=1.0.0", causes that version to be copied to the local project folder and started without any dialog boxes being displayed.</p>
+        <div class="tip">
+            <p class="SVnormal">When using the -d command line argument, you can either omit the <u>proj</u> or <u>lib</u> parameter. For example, you can use the argument -d "proj=2.3.1" to start the project version 2.3.1 along with the libraries already available locally, or the argument -d "lib=1.2.5" to start the project already available locally along with the libraries version 1.2.5.</p>
+        </div>
+        <p class="SVnormal">You can use the -d command line argument with tags instead of a specific version Id. Tags are like labels that you can associate to a version and add to the -d command line argument when attempting to start up a project. <span class="mc-variable OEM.ProductName variable">PcVue</span> will start the version with a tag matching the one you put on the command line.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

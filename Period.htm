@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Data analysis (Data export)" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Understanding the period used by Data Export</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Understanding the Period Used by Data Export<a name="kanchor200"></a></h1>
+        <div class="note">
+            <p class="SVnormal">By time period, we mean the interval, defined by start and end times, for which historical data is extracted and exported when a Data Export is triggered.</p>
+        </div>
+        <p class="SVnormal">The time period used by a particular Data Export is defined when the export is configured and, optionally, when it is triggered. If you define a period when a Data Export is triggered, the period as defined in the configuration will be ignored for that particular generation. </p>
+        <p class="SVnormal">The period is configured using one of three methods. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/DataExport/generation_dialog.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <h2 class="SVheading2">By period</h2>
+        <p class="SVnormal">Configure a Data Export to use a set period. A period is defined by using a quantity and type of time units. The time units you can select are as follows.</p>
+        <ul style="list-style-type: disc;">
+            <li>Minutes</li>
+            <li>Hours</li>
+            <li>Days</li>
+            <li>Weeks - See note below about the first day of the week.</li>
+            <li>Months</li>
+            <li>Years</li>
+        </ul>
+        <p class="SVnormal">For example, you could select 2 hours, or 4 weeks, or 1 year etc.</p>
+        <p class="SVnormal">The period is relative to the <u>Reference timestamp</u>, and can either be the <u>Completed period</u> or the <u>Current period</u>.</p>
+        <ul>
+            <li>Completed period - The period is the time unit previous to the reference timestamp. For example, if you selected 24 hours and the reference timestamp was 22/05/2013 16:08:00, the completed period would be 21/05/2013 16:00:00 to 22/05/2013 16:00:00 (actually 22/05/2013 15:59:59.999). The incomplete 1 hour time period corresponding to the reference timestamp (from 16:00:00 to 17:00:00) is not included in the 24 hours time period that is requested.</li>
+            <li>Current period - The period is the time unit that includes the reference timestamp. For example, if you selected 24 hours and the reference timestamp was 22/05/2013 16:08:00, the request would display data for the period from 21/05/2013 17:00:00 to 22/05/2013 16:08:00. The current 1 hour time period corresponding to the reference timestamp (from 16:00:00 to 17:00:00) is included in the 24 hours time period asked for.</li>
+        </ul>
+        <p>Requesting data for 1 day does not yield the same result as requesting data for 24 hours as the time unit is not the same. The same example with a request for 2 days would behave as follows.</p>
+        <ul>
+            <li>Completed period - If you selected 2 days and the reference timestamp was 22/05/2013 16:08:00, the request would display data for the period from 20/05/2013 00:00:00 to 21/05/2013 24:00:00 (actually 21/05/2013 23:59:59.999). That is the last completed 2 days period. The incomplete day and time period corresponding to the reference timestamp (22/05/2013) is not included in the time period requested.</li>
+            <li>Current period - If you selected 2 days and the reference timestamp was 22/05/2013 16:08:00, the request would display data for the period from 21/05/2013 00:00:00 to 22/05/2013 16:08:00. The current day and time period corresponding to the reference timestamp (22/05/2013) is included in the time period requested.</li>
+            <li>This time period definition is very versatile when requiring sliding time windows.</li>
+        </ul>
+        <p class="SVnormal">By default the reference time is set to the current time when the export starts. You can change this by selecting the option <u>Use reference timestamp</u> and manually entering the reference time. Of course if you use the default current time, and <u>Current period</u>, you only get exported data from the start of the period to the current time. Being able to manually override the reference timestamp is handy if one needs to re-execute an export based on a sliding time window (current or completed period), it permits re-doing the export “as if” the time the export starts was in the past. It can be very helpful to recover from situations where an automatic export have failed (export at night or on week-ends…): Instead of missing one of your export you can manually execute it later and override the reference timestamp.</p>
+        <div class="note">
+            <p class="SVnormal">If you use the default current time, and <u>Current period</u>, you only get exported data from the start of the period to the current time. The effective period length will depend on the exact time of the trigger.  But it allows you to have an export over a long time period (a monthly report for instance), and get it updated on a shorter time period (daily update for instance) – To achieve so you can configure the export for the current 1 month, and execute it every day.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">The first day of the week is configured by the property <u>First day of week</u> in the Languages.Settings section in the  main Application Explorer Settings dialog. </p>
+        </div>
+        <h2 class="SVheading2">By date / time picker</h2>
+        <p class="SVnormal">Use specific start and end times.  You can only use this option at trigger time (not in the Data Export configuration as it would mean to hardcode specific times). You can enter the date by typing it in, or by using a calendar opened from the tool adjacent to the date field.</p>
+        <h2 class="SVheading2">By variable</h2>
+        <p class="SVnormal">User start and end times defined by two register variables. The time must be in the format produced by the SCADA Basic instruction DATETIMEVALUE. The format of DATETIMEVALUE is the number of milliseconds since 01/01/1970 and is of type DOUBLE. The variable's default maximum value of 65535 must be changed to accommodate this (suggested 9999999999999).</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|Dynamic Busbar Coloring" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Dynamic Busbar Coloring Topology engine traces</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Topology Engine Traces</h1>
+        <p class="SVnormal">The Topology Engine Add-on takes advantage of <span class="mc-variable OEM.ProductName variable">PcVue</span> diagnostic traces to log messages at run-time. The messages appear in the Event Viewer.</p>
+        <p class="SVnormal">The log messages have the following format:</p>
+        <p class="SVnormal">.....,Topology Engine,&lt;Log Level&gt;,&lt;The Subject&gt;: &lt;The Message&gt;</p>
+        <p class="SVnormal">Where:</p>
+        <ul style="list-style-type: disc;">
+            <li>&lt;Log Level&gt; - Error / Warning / Info / Debug</li>
+            <li>&lt;The Subject&gt; - Project / Setting / Config / Data</li>
+            <li>&lt;The Message&gt; Is the text of the message</li>
+        </ul>
+        <p class="SVnormal">Messages issued by the Topology Engine are as follows.</p>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 300px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading" style="vertical-align: top;">Message</td>
+                    <td class="SVtableHeading" style="vertical-align: top;"> Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Topology EngineInfoProject: Load with demo mode</td>
+                    <td class="SVtable" style="vertical-align: top;"> Indicates the project will run in demo mode (license not found). In demonstration mode, the Topology Engine calculates the voltage distribution for a period of 1 hour and then sets all calculation results to Invalid.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Topology EngineInfoConfig: Configuration successfully loaded</td>
+                    <td class="SVtable" style="vertical-align: top;"> Indicates the configuration was loaded without detecting any error.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Topology EngineInfoConfig: Start</td>
+                    <td class="SVtable" style="vertical-align: top;"> The Topology Engine has started its process and calculation mechanisms.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Topology EngineInfoProject: Unable to read dongle, error 3</td>
+                    <td class="SVtable" style="vertical-align: top;"> Indicates that the protection dongle could not found.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">In addition error messages can also occur while loading configuration or at run-time. Most of the errors described in the following table are configuration related, raised at loading time. In general, they can be fixed by checking and modifying the Topology Engine configuration. In all cases, the item or variable in error is referenced in the message.</p>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 300px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtableHeading">Error code</td>
+                    <td style="vertical-align: top;" class="SVtableHeading"> Description</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_ID_INVALID</td>
+                    <td style="vertical-align: top;" class="SVtable"> The item identifier is invalid. The item can be of type switch transformer node or network.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_VARNAME_INVALID</td>
+                    <td style="vertical-align: top;" class="SVtable"> The variable name is invalid.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_INJECTION_INVALID</td>
+                    <td style="vertical-align: top;" class="SVtable"> The value of the injection at a node is invalid.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_INJECTION_NODEFAULT</td>
+                    <td style="vertical-align: top;" class="SVtable"> The Default injection value is missing on a Static node.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_POSITION_INVALID</td>
+                    <td style="vertical-align: top;" class="SVtable"> The value indicated for the switch position is invalid.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_POSITION_UNDEFINED</td>
+                    <td style="vertical-align: top;" class="SVtable"> The normal position of the switch is not defined.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_NODE_UNKNOWN</td>
+                    <td style="vertical-align: top;" class="SVtable"> An undefined node is referenced in the configuration item. For example the upstream or downstream node of a switch (or transformer) may be missing in the configuration.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_NODE_EXISTS</td>
+                    <td style="vertical-align: top;" class="SVtable"> 2 or more nodes are using the same identifier.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_NODE_USED</td>
+                    <td style="vertical-align: top;" class="SVtable"> The node is already referenced. This error is in particular raised in the case of a switch where the upstream and downstream nodes are referencing the same node introducing an undesired loop. The same can apply to a transformer.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_SWITCH_UNKNOWN</td>
+                    <td style="vertical-align: top;" class="SVtable"> The switch or transformer is referenced but undefined.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_SWITCH_EXISTS</td>
+                    <td style="vertical-align: top;" class="SVtable"> The switch or transformer is defined twice.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_CONFIG_NOTREAD</td>
+                    <td style="vertical-align: top;" class="SVtable"> The configuration file cannot be accessed. This issue is raised if one or more configuration file is missing or if the file system security prevents the Topology Run-time Engine from opening them.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_CONFIG_INVALID</td>
+                    <td style="vertical-align: top;" class="SVtable"> The main configuration file format is invalid and cannot be recognized.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_CONFIG_NOTWRITTEN</td>
+                    <td style="vertical-align: top;" class="SVtable"> The main configuration file cannot be saved.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_CONFIG_NOTSUBSCRIBED</td>
+                    <td style="vertical-align: top;" class="SVtable"> The Topology Engine Run-time failed to subscribe to its configuration.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_SYSTEM_NOTSUBSCRIBED</td>
+                    <td style="vertical-align: top;" class="SVtable"> The Topology Engine Run-time failed to subscribe to <span class="mc-variable OEM.ProductName variable">PcVue</span> system variables.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_VARIABLE_NOTEXIST</td>
+                    <td style="vertical-align: top;" class="SVtable"> The variable (as referenced in the Topology Engine configuration) is missing in <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_VARIABLE_NOTSUBSCRIBED</td>
+                    <td style="vertical-align: top;" class="SVtable"> The Topology Engine Run-time failed to subscribe to the variable.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_VARIABLE_NOTUNSUBSCRIBED</td>
+                    <td style="vertical-align: top;" class="SVtable"> The Topology Engine Run-time failed to unsubscribe from the variable.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_ONCHANGE_DATAUNKNOWN</td>
+                    <td style="vertical-align: top;" class="SVtable"> A new value is received for the variable but it cannot be processed by the Topology Engine Runtime.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">ERROR_CALCULATE_TRANSFOLOOP</td>
+                    <td style="vertical-align: top;" class="SVtable"> An undesired loop is configured with transformers. In particular 2 transformers with different ratios but sharing the same upstream and downstream nodes.</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

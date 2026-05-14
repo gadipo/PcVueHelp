@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|EtherNET/IP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Ethernet/IP Data Acquisition Driver Add-on Traces</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Ethernet/IP Data Acquisition Driver Add-on Traces</h1>
+        <p class="SVnormal">Information regarding the Ethernet/IP Add-on activity is logged in the traces and  displayed in the Event Viewer with messages starting with <u>EtherNet/IP</u>. The following messages can be displayed.</p>
+        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 400px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtableHeading">Message</td>
+                    <td style="vertical-align: top;" class="SVtableHeading">Cause</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">EtherNet/IP - Unable to read dongle. Error 12.</td>
+                    <td style="vertical-align: top;" class="SVtable">
+                        &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> has been unable to detect a dongle and is running in demonstration mode. The driver will run for one hour.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">
+                        EtherNet/IP – No license found on the protection key
+                    </td>
+                    <td style="vertical-align: top;" class="SVtable">The Ethernet/IP option is not coded in the dongle. The driver will run for one hour (as in demonstration mode).</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">
+                        EtherNet/IP – Failed to initialize the stack. Error 66
+                    </td>
+                    <td style="vertical-align: top;" class="SVtable">Invalid local IP address</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">EtherNet/IP – &lt;DeviceName&gt; (&lt;IP&gt; &lt;Slot&gt; &lt;Port&gt;) Error &lt;Value&gt; on request</td>
+                    <td style="vertical-align: top;" class="SVtable">Device connection error.<br />33 = Time out on the request.<br />74 = Length of response message too long. Greater than 511 bytes.<br />58 = TCP network error. Cannot connect to &lt;DeviceName&gt;. Check connectivity using ping.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">
+                        EtherNet/IP - &lt;DeviceName&gt; ArrayTagName[index_min..Index_max] Error &lt;Value&gt;<br />                      OR<br />                        EtherNet/IP - &lt;DeviceName&gt; TagName Response Error &lt;Value. [VarName]
+                        
+                    </td>
+                    <td style="vertical-align: top;" class="SVtable">Tagname error.<br />0x4 = Invalid TagName. A syntax error was detected 				decoding the Request Path.<br />0x5 = Invalid TagName. Request Path destination 					unknown. Probably instance number is  missing in the addressing.<br />0x6 = Insufficient Packet Space. Not enough room in the 				response buffer for all the data.<br />0x13 = Insufficient Request Data. Data too short for 					expected parameters.<br />0x26 = The Request Path Size received was shorter or longer 			than expected.<br />0xFF  = General Error. Access beyond end of the object.<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Additional traces can be triggered using the SCADA Basic instruction TRACE as follows.</p>
+        <p class="SVdataListing">TRACE(Mode, ManagerId, HexFlag);</p>
+        <ul style="list-style-type: disc;">
+            <li>Mode - Turn the additional trace on or off<ul style="list-style-type: disc;"><li>		1 - On</li><li>0 - Off</li></ul></li>
+            <li>ManagerId - The identifier of the Ethernet/IP Add-on manager. Set to 11 if it is the only Add-on in use.</li>
+            <li>HexFlag	- Hexadecimal combination flag<ul style="list-style-type: disc;"><li>001	- To view cyclic errors.</li></ul></li>
+        </ul>
+        <h2 class="SVheading2">Example of use of SCADA Basic TRACE instruction </h2>
+        <p class="SVprogramCode">TRACE(1,11,”001”); ‘Turn on all additional trace</p>
+        <p class="SVprogramCode">TRACE(0,11,”001”); ‘Turn off all traces.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

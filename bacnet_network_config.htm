@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Communication|Data acquisition|BACnet|Configuring a BACnet network" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Adding a BACnet network</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor146"></a>Adding a BACnet Network</h1>
+        <p class="SVnormal">A BACnet Network object in <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration represents and provides access to a physical BACnet network. If configuring a multi-station application there must be a corresponding <a href="bacnet_adding_a_port.htm">Network Interface</a> for each Network Server List (producer).</p>
+        <h2 class="SVheading2">How to add a network</h2>
+        <ol>
+            <li value="1">Select the BACnet node in the Application Explorer and select <u>Add a network</u> from the task list. The BACnet Network dialog opens.  The following screenshot was taken with the default configuration. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /></li>
+            <div MadCap:targetName="t1" style="display: none;">
+                <br />
+                <img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_network_dialog_general_tab.png" />
+                <br />
+            </div>
+            <li value="2">Enter the name of the network in the <u>Name</u> text box. This is the name by which the network will be known in <span class="mc-variable OEM.ProductName variable">PcVue</span>. You can accept the suggested default or enter one of your own.</li>
+            <li value="3">Enter a description of the network. The description appears in the contents pane of the Application Explorer and can be useful to identify the network later. The description is optional. </li>
+            <li value="4">To activate the network when <span class="mc-variable OEM.ProductName variable">PcVue</span> is started, tick <u>Activate at start-up</u>. Alternatively, a SCADA Basic program can be used to activate the network.</li>
+            <li value="5">Click on <u>OK</u> to confirm the configuration and close the dialog. </li>
+        </ol>
+        <h2 class="SVheading2">The EDE files tab</h2>
+        <p class="SVnormal">The EDE files tab contains a list of EDE files referenced for one or the other device that will be configured on the network.</p>
+        <p class="SVnormal">See <a href="bacnet_importing_ede_files.htm">Using EDE files for configuring BACnet devices</a> for more information.</p>
+        <h2 class="SVheading2">The Advanced tab</h2>
+        <ul style="list-style-type: disc;">
+            <li>Networking<ul style="list-style-type: disc;"><li>Servers - If the BACnet network is part of a multi-station application, select the name of the Servers List. The BACnet network will only be started on stations that appear in the servers list.</li></ul></li>
+            <li>Backup and restore<ul style="list-style-type: disc;"><li>Storage folder - The storage folder for files used by the Backup and Restore tasks. You can use either a relative or an absolute path. A relative path will be relative to the default, which is the project's TP folder. </li></ul></li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">At runtime, a given <span class="mc-variable OEM.ProductName variable">PcVue</span> station can manage only one BACnet network interface, so for a given station in the Servers list, only one BACnet network can be active at a time.</p>
+            <p class="SVnormal">As a consequence, in most cases, only one BACnet network is configured in the project, with the Servers list containing either one station or an association of stations (for data acquisition redundancy). In some rare cases of distributed applications, you may have to configure more than one BACnet network, each produced by different stations or associations. </p>
+            <p class="SVnormal">But in all cases, a station cannot be part of the Servers list for more than one of the configured BACnet network.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

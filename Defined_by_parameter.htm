@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Application Architect|Differentiation (Defining properties)" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Defining a Property by a Parameter</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor10"></a>Defining a Property by a Parameter</h1>
+        <p class="SVnormal">A parameter is a container for a value that can be used instead of a fixed value in any object property.  For example, you could create a  parameter called pMaximum to be used for a register variable's Maximum  property. There are two types of  parameter, Input and Expression.</p>
+        <ul>
+            <li>Input - An input parameter allows setting a value at a certain level of the instantiation tree. The level at which the value has to be set is defined by the template to which the input parameter is attached. The value for an input parameter declared in the Parameters folder of a template is propagated to all subordinate templates. For example, if a parameter is associated to the Building template, the value will have to be entered for each Building instance, but will be propagated to subordinate floors and offices of building instances. See the topic <a href="Input_parameters_value.htm">How the value of an input parameter is resolved</a>.</li>
+            <li>Expression - An expression parameter is a container for an expression. The expression is of the same form that can be entered directly in a property. If you use a parameter to contain an expression, you can re-use the same expression many times without having to re-enter it each time (you just enter the name of the parameter instead). Unlike Input parameters, the value that is produced by the expression is  not propagated anywhere else, but is re-evaluated for each property where it is used.</li>
+        </ul>
+        <h2 class="SVheading2">How to create a parameter</h2>
+        <ol>
+            <li value="1">Select the Parameters tab and navigate the parameters configuration tree to select the folder under which the parameter is to be created. </li>
+            <li value="2">Select <u>Add a parameter</u> followed by clicking the Enter key on the keyboard. A new parameter is created with default properties.</li>
+            <li value="3">Enter a name for the parameter. You can edit either the name in the parameters configuration tree or the <u>Name</u> property in the properties grid. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t1" style="display: none;"><br /><img src="../Resources/Images/AA/input_param_configure.png" /><br /></div></li>
+            <li value="4">Enter a <u>Description</u> for the parameter. The description is optional.</li>
+            <li value="5">Select the <u>Data type</u>. See Using the Data type property below.</li>
+            <li value="6">Select the <u>Type</u> from either Input or Expression. The configuration that is now required depends on what you have selected.<ol style="list-style-type: lower-alpha;"><li value="1">For Input type. Enter a <u>Default value</u>. This is the value that the parameter will have if it is not assigned a specific value when it is associated with a template or an instance. Optional.<br />Select the <u>Parameter input</u> property. This property controls if, at instantiation time, the parameter must be filled, if filling it is recommended or if it is only optional to fill sit. Depending on its value, a warning or an error is raised when generating if the parameter value was left empty when instantiating. Optional.</li><li value="2">For Expression type. Enter the expression that will define the value  of the parameter. See the topic <a href="Expression_substitution.htm">Defining a property by an expression</a>. You can also configure the <u>Evaluation mode</u>. See below.</li></ol></li>
+        </ol>
+        <h2 class="SVheading2">Using the <u>Data type</u> property</h2>
+        <p class="SVnormal">The <u>Data type</u> property allows you to typecast a parameter for use in an expression. The result of this can be illustrated using a simple example.</p>
+        <p class="SVnormal">Expression <u>=Params("Parameter01")+3</u>. Parameter01 is given a value of 5.</p>
+        <ul style="list-style-type: disc;">
+            <li>If Parameter01 were typecast as a string, the result would be 53. The + operator is treated as concatenation.</li>
+            <li>If Parameter01 were typecast as an integer, the result would be 8. The + operator is treated as addition.</li>
+        </ul>
+        <h2 class="SVheading2">Using the Evaluation mode property</h2>
+        <p class="SVnormal">The <u>Evaluation mode</u> property determines the level within the instances tree topology at which the expression is evaluated.</p>
+        <ul style="list-style-type: disc;">
+            <li>Once - The expression is calculated at the level in the topology at which it is assigned and the value is propagated to all child elements. For example, the global parameter called gDomain, linked to the Domain property and with the expression "Dom_ " + " Me.name", is assigned to an instance of the Building template. The expression produces the value Dom_Building01 that is then used as the value for the Domain of all variable instantiations sub-ordinate to the Building instance.</li>
+            <li>On each instance - The parameter's expression is evaluated for each property where it is used. For example, for  the variable Bit01 the expression produces Dom_Bit01 that will be used as the Domain. The variable Register01 would have a Domain of Dom_Register01.</li>
+        </ul>
+        <h2 class="SVheading2">Using the <u>Must match property</u> property </h2>
+        <p class="SVnormal">The <u>Must match property</u> property allows you to restrict the value of the Parameter so that it respects the same rules that are applied to the property for which it will be used. To do this, <u>Must match property</u> is set to <u>Yes</u> and two new properties, <u>Element type</u> and <u>Property</u>, become visible. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/AA/must_match_property.png" MadCap:targetName="t2" style="display: none;" /></p>
+        <ul>
+            <li>Element type - Selects the configuration element type, for example Variable.</li>
+            <li>Property - Selects a property within the selected element, for example Alarm Priority.</li>
+        </ul>
+        <p class="SVnormal">When you enter a value for the parameter (NOT the <u>Default value</u>), you are presented with the same value entry dialog that you would see if you were entering the value directly into the original property. For example if the parameter was used for Alarm Level, when instantiating the user can only enter a value in the range 0 to 29.</p>
+        <div class="warning">
+            <p class="SVnormal">This only works when the property where the parameter is independent - that is its range of values does not depend on the value of another property.</p>
+            <ul>
+                <li>
+                    <p class="SVbulleted">An example of a property that is not independent is the list of tables in a database, which is dependent on the database.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">An example of a property that is independent is Domain, which will always have the same list of values no matter what the context.</p>
+                </li>
+            </ul>
+        </div>
+        <h2 class="SVheading2">How to add an input parameter to a template</h2>
+        <p class="SVnormal">Adding an input parameter to the Parameters folder of a template defines at which level, within the template hierarchy, that the parameter value is entered. </p>
+        <ol>
+            <li value="1"><a name="kanchor11"></a>Select the Templates tab, navigate the templates configuration tree and select the template.	</li>
+            <li value="2">Select the Parameters folder.</li>
+            <li value="3">Select <u>Add a parameter</u>. The menu will expand to display the available parameters. Select the parameter that is to be added.</li>
+        </ol>
+        <p class="SVnormal">For more information see the topic <a href="Input_parameters_value.htm">How the value of an input parameter is resolved</a>.</p>
+        <h2 class="SVheading2">How to define a property using an Input or Expression parameter</h2>
+        <ol>
+            <li value="1">Select the Templates tab and navigate the templates configuration tree to open the properties grid that contains the property to be substituted.</li>
+            <li value="2">Right click on the property name (left column) and, from the pop-up menu, select <u>Define by</u> and then <u>Parameter</u> and follow the menu levels to select the name of the parameter. The value of the property will change to the name of the parameter.</li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">The previous three properties that you selected are always repeated (in blue) at the top of the list and can be used as shortcuts so that you do not have to drill down through the list every time.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

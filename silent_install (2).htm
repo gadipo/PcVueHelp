@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV_Installation.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Silent installation</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Silent Installation</h1>
+        <p class="SVnormal">Silent installation allows you to automate the installation of <span class="mc-variable OEM.ProductName variable">PcVue</span> rather than using the installation packages interactively. Silent installation is typically performed via scripts based on PowerShell or command line files (.cmd).</p>
+        <p class="SVnormal">This topic explains how to use the installation packages to perform silent installation, including:</p>
+        <ul>
+            <li>Fresh installation - The moment you install a given version of the product for the first time on a computer. The installation media must always be available.</li>
+            <li>Update or patching of the installation - When the product is already installed and you want to update to a newer release for the same version.  The installation media must always be available.</li>
+            <li>Repair - When the product is already installed and you want to make sure no file is missing or corrupted for the installed features.  The installation media is required in most cases.</li>
+            <li>Modify - When the product is already installed and you want to add or remove features. Adding features requires the installation media, removing features does not.</li>
+            <li>Remove - When the product is installed and you want to uninstall it. Does not require the installation media.</li>
+        </ul>
+        <p class="SVnormal">Please refer to the topic <a href="Before_starting.htm">Before starting the installation</a> for more information about what you should check before proceeding with installation.</p>
+        <div class="warning">
+            <p class="SVnormal">Scripts or command line used for installing <span class="mc-variable OEM.ProductName variable">PcVue</span> must be executed with administrator privileges.</p>
+        </div>
+        <p class="SVnormal">From an installation point of view, <span class="mc-variable OEM.ProductName variable">PcVue</span> is made-up of 2 packages that can be installed together or separately, on the same computer or not:</p>
+        <ul>
+            <li>&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> Core - The main components of the <span class="mc-variable OEM.ProductName variable">PcVue</span> product, including the desktop client and configuration tools.</li>
+            <li>The <span class="mc-variable OEM.ProductName variable">PcVue</span> Web Deployment Tools (WDT) - The Web Deployment Console and the web application packages that the WDC will help you deploy on the web server.</li>
+        </ul>
+        <p class="SVnormal"> Because both come with prerequisites packages, the full list of installation packages you will use to perform silent installation is the following:</p>
+        <ul style="list-style-type: disc;">
+            <li>Core prerequisites - Installed once only before Core installation. Not needed if Core does not need to be installed or if the Core prerequisites have already been installed. Provided as part of a Full DVD or a Standard package.</li>
+            <li>WDT prerequisites - Installed only once before Web Deployment Tools installation. Not needed if WDT does not need to be installed or if the WDT prerequisites have already been installed. Provided as part of a Full DVD or a Standard package.</li>
+            <li>Core - The main package for the <span class="mc-variable OEM.ProductName variable">PcVue</span> product. Provided as part of a Full DVD or a Standard package.</li>
+            <li>WDT - The Web Deployment Tools package. Provided as part of a Full DVD or a Standard package.</li>
+            <li>Patch -  The package you will use to update an already installed release. It is a bundled package that will update Core or WDT or both depending on what packages are already installed. Provided as part of a Full DVD or a Standard package for Minor updates or as a Cumulative patch.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">A product release comes either as a Major upgrade or as a Minor upgrade. A Major upgrade is not more important than a Minor one. The fact that a release is Major just indicates that from a Windows Installer prospective, some changes in the packages prevent from making a patch available (due to new files, removed files, changes in file names etc.).</p>
+            <p class="SVnormal">A Minor upgrade is a patch, it  is always available as a Cumulative patch, it may also be available as a Standard package and eventually as a Full DVD package. If provided as a Standard package, it is made up of the 4 packages for Core and WDT prerequisites and main packages in their respective folders, plus a patch folder that contains the patch packages.</p>
+        </div>
+        <p class="SVnormal">This topic contains typical command line examples that can be included in a command file.</p>
+        <p class="SVnormal">The examples assume the <span class="mc-variable OEM.ProductName variable">PcVue</span> installation media (DVD or ISO file) is mounted as drive D.</p>
+        <h2 class="SVheading2">Installing <span class="mc-variable OEM.ProductName variable">PcVue</span> Core and WDT prerequisite packages</h2>
+        <p class="SVnormal">Installing the prerequisites packages is the first step in any fresh installation process and cannot be performed with an installation media of type Cumulative patch.</p>
+        <p class="SVnormal">Packages are located in the \Prerequisite folder of the installation media:</p>
+        <ul>
+            <li>\Prerequisite\PrqCore.exe - Core prerequisites</li>
+            <li>\Prerequisite\PrqWdt.exe - WDT prerequisites</li>
+        </ul>
+        <p class="SVnormal">The following table lists the command line arguments available for these packages.</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Argument</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/quiet</td>
+                    <td class="SVtable">Suppress the installation wizard UI.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/norestart</td>
+                    <td class="SVtable">Suppress any restart. Unlike msiexec.exe, if no reboot option is specified, the installer prompts the user before restarting, even in quiet mode.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/repair</td>
+                    <td class="SVtable">Repair the installed package.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/uninstall</td>
+                    <td class="SVtable">Uninstall the installed package.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/log</td>
+                    <td class="SVtable">Log to a specific file.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/noprompt</td>
+                    <td class="SVtable">Suppress any message box (info, error) that may be open during the process.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">silentmode=1</td>
+                    <td class="SVtable">Suppress installation UI for embedded packages.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Performing a silent install requires using the arguments <u>/quiet</u> <u>/norestart</u> <u>/noprompt</u> <u>silentmode=1</u>.</p>
+        <p class="SVnormal">Example of command line for a fresh installation of the Core prerequisites:</p>
+        <p class="SVprogramCode">Start /wait D:\Prerequisite\PrqCore.exe /quiet /norestart /noprompt SilentMode=1</p>
+        <p class="SVnormal">Example of command line for a fresh installation of the WDT prerequisites:<br /></p>
+        <p class="SVprogramCode">Start /wait D:\Prerequisite\PrqWdt.exe /quiet /norestart /noprompt SilentMode=1</p>
+        <p class="SVnormal">You can repair and uninstall the <span class="mc-variable OEM.ProductName variable">PcVue</span> Core and WDT prerequisites using the /repair and /uninstall command line arguments.<br />As they have no optional feature to add or remove, you will never modify an installation.</p>
+        <p class="SVnormal">Example of command line to repair the Core prerequisites installation:</p>
+        <p class="SVprogramCode">Start /wait D:\Prerequisite\PrqCore.exe /quiet /norestart /repair SilentMode=1</p>
+        <p class="SVnormal">Example of command line to repair the WDT prerequisites installation:<br /></p>
+        <p class="SVprogramCode">Start /wait D:\Prerequisite\PrqWdt.exe /quiet /norestart /repair SilentMode=1</p>
+        <p class="SVnormal">Example of command line to uninstall the Core prerequisites:</p>
+        <p class="SVprogramCode">Start /wait D:\Prerequisite\PrqCore.exe /quiet /norestart /uninstall SilentMode=1</p>
+        <p class="SVnormal">Example of command line to uninstall the WDT prerequisites:<br /></p>
+        <p class="SVprogramCode">Start /wait D:\Prerequisite\PrqWdt.exe /quiet /norestart /uninstall SilentMode=1</p>
+        <h2 class="SVheading2"><a name="Typical_fresh_install"></a>Installing fresh Core and WDT packages</h2>
+        <p class="SVnormal">A fresh installation can be performed using a Full DVD or Standard package installation media. It cannot be performed with an installation media of type Cumulative patch.</p>
+        <p class="SVnormal">Packages on the installation media are the following:</p>
+        <ul>
+            <li>\Core\Setup.exe - Core package</li>
+            <li>\Wdt\Setup.exe - WDT package</li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">If the installation media you have at hands has a \Patch folder (it is the Standard package of a Minor update), performing a Fresh installation requires to proceed as described here and to then install the patch as described in <a href="#Core_and_WDT_Updates">Core and WDT Updates</a>.</p>
+        </div>
+        <p class="SVnormal">The Core package does have a number of features you can install optionally. See <a href="#Customize_feature_list">below</a> for the detailed list of features. The WDT does not have any optional feature.</p>
+        <p class="SVnormal">The following table lists the command line arguments available for the packages.</p>
+        <table style="width: 100%;">
+            <col>
+            </col>
+            <col>
+            </col>
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Argument</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/v”&lt;msiexec.exe arguments&gt;”</td>
+                    <td class="SVtable">Pass command-line options and arguments to msiexec.exe.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/s</td>
+                    <td class="SVtable">Suppress the installation wizard UI.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/clone_wait</td>
+                    <td class="SVtable">Wait for the setup process to complete before exiting.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/L&lt;LanguageId&gt;</td>
+                    <td class="SVtable">
+                        <p>Run in the language specified by its LanguageId (defaults to English if not specified).</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/x</td>
+                    <td class="SVtable">Uninstall the product.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Using the /v argument, you can pass arguments to the Windows Installer command that will be run ultimately. The list of useful arguments is the following:</p>
+        <table style="width: 100%;">
+            <col>
+            </col>
+            <col>
+            </col>
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Argument</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/quiet</td>
+                    <td class="SVtable">Suppress the installation wizard UI.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/norestart</td>
+                    <td class="SVtable">Never restarts the computer after the installation.
+If no reboot option is specified, the installer restarts the computer whenever necessary without displaying any prompt or warning to the user.<br />It is recommended to use it to avoid an unintended restart.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/l*v &lt;absolute path to log file&gt;</td>
+                    <td class="SVtable">Specify the path of the folder where to store log files. The folder must already exist.
+This parameter is optional, but highly recommended.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/uninstall</td>
+                    <td class="SVtable">Uninstall the product or a patch.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">/f&lt;options&gt;</td>
+                    <td class="SVtable">
+                        <p>Repair the product.
+Among the available options, the following are often used:</p>
+                        <ul>
+                            <li>
+                                <p>e - Reinstalls if file is missing or an equal or older version is installed.</p>
+                            </li>
+                            <li>
+                                <p>m - Rewrites all required computer-specific registry entries.</p>
+                            </li>
+                            <li>
+                                <p>u - Rewrites all required user-specific registry entries.</p>
+                            </li>
+                            <li>
+                                <p>s - Overwrites all existing shortcuts.
+</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">INSTALLDIR_OEM</td>
+                    <td class="SVtable">Specify a custom target directory for programs (\Bin).</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">PROJECTDIR_USR</td>
+                    <td class="SVtable">Specify a custom target directory for projects (\Usr) and shared libraries (\Lib). Applicable to the Core package only.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ADDFEATURE</td>
+                    <td class="SVtable">Specify a custom list of features to install when performing a fresh installation and when modifying an already installed product.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">REMOVE</td>
+                    <td class="SVtable">Specify a list of features to remove when modifying an already installed product.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Performing a silent install requires using the arguments <u>/s</u> <u>/v"/quiet /norestart"</u>.</p>
+        <p class="SVnormal">The following command line installs the Core in the default target directories with the default features:</p>
+        <p class="SVdataListing">Start /wait D:\Core\Setup.exe /clone_wait /s /v"/quiet /norestart"</p>
+        <p class="SVnormal">The following command line installs the WDT in the default target directory with the default features: </p>
+        <p class="SVdataListing">Start /wait D:\Wdt\Setup.exe /clone_wait /s /v"/quiet /norestart"</p>
+        <h3 class="SVheading3">Customizing the installation language</h3>
+        <p class="SVnormal">By default the installation language is English but it can be changed using the /L argument with the following language codes.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 200px;" />
+            <col style="width: 100px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtable">
+                        <p>German</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>1031</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Spanish</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>1034</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>French</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>1036</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Italian</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>1040</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Japanese</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>1041</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Latvian</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>1062</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Polish</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>1045</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Portuguese</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>2070</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Russian</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>1049</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Chinese (Simplified)</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>2052</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Chinese (Traditional)</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>1028</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Using a specific installation language changes the installation behavior as follows:</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted">The shortcuts are created in the specified language.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">The Online Help is installed in the specified language if it exists, in addition to the Online Help in English, which is always installed if the Online Help feature is selected.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">The Library, QuickStart and Demo projects are installed in the specified language if they exist.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">The default language settings for a new project are: 1<sup>st</sup> language = Installation language, 2<sup>nd</sup> language = English.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The following command line installs the Core with the default features and the installation language set to French. </p>
+        <p class="SVprogramCode">Start /wait D:\Core\Setup.exe /clone_wait /L1036 /s /v"/quiet /norestart"</p>
+        <p class="SVnormal">The following command line installs the WDT with the default features and the installation language set to Italian. </p>
+        <p class="SVprogramCode">Start /wait D:\Wdt\Setup.exe /clone_wait /L1040 /s /v"/quiet /norestart"</p>
+        <h3 class="SVheading3">Customizing target folders</h3>
+        <p class="SVnormal">You can customize the target folders using the arguments /l*v, INSTALLDIR_OEM and PROJECTDIR_USR respectively for the installation log files, programs and projects &amp; libs.</p>
+        <p class="SVnormal">The following command line installs the Core with custom target folders for the programs and the projects &amp; libs.</p>
+        <p class="SVdataListing">Start /wait D:\Core\Setup.exe /clone_wait /s /v"/quiet /norestart INSTALLDIR_OEM=\”C:\<span class="mc-variable OEM.ProductName variable">PcVue</span> 16\” PROJECTDIR_USR=\"C:\<span class="mc-variable OEM.ProductName variable">PcVue</span> Projects\""</p>
+        <p class="SVnormal">The following command line installs the WDT with custom target folders for the programs and the log files.</p>
+        <p class="SVdataListing">Start /wait D:\Core\Setup.exe /clone_wait /s /v"/quiet /norestart INSTALLDIR_OEM=\”C:\<span class="mc-variable OEM.ProductName variable">PcVue</span> 16\” /l*v C:\Log\Install.log"</p>
+        <div class="warning">
+            <p class="SVnormal">The folder in which the installation log files are stored must exist or the command line will fail. The other folders are created automatically if they do not exists</p>
+        </div>
+        <h3 class="SVheading3"><a name="Customize_feature_list"></a>Customizing the feature set when installing a Core package</h3>
+        <p class="SVnormal">By default, the Core package only installs mandatory features (programs in particular)  as seen when you perform a Typical installation interactively.</p>
+        <p class="SVnormal">The full list of features you can select from to perform a custom installation is described in the following table with the corresponding mnemonics to pass on the command line. It matches the set of features available for selection when you perform a Custom installation interactively.</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Feature mnemonic</td>
+                    <td class="SVtableHeading">Description</td>
+                    <td class="SVtableHeading">Required and installed in all cases</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Redist</td>
+                    <td class="SVtable">Redistribuable files</td>
+                    <td class="SVtable">Yes</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Main</td>
+                    <td class="SVtable">Main programs and data files</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Main_Main</td>
+                    <td class="SVtable">Main programs and data files</td>
+                    <td class="SVtable">Yes</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Main_Licutil</td>
+                    <td class="SVtable">License utility</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Main_Dmt</td>
+                    <td class="SVtable">Database manager</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Cimway</td>
+                    <td class="SVtable">CimWay programs and data files</td>
+                    <td class="SVtable">Yes</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Hmi_BIMControl</td>
+                    <td class="SVtable">HMI BIM control</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Hmi_VideoControls</td>
+                    <td class="SVtable">HMI Video controls</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Backend</td>
+                    <td class="SVtable">Web &amp; Mobile back end</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Backend_Geoloc</td>
+                    <td class="SVtable">Geolocation back end</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Backend_Geoloc_Tracking</td>
+                    <td class="SVtable">Tracking</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Backend_Push</td>
+                    <td class="SVtable">Notification publisher (preview)</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Msg</td>
+                    <td class="SVtable">Instant Messaging server</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Msg_Bot</td>
+                    <td class="SVtable">Smart bot</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Readme</td>
+                    <td class="SVtable">Readme in English and in the installation language if any</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Readme_en</td>
+                    <td class="SVtable">Readme in English</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Readme_fr</td>
+                    <td class="SVtable">Readme in French</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Readme_zhChs</td>
+                    <td class="SVtable">Readme in Chinese</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Readme_ru</td>
+                    <td class="SVtable">Readme in Russian</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Readme_ja</td>
+                    <td class="SVtable">Readme in Japanese</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Help</td>
+                    <td class="SVtable">Online help in English and in the installation language if any</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Help_Common</td>
+                    <td class="SVtable">Online help sections common to all languages, including the reference help for the VBA</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Help_en</td>
+                    <td class="SVtable">Online help in English </td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Help_fr</td>
+                    <td class="SVtable">Online help in French</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Help_es</td>
+                    <td class="SVtable">Online help in Spanish</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Help_de</td>
+                    <td class="SVtable">Online help in German</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Help_it</td>
+                    <td class="SVtable">Online help in Italian</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Help_zhChs</td>
+                    <td class="SVtable">Online help in Chinese</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Help_ru</td>
+                    <td class="SVtable">Online help in Russian</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Help_ja</td>
+                    <td class="SVtable">Online help in Japanese</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Lib</td>
+                    <td class="SVtable">Libraries</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Qstart</td>
+                    <td class="SVtable">QuickStart project</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Demo</td>
+                    <td class="SVtable">Demonstration project</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Doc</td>
+                    <td class="SVtable">Extra documentation including the addenda</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Sdk</td>
+                    <td class="SVtable">SDK &amp; API resources</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Sdk_Import</td>
+                    <td class="SVtable">Technical resources for the XML Generic Import Toolkit</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Sdk_Manager</td>
+                    <td class="SVtable">Technical resources for the SV Manager SDK</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Sdk_Protocol</td>
+                    <td class="SVtable">Technical resources for the CimWay driver SDK</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Sdk_WebServices</td>
+                    <td class="SVtable">Technical resources for the Web Services Toolkit</td>
+                    <td class="SVtable">No</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Mnemonics of features and sub-features can be used as part of the ADDFEATURE argument to customize the set of features that will be installed.</p>
+        <div class="warning">
+            <p class="SVnormal">Pay attention to the fact that mnemonics are case sensitive.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">The component Edge WebView2 runtime must be installed if you want to take advantage of the HMI Web browser control. While it can be selected as part of the installation UI, the silent installation is not designed to install it.</p>
+            <p class="SVnormal">If you want to install it silently as part of your deployment strategy, we recommend you to directly use the Microsoft redistributable available at <a href="https://developer.microsoft.com/microsoft-edge/webview2/" target="_blank">https://developer.microsoft.com/microsoft-edge/webview2/</a>. Select the Evergreen Standalone Installer for the x64 platform if you have a typical offline deployment. It must be installed in <i>Per-machine</i> mode (as opposed to <i>Per-user</i>).</p>
+        </div>
+        <p class="SVnormal"><u>Example 1:</u>
+        </p>
+        <p class="SVnormal">To install the mandatory programs plus the Web &amp; Mobile back end and Libraries, you would use the following command line:</p>
+        <p class="SVdataListing">Start /wait D:\Core\Setup.exe /clone_wait /s /v"/quiet /norestart ADDFEATURE=Backend,Lib"</p>
+        <p class="SVnormal">This corresponds to the following optional features as you would select them in the installation UI. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Install/SV_silent_install_options.png" MadCap:targetName="t3" style="display: none;" /></p>
+        <p class="SVnormal" style="text-decoration: underline;">Example 2:</p>
+        <p class="SVnormal">To install the mandatory programs, plus the Database Manager, the Web &amp; Mobile back end, the Geolocation back end, the Instant Messaging server and the Smart Bot, you would use the following command line:</p>
+        <p class="SVdataListing">Start /wait D:\Core\Setup.exe /clone_wait /s /v"/quiet /norestart ADDFEATURE=Main_Dmt,Backend_Geoloc,Msg_Bot /l*v C:\Log\Install.log"</p>
+        <p class="SVnormal">This corresponds to the following optional features as you would select them with the Custom installation UI. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Install/SV_silent_install_custom.png" MadCap:targetName="t4" style="display: none;" /></p>
+        <h2 class="SVheading2">Modifying the Core installation</h2>
+        <p class="SVnormal">The set of features installed for a product can by modified using a Full DVD or a Standard package installation media. It cannot be performed with an installation media of type Cumulative patch.<br />The useful command line arguments for modifications are:</p>
+        <ul>
+            <li>
+                <p class="SVnormal">The ADDFEATURE argument to install more features</p>
+            </li>
+            <li>
+                <p class="SVnormal">The REMOVE argument to uninstall one or more features</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The mnemonics for identifying features are the same as for customizing a Fresh installation. See <a href="#Customize_feature_list">How to customize the feature set</a> for more information.</p>
+        <div class="note">
+            <p class="SVnormal">Adding features requires at least the installation media of the last installation performed. Because patch installation packages are cached on the Windows system, the installation media of any installed patch is not necessary.</p>
+        </div>
+        <p class="SVnormal"><u>Example:</u>
+        </p>
+        <p class="SVnormal">If the Core package is already installed, the following command line will add the QuickStart project and the XML Generic Import toolkit resources, and it will also remove the Addenda part of the documentation. </p>
+        <p class="SVprogramCode">Start /wait D:\Core\Setup.exe /clone_wait /s /v"/quiet /norestart ADDFEATURE=QStart,Sdk_Import REMOVE=Doc_Addenda"</p>
+        <h2 class="SVheading2"><a name="Core_and_WDT_Updates"></a>Updating Core and WDT</h2>
+        <p class="SVnormal">Because patches are distributed as a bundle embedding the patch for both the Core and the WDT packages, there is only one command line to run to update an installed product with a Cumulative patch.</p>
+        <p class="SVnormal">For example, you can use a command such as:</p>
+        <p class="SVdataListing">Start /wait "" "D:\15.0.3_<span class="mc-variable OEM.ProductName variable">PcVue</span>_Patch for 15.0.0 or later.exe" /quiet /norestart</p>
+        <p class="SVnormal">If you have a Standard package with a \Patch folder (it is the Standard package of a Minor update), the patch is available in the \Patch folder, and you can use a command such as:</p>
+        <p class="SVdataListing">Start /wait "" "D:\Patch\15.0.3_<span class="mc-variable OEM.ProductName variable">PcVue</span>_Patch for 15.0.0 or later.exe" /quiet /norestart</p>
+        <h2 class="SVheading2">Return codes</h2>
+        <p class="SVnormal">The main return codes are the following:</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Error code</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ERROR_SUCCESS</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">Completed successfully</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ERROR_SUCCESS_REBOOT_INITIATED</td>
+                    <td class="SVtable">1641</td>
+                    <td class="SVtable">The installer has initiated a restart. This message is indicative of a success</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ERROR_SUCCESS_REBOOT_REQUIRED</td>
+                    <td class="SVtable">3010 </td>
+                    <td class="SVtable">A restart is required to complete the install. This message is indicative of a success. </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">
+Please refer to the Microsoft documentation for the full list of Windows Installer error codes: <a href="https://docs.microsoft.com/windows/win32/msi/error-codes" target="_blank">https://docs.microsoft.com/windows/win32/msi/error-codes</a></p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

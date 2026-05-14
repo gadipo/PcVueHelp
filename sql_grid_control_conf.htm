@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Graphic controls and Viewers" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to configure a Sql grid control</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to configure a Sql grid control</h1>
+        <p class="SVnormal">The Sql grid is a control designed to display the result of Sql queries in a grid control. Based on pre-defined Sql queries, it is able to request data upon mimic opening and other triggers, and display the returned data under the form of a data table.</p>
+        <h2 class="SVheading2">Prerequisites</h2>
+        <ul>
+            <li>
+                <p class="SVbulleted">You have configured a Sql read query with consumer type User interface. Refer to How to configure Sql queries topic to learn more.</p>
+            </li>
+            <li>
+                <p>You have created the mimic in which the Sql grid control is to be inserted.</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2"><a name="aspect-general"></a>Inserting a Sql grid control and configuring the Aspect and General properties</h2>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Open the mimic in design mode and click the Insert menu.</p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click Sql grid, the Properties dialog of the control opens. The first tab is Aspect tab, here you can configure the following properties: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="conf-aspect-props"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Border and Appearance properties - Define the style of the control's border.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted"> Position and Size properties - Define the control's position and size in the mimic.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Locked - If selected, the control cannot be moved or changed while in Design mode.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Save properties as text (ASCII mimic only) - If selected, the control's properties are saved  in ASCII format. The mimic must also be saved in ASCII.</p>
+                        <p>
+                            <img src="../../Resources/Images/HMI/Controls/sql_grid_control_aspect_conf_task.png" MadCap:targetName="conf-aspect-props" style="display: none;" />
+                        </p>
+                        <div class="tip">
+                            <p class="SVnormal">You can specify more properties to control the graphical element visibility. From the Aspect tab, behind the down arrow at the bottom of the Properties dialog box:</p>
+                            <ul>
+                                <li>
+                                    <p class="SVbulleted">Specify zoom visibility bounds so that the graphic control is only visible for predefined zoom levels.</p>
+                                </li>
+                                <li>
+                                    <p class="SVbulleted">Specify layers so that the graphic control is only visible if one of the selected layers is displayed.</p>
+                                </li>
+                            </ul>
+                            <p class="SVnormal">These are even more useful when combined with user permissions and <a href="../Drawing/Creating_and_Using_De-clutter_Templates.htm">decluttering templates</a>.</p>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Select the General tab, here you can configure the size of the grid, the number of rows and columns, and more via the following properties:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Rows / Columns - Specify the total number of rows and columns respectively, including any header rows and columns. For example, if you want a grid of 10 x 3 cells and both row and column headers, the number of rows/columns to configure is 11 x 4. When referenced programmatically the top left cell, excluding any headers, has an index of 0,0.</p>
+                        <div class="note">
+                            <p class="SVnormal">There is no enforced limit for the maximum number of cells but it is recommended that the total number of cells is kept below 100,000.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Fixed Row/ Col - Specify the number of header rows and columns. When referenced programmatically, the cells of the header rows and columns are indexed negatively. A value of zero means that no row or column header is displayed. The cells that make up the headers behave differently compared to the other cells. Certain actions cannot be perform on them such as changing their color from the configuration dialog, select them or type text into them (although you can change their label using a script).</p>
+                        <div class="warning">
+                            <p class="SVnormal">You must have a header row and column if you want to allow the user to resize the columns and rows at run time.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Scrollbars - If selected, it enables the display of scroll bars in the grid. It can be used to navigate through the cells at run-time if the number of cells is greater than can be displayed in the grid control's visible area.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Background - Defines the background color of the cells.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Gridline color - Defines the color of the grid displayed between the cells.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Text color - Defines the color of any text displayed in the grid.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Font -Defines the font type and style for all the cells including the headers.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Selectable - If selected, enables the selection of cells by pointing and clicking at runtime.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Multiselection - If selected, enables the selection of multiple cells at once.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Autosize - If selected, it enables the automatic adjustment of the width and height of each cell to fit the available space. All rows will have the same height and all columns will have the same width. The effect of any previous resizing is lost.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Frame selection - If selected, enables highlight of selected cells with a black frame.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Track selection - If selected, causes the headers to indicate the cell that is currently selected by adopting a relief appearance.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Enable Drag &amp; Drop - If selected, enables dragging and dropping the contents of one cell to another.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Editable - If selected, enables entering of text into cells.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Sort on Header Click - If selected, it enables the sorting of the contents of the entire grid at run-time, using to the content of a single column.</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Configuring the Queries tab properties</h2>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Select the Queries tab.</p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Select a Sql connection from the Sql connection name drop-down.</p>
+                <div class="note">
+                    <p class="SVnormal">Several Sql queries can be configured in the grid but only the one flagged as selected is used to fill the control at runtime. Associated variable or SCADA Basic give you a way to switch from one Sql query to another at runtime.</p>
+                </div>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Click in a Sql query cell to select the query. The query must be configured to be consumed by a user interface. If the query comes with parameters, parameter columns are added to the table to configure the parameters substitution. It is possible to select the same query several times in case you need to use the same query with different parameter values. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="conf-data-connec-props"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../../Resources/Images/HMI/Controls/sql_grid_control_data_connection_conf_task.png" MadCap:targetName="conf-data-connec-props" style="display: none;" />
+                </p>
+            </li>
+            <p class="SVnormal">You can further configure the queries:</p>
+            <ul>
+                <li>
+                    <p class="SVbulleted">To substitute a parameter with a variable, select the icon in the value column and select a variable from the Variable selector dialog. You can also enter a static value directly or enter an expression. For example, selecting the variable "@MyVariable" in the value field for ?Param01 will substitute the value of the parameter called Param 01 with that of the variable called @MyVariable.</p>
+                    <div class="warning">
+                        <p class="SVnormal">Query parameter substitution is saved as part of the mimic.</p>
+                    </div>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <p class="SVbulleted">To define the default Sql query, tick the Sel checkbox for the desired query. It is possible to validate the configuration without any default query selected, an associated index variable must then be used to specify the default query. SCADA Basic scripting can also be used to select the query to execute.</p>
+                </li>
+            </ul>
+            <div class="tip">
+                <p class="SVnormal">You can copy, paste, cut, create, delete, move up, or move down any query using the context menu available on right-click.</p>
+            </div>
+        </ol>
+        <h2 class="SVheading2">Configuring the Operations tab properties</h2>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Select the Operations tab. Here you can configure the following properties: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="conf-op-props"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Selection - Defines how the default query to execute is selected. There are two options: If set to Default item selection, the selected query in the Queries tab is used. If set to Index variable value, the query is selected according to the value of the Index variable.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Index - Defines the register variable used as  index to select a query.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Execution status - Defines the register variable that holds the operation status of the query.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Execution error -Defines the text variable that holds extra information when the variable status indicates a failure.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Number of rows returned - Defines the register variable that holds the number of rows returned by the last query execution.</p>
+                    </li>
+                </ul>
+                <p>
+                    <img src="../../Resources/Images/HMI/Controls/sql_grid_control_operations_conf_task.png" MadCap:targetName="conf-op-props" style="display: none;" />
+                </p>
+            </li>
+            <div class="note">
+                <p class="SVnormal">Changes in variable values are in both directions:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">If you change the control's query selection, the value of the index variable changes.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">If you change the value of the index variable, the query selection in the control changes to follow it (assuming that the value is within the valid range).</p>
+                    </li>
+                </ul>
+            </div>
+        </ol>
+        <h2 class="SVheading2">Configuring the Execution tab properties</h2>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Select Execution tab. Here you can set the execution properties of a Sql read query. It’s possible to trigger it cyclically, on a trigger, by script or with an accelerator key. It’s also possible to inhibit the query execution. The following properties can be configured: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="conf-exec-props"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Cyclic - If selected, activates the execution of the selected query cyclically. The execution period can be customized.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Triggering bit - If selected, enables the execution of the selected query on value change of a bit variable. If the variable is invalid, query execution is inhibited.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">On mimic open - If selected, enables the execution of the selected query when the mimic that contains the grid is opened.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Allow trigger by script - If selected, enables the use of the SCADA Basic instruction SELECTOR to trigger the query.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Enable - If selected, enables the use of a keyboard accelerator key to trigger the query. You can specify the  shortcut in the Accelerator field.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Inhibiting bit - If selected, enables the use of a bit variable to inhibit the execution of the query if the variable changes to 0 or 1. If the variable is NS, the query is also inhibited.</p>
+                    </li>
+                </ul>
+                <p>
+                    <img src="../../Resources/Images/HMI/Controls/sql_grid_control_execution_conf_task.png" MadCap:targetName="conf-exec-props" style="display: none;" />
+                </p>
+                <div class="warning">
+                    <p class="SVnormal">If a query is in running state, it’s not possible to trigger it again.</p>
+                </div>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Activating Traces messages</h2>
+        <p class="SVnormal">The Traces tab is used to enable trace messages from the control. It is useful when diagnosing errors or if you want to track the activity at run-time. Trace messages appear in the Trace window and are logged in the trace file. The following messages can be generated.</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">System errors - If selected, logs a trace when an unexpected error such as a stream processing failure occurs.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Verbose - If selected, logs traces of all activity associated with the control.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Runtime (Queries) - If selected, logs traces  related to query handling.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Runtime (Triggers) - If selected, logs  traces related to query triggering.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Runtime (Performances) - If selected, logs  traces related to query performances.</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Using the Sql grid at runtime</h2>
+        <p class="SVnormal">This section describes the basic capabilities of the Sql grid at run-time as  configured with the properties in the Aspect and General tab.</p>
+        <div class="note">
+            <p class="SVnormal">Capabilities can be extended by scripting the Sql grid control with the SCADA Basic instruction SELECTOR.</p>
+        </div>
+        <h3 class="SVheading3">Resizing a column or row</h3>
+        <p class="SVnormal">Rows and columns can be re-sized by clicking and dragging the border between adjacent columns or rows on the header. The new widths and heights are saved when the mimic is saved as long as the property Autosize in the General tab is not selected.</p>
+        <p class="SVnormal">If you want to resize the columns or rows, and then prevent further resizing by the run-time user, the headers must be turned off (number of headers set to 0) when the mimic is saved.</p>
+        <div class="note">
+            <p class="SVnormal">If the run-time user does not have development rights, resizing is not persisted. The columns and rows return to their design size when the mimic is closed and re-opened.</p>
+        </div>
+        <h3 class="SVheading3">Selecting cells</h3>
+        <p class="SVnormal">Cell selection is only possible if Selectable property is selected in the General tab of the properties dialog. The background of the cells changes color to blue when they are selected.</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">To select a single cell, click on it. Clicking again will de-select it.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">To select several cells, hold down the ctrl key while clicking on cells in succession.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">To select a block of cells, click and drag the pointer across adjacent cells or select a cell for one end or corner of the block, then hold down the shift key and click on the cell in the opposite end or corner.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">To select all cells in a column, click on the corresponding cell in the column header.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">To select all cells in a row, click on the corresponding cell in the row header.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">To select all cells, use the keyboard shortcut ctrl+A.</p>
+            </li>
+        </ul>
+        <h3 class="SVheading3">Navigating</h3>
+        <p class="SVnormal">The Sql grid supports similar control of navigation to that of Microsoft Excel. The most commonly used keys are as follows:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">Tab - Selects the next cell in the same row (or if at the end of the row: the first cell in the next row).</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Shift+Tab - Selects the previous cell in the same row (or if at the start of the row: the last cell in the previous row).</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Arrow keys - Moves the selection according to the key pressed (up, down left and right).</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Home - Selects the first cell in a row.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">End - Selects the last cell in a row.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Ctrl+Home - Selects the first cell in the grid.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Ctrl+End - Selects the last cell in the grid.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Page up - Scrolls the display vertically so that the previous page is displayed. A page is the visible area in Grid; the grid itself is continuous.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Page down - Scrolls the display vertically so that the next page is displayed.</p>
+            </li>
+        </ul>
+        <h3 class="SVheading3">Sorting cells</h3>
+        <p class="SVnormal">To sort the whole grid alphabetically, click on a cell in the top header (a second click reverses  the sort order). The sort order is according to the corresponding column's contents.</p>
+        <div class="note">
+            <p class="SVnormal">The cells content is text and will be sorted alphabetically. Sorting a column that only contains numbers may produce unexpected results. For example:</p>
+            <p class="SVnormal">1,2,3,4,5,6,7,8,9,11,12 will be sorted as 1,11,12,2,3,4,5,6,7,8,9</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

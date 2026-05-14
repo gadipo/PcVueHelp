@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Archives|Using the HDS to record data|Database migration" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Overview of Database migration</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Overview of Database migration</h1>
+        <p class="SVnormal">Depending on changes brought to the archiving features, migrating to a newer version of <span class="mc-variable OEM.ProductName variable">PcVue</span> can require changes to the HDSdatabase schema for each of your databases.</p>
+        <p class="SVnormal">2 mechanisms are available to ensure a smooth migration:</p>
+        <ul style="list-style-type: disc;">
+            <li>If the database size is less than 10 Gb, the conversion will happen automatically the first time that the project is started with the new version of <span class="mc-variable OEM.ProductName variable">PcVue</span>. This may take several minutes during which time you must not restart the computer.</li>
+            <li>If the database size is greater than 10 Gb, the HDS will not start and you must use a T-SQL migration script to manually convert the historic data. The script is found in Bin folder and must be run using SQL Server Management Studio. If you are unsure about how to do that then please contact your Technical Support provider. </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">Before initiating either the automatic or manual conversion, you should ensure that the historic data files are backed up.</p>
+        </div>
+        <p class="SVnormal">The following topics explain how HDS database structures and data can be migrated when starting <span class="mc-variable OEM.ProductName variable">PcVue</span> with an application that used to be run with an earlier version:</p>
+        <ul>
+            <ul>
+                <li>
+                    <p class="SVbulleted"><a href="HDS_Migration_SQL_Server.htm">How to use the SQL Server Management Studio</a> - A note for prime users of SSMS,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">How to <a href="HDS_Migration_Database_Backup.htm">backup</a> and <a href="HDS_Migration_Database_Restore.htm">restore</a> a database,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">The first <span class="mc-variable OEM.ProductName variable">PcVue</span> start up and the <a href="HDS_migration_Startup.htm">automatic migration</a>,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">How to <a href="HDS_Migration_Database_Migrate.htm">manually migrate</a> HDS tables.</p>
+                </li>
+            </ul>
+        </ul>
+        <p class="SVnormal">These instructions are applicable in the following context:</p>
+        <ul>
+            <ul>
+                <li>
+                    <p class="SVbulleted">
+                        &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> version 10.0 or upper using the Historical Data Server to archive data in a Microsoft SQL Server database.</p>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                    <p class="SVbulleted">Microsoft SQL Server: All editions, including SQL Server Express.</p>
+                </li>
+            </ul>
+        </ul>
+        <p class="SVnormal">These instructions are not applicable if:</p>
+        <ul>
+            <ul>
+                <li>
+                    <p class="SVbulleted">You intend to discard HDS archived data prior to the upgrade of an existing application.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">You are working on a new application, without HDS archived data to preserve during the version upgrade phase.</p>
+                </li>
+            </ul>
+        </ul>
+        <p class="SVnormal">In the following topics:</p>
+        <ul>
+            <ul>
+                <li>
+                    <p class="SVbulleted">The Historical Data Server is referred to as HDS,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Microsoft SQL Server Management Studio is referred to as SSMS,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Transact-SQL script is referred to as T-SQL.</p>
+                </li>
+            </ul>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">If your <span class="mc-variable OEM.ProductName variable">PcVue</span> application takes advantage of multiple HDS databases and/or multiple SQL Server hosts, it is required to apply the following instructions to each HDS database on each SQL Server host.</p>
+        </div>
+        <h2 class="SVheading2">Migration of Historic Data to Version 12</h2>
+        <p class="SVnormal">The HDS database table structures changed in version 12 as follows:</p>
+        <ul style="list-style-type: disc;">
+            <li>In the Log Table, the size of the LogList column increased to 100 characters.</li>
+        </ul>
+        <p class="SVnormal">If you have a project developed in a version earlier than 12, historic data has to be converted before it is compatible.</p>
+        <h2 class="SVheading2">Migration of Historic Data to Version 11.2 (or later)</h2>
+        <p class="SVnormal">The HDS database table structures changed in version 11.2 as follows:</p>
+        <ul style="list-style-type: disc;">
+            <li>In the Log Table, the size of the AssocLabel column increased from 12 to 255 characters and the EvtTitle column increased from 24 to 255 characters.</li>
+            <li>In the Trend Table, the size of the AssocLabel column increased from 12 to 255 characters.</li>
+        </ul>
+        <p class="SVnormal">If you have a project developed in a version earlier than 11.2, historic data has to be converted before it is compatible.</p>
+        <h2 class="SVheading2">Migration of Historic Data from Version 9.0 (or earlier) to Version 10.0 (or later)</h2>
+        <p class="SVnormal">Enhancement to the operation of the HDS means that the table structures used in version 9.0 and earlier are not compatible with those in version 10.0 and later. If you have a project developed in version 9.0 or earlier that is using the HDS, historic data has to be converted before it is compatible with version 10.0 or later.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

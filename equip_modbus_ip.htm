@@ -1,0 +1,2748 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|Equipment|Driver references" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Modbus Ip</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Modbus Ip</h1>
+        <p class="SVnormal">This driver supports communication over Ip with Modbus field devices.</p>
+        <p class="SVnormal">In all exchanges, <span class="mc-variable OEM.ProductName variable">PcVue</span> is the master and the field device is the slave.</p>
+        <div class="note">
+            <p class="SVnormal">If you need the field device to be master and <span class="mc-variable OEM.ProductName variable">PcVue</span> to be slave, you should use the Modbus Ip Slave driver instead.</p>
+        </div>
+        <p class="SVnormal">The driver also has preconfigured sets of frames for communication with:</p>
+        <ul>
+            <li>
+                <p>Wago DALI controllers</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Supported functions</h2>
+        <p class="SVnormal">The following function codes are supported.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Decimal</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Hex</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Function</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>1</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x01</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read coil status</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>2</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x02</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read input status</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>3</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x03</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read holding registers</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>4</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x04</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read input registers</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>5</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x05</p>
+                </td>
+                <td class="SVtable">
+                    <p>Force single coil</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>6</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x06</p>
+                </td>
+                <td class="SVtable">
+                    <p>Force single register</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>15</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x0F</p>
+                </td>
+                <td class="SVtable">
+                    <p>Force multiple coils</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>16</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x10</p>
+                </td>
+                <td class="SVtable">
+                    <p>Force multiple registers</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>65</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x41</p>
+                </td>
+                <td class="SVtable">
+                    <p>Extended read coil status</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>66</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x42</p>
+                </td>
+                <td class="SVtable">
+                    <p>Extended read input status</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>67</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x43</p>
+                </td>
+                <td class="SVtable">
+                    <p>Extended read holding registers</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>68</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x44</p>
+                </td>
+                <td class="SVtable">
+                    <p>Extended read input registers</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>69</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x45</p>
+                </td>
+                <td class="SVtable">
+                    <p>Extended force single coil</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>70</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x46</p>
+                </td>
+                <td class="SVtable">
+                    <p>Extended force single register</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>79</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x4F</p>
+                </td>
+                <td class="SVtable">
+                    <p>Extended force multiple coils</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>80</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x50</p>
+                </td>
+                <td class="SVtable">
+                    <p>Extended force multiple registers</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Prerequisites</h2>
+        <p class="SVnormal">Open Modbus Master for Wago DALI is a specific implementation of Modbus TCP/IP with specially formatted frames.<br />DALI (Digital Addressable Lighting Interface) is a protocol used for standardized control of electronic ballasts in lighting applications.</p>
+        <p class="SVnormal">The Wago DALI module (750-641) can control up to 64 DALI slaves (also known as ballasts) connected on a single line. Each slave can be assigned to 16 individual groups or 16 individual scenes. Addressing, allocating and parameter changes to the slaves is made using an IEC 61131-3 program running on a Wago programmable coupler.</p>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> provides connectivity to the Wago DALI module using a Wago programmable Ethernet controller (750-851) and the Modbus TCP/IP protocol. The programmable controller must run a specific program (SVDALIDRV) available from Wago. A single Ethernet controller can be connected to up to five DALI modules.</p>
+        <p class="SVnormal">To configure <span class="mc-variable OEM.ProductName variable">PcVue</span> for connection to the DALI module you must select the equipment type WAGO_DALI (see below). </p>
+        <h2 class="SVheading2">Network properties</h2>
+        <p class="SVnormal">This topic only includes a reference of objects' properties.<br /></p>
+        <p class="SVnormal">See the topic <a href="equipment_configure_comm_objects.htm">How to configure networks devices and frames</a> for more information about how to configure communication objects.</p>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the network</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the network (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the network will start upon Equipment communication start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Use default value</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Networking</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Servers</p>
+                </td>
+                <td class="SVtable">
+                    <p>The list of <span class="mc-variable OEM.ProductName variable">PcVue</span> stations where the network will be active</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Device properties</h2>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the device</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the device (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Equipment type</td>
+                    <td class="SVtable">Select the type of equipment that best suits the field device you want  communicate with.<br />The list of frame types and address ranges depend on the equipment type.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">With the Modbus Ip driver, the property <u>Equipment type</u> allows you to select between Modbus and Jbus addressing, decimal and hexadecimal encoding of memory addresses.<br />Modbus frame addresses start at 1, Jbus frame addresses start at 0.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Address</td>
+                    <td class="SVtable">The Ip address of the field device.<br />Some drivers also support configuration by host name.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Slave address</td>
+                    <td class="SVtable">The Modbus slave address of the field device<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the device will start upon network start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Connection</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum waiting time between a request and the reply from the equipment</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Port number</p>
+                </td>
+                <td class="SVtable">
+                    <p>The port number of the field device</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p>Shared connection </p>
+                </td>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p class="SVnormal">Connection sharing is normally used when communicating with a Modbus gateway with a single Modbus TCP/IP connection on one side and several serial Modbus devices on the other.</p>
+                    <p class="SVnormal">Sharing the connection allows a single TCP/IP address and Port to be used to communicate with several Modbus devices. If connection sharing is not enabled then each connection requires its own TCP port.</p>
+                    <p class="SVnormal">When you use connection sharing, communication is managed serially. That is communication with one device (send and reply) must be completed before communication with the next device is started. The disadvantage of this method is that if one device is faulty, the communication is delayed to all the other devices while the connection times out. A connection on the TCP/IP side will only be restarted if all shared connections time out.</p>
+                    <p class="SVnormal">By default, shared connections are allocated to a single group (group 0), and a single connection to a gateway typically allow communication with one or more PLC field devices. If you have more than one Modbus gateway, you should allocate all devices accessible via a given Modbus gateway to the same group by the setting the Group number property to the same value. If you allocate shared connections to different groups this way, the connection on the TCP/IP side is restarted if all shared connections within the group time out. It is normal practice to configure one group for each physical connection on a gateway.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">Close connection on passive server</td>
+                <td class="SVtable" style="vertical-align: top;">If enabled, the connection is closed on passive servers.<br />This property only applies if the network the device is associated to has a server list defined with an association (for redundancy)</td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">Apply a fixed timeout</td>
+                <td class="SVtable" style="vertical-align: top;">Ensures that the time-out handling is strictly followed (as configured at the device level) when establishing the connection and, if need be, before declaring the equipment unreachable.</td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">Close socket using FIN ACK</td>
+                <td class="SVtable" style="vertical-align: top;">Allows to close socket connection using the FIN ACK instruction. The one used by default is RST ACK.</td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Reconnect period</p>
+                </td>
+                <td class="SVtable">
+                    <p>Minimum period between attempts to recover a connection. This period is also used as a waiting period after a time-out.</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Timestamping</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Enable</p>
+                </td>
+                <td class="SVtable">
+                    <p>Tick to enable field device timestamping mode</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Error address</td>
+                <td class="SVtable">If timestamping is enabled, the address used to indicate a full stack. Must be set to a positive value (greater than 0).</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Timestamp UTC</td>
+                <td class="SVtable">Specify if the field device transmits timestamps as UTC or as local time</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Delta TS</td>
+                <td class="SVtable">
+                    <p>Used to set-up direct archiving. If the difference between the timestamp coded in a received timestamped block and the current time is greater than the <b>Delta TS</b> value, the data is sent directly for archiving but is not considered fresh enough to be used as instantaneous value. </p>
+                    <p>As a consequence, the value of the corresponding variable is not updated.</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">Modbus addressing</td>
+                <td class="SVtable" style="vertical-align: top;">If enabled, addresses found in timestamp blocks are interpreted as Modbus addresses (as opposed to Jbus addresses)</td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable" colspan="2" style="vertical-align: top;font-weight: bold;">
+                    <p>Redundancy groups </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p>Switch back automatically to primary connection </p>
+                </td>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p>Enables automatic selection of the highest priority connection. This mechanism has been implemented to support redundant connections that have varying quality and cost of service. If not enabled, there is no mechanism to automatically return to the failed connection once it is restored.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p>Redundancy connection n</p>
+                </td>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p>Allows the configuration of up to 5 additional field devices to provide redundant behavior for an item of equipment. When the application starts, the communication manager communicates with the primary device. When an error occurs, it switches to the next device in the sequence.</p>
+                    <p>Learn how to control redundant device operation with <a href="#scada-basic">SCADA Basic</a>. </p>
+                    <p class="SVnormal">For each device with redundant configuration, you can manage the operation using register variables linked to frames of type Command and Information (see below).</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p>Number of retry before switch</p>
+                </td>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p>Defines the number of retries before attempting to connect to the next redundant field device. On the first connection at communication start-up, or after a fault on one of the redundant equipments, the configured number of retries is applied before attempting to connect to the next equipment. If both fail, only single connection attempts are made to subsequent redundant equipments.</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Miscellaneous</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Virtual</p>
+                </td>
+                <td class="SVtable">
+                    <p>Reserved. Do not select.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Message delay</td>
+                <td class="SVtable">Reserved. Leave default value 0.</td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable" style="vertical-align: top;background-color: #ffffff;">
+                    <p>Interoperability issues - Single write disable</p>
+                </td>
+                <td class="SVtable" style="vertical-align: top;background-color: #ffffff;">
+                    <p>If enabled, the code function for Single write will not be used (function code 0x0F and 0x10 will be used instead).<br />To be activated if the field device does not support function codes 5 and 6.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p>Site serialization - Shared site</p>
+                </td>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p>Activates serialization of connections by site. This option is useful when several devices can be reached via the same network path and that this network path requires requests to be serialized.</p>
+                    <ul>
+                        <li>
+                            <p>From connection number - Either 0 (default) or a connection number corresponding to a redundancy equipment Id as defined in Redundant device configuration (1 to 5).</p>
+                        </li>
+                        <li>
+                            <p>Site number - The site number to which the equipment belongs.</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <div class="warning">
+            <p class="SVnormal">Connection sharing and Site serialization are designed for 2 different and opposite purposes and should not be used together.</p>
+        </div>
+        <div class="note">
+            <p> Contrary to explanations in the topic <a href="equipment_msg_exchange.htm">Message exchange mechanisms  in <span class="mc-variable OEM.ProductName variable">PcVue</span></a>, with the Modbus Ip driver, operations when re-establishing a connection to a slave after an error is as follows:</p>
+            <ul>
+                <li>
+                    <p>On the 1st TCP/IP error – The driver waits for the Reconnection period before trying again. The default value is 10 seconds and can be configured in the Advanced property dialog.</p>
+                </li>
+                <li>
+                    <p>On the 2nd TCP/IP error – The driver waits for Time out (default 1 second) before trying again.</p>
+                </li>
+                <li>
+                    <p>On the 3rd TCP/IP error – The driver waits for Time out (default 1 second) before trying again.</p>
+                </li>
+            </ul>
+            <p>This sequence is strictly followed for device configured to ensure Fixed time-out, and can be curtailed for devices configured as standard device if the system layer indicates that the connection cannot be open (disconnected network etc.).</p>
+        </div>
+        <h2 class="SVheading2">Frame addressing</h2>
+        <p class="SVnormal">Depending on the equipment type you have selected when configuring the device, you have access to the following type of frames.</p>
+        <p class="SVnormal">The Starting address
+ and Quantity properties define the memory address range for each frame, how it
+ is read from and written to, and how it is interpreted in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <h3 class="SVheading3">Equipment type - JBUS_DEC, MODBUS_DEC, JBUS_HEX and MODBUS_HEX - Standard address frames</h3>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col style="width: 112px;" />
+            <col />
+            <tbody>
+                <tr style="height: 28px;">
+                    <td style="font-weight: bold;" class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Access</td>
+                    <td style="font-weight: bold;" class="SVtableHeading">Max quantity</td>
+                    <td class="SVtableHeading">Starting address</td>
+                </tr>
+                <tr style="height: 28px;">
+                    <th style="font-weight: bold;text-align: left;" colspan="4">Bit</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">Input bits</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">2048</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Worbit Input registers MLsb</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">2048</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Coils</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">2048</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Worbit Input registers LMsb</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">2048</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Worbit Holding registers LMsb</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">2048</td>
+                    <td class="SVtable" rowspan="2">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Worbit Holding registers MLsb</td>
+                </tr>
+                <tr>
+                    <th colspan="4" style="text-align: left;">Text</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">Byte Input registers LMsb</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read</p>
+                        <p>&#160;</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">256</td>
+                    <td class="SVtable" rowspan="2">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable"> Byte Input registers MLsb</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Byte Holding registers LMsb</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">256</td>
+                    <td class="SVtable" rowspan="2">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Byte Holding registers MLsb</td>
+                </tr>
+                <tr>
+                    <th colspan="4" style="text-align: left;">Word</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">Input registers</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">128</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Holding registers</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">128</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Timestamped CEI</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">	15</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Timestamped 12b</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">21</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Timestamped 24b</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">18</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Information</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">8</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">0..7 (JBUS_DEC and MODBUS_DEC)</p>
+                        <p class="SVnormal">0x0..0x7 (JBUS_HEX&#160;and MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Commands</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">0..3 (JBUS_DEC and MODBUS_DEC)</p>
+                        <p class="SVnormal">0x0..0x3 (JBUS_HEX&#160;and MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="4" style="text-align: left;">Real</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">Real Input registers LMsb</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">62</td>
+                    <td class="SVtable" rowspan="2">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Real Input registers MLsb</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Real Holding registers LMsb</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">62</td>
+                    <td class="SVtable" rowspan="2">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Real Holding registers MLsb</td>
+                </tr>
+                <tr>
+                    <th colspan="4" style="text-align: left;">Double word</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">DWord Input registers LMsb</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">62</td>
+                    <td class="SVtable" rowspan="2">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DWord Input registers MLsb</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DWord Holding registers LMsb</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">62</td>
+                    <td class="SVtable" rowspan="2">
+                        <p class="SVnormal">0..65535 (JBUS_DEC)</p>
+                        <p class="SVnormal">0X0..0xFFFF (JBUS_HEX)</p>
+                        <p class="SVnormal">1..65535 (MODBUS_DEC)</p>
+                        <p class="SVnormal">0x1..0xFFFF (MODBUS_HEX)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DWord Holding registers MLsb</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Command and Information frames values</h3>
+        <p class="SVnormal">The Command frame is a read/write frame in word format, used to control the redundancy connection and manage connection settings.</p>
+        <ul>
+            <li>Word 0 - This register is used to force a switch to the corresponding redundant connection (0 to 5) by setting its value within the range 0 to 5. During the connection establishment phase, its value is set to the decimal value 10x, where x is the ID (0 to 5) of the connection.</li>
+            <li>Word 1 - This register is used to enable and disable redundant connections in a bitwise manner. Bit 0 corresponds to connection 1, bit 1 to connection 2, and so on. Setting a bit to 0 disables a connection, while setting it to 1 enables it.</li>
+            <li>Word 2 - This register is used to set the priority status of specific equipment in the redundancy configuration.</li>
+        </ul>
+        <p class="SVnormal">The Information frame is a read-only frame in word format, providing status information about the active connection and redundancy connection.</p>
+        <ul>
+            <li>Word 0 - This register contains the number of the active connection (0 to 5). During the connection establishment phase, its value is set to the decimal value 10x, where x is the ID (0 to 5) of the connection.</li>
+            <li>Word 2 - This register is used to set the priority status of specific equipment in the redundancy configuration.</li>
+            <li>Word 3 - This register provides information related to timestamping and archiving of data packets in the redundancy system. Possible states are:</li>
+            <ul>
+                <li>Bit 0 - Timestamping disabled.</li>
+                <li>Bit 1 - Timestamping enabled.</li>
+            </ul>
+            <li>Word 4 - This register displays the equipment timeout duration in seconds.</li>
+            <li>Word 5 - This register displays the current timeout value.</li>
+            <li>Word 6 - This register displays the maximum error threshold before switching to redundant mode.</li>
+            <li>Word 7 - This register displays the current timeout value.<br /></li>
+        </ul>
+        <h3 class="SVheading3">Equipment type - Reserved dec - Extended address frames</h3>
+        <p class="SVnormal">The driver supports extended address frames that use modified start address and number of items to define frames larger than allowed for by the Modbus standard. Larger frames mean you can read larger address spaces in one request and thus minimize the network traffic.</p>
+        <p class="SVnormal">Extended address frames can be configured for device with a equipment type set to <u>Reserved dec</u>.</p>
+        <div class="note">
+            <p class="SVnormal">Extended addressing only works with specific field devices. For further information contact technical support.</p>
+        </div>
+        <table style="width: 100%;">
+            <col style="width: 133px;" />
+            <col style="width: 87px;" />
+            <col style="width: 122px;" />
+            <col style="width: 95px;" />
+            <col style="width: 204px;" />
+            <tbody>
+                <tr>
+                    <td style="font-weight: bold;" class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Access</td>
+                    <td style="font-weight: bold;" class="SVtableHeading">Max quantity</td>
+                    <td class="SVtableHeading">Starting address</td>
+                    <td style="font-weight: bold;" class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <th style="font-weight: bold;text-align: left;" colspan="5">Real</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">Extd I LM</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">16379</td>
+                    <td class="SVtable" rowspan="2">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">Read input registers as IEEE754 real (Least significant byte first) in extended frame</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Extd I ML</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read input registers as IEEE754 real (Most significant byte first) in extended frame</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Extd I/O LM</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">16379</td>
+                    <td class="SVtable" rowspan="2">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read/write holding (output) registers as IEEE754 real (Least significant byte first) in extended frame</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Extd I/O ML</td>
+                    <td class="SVtable" style="font-weight: normal;">Read/write holding (output) registers as IEEE754 real (Most significant byte first) in extended frame</td>
+                </tr>
+                <tr>
+                    <th colspan="5" style="text-align: left;">Byte</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">Extd I LM</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">65518</td>
+                    <td class="SVtable" rowspan="2">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read input registers as bytes in extended frame</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Extd I ML</td>
+                    <td class="SVtable" style="font-weight: normal;">Read input registers (Least significant byte first) in extended frame</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Extd I/O LM</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">65518 </td>
+                    <td class="SVtable" rowspan="2">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read/write holding (output) registers as bytes in extended frame</p>
+                    </td>
+                </tr>
+                <tr style="height: 25px;">
+                    <td class="SVtable">Extd I/O ML</td>
+                    <td class="SVtable" style="font-weight: normal;">Read/write holding (output) registers l (Least significant byte first) in extended frame</td>
+                </tr>
+                <tr style="height: 25px;">
+                    <th colspan="5" style="text-align: left;">Bit</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Bi Extd I</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">1048560</td>
+                    <td class="SVtable">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read input status in extended frame</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>WB Extd I/O LM</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">65520</td>
+                    <td class="SVtable" rowspan="2">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read/write holding (output) registers as bits (Least significant byte first) in extended frame</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>WB Extd I/O ML</p>
+                    </td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read/write holding (output) registers as bits (Most significant byte first) in extended frame.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Bi Extd I/O</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">1048560</td>
+                    <td class="SVtable">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read/write coil (output) status in extended frame</p>
+                    </td>
+                </tr>
+                <tr style="height: 78px;">
+                    <td class="SVtable">
+                        <p>WB Extd I LM</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">65520</td>
+                    <td class="SVtable" rowspan="2">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read input registers as bits (Least significant byte first) in extended frame</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>WB Extd I ML</p>
+                    </td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read input registers as bits (Most significant byte first) in extended frame </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="5" style="text-align: left;">Word</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>W Extd I</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">65518</td>
+                    <td class="SVtable">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read input registers in extended frame</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>W Extd I/O</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">65518</td>
+                    <td class="SVtable">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read/write output (holding) registers in extended frame</p>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="5" style="text-align: left;">Double word</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>DW Extd I LM</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">16379</td>
+                    <td class="SVtable" rowspan="2">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read input registers as double word (Least significant byte first) in extended frame</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>DW Extd I ML</p>
+                    </td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read input registers as double word (Most significant byte first) in extended frame</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>DW Extd I/O LM</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">16379</td>
+                    <td class="SVtable" rowspan="2">0..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read/write holding (output) registers as double word (Least significant byte first) in extended frame</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>DW Extd I/O ML</p>
+                    </td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Read/write holding (output) registers as double word (Most significant byte first) in extended frame</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Equipment type - WAGO DALI v2</h3>
+        <p class="SVnormal">This equipment type is used to communicate with WAGO controllers equipped with DALI modules.</p>
+        <div class="tip">
+            <p class="SVnormal">You can configure WAGO DALI devices using the Smart Generator made for it.</p>
+        </div>
+        <table style="width: 100%;">
+            <col style="width: 70px;" />
+            <col />
+            <col />
+            <col style="width: 149px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Access</td>
+                    <td class="SVtableHeading">Max quantity</td>
+                    <td class="SVtableHeading">Starting address</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <th style="font-weight: bold;text-align: left;" colspan="5">Bit</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">B Group</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">1024</td>
+                    <td class="SVtable">1..65535</td>
+                    <td class="SVtable">
+                        <p style="font-weight: normal;">Read ballast group status.<br />1 frame per DALI module.<br />The frame size is fixed at 1028 bits.<br />The start address corresponds to the Modbus address of the ballast group buffer for the corresponding module. Refer to the program running in the programmable coupler to obtain the address.</p>
+                        <p class="SVtable" style="font-weight: normal;">The data structure is as follows (where xxxx  is the base address):</p>
+                        <ul>
+                            <li>
+                                <p class="SVtable" style="font-weight: normal;">xxxx.0 – Bit Ballast 1 group 1</p>
+                            </li>
+                            <li>
+                                <p class="SVtable" style="font-weight: normal;">xxxx.1 – Bit Ballast 1 group 2</p>
+                            </li>
+                            <li>
+                                <p class="SVtable" style="font-weight: normal;">xxxx.2 – Bit Ballast 1 group 3</p>
+                            </li>
+                            <li>
+                                <p class="SVtable" style="font-weight: normal;">xxxx.14 – Bit Ballast 1 group 15</p>
+                            </li>
+                            <li>
+                                <p class="SVtable" style="font-weight: normal;">xxxx.15 – Bit Ballast 1 group 16</p>
+                            </li>
+                            <li>
+                                <p class="SVtable" style="font-weight: normal;">(xxxx+1).0 – Bit Ballast 2 group 1</p>
+                            </li>
+                            <li>
+                                <p class="SVtable" style="font-weight: normal;">(xxxx+1).1 – Bit Ballast 2 group 2</p>
+                            </li>
+                            <li>
+                                <p class="SVtable" style="font-weight: normal;">(xxxx+1).2 – Bit Ballast 2 group 3</p>
+                            </li>
+                        </ul>
+                        <p class="SVtable" style="font-weight: normal;">Bit value:</p>
+                        <p class="SVtable" style="font-weight: normal;">0 – not part of the group<br />1 – part of the group</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B Info</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">448</td>
+                    <td class="SVtable">1..65535</td>
+                    <td class="SVtable">Ballast information</td>
+                </tr>
+                <tr>
+                    <th colspan="5" style="text-align: left;">Word</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">B type</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">Ballast type</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DALI Cfg</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable">1..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">DALI configuration</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>L Diag</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">2</td>
+                    <td class="SVtable">1..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">Light diagnostic</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Cmd Mx B </td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">64</td>
+                    <td class="SVtable">1..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">Command ballast x module</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Cmd Mx S</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">16</td>
+                    <td class="SVtable" rowspan="2">1..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">Command scene x module</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Cmd Mx G</td>
+                    <td class="SVtable" style="font-weight: normal;">Command group x module</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B Value</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1..65535</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Ballast real time value.</p>
+                        <p>1 frame per DALI module.</p>
+                        <p>The size is fixed at 64 words.</p>
+                        <p>The start address corresponds to the Modbus address of the real time value buffer.</p>
+                        <p>Refer to the program running in the programmable coupler to obtain the address.</p>
+                        <p>The data structure is as follows (where xxxx is the base address):</p>
+                        <ul>
+                            <li>
+                                <p>xxxx.0 – Ballast 1 value</p>
+                            </li>
+                            <li>
+                                <p>xxxx.1 – Ballast 2 value</p>
+                            </li>
+                            <li>
+                                <p>xxxx.2 – Ballast 3 value</p>
+                            </li>
+                            <li>
+                                <p>xxxx.62 – Ballast 63 value</p>
+                            </li>
+                            <li>
+                                <p>xxxx.63 – Ballast 64 value</p>
+                            </li>
+                        </ul>
+                        <p>The value is expressed as a percentage in the range 0 to 100.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Equipment type - Wago DALI</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 84px;" />
+            <col style="width: 66px;" />
+            <col style="width: 493px;" />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Data type</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Access</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Description</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtableHeading" colspan="3">
+                    <p>Bit</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B Group</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read ballast group status.<br />1 frame per DALI module.<br />The frame size is fixed at 1028 bits.<br />The start address corresponds to the Modbus address of the ballast group buffer for the corresponding module. Refer to the program running in the programmable coupler to obtain the address.</p>
+                    <p class="SVtable">The data structure is as follows (where xxxx  is the base address):</p>
+                    <ul>
+                        <li>
+                            <p class="SVtable">xxxx.0 – Bit Ballast 1 group 1</p>
+                        </li>
+                        <li>
+                            <p class="SVtable">xxxx.1 – Bit Ballast 1 group 2</p>
+                        </li>
+                        <li>
+                            <p class="SVtable">xxxx.2 – Bit Ballast 1 group 3</p>
+                        </li>
+                        <li>
+                            <p class="SVtable">xxxx.14 – Bit Ballast 1 group 15</p>
+                        </li>
+                        <li>
+                            <p class="SVtable">xxxx.15 – Bit Ballast 1 group 16</p>
+                        </li>
+                        <li>
+                            <p class="SVtable">(xxxx+1).0 – Bit Ballast 2 group 1</p>
+                        </li>
+                        <li>
+                            <p class="SVtable">(xxxx+1).1 – Bit Ballast 2 group 2</p>
+                        </li>
+                        <li>
+                            <p class="SVtable">(xxxx+1).2 – Bit Ballast 2 group 3</p>
+                        </li>
+                    </ul>
+                    <p class="SVtable">Bit value:</p>
+                    <p class="SVtable">0 – not part of the group</p>
+                    <p class="SVtable">1 – part of the group </p>
+                </td>
+            </tr>
+            <tr style="height: 13.9pt;" valign="top">
+                <td class="SVtable">
+                    <p>B Present</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read</p>
+                </td>
+                <td>
+                    <p class="SVtable">
+                        <p class="SVtable">Read ballast present status.</p> 1 frame for up to 5 DALI modules.<br />The frame size is fixed at 320 bits.<br />The start address corresponds to the Modbus address of the ballast present buffer. Refer to the program running in the programmable coupler to obtain the address.
+					<p class="SVtable">The data structure is as follows (where xxxx is the base address):</p><ul><li><p class="SVtable">xxxx.0 – DALI module 1 Ballast 1 present</p></li><li><p class="SVtable"><p>xxxx.1 – DALI module 1 Ballast 2 present</p></p></li><li><p class="SVtable"><p>xxxx.2 – DALI module 1 Ballast 3 present</p></p></li><li><p class="SVtable"><p>xxxx.62 – DALI module 1 Ballast 63 present</p></p></li><li><p class="SVtable"><p>xxxx.63 – DALI module 1 Ballast 64 present</p></p></li><li><p class="SVtable">(+1).0 – DALI module 2 Ballast 1 present</p></li><li><p class="SVtable"><p>(xxxx+1).1 – DALI module 2 Ballast 2 present</p></p></li><li><p class="SVtable"><p>(xxxx+1).2 – DALI module 2 Ballast 2 present</p></p></li></ul><p class="SVtable">Bit value:</p><p class="SVtable">0 – not present</p></p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B Status</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read ballast status bit.<br />1 frame for up to 5 DALI modules.<br />The frame size is fixed at 320 bits.<br />The start address corresponds to the Modbus address of the ballast status buffer. Refer to the program running in the programmable coupler to obtain the address.</p>
+                    <p class="SVtable">The data structure is as follows (where xxxx is the base address):</p>
+                    <ul>
+                        <li>
+                            <p>xxxx.0 – DALI module 1 Ballast 1 status</p>
+                        </li>
+                        <li>
+                            <p>xxxx.1 – DALI module 1 Ballast 2 status</p>
+                        </li>
+                        <li>
+                            <p>xxxx.2 – DALI module 1 Ballast 3 status</p>
+                        </li>
+                        <li>
+                            <p>xxxx.62 – DALI module 1 Ballast 63 status</p>
+                        </li>
+                        <li>
+                            <p>xxxx.63 – DALI module 1 Ballast 64 status</p>
+                        </li>
+                        <li>
+                            <p>(xxxx+1).0 – DALI module 2 Ballast 1 status</p>
+                        </li>
+                        <li>
+                            <p>(xxxx+1).1 – DALI module 2 Ballast 2 status</p>
+                        </li>
+                        <li>
+                            <p>(xxxx+1).2 – DALI module 2 Ballast 2 status</p>
+                        </li>
+                    </ul>
+                    <p class="SVtable">Bit value</p>
+                    <p class="SVtable">0 – not OK</p>
+                </td>
+            </tr>
+            <tr style="height: 13.9pt;" valign="top">
+                <td class="SVtable">
+                    <p>B Fail</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read ballast lamp failure status.<br />1 frame for up to 5 DALI modules.<br />The frame size is fixed at 320 bits.<br />The start address corresponds to the Modbus address of the ballast status buffer. Refer to the program running in the programmable coupler to obtain the address.</p>
+                    <p class="SVtable">The data structure is as follows (where is the base address):</p>
+                    <ul>
+                        <li>
+                            <p>xxxx.0 – DALI module 1 Ballast 1 lamp failure</p>
+                        </li>
+                        <li>
+                            <p>xxxx.1 – DALI module 1 Ballast 2 lamp failure</p>
+                        </li>
+                        <li>
+                            <p>xxxx.2 – DALI module 1 Ballast 3 lamp failure</p>
+                        </li>
+                        <li>
+                            <p>xxxx.62 – DALI module 1 Ballast 63 lamp failure</p>
+                        </li>
+                        <li>
+                            <p>xxxx.63 – DALI module 1 Ballast 64 lamp failure</p>
+                        </li>
+                        <li>
+                            <p>(xxxx+1).0 – DALI module 2 Ballast 1 lamp failure</p>
+                        </li>
+                        <li>
+                            <p>(xxxx+1).1 – DALI module 2  Ballast 2 lamp failure</p>
+                        </li>
+                        <li>
+                            <p>(xxxx+1).2 – DALI module 2  Ballast 2 lamp failure</p>
+                        </li>
+                    </ul>
+                    <p class="SVtable">Bit value</p>
+                    <p class="SVtable">0 – OK</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B Power</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read ballast power status.<br />1 frame for up to 5 DALI modules.<br />The frame size is fixed at 320 bits.<br />The start address corresponds to the Modbus address of the ballast status buffer. Refer to the program running in the programmable coupler to obtain the address.</p>
+                    <p class="SVtable">The data structure is as follows (where is the base address):</p>
+                    <ul>
+                        <li>
+                            <p>xxxx.0 – DALI module 1 Ballast 1 power</p>
+                        </li>
+                        <li>
+                            <p>xxxx.1 – DALI module 1 Ballast 2 power</p>
+                        </li>
+                        <li>
+                            <p>xxxx.2 – DALI module 1 Ballast 3 power</p>
+                        </li>
+                        <li>
+                            <p>xxxx.62 – DALI module 1 Ballast 63 power</p>
+                        </li>
+                        <li>
+                            <p>xxxx.63 – DALI module 1 Ballast 64 power</p>
+                        </li>
+                        <li>
+                            <p>(xxxx+1).0 – DALI module 2 Ballast 1 power</p>
+                        </li>
+                        <li>
+                            <p>(xxxx+1).1 – DALI module 2 Ballast 2 power</p>
+                        </li>
+                        <li>
+                            <p>(xxxx+1).2 – DALI module 2 Ballast 2 power</p>
+                        </li>
+                    </ul>
+                    <p class="SVtable">Bit value:</p>
+                    <p class="SVtable">0 – Power off</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtableHeading" colspan="3">
+                    <p>Word</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Cmd Lx B</p>
+                </td>
+                <td class="SVtable">
+                    <p>Write</p>
+                </td>
+                <td class="SVtable">
+                    <p>Write ballast command.<br />1 frame per DALI module where Lx corresponds to the number of the DALI. For example Cmd L3 B.<br />The size is fixed at 65 words.<br />The start address corresponds to the Modbus address of the command buffer.<br />Refer to the program running in the programmable coupler to obtain the address.</p>
+                    <p class="SVtable">The data structure is as follows (where is the base address):</p>
+                    <ul>
+                        <li>
+                            <p>xxxx.0 – DALI module x Ballast 1 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.1 – DALI module x Ballast 2 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.2 – DALI module x Ballast 3 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.62 – DALI module x Ballast 63 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.63 – DALI module x Ballast 64 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.64 – DALI module x All Ballast for DALI module x</p>
+                        </li>
+                    </ul>
+                    <p>Word value:</p>
+                    <ul>
+                        <li>
+                            <p>0 – Off</p>
+                        </li>
+                        <li>
+                            <p>5 – On</p>
+                        </li>
+                        <li>
+                            <p>1 – '- -'</p>
+                        </li>
+                        <li>
+                            <p>2 – '+ +'</p>
+                        </li>
+                    </ul>
+                    <p class="SVtable">For a complete set of commands, please refer to the manual for the Wago DALI module.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Cmd Lx G</p>
+                </td>
+                <td class="SVtable">
+                    <p>Write</p>
+                </td>
+                <td class="SVtable">
+                    <p>Write group command.<br />1 frame per DALI module where Lx corresponds to the number of the DALI. For example Cmd L3 G.<br />The size is fixed at 16 words.<br />The start address corresponds to the Modbus address of the command buffer.<br />Refer to the program running in the programmable coupler to obtain the address.</p>
+                    <p class="SVtable">The data structure is as follows (where is the base address):</p>
+                    <ul>
+                        <li>
+                            <p>xxxx.0 – DALI module x Group 1 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.1 – DALI module x Group 2 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.2 – DALI module x Group 3 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.14 – DALI module x Group 15 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.15 – DALI module x Group 16 command</p>
+                        </li>
+                    </ul>
+                    <p>Word value:</p>
+                    <ul>
+                        <li>
+                            <p>300 – Off</p>
+                        </li>
+                        <li>
+                            <p>305 – On</p>
+                        </li>
+                        <li>
+                            <p>301 – '- -'</p>
+                        </li>
+                        <li>
+                            <p>302 – '+ +'</p>
+                        </li>
+                    </ul>
+                    <p class="SVtable">For a complete set of commands, please refer to the manual for the Wago DALI module.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Cmd Lx S</p>
+                </td>
+                <td class="SVtable">
+                    <p>Write</p>
+                </td>
+                <td class="SVtable">
+                    <p>Write scene command.<br />1 frame per DALI module where Lx corresponds to the number of the DALI. For example Cmd L3 S.<br />The size is fixed at 16 words.<br />The start address corresponds to the Modbus address of the command buffer.<br />Refer to the program running in the programmable coupler to obtain the address.</p>
+                    <p class="SVtable">The data structure is as follows (where is the base address):</p>
+                    <ul>
+                        <li>
+                            <p>xxxx.0 – DALI module x Group 1 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.1 – DALI module x Group 2 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.2 – DALI module x Group 3 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.14 – DALI module x Group 15 command</p>
+                        </li>
+                        <li>
+                            <p>xxxx.15 – DALI module x Group 16 command</p>
+                        </li>
+                    </ul>
+                    <p>Word value:</p>
+                    <ul>
+                        <li>
+                            <p>1000 – Send scene</p>
+                        </li>
+                        <li>
+                            <p>1001 – Save scene</p>
+                        </li>
+                    </ul>
+                    <p class="SVtable">For a complete set of commands, please refer to the manual for the Wago DALI module.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtableHeading" colspan="3">
+                    <p>Real</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B Value</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read</p>
+                </td>
+                <td class="SVtable">
+                    <p>Ballast real time value.<br />1 frame per DALI module.<br />The size is fixed at 64 words.<br />The start address corresponds to the Modbus address of the real time value buffer.<br />Refer to the program running in the programmable coupler to obtain the address.</p>
+                    <p class="SVtable">The data structure is as follows (where is the base address):</p>
+                    <ul>
+                        <li>
+                            <p>xx.0 – Ballast 1 value</p>
+                        </li>
+                        <li>
+                            <p>xxxx.1 – Ballast 2 value</p>
+                        </li>
+                        <li>
+                            <p>xxxx.2 – Ballast 3 value</p>
+                        </li>
+                        <li>
+                            <p>xxxx.62 – Ballast 63 value</p>
+                        </li>
+                        <li>
+                            <p>xxxx.63 – Ballast 64 value</p>
+                        </li>
+                    </ul>
+                    <p>The value is expressed as a percentage in the range 0 to 100.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Driver status</h2>
+        <p class="SVnormal">The driver status provides driver-specific 
+ information to supplement the <b>frame general status</b>. For more information 
+ on status in general, refer to the topic <a href="equipment_comm_status.htm">General communication status</a>.</p>
+        <table style="border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;width:100%" cellspacing="0">
+            <col style="width: 150px;" />
+            <col style="width: 497px;" />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Driver status</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Description</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0001</p>
+                </td>
+                <td class="SVtable">
+                    <p>Illegal function</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0002</p>
+                </td>
+                <td class="SVtable">
+                    <p>Illegal data address in equipment</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0003</p>
+                </td>
+                <td class="SVtable">
+                    <p>Illegal data value, wrong size</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0004</td>
+                <td class="SVtable">
+                    <p>Slave device failure: the slave cannot reply</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0005</td>
+                <td class="SVtable">
+                    <p>Acknowledged: the slave has accepted the request and processing it, but will take a long time</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0006</td>
+                <td class="SVtable">
+                    <p>Slave device is busy: the slave is engaged in long processing of a program command</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0007</td>
+                <td class="SVtable">
+                    <p>Negative Acknowledge</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0008</td>
+                <td class="SVtable">
+                    <p>Memory parity error</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0102</p>
+                </td>
+                <td class="SVtable">
+                    <p>Connection closed because of:</p>
+                    <ul style="list-style: disc;" type="disc">
+                        <li>Incorrect IP address</li>
+                        <li>Incorrect Port number</li>
+                        <li>Field device not connected</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0000</p>
+                </td>
+                <td class="SVtable">Request time-out</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">000A</td>
+                <td class="SVtable">Gateway path unavailable</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">000B</td>
+                <td class="SVtable">Gateway target device failed to respond (timeout)</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0108</td>
+                <td class="SVtable">The response ID does not match the request</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0113</td>
+                <td class="SVtable">The device slave address is 0 (Broadcast). It only accepts write requests. If not intended, set the address to a value different to 0.</td>
+            </tr>
+        </table><a name="scada-basic"></a>
+        <h2 class="SVheading2">SCADA Basic scripting</h2>
+        <p class="SVnormal">You can control communication with this driver in SCADA Basic scripts with the CIMWAY instruction.</p>
+        <div class="note">See the topic <a href="equipment_msg_exchange.htm">Message exchange mechanisms in <span class="mc-variable OEM.ProductName variable">PcVue</span></a> for more information about what to optimize and how you can send commands from scripts. </div>
+        <p class="SVnormal">The driver also supports the following specific capabilities in SCADA Basic.</p>
+        <h3 class="SVheading3">Changing a device address</h3>
+        <p class="SVnormal"><i>IntVal</i> = CIMWAY(<i>CFG</i>, <i>CommObjName</i>, <i>Modif</i>, <i>Param</i>, [, <i>ResultVar</i>]);</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 98px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable">CommObjName</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Configuration element to modify: A device.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable">Modif</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The property you want to modify:</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">&#160;</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">EQT_ADDRESS: Modification of the equipment address. <i>CommObjName</i> is the name of a device attached to the network. For example, Net1.Dev1.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="font-style: italic;vertical-align: top;">
+                    <p class="SVtable">Param</p>
+                </td>
+                <td colspan="1" rowspan="1" style="vertical-align: top;">
+                    <p class="SVtable"><i>Param</i> is a string with a typical syntax like Param1#Param2#Param3...#ParamN. Type STR.</p>
+                    <p class="SVtable">See below for the syntax specific to this driver.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable">ResultVar</p>
+                </td>
+                <td valign="top">
+                    <p>Specifies the name of the variable where the status of the modification is stored.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">Syntax for Modbus Ip:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">slave_address#ip1#ip2#ip3#ip4#tcp_port#ts_erroraddress#flag#reconnection_period#sharing_group_id</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">Where:</p>
+        <ul>
+            <li>
+                <p class="SVnormal">slave_address: The slave address</p>
+            </li>
+            <li>
+                <p class="SVnormal">ip1 to ip4: The 4 segments of the Ip address<br />If ip1 is a string, it is the host name and ip2 to ip4 are ignored</p>
+            </li>
+            <li>
+                <p class="SVnormal">tcp_port: The Tcp port number</p>
+            </li>
+            <li>
+                <p class="SVnormal">ts_error_address: The error address for source timestamping</p>
+            </li>
+            <li>
+                <p class="SVnormal">flag: Additional properties under the form of a bit mask (0 or 1)</p>
+                <ul>
+                    <li>
+                        <p class="SVnormal">bit 1 Reserved (0)</p>
+                    </li>
+                    <li>
+                        <p class="SVnormal">bit 2 Interoperability issues - Single write disable (1) or enable (0)</p>
+                    </li>
+                    <li>
+                        <p class="SVnormal">bit 3 Reserved (0)</p>
+                    </li>
+                    <li>
+                        <p class="SVnormal">bit 4 Timestamp UTC (1) or local (0)</p>
+                    </li>
+                    <li>
+                        <p class="SVnormal">bit 5 Timestamp blocks based on Modbus addressing</p>
+                    </li>
+                    <li>
+                        <p class="SVnormal">bit 6 Close connection on passive server</p>
+                    </li>
+                    <li>
+                        <p class="SVnormal">bit 7 Enable site serialization</p>
+                    </li>
+                    <li>
+                        <p class="SVnormal">bit 8 Apply a fixed time-out</p>
+                    </li>
+                    <li>
+                        <p class="SVnormal">bit 9 Close socket using FIN ACK</p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p class="SVnormal">reconnection_period: The reconnection period</p>
+            </li>
+            <li>
+                <p>sharing_group_id: The sharing group number</p>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">If redundant connections are in place, the syntax is as follow:</p>
+            <div class="codeSnippet_0 codeSnippet">
+                <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                    <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                        <tbody>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">slave_address#ip1#ip2#ip3#ip4#tcp_port#ts_erroraddress#flag#reconnection_period#redundant_connection_nb#[redundant_connection_id_redn#ip1_redn#ip2_redn#ip3_redn#ip4_redn#tcp_port_redn#slave_address_redn#reserved(set 0)#]sharing_group_id#nb_retry_before_switch#site_serialization_min_connection_id#site_serialization_site_number</pre>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p class="SVnormal">Where:</p>
+            <ul>
+                <li>
+                    <p class="SVnormal">Flag - In addition to the bits describe above:</p>
+                    <ul>
+                        <li>
+                            <p class="SVnormal">bit 1 Connection sharing enabled (1) or disabled (0)</p>
+                        </li>
+                        <li>
+                            <p class="SVnormal">bit 3 Switch back automatically to primary connection</p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="SVnormal">redundant_connection_number: The number of redundant connections (1..5)</p>
+                </li>
+                <li>
+                    <p class="SVnormal">The part between square brackets [] is repeated for each redundant connection</p>
+                    <ul>
+                        <li>
+                            <p>redundant_connection_id_redn: The id of the redundant connection (1..5)</p>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <p class="SVnormal">nb_retry_before_switch: Number of retry before switch</p>
+                </li>
+                <li>
+                    <p class="SVnormal">site_serialization_min_connection_id: A connection number corresponding to a redundancy equipment Id as defined in Redundant device configuration (1 to 5)</p>
+                </li>
+                <li>
+                    <p class="SVnormal">site_serialization_site_number: The site number to which the equipment belongs</p>
+                </li>
+            </ul>
+        </div>
+        <h3 class="SVheading3">Sending a control message to the driver</h3>
+        <p class="SVnormal"><span style="font-style: italic;">IntVal</span> = CIMWAY (<span style="font-style: italic;">SENDMSG</span>, <span style="font-style: italic;">CommObjectName</span>, <span style="font-style: italic;">CommandString</span>);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">CommObjectName</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Identifies the target object identifier:</p>
+                    <p class="SVtable" style="margin-left: 40px;margin-bottom: 0pt;">All networks: Empty string.</p>
+                    <p class="SVtable" style="margin-left: 40px;margin-bottom: 0pt;">A specific network: <i>NetworkId</i>.</p>
+                    <p class="SVtable" style="margin-left: 40px;margin-bottom: 0pt;">A specific device: <i>NetworkID.EquipmentId</i>.</p>
+                    <p class="SVtable" style="margin-left: 40px;margin-bottom: 0pt;">A specific frame: <i>NetworkID.EquipmentId.FrameId</i>.</p>
+                    <p class="SVtable" style="margin-left: 0px;">Type STR.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">CommandString</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The command to send to the driver. Type STR.</p>
+                    <p class="SVtable">See below for the list of messages supported by the driver.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">Control messages for Modbus Ip:</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 139px;" />
+            <col style="width: 508px;" />
+            <tr>
+                <td class="SVtableHeading">Control message</td>
+                <td class="SVtableHeading">Description</td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtable">Switching the connection for a redundant PLC configuration</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Command string syntax is "ConnectTo;num"</p>
+                    <div class="note">
+                        <p class="SVnormal">SCADA Basic switching is slower that variable switching, as the command is not sent immediately to the driver (queues along with other requests), but it is flexible and doesn't require the configuration of an extra frame and variable.</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtable">Enable/Disable connection for a redundant PLC configuration</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Command string syntax is "ConnectionDisable;num" to enable the connection number <i>num</i>. This connection is then unavailable for the driver to connect to the device.</p>
+                    <p class="SVtable">Command string syntax is "ConnectionEnable;num" to disable the connection number <i>num</i>. This connection is then available for the driver to connect to the device.</p>
+                    <p class="SVtable"><i>ComObj</i> must be the name of a device, for example NET.DEV1.</p>
+                    <p class="SVtable">If redundant data acquisition servers are in place, the change is only applied on the data acquisition server where the command is executed.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtable">Enable/Disable timestamping</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Command string syntax is "DisableTS" to disable source timestamping.</p>
+                    <p class="SVtable">Command string syntax is "EnableTS" to enable source timestamping.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtable">Switch all frames to polling mode</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Command string syntax is "SwitchAllToPollingMode" to switch all frames to polling mode.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">&#160;</td>
+                <td class="SVtable">
+                    <p class="SVtable"><i>ComObj</i> must be the name of a device, for example NET.DEV1.<br /> <i>num</i> is the number of the connection to consider. Range [0..5].</p>
+                    <p class="SVtable">For example, the following command forces a connection to the redundant connection 3 for the device NET1.EQT1:</p>
+                    <div class="codeSnippet_0 codeSnippet">
+                        <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                            <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                                <tbody>
+                                    <tr>
+                                        <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">CIMWAY("SENDMSG", "NET.EQT1",&#160;"ConnectTo;3");</pre>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Timestamped Data - Data Table and Block Structures</h2>
+        <p class="SVnormal">The timestamped data stack must be located in the holding (output) register table. The table is read using function code 3 and the single word reply is written using function code 6.</p>
+        <h3 class="SVheading3">Timestamped data table structure</h3>
+        <table style="border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0">
+            <col style="width: 80px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;border-left-style: Solid;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-left-color: #808080;border-left-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="80px">
+                    <p class="SVtable">&#160;</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">15</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">14</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">13</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">12</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">11</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">10</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">9</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">8</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">7</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">6</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">5</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">4</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">3</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">2</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">1</p>
+                </td>
+                <td colspan="1" rowspan="1" style="border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-right-color: #808080;border-right-width: 1px;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-left-width: 1px;border-left-color: #808080;border-left-style: Solid;border-right-width: 1px;border-right-color: #808080;border-right-style: Solid;border-bottom-width: 1px;border-bottom-color: #808080;border-bottom-style: Solid;" width="80px">
+                    <p class="SVtable">Word W</p>
+                </td>
+                <td colspan="8" rowspan="1" style="width: 240px;padding-left: 1px;padding-right: 1px;border-right-width: 1px;border-right-color: #808080;border-right-style: Solid;border-bottom-width: 1px;border-bottom-color: #808080;border-bottom-style: Solid;" width="240px">
+                    <p class="SVtable" style="text-align: center;" align="center">Exchange number</p>
+                </td>
+                <td style="width: 240px;padding-left: 1px;padding-right: 1px;border-right-width: 1px;border-right-color: #808080;border-right-style: Solid;border-bottom-width: 1px;border-bottom-color: #808080;border-bottom-style: Solid;" width="240px">Fbit</td>
+                <td style="border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-right-color: #808080;border-right-width: 1px;padding-left: 1px;padding-right: 1px;">Cbit</td>
+                <td style="width: 30px;border-top-style: Solid;border-right-style: Solid;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-top-color: #808080;border-top-width: 1px;border-bottom-color: #808080;border-bottom-width: 1px;padding-left: 1px;padding-right: 1px;" width="30px" colspan="6">
+                    <p class="SVtable" style="text-align: center;" align="center">Number of blocks (N)</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-left-width: 1px;border-left-color: #808080;border-left-style: Solid;border-right-width: 1px;border-right-color: #808080;border-right-style: Solid;border-bottom-color: #808080;border-bottom-style: Solid;border-bottom-width: 1px;" width="80px">
+                    <p class="SVtable">Word W+1</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-right-width: 1px;border-right-color: #808080;border-right-style: Solid;border-bottom-color: #808080;border-bottom-style: Solid;border-bottom-width: 1px;" width="480px">
+                    <p class="SVtable" style="text-align: center;" align="center">Start of first block</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-left-style: Solid;border-left-color: #808080;border-left-width: 1px;border-right-style: Solid;border-right-color: #808080;border-right-width: 1px;border-bottom-style: Solid;border-bottom-color: #808080;border-bottom-width: 1px;" width="80px">
+                    <p class="SVtable">Word W+1<br />+(N-1)*T</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-right-style: Solid;border-right-color: #808080;border-right-width: 1px;border-bottom-style: Solid;border-bottom-color: #808080;border-bottom-width: 1px;" width="480px">
+                    <p class="SVtable" style="text-align: center;" align="center">Start of last block</p>
+                </td>
+            </tr>
+        </table>
+        <ul>
+            <li>
+                <p class="SVbulleted">T = size of timestamped block</p>
+            </li>
+            <li>
+                <p class="SVbulleted">N = Number of blocks as specified by the timestamp frame's <u>Quantity of data</u> property.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">W = The starting address as specified by the timestamp frame's <u>Starting address</u> property.</p>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">Change caused by the Cbit (Bit 6 of the first word) : If set to 1 then the driver transfers the timestamp block directly to <span class="mc-variable OEM.ProductName variable">PcVue</span>’s archived data. While it is set the driver also refreshes the real time value by polling of the timestamp enabled frame, thus keeping the real time variable up to date.</p>
+            <p class="SVnormal">Change caused by Fbit (Bit 7 of the first word) : If set to 1 then the driver expects that the exchange number is incremented by the field device. In that case, the driver only processes the block if the exchange number changes from one poll to the next. Otherwise, transmitted blocks are ignored.</p>
+        </div>
+        <h3 class="SVheading3">Timestamped block with short (12 bit) address (T = 6)</h3>
+        <table style="border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0">
+            <col style="width: 80px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <tr valign="top">
+                <td style="width: 30px;border-left-style: Solid;border-left-width: 1px;border-left-color: #808080;border-right-style: Solid;border-right-width: 1px;border-right-color: #808080;border-top-style: solid;border-top-width: 1px;border-top-color: #808080;border-bottom-style: Solid;border-bottom-width: 1px;border-bottom-color: #808080;padding-left: 1px;padding-right: 1px;padding-bottom: 10px;" class="SVtable">
+                    <p class="SVtable">&#160;</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">15</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">14</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">13</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">12</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">11</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">10</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">9</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">8</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">7</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">6</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">5</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">4</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">3</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">2</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">1</p>
+                </td>
+                <td style="padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" class="SVtable" width="80px">
+                    <p class="SVtable">Word W+1</p>
+                </td>
+                <td colspan="4" rowspan="1" style="width: 120px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="120px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Type</p>
+                </td>
+                <td colspan="12" rowspan="1" style="width: 360px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="360px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Address</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" class="SVtable" width="80px">
+                    <p class="SVtable">Word W+2</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="480px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Value1</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" class="SVtable" width="80px">
+                    <p class="SVtable">Word W+3</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="480px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Value0</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" class="SVtable" width="80px">
+                    <p class="SVtable">Word W+4</p>
+                </td>
+                <td colspan="7" rowspan="1" style="width: 210px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="210px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Year</p>
+                </td>
+                <td colspan="4" rowspan="1" style="width: 120px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="120px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Month</p>
+                </td>
+                <td colspan="5" rowspan="1" style="width: 150px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="150px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Day</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" class="SVtable" width="80px">
+                    <p class="SVtable">Word W+5</p>
+                </td>
+                <td style="width: 270px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="270px" class="SVtable" colspan="8">
+                    <p class="SVtable" style="text-align: center;" align="center">Hour</p>
+                </td>
+                <td style="width: 120px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="120px" class="SVtable" colspan="8">
+                    <p class="SVtable" style="text-align: center;" align="center">Minute</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" class="SVtable" width="80px">
+                    <p class="SVtable">Word W+6</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="480px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Millisecond</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Timestamped block with long (24 bit) address (T = 7)</h3>
+        <table style="border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0">
+            <col style="width: 80px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <tr valign="top">
+                <td style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">&#160;</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">15</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">14</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">13</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">12</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">11</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">10</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">9</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" class="SVtable" width="30px">
+                    <p class="SVtable" style="text-align: center;" align="center">8</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">7</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">6</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">5</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">4</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">3</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">2</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">1</p>
+                </td>
+                <td style="padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+1</p>
+                </td>
+                <td colspan="4" rowspan="1" style="width: 120px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="120px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Reserved</p>
+                </td>
+                <td colspan="4" rowspan="1" style="width: 120px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="120px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Type</p>
+                </td>
+                <td colspan="8" rowspan="1" style="width: 240px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="240px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Address (bits 23 - 16)</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+2</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="480px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Address (bits 15 - 0)</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+3</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="480px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Value1</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+4</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="480px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Value0</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+5</p>
+                </td>
+                <td colspan="7" rowspan="1" style="width: 210px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="210px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Year</p>
+                </td>
+                <td colspan="4" rowspan="1" style="width: 120px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" class="SVtable" width="120px">
+                    <p class="SVtable" style="text-align: center;" align="center">Month</p>
+                </td>
+                <td colspan="5" rowspan="1" style="width: 150px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="150px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Day</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+6</p>
+                </td>
+                <td style="width: 270px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="270px" class="SVtable" colspan="8">
+                    <p class="SVtable" style="text-align: center;" align="center">Hour</p>
+                </td>
+                <td style="width: 120px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="120px" class="SVtable" colspan="8">
+                    <p class="SVtable" style="text-align: center;" align="center">Minute</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+7</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="480px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Millisecond</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Timestamped block with IEC format (T = 8)</h3>
+        <table style="border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0">
+            <col style="width: 80px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <col style="width: 30px;" />
+            <tr valign="top">
+                <td style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">&#160;</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">15</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">14</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">13</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">12</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">11</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">10</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">9</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">8</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">7</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">6</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">5</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">4</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">3</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">2</p>
+                </td>
+                <td style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">1</p>
+                </td>
+                <td style="padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-top-color: #808080;border-top-width: 1px;border-top-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+1</p>
+                </td>
+                <td colspan="4" rowspan="1" style="width: 120px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="120px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Reserved</p>
+                </td>
+                <td colspan="4" rowspan="1" style="width: 120px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="120px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Type</p>
+                </td>
+                <td colspan="8" rowspan="1" style="width: 240px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="240px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Reserved</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+2</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="480px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Address (bits 15 - 0)</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+3</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="480px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Value1</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+4</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="480px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Value0</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+5</p>
+                </td>
+                <td colspan="8" rowspan="1" style="width: 240px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="240px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Reserved</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+                <td colspan="7" rowspan="1" style="width: 210px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="210px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Year</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+6</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+                <td colspan="4" rowspan="1" style="width: 120px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="120px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Month</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 30px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="30px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+                <td colspan="5" rowspan="1" style="width: 150px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;" width="150px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Day</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="width: 80px;padding-left: 1px;padding-right: 1px;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+7</p>
+                </td>
+                <td style="width: 30px;border-right-style: Solid;border-right-width: 1px;border-right-color: #808080;border-bottom-style: Solid;border-bottom-width: 1px;border-bottom-color: #808080;text-align: center;" width="30px" class="SVtable" colspan="8">
+                    <p class="SVtable" style="text-align: center;" align="center">Hour</p>
+                </td>
+                <td style="width: 30px;border-right-style: Solid;border-right-width: 1px;border-right-color: #808080;border-bottom-style: Solid;border-bottom-width: 1px;border-bottom-color: #808080;text-align: center;" width="30px" class="SVtable" colspan="8">
+                    <p class="SVtable" style="text-align: center;" align="center">Minute</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="width: 80px;padding-left: 1px;padding-right: 1px;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-left-color: #808080;border-left-width: 1px;border-left-style: Solid;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;" width="80px" class="SVtable">
+                    <p class="SVtable">Word W+8</p>
+                </td>
+                <td colspan="16" rowspan="1" style="width: 480px;padding-left: 1px;padding-right: 1px;border-right-color: #808080;border-right-width: 1px;border-right-style: Solid;border-bottom-color: #808080;border-bottom-width: 1px;border-bottom-style: Solid;" width="480px" class="SVtable">
+                    <p class="SVtable" style="text-align: center;" align="center">Millisecond</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">Value0 is the least significant word when reading a 32 bit value (real and double word) and the only significant word when reading 16 bit frames (word, byte and bit).</p>
+            <p class="SVnormal"> Value1 is the most significant word when reading 32 bit value (real and double word) and the offset when reading bits.</p>
+        </div>
+        <h3 class="SVheading3">Coding of the Type field</h3>
+        <table style="border-collapse: collapse;">
+            <col style="width: 100px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Data type</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;" class="SVtable"> 0</td>
+                    <td class="SVtable">Input status</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">Not used</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2</td>
+                    <td class="SVtable">Input registers</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">3</td>
+                    <td class="SVtable">Not used</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable">Not used</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">5</td>
+                    <td class="SVtable">Input registers as bits (obsolete)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">6</td>
+                    <td class="SVtable">Input registers as bits (see note below)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">7</td>
+                    <td class="SVtable">Real or Double Word input</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8</td>
+                    <td class="SVtable">Coil status</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">9</td>
+                    <td class="SVtable">Not used</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10</td>
+                    <td class="SVtable">Holding registers</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">11</td>
+                    <td class="SVtable">Not used</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">12</td>
+                    <td class="SVtable">Not used</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">13</td>
+                    <td class="SVtable">Holding registers as bits (Obsolete)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">14</td>
+                    <td class="SVtable">Holding registers as bits (See rule below)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">15</td>
+                    <td class="SVtable">Real or Double Word Input/Output</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note">
+            <p class="SVnormal">Rules for coding the address field for accessing a bit within a word:</p>
+            <ul>
+                <li>
+                    <p class="SVbulleted">The Word address is coded in the field Address.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">The offset of the bit is coded in the field Value1.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Example - Wordbit 5 of Word 7220 will be coded as: Address = 7220 and Value1 = 5.</p>
+                </li>
+            </ul>
+        </div>
+        <h3 class="SVheading3">Coding of the date and time fields</h3>
+        <table style="border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0">
+            <col style="width: 100px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading" style="vertical-align: top;">Field</td>
+                    <td class="SVtableHeading" style="vertical-align: top;">Coding</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Year</td>
+                    <td class="SVtable" style="vertical-align: top;">0-99 (The number of years since 1980)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Month</td>
+                    <td class="SVtable" style="vertical-align: top;">1-12</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Day</td>
+                    <td class="SVtable" style="vertical-align: top;">1-31</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Hour</td>
+                    <td class="SVtable" style="vertical-align: top;">0-23</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Minute</td>
+                    <td class="SVtable">0-59</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Millisecond</td>
+                    <td class="SVtable">0-59999</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note">
+            <p class="SVnormal">There is no field for seconds. Instead, the seconds are included with the milliseconds.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

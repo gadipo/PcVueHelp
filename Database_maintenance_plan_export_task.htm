@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Archives|Configuring databases|Database maintenance" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Maintenance Plan - Export Task</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor42"></a>Maintenance Plan - Export Task</h1>
+        <p class="SVnormal">The Export Task is for the 
+ export of records for backup purposes or for use in a 3rd party product such 
+ as Microsoft Excel. Exporting records does not remove them from the database. When 
+ an export takes place, only tables that have the property <span style="text-decoration: underline;">Can 
+ be exported</span> set are included.</p>
+        <p class="SVnormal">Records can be exported as text, XML, or in Microsoft's 
+ ADTG (advanced Data TableGram) format. </p>
+        <div class="note">
+            <p class="SVnormal">There is no mechanism in the HDS to import previously 
+ exported records.</p>
+        </div>
+        <p class="SVnormal">
+            <p>
+                <body>
+                    <h2 class="SVheading2">How to configure an export task</h2>
+                    <ol>
+                        <li value="1">Open the Application Explorer and from the configuration tree select the Maintenance Plan to which the maintenance task is to be attached.</li>
+                        <li value="2">From the task list, select <u>Add a maintenance task</u>. The Maintenance Task Configuration dialog opens.</li>
+                        <li value="3">Using the <u>Task</u> drop down list box select <u>Export</u>. An Export tab appears in the dialog. Select the tab.<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="T1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="T1" style="display: none;"><p><img src="../../Resources/Images/AE/Archives/task_database_export_tab.png" /></p></div></li>
+                        <li value="4">Select the period of data for export. You can select the units from minutes, hours, days, weeks, months or years. For information about the <u>Export time shift</u> field see below.</li>
+                        <li value="5">Either tick the <u>Use 
+ default folder</u> property or enter the path to which the export files will 
+ be sent. You can type in the path or select it using the browse 
+ button. </li>
+                        <li value="6">Select the export format. If text format is selected, there are some further options that can be configured - see below.</li>
+                        <li value="7">Click <u>OK</u> 
+ to confirm the configuration and close the dialog.</li>
+                    </ol>
+                    <div class="tip">
+                        <p class="SVnormal">The default export folder, EXPORT, is located in the Databases folder.</p>
+                    </div>
+                    <div class="note">
+                        <p class="SVnormal">The time used by the scheduler to trigger a Maintenance Plan is local time, whereas the time in records of the database is UTC (Coordinated Universal Time).</p>
+                    </div>
+                    <h2 class="SVheading2">Exporting data in text Format</h2>
+                    <p class="SVnormal">The following options are available when exporting data 
+ in text format.</p>
+                    <ul>
+                        <li class="SVbulleted">Include column headers 
+ - If selected the first line of the text file contains the names of the 
+ tables column headers.</li>
+                        <li class="SVbulleted">Delimiter - The character 
+ used to separate fields on each line. The default is a semi-colon.</li>
+                        <li class="SVbulleted">Substitution string 
+ for null value - A string that is substituted for any fields that are 
+ blank.</li>
+                    </ul>
+                    <p class="SVnormal">Text format records are exported as follows.</p>
+                    <ul>
+                        <li class="SVbulleted">A sub-folder with 
+ the same name as the database is created under the export path.</li>
+                        <li class="SVbulleted">One sub folder for 
+ each configured table is created under the database folder. </li>
+                        <li class="SVbulleted">One text file, with 
+ the name constructed from the time at which the export was initiated, 
+ is created under each table folder.</li>
+                        <li class="SVbulleted">Each text file contains 
+ a number of lines, each line representing one record in a table.</li>
+                        <li class="SVbulleted">Each line will contain 
+ a number of fields, separated by a delimiter, representing the values 
+ in a record.</li>
+                    </ul>
+                    <p class="SVnormal">The file name is constructed as follows: YYYYMMDDHHMM.EXT</p>
+                    <p class="SVnormal">Where YYYY is the year as four digits, MM is the month 
+ number as two digits, DD is the day number as two digits, HH is the hour 
+ as two digits and MM is the minute as two digits. EXT is the configured 
+ file extension. For example, 200205191200.dat, would represent a file 
+ created on the 19th of May 2002 at midday.</p>
+                    <p class="SVnormal">
+                        <img src="../../Resources/Images/AE/Archives/export_folder_structure.png" style="border-style: none;border: none;float: none;" border="0" />
+                    </p>
+                    <div class="warning">
+                        <p class="SVnormal">The property <i style="text-decoration: underline; font-style: normal;">Substitution string 
+ for null value</i> must be left empty if you export data in text format in order to re-import it using the Database Import tool.</p>
+                    </div>
+                    <h2 class="SVheading2">Using the Export time shift option</h2>
+                    <p class="SVnormal">The data that is exported can be offset using the Export time shift option. For example if you export 7 days of data with an <u>Export time shift</u> of 5 days the export run from 00:00 12 days ago to 00:00 5 days ago.</p>
+                    <p class="SVnormal">
+                        <img src="../../Resources/Images/AE/Archives/database_export_timeshift_example.png" />
+                    </p>
+                    <p class="SVnormal">Offsetting the data that is exported can be very useful under certain conditions. Take for example the situation where the system is just recovering after a failure. If the schedule requires that an export is executed immediately, and there is no offset, there is no opportunity to replace any missing data using the Database Manager replication process. If however, a 5 day offset was configured the user has up to 5 days to replace missing data before it is due for export.</p>
+                </body>
+            </p>
+        </p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

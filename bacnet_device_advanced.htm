@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Communication|Data acquisition|BACnet|Managing BACnet devices" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>BACnet device advanced properties</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor98"></a>BACnet Device Advanced Properties</h1>
+        <p class="SVnormal">The following screenshot was taken with the default configuration. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_device_advanced_tab.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <ul style="list-style-type: disc;">
+            <li>Binding<ul style="list-style-type: disc;"><li>Dynamic - Use the classic BACnet binding mechanism based on UDP broadcast messages to browse the devices on the BACnet network. </li><li>Static - Use the static device binding mechanism to communicate directly with an IP device without soliciting the classic BACnet browsing based on UDP broadcast messages.<ul style="list-style-type: disc;"><li>MAC address - The device BACnet MAC address, which can be entered in one of two formats:<ul style="list-style-type: disc;"><li> The socket address under the form IP address:UDP port. For example 10.59.5.151:47808<br /></li><li>As the actual BACnet MAC address. For example 0A:3B:05:97:BA:C0<br />Note that the BACnet MAC address format, as defined by the standard, is a conversion of the socket address as six bytes, and does not match the MAC address as defined usually.<br />IP address: 	10.59.5.151 	&gt; 	0A:3B:05:97<br />Port	:	47808			&gt; 	BA:C0</li></ul></li><li>Network identifier - The BACnet network number or network Id. By default, 0 is used to indicate the local network (as defined in the BACnet standard). </li></ul></li></ul></li>
+            <li>Monitoring<ul style="list-style-type: disc;"><li>BACnet objects<ul style="list-style-type: disc;"><li>Status flag management - Configure how the BACnet device status flags are interpreted.<ul style="list-style-type: disc;"><li>Process FAULT as invalid quality.</li><li>Process OVERRIDDEN as invalid quality.</li><li>Process OUT_OF_SERVICE as invalid quality.</li></ul></li><li>Accumulator<ul style="list-style-type: disc;"><li>Apply scale on instance value - Calculate the value of a variable mapped to the object by using the PresentValue and the Scale properties.</li></ul></li></ul></li></ul></li>
+            <li>Writing<ul style="list-style-type: disc;"><li>Update the variable immediately with the written value -  For a variable configured with polling, when a command is sent successfully, setting this property updates the variable value immediately with the written value (otherwise you have to wait for the next poll).</li><li class="SVbulleted">Synchronize values 
+ after writing – Used to synchronize the client and server after a write 
+ has been performed. <ul style="list-style-type: disc;"><li>No synchronization 
+ – No action taken.</li><li>Synchronize 
+ by read – The value in the client is read back from the server cache. This is the default selection.</li></ul></li></ul></li>
+            <li>Alarming<ul style="list-style-type: disc;"><li>Timestamp<ul style="list-style-type: disc;"><li>Use time provided by device - Use the timestamp included in the event notification.</li></ul></li></ul></li>
+        </ul>
+        <ul style="list-style-type: disc;">
+            <li>Device management<ul style="list-style-type: disc;"><li>Password - The password for all services that are password protected, such as ReinitializeDevice and DeviceCommunicationControl.</li><li>Time duration for communication control (hh:mm) - Used for DeviceCommunicationControl to indicate the number of minutes that the remote device shall ignore all APDUs other than  DeviceCommunicationControl and, if supported, ReinitializeDevice APDUs. If the “Time Duration” property is 0, then the time duration is considered indefinite, meaning that only an explicit DeviceCommunicationControl or ReinitializeDevice APDU will enable communications.</li><li>Backup and restore<ul style="list-style-type: disc;"><li>File transfer max size<ul style="list-style-type: disc;"><li>Automatic detection - Automatically detect the file transfer behavior when receiving backup files or sending restore files.</li><li>Customize - Force the number of bytes, or the record count, according to the access mode defined by the BACnet File object (stream or record access).<ul style="list-style-type: disc;"><li>Stream access (bytes) - The number of bytes if using stream access.</li><li>Record access - The number of records if using record access.</li></ul></li></ul></li><li>Timeout - Configure a specific timeout for the backup/restore process. The backup/restore process can take much longer than other requests.<ul style="list-style-type: disc;"><li>Disable - Disable specific timeout.</li><li>Enable - Enable a specific timeout. The value is entered in minutes.</li></ul></li></ul></li></ul></li>
+            <li>Interoperability issues<ul style="list-style-type: disc;"><li>Monitoring<ul style="list-style-type: disc;"><li>Switch automatically to polling mode if COV not supported - Force monitoring by polling if  COV is not supported or if COV subscription limit in the device has been reached.</li><li>On-demand read - Defines which BACnet service shall be used for reading properties on-demand, for example to fill-in property grids in Helpers and other design and diagnostic tools.<ul style="list-style-type: disc;"><li>Automatic detection - The driver will determine the most adequate service depending on the BACnet device capabilities. Default selection.</li><li>Use ReadProperty service - The ReadProperty service will be used even if a more suitable service is supported by the device.</li><li>Use ReadPropertyMultiple service - The ReadPropertyMultiple service will be used, and the action may fail if the device does not support this service.</li></ul></li></ul></li></ul></li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">In some cases, using static binding can be a good alternative to setting up a BBMD. See <a href="bacnet_bbmd.htm">BACnet BBMD Configuration</a> for more information.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

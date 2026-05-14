@@ -1,0 +1,1764 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|Equipment|Driver references" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Schneider Modbus II</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Schneider Modbus II</h1>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> supports communication with Schneider Electric T200 series 2, FLAIR200C and G200 devices.</p>
+        <p class="SVnormal">Four drivers are available depending on your requirements:</p>
+        <ul>
+            <li>Modbus II Serial - For permanent communication over serial link</li>
+            <li>Modbus II Modem - For non-permanent communication over phone lines with a PSTN or GSM modem</li>
+            <li>Modbus II Radio - For non-permanent communication with a radio modem</li>
+            <li>Modbus II Ip - For permanent, semi-permanent or non-permanent communication over a TCP/IP link</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The Application layer of the driver is identical for the four types of links, only the behavior differs.</p>
+        </div>
+        <h2 class="SVheading2">Supported functions</h2>
+        <p class="SVnormal">A serial link may be used to directly connect to devices having an RS232 port or to several devices connected to an RS485 network. The driver must be configured with cyclic access.</p>
+        <p class="SVnormal">Modem access may be used to connect equipment via a PSTN or GSM network. The driver must not be configured for cyclic access (no cyclic frame in this configuration).</p>
+        <p class="SVnormal">A radio link may be used to connect to devices via a radio network. The driver must not be configured for cyclic access (no cyclic frame in such configuration).</p>
+        <p class="SVnormal">The TCP/IP link is used to connect to devices via an Ethernet network, or GPRS with static or dynamic IP addresses.</p>
+        <p class="SVnormal">The driver supports the <u>Report By Exception</u> mode of the devices:</p>
+        <ul>
+            <li>Incoming calls via phone/modem</li>
+            <li>Exchanges initiated by a device with Radio link</li>
+            <li>Connection initiated by a device with TCP/IP link</li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">The driver does not support commands using the <u>Select Before Execute</u> mode.</p>
+        </div>
+        <p class="SVnormal">The driver automatically synchronizes devices’ clocks in the following cases:</p>
+        <ul>
+            <li>Modem link, at each connection</li>
+            <li>Radio link, at each connection initiated by the device</li>
+            <li>TCP/IP link, at each connection, only in case of non-permanent connection</li>
+        </ul>
+        <p class="SVnormal">The driver never synchronizes devices’ clocks in the following cases:</p>
+        <ul>
+            <li>Serial link</li>
+            <li>TCP/IP link, at each connection, in case of permanent and semi-permanent connection</li>
+        </ul>
+        <h2 class="SVheading2">Prerequisites</h2>
+        <p class="SVnormal">For Modbus II Modem, the modem must be installed and configured on the host operating system. The modem must support the Microsoft® TAPI version 2.0 interface.</p>
+        <h2 class="SVheading2">Network properties</h2>
+        <p class="SVnormal">This topic only includes a reference of objects' properties.<br /></p>
+        <p class="SVnormal">See the topic <a href="equipment_configure_comm_objects.htm">How to configure networks devices and frames</a> for more information about how to configure communication objects.</p>
+        <p class="SVnormal">When configuring the network, select the driver that fits your needs:</p>
+        <ul>
+            <li>Modbus II Serial</li>
+            <li>Modbus II Modem</li>
+            <li>Modbus II Radio</li>
+            <li>Modbus II Ip</li>
+        </ul>
+        <p class="SVnormal">The rest of the configuration is the similar, the only differences are for properties related to the connection and transport layer configuration.</p>
+        <h3 class="SVheading3">Modbus II Serial, Modem and Radio drivers</h3>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the network</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the network (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Serial port</td>
+                    <td class="SVtable">The COM port associated to the network</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the network will start upon Equipment communication start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Use default value</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Networking</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Servers</p>
+                </td>
+                <td class="SVtable">
+                    <p>The list of <span class="mc-variable OEM.ProductName variable">PcVue</span> stations where the network will be active</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Serial port parameters</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Baud rate</td>
+                <td class="SVtable">The baud rate on the serial line</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Data bits</td>
+                <td class="SVtable">The number of data bits on the serial line</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Parity</td>
+                <td class="SVtable">The parity set on the serial line</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Stop bit(s)</td>
+                <td class="SVtable">The number of stop bits on the serial line</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Modem handshaking</td>
+                <td class="SVtable">If enabled, modem handshaking is performed for flow control on the serial line</td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Modbus II Ip driver</h3>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the network</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the network (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the network will start upon Equipment communication start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Use default value</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Networking</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Servers</p>
+                </td>
+                <td class="SVtable">
+                    <p>The list of <span class="mc-variable OEM.ProductName variable">PcVue</span> stations where the network will be active</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Connection</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Listening port</td>
+                <td class="SVtable">
+                    <p>The port number on which the driver listens for incoming requests. This property is only useful if you want to take advantage of dynamic Ip addressing for field devices (typical GPRS deployment).</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Disconnect after silent interval</td>
+                <td class="SVtable">Maximum duration with no activity before the driver closes the TCP connection  (i.e., if no request is received from the field device).</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Device properties</h2>
+        <h3 class="SVheading3">Modbus II Serial driver</h3>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the device</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the device (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Equipment type</td>
+                    <td class="SVtable">Select the type of equipment that best suits the field device you want  communicate with.<br />The list of frame types and address ranges depend on the equipment type.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Slave address</td>
+                    <td class="SVtable">The slave address of the field device<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the device will start upon network start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Connection</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum waiting time between a request and the reply from the equipment</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Miscellaneous</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Virtual</p>
+                </td>
+                <td class="SVtable">
+                    <p>Reserved. Do not select.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Message delay</td>
+                <td class="SVtable">Reserved. Leave default value 0.</td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Modbus II Modem driver</h3>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the device</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the device (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Equipment type</td>
+                    <td class="SVtable">Select the type of equipment that best suits the field device you want  communicate with.<br />The list of frame types and address ranges depend on the equipment type.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Slave address</td>
+                    <td class="SVtable">The slave address of the field device<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Phone number</td>
+                    <td class="SVtable">Phone number of the device<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the device will start upon network start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Connection</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum waiting time between a request and the reply from the equipment</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Max connection period</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum duration of connections in the case of non-permanent connection. When this duration is reached, the connection is closed automatically by the driver.</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Miscellaneous</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Virtual</p>
+                </td>
+                <td class="SVtable">
+                    <p>Reserved. Do not select.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Message delay</td>
+                <td class="SVtable">Reserved. Leave default value 0.</td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Modbus II Radio driver</h3>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the device</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the device (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Equipment type</td>
+                    <td class="SVtable">Select the type of equipment that best suits the field device you want  communicate with.<br />The list of frame types and address ranges depend on the equipment type.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Slave address</td>
+                    <td class="SVtable">The slave address of the field device<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the device will start upon network start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Connection</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum waiting time between a request and the reply from the equipment</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Max connection period</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum duration of connections in the case of non-permanent connection. When this duration is reached, the connection is closed automatically by the driver.</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Miscellaneous</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Virtual</p>
+                </td>
+                <td class="SVtable">
+                    <p>Reserved. Do not select.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Message delay</td>
+                <td class="SVtable">Reserved. Leave default value 0.</td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Modbus II Ip driver</h3>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the device</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the device (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Equipment type</td>
+                    <td class="SVtable">Select the type of equipment that best suits the field device you want  communicate with.<br />The list of frame types and address ranges depend on the equipment type.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Address</td>
+                    <td class="SVtable">The Ip address of the field device.<br />Some drivers also support configuration by host name.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Slave address</td>
+                    <td class="SVtable">The slave address of the field device<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the device will start upon network start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Connection</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum waiting time between a request and the reply from the equipment</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Port number</p>
+                </td>
+                <td class="SVtable">
+                    <p>The port number of the field device</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Device Id</p>
+                </td>
+                <td class="SVtable">
+                    <p>A 16-bit integer used to uniquely identify a device on the network. It is mandatory when the IP address is dynamic</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Type (0=NP /1=P /2=SP)</p>
+                </td>
+                <td class="SVtable">
+                    <p>This property indicates the connection type:</p>
+                    <p>0 = non-permanent link</p>
+                    <p>1 = permanent link</p>
+                    <p>2 = semi-permanent link</p>
+                    <p>Semi-permanent link enables to reduce the amount of data transmitted and thus the cost of connections</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Reconnect period</p>
+                </td>
+                <td class="SVtable">
+                    <p>Minimum period between attempts to recover a connection. This period is also used as a waiting period after a time-out.</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Refresh period</p>
+                </td>
+                <td class="SVtable">
+                    <p>When the equipment is connected, it is the period during which data are refreshed (in GPRS, the period can be longer)</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Dynamic Ip address</p>
+                </td>
+                <td class="SVtable">
+                    <p>Check to indicate that the IP address of the field device is dynamic</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Keep alive period</p>
+                </td>
+                <td class="SVtable">
+                    <p>Period between 2 keep-alive requests. The keep-alive enables to keep a connection active. Only used with permanent and semi-permanent connections.</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Keep alive retry period</p>
+                </td>
+                <td class="SVtable">
+                    <p>When a keep-alive request failed, it is the delay before sending another keep-alive request</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Keep alive retry number</p>
+                </td>
+                <td class="SVtable">
+                    <p>Number of retry before closing a connection</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Miscellaneous</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Virtual</p>
+                </td>
+                <td class="SVtable">
+                    <p>Reserved. Do not select.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Message delay</td>
+                <td class="SVtable">Reserved. Leave default value 0.</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Frame addressing</h2>
+        <p class="SVnormal">Depending on the equipment type you have selected when configuring the device, you have access to the following type of frames.</p>
+        <p class="SVnormal">The Starting address
+ and Quantity properties define the memory address range for each frame, how it
+ is read from and written to, and how it is interpreted in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <h3 class="SVheading3">Frames structures for Serial, Radio and Modem links</h3>
+        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 169px;" />
+            <col style="width: 127px;" />
+            <col style="width: 140px;" />
+            <col style="width: 109px;" />
+            <col style="width: 97px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Device address</td>
+                    <td class="SVtableHeading">Function code</td>
+                    <td class="SVtableHeading">Data address</td>
+                    <td class="SVtableHeading">data</td>
+                    <td class="SVtableHeading">CRC</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1 byte</td>
+                    <td class="SVtable">1 byte</td>
+                    <td class="SVtable">2 bytes</td>
+                    <td class="SVtable">X bytes</td>
+                    <td class="SVtable">2 bytes</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3"> TCP/IP link frames structures</h3>
+        <table style="width: 100%;">
+            <col style="width: 234px;" />
+            <col style="width: 401px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">
+                        <p>Header Modbus TCP/IP</p>
+                    </td>
+                    <td class="SVtableHeading">Frame</td>
+                </tr>
+                <tr>
+                    <td style="padding: 0px;">
+                        <table style="width: 100%;">
+                            <col style="width: 80px;" />
+                            <col style="width: 67px;" />
+                            <col />
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: bold;text-align: center;">Frame Id</td>
+                                    <td style="font-weight: bold;text-align: center;">Version</td>
+                                    <td style="font-weight: bold;text-align: center;">Frame size</td>
+                                </tr>
+                                <tr>
+                                    <td>2 bytes</td>
+                                    <td>0x0000</td>
+                                    <td>2 bytes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td style="padding: 0px;">
+                        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+                            <col style="width: 90px;" />
+                            <col style="width: 95px;" />
+                            <col style="width: 117px;" />
+                            <col style="width: 95px;" />
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: center;font-weight: bold;">Device address</td>
+                                    <td style="text-align: center;font-weight: bold;">Function code</td>
+                                    <td style="text-align: center;font-weight: bold;">Data address</td>
+                                    <td style="text-align: center;font-weight: bold;">Data</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>1 byte</p>
+                                    </td>
+                                    <td>
+                                        <p>1 byte</p>
+                                    </td>
+                                    <td>2 bytes</td>
+                                    <td>X bytes</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Frame types common to all equipment types</h3>
+        <table style="border-collapse: collapse;width:100%">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col style="width: 303px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Access </td>
+                    <td class="SVtableHeading">Max quantity</td>
+                    <td class="SVtableHeading">Starting address </td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <th colspan="5" style="text-align: left;">Bit</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">TCD</td>
+                    <td class="SVtable" style="text-align: left;">- </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">24</p>
+                        <p class="SVnormal">8 (G200)</p>
+                        <p class="SVnormal">1024 (Free)</p>
+                    </td>
+                    <td class="SVtable" style="text-align: left;">0..65535</td>
+                    <td style="text-align: left;" class="SVtable">TCD memory area</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TSD</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">24</p>
+                        <p class="SVnormal">1024 (Free)</p>
+                    </td>
+                    <td class="SVtable" style="text-align: left;">0..65535</td>
+                    <td style="text-align: left;" class="SVtable">TSD memory area.  TSD double remote signaling for which the values 00 and 11 are invalid values.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">STATUS</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">16</p>
+                        <p class="SVnormal">17 (Free)</p>
+                    </td>
+                    <td class="SVtable" style="text-align: left;">0..16</td>
+                    <td style="text-align: left;" class="SVtable">Status memory area</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">CR</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">6 </p>
+                        <p class="SVnormal">2048 (Free)</p>
+                    </td>
+                    <td class="SVtable" style="text-align: left;">0..65535</td>
+                    <td style="text-align: left;" class="SVtable">CR memory area</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TSS</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">128</p>
+                        <p class="SVnormal">112 (G200)</p>
+                        <p class="SVnormal">2048 (Free)</p>
+                    </td>
+                    <td class="SVtable" style="text-align: left;">0..65535</td>
+                    <td style="text-align: left;" class="SVtable">TSS memory area</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TEST</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">144 </p>
+                        <p class="SVnormal">2048 (Free)</p>
+                    </td>
+                    <td class="SVtable" style="text-align: left;">0..65535</td>
+                    <td style="text-align: left;" class="SVtable">Test memory area</td>
+                </tr>
+                <tr>
+                    <th style="font-weight: bold;text-align: left;" colspan="5">Word</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">VERSION</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">1</p>
+                        <p class="SVnormal">128 (Free)</p>
+                    </td>
+                    <td class="SVtable" style="text-align: left;">0..65535</td>
+                    <td style="text-align: left;" class="SVtable">Version memory area</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TEST</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">9</p>
+                        <p class="SVnormal">128 (FLAIR200C)</p>
+                    </td>
+                    <td class="SVtable" style="text-align: left;">0..65535</td>
+                    <td style="text-align: left;" class="SVtable">Test memory area</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TM</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">16</p>
+                        <p class="SVnormal">80 (G200)</p>
+                        <p class="SVnormal">128 (Free) </p>
+                    </td>
+                    <td class="SVtable" style="text-align: left;">0..65535</td>
+                    <td style="text-align: left;" class="SVtable">TM memory area. TM words for which the value 0x8000 allows the device to define a word as invalid.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">EVENTS</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable" style="text-align: left;">0..65535</td>
+                    <td style="text-align: left;" class="SVtable">Timestamped blocks memory area. Header writing is automatic.</td>
+                </tr>
+                <tr>
+                    <th colspan="5" style="text-align: left;">Double word</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">TMD</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">64 (Free)</p>
+                        <p class="SVnormal">16 (FLAIR200C)</p>
+                    </td>
+                    <td class="SVtable" style="text-align: left;">0..65535</td>
+                    <td style="text-align: left;" class="SVtable">TMD memory area. TMD double-words for which the value 0x80000000 allows the equipment to define a double-word as invalid.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Status information frame types </h3>
+        <p class="SVnormal">The following frame types are available for their respective drivers. They are used to retrieve information about connection status.</p>
+        <table style="border-collapse: collapse;width:100%">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col style="width: 303px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Access </td>
+                    <td class="SVtableHeading">Max quantity</td>
+                    <td class="SVtableHeading">Starting address </td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <th colspan="5" style="text-align: left;">Bit</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">BIT MODEM STATUS</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">6</td>
+                    <td class="SVtable" style="text-align: left;">1..6</td>
+                    <td style="text-align: left;" class="SVtable">Modem status information (see <a href="#Bit_MODEM_STATUS">below</a> for data mapping and values)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">BIT RADIO STATUS</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable" style="text-align: left;">1..4</td>
+                    <td style="text-align: left;" class="SVtable">Radio status information (see <a href="#Bit_RADIO_STATUS">below</a> for data mapping and values)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">BIT TCP/IP STATUS</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">7</td>
+                    <td class="SVtable" style="text-align: left;">1..7</td>
+                    <td style="text-align: left;" class="SVtable">TCP/IP status information (see <a href="#Bit_TCPIP_STATUS">below</a> for data mapping and values)</td>
+                </tr>
+                <tr>
+                    <th style="font-weight: bold;text-align: left;" colspan="5">Byte</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">BYTE TCPIP STATUS</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">22</td>
+                    <td class="SVtable" style="text-align: left;">1..22</td>
+                    <td style="text-align: left;" class="SVtable">TCP/IP status information (see <a href="#Byte_TCPIP_STATUS">below</a> for data mapping and values)</td>
+                </tr>
+                <tr>
+                    <th style="font-weight: bold;text-align: left;" colspan="5">Word</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">WORD MODEM STATUS</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">18</td>
+                    <td class="SVtable" style="text-align: left;">1..18</td>
+                    <td style="text-align: left;" class="SVtable">Modem status information (see <a href="#Word_MODEM_STATUS">below</a> for data mapping and values)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">WORD RADIO STATUS</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">11</td>
+                    <td class="SVtable" style="text-align: left;">1..11</td>
+                    <td style="text-align: left;" class="SVtable">Radio status information (see <a href="#Word_RADIO_STATUS">below</a> for data mapping and values)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">WORD TCPIP STATUS</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">18</td>
+                    <td class="SVtable" style="text-align: left;">1..18</td>
+                    <td style="text-align: left;" class="SVtable">TCP/IP status information (see <a href="#Word_TCPIP_STATUS">below</a> for data mapping and values)</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Command frame types</h3>
+        <p class="SVnormal">The following frame type is available for the drivers. It is used to request the field device to perform actions.</p>
+        <table style="border-collapse: collapse;width:100%">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col style="width: 303px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Access </td>
+                    <td class="SVtableHeading">Max quantity</td>
+                    <td class="SVtableHeading">Starting address </td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <th colspan="5" style="text-align: left;">Bit</th>
+                </tr>
+                <tr>
+                    <td class="SVtable">COMMAND</td>
+                    <td class="SVtable" style="text-align: left;">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable" style="text-align: left;">1..4</td>
+                    <td style="text-align: left;" class="SVtable">Command (see <a href="#COMMAND">below</a> for data mapping and values)</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">STATUS and COMMAND frames data mapping</h2>
+        <h3 class="SVheading3"><a name="Bit_MODEM_STATUS"></a>Bit MODEM STATUS frame data mapping</h3>
+        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 82px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Index</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="font-weight: normal;"> 1</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Connection state:<br />0 if not connected</p>
+                        <p>1 if connected</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="font-weight: normal;"> 2</td>
+                    <td class="SVtable" style="font-weight: normal;">
+                        <p>Connection in progress for the field device (telephony dialing phase can be long):<br />0 if no connection attempt is in progress</p>
+                        <p>1 if a connection attempt is in progress</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="font-weight: normal;"> 3</td>
+                    <td class="SVtable" style="font-weight: normal;">Read status of the timestamped zone. Set to 1 when there are no more blocks to read.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">4</td>
+                    <td class="SVtable">Connection in progress for the network:<br />0 if no connection attempt is in progress<br />1 if a connection attempt is in progress on the network the device belongs to.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">5</td>
+                    <td class="SVtable">Synchronization status of the field device. Set to 1 when all data has been read successfully.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">6</td>
+                    <td class="SVtable">Status of the field device time-synchronization, set to 1 when the time has been updated successfully.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3"><a name="Word_MODEM_STATUS"></a>Word MODEM STATUS frame data mapping</h3>
+        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 93px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Index</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">Elapsed time of the connection (minute)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2</td>
+                    <td class="SVtable">Elapsed time of the connection (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">3</td>
+                    <td class="SVtable">Remaining time before automatic disconnection (minute)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable">Remaining time before automatic disconnection (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">5</td>
+                    <td class="SVtable">Maximum connection duration (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">6</td>
+                    <td class="SVtable">Timestamp of last connection (year)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">7</td>
+                    <td class="SVtable">Timestamp of last connection (month)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8</td>
+                    <td class="SVtable">Timestamp of last connection (day)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">9</td>
+                    <td class="SVtable">Timestamp of last connection (hour)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10</td>
+                    <td class="SVtable">Timestamp of last connection (minute)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">11</td>
+                    <td class="SVtable">Timestamp of last connection (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">12</td>
+                    <td class="SVtable">
+                        <p>Connection attempts counter</p>
+                        <p>0 = no attempt in progress or last connection completed successfully.</p>
+                        <p>1 = second attempt in progress.</p>
+                        <p>2 = third attempt in progress.</p>
+                        <p>3 = The last attempt failed, the value will only change when another connection is requested.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">13</td>
+                    <td class="SVtable">Timestamp of last refresh (year)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">14</td>
+                    <td class="SVtable">Timestamp of last refresh (month)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">15</td>
+                    <td class="SVtable">Timestamp of last refresh (day)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">16</td>
+                    <td class="SVtable">Timestamp of last refresh (hour)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">17</td>
+                    <td class="SVtable">Timestamp of last refresh (minute)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">18</td>
+                    <td class="SVtable">Timestamp of last refresh (second)</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3"><a name="Bit_RADIO_STATUS"></a>Bit RADIO STATUS frame data mapping</h3>
+        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 93px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Index</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">1</td>
+                    <td class="SVtable">Connection state:<br />0 if not connected<br /> 1 if connected</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">2</td>
+                    <td class="SVtable">Read status of the timestamped zone. Set to 1 when there are no more blocks to read.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">3</td>
+                    <td class="SVtable">Synchronization status of the field device. Set to 1 when all data has been read successfully.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">4</td>
+                    <td class="SVtable">Status of the field device time-synchronization, set to 1 when the time has been updated successfully.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3"><a name="Word_RADIO_STATUS"></a>Word RADIO STATUS frame data mapping</h3>
+        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 93px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Index</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">Elapsed time of the connection (minute)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2</td>
+                    <td class="SVtable">Elapsed time of the connection (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">3</td>
+                    <td class="SVtable">Remaining time before automatic disconnection (minute)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable">Remaining time before automatic disconnection (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">5</td>
+                    <td class="SVtable">Maximum connection duration (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">6</td>
+                    <td class="SVtable">Timestamp of last connection (year)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">7</td>
+                    <td class="SVtable">Timestamp of last connection (month)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8</td>
+                    <td class="SVtable">Timestamp of last connection (day)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">9</td>
+                    <td class="SVtable">Timestamp of last connection (hour)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10</td>
+                    <td class="SVtable">Timestamp of last connection (minute)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">11</td>
+                    <td class="SVtable">Timestamp of last connection (second)</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3"><a name="Bit_TCPIP_STATUS"></a>Bit TCP/IP STATUS frame data mapping</h3>
+        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 93px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Index</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">1</td>
+                    <td class="SVtable">
+                        <p>Connection state:</p>
+                        <p>0 if not connected</p>
+                        <p>1 if connected</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">2</td>
+                    <td class="SVtable">Connection in progress for the field device:<br />0 if no connection attempt is in progress<br /> 1 if a connection attempt is in progress</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">3</td>
+                    <td class="SVtable">Read status of the timestamped zone. Set to 1 when there are no more blocks to read.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">4</td>
+                    <td class="SVtable">Synchronization status of the field device. Set to 1 when all data has been read successfully.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">5</td>
+                    <td class="SVtable">Status of the field device time-synchronization, set to 1 when the time has been updated successfully.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">6</td>
+                    <td class="SVtable">Connection or identification error. Set to 1 when a connection request cannot be satisfied, or when a field device at the initiative of an incoming connection cannot be identified (configuration error of the unique Id, the IP address or the remote port).</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">7</td>
+                    <td class="SVtable">
+                        <p>Connection in progress for the network :</p>
+                        <p>0 if no connection attempt is in progress</p>
+                        <p>1 if a connection attempt is in progress on the network the device belongs to.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3"><a name="Byte_TCPIP_STATUS"></a>Byte TCP/IP STATUS frame data mapping</h3>
+        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 93px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Index</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">1..16</td>
+                    <td class="SVtable">IP Address under the form « xxx.xxx.xxx.xxx\0 »</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">17..22</td>
+                    <td class="SVtable">Local port number local under the form « xxxxx\0 »</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3"><a name="Word_TCPIP_STATUS"></a>Word TCP/IP STATUS frame data mapping</h3>
+        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 93px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Index</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">Elapsed time of the connection (minute)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2</td>
+                    <td class="SVtable">Elapsed time of the connection (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">3</td>
+                    <td class="SVtable">Remaining time before automatic disconnection (minute)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable">Remaining time before automatic disconnection (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">5</td>
+                    <td class="SVtable">Maximum connection duration (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">6</td>
+                    <td class="SVtable">Timestamp of last connection (year)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">7</td>
+                    <td class="SVtable">Timestamp of last connection (month)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8</td>
+                    <td class="SVtable">Timestamp of last connection (day)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">9</td>
+                    <td class="SVtable">Timestamp of last connection (hour)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10</td>
+                    <td class="SVtable">Timestamp of last connection (minute)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">11</td>
+                    <td class="SVtable">Timestamp of last connection (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">12</td>
+                    <td class="SVtable">Timestamp of last refresh (year)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">13</td>
+                    <td class="SVtable">Timestamp of last refresh (month)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">14</td>
+                    <td class="SVtable">Timestamp of last refresh (day)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">15</td>
+                    <td class="SVtable">Timestamp of last refresh (hour)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">16</td>
+                    <td class="SVtable">Timestamp of last refresh (minute)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">17</td>
+                    <td class="SVtable">Timestamp of last refresh (second)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">18</td>
+                    <td class="SVtable">Always 0</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3"><a name="COMMAND"></a>COMMAND frame data mapping</h3>
+        <table style="width: 100%;">
+            <col style="width: 93px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Index</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">Force clock synchronization</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note">
+            <p class="SVnormal">Only the first bit is used. Forcing this bit to 0 or 1 causes the device clock to be synchronized if it is connected.</p>
+        </div>
+        <h2 class="SVheading2">Driver status</h2>
+        <p class="SVnormal">The driver status provides driver-specific 
+ information to supplement the <b>frame general status</b>. For more information 
+ on status in general, refer to the topic <a href="equipment_comm_status.htm">General communication status</a>.</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Driver status</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">8001</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Unable to write multiple values</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8002</td>
+                    <td class="SVtable">
+                        <p>Unknown communication port</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8003</td>
+                    <td class="SVtable">
+                        <p>Incorrect CRC</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8004</td>
+                    <td class="SVtable">
+                        <p>Start address outside the addressing space</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8005</td>
+                    <td class="SVtable">No modem found  on the configured port</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8006</td>
+                    <td class="SVtable">Connection not established</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8007</td>
+                    <td class="SVtable">Unable to write</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8008</td>
+                    <td class="SVtable">Incorrect slave address</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8009</td>
+                    <td class="SVtable">Incorrect response</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">800A</td>
+                    <td class="SVtable">Incorrect response size</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">SCADA Basic scripting</h2>
+        <p class="SVnormal">You can control communication with this driver in SCADA Basic scripts with the CIMWAY instruction.</p>
+        <div class="note">See the topic <a href="equipment_msg_exchange.htm">Message exchange mechanisms in <span class="mc-variable OEM.ProductName variable">PcVue</span></a> for more information about what to optimize and how you can send commands from scripts. </div>
+        <p class="SVnormal">The driver also supports the following specific capabilities in SCADA Basic.</p>
+        <h3 class="SVheading3">Sending a control message to the driver</h3>
+        <p class="SVnormal"><span style="font-style: italic;">IntVal</span> = CIMWAY (<span style="font-style: italic;">SENDMSG</span>, <span style="font-style: italic;">CommObjectName</span>, <span style="font-style: italic;">CommandString</span>);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">CommObjectName</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Identifies the target object identifier:</p>
+                    <p class="SVtable" style="margin-left: 40px;margin-bottom: 0pt;">All networks: Empty string.</p>
+                    <p class="SVtable" style="margin-left: 40px;margin-bottom: 0pt;">A specific network: <i>NetworkId</i>.</p>
+                    <p class="SVtable" style="margin-left: 40px;margin-bottom: 0pt;">A specific device: <i>NetworkID.EquipmentId</i>.</p>
+                    <p class="SVtable" style="margin-left: 40px;margin-bottom: 0pt;">A specific frame: <i>NetworkID.EquipmentId.FrameId</i>.</p>
+                    <p class="SVtable" style="margin-left: 0px;">Type STR.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">CommandString</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The command to send to the driver. Type STR.</p>
+                    <p class="SVtable">See below for the list of messages supported by the driver.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">Control messages for Modbus II:</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 139px;" />
+            <col style="width: 508px;" />
+            <tr>
+                <td class="SVtableHeading">Control message</td>
+                <td class="SVtableHeading">Description</td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtable">REFRESH</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Causes the opening of the communication channel with a device, a reading of all the data, followed by closing the communication channel. If this command is sent to a network, the REFRESH is executed on all the devices of the network.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtable">CANCELREFRESH</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Causes the current REFRESH to stop (this message cancels all pending REFRESHs, but it does not stop a REFRESH that might be running for a device in the case of a Network REFRESH).</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtable">CONNECT</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Causes the opening of the communication channel with a device. All the data are then read cyclically until the end of the connection, which occurs at the latest (and automatically) when the maximum connection time (or exchange time) is reached.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtable">DISCONNECT</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Causes the communication channel to close with the equipment. The current reading cycle is completed before stopping exchanges.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtable">KEEPCONNECT</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Causes the extension of exchanges for an additional time period equal to the maximum connection time (or exchange time). The closing of the communication channel will therefore occur beyond the maximum time allowed by the configuration.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">See table below to see which commands are supported by which type of communication link.</p>
+        </div>
+        <h3 class="SVheading3">Communication link support for commands</h3>
+        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col style="width: 117px;" />
+            <tbody>
+                <tr>
+                    <td>&#160;</td>
+                    <td class="SVtableHeading">REFRESH</td>
+                    <td class="SVtableHeading">CANCELREFRESH</td>
+                    <td class="SVtableHeading">CONNECT</td>
+                    <td class="SVtableHeading">DISCONNECT</td>
+                    <td class="SVtableHeading">KEEPCONNECT</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Modem link - Network</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Modem link - Device</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">Supported</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Radio link - Network</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Radio link - Device</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TCP/IP link - Network</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TCP/IP link - Device</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">Supported</td>
+                    <td class="SVtable">Supported</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note">
+            <p class="SVnormal">Serial access does not support any command.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

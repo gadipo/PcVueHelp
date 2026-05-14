@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Instruction reference A to Z|S" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>SVALA</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="SVALA_Instruct" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor262"></a>SVALA</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc249">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="HistoricData_InstbyCat" />
+                <param name="Item3" value="VariablesTree_InstbyCat" />
+            </object><a class="MCConceptLink_seealso_0" href="javascript:mc249.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />See also</a> <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc250"><param name="Command" value="ALink,MENU" /><param name="Item1" value="" /><param name="Item2" value="SVALA_Ex" /></object><a class="MCConceptLink_example_0" href="javascript:mc250.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Example</a> <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc251"><param name="Command" value="ALink,MENU" /><param name="Item1" value="" /><param name="Item2" value="FilterExp_Ref" /><param name="Item3" value="ParamBuffer_Alarms_Ref" /><param name="Item4" value="ParamBuffer_Logs_Ref" /></object><a class="MCConceptLink_info_0" href="javascript:mc251.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Further information</a></p>
+        <p class="SVnormal">Extraction of alarm information.</p>
+        <p class="SVnormal">WebVue support - Yes.</p>
+        <table style="width: ;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50px;" />
+            <col style="width: 100px;" />
+            <col style="width: 50px;" />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Syntax</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">
+                     1 
+                </td>
+                <td valign="top" class="SVtable">
+                     EXTRACT 
+                </td>
+                <td valign="top" class="SVtable"><a title="Click to view the syntax for this mode." href="#Syntax1">1</a>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">
+                     2 
+                </td>
+                <td valign="top" class="SVtable">
+                     COUNT 
+                </td>
+                <td valign="top" class="SVtable"><a title="Click to view the syntax for this mode." href="#Syntax2">2</a>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">Only one extraction can be processed at a time across user sessions. The application developer shall make sure the value of the asynchronous result variable is different from -9 (a request is in progress) before starting an extraction.</p>
+            <p class="SVnormal">In addition, SVALA execution is not protected at the user session level, e.g. all sessions have access to the data extracted by another session if buffer handles are global.</p>
+        </div>
+        <h2 class="SVheading2"><span><a name="Syntax1"></a></span>Syntax 1</h2>
+        <p class="SVnormal"><span style="font-style: italic;">IntVal</span> = SVALA(<span style="font-style: italic;">Mode</span>, <span style="font-style: italic;">DestHandle</span>, 
+ <span style="font-style: italic;">ParamHandle</span> [,<span style="font-style: italic;">EndVarName</span>, 
+ <span style="font-style: italic;">Sense</span>] [, <span style="font-style: italic;">CountVarName</span>]);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">DestHandle</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The handle of a buffer in which the retrieved alarms will 
+ be placed. Type LONG.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">ParamHandle</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The handle of a buffer that contains parameters that will 
+ be used to filter the alarms to be extracted. The parameters take the 
+ format of a comma-separated string. Type LONG.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">EndVarName</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The name of a database bit variable that will be set to 
+ the value contained in <span style="font-style: italic;">Sense</span> 
+ when the extract has finished. Type STR.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">Sense</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">A flag (0 or 1) which will be written into the variable 
+ <span style="font-style: italic;">EndVarName</span> when the extract has 
+ finished. Any numeric type.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">CountVarName</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The name of a database register variable into which will 
+ be placed the number of alarms extracted. Type STR.</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr style="height: 0px;">
+                <td valign="top">
+                    <p class="SVtable">1</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">EXTRACT</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Alarms passing the filter criteria are extracted and placed 
+ in the buffer defined by the parameter <span style="font-style: italic;">DestHandle</span>.</p>
+                </td>
+            </tr>
+            <tr style="height: 0px;">
+                <td valign="top">
+                    <p class="SVtable">&#160;</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">&#160;</p>
+                </td>
+                <td rowspan="1" colspan="1">
+                    <p class="SVtable">Return values:</p>
+                    <p class="SVtable">1 The instruction was executed successfully.<span><br />0 The mode is incorrect.<br />-1 The parameter </span><span style="font-style: italic;">DestHandle</span> 
+ is incorrect.<br />-2 The parameter <span style="font-style: italic;">ParamHandle</span> 
+ is incorrect.<br />-3 The content pointed to by <span style="font-style: italic;">ParamHandle</span> 
+ is incorrect.<br />-4 The variable <span style="font-style: italic;">EndVarName</span> does 
+ not exist.<br />-5 The variable <span style="font-style: italic;">EndVarName</span> cannot 
+ be written to.<br />-5 The variable <span style="font-style: italic;">EndVarName</span> cannot 
+ be written to.<br />-6 The parameter <span style="font-style: italic;">Sense</span> does not 
+ exist or has an incorrect value.<br />-7 The variable <span style="font-style: italic;">CountVarName</span> 
+ does not exist.<br />-8 The variable <span style="font-style: italic;">CountVarName</span> 
+ cannot be written to.<br />-9 A request is in progress.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax2"></a>Syntax 2</h2>
+        <p class="SVnormal"><span style="font-style: italic;">IVal</span> = SVALA(<span style="font-style: italic;">Mode</span>, <span style="font-style: italic;">ParamHandle</span> 
+ [,<span style="font-style: italic;">EndVarName</span>, <span style="font-style: italic;">Sense</span>] 
+ [, <span style="font-style: italic;">CountVarName</span>]);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">2</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">COUNT</p>
+                </td>
+                <td>
+                    <p class="SVtable">Alarms passing the filter criteria are counted and the 
+ result placed in the variable <i>CountVarName</i>.</p>
+                </td>
+            </tr>
+            <tr style="height: 0px;">
+                <td valign="top">
+                    <p class="SVtable">&#160;</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">&#160;</p>
+                </td>
+                <td rowspan="1" colspan="1">
+                    <p class="SVtable" style="margin-left: 0px;">Return values:</p>
+                    <p class="SVtable">1 The instruction was executed successfully.<br />0 The mode is incorrect.<br />-1 The parameter <span style="font-style: italic;">DestHandle</span> is 
+ incorrect.<br />-2 The parameter <span style="font-style: italic;">ParamHandle</span> 
+ is incorrect.<br />-3 The content pointed to by <span style="font-style: italic;">ParamHandle</span> 
+ is incorrect.<br />-4 The variable <span style="font-style: italic;">EndVarName</span> does 
+ not exist.<br />-5 The variable <span style="font-style: italic;">EndVarName</span> cannot 
+ be written to.<br />-6 The parameter <span style="font-style: italic;">Sense</span> does not 
+ exist or has an incorrect value.<br />-7 The variable <span style="font-style: italic;">CountVarName</span> 
+ does not exist.<br />-8 The variable <span style="font-style: italic;">CountVarName</span> 
+ cannot be written to.<br />-9 A request is in progress.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">For the format of the parameter buffer, see the topic 
+ <a href="../References/Param_Buffer_Format_Alarms.htm">Parameter 
+ Buffer Format</a> and the topic on <a href="../References/Filter_Expressions.htm">Native Filter Expressions</a>.</p>
+        <h2 class="SVheading2">Example</h2>
+        <p class="SVnormal">For an example, select the Example link above. </p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

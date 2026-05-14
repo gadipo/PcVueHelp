@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|SNMP" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>SNMP redundancy management</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">SNMP Redundancy Management<a name="kanchor206"></a></h1>
+        <p class="SVnormal">Redundancy is managed at the Network level with the Network configuration including the option of a Server List. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>.</p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <br />
+            <img src="../../Resources/Images/AE/Comm_DataAcq/snmp_net_advanced1.png" />
+            <br />
+        </div>
+        <p class="SVnormal">All the devices configured under a given network effectively inherit the server list defined for the network. This allows for all redundancy architecture (both single active server and multi active servers).</p>
+        <div class="warning">
+            <p class="SVnormal">The same device cannot be configured on more than one network. </p>
+        </div>
+        <h2 class="SVheading2">Polled data</h2>
+        <p class="SVnormal">The variables belonging to a given device are only produced on the server listed in the Server List selected in the Network's advanced properties.</p>
+        <ul style="list-style-type: disc;">
+            <li>Single active server association - The variables for a given device are polled only by the active server of the association. Passive servers and clients  are updated in the normal manner.</li>
+            <li>Multiple active server association - The variables for a given device are polled by all servers belonging to the association. Clients  are updated in the normal manner by the LAN manager.</li>
+        </ul>
+        <h2 class="SVheading2">Trap data</h2>
+        <p class="SVnormal">Variables mapped to traps or OIDs refreshed by <u>Trap only and ad-hoc synchronization</u> are updated when the active servers receive a trap message. However, traps are not broadcast by the agent across the entire network, they are sent to a specific machine or machines. Therefore, it is up to the agent's capability if it can send a trap to more than one machine.</p>
+        <p class="SVnormal">If an agent can only send to one machine that means that in a redundant architecture only one of the redundant machines will be able to receive traps. Therefore, redundancy cannot be managed correctly by <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <p class="SVnormal">If an agent can send a trap to more than one machine there are two possibilities.</p>
+        <ul style="list-style-type: disc;">
+            <li>Single active server association - The trap is received on both servers and only the active one produces its value. There is a theoretical possibility of losing an event if a trap occurs when a server switches from passive to active.</li>
+            <li>Multiple active server association - The trap is received by all servers. Clients  are updated in the normal manner. In the event of a server failure, there is a theoretical possibility of losing an event on a client that was still subscribed to that server.</li>
+        </ul>
+        <p class="SVnormal">To prevent event loss the SNMP driver uses a list mechanism. </p>
+        <ul style="list-style-type: disc;">
+            <li> Each trap has a unique time identifier.  Both machines receive the trap and acknowledge reception to the agent.</li>
+            <li>For each trap it receives, the active server sends a trap notification to the passive server and the passive server removes the relevant trap from its list.</li>
+            <li>When the passive server switches to active, it empties its list processing the traps that have not been already processed by the active server.  In a controlled changeover, the passive server list should be empty but in case of a failure, the mechanism minimizes the chance of losing trap information.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

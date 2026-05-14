@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|BACnet Server Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Other runtime behaviors</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Other runtime behaviors</h1>
+        <h2 class="SVheading2">Datatype conversion</h2>
+        <p class="SVnormal">If the variable type is different to that of the BACnet object, datatype conversion takes place automatically.</p>
+        <ul style="list-style-type: disc;">
+            <li>Bit variables exposed as Analog objects - The value  is converted from the Boolean representation to the numeric representation (0 or 1) for Analog Input, Analog Output and Analog Value objects.</li>
+            <li>Register variables exposed as Binary objects - The value  is converted to true if the value is different from zero,  and false if its value is equal to zero for Binary Input, Binary Output and Binary Value objects.</li>
+            <li>Text variables exposed as Analog or Binary objects - The value  is converted from its string representation into a real value for Analog Input, Analog Output and Analog Value objects. The value  is converted from its string representation into 0 or 1 for binary values for Binary Input and Binary Output objects.</li>
+        </ul>
+        <h2 class="SVheading2">Commandable objects</h2>
+        <p class="SVnormal">Variables can be exposed as commandable objects. Multiple attempts to write to the Present Value property, at the same time, may result in conflicts. Consequently, the standard BACnet arbitration system is used, based on command prioritization. The priority associated with a command is ranged from  1 to 16, with 1 being the highest.</p>
+        <p class="SVnormal">The Priority Array property contains the 16 values associated with the prioritized commands and is entirely initialized with null values at startup. Any non-null value is considered a command. The highest priority command in the array is the active command and the value contained in the Present Value property matches this active command.</p>
+        <p class="SVnormal">If no command is active, and therefore the Priority Array is completely filled with null values, the Relinquish Default property is used for the Present Value.</p>
+        <p class="SVnormal">The supported commandable objects are Analog Output, Binary Output, Analog Value and Binary Value.</p>
+        <div class="note">
+            <p class="SVnormal">The property Priority Array of commandable objects is not persisted when shutting down <span class="mc-variable OEM.ProductName variable">PcVue</span> and is initialized with null values at start-up. It is the responsibility of BACnet clients to ensure setting the priority properly when sending a command.</p>
+        </div>
+        <h2 class="SVheading2">Clock management</h2>
+        <p class="SVnormal">Local date and time are provided by the Local Time and Local Date properties of the Device object. The time and date originate from the system running the Add-on and automatically adjust for system and time zone changes.</p>
+        <p class="SVnormal">Current Daylight Saving Status and UTC Offset are also provided within the Device object.</p>
+        <h2 class="SVheading2">Default property values</h2>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Device object</td>
+                    <td class="SVtableHeading">Default value</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Instance Number </td>
+                    <td class="SVtable">1990</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Vendor Name</td>
+                    <td class="SVtable">See PICS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Vendor Identifier</td>
+                    <td class="SVtable">See PICS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Model Name</td>
+                    <td class="SVtable">See PICS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Location</td>
+                    <td class="SVtable">See PICS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Firmware Revision</td>
+                    <td class="SVtable">See PICS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Application Software Version</td>
+                    <td class="SVtable">See PICS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Protocol Version</td>
+                    <td class="SVtable">1</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Protocol Revision</td>
+                    <td class="SVtable">12</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Database Revision</td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Max APDU Length Accepted</td>
+                    <td class="SVtable">1476</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Segmentation Supported</td>
+                    <td class="SVtable">Transmitted and Received frames</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Max Segments Accepted</td>
+                    <td class="SVtable">16</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>APDU Segment Time Out</p>
+                    </td>
+                    <td class="SVtable">2000</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>APDU Time Out</p>
+                    </td>
+                    <td class="SVtable">3000</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Number Of APDU Retries</td>
+                    <td class="SVtable">5</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">COV, Intrinsic Reporting Process ID</td>
+                    <td class="SVtable">123456</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Analog Input object</td>
+                    <td class="SVtableHeading">Default value</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Present Value</td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Status Flags </td>
+                    <td class="SVtable">0000</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Event State</td>
+                    <td class="SVtable">State normal</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Out Of Service</td>
+                    <td class="SVtable">False</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Units</td>
+                    <td class="SVtable">No units</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Min Pres Value</td>
+                    <td class="SVtable">- Double Max (32 bits)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Max Pres Value</td>
+                    <td class="SVtable">Double Max (32 bits)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Resolution</td>
+                    <td class="SVtable">Double precision</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">COV Increment</td>
+                    <td class="SVtable">0.5</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Analog Output and Analog Value object</td>
+                    <td class="SVtableHeading">Default value</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Present Value</td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Status Flags </td>
+                    <td class="SVtable">0000</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Event State</td>
+                    <td class="SVtable">State normal</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Out Of Service</td>
+                    <td class="SVtable">False</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Units</td>
+                    <td class="SVtable">No units</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Minimum Present Value</td>
+                    <td class="SVtable">- Double Max (32 bits)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Maximum Present Value</td>
+                    <td class="SVtable">Double Max (32 bits)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Resolution</td>
+                    <td class="SVtable">Double precision</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Priority Array</td>
+                    <td class="SVtable">16 NULL values</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Relinquish Default</td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">COV Increment</td>
+                    <td class="SVtable">0.5</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Binary Input object</td>
+                    <td class="SVtableHeading">Default value</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Present Value</td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Status Flags </td>
+                    <td class="SVtable">0000</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Event State</td>
+                    <td class="SVtable">State normal</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Out Of Service</td>
+                    <td class="SVtable">False</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Polarity</td>
+                    <td class="SVtable">Normal</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Binary Output and Binary Value object</td>
+                    <td class="SVtableHeading">Default value</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Present Value</td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Status Flags </td>
+                    <td class="SVtable">0000</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Event State</td>
+                    <td class="SVtable">State normal</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Out Of Service</td>
+                    <td class="SVtable">False</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Polarity</td>
+                    <td class="SVtable">Normal</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Priority Array</td>
+                    <td class="SVtable">16 NULL values</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Relinquish Value</td>
+                    <td class="SVtable">0</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Archives|Configuring databases|Database maintenance" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Overview of database maintenance plans</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Overview of Database Maintenance Plans</h1>
+        <p class="SVnormal">A Maintenance Plan is used to automatically execute maintenance tasks on one or more of the database's used by <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <p class="SVnormal">Each Maintenance Plan consists of a schedule and a list of tasks.</p>
+        <ul>
+            <li>The schedule decides when and how often the Maintenance Plan runs.</li>
+            <li>The list of tasks determines what the Maintenance plan does. The tasks are executed in a configured sequence. The first task in the sequence starts when the Maintenance Plan runs, the second task starts when the first has finished and so on.</li>
+        </ul>
+        <p class="SVnormal">The following tasks are available.</p>
+        <ul>
+            <li>Purge - Limits the age of records in the database by deleting those older than a defined period. Equivalent to the functionality provided by the Database Purge tab in version 8.10.</li>
+            <li>Export - Exports data from the database, for a defined period, in either text, ADTG or XML formats. Equivalent to the functionality provided by the Database Export tab in version 8.10.</li>
+            <li>Defrag - Defragments the  database's index.  Only available for SQL Server databases.</li>
+            <li>Custom - Executes a custom Transact-SQL script.  Only available for SQL Server databases.</li>
+            <li>Shrink - Removes unused space allocated in the Database's files reducing the space occupied on the storage device. Only available for SQL Server databases.</li>
+        </ul>
+        <p class="SVnormal">Each task is attached to a particular database. A single Maintenance Plan can execute tasks on one or more databases.</p>
+        <p class="SVnormal">For multi-station applications, a Maintenance Plan may be attached to a server station list thereby selecting the stations on which it is executed.</p>
+        <p class="SVnormal">Typical uses of the Maintenance plan are:</p>
+        <ul>
+            <li>Ensuring that the database does not reach its maximum size (at which point data recording would stop).</li>
+            <li>Making sure that the database operates at maximum efficiency by regular defragmentation and shrinking (removing unused allocated space).</li>
+            <li>Periodically exporting the data for archive purposes or access by another application.</li>
+        </ul>
+        <p class="SVnormal">The functionality provided by Database Maintenance Plans replaces that of the Maintenance and Export tabs of the Database configuration dialog in versions of <span class="mc-variable OEM.ProductName variable">PcVue</span> earlier than 8.2. If a project created by version 8.10, is opened in 8.2 or later, the database maintenance and export configuration is converted to the equivalent Maintenance Plan.</p>
+        <p class="SVnormal">From version 11.2 onwards, when a maintenance plan is produced by an association of redundant servers, it is only executed on the active servers of the association. Prior to 11.2 such maintenance plans were executed on all servers of the association, irrespective of their current status (active or passive) at the time of execution.</p>
+        <div class="note">
+            <p class="SVnormal">If you shutdown the software whilst a Maintenance Plan is running, the current task is completed but any remaining tasks are not started.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

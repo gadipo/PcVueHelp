@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Networked applications" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to configure the variables for networked applications</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to Configure the Variables for Networked Applications</h1>
+        <p class="SVnormal">In the majority of networked applications, careful use 
+ of the client and server station lists to control the variable's behavior 
+ will allow the same reference project to be deployed identically on all stations.</p>
+        <h2 class="SVheading2">Using the client and server lists to control the behavior 
+ of variables</h2>
+        <p class="SVnormal">On each station in the network, the behavior of variables 
+ is modified as follows.</p>
+        <ul>
+            <li class="SVbulleted">If the name of the 
+ local station appears in a variable's server list, the variable is loaded 
+ and behaves normally. That is the station produces the value of the variable.</li>
+            <li class="SVbulleted">If the name of the 
+ local station appears in a variable's client list, the variable is loaded 
+ and its behavior is modified so that the station consumes the value of 
+ the variable.</li>
+            <li class="SVbulleted">If the name of the 
+ local station does not appear in either the variable's client or server 
+ list, the variable is not loaded.</li>
+            <li class="SVbulleted">If the server list and the client list of a variable are not empty (not defined), this variable will produced and consumed locally on every station. Its value will not be shared among stations.</li>
+        </ul>
+        <p class="SVnormal">For examples of the use of client and server lists see 
+ the book <a href="Ex_1_server_station_and_2_client_stations.htm">Architecture examples</a>.</p>
+        <p class="SVnormal">For the precise behavior of a variable when it becomes 
+ a consumer, see the topic Behavior 
+ of variables on a client station.</p>
+        <h2 class="SVheading2">Allocating client and server lists to variables</h2>
+        <p class="SVnormal">When configuring variables for a networked application, 
+ each variable is allocated to a client station list and a server station 
+ list. These lists determine the behavior of each variable according to 
+ the station on which it is used.</p>
+        <ol>
+            <li class="SVnumbered" value="1">Open the Application Explorer and expand the configuration tree to select the Variables tree folder.</li>
+            <li class="SVnumbered" value="2">Expand the Variables tree and select a variable. From the task list, select <u>Properties</u>. The Variable Properties dialog opens.</li>
+            <li class="SVnumbered" value="3">Select the Advanced 
+ tab. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show 
+ picture</a><div MadCap:targetName="t1" style="display: none;"><p><img src="../../Resources/Images/AE/Variables/properties_advanced_tab.png" /></p></div></li>
+            <li class="SVnumbered" value="4">From the <u>Servers</u> drop down list box, select the list corresponding to 
+ the server stations where the variable will appear.</li>
+            <li class="SVnumbered" value="5">From the <u>Clients</u> drop down list box, select the list corresponding to 
+ the client stations where the variable will appear.</li>
+            <li class="SVnumbered" value="6">Click <u>OK</u> 
+ to confirm the selection and close the advanced options dialog.</li>
+        </ol>
+        <h2 class="SVheading2">Behavior of variables on a consumer station (client)</h2>
+        <p class="SVnormal">The behavior of variables, loaded on a station that 
+ appears in the variable's client list, is modified so that the station 
+ consumes the value of the variable. The real time value and status of 
+ variables is produced from the 
+ equivalent variable on the active server.</p>
+        <table style="border-spacing: ;border-collapse: collapse;" width="100%">
+            <col style="width: 80px;" />
+            <col />
+            <tr valign="top">
+                <td style="width: 80px;" width="80px">
+                    <p class="SVtableHeading">Variable</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Behavior as a consumer</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;" width="80px">
+                    <p class="SVtable">Bit</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Becomes a consumer bit. If the bit has command attributes, 
+ any command issued by a client is re-directed to the active server 
+ to be processed.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;" width="80px">
+                    <p class="SVtable">Threshold</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Behaves as a bit. The threshold is only calculated on 
+ the active server.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;" width="80px">
+                    <p class="SVtable">Alarm</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Becomes a consumer alarm. The result of acknowledgment 
+ and masking operations issued by a client are re-directed to the active 
+ server to be processed.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;" width="80px">
+                    <p class="SVtable">Register</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Becomes a consumer register. If the register has control attributes, any control 
+ value issued by a client is re-directed to the active server to be 
+ processed.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;" width="80px">
+                    <p class="SVtable">Counter</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Behaves as a register. The value of the counter is only 
+ calculated on the active server.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="width: 80px;" width="80px">
+                    <p class="SVtable">Timer</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Behaves as a register. The value of the timer is only 
+ calculated on the active server.</p>
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

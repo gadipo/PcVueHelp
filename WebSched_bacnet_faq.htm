@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Web and mobile client applications|WebScheduler" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>WebScheduler and BACnet FAQ</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">The WebScheduler and BACnet FAQ</h1>
+        <p class="SVnormal">The WebScheduler is designed as a generic tool presenting a consistent interface independent of the underlying scheduling technology. However,  there are some different operational features depending on what scheduling technology you are using. This topic describes those for BACnet.</p>
+        <h2 class="SVheading2">BACnet B-OWS &amp; B-AWS requirements</h2>
+        <p class="SVnormal">The WebScheduler's capability integrates all functionality required to fulfill the scheduling BIBBs. As a consequence, the WebScheduler can be used in <span class="mc-variable OEM.ProductName variable">PcVue</span> projects that are required to match B-OWS or B-AWS requirements. Projects that do not require Schedules do not need to use the WebScheduler.</p>
+        <h2 class="SVheading2">BACnet Schedule Object</h2>
+        <p class="SVnormal">The BACnet Schedule Object is a structured list of date, time and value pairs that can be used by a BACnet Device to schedule operations. The Weekly Schedule property of this object is used to control the Present Value property based on the 7 days of the week. Each day of the week has a corresponding schedule containing values and  times that are used for that day. The <u>Weekly Schedule</u> property can be overridden by the <u>Exception Schedule</u> property, which can be configured to define alternative behaviors for dates, date ranges and date patterns configured either directly in the exception or in a referenced calendar object.</p>
+        <h2 class="SVheading2">BACnet Calendar Object</h2>
+        <p class="SVnormal">The BACnet Calendar Object is a list of dates used to generate an exception in one or more Schedule Objects.</p>
+        <h2 class="SVheading2">WebScheduler Standard Week</h2>
+        <p class="SVnormal">The WebScheduler Standard Week page is used to manage the behavior of a schedule for each of the seven days of a week. For BACNet, the  Standard Week corresponds to the WeeklySchedule property of an instance of the Schedule object.</p>
+        <h2 class="SVheading2">WebScheduler Special Days</h2>
+        <p class="SVnormal">The Special Days page is used to manage BACnet Calendar Objects. </p>
+        <h2 class="SVheading2">WebScheduler Calendar</h2>
+        <p class="SVnormal">The Calendar page is used to manage an entire schedule including the Standard Week, Exceptions, Special Days and Effective Period (as applicable). It gives a view on what will be actually run by the device for a certain time period, taking into account the Standard Week, Exceptions, Special Days and Effective Period.</p>
+        <h2 class="SVheading2">WebScheduler Effective Period</h2>
+        <p class="SVnormal">The WebScheduler Effective Period page is used to manage the Effective Period property of an instance of a BACnet Schedule Object. </p>
+        <h2 class="SVheading2">Understanding the behavior caused by the BACNet NULL status<br /></h2>
+        <p class="SVnormal">The absence of any interval in the Scheduler Control indicates the schedule's default output value will be set as defined by its schedule-default property. If this value is NULL, the output value of the schedule is undefined. The same applies to exception periods - on days with exception behavior (i.e. other than the standard week), the empty space means that the output of the exception is NULL or undefined. This means that, unintentionally, standard week behavior can be reactivated. In general, it is preferential to never set the default output value of a schedule to NULL or undefined, instead using the  Effective Period to limit a schedule's effect.</p>
+        <p class="SVnormal">Example</p>
+        <ul style="list-style-type: disc;">
+            <li>         You have schedule with the schedule default = NULL. The Standard Week is configured with each day  as follows.<ul style="list-style-type: disc;"><li>  9:00 = 1
+</li><li>  16:00 = NULL</li></ul></li>
+            <li>         You have one exception period on 14/11/2014 configured as follows.<ul style="list-style-type: disc;"><li>  8:00 = 1</li><li>  14:00 = NULL</li></ul></li>
+            <li>As the exception period remains undefined after 14:00 (NULL), what you see in the WebScheduler HMI is the following.<ul style="list-style-type: disc;"><li>  8:00 = 1</li><li>  14:00 = 1
+</li><li>  16:00 = NULL</li></ul></li>
+            <li>         If you remove the interval from 8:00-14:00 on 14/11 the exception is modified in the following manner as one small interval remains in the WebScheduler HMI.<ul style="list-style-type: disc;"><li>  14:00 = 1</li><li>  16:00 = NULL
+  </li></ul></li>
+            <li>Consequently after reload you have the following behavior on 14/11:
+<ul style="list-style-type: disc;"><li>  9:00 = 1 (from the Standard Week)
+</li><li>  14:00 = 1 (from the updated exception)
+</li><li>  16:00 = NULL (from the updated exception)</li></ul></li>
+        </ul>
+        <h2 class="SVheading2">User rights</h2>
+        <p class="SVnormal">The WebScheduler controls user access to BACnet Schedule and Calendar objects based on "Timetables" privileges as defined in the connected user's profile. The file SchedulesAccess.dat is ignored.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

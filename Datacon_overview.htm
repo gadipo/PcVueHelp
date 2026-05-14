@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="General|Data connections" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Data connections overview</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor195"></a>Data Connections Overview</h1>
+        <div class="note">The Data connection feature is protected by the license.</div>
+        <p class="SVnormal"><a name="kanchor196"></a>The Data Connection feature facilitates the connection of <span class="mc-variable OEM.ProductName variable">PcVue</span> to third party systems. In particular, Sql connections are useful to exchange data with Enterprise systems such as:</p>
+        <ul>
+            <li>MES - For retrieving production parameters and giving feedback on its execution...</li>
+            <li>CMMS - For triggering work orders on event and alarms, retrieving work orders' status and accessing spare parts availability...</li>
+            <li>ERP - For exchanging information about production planning, raw material availability and usage...</li>
+            <li>Weather data - Either pushing weather data to a central database if weather stations are directly connected or retrieving weather data in a third-party system, for use in <span class="mc-variable OEM.ProductName variable">PcVue</span>&#160;.</li>
+            <li>etc.</li>
+        </ul>
+        <p class="SVnormal">Simply said, Sql connections and the underlying Sql request handler can be used to bridge <span class="mc-variable OEM.ProductName variable">PcVue</span> to any external data source, provided that a compatible ADO.NET provider is available.</p>
+        <p class="SVnormal">The module behind Sql connection handling helps you connect seamlessly to Sql data sources. It includes:</p>
+        <ul>
+            <li>Request routing inside the multi-station system - In order to avoid the need to open the access to the data source to all stations of the network,  the configuration allows you to define which station is in charge of the interface to the DBMS. All other stations will go through this designated station to execute requests.</li>
+            <li>Support for single active server associations - A Sql connection can be produced by an association for redundant paths to the DBMS.</li>
+            <li>Error handling</li>
+            <li>Asynchronous command handling</li>
+            <li>Centralized connection strings at the project configuration level</li>
+            <li>etc.</li>
+        </ul>
+        <p>This Sql bridge supports a large variety of database commands including:</p>
+        <ul>
+            <li>Select, Insert, Update and Delete queries</li>
+            <li>Scalar and non-query requests</li>
+            <li>Requests on tables, views, stored procedure execution</li>
+        </ul>
+        <p>Data Connections allow the developer to configure a connection to a Data Source, typically a Database Management System (DMBS) using the ADO.NET technology. The Data Source can be local, on another server on the local network or cloud based.<br />This version  includes support for:</p>
+        <ul>
+            <li>
+                <p>Microsoft's SQL Server - Local, network or Azure</p>
+            </li>
+            <li>
+                <p>Oracle - Based on the ODP.NET provider</p>
+            </li>
+            <li>
+                <p>Built-in providers</p>
+            </li>
+            <li>
+                <p>A generic data source is also included which can be used to connect to any Data Source that supports the ADO.NET technology.</p>
+            </li>
+        </ul>
+        <div class="warning">
+            <p>The Data Connections feature is based on a process running as a Windows service called SV DbConnect.</p>
+            <p class="SVnormal"> This service is installed as part of <span class="mc-variable OEM.ProductName variable">PcVue</span> installation and must be running for Sql connections and requests to operate properly.</p>
+            <p class="SVnormal">By default, the service SV DbConnect runs with a virtual account. While this is suitable in the most common situations, you may need to change the selected account depending on the constraints of the RDBMS and the ADO.NET provider.</p>
+        </div>
+        <p class="SVnormal">Access to Data Sources via Sql connections is possible using SCADA Basic, the SV Manager Toolkit and, using Sql Read Queries or Sql Write Queries, you can map variables to data from any data source. </p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/General/datacon_overview.png" />
+        </p>
+        <h2 class="SVheading2">Sql Queries</h2>
+        <p class="SVnormal">Pre-defined Sql queries can be added to a configured Sql Connection. See the topic <a href="Datacon_sql_query_conf.htm">How to configure an Sql query</a>. A query can be configured to run cyclically and / or on various events. The data produced by a query can be used in the following ways. </p>
+        <ul style="list-style-type: disc;">
+            <li>By mapping to one or more variables. See the topics <a href="../Variables/Link_sqlquery_read.htm">Linking a variable to a Sql read query</a> and <a href="../Variables/Link_sqlquery_write.htm">Linking a variable to a Sql write query</a>.</li>
+            <li>By configuring a Sql grid control to display rows returned by a Sql query. See the topic Sql grid control.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

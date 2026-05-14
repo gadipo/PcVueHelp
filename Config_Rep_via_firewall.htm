@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Replicating a database (SQL Server)|System Configuration for Replication|Replication across a firewall" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="DatabaseManager.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuration for replicating databases across Windows Firewall</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuration for Replicating Databases Across Windows 
+ Firewall</h1>
+        <p class="SVnormal">If you are running a firewall on the computer that is 
+ running SQL Server, external connections to SQL Server will 
+ be blocked unless SQL Server and the SQL Server Browser service can 
+ communicate through the firewall. You have to create an exception for each 
+ instance of SQL Server that you want to accept remote connections 
+ and an exception for the SQL Server Browser service.</p>
+        <p class="SVnormal">If enabled, the default instance of the Microsoft SQL 
+ Server Database Engine listens on TCP port 1433.</p>
+        <p class="SVnormal">Named instances of the SQL Server Database Engine are configured for to use dynamic 
+ ports, which means that they select an available port when the SQL Server 
+ service is started. When connecting to a named instance through a firewall, 
+ you need to configure the Database Engine to listen on a specific port, 
+ so that the appropriate port can be opened in the firewall.</p>
+        <h2 class="SVheading2">Assigning a TCP/IP port number to the SQL Server Database 
+ Engine</h2>
+        <ol>
+            <li class="SVnumbered" value="1">Click Start, select Microsoft SQL Server 
+ and then click on SQL Server Configuration Manager. </li>
+            <li class="SVnumbered" value="2">In the left hand 
+ (console) pane, expand SQL Server Network Configuration, expand Protocols 
+ for &lt;<span style="font-style: italic;">instance name</span>&gt; and then double-click TCP/IP. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t2" style="display: none;"><p><img src="../Resources/Images/DatabaseManager/SQL_Server_Config_Manager_dialog_TCPIP.png" style="border-style: none;border: none;" border="0" /></p></div></li>
+            <li class="SVnumbered" value="3">In the TCP/IP Properties 
+ dialog, open the IP Addresses tab. Any IP addresses will appear in the 
+ format IP1, IP2, up to IPAll. One of these is for the IP address of the 
+ loopback adapter, 127.0.0.1; you can ignore it.</li>
+            <li class="SVnumbered" value="4">Additional IP addresses 
+ appear for each IP device on the computer. Right-click each address, and 
+ then click Properties to identify the IP address that you wish to configure.</li>
+            <li class="SVnumbered" value="5">If the TCP Dynamic 
+ Ports dialog shows 0, indicating that the Database Engine is listening 
+ on dynamic ports, delete the 0.</li>
+            <li class="SVnumbered" value="6">In the IP<span style="font-style: italic;">n</span> 
+ Properties area box, in the TCP Port box, type the port number you wish 
+ this IP address to listen on and then click OK.</li>
+            <li class="SVnumbered" value="7">In the console pane, 
+ click SQL Server Services.</li>
+            <li class="SVnumbered" value="8">In the right hand 
+ (details) pane, right-click SQL Server (&lt;<span style="font-style: italic;">instance 
+ name</span>&gt;) and click on Restart to stop and then restart SQL Server. 
+ <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t1" style="display: none;"><p><img src="../Resources/Images/DatabaseManager/SQL_Server_Config_Manager_dlg_Restart.png" style="border-style: none;border: none;" border="0" /></p></div></li>
+        </ol>
+        <p class="SVnormal">You the run the SQL Server Browser service on the server 
+ to connect to the Database Engine instance by name, as follows.</p>
+        <h2 class="SVheading2"><a name="Run_Service_Browser"></a>Running the Service 
+ Browser </h2>
+        <p class="SVnormal">SQL Server uses an instance ID as part of the path 
+ when you install its program files. To create an exception for each instance 
+ of SQL Server, you must identify the correct instance ID. To obtain an 
+ instance ID, follow these steps:</p>
+        <ol>
+            <li class="SVnumbered" value="1">In SQL Server Configuration 
+ Manager, click the SQL Server Browser service in the right pane, right-click 
+ the instance name in the main window and then click on Properties. </li>
+            <li class="SVnumbered" value="2">On the SQL Server 
+ Browser Properties dialog, click the Advanced tab, locate the instance 
+ ID in the property list and then click OK. </li>
+        </ol>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Networked applications|Using redundant configurations - Associations" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Overview of redundant configurations</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Overview of Redundant Configurations</h1>
+        <p class="SVnormal">Redundant server operation is available for applications 
+ where system availability is of prime importance. You can configure redundant 
+ operation for either or both real-time and historic data.</p>
+        <p class="SVnormal">There are two types of redundant configurations available 
+ for real-time data - the one most suitable for your application will largely 
+ depend on the type of industrial network you are using.</p>
+        <ul>
+            <li class="SVbulleted">Single Active Server: 
+ suitable for all networks.</li>
+            <li class="SVbulleted">Multiple Active Server: 
+ only suitable for multi-master or dual path networks. </li>
+        </ul>
+        <h2 class="SVheading2">Simplified principle of operation when using a redundant 
+ configuration for real-time data.</h2>
+        <p class="SVnormal">Two or more stations are configured as real-time servers. 
+ Their configuration is identical unless the <u>Available rate</u> feature is being used. All servers 
+ are connected to the industrial network and the local area network. At 
+ any time, one of the servers will be active and the others passive. If all servers are available the server that was started first becomes active unless the available rates are different, in which case the server with the highest available rate becomes active.</p>
+        <p class="SVnormal">In the network configuration, the server stations are 
+ included in a real-time association. Clients are configured so that they 
+ are linked to the association, not directly to one or other of the actual 
+ servers. The association automatically routes real time information from 
+ the active server to the clients.</p>
+        <div class="note">
+            <p class="SVnormal">Although <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration is identical, the stations are allocated different station numbers, as this is dependent on the IP address.</p>
+        </div>
+        <h2 class="SVheading2">Simplified principle of operation when using a redundant 
+ configuration and multiple active servers for historical data </h2>
+        <p class="SVnormal">Two stations are configured as historical servers. Their 
+ configuration is identical unless the <u>Available rate</u> feature is being used. Historical data is recorded 
+ on both stations.</p>
+        <p class="SVnormal">In the network configuration, both stations are included 
+ in a historical association. Stations, where the archive units are consumed
+ behave as clients and are configured so that they are linked to the historical 
+ association of servers. When processing a request (for example for Trend data), the 
+ station on which the client archive unit is located checks to see which 
+ of the servers in the association is available. If both are available, 
+ it sends the request to the server with the larger <u>Available 
+ rate</u>. If the rates are identical then the request is sent to the server with the lowest station number.</p>
+        <p class="SVnormal">While the behavior of a passive server in an association  can generally be described as that of a client of the active server, it is not the case if you issue requests to historical data from it for an archive unit it produces. Indeed, the passive server, as a consumer of an archive unit it produces, is only able to retrieve data from the archives it produces, the request is not sent to the active server of the association and the availability rate is not a decision criteria in this case.</p>
+        <h2 class="SVheading2">Simplified principle of operation when using a redundant 
+ configuration and a single active server for historical data </h2>
+        <p class="SVnormal">Two stations are configured as historical servers. Their 
+ configuration is identical*. They both record data in the same SQL Server database. Only one station is active at any given time.</p>
+        <p class="SVnormal">In the network configuration, both stations are included 
+ in a historical association. Stations, where the archive units are to 
+ behave as clients, are configured so that they are linked to the historical 
+ association. Requests for historic data are routed to the active server. </p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

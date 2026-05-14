@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|BACnet|BACnet Scheduling" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to configure PcVue to use a BACnet Schedule</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor115"></a>How to Configure <span class="mc-variable OEM.ProductName variable">PcVue</span> to use a BACnet Schedule</h1>
+        <p class="SVnormal">Adding Schedule objects to the device in <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration is a requirement in order to view and change a BACnet schedule in the WebScheduler.</p>
+        <div class="warning">
+            <p class="SVnormal">The process described below does not create a Schedule object instance in the physical device if it does not exist. Schedule objects can be created within the physical device using the              <a href="bacnet_schedules_helper.htm">Schedules and Calendars helper</a>, or the left pane of the <a href="bacnet_mapping_overview.htm">Mapping editor</a>.</p>
+        </div>
+        <h2 class="SVheading2">Adding a Schedule object using the Application Explorer</h2>
+        <ol>
+            <li value="1">Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network and device.</li>
+            <li value="2">From the task pane, select <u>Add a Schedule</u>. The Schedule configuration dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_schedule_ae.png" MadCap:targetName="t3" style="display: none;" /></li>
+            <li value="3">Click the Ellipsis button adjacent to the <u>Instance number</u> field. The Object Selection dialog opens containing a list of discovered Schedule instances for that device. The list can be updated using the <u>Refresh</u> button. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_schedule_selection_dialog.png" MadCap:targetName="t4" style="display: none;" /></li>
+            <li value="4">Select the Schedule instance to use and click <u>OK</u> to close the Object Selection dialog.</li>
+            <li value="5">Enter the optional <u>Description</u>. The Description appears in the Application Explorer and can be useful to identify the object later.</li>
+            <li value="6">Enter or select the optional <u>Branch</u>. The branch can be used to organize calendars and schedules in the WebScheduler in a hierarchical manner. For example, a branch of XXXX.YYYY would generate a branch XXXX containing the schedule YYYY.</li>
+            <li value="7">Click the <u>OK</u> button to close the Schedule configuration dialog. The schedule appears in the configuration tree and is available to <span class="mc-variable OEM.ProductName variable">PcVue</span> and the WebScheduler.</li>
+        </ol>
+        <h2 class="SVheading2">Use of the <u>Ignore default values</u> setting in the Advanced tab</h2>
+        <p class="SVnormal"><span id="lblReponse">When working with BACnet schedules the  Web Scheduler evaluates the value of the schedule-default  property of the schedule object. As the Web Scheduler ends each defined interval  with a transition  to NULL, the schedule-default value becomes active for all the undefined  periods on the schedule control. In other words, undefined time periods in the Web Scheduler’s schedule  control represent times when the schedule-default value is active. </span>
+        </p>
+        <p class="SVnormal"><span id="lblReponse">However, BACnet devices from some vendors dynamically change the value of the schedule-default during runtime. In this case, <u>Ignore default values</u> can be ticked. The user is then able to select the output value, for all intervals, from the list of available output values except for NULL.  For example, for schedules of type “Enumerated” the possible output  values of an interval are 0 and 1.</span>
+        </p>
+        <h2 class="SVheading2">Displaying the Schedule configuration in the lower pane</h2>
+        <p class="SVnormal">The lower right pane of the Application Explorer shows essential information about the selected Schedule. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t5"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_schedule_info.png" MadCap:targetName="t5" style="display: none;" /></p>
+        <ul style="list-style-type: disc;">
+            <li>Schedule outputs - One line for each of the schedule's outputs.<ul style="list-style-type: disc;"><li>Name - The object type, instance and property corresponding to the output.</li><li>Device reference<ul style="list-style-type: disc;"><li>If empty, the output is on the same device as schedule object.</li><li>The name of the device if the output is not on the same device as the schedule and the device is configured in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li><li>The device id if the output is not on the same device as the schedule and the device is not configured in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li></ul></li><li>Variable name - The name of the variable that is mapped to the output property. </li><li>Associated label - The name of the associated label used by the variable.</li></ul></li>
+            <li>Schedule associated label - The name of the associated label that will be used by the WebScheduler. It is taken from the first associated label found in the Scheduled Outputs list.</li>
+        </ul>
+        <h2 class="SVheading2">Adding or deleting an output</h2>
+        <p class="SVnormal">The Application Explorer can be used to add an output to, or delete an output from, a schedule object on the physical device under the following conditions.</p>
+        <ul style="list-style-type: disc;">
+            <li>The physical device must be configured to allow such modification.</li>
+            <li>The BACnet setting <u>Enable object creation and deletion</u> must be ticked.</li>
+            <li>The device/object/property to be used must be already mapped to a variable.</li>
+        </ul>
+        <p>How to add an output:</p>
+        <ol>
+            <li value="1">Open the Application Explorer and expand the configuration tree to display a previously configured BACnet Schedule.</li>
+            <li value="2">From the task bar of the lower right pane, select <u>New item</u>. The Variable Selector dialog opens showing only those variables already mapped to a BACnet property.</li>
+            <li value="3">Select the variable corresponding to the BACnet property to be used for the new output and click <u>OK</u>. A new Schedule Output is added to the Schedule object.</li>
+        </ol>
+        <p class="SVnormal">How to delete an output:</p>
+        <ol>
+            <li value="1">Open the Application Explorer and expand the configuration tree to display a previously configured BACnet Schedule.</li>
+            <li value="2">Select an output in the lower right pane and, from the lower right pane task bar, select <u>Delete item</u>. The Output is removed from the Schedule object.</li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal"> Not all physical devices will permit Schedule Output to be changed from another device (in this case <span class="mc-variable OEM.ProductName variable">PcVue</span>), some may not support it, or the corresponding property may be read-only.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

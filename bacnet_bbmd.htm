@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|BACnet" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>BACnet BBMD configuration</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor300"></a>BACnet BBMD Configuration</h1>
+        <p class="SVnormal">BACnet device discovery uses services that rely on the use of broadcast messages. As broadcast messages are normally not forwarded by routers, BBMD (BACnet/IP Broadcast Management Device) is a technology to enable BACnet broadcast messages to be sent to other subnets with BACnet IP devices. Each BBMD, in this case <span class="mc-variable OEM.ProductName variable">PcVue</span>, manages a table that lists any other partner BBMD's on the network it should connect to.</p>
+        <div class="note">
+            <p class="SVnormal">In some cases, using static binding can be a good alternative to setting up a BBMD. See <a href="bacnet_device_advanced.htm">BACnet Device Advanced Properties</a> for more information.</p>
+        </div>
+        <h2 class="SVheading2">How to configure a BBMD table</h2>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> BBMD tables are configured from the BBMD task.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnormal">Navigate to the Application Explorer configuration tree and select the BACnet node.</p>
+            </li>
+            <li value="2">
+                <p class="SVnormal">Select the <u>BBMD</u> task from the left pane.  The BBMD configuration dialog opens.
+</p>
+            </li>
+            <li value="3">
+                <p class="SVnormal"> Click the yellow folder icon on the BBMD configuration dialog. The BBMD list creation dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="creation_list"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p class="SVnormal">
+                    <img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_bbmd_creation_list.png" MadCap:targetName="creation_list" style="display: none;" />
+                </p>
+            </li>
+            <li value="4">
+                <p>Enter the BBMD list <u>Name</u>. A default name is suggested. Accept the name or enter one of your own. </p>
+            </li>
+            <li value="5">
+                <p>Select the Network interface or Station where the list will be active. What you are defining here is the <span class="mc-variable OEM.ProductName variable">PcVue</span> station that will act as a BBMD on the BACnet network. It can be defined by selecting a network interface that you have configured (associated to a BACnet network configuration item), or a station. In all cases, the <span class="mc-variable OEM.ProductName variable">PcVue</span> station that is a BBMD must be a BACnet data acquisition server, i.e. it produces communication for a BACnet network item you have configured.</p>
+                <div class="warning">
+                    <p class="SVnormal">BBMD redundancy is not supported. The list selected must be a station name, a list or association containing only a single station.</p>
+                </div>
+            </li>
+            <li value="6">
+                <p>Click  <u>OK</u> to confirm the configuration. The BBMD list will appear in the right pane of the BBMD creation dialog. </p>
+            </li>
+            <li value="7">
+                <p>Select the BBMD list added in the left pane and click the add icon in the right pane of the BBMD configuration dialog to add a partner BBMD. What you are doing here is configuring the IP address and Port number of a device acting as BBMD on another subnet that the <span class="mc-variable OEM.ProductName variable">PcVue</span> station will have to communicate with (as a BBMD). <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="creation_address"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_bbmd_creation_address.png" MadCap:targetName="creation_address" style="display: none;" />
+                </p>
+                <div class="note">
+                    <p class="SVnormal">The icons that appear upon selection of added BBMD lists and BBMDs enable you to  remove or view properties of these elements</p>
+                </div>
+            </li>
+            <li value="8">
+                <p>Click  <u>OK</u> to confirm the configuration. </p>
+            </li>
+            <li value="9">
+                <p>Repeat from Step 7 if you need to configure more than one partner BBMD for the selected BBMD list. It is typically the case if you have BACnet devices on more than 2 subnets (there should be a partner BBMD on each subnet).</p>
+            </li>
+            <li value="10">
+                <p>Repeat from Step 2 if you need to configure more than one BBMD list, e.g. more than one <span class="mc-variable OEM.ProductName variable">PcVue</span> station that will act as a BBMD. Having more than one <span class="mc-variable OEM.ProductName variable">PcVue</span> station acting as a BBMD only makes sense if they communicate to different subsets of partner BBMD on other subnets.</p>
+            </li>
+        </ol>
+        <div class="warning">
+            <p class="SVnormal">While it is recommended to configure the network interface associated to a BACnet network explicitly, it is not mandatory and you may not have configured them. In such case, the BACnet driver will use the first available network interface card of the computer. And if BBMD lists are configured, the first one will be used which may result in communication failures because nothing guarantee that the first BBMD list is the good one for a given subnet.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

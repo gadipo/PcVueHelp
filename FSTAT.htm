@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Instruction reference A to Z|F" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>FSTAT</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="FSTAT_Instruct" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor34"></a>FSTAT</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc129">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="File_Mgmt_InstbyCat" />
+            </object><a class="MCConceptLink_seealso_0" href="javascript:mc129.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />See also</a>
+        </p>
+        <p class="SVnormal">Return the size and last modification date for the specified 
+ file.</p>
+        <p class="SVnormal">WebVue support - Yes.</p>
+        <h2 class="SVheading2">Syntax</h2>
+        <p class="SVnormal">IntVal = FSTAT(<span style="font-style: italic;">Filename</span>, 
+ <span style="font-style: italic;">Handle</span>);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">Filename</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The name of the file. 
+ Type STR.<br />If executed in a WebVue session context this instruction is processed by the computer that hosts the web back end and the referenced file is on that computer. </p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">Handle</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The location of the memory buffer in which the data is 
+ to be returned. Type LONG.</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <p class="SVnormal">The file statistics are returned in a memory buffer previously 
+ allocated with ALLOC_BUFFER or by FILETOBUF. The size of the file is found 
+ at an offset of 0 and the date at an offset of 4. The minimum buffer size 
+ for the operation is 22. The file may be open or closed.</p>
+        <p class="SVnormal">Return: 1 if successful, else 0.</p>
+        <h2 class="SVheading2">Example</h2>
+        <p class="SVprogramCode">DIM bufh as LONG; 'buffer handle<br />CONST SIZE=0; 'offset to read the size<br />CONST MODIF=4; 'offset to read the date<br />CONST ALLOC=22; '22 is the minimum required<br />bufh=ALLOC_BUFFER(ALLOC);<br />IF(FSTAT("file.txt",bufh)==1) THEN<br />&#160; PRINT("Size in bytes:",LGET_BUFFER(bufh,SIZE));<br />&#160; PRINT("Date of last modification:",CGET_BUFFER (bufh,MODIF,18));<br />END IF</p>
+        <p class="SVprogramCode">FREE_BUFFER(bufh); 'free buffer</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

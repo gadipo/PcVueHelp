@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|ICCP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Configuring ICCP variables</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuring ICCP Variables</h1>
+        <p class="SVnormal">The user can create and configure ICCP variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> by adding a formatted value in the extended attributes of the variable. This value  contains ICCP mapping information for that variable. It has 7 or 9 fields, depending on the type, with each field separated by a special character corresponding to  the parameter BranchSeparator.</p>
+        <p class="SVnormal">The user can configure two important parameters in the ICCP.ini file that are later used to parse the variables extended attributes:</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">BranchSeparator - The field separator in text extended attributes</li>
+            <li class="SVbulleted">AttributeNumber - The Id of the text extended attribute that contains the ICCP mapping</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The number of characters in an extended attribute is limited to 100. To reduce the length, some of the more common fields are entered with a single or a few characters.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">It is important that to use short names with care for the elements Network, LCC, Local Domain, RCC, Remote Domain and Data Set. All the name lengths come into play when using this extended attribute text.</p>
+        </div>
+        <h2 class="SVheading2">Required parameters</h2>
+        <p class="SVnormal">In the extended attribute, the user must enter specific information that is important to define the variable mapping. All the fields must be separated by the character BranchSeparator defined in the ICCP.ini file. The specific order of these fields depends on the variables type (data or device command) and its origin (local or remote).</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 50px;" />
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Field</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">ICCP</td>
+                    <td class="SVtable">
+                        <p>A header that must be ICCP. Mandatory for all ICCP variables. </p>
+                        <p>Used to identify that this is an ICCP variable.</p>
+                        <p>Case sensitive.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2</td>
+                    <td class="SVtable">&lt;LocalOrRemote&gt;</td>
+                    <td class="SVtable">
+                        <p>A string that can be either: L or R. These letters represent Local or Remote variables.</p>
+                        <p>Defines if the variable belongs to the local control center or to the remote control center.</p>
+                        <p>Mandatory. Not case sensitive.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">3</td>
+                    <td class="SVtable">&lt;DataType&gt;</td>
+                    <td class="SVtable">
+                        <p>A string that defines the ICCP data type of the variable. It must be one of the 15 data types or 3 control types.</p>
+                        <p>The allowed values for this field are: D, DE, DQ, DQT, DQTE, R, RE, RQ, RQT, RQTE, S, SE, SQ, SQT, SQTE, CC, DSP or RSP.</p>
+                        <p>Mandatory. Not case sensitive.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable">&lt;Network&gt;</td>
+                    <td class="SVtable">
+                        <p>A string that defines the Network that the variable belongs to.</p>
+                        <p>It must match a Network Name configured in the ICCP.ini file.</p>
+                        <p>Mandatory. Case sensitive.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">5</td>
+                    <td class="SVtable">&lt;LCC&gt;</td>
+                    <td class="SVtable">
+                        <p>A string that defines the LCC that the variable belongs to. </p>
+                        <p>It must match a LCC Name configured in the ICCP.ini file that is consistent with the Network.</p>
+                        <p>Mandatory. Case sensitive.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">6</td>
+                    <td class="SVtable">&lt;RCC&gt;</td>
+                    <td class="SVtable">
+                        <p>A string that defines the RCC that the variable belongs to.</p>
+                        <p>It must match a RCC Name configured in the ICCP.ini file that is consistent with the LCC and Network.</p>
+                        <p>Only Remote variables require this field. Case sensitive.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">7</td>
+                    <td class="SVtable">&lt;Domain&gt;</td>
+                    <td class="SVtable">
+                        <p>A string that defines the domain name (Local or Remote) that the variable belongs to.</p>
+                        <p>- If the LocalOrRemote field is L, then this field is the local domain name.</p>
+                        <p>- If the LocalOrRemote field is R, then this field is the remote domain name.</p>
+                        <p>It must match a domain configured in the ICCP.ini file.</p>
+                        <p>- If the variable is Local. Either VCC or the Local Domain Name entry established in desired Local Domain section of the ICCP.ini file.</p>
+                        <p>- If the variable is Remote. Either VCC or the Remote Domain entry established in the desired Remote Control Center section of the ICCP.ini file.</p>
+                        <p>Mandatory. Case sensitive.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8</td>
+                    <td class="SVtable">&lt;DataSet&gt;</td>
+                    <td class="SVtable">
+                        <p>A string that defines the data set that the variable belongs to.</p>
+                        <p> It must match a dataset configured in the ICCP.ini file.</p>
+                        <p>Only Remote data type variables require this field. Case sensitive.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">9</td>
+                    <td class="SVtable">&lt;ICCPVarName&gt;</td>
+                    <td class="SVtable">
+                        <p>A string that defines the ICCP variable name.</p>
+                        <p>The name does not have to be the same as the variable name to which it is mapped. The name must be unique in the domain (Local or Remote) it is assigned to.</p>
+                        <p>Case sensitive.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10</td>
+                    <td class="SVtable">&lt;MappingId&gt;</td>
+                    <td class="SVtable">
+                        <p>A string that defines the mapping mechanism that the variable is to use. There are 3 possible options for this field: F (Full), H (High) and L (Low). This field should be F for all variable cases except for the following: State, StateExtended, StateQ, StateQTimeTag and StateQTimeTagExtended.</p>
+                        <p>Only variables for monitoring require this field. This field is case sensitive.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">11</td>
+                    <td class="SVtable">&lt;CurrentSource&gt;</td>
+                    <td class="SVtable">
+                        <p>A string that defines the ICCP source of the variable.It can be: Entered, Calculated, Estimated or Telemetered.</p>
+                        <p>The allowed values for this field are: EN, C, ES or T. </p>
+                        <p>It specifies the nature of the value. </p>
+                        <p>Only local data type variables require this field. Not case sensitive.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">12</td>
+                    <td class="SVtable">&lt;SBOOrDE&gt;</td>
+                    <td class="SVtable">
+                        <p>A string that defines the control mechanism for the variable. </p>
+                        <p>The value can be either SBO (Select Before Operate) or DE (Direct Execute). </p>
+                        <p>Mandatory only for device command type variables. Not case sensitive.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">More information about &lt;MappingId&gt;</h2>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">For ICCP States, you can select to use a bit, register or alarm variable.</li>
+            <li class="SVbulleted">All Discrete, Real, ControlCommand, DiscreteSetPoint and RealSetpoint variables use F as their mapping ID. ICCP State variables have 4 possible states: 0, 1, 2 and 3. Typically, 0 is intermediate, 1 is open, 2 is closed and 3 is error.</li>
+            <li class="SVbulleted">A register mapped to a state, functions in the following way:
+                <ul style="list-style-type: disc;"><li class="SVbulleted">As a register it can only have F as its mapping Id.</li><li class="SVbulleted">The value 0 represents a State value of 0 (00 or intermediate).</li><li class="SVbulleted">The value 1 represents a State value of 1 (01 or open).</li><li class="SVbulleted">The value 2 represents a State value of 2 (10 or closed).</li><li class="SVbulleted">Any other value represents a State value of 3 (11 or error).</li></ul></li>
+            <li class="SVbulleted">A bit or alarm can function in the same way.
+                <ul style="list-style-type: disc;"><li class="SVbulleted">If  the mapping Id is F and the bit is valid in <span class="mc-variable OEM.ProductName variable">PcVue</span>, it can send only 2 values. This option can be inverted when used in conjunction with the InvertStateSingleBit parameter discussed previously.</li><li class="SVbulleted">The value of 0 represents a State value of 1 (01 or open).</li><li class="SVbulleted">The value of 1 represents a State value of 2 (10 or closed).</li><li class="SVbulleted">If the bit variable is not valid (Status NS) it represents a State value of 3 (11 or error).</li></ul></li>
+            <li class="SVbulleted">If the mapping Id is not F, then the ICCP State must be represented with 2 bits or 2 alarms. One of the bits will represent the High part of the bitstring and the other bit will represent the Low part.
+                <ul style="list-style-type: disc;"><li class="SVbulleted">H and L must be used together. They must be associated to the same &lt;ICCPVarName&gt; but with different <span class="mc-variable OEM.ProductName variable">PcVue</span> variable names.</li><li class="SVbulleted">Example: 2 <span class="mc-variable OEM.ProductName variable">PcVue</span> bit variables with the following fields in the extended attribute:<br />SVBit1 -&gt; ICCP/MyState/H/Dom/Discrete/Telemetered</li><p class="SVbulleted">SVBit2 -&gt; ICCP/MyState/L/Dom/Discrete/Telemetered<br />When SVBit1 is 0 and SVBit2 is 0, they represent an ICCP state MyState of 0 (00 or intermediate)<br />When SVBit1 is 0 and SVBit2 is 1, they represent an ICCP state MyState of 1 (01 or open)<br />When SVBit1 is 1 and SVBit2 is 0, they represent an ICCP state MyState of 2 (10 or closed)<br />When SVBit1 is 1 and SVBit2 is 1, they represent an ICCP state MyState of 3 (11 or error)</p><li class="SVbulleted">In this High/Low configuration of the states, the timestamp that is sent to the ICCP variable comes directly from the variable’s origin.</li></ul></li>
+        </ul>
+        <h2 class="SVheading2">For local ICCP monitoring variables</h2>
+        <p class="SVnormal">The structure of the parameters should be entered in the corresponding extended attribute of the variable and contain 9 different fields as follows:</p>
+        <p class="SVdataListing">ICCP/&lt;LocalOrRemote&gt;/&lt;DataType&gt;/&lt;Network&gt;/&lt;LocalControlCenter&gt;/&lt;Domain&gt;/&lt;ICCPVarName&gt;/&lt;MappingID&gt;/&lt;CurrentSource&gt;</p>
+        <p class="SVnormal">Example for a VCC variable:</p>
+        <p class="SVdataListing">ICCP/L/D/NET1/LCC2/VCC/SV_VCC_Disc/F/T</p>
+        <p class="SVnormal">Example for an ICC variable:</p>
+        <p class="SVdataListing">ICCP/L/D/NET1/LCC2/LCC2_Dom1/SV_ICC_Disc/F/T</p>
+        <h2 class="SVheading2">For local ICCP device command variables</h2>
+        <p class="SVnormal">The structure of the parameters should be entered in the corresponding extended attribute of the variable and must contain 8 different fields as follows:</p>
+        <p class="SVdataListing">ICCP/&lt;LocalOrRemote&gt;/&lt;DataType&gt;/&lt;Network&gt;/&lt;LocalControlCenter&gt;/&lt;Domain&gt;/&lt;ICCPVarName&gt;/&lt;IsSBO&gt;</p>
+        <p class="SVnormal">Example for a VCC SBO variable:</p>
+        <p class="SVdataListing">ICCP/L/DSP/NET1/LCC2/VCC/SV_VCC_DSP_SBO/SBO</p>
+        <p class="SVnormal">Example for an ICC DE variable:</p>
+        <p class="SVdataListing">ICCP/L/RSP/NET1/LCC2/LCC2_Dom1/SV_ICC_RSP_DE/DE</p>
+        <h2 class="SVheading2">For remote ICCP monitoring variables</h2>
+        <p class="SVnormal">The structure of the parameters should be entered in the corresponding extended attribute of the variable and must contain 10 different fields as follows:</p>
+        <p class="SVdataListing">ICCP/&lt;LocalOrRemote&gt;/&lt;DataType&gt;/&lt;Network&gt;/&lt;LocalControlCenter&gt;/&lt;RemoteControlCenter&gt;/&lt;Domain&gt;/&lt;DataSet&gt;/&lt;ICCPVarName&gt;/&lt;MappingID&gt;</p>
+        <p class="SVnormal">Example for a VCC variable:</p>
+        <p class="SVdataListing">ICCP/R/RQ/NET1/LCC2/LCC2_MyRCC1/VCC/LCC2_MyDataSet/SIM_VCC_RealQ/F</p>
+        <p class="SVnormal">Example for an ICC variable:</p>
+        <p class="SVdataListing">ICCP/R/SQTE/NET1/LCC2/LCC2_MyRCC1/SIM_Domain/LCC2_MyDataSet/SIM_ICC_Reg_StateQTTE/F</p>
+        <h2 class="SVheading2">For remote ICCP device command variables</h2>
+        <p class="SVnormal">The structure of the parameters should be entered in the corresponding extended attribute of the variable and should contain 9 different fields as follows.</p>
+        <p class="SVdataListing">ICCP/&lt;LocalOrRemote&gt;/&lt;DataType&gt;/&lt;Network&gt;/&lt;LocalControlCenter&gt;/&lt;RemoteControlCenter&gt;/&lt;Domain&gt;/&lt;ICCPVarName&gt;/&lt;IsSBO&gt;</p>
+        <p class="SVnormal">Example for a VCC DE variable:</p>
+        <p class="SVdataListing">ICCP/R/DSP/NET1/LCC2/LCC2_MyRCC1/VCC/SIM_VCC_DSP_DE/DE</p>
+        <p class="SVnormal">Example for an ICC SBO variable:</p>
+        <p class="SVdataListing">ICCP/R/CC/NET1/LCC2/LCC2_MyRCC1/SIM_Domain/SIM_ICC_CC_SBO_Reg/SBO</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|The VCR Facility" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Estimating the archive file capacity</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Estimating the Archive File Capacity</h1>
+        <p class="SVnormal">Estimating the archive file capacity can be difficult 
+ as you must know:</p>
+        <ul>
+            <li class="SVbulleted">The format in which 
+ you are recording the timestamps</li>
+            <li class="SVbulleted">The length of your 
+ variable names</li>
+            <li class="SVbulleted">The length of any 
+ other attributes you are recording. </li>
+        </ul>
+        <p class="SVnormal">You also need to know the rate at which 
+ you expect events to occur. </p>
+        <div class="warning">
+            <p class="SVnormal">It is important to at least estimate the worst case, else 
+ you may find that the archive unit does not store information for a sufficient 
+ number of days.</p>
+            <p class="SVnormal">You should provision the correct amount of storage space on the station that is the archive unit server, and also on all replay stations (clients of the archive unit) because archived data files are too be synchronized on such computers.</p>
+        </div>
+        <h2 class="SVheading2">Example</h2>
+        <p class="SVnormal">The following example estimates the amount of space required 
+ to record 10 events per second for 7 days using the default date format 
+ and no additional attributes.</p>
+        <table style="border-spacing: 0px 0px;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 162px;" />
+            <col style="width: 102px;" />
+            <tr>
+                <td>
+                    <p class="SVtableHeading">Field</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Characters</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="font-style: italic;">Timestamp1 </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="text-align: center;" align="center">16</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="font-style: italic;">Timestamp2 </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="text-align: center;" align="center">16</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="font-style: italic;">VarName </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="text-align: center;" align="center">20</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="font-style: italic;">Flag</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="text-align: center;" align="center">2</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="font-style: italic;">Value </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="text-align: center;" align="center">3</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="font-style: italic;">Attributes<span style="font-style: normal;"> 
+ (none)</span></p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="text-align: center;" align="center">0</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Total</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="text-align: center;" align="center">57</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">Including the end of line character, each event will 
+ require about 60 characters. Each character requires 1 byte. The total 
+ storage required therefore is:</p>
+        <ul>
+            <li class="SVbulleted">10 (events) x 60 (seconds) 
+ x 60 (minutes) x 24 (hours) x 7 (days) x 60 (bytes) = 360MB</li>
+        </ul>
+        <p class="SVnormal">Assuming that you create one file an hour, this will 
+ produce:</p>
+        <ul>
+            <li class="SVbulleted">168 files (24x7) 
+ of approximately 2.2MB each (10x60x60x60).</li>
+        </ul>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

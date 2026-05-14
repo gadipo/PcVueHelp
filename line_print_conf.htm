@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="General" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to configure Line printers</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to configure Line printers</h1>
+        <p class="SVnormal">There are two distinct printing mechanisms within <span class="mc-variable OEM.ProductName variable">PcVue</span>, graphical printing and text printing.</p>
+        <p class="SVnormal">Graphical printing allows you to print the contents of a window or the entire screen on the Windows' default printer. This mechanism is used when producing screenshots:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">From a SCADA Basic script using the instruction HARDCOPY.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">When printing a report from the replay dialog box.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">When printing using the File.Print menu item.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">In general, graphical printing uses the default printer as set in the operating system. You cannot change print settings from within <span class="mc-variable OEM.ProductName variable">PcVue</span>. The only exception to this is when printing a window using File menu item then Print. You can select and print to any printer configured under the operating system. You can also change the printer properties as usual with the Windows Print dialog box.</p>
+        <div class="warning">
+            <p class="SVnormal">When using any of the screen printing methods, some graphic controls may not print correctly.</p>
+        </div>
+        <p class="SVnormal">Text printing allows you to print information in a line-based text format on any printer configured in the operating system, either locally or over a network. This mechanism is used when printing events from a log list, from the Alarm and Log viewers and when using the SCADA Basic instruction LPRINT and requires that the printer is also configured in <span class="mc-variable OEM.ProductName variable">PcVue</span>. <span class="mc-variable OEM.ProductName variable">PcVue</span> supports printing on up to 12 printers from a single station. For each printer that you configure, <span class="mc-variable OEM.ProductName variable">PcVue</span> creates a print spooler, which manages the information being sent to the printer. You can also print to a text file. Text printing is always in portrait format and is not affected by changing the printer properties in the operating system.</p>
+        <div class="warning">
+            <p class="SVnormal">When a printer is used to output events on the fly, <span class="mc-variable OEM.ProductName variable">PcVue</span> needs an exclusive access to the printer. If you print to such a printer from another application, and depending on a variety of factors such as the printer driver behavior, you may cause <span class="mc-variable OEM.ProductName variable">PcVue</span>'s print spooler to stop. Printing can then only be resumed by user intervention.</p>
+        </div>
+        <p class="SVnormal">A printer can only be used to print data from one source. If your project requires the use of both printing mechanisms, you need two printers. For example, you could use a dot matrix printer connected to one of the PC's USB ports to print alarms and events and a color ink jet printer connected to another PC's port or network to make screenshots.</p>
+        <div class="tip">
+            <p class="SVnormal">Changes you make to a printer's properties at the operating system level, including changing the default printer and paper defaults (size, orientation...) are permanent.</p>
+            <p class="SVnormal">Changes you make at the operating system level affect the printing of graphics with <span class="mc-variable OEM.ProductName variable">PcVue</span> immediately. Text printing is not affected by printer properties.</p>
+        </div>
+        <h2 class="SVheading2"> Configuring a line printer - Text printing</h2>
+        <p class="SVnormal">Configuring a line printer is a prerequisite to printing events from <span class="mc-variable OEM.ProductName variable">PcVue</span>. Once a line printer is configured, you are able to:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">Stream events to a printer via the built-in printer spooler.</p>
+            </li>
+            <li>
+                <p class="SVbulleted"> Print events and alarms displayed in an alarm or log viewer to a text file.</p>
+            </li>
+            <li>
+                <p class="SVbulleted"> Print events and alarms displayed in an alarm or log viewer to a Pdf or Xps file using Windows virtual printers.</p>
+            </li>
+        </ul>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Go to <b>Configure</b> then Application Explorer, expand the General node and select Line printers.</p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click <b>Add a line printer</b> button in the toolbar. The Line printer creation dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="create-printer"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../../Resources/Images/AE/General/line_printer_create_task.png" MadCap:targetName="create-printer" style="display: none;" />
+                </p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Select the printer Id. This number is used as a reference when selecting the printer in <span class="mc-variable OEM.ProductName variable">PcVue</span> and enter a description for the printer (optional).</p>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">From the <b>Print to</b> drop-down, select whether to print to a File, to a Printer spooler, or to a Virtual printer and select the Enable box.</p>
+            </li>
+            <li value="5">
+                <p class="SVnumbered">Depending on what you selected in the Print to drop-down, the following properties apply:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">(For Printer spooler) To select a printer connected via another host on a network, click on the ellipses button in the Printer section and select a printer from the list displaying known hosts on the network then select or enter a name for the printer in the Printer name field.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">(For File) Select or enter a name for the file to which the output is sent. The file must already exist, <span class="mc-variable OEM.ProductName variable">PcVue</span> does not create it.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">(For Virtual printer) Select a printer. Next, click on the ellipsis button in the Folder field to select the folder where to save files and enter the prefix string for file names. Files are named after a predefined pattern that includes the date and time.</p>
+                    </li>
+                </ul>
+            </li>
+            <li value="6">
+                <p class="SVnumbered">Select the <b>Advanced</b> tab, depending on what you selected in the Print to drop-down, the following advanced properties apply:</p>
+                <table style="width: 100%;">
+                    <col style="width: 171px;" />
+                    <col />
+                    <tbody>
+                        <tr>
+                            <td class="SVtableHeading">Properties</td>
+                            <td class="SVtableHeading">Description</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="SVtableHeading">Apply to all printer types</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Servers </td>
+                            <td class="SVtable">If set, it defines the list of server stations on which the printer will be active. Only used in networked applications.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="SVtableHeading">Apply to Printer spooler</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Working folder</td>
+                            <td class="SVtable">Defines the folder in which the temporary files used by the spooler are stored. By default, the TEMP folder within the project.</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Character conversion</td>
+                            <td class="SVtable">Defines the character conversion to be performed before sending to the printer.</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">TrueType font option</td>
+                            <td class="SVtable">Defines how TrueType fonts must be dealt with. If the printer does not support TrueType fonts, then leave this property at its default setting.</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Spooler timeout</td>
+                            <td class="SVtable">
+                                <p class="SVtable">Defines the period at which the spooler checks to see if it has anything to print.</p>
+                                <p class="SVtable"> In some cases, it may be necessary to change this period to avoid overloading the printer buffer.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Printer timeout</td>
+                            <td class="SVtable">
+                                <p class="SVbulleted">Defines the maximum period during which continuous messages are sent to a printer. After this period, messages are saved until the next spooler timeout. In some cases, it may be necessary to change this period to avoid overloading the printer buffer.</p>
+                                <div class="note">
+                                    <p class="SVbulleted">The properties Spooler timeout and Printer timeout are used together.</p>
+                                    <p class="SVbulleted">For example, if the Spooler timeout was set to 3 seconds, and the Printer timeout set to 2 seconds, messages are sent to the printer for a maximum of 2 seconds in any 3.</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Retry timeout</td>
+                            <td class="SVtable">
+                                <p class="SVbulleted">Defines the period at which the spooler retries printing to a failed printer (out of paper etc.). The default period is 900 seconds.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Enable packet printing</td>
+                            <td class="SVtable">
+                                <p class="SVtable">If set, the legacy packet printing mechanism is activated instead of the built-in printer spooler. The spooler and printer timeout periods are ignored and the messages are buffered and printed in packets.</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Lines per packet - If set, it defines the number of messages (lines) per packet.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Add form feed - If set, it adds a form feed after each packet.</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Open warning boxes</td>
+                            <td class="SVtable">If set, displays of the Windows' printing warning boxes, under error conditions, allowing the user to cancel or retry printing.</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Verbose</td>
+                            <td class="SVtable">If set, activates the reporting of all printer transactions in the print spooler message area.</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="SVtableHeading">Apply to Virtual printer</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Margins</td>
+                            <td class="SVtable">Defines the margins for the printed page.</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Orientation</td>
+                            <td class="SVtable">Defines the orientation of the printed page. Either portrait or landscape.</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Page header and footer</td>
+                            <td class="SVtable">
+                                <p class="SVtable">Defines the look and feel of  the header and footer of the page to be printed:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">The font type, font size, and color.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">The title of the page (Header 1) which could be a static text  limited to 132 characters or a text variable limited to 256 characters as well as the printing timestamp format and alignment options.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">The header 2 of the page which is an image. The image path has to be less than 260 characters. The path can be an absolute path or relative path to the project subfolder TP.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">The footer page number.</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Page body</td>
+                            <td class="SVtable">
+                                <p class="SVtable">Defines the look and feel of the page to be printed:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">The font type, font size, and border color and style.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">The line spacing.</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li value="7">
+                <p class="SVnumbered">Click <b>OK</b> then <b>Apply</b> to confirm the configuration and close the dialog.</p>
+            </li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">Depending on the operating system and the printer driver, a spooler may be associated with each printer at the operating system level. Whilst <span class="mc-variable OEM.ProductName variable">PcVue</span> is able to print with the print spoolers enabled at the system level, it delays the detection of printing issues as they only notify problems once they are full. To disable the Windows' print spooler, go to the Windows printer properties and select the option <b>Print directly to the printer</b>.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">Tasks are available from the Application Explorer.</p>
+            <p class="SVnormal">When the node Line printers is selected, you can:</p>
+            <ul>
+                <li>
+                    <p class="SVnormal">Access Line printers settings.</p>
+                </li>
+                <li>
+                    <p class="SVnormal">Add a Line printer.</p>
+                </li>
+                <li>
+                    <p class="SVnormal">Enable and Disable all Line printers.</p>
+                </li>
+            </ul>
+            <p class="SVnormal">When a configured Line printer is selected, you can:</p>
+            <ul>
+                <li>
+                    <p class="SVnormal">Remove the selected Line printer.</p>
+                </li>
+                <li>
+                    <p class="SVnormal">Access its properties.</p>
+                </li>
+                <li>
+                    <p class="SVnormal">Enable and Disable it.</p>
+                </li>
+            </ul>
+        </div>
+        <h2 class="SVheading2">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> print spooler - Text printing</h2>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> creates a print spooler for each printer configured. The print spooler is started with its interface window minimized. To restore the Print spooler window click on its icon in the Windows' task bar. Each print spooler is identified by displaying the associated printer number in its title bar.</p>
+        <p class="SVnormal">The print spooler window displays events related to the spooler activity and a number of fields displaying the spooler properties. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="print-spooler"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/General/line_printer_spooler.png" MadCap:targetName="print-spooler" style="display: none;" />
+        </p>
+        <div class="warning">
+            <p class="SVnormal">If you close a print spooler, all printing associated with that printer stop until <span class="mc-variable OEM.ProductName variable">PcVue</span> is restarted.</p>
+        </div>
+        <p class="SVnormal">You can perform the following actions on the print spooler while printing:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">Stop - Temporarily suspends printing. <span class="mc-variable OEM.ProductName variable">PcVue</span> continues to send messages to the spooler files, which grows in size until the spooler Start button is clicked. The printer status system variable is set to 0.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Start - Resumes printing. The spooler prints the contents of the spooler files until they are empty. The printer status system variable is set to 1.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Cancel - Minimizes the print spooler window.</p>
+            </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">Using the Start and Stop buttons in the print spooler window does not have the same effect as using the Start and Stop mode of the PRINTER instruction in a SCADA Basic program. If you stop the printer from the spooler window, you must start it again from the spooler window. If you stop the printer from a SCADA Basic program, you must start it again from SCADA Basic.</p>
+        </div>
+        <h2 class="SVheading2">Line printers settings - Text printing</h2>
+        <p class="SVnormal">To configure general printer settings, right-click on Line printers and select <b>Settings</b>, the following settings can be configured:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">Printing period - Defines the period at which packets are sent to the spooler for all printers having <b>Packet printing</b> enabled. The default is 1 second.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Number of lines per period - Defines the number of lines that are sent at once when a packet is to be printed for  all printers having <b>Packet printing</b> enabled. Enabling this property is highly recommended.</p>
+                <div class="warning">
+                    <p class="SVnormal">For certain ink jet and laser printers, you must set the <b>Add form feed</b> property under <b>Enable packet printing</b> in the advanced properties of the line printer configuration to continue printing on the next page.</p>
+                </div>
+            </li>
+        </ul>
+        <p class="SVnormal">These settings determine the maximum rate at which <span class="mc-variable OEM.ProductName variable">PcVue</span> prints to a line (text) printer if the <b>Packet printing</b> property is set in the printer configuration. For example, if the printing period is set to 5 seconds and the number of lines per period is set to 10, <span class="mc-variable OEM.ProductName variable">PcVue</span> is able to print up to 10 lines once every 5 seconds. It is used to avoid congestion in the printing mechanism when attempting to print an excessive number of lines. For example on recovery from a communication failure.</p>
+        <p class="SVnormal">It is included for compatibility only as the packet printing mechanism has been superseded by <span class="mc-variable OEM.ProductName variable">PcVue</span>'s print spooler.</p>
+        <h2 class="SVheading2">Printing graphics</h2>
+        <h3 class="SVheading3">Using the file menu</h3>
+        <p class="SVnormal">Go to File in the main menu, you find here three  buttons for printing: Print setup, Print preview, and Print. These provide the same functionality you find in most applications running under Windows (word processor, spreadsheet, etc.).</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">The Print setup button displays a standard Windows Print Setup dialog that allows you to select which printer to use and change its properties.</p>
+                <div class="note">
+                    <p class="SVnormal">Any change in printer properties are temporary and do not affect the configuration of the operating system.</p>
+                </div>
+            </li>
+            <li>
+                <p class="SVbulleted">The print preview button displays a preview of what will actually be printed.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">The print button prints the contents of the window that currently has the focus (the one that was last clicked).</p>
+            </li>
+        </ul>
+        <h3 class="SVheading3">Using a SCADA Basic script</h3>
+        <p class="SVnormal">You can print the entire screen or the current mimic using a Run Program animation to call a script taking advantage of the SCADA Basic instruction WINDOW.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

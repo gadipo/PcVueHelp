@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="SQL server memory options" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="DatabaseManager.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>About SQL Server's memory options</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">About SQL Server's Memory Options</h1>
+        <p class="SVnormal">You use the two server memory options, Min Server Memory 
+ and Max Server Memory, to re-configure the amount of memory (in megabytes, 
+ MB) in the buffer pool used by an instance of the SQL Server.</p>
+        <ul>
+            <li class="SVbulleted">By default, SQL Server 
+ can change its memory requirements dynamically based on available system 
+ resources. </li>
+            <li class="SVbulleted">The default setting 
+ for Min Server Memory is 0. </li>
+            <li class="SVbulleted">The default setting 
+ for Max Server Memory is the amount of RAM memory available to the PC. 
+ </li>
+            <li class="SVbulleted">The minimum amount 
+ of memory you can specify for Max Server Memory is 4MB.</li>
+        </ul>
+        <p class="SVnormal">When SQL Server is using memory dynamically, it queries 
+ the system periodically to determine the amount of free physical memory 
+ available. SQL Server grows or shrinks the buffer cache to keep free physical 
+ memory between 4MB and 10MB depending on server activity. This prevents 
+ Microsoft Windows from paging. </p>
+        <ul>
+            <li class="SVbulleted">If there is less 
+ memory free, SQL Server releases memory to Windows that usually goes on 
+ the free list. </li>
+            <li class="SVbulleted">If there is more 
+ memory free, SQL Server recommits memory to the buffer cache. </li>
+            <li class="SVbulleted">SQL Server adds memory 
+ to the buffer cache only when its workload requires more memory, so a 
+ server at rest does not grow its buffer cache.</li>
+        </ul>
+        <p class="SVnormal">The recommended configuration is to allow SQL Server 
+ to use memory dynamically. However, you can override SQL by setting the 
+ memory options manually. </p>
+        <h2 class="SVheading2">SQL Server's ability to use memory dynamically</h2>
+        <p class="SVnormal">Before you set the amount of memory for SQL Server, you 
+ should determine the appropriate memory setting by subtracting from the 
+ total physical memory the memory required for:</p>
+        <ul>
+            <li class="SVbulleted">The Windows operating 
+ system.</li>
+            <li class="SVbulleted">Any other instances 
+ of SQL Server.</li>
+            <li class="SVbulleted">Other system purposes, 
+ if the computer is not wholly dedicated to SQL Server</li>
+        </ul>
+        <p class="SVnormal">The remainder is the maximum amount of memory you can 
+ assign to SQL Server.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

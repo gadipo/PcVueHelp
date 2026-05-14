@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Smart Generators" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to import an Azbil Harmonas configuration</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor90"></a>How to import an Azbil Harmonas configuration</h1>
+        <p class="SVnormal">The Smart Generator for Harmonas generates the <span class="mc-variable OEM.ProductName variable">PcVue</span> project configuration by importing files from the Azbil Harmonas RTC Editor tool. Some or all of the following configuration elements are generated:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">OPC data acquisition between <span class="mc-variable OEM.ProductName variable">PcVue</span> and the Harmonas Controller.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Natures (from the Harmonas Groups).</p>
+            </li>
+            <li>
+                <p class="SVbulleted">I/O variables including their Domain and Nature, mapping onto the OPC-DA client driver and trending (if applicable).</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Archive units.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Project mimics: System mimics including the Toolbox, readily-customizable process mimics,  trend mimics, and populated control group mimics.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Components for the HMI:</p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted"> Graphic symbols representing each type of Harmonas Data Point.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Function key settings.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Programs scripts and other elements.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The mimics that are generated are WebVue compliant, moveable except for the menus, sizeable except for the toolbox and menus, and have the property Scale mimic to fit window set.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal"><span class="mc-variable OEM.ProductName variable">PcVue</span> applications are bilingual - that is text strings can be configured with two alternative texts representing two languages. You can dynamically switch between the languages at run time. The text elements used in the Harmonas graphics and symbols use Japanese as the first language and English as the second language.</p>
+        </div>
+        <p class="SVnormal">The Harmonas Smart Generator uses several files from the Harmonas project, which it interprets to create the <span class="mc-variable OEM.ProductName variable">PcVue</span> project. The files that are required are from the IT and EB folders. The following files are read from the IT folder:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">ENUM.CSV - contains the associated labels configured by points.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">NODE.CSV	- contains the list of devices declared in the RTC Editor.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">TAG.CSV - contains the list of all points declared in the RTC Editor.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">UNIT.CSV	- contains the list of all units declared in the RTC Editor.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The files in the EB folder are created manually using the export feature of the RTC Editor. There is one file for each point type, for each device. The file naming format is &lt;Device name&gt;&lt;Point type&gt;.EB. For example PL2011DI.EB.</p>
+        <h2 class="SVheading2">Prerequisites</h2>
+        <ul>
+            <li>
+                <p class="SVbulleted">You have exported the Harmonas project. This is files exported from the Azbil Harmonas RTCEditor tool, in IEC 61131-3 (ASCII) format.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">You have installed the <span class="mc-variable OEM.ProductName variable">PcVue</span> global library (HAS) for Harmonas.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">You have installed the <span class="mc-variable OEM.ProductName variable">PcVue</span> project template folder (TPL) for Harmonas.</p>
+                <div class="note">
+                    <p class="SVnormal">The Harmonas library (HAS) and the Harmonas project template (TPL) are not installed by default. To make them available:</p>
+                    <ol>
+                        <li value="1">
+                            <p class="SVnumbered">Copy the Harmonas Library folder (HAS) to the  Global Library folder (LIB) found in the <span class="mc-variable OEM.ProductName variable">PcVue</span> root folder.</p>
+                        </li>
+                        <li value="2">
+                            <p class="SVnumbered">Open the LIBRARY.DAT file in the LIB folder with a text editor and check that there is an entry for the HAS library and that it is not commented out. It should read: LIBRARY,HAS,"HAS","HAS",1,0,0,0,1,1. You can manually enter it if is not there.</p>
+                        </li>
+                        <li value="3">
+                            <p class="SVnumbered">Copy the project template folder (TPL) to the <span class="mc-variable OEM.ProductName variable">PcVue</span> root folder.</p>
+                        </li>
+                    </ol>
+                    <p class="SVnormal">The template project is a sub-set of folders and files from an actual project. If, when creating a new project, <span class="mc-variable OEM.ProductName variable">PcVue</span> finds a template project it will copy the contents into the new project replacing the default configuration.</p>
+                </div>
+            </li>
+            <li>
+                <p class="SVbulleted">You have manually configured the  network including the station lists before using the smart generator if a multi-station project is being generated.</p>
+            </li>
+        </ul>
+        <div class="tip">
+            <p class="SVnormal">Refer to the overview topic <a href="sg_overview.htm">Smart Generators overview</a> to learn more.</p>
+        </div>
+        <h2 class="SVheading2">Selecting the source data</h2>
+        <div class="warning">
+            <p class="SVnormal">Before you start the import process, we recommend that you back up the <span class="mc-variable OEM.ProductName variable">PcVue</span> variables configuration in case of any problems occurring during the import process. The variable configuration is stored in the file VAREXP.DAT in the project's C folder.</p>
+            <p class="SVnormal">Make sure that <span class="mc-variable OEM.ProductName variable">PcVue</span> is shut down before copying the file.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Go to <b>Configure</b> then Smart Generators and click <b>New Harmonas import</b>. The Smart Generator for Harmonas dialog opens with the Import name field specified. You can change this name. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-project"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_azbil_harmonas_select_project.png" MadCap:targetName="select-project" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click on the ellipses button in IT and EB folder fields to import project files. The IT and EB folders are stored together and the default name of the EB folder is automatically filled in when you complete the IT folder box.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Click the <b>Options</b> button, here you can configure the generated import encoding and archive unit format via the following properties:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Export files' encoding - If specified, it defines the encoding of the input files. By default, it matches the encoding of the <span class="mc-variable OEM.ProductName variable">PcVue</span> presentation language.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Archive units format - If selected, it defines if the format for the archive units should be proprietary or SQL Server.</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Selecting data points and import type</h2>
+        <ol>
+            <li value="1">
+                <p class="SVbulleted">Click <b>Next</b>, the Select Points dialog opens. Here the data points are displayed  in a tree structure of three levels, the first level is the device (controller), the second one is the point type and the third and lowest is the point instance. Select the items to be imported.</p>
+                <div class="note">
+                    <p class="SVnormal">The Harmonas Units are not shown in the structure. Each imported data point will generate several variables in the <span class="mc-variable OEM.ProductName variable">PcVue</span> project.</p>
+                </div>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Right-click on a device node to open a pop-up menu and select the IP address of the device. This is mandatory and used by the <span class="mc-variable OEM.ProductName variable">PcVue</span> OPC configuration.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Select the server and client lists using the same pop-up menu. These are only required for multi-station applications. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-points"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_azbil_harmonas_select_points.png" MadCap:targetName="select-points" style="display: none;" />
+                </p>
+                <div class="note">
+                    <p class="SVnormal">This is how the <span class="mc-variable OEM.ProductName variable">PcVue</span> variable naming relates to the Harmonas configuration:</p>
+                    <ul>
+                        <li>
+                            <p class="SVbulleted">Variables related to a Harmonas Unit: &lt;Device name&gt;.&lt;Unit name&gt;._COMMON.&lt;__INFO or CONTROL_OFF or CONTROL_ON&gt;.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">Variables related to a Harmonas Unit and a particular point instance: &lt;Device name&gt;.&lt;Unit name&gt;.PARAMETERS.&lt;Point instance&gt;.&lt;TEXT or VALUE or STATE&gt;.</p>
+                        </li>
+                    </ul>
+                    <p class="SVnormal">Variables not directly related to the Harmonas configuration but necessary to the operation of the <span class="mc-variable OEM.ProductName variable">PcVue</span> project are found under the GENERAL branch.</p>
+                </div>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">Click <b>Next</b>, the Import type dialog opens. Select the import type you need. There are three options:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Import data - If selected, it only imports the configuration necessary to generate <span class="mc-variable OEM.ProductName variable">PcVue</span> variables.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Import HMI- If selected, it only imports the configuration necessary to generate and structure <span class="mc-variable OEM.ProductName variable">PcVue</span> mimics (HMI).</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Full import -  If selected, it imports the configuration and generate both the variables and mimics (HMI).</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <div class="warning">
+            <p class="SVnormal">The Harmonas HMI Configuration dialog does not have a Back button and so you must be sure that the configuration is correct before you click the <b>Next</b> button.</p>
+        </div>
+        <h2 class="SVheading2">Configuring the HMI</h2>
+        <p class="SVnormal">After selecting the data points and the import type via the Import type dialog, the next step is to configure the HMI elements to be generated.</p>
+        <div class="warning">
+            <p class="SVnormal">After making any changes to the properties of an element, you must use click <b>Apply</b> button in the toolbar before selecting another element or clicking <b>Finish</b>. Failing to do so results in the loss of any changes made.</p>
+        </div>
+        <p class="SVnumbered">Click <b>Next</b>, the Smart Generator HMI Configuration dialog opens. Here you can configure the structure and some of the contents of the mimics that form the HMI. In addition to the menu and toolbar, the dialog contains two main areas:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">The Categories configuration tree in the left pane. Right clicking on a node in the configuration tree displays a context menu. Categories are groups that contain the mimics generated by the Smart Generator. Categories are displayed and selected at run-time using the Toolbox mimic. One Category is automatically generated for each Unit. By default, each Category contains one Control Group (mimic), one Trend (mimic), and one Graphic (process mimic).</p>
+            </li>
+            <li>
+                <p class="SVbulleted"> The properties for the item selected in the Categories tree in the right pane.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The following are all possible ways in which you can modify the structure and some of the contents of the mimics that form the HMI:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">To add a new category, click in the category tree then the <b>Add</b> icon button in the menu. A new category, with default properties, is added to the end of the category tree. Category ID's are assigned automatically and cannot be edited. A maximum of 1000 categories can be created. The following properties can be edited: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="add-category"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted">Name - Language 1 - The identity of the category, if language 1 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Name - Language 2 - The identity of the category, if language 2 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Number of control groups - The number of control group mimics in the selected category. Range: 1..1000.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Number of graphics - The number of process mimics in the selected category. Range: 1..1000.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Number of trends - The number of trend mimics in the selected category. Range: 1..1000.</p>
+                    </li>
+                </ul>
+                <p class="SVbulleted">To delete a category, select it then click the <b>Delete</b> icon button in the toolbar. The category and all its mimics are deleted.</p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_azbil_harmonas_yokogawa_stardom_conf_hmi.png" MadCap:targetName="add-category" style="display: none;" />
+                </p>
+            </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">The order in which categories appear in the menu mimics at run-time is the same as configured in the categories tree. Be careful when adding or deleting categories as there are no specific tools to reorder them.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">If you reduce the number of nodes below that were previously configured, a dialog warns you that related mimics will be deleted. Deleted mimics are moved to the project's sub folder \W\BAK.</p>
+        </div>
+        <ul>
+            <li>
+                <p class="SVbulleted">To add a new control group, select the node representing the category to which the control group is to be added then click Control groups in the main menu then Add control group. A new control group with default properties will be created with the following language properties: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="add-control-group"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted">Name - Language 1 - The name of the control group. If language 1 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Name - Language 2 - The name of the control group. If language 2 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                </ul>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_azbil_harmonas_control_group_tab.png" MadCap:targetName="add-control-group" style="display: none;" />
+                </p>
+            </li>
+        </ul>
+        <p class="SVnormal">A control group (mimic) can contain up to eight faceplates (in XSGA) or 16 faceplates (in Full HD) according to the resolution you select. Each faceplate is represented by a particular symbol from the HAS library according to the point type, and is instantiated in the mimic with an appropriate branch. </p>
+        <ul>
+            <li>
+                <p class="SVbulleted">To add points to a control group, select a control group from the categories tree. The Control group configuration is displayed in the right pane subdivided into a representation of the mimic with positions for the faceplates and the points tree. Select the faceplate position then double-click the point to be added in the points tree. The points can be filtered according to point type using the Filter drop down box.</p>
+                <div class="note">
+                    <p class="SVnormal">To remove points from the control group, double-click in the corresponding faceplate position.</p>
+                </div>
+            </li>
+            <li>
+                <p class="SVbulleted">To add a new graphic, select the node representing the category to which the graphic is to be added then click Graphics in the main menu then <b>Add graphics</b>. A new graphic with default properties will be created with the following language properties:</p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted">Name Language 1 - The name of the graphic. If language 1 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Name Language 2 - The name of the graphic. If language 2 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                </ul>
+                <p class="SVbulleted">To delete a graphic, select it then using the <b>Delete</b> icon button in the toolbar. The node is removed from the tree structure.</p>
+                <p class="SVnormal">There are graphic symbols for each of the Harmonas data point types. They are automatically instantiated in the Control group mimics as part of the smart generator's configuration process. If you manually create any mimics and want to display a data point you should use the corresponding symbol instantiated using the correct branch from the variables tree.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">To configure mimic links, select a graphics from the Categories tree. The Graphics configuration is displayed in the right pane. You can configure links with up to six other mimics, two each of control groups, graphics and trends, within the category. For each link, you can configure the following properties: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="add-graphics"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <ul>
+                    <ul style="list-style-type: circle;">
+                        <li>
+                            <p class="SVbulleted">Link - If selected, it enables the link configuration.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">Name - If specified, it opens the names of the control group/graphic/trend.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">Branch - If specified, it defines the branch (if any) for the link.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">Title Language 1 - If specified, it defines the text that appears on the button at run-time if using language 1.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">Title Language 2 - If specified, it defines the text that will appear on the button at run-time if using language 2.</p>
+                            <p>
+                                <img src="../Resources/Images/SmartGen/sg_azbil_harmonas_yokogawa_stardom_conf_hmi_graph.png" MadCap:targetName="add-graphics" style="display: none;" />
+                            </p>
+                            <div class="note">By default, the two links for graphics are populated with the previous and next mimic in the category.</div>
+                        </li>
+                    </ul>
+                </ul>
+                <div class="warning">
+                    <p class="SVnormal">You must manually configure the graphics after the smart generator has completed and using <span class="mc-variable OEM.ProductName variable">PcVue</span> standard drawing elements, animations and symbols. This is because the  graphic mimics created by the smart generator are empty with the exception of a number of navigation buttons (mimic links).</p>
+                </div>
+            </li>
+            <li>
+                <p class="SVbulleted">To add a new trend, select the node representing the category to which the trend is to be added then click Trends in the main menu then <b>Add trends</b>. A new trend with default properties will be created with the following language properties:</p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted">Name Language 1 - The name of the trend. If language 1 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Name Language 2 - The name of the trend. If language 2 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                </ul>
+                <div class="warning">
+                    <p class="SVnormal">You must manually configure the Trend viewer after the Smart Generator has completed the generation. This is because each trend mimic created by the Smart Generator contains a single unconfigured Trend viewer.</p>
+                </div>
+            </li>
+            <li>
+                <p class="SVbulleted">To select the size of the mimic, click the HMI options icon button from the main menu then select one of the two available options:</p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted">SXGA - If selected, It sets the mimic resolution at (1280 x 1024) and the number of points allocated to a control group is eight points.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Full HD - If selected, It sets the mimic resolution at (1920 x 1080) and the number of points allocated to a control group is 16 points.</p>
+                    </li>
+                </ul>
+                <div class="warning">
+                    <p class="SVnormal">If you change from FullHD to SXGA then the configuration of all Control group mimics is reset. A confirmation dialog is displayed to allow you to cancel the action.</p>
+                </div>
+            </li>
+        </ul>
+        <p class="SVnumbered">Click <b>Finish</b> to complete the generation process.</p>
+        <h2 class="SVheading2">Runtime HMI reference</h2>
+        <p class="SVnormal">The following shortcut keys are available at runtime:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">The right arrow key opens the next mimic in the current category.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">The left arrow key opens the previous mimic within the current category.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">The Ctrl+Space key combination closes all mimics except the Toolbox.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">The space key opens Variables selector.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The controls are as follows:</p>
+        <p>
+            <img src="../Resources/Images/SmartGen/sg_azbil_harmonas_toolbox_runtime.png" title="Toolbar at runtime, annotated." />
+        </p>
+        <table style="width: 100%;">
+            <col style="width: 82px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">A</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Alarms counters:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">All: All alarms.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">PRC: All Process alarms.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">SYS: all System alarms.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">B</td>
+                    <td class="SVtable">Graphic, Trend, C Group: Display the menu for selection of a Graphic, Trend or Control Group mimic respectively.</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">C</td>
+                    <td class="SVtable">Alarm: Display the main alarm mimic.</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">D</td>
+                    <td class="SVtable"> System: Display the System overview mimic.</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">E</td>
+                    <td class="SVtable">User1, Userx: Spare buttons for configuration by the developer.</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">F</td>
+                    <td class="SVtable">PrevWindow: Open the previous window (mimic).</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">G</td>
+                    <td class="SVtable"> ClrWindow: Close all mimics except the Toolbar.</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">H</td>
+                    <td class="SVtable">Event Viewer: Open the <span class="mc-variable OEM.ProductName variable">PcVue</span> Event Viewer.</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">I</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Search tools: </p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">Combo: Select the Category to search</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Text field: Type the object to search.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Button: Start search</p>
+                            </li>
+                        </ul>
+                        <p class="SVnormal">Search syntax:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">obj: &lt;ObjectID&gt;Search any object matching that e.g. CGR_0001.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">cgr: &lt;Control Group viewer name&gt; e.g. MyControlGroup.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">gra: &lt;Graphic viewer name&gt; e.g. MyGraphic.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">trd: &lt;Trend viewer name&gt; e.g. MyTrend.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">pnt: &lt;Point instance name&gt; e.g. PDIC100_I.</p>
+                            </li>
+                        </ul>
+                        <p>For all types of search, the action is to open the corresponding mimic.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">J</td>
+                    <td class="SVtable">Logon: Button to logon and the name of the current User.</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">K</td>
+                    <td class="SVtable">No: Station number.</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">L</td>
+                    <td class="SVtable">Alarm Ack: Acknowledge the displayed alarm.</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">M</td>
+                    <td class="SVtable">No beep: Mute audible alarm.</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">N</td>
+                    <td class="SVtable">Alarm viewer showing the most recent alarm only.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">The following screenshot shows a typical control group mimic as produced by the smart generator. If necessary Points can be removed or added by instantiating the appropriate symbol from the HAS symbol library.</p>
+        <p>
+            <img src="../Resources/Images/SmartGen/sg_azbil_harmonas_mimic_runtime.png" />
+        </p>
+        <h2 class="SVheading2">Synchronizing an existing import</h2>
+        <p class="SVnormal">When you synchronize an import, the smart generator compares the configuration elements available in the import file with those that have been imported previously to <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <div class="warning">
+            <p class="SVnormal">The synchronizing process takes into account any filter that you may have used previously with the import. For example if there are 400 variables in the import file and the previous use of the import was with a filter and created 100 variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>, synchronization will inform you that there are 300 new variables available for import.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Select the import to synchronize in the right pane of the Smart Generators dialog. A list with actions appears under the Import references pane. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="workspace"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_workspace_synch.png" MadCap:targetName="workspace" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click Synchronize. This will open the smart generator dialog in which you can reconfigure the import. If variables have been added to the import file since the last import, the smart generator will display the Import new variables dialog, inviting you to make either a full or a custom import of the remaining variables.</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">If you select full import, all variables not already in <span class="mc-variable OEM.ProductName variable">PcVue</span> are imported.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">If you select custom import, you can filter the variables using the Select variables dialog.</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">If the smart generator finds variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> that no longer exist in the import file, a list of the variables is displayed. Using this list, you can choose to remove some or all of the variables from <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">You can choose to only remove imported configuration elements of a smart generator without removing the smart generator import itself. This can be done by right-clicking the import generated and selecting <b>Remove all imported objects</b>.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Variables|The Variables Tree|Configuring variables|Linking a variable to its source|Linking a variable to a BACnet object" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How variable properties are linked to BACnet object properties</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How Variable Properties are Linked to BACnet Object Properties</h1>
+        <p class="SVnormal">Each BACnet device contains one or more objects. Each object contains one or more properties. There can be several instances of an object type within a device. The BACnet standard specifies the object types and their properties. The standard also specifies that each device must contain a Device object.  <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Variables/link_register_bacnet_device_example.png" MadCap:targetName="t2" style="display: none;" /></p>
+        <p class="SVnormal">When you link a variable to a BACnet object you specify the device, the object-type and the object instance. You can optionally also specify a particular object property, or if the device configuration includes an Alarm/Event Notification, the Alarm/Event status. If you do not specify a particular property then the variable's value is linked to the BACnet object's present_value property and the variable's timestamp and quality are produced by <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <div class="note">
+            <p class="SVnormal">To enable the variable's timestamp to be linked to the BACNet object's change_of_state_time property you must also tick  <u>Use time provided by the device</u> in the Advanced tab of the BACNet Device Properties dialog.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">You can configure the project so that raw BACnet alarm information are reflected in the variables' text extended attributes: Event_Value, Event_Type, From_State, To_State, Message_Text...</p>
+            <p class="SVnormal">Please refer to the document describing the format of the file VarConf.dat for more information.</p>
+        </div>
+        <h2 class="SVheading2">Special case for the binary_input, binary_output and binary_value objects</h2>
+        <p class="SVnormal">A special case exists for the BACnet objects binary_input, binary_output and binary_value. If you do not specify a particular property when linking to a variable, then, not only is the variable's real-time value is linked to object's present_value, but the timestamp is linked to the property change_of_state_time and the quality to status_flags.</p>
+        <p class="SVnormal">The BACnet status flags are converted into the variable's quality property as follows.      </p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 120px;" />
+            <col style="width: 100px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading" colspan="4">Status Flags</td>
+                    <td class="SVtableHeading">Variable</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">Fault</td>
+                    <td class="SVtableHeading">In alarm</td>
+                    <td class="SVtableHeading">Overridden</td>
+                    <td class="SVtableHeading">Out of service</td>
+                    <td class="SVtableHeading">Quality</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">OK</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">OK</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">OK</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">OK</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">OK</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">OK</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">OK</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">OK</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">NS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">NS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">NS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">NS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">NS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">NS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">NS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">NS</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

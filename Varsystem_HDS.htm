@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Archives|Using the HDS to record data" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>HDS status variables</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">HDS Status Variables</h1>
+        <h2 class="SVheading2">HDS information</h2>
+        <p class="SVnormal">The following variables provide information about the status of the HDS.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable"><b>System.HDS.ErrorCount</b>
+                    </td>
+                    <td class="SVtable">R/W</td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Automatic</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Incremented each time there is an error or warning from the HDS. If recorded allows the user to see a history of any errors with the HDS. Can be reset by the application.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td><b>System.HDS.PendingRecords</b>
+                    </td>
+                    <td>R</td>
+                    <td>Register</td>
+                    <td>Automatic</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">The number of records in the HDS buffer waiting to be stored in the database.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tbody>
+                <tr valign="top">
+                    <td><b>System.HDS.Overflow</b>
+                    </td>
+                    <td>R</td>
+                    <td>Bit</td>
+                    <td>Automatic</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Set to 1 when the HDS stops queuing records because the event buffer is full (number of pending records has reached the buffer size).</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tbody>
+                <tr valign="top">
+                    <td><b>System.HDS.Started</b>
+                    </td>
+                    <td>R</td>
+                    <td>Bit</td>
+                    <td>Automatic</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Set to 1 when the HDS is running. Set to 0 when it is stopped. Note that the HDS stops automatically if no more storage space is available to it.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tbody>
+                <tr valign="top">
+                    <td><b>SYSTEM.HDS.NoResponseCount</b>
+                    </td>
+                    <td>R</td>
+                    <td>Register</td>
+                    <td>Automatic</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Incremented when a request between <span class="mc-variable OEM.ProductName variable">PcVue</span> and the HDS is not completed because of a timeout (5 minutes for trend data and 8 minutes for log data).</p>
+        <h2 class="SVheading2">HDS database information</h2>
+        <p class="SVnormal">The following variables provide information about the status of each HDS database. </p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tbody>
+                <tr valign="top">
+                    <td><b>System.HDS.&lt;DatabaseName&gt;.Defrag</b>
+                    </td>
+                    <td>R</td>
+                    <td>Bit</td>
+                    <td>Automatic</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Set to 1 when a maintenance task of type index defragmentation is in progress.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tbody>
+                <tr valign="top">
+                    <td><b>System.HDS.&lt;DatabaseName&gt;.Custom</b>
+                    </td>
+                    <td>R</td>
+                    <td>Bit</td>
+                    <td>Automatic</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Set to 1 when a maintenance task of type custom is in progress.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tbody>
+                <tr valign="top">
+                    <td><b>System.HDS.&lt;DatabaseName&gt;.NoResponseCount</b>
+                    </td>
+                    <td>R</td>
+                    <td>Register</td>
+                    <td>Automatic</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Incremented when a request between <span class="mc-variable OEM.ProductName variable">PcVue</span> and the HDS is not completed because of a timeout (5 minutes for trend data and 8 minutes for log data) for a given database.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.SpaceUsed</b>
+                </td>
+                <td>R/W</td>
+                <td>Register</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">The percentage of the database capacity (maximum database size) used.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.SpaceAlloc</b>
+                </td>
+                <td>R</td>
+                <td>Register</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">The storage space allocated to the database (in Mb).</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.DelayProc</b>
+                </td>
+                <td>R</td>
+                <td>Bit</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">If set to 1, indicates that the processing of purges, shrinking or export has been blocked using VBA.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.Disconn</b>
+                </td>
+                <td>R</td>
+                <td>Bit</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">If set to 1, indicates that the database is off-line.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.Paused</b>
+                </td>
+                <td>R</td>
+                <td>Bit</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">If set to 1, indicates that records are not being recorded in the database. Set by the HDS if the database is full, or may also be 
+ set using VBA.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.DiskFull</b>
+                </td>
+                <td>R</td>
+                <td>Bit</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">If set to 1, indicates that there is not enough space on the storage device to store any more records to the database.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.Full</b>
+                </td>
+                <td>R</td>
+                <td>Bit</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">If set to 1, indicates that the database has reached its maximum configured size.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.Compact</b>
+                </td>
+                <td>R</td>
+                <td>Bit</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">Set to 1 when a maintenance task of type shrink is in progress.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.Purge</b>
+                </td>
+                <td>R</td>
+                <td>Bit</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">Set to 1 when a maintenance task of type purge is in progress.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.Export</b>
+                </td>
+                <td>R</td>
+                <td>Bit</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">Set to 1 when a maintenance task of type export is in progress.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.Synchro</b>
+                </td>
+                <td>R</td>
+                <td>Bit</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">Deprecated - Do not use.</p>
+        <table style="width: 80%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50%;" />
+            <col style="width: 10%;" />
+            <col style="width: 10%;" />
+            <col />
+            <tr valign="top">
+                <td><b>System.HDS.&lt;DatabaseName&gt;.EmergencyPurge</b>
+                </td>
+                <td>R</td>
+                <td>Bit</td>
+                <td>Automatic</td>
+            </tr>
+        </table>
+        <p class="SVnormal">Set to 1 when an emergency purge is in progress.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

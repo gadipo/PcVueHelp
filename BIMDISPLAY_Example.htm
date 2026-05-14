@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>BIMDISPLAY example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="BIMDISPLAY_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor282"></a>BIMDISPLAY Example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc312">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="BIMDISPLAY_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc312.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">This program illustrates the use of the BIMDISPLAY instruction.</p>
+        <div class="note">
+            <p class="SVnormal">Illustrations in this book are based on an Ifc model provided by the XBIM team and available under the Common Development and Distribution License (CDDL).<br />The original "Sample house" model can be downloaded at <a href="https://github.com/xBimTeam/XbimEssentials/blob/master/Tests/TestFiles/SampleHouse4.ifc" target="_blank">https://github.com/xBimTeam/XbimEssentials/</a>.<br />Credits: The XBIM team.<br /></p>
+        </div>
+        <h2 class="SVheading2">Example prerequisites</h2>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted"> A mimic containing a BIM control and a List-box control must be open. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+            </li>
+            <li>
+                <p class="SVbulleted">The BIM control is used to visualize the contents of a .Ifc file. This example requires the file to be located in the project's BIM folder.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">A text variable, @SB_EXAMPLES.PresetName, is required. This variable must have the <u>Command</u> property set.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">A register variable, @SB_EXAMPLES.LabelValue, is required. This variable must have the <u>Command</u> property set.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">An Xml file is used to save and load the presets. This file is created the first time the SAVEPRESETS mode is used. In this example it is located in project's BIM folder.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/Scripting_SCADABasic/BIMDISPLAY.png" MadCap:targetName="t1" style="display: none;" />
+        </p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: PlainText;" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DIM sWindow AS STR;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DIM sBranch AS STR;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DIM sIdentity AS STR;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DIM sPresetListBox AS STR;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DIM sPresetFileName AS STR;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'-------- Must be ran once to initialize variables</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB Main ()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;sWindow = "Mimic3"; ' Name of the mimic comtaining the BIM control</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;sBranch = "";</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;sIdentity = "BimControl1"; 'Identity of the BIM control</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;sPresetListBox = "AIListBox1"; 'Identity of the list box used to display presets</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;sPresetFilename = "UserPresets.xml"; 'Name of the file used to save presets</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'-------- Load an Ifc file in the BIM control. File name passed as an argument.</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB Exec_LoadIFC ()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM lReturn AS LONG;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM cIfcFileName AS STR;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;cIfcFileName = GETARG("ARG1");</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;lReturn = BIMDISPLAY("LOADIFC", sWindow, sBranch, sIdentity, cIfcFileName);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;PRINT("Result from mode LOADIFC = ", lReturn);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'-------- Open the BIM control Ifc properties dialog</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Sub Exec_OpenPropertiesWindow ()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM lReturn AS LONG;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;lReturn = BIMDISPLAY("OPENPROPERTIESWINDOW", sWindow, sBranch, sIdentity);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;PRINT("Result from mode OPENPROPERTIESWINDOW = ", lReturn);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'-------- Add a user preset. The preset name comes from the variable @SB_EXAMPLES.PresetName</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB Exec_AddPreset()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM lReturn AS LONG;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM cPresetName AS STR;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;CONST CAMERA = 2; 'To add a camera preset</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;CONST CUTPLANE = 1; 'To add a cutplane preset</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;CONST BOTH = 0; 'To add both a camera and cutplane preset</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;cPresetName = @SB_EXAMPLES.PresetName;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;lReturn = BIMDISPLAY("ADDPRESET", sWindow, sBranch, sIdentity, cPresetName, CAMERA);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;PRINT("Result from mode ADDPRESET = ", lReturn);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'-------- Go to a preset. The preset name comes from the list box populated by Exec_GetPresets</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB Exec_GoToPreset()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM lReturn AS LONG;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM cPresetName AS STR;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM iIndex AS Integer;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;iIndex = TOI(LISTBOX("GETSELECTEDINDEX", sWindow, sBranch, sPresetListBox));</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;cPresetName = LISTBOX("GETUSERDATA", sWindow, sBranch, sPresetListBox, iIndex);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;@SB_EXAMPLES.PresetName = cPresetName;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;lReturn = BIMDISPLAY("GOTOPRESET", sWindow, sBranch, sIdentity, cPresetName);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;PRINT("Result from mode GOTOPRESET ", cPresetName, " = ", lReturn);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'-------- Go to a preset. The preset name is passed as an argument</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB Exec_GoToStandardPreset()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM lReturn AS LONG;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM cPresetName AS STR;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;cPresetName = GETARG("ARG1");</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;lReturn = BIMDISPLAY("GOTOPRESET", sWindow, sBranch, sIdentity, cPresetName);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;PRINT("Result from mode GOTOPRESET ", cPresetName, " = ", lReturn);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'-------- Get the BIM control user added presets and display them in a list box</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB Exec_GetPresets()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM iPresetCount AS Integer, iIndex AS Integer, i AS Integer;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;CONST INDEXEND = -1; ' Used AS the ListBox index adds to the end of the list.</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM cText AS STR, cUserData AS STR;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;ListBox("CLEAR", sWindow, sBranch, sPresetListBox);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;iPresetCount = TOI(BIMDISPLAY("GETPRESETCOUNT", sWindow, sBranch, sIdentity));</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;PRINT(iPresetCount, " presets found");</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;FOR (iIndex=0; iIndex &lt; iPresetCount; iIndex++)</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;cText = BIMDISPLAY("GETPRESETNAME", sWindow, sBranch, sIdentity, iIndex);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;cUserdata = cText;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;ListBox("INSERT", sWindow, sBranch, sPresetListBox, cText, cUserData, INDEXEND);&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;NEXT</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'-------- Save BIM Control user added presets in an Xml file</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB Exec_SavePresets ()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM lReturn AS LONG;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;lReturn = BIMDISPLAY("SAVEPRESETS", sWindow, sBranch, sIdentity, sPresetFileName);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;PRINT("Result from mode SAVEPRESETS = ", lReturn);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'-------- Load BIM control user added presets from an Xml file</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB Exec_LoadPresets ()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM lReturn AS LONG;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;CONST ADDPRESETS = 1; 'Adds presets. Using this sub-mode presets may be duplicated.</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;CONST REPLACEPRESETS = 0; 'Adds presets replacing any already existing that have the same name.</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;lReturn = BIMDISPLAY("LOADPRESETS", sWindow, sBranch, sIdentity, sPresetFileName, REPLACEPRESETS);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;PRINT("Result from mode LOADPRESETS = ", lReturn);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'-------- Show/hide object according to its type. Show(1) or hide(0) is passed as an argument.</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB&#160;&#160;Exec_ShowObjectByType()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM lReturn AS LONG;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM iShow AS INTEGER;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM sIfcTypeValue AS STR;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;iShow = IVAL(GETARG("ARG1"));</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;sIfcTypeValue = @SB_EXAMPLES.ObjectType;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;lReturn = BIMDISPLAY("SHOWOBJECTBYTYPE", sWindow, sBranch, sIdentity, sIfcTypeValue, iShow);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;PRINT("Result from mode SHOWOBJECTBYTYPE = ", lReturn);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'-------- Zoom in on a specifc object using its unique LabelValue. The object is highlighted and the other Ifc elements are set to transparent.</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB Exec_ZoomObject()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM lReturn AS LONG;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;DIM iIfcLabelValue AS INTEGER;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;CONST SELECTOBJECT = 1;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;CONST CHANGEMODEOPACITY = 1;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;iIfcLabelValue = TOI(@SB_EXAMPLES.LabelValue);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;lReturn = BIMDISPLAY("ZOOMOBJECT", sWindow, sBranch, sIdentity, iIfcLabelValue, SELECTOBJECT, CHANGEMODEOPACITY );</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;PRINT("Result from mode ZOOMOBJECT = ", lReturn);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|Dynamic Busbar Coloring|Main concepts" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Dynamic Busbar Coloring Concepts</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Concepts</h1>
+        <p class="SVnormal">The Topology Engine uses 3 main concepts.</p>
+        <ul style="list-style-type: disc;">
+            <li>Nodes,</li>
+            <li>Switches,</li>
+            <li>Transformers.</li>
+        </ul>
+        <p class="SVnormal">They are used to describe the network topology and are referred to as topology items.</p>
+        <h2 class="SVheading2">Nodes</h2>
+        <p class="SVnormal">Nodes are the parts of the electrical network connected by switches and transformers. For example, a node can be an incoming source, a busbar, or an outgoing, feeder. The nodes can be of three types.</p>
+        <ul style="list-style-type: disc;">
+            <li>Passive: The nodes those are not able to provide their own voltage level.</li>
+            <li>Static: The nodes with a determinate voltage (e.g. Earth)</li>
+            <li>Measured: For measured nodes, it is possible to define steady sources such as generators or other sources that are active up to a specified voltage level. The source can be set manually by user input or coming from the field as a voltage measurement. As a consequence, measured nodes are able to provide their own voltage level. Measured nodes are also called injection nodes.</li>
+        </ul>
+        <p class="SVnormal">The Topology Engine supports up to 8 discrete voltage levels, which can be interpreted in an arbitrary manner, e.g. not associated with any particular voltage value (12 kV, 20 kV…). One of these levels is the earth voltage level and another represents voltage absence. Each measured node is able to provide only one voltage level that must be declared as its default injection value. If a node’s injection value is set to 0, the node is passive. If node injection value is set to non-significant, the node will provide the uncertain value as default injection. The node injection value can change at runtime.</p>
+        <h2 class="SVheading2">Switches</h2>
+        <p class="SVnormal">Switches are any type of device able to open or close an electrical circuit with regards to voltage calculation (breaker, isolator, disconnector, earthing switch…). The switching capability does not affect the Topology Engine calculations. A switch can only be in one of the three following states.</p>
+        <ul style="list-style-type: disc;">
+            <li>Position open,</li>
+            <li>Position closed,</li>
+            <li>Unknown position, also called uncertain, non-significant or NS.</li>
+        </ul>
+        <p class="SVnormal">A switch is always connected to two nodes.</p>
+        <h2 class="SVheading2">Transformers</h2>
+        <p class="SVnormal">Transformers are devices that are able to modify the voltage level. They are characterized by an input voltage level and an output voltage level. Like switches, transformers are always connected to two Nodes. Unlike switches, transformers are directional devices.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

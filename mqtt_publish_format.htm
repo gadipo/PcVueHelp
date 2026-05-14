@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|MQTT Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to customize the MQTT publish format</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to customize the MQTT publish format</h1>
+        <p class="SVnormal">The MQTT Add-on publishes variables by sending payloads similar to those specified in Sparkplug. It also offers the possibility to customize the payload format, in particular by adding metadata such as the description, domain, nature, alarm level...</p>
+        <h2 class="SVheading2">Raw publish payload</h2>
+        <p class="SVnormal">When using the keyword 'Raw' as the <b>PayloadType</b> value, the driver publishes unformatted messages. The message consists solely of the raw variable value, encoded as ASCII, on the MQTT topic:</p>
+        <ul>
+            <li>Bit values are sent as 0 or 1.</li>
+            <li>Register values are sent as numeric values, e.g., 123.5.</li>
+            <li>Text values are sent as plain strings, e.g., Hello world.</li>
+        </ul>
+        <h2 class="SVheading2">Generic publish payload</h2>
+        <p class="SVnormal">When using the keyword 'Generic' as the <b>PayloadType</b> value, payloads sent for published variables have the following default fixed format.</p>
+        <p class="SVnormal">Register variables:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">{</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"metrics":[</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;{</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"name":"MQTT.PUB_TEMP",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"value":37,</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"timestamp":"2008-04-22T06:00:11Z",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"quality":0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;}</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">}</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">Text variables:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">{</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">"metrics":[</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;{</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"name":"MQTT.PUB_TXT",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"value":"mydata",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"timestamp":"2019-10-29T16:14:40.284Z",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"quality":0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;}</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">}</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">Bit variables:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">{</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">"metrics":[</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;{</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"name":"MQTT.PUB_BIT",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"value":true,</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"timestamp":"2019-10-29T16:14:21.024Z",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"quality":0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;}</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">}</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">Where:</p>
+        <ul style="list-style-type: disc;">
+            <li>name: Name of the published variable,</li>
+            <li>value: Current value of the variable at the time of sending the Publish message,</li>
+            <li>timestamp: Timestamp of the variable at the time of sending the Publish message. The format follows the ISO 8601 standard (UTC time).</li>
+            <li>quality: Quality of the variable at the time of sending the Publish message. See <a href="#Quality_values">below</a> for the list of possible values</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">For all register variables:</p>
+            <ul>
+                <li>
+                    <p class="SVbulleted">If the <u>Format</u> property is specified in the variable configuration, the MQTT  applies it. For example, if the format property is "#.##", the MQTT Add-on will publish a value with 2 decimal places.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">If the <u>Format</u> property is not specified in the variable configuration, the MQTT Add-on applies the number of decimal places as specified by the <u>DefaultDecimalPlaces</u> parameter in the file svmgrMQTT.ini.</p>
+                </li>
+            </ul>
+            <p class="SVnormal">The same applies to the following metadata: minimumValue, maximumValue, controlMinimum and controlMaximum.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">This default format can be customized by defining the <b>PublishFormat</b> parameter. See <a href="#Customiz">Customizing Publish payloads with additional metadata</a> for more information.</p>
+        </div>
+        <h2 class="SVheading2">Predefined custom publish payload</h2>
+        <p class="SVnormal">One or more custom formats for publish payloads can be predefined in a file named PubTemplates.txt, located in the project's C directory.<br />Each custom format is given a name, that you use as the value of the <b>PayloadType</b> parameter.</p>
+        <p class="SVnormal">Example of PubTemplates.txt file:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Format0]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name = TestFormat</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">BeginFormat</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">{</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"name":"&amp;varname",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"metrics": [</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"value":"&amp;value"&#160;&#160;&#160;&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"timestamp":"&amp;tsType",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;"quality": &amp;quality</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;}</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">}</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">EndFormat</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Format1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name = OtherFormatForTest</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">BeginFormat</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Myformat1: &amp;varname - &amp;value - &amp;timestamp - &amp;quality</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">EndFormat</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Format2]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name = Full</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">BeginFormat</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&amp;varname - &amp;value - &amp;timestamp - &amp;quality -</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&amp;tsType - &amp;unit - &amp;description - &amp;source - &amp;alarmLevel -</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&amp;domain - &amp;nature - &amp;textAttr03 - &amp;textAttr04 - &amp;textAttr05 - &amp;textAttr06 - &amp;textAttr07 - &amp;textAttr08 - &amp;textAttr09 -</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&amp;textAttr10 - &amp;textAttr11 - &amp;textAttr12 - &amp;textAttr13 - &amp;textAttr14 - &amp;textAttr15 - &amp;textAttr16 -</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&amp;binAttr - &amp;textSize</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">EndFormat</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2"><a name="Customiz"></a>Customizing Publish payloads with additional metadata</h2>
+        <p class="SVnormal">When using the Generic payload type, It is possible to add extra information in the Publish payloads by using the <u>PublishFormat</u> parameter. In this case, a metadata section will be added to the payload with the specified additional information.</p>
+        <p class="SVnormal">The syntax of the <u>PublishFormat</u> parameter is: keyname1#keyname2#keyname3</p>
+        <p class="SVnormal">As any optional parameter, the <u>PublishFormat</u> can be specified:</p>
+        <ul>
+            <li>Directly in the MQTT mapping extended attribute,</li>
+            <li>In a different extended attribute,</li>
+            <li>In the svmgrMQTT.ini file.</li>
+        </ul>
+        <p>For example, if you want to publish a register variable named Mqtt.Pub_Temp with the following additional information:</p>
+        <ul>
+            <li>Unit,</li>
+            <li>Description,</li>
+            <li>Source,</li>
+            <li>Minimum value,</li>
+            <li>Maximum value.</li>
+        </ul>
+        <p class="SVnormal">The <u>PublishFormat</u> syntax will be: unit#description#source#minimumValue#maximumValue</p>
+        <p class="SVnormal">And a typical published payload will be:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">{</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"metrics": [</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;{</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"name":"MQTT.PUB_TEMP",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"value":29,</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"timestamp":"2020-01-13T08:00:00.123Z",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"quality":0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"metaData": {</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"unit":"Celsius degrees",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"description":"Value sent from ",</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"source":1,</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"minimumValue":0,</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;"maximumValue":45</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;}</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;}</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">}</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">This table gives the list of metadata and corresponding <u>keyname</u> that can be added to the <u>PublishFormat</u> parameter.</p>
+        <p class="SVnormal">The same keynames are used to predefine custom payload styles in the PubTemplates.txt file.</p>
+        <table style="width: 40%;">
+            <col style="width: 116px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Keyname</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td>datatype</td>
+                    <td>Datatype of the variable. See <a href="#Datatype_values">below</a>.</td>
+                </tr>
+                <tr>
+                    <td>varname</td>
+                    <td>Name of the variable.<br />Present by default when using the Generic payload type.</td>
+                </tr>
+                <tr>
+                    <td>value</td>
+                    <td>Value of the variable.<br />Present by default when using the Generic payload type.</td>
+                </tr>
+                <tr>
+                    <td>timestamp</td>
+                    <td>Timestamp of the variable.<br />Present by default when using the Generic payload type.</td>
+                </tr>
+                <tr>
+                    <td>quality</td>
+                    <td>Quality of the variable.<br />Present by default when using the Generic payload type.</td>
+                </tr>
+                <tr>
+                    <td>tsType</td>
+                    <td>Quality of the timestamp: SV, PLC or PLC?.</td>
+                </tr>
+                <tr>
+                    <td>unit</td>
+                    <td>Unit of the variable, only for register variables.</td>
+                </tr>
+                <tr>
+                    <td>description</td>
+                    <td>Description of the variable.</td>
+                </tr>
+                <tr>
+                    <td>source</td>
+                    <td>Source of the variable. See <a href="#source_values">below</a>.</td>
+                </tr>
+                <tr>
+                    <td>alarmLevel</td>
+                    <td>Alarm level, only for alarm variables.</td>
+                </tr>
+                <tr>
+                    <td>domain</td>
+                    <td>Domain of the variable.</td>
+                </tr>
+                <tr>
+                    <td>nature</td>
+                    <td>Nature of the variable.</td>
+                </tr>
+                <tr>
+                    <td>textAttr03 to textAttr16</td>
+                    <td>Text attribute 03 to 16 of the variable.</td>
+                </tr>
+                <tr>
+                    <td>binAttr</td>
+                    <td>Binary attribute 1 to 32, in decimal. Example: If binary attributes 1, 4 and 8 are true, then binAttr = 137.</td>
+                </tr>
+                <tr>
+                    <td>minimumValue</td>
+                    <td>Minimum value of the variable, only for register variables.</td>
+                </tr>
+                <tr>
+                    <td>maximumValue</td>
+                    <td>Maximum value of the variable, only for register variables.</td>
+                </tr>
+                <tr>
+                    <td>controlMinimum</td>
+                    <td>Minimum control value of the variable, only for register variables.</td>
+                </tr>
+                <tr>
+                    <td>controlMaximum</td>
+                    <td>Maximum control value of the variable, only for register variables.</td>
+                </tr>
+                <tr>
+                    <td>threshold1Value</td>
+                    <td>Value of threshold1, only for register variables.</td>
+                </tr>
+                <tr>
+                    <td>threshold2Value</td>
+                    <td>Value of threshold2, only for register variables.</td>
+                </tr>
+                <tr>
+                    <td>threshold3Value</td>
+                    <td>Value of threshold3, only for register variables.</td>
+                </tr>
+                <tr>
+                    <td>threshold4Value</td>
+                    <td>Value of threshold4, only for register variables.</td>
+                </tr>
+                <tr>
+                    <td>textSize</td>
+                    <td>Length, only for Text variables.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2"><a name="Datatype_values"></a>Datatype values</h2>
+        <table style="width: 30%;">
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">dataType</td>
+                    <td class="SVtableHeading">Key value</td>
+                </tr>
+                <tr>
+                    <td>Bit</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Alarm</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Register</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>Text</td>
+                    <td>4</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2"><a name="source_values"></a>Source values</h2>
+        <table style="width: 30%;">
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">source</td>
+                    <td class="SVtableHeading">Key value</td>
+                </tr>
+                <tr>
+                    <td>Internal</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>External</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Equipment</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>DDE</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>OPC</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>LNS</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>BACnet</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>IEC 61850</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>IEC 60870-5</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>DNP3</td>
+                    <td>11</td>
+                </tr>
+                <tr>
+                    <td>SNMP</td>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>OPC&#160;UA</td>
+                    <td>13</td>
+                </tr>
+                <tr>
+                    <td>SQL</td>
+                    <td>14</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2"><a name="Quality_values"></a>Quality values</h2>
+        <table style="width: 30%;">
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">quality</td>
+                    <td class="SVtableHeading">Key value</td>
+                </tr>
+                <tr>
+                    <td>Quality_Good</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Quality_Bad</td>
+                    <td>128</td>
+                </tr>
+                <tr>
+                    <td>Quality_Bad_CommunicationFailure</td>
+                    <td>129</td>
+                </tr>
+                <tr>
+                    <td>Quality_Bad_BadFormattingValue</td>
+                    <td>130</td>
+                </tr>
+                <tr>
+                    <td>Quality_Bad_WatchdogFailure</td>
+                    <td>132</td>
+                </tr>
+                <tr>
+                    <td>Quality_Bad_LowLimitExceeded</td>
+                    <td>133</td>
+                </tr>
+                <tr>
+                    <td>Quality_Bad_HighLimitExceeded</td>
+                    <td>134</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

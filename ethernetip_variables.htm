@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|EtherNET/IP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Ethernet/IP Data Acquisition Driver Add-on Configuration of the PcVue Variables</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuration of the <span class="mc-variable OEM.ProductName variable">PcVue</span> Variables for the Ethernet/IP Data Acquisition Driver Add-on</h1>
+        <p class="SVnormal">To define a variable as having an Ethernet/IP source you have to enter its address in the extended attribute as defined in EtherNetIP.ini. It takes the form of a string with the following syntax.</p>
+        <p>EIP#EquipmentName#TagName#Type#PollingGroup#Access#Scaled</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">EIP - The key that indicates it is a variable with an Ethernet/IP source.</li>
+            <li>
+                <p>EquipmentName - The name of the equipment, as defined in EtherNetIP.ini, from which the variable gets its value.</p>
+            </li>
+            <li class="SVbulleted">TagName - The identifier of the variable within the equipment. See below.</li>
+            <li class="SVbulleted">Type - The variable type. See below.</li>
+            <li class="SVbulleted">PollingGroup - The name of the polling group, as defined in EtherNetIP.ini,  which defines the variable scan rate.</li>
+            <li class="SVbulleted">Access - Use <b>W</b> if you want <span class="mc-variable OEM.ProductName variable">PcVue</span> to write to the tag.</li>
+            <li class="SVbulleted">Scaled - Use <b>S</b> if you want <span class="mc-variable OEM.ProductName variable">PcVue</span> to apply scaling between the minimum and maximum of the data type and the minimum and maximum defined in the variable. If omitted the variable is not scaled.</li>
+        </ul>
+        <h2 class="SVheading2">TagName syntax for ControlLogix access</h2>
+        <p class="SVnormal">The tag name refers to the tag name in the equipment.</p>
+        <ul style="list-style-type: disc;">
+            <li>If the tag is part of a program, named MyProg, the syntax is <b>Program:MyProg.MyTag</b>.</li>
+            <li>If the tag is part of a UDT structure TemplateStructA, named Mystruct, the syntax is  <b>MyStruct.MyTag</b>.</li>
+            <li>If MyStruct is instantiated with the program MyProg, the syntax is <b>Program:MyProg.MyStruct.MyTag</b>.</li>
+            <li>If the tag is an array, the syntax is <b>MyArray[x]</b> where x is the array index of the specific element to access.</li>
+            <li>If the tag is a string, the syntax is  <b>MyString[x]</b> where x is the string size you want to access.</li>
+        </ul>
+        <p>Example:<br />EIP#EqtTest#TEST2_ARR[29]#INT#Fast#W</p>
+        <p>Connect the variable to the device called <u>EqtTest</u> and access the <u>index 29</u> of the table called <u>TEST2_ARR</u> at the frequency define by the polling group <u>Fast</u> and the <u>value can be written</u>. The device named <u>EqtTest</u> and the polling group named <u>Fast</u> must be defined in the .ini file.</p>
+        <h2 class="SVheading2">TagName syntax for CIP generic device</h2>
+        <p class="SVnormal">The tag name refer to a specific explicit message within the CIP device. The syntax is <b>CIP:S:C:N:I:[x]</b>.</p>
+        <ul style="list-style-type: disc;">
+            <li>S - The service expressed in hexadecimal. For example:<ul style="list-style-type: disc;"><li>01 - Get Attributes all</li><li>0e - Get Attribute single</li></ul></li>
+            <li>C - Class in hexadecimal</li>
+            <li>I - Instance number in decimal</li>
+            <li>N - Attribute number</li>
+            <li>[x] - The offset, in bytes, of the response buffer from which to extract the variable value.</li>
+        </ul>
+        <h2 class="SVheading2">Variable type</h2>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 100px;" />
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Format</td>
+                    <td class="SVtableHeading">Scaling support</td>
+                    <td class="SVtableHeading">Range</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">BOOL</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">SINT</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">-127..128</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">INT</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">-32767..32768</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DINT</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">-2147483647..2147483648</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">USINT</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">0..255</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">UINT</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">0..65535</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">UDINT</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">0..4294967295</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">REAL</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">STRING</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Control tag for redundant equipment</h2>
+        <p class="SVnormal">If the equipment is configured with two IP addresses, <span class="mc-variable OEM.ProductName variable">PcVue</span> is able to control / display the active connection using a variable. To configure such a variable in <span class="mc-variable OEM.ProductName variable">PcVue</span> you use the following syntax, specified in the extended attribute.</p>
+        <p class="SVnormal">EIP#EquipmentName#ConnectionIndex</p>
+        <ul style="list-style-type: disc;">
+            <li>EIP - The key that indicates it is a variable with an Ethernet/IP source.</li>
+            <li>EquipmentName - The equipment name from which the variable gets its value as defined in the EtherNetIP.ini</li>
+            <li>ConnectionIndex - The connection index. <ul style="list-style-type: disc;"><li>0 - Use IpAddress1</li><li>1 - Use IpAddress2</li></ul></li>
+        </ul>
+        <p class="SVnormal">The variable value reflects which connection is in use and can be used to force the use of one connection or the other.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

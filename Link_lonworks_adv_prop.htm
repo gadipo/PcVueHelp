@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|The Variables Tree|Configuring variables|Linking a variable to its source|Linking a variable to a LonWorks variable" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Advanced properties specific to LonWorks variables</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor325"></a>Advanced Properties Specific to LonWorks Variables</h1>
+        <p class="SVnormal">The Advanced tab of the variable's properties dialog contains a number of properties only available when a LonWorks source has been selected.    <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show Picture</a> 
+ Before changing the properties it is important to understand the two options 
+ for monitoring a LonWorks variable.</p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/AE/Variables/link_register_lns_properties.png" style="border-style: none;border: none;float: none;" border="0" />
+            </p>
+        </div>
+        <ul>
+            <li class="SVbulleted">Bind this variable 
+ - Selecting this option means that each time the value of the variable 
+ changes in the LonWorks node it is automatically sent to <span class="mc-variable OEM.ProductName variable">PcVue</span>. 
+ This option should be avoided if possible because of its potential for 
+ loading the LonWorks network. Also, the binding takes place during the 
+ startup of <span class="mc-variable OEM.ProductName variable">PcVue</span> adding considerably to the time that it takes 
+ to start. As a guideline, you should not exceed 100 variables that have 
+ this option selected.</li>
+            <li class="SVbulleted">Polled - <span class="mc-variable OEM.ProductName variable">PcVue</span> 
+ polls the LonWorks node at a pre-defined interval for the value of the 
+ variable. It is important that the polling rate reflects the speed at 
+ which the variable changes. For example, a room temperature might be polled 
+ every five minutes. Good polling rate selection will help reduce the traffic 
+ on the network and hence improve its performance.</li>
+        </ul>
+        <h2 class="SVheading2">LonWorks properties in the Advanced tab</h2>
+        <ul>
+            <li class="SVbulleted">Use default parameters 
+ - The selection of <u>Bind this variable</u> property and the value of the <u>Poll 
+ interval</u> property is taken from the default set in the LonWorks Network 
+ configuration.</li>
+            <li class="SVbulleted">Bind this variable 
+ - If selected the <span class="mc-variable OEM.ProductName variable">PcVue</span> variable is bound to the LonWorks 
+ node when <span class="mc-variable OEM.ProductName variable">PcVue</span> starts.</li>
+            <li class="SVbulleted">Poll interval - The 
+ interval at which the LonWorks node is polled if the variable is not bound.</li>
+        </ul>
+        <h2 class="SVheading2">Using the Permanent scan for mimics property to reduce 
+ network traffic</h2>
+        <p class="SVnormal">In addition to regulating the network traffic using carefully 
+ selected poll intervals, you can also reduce network traffic by de-selecting 
+ the property <u>Permanent scan for mimics</u> in the Advanced options of a 
+ variables configuration. In general (but see table below), when this property 
+ is de-selected polling only takes place when a mimic displaying 
+ the value of the variable is open.</p>
+        <h2 class="SVheading2">Variable type versus monitoring mode</h2>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;caption-side: top;width:100%">
+            <col style="width: 160px;" />
+            <col style="width: 120px;" />
+            <col style="width: 120px;" />
+            <col style="width: 420px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Variable use</td>
+                    <td class="SVtableHeading">Monitoring mode</td>
+                    <td class="SVtableHeading">Permanent scan for mimic</td>
+                    <td class="SVtableHeading">Behavior</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Mimic only</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Polled</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">De-selected</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">The variable is only monitored if a mimic displaying it 
+ is open.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Trend</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Polled</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">N/A</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">When a variable has trend recording enabled the variable 
+ is always scanned. The property, Permanent scan for mimics, has no effect.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Log</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Polled or Bind</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Selected</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">If polled then it is possible that some transitions will 
+ not be logged.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Alarm</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Bind</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">N/A</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Alarms must be bound if all transitions are to be detected. 
+ The property, Permanent scan for mimics, has no effect.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Variable linked to node configuration property (SCPT or 
+ UCPT)</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">N/A</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Selected</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">The variable is read once when <span class="mc-variable OEM.ProductName variable">PcVue</span> is started. 
+ To refresh the variable you must use the LNS instruction in SCADA BASIC.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

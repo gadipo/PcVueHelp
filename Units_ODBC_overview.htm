@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Archives|Configuring archive units|Other archive unit types|ODBC archive unit " MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>ODBC and PcVue&#160;</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">ODBC and <span class="mc-variable OEM.ProductName variable">PcVue</span>&#160;</h1>
+        <p class="SVnormal">ODBC is an acronym for Open 
+ Data Base 
+ Connectivity. </p>
+        <p class="SVnormal">ODBC defines a standard protocol by which a program or 
+ application may open, read, and write to any compliant database. Once 
+ a program has ODBC connectivity it should, in theory, be able to access 
+ any ODBC compliant database without the need for extra tools or development.</p>
+        <h2 class="SVheading2">ODBC Architecture</h2>
+        <p class="SVnormal">Whilst it is not strictly necessary to understand how 
+ the ODBC interface works in order to use it with <span class="mc-variable OEM.ProductName variable">PcVue</span>, it can 
+ be useful when understanding its limitations and solving problems. The 
+ architecture of ODBC is best explained with a simple diagram. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/AE/Archives/units_ODBC_architecture.png" style="border-style: none;border: none;float: none;" border="0" />
+            </p>
+        </div>
+        <ul>
+            <li class="SVbulleted">In this case, the 
+ Application is <span class="mc-variable OEM.ProductName variable">PcVue</span>. It 
+ uses the standard ODBC functions to open, read and write to the chosen 
+ database.</li>
+            <li class="SVbulleted">The Driver Manager 
+ is responsible for loading the driver corresponding to the database used.</li>
+            <li class="SVbulleted">The Driver interprets 
+ the ODBC functions, sends the requests to the relational database and 
+ returns the results to the Application using standard query language (Sql) 
+ commands.</li>
+            <li class="SVbulleted">The Relational Database 
+ (RDB) stores the data requested and sent by the Application.</li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> does not support automatic reconnection to the DBMS in case the connection to the ODBC data source is lost. Re-establishing the connection requires <span class="mc-variable OEM.ProductName variable">PcVue</span> to be restarted.</p>
+            <p class="SVnormal">To limit the risk of disconnection, it is recommended to host the DBMS on the same computer as the archive server station, and to store data on a local filesystem to avoid any network infrastructure dependency.</p>
+            <p class="SVnormal">Maintenance procedures that require closing the connection shall accommodate the need to restart <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        </div>
+        <h2 class="SVheading2">Using ODBC with <span class="mc-variable OEM.ProductName variable">PcVue</span>&#160;</h2>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> is able to use ODBC in the following ways.</p>
+        <ul>
+            <li class="SVbulleted">For historic data 
+ - an ODBC database may be used by an ODBC archive unit. Data may be recorded 
+ and played back in the same way as for a proprietary archive unit.</li>
+            <li class="SVbulleted">For recipes - recipes 
+ may be saved to, or loaded from, an ODBC database.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">Recording and playing back data using an ODBC data source 
+ is considerably slower than when using a proprietary format archive unit.</p>
+        </div>
+        <p class="SVnormal">The following ODBC compliant database systems have been 
+ tested with <span class="mc-variable OEM.ProductName variable">PcVue</span>&#160;</p>
+        <ul>
+            <li class="SVbulleted">Access 97 and 2000</li>
+            <li class="SVbulleted">Oracle V8</li>
+            <li class="SVbulleted">SQL Server 6.5</li>
+        </ul>
+        <p class="SVnormal">A single ODBC database can be used to record data from 
+ many ODBC archive units and recipes.</p>
+        <p class="SVnormal">Using ODBC requires that the following configuration steps be completed in the correct order.</p>
+        <ol>
+            <li class="SVnumbered" value="1">Using the operating 
+ system - check that you have ODBC drivers installed on your PC.</li>
+            <li class="SVnumbered" value="2">Using the operating 
+ system - create an ODBC database source. The name of the ODBC source is 
+ used in the configuration of <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li>
+            <li class="SVnumbered" value="3">Configure <span class="mc-variable OEM.ProductName variable">PcVue</span> 
+ to inform it of the existence of the ODBC database. You will use the name 
+ you gave the database when you created the ODBC source using the operating 
+ system.</li>
+            <li class="SVnumbered" value="4">Create one or more 
+ ODBC archive units that will use the database to record the data.<br />	And/or</li>
+            <li class="SVnumbered" value="5">Create one or more 
+ recipes using the database to record the data.</li>
+        </ol>
+        <div class="warning">
+            <p class="SVnormal">The variable name, variable title, and extended text attributes fields are limited to 40 characters in ODBC archive units. If variables are recorded, whose configuration exceed this limitation the fields are truncated to 40 characters and an error is generated in the Event Viewer.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

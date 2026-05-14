@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Instruction reference A to Z|F" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>FTP</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="FTP_Instruct" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor53"></a>FTP</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc130">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="Input_Output_InstbyCat" />
+            </object><a class="MCConceptLink_seealso_0" href="javascript:mc130.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />See also</a> <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc131"><param name="Command" value="ALink,MENU" /><param name="Item1" value="" /><param name="Item2" value="FTP_Ex" /></object><a class="MCConceptLink_example_0" href="javascript:mc131.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Example</a></p>
+        <p class="SVnormal">Copies a file to or from an FTP server.</p>
+        <p class="SVnormal">WebVue support - Yes. The runtime HMI display is not supported.</p>
+        <table style="width: ;border-spacing: 0px;border-spacing: 0px;" cellspacing="0">
+            <col style="width: 50px;" />
+            <col style="width: 100px;" />
+            <col style="width: 50px;" />
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtableHeading">Syntax</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">1</td>
+                <td class="SVtable">DOWNLOAD</td>
+                <td class="SVtable"><a title="Click to view the syntax for this mode." href="#Syntax1">1</a>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">2</td>
+                <td class="SVtable">UPLOAD</td>
+                <td class="SVtable"><a title="Click to view the syntax for this mode." href="#Syntax2" alt="Click to view the syntax for this mode.">2</a>
+                </td>
+            </tr>
+        </table>
+        <div class="warning">
+            <p class="SVnormal">By design, FTP is considered a weak protocol as it transmits clear-text data over a TCP/IP network. It is obsolete and shall no longer be used. Use FTPS connections and the <a href="FTPS.htm">FTPS</a> instruction instead.</p>
+        </div>
+        <h2 class="SVheading2">Common Arguments</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable"><i>HMIdisplay</i>
+                </td>
+                <td class="SVtable">
+                    <p>Whether and how to display the progress dialog on a desktop client.</p>
+                    <ul style="list-style-type:none;">
+                        <li>0: None.</li>
+                        <li>1: Dialog without a Cancel button (default).</li>
+                        <li>2: Dialog with a Cancel button.</li>
+                    </ul>
+                    <p>Type: INTEGER.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable"><i>UserName</i>
+                </td>
+                <td class="SVtable">
+                    <p>The user name of the account used to access the FTP server. If omitted, an anonymous login attempt is performed. Type STR.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable"><i>Password</i>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The password of the account used to access the FTP server. Type STR.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax1"></a>Syntax 1</h2>
+        <p class="SVnormal">FTP("DOWNLOAD", <i>FtpFileSource</i>, <i>FileDestination</i> [, <i>HMIdisplay </i>[, <i>UserName</i>, <i>Password</i> [, <i>VariableName</i>]]]);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 145px;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p><i>FtpFileSource</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p>The full path of the file to download e.g. "ftp://<i>server</i>/<i>path</i>”. Type STR.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable"><i>FileDestination</i>
+                </td>
+                <td class="SVtable">
+                    <p>The path to the local destination for storing the file. It can be an absolute path or a relative path from the TP project directory, but not a path to a FTP site. Type STR.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable"><i>VariableName</i>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The name of a register variable used to provide status indication.</p>
+                    <ul style="list-style-type:none;">
+                        <li>0: Transfer in progress.</li>
+                        <li>1: Completed.</li>
+                        <li>2: Canceled by the user.</li>
+                        <li>3: The remote server name cannot be resolved. </li>
+                        <li>4: Authentication failure.</li>
+                        <li>5: The source file for downloading does not exist.</li>
+                        <li>6: Logged on but permission denied.</li>
+                        <li>7: Transfer canceled - An error occurred.</li>
+                    </ul>
+                    <p class="SVtable">Type STR.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">If the variable does not exist, the FTP transfer may work but no status can be monitored. An information message is displayed in the Event Viewer.</p>
+        </div>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 66px;" />
+            <col style="width: 132px;" />
+            <col />
+            <tr>
+                <td class="SVtable" colspan="1" rowspan="1">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable" colspan="1" rowspan="1">
+                    <p class="SVtable">1</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">DOWNLOAD</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Copy a file from the FTP server to the local destination.</p>
+                    <p class="SVtable">Return:</p>
+                    <ul style="list-style-type:none;">
+                        <li>0: No error.</li>
+                        <li>-1: First argument is missing.</li>
+                        <li>-2: Second argument is missing.</li>
+                        <li>-3: Third argument is out of range.</li>
+                        <li>-4: Unknown mode.</li>
+                        <li>-5: The <i>HMIDisplay</i> is different from 0 and the HMI for file transfer is not supported in the execution context.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax2"></a>Syntax 2</h2>
+        <p class="SVnormal">FTP("UPLOAD", <i>FileSource</i>, <i>FtpFileDestination</i> [, <i>HMIdisplay </i>[, <i>UserName</i>, <i>Password</i> [, <i>VariableName</i>]]]);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 148px;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p><i>FileSource</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p>The full path of the file to be uploaded. It can be an absolute path or a relative path from the TP project directory, but not a path to a FTP site. Type STR.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable"><i>FtpFileDestination</i>
+                </td>
+                <td class="SVtable">
+                    <p>The path to the FTP destination. Type STR.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable"><i>VariableName</i>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The name of a register variable used to provide status indication.</p>
+                    <ul style="list-style-type:none;">
+                        <li>0: Transfer in progress.</li>
+                        <li>1: Completed.</li>
+                        <li>2: Canceled by the user.</li>
+                        <li>3: The remote server name cannot be resolved.</li>
+                        <li>4: Authentication failure.</li>
+                        <li>5: The source file for uploading does not exist.</li>
+                        <li>6: Logged on but permission denied.</li>
+                        <li>7: Transfer canceled - An error occurred.</li>
+                    </ul>
+                    <p class="SVtable">Type STR.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">If the variable does not exist, the FTP transfer may work but no status can be monitored. An information message is displayed in the Event Viewer.</p>
+        </div>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 67px;" />
+            <col style="width: 123px;" />
+            <col />
+            <tr>
+                <td>
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p class="SVtable">1</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">UPLOAD</p>
+                </td>
+                <td class="SVtable">
+                    <p>Copy a file from the local storage to the FTP server.</p>
+                    <p class="SVtable">Return:</p>
+                    <ul style="list-style-type:none;">
+                        <li>0: No error.</li>
+                        <li>-1: First argument is missing.</li>
+                        <li>-2: Second argument is missing.</li>
+                        <li>-3: Third argument is out of range.</li>
+                        <li>-4: Unknown mode.</li>
+                        <li>-5: The <i>HMIDisplay</i> is different from 0 and the HMI for file transfer is not supported in the execution context.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">The HMI for file transfer</h2>
+        <p class="SVnormal">During transfer, a dialog is optionally displayed with both paths, the speed of data transfer and a progress bar. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/Scripting_SCADABasic/FTP_uploadprogress_dialog.png" title="FTP UploadProgress dialog." MadCap:targetName="t1" style="display: none;" />
+        </p>
+        <div class="warning">
+            <p class="SVnormal">The HMI for file transfer is not supported in WebVue. As a consequence, the <i>HMIDisplay</i> argument must be set to 0 for the instruction to be executed in a WebVue context. An error is returned and the instruction is not executed in WebVue context if any other value is passed.</p>
+        </div>
+        <h2 class="SVheading2">Example</h2>
+        <p class="SVnormal">For an example, select the Example link at top of page.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

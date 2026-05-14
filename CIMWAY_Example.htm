@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>CIMWAY example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="CIMWAY_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor28"></a>CIMWAY Example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc319">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="CIMWAY_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc319.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">This program shows several modes of the CIMWAY instruction.</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">SUB Main()</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'------ The communication object is MODBUS.PLC1.WORD1</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;DIM ret AS INTEGER;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;DIM period AS SINGLE;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;DIM errcount AS LONG;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;DIM net_stat AS INTEGER, node_stat AS INTEGER;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;DIM frame_stat AS INTEGER;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'------ Set scan rate to 500mSec</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;ret = CIMWAY("SCANMDF","MODBUS.PLC1.WORD1",0.5);</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'------ Test the network, node and frame Status</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;net_stat = CIMWAY("STATUS","MODBUS");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;IF (net_stat ==1) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;errcount = CIMWAY("ERROR","MODBUS");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;PRINT("Network out of service", errcount,"errors.");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;node_stat = CIMWAY("STATUS","MODBUS.PLC1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;IF (node_stat ==1) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;errcount = CIMWAY("ERROR","MODBUS.PLC1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;PRINT("Node out of service", errcount,"errors.");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;frame_stat = CIMWAY("STATUS","MODBUS.PLC1,WORD1"); 'frame status</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;IF (frame_stat ==1) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;errcount = CIMWAY(5,"MODBUS.PLC1.WORD1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;PRINT("Frame out of service", errcount,"errors.");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'------ MODBUS connection to COM2</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;ret = CIMWAY("CFG","MODBUS","PORT_NUMBER","abc");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;IF(ret !=0) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;IF (ret == -1) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;print("XBUS network do not exist");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;ELSE</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;IF (ret ==-2) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print("Incorrect parameter");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;ELSE</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print("Unknown error ",ret );</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'------ Modification of the node address</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;ret = CIMWAY("CFG","MODBUS.VIRTUALNODE","EQT_ADDRESS","10");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;IF (ret !=0) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;IF (ret == -1) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;print("MODBUS.VIRTUALNODE does not exist");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;ELSE</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;IF (ret == -2) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print("Incorrect parameter");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;ELSE</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print("Unknown error");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'------ Modify the address of the frame</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;ret = CIMWAY("CFG","MODBUS.PLC1.WORD1","MEMORY_ADDRESS","10");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;IF (ret !=0) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;IF (ret == -1) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;print("MODBUS.PLC1,WORD1 does not exist");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;ELSE</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;IF (ret == -2) THEN</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print("Incorrect parameter");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;ELSE</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;print("Unknown error ",ret);</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;END IF</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'------ Start a communication object.</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print("Start MODBUS network");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;ret = CIMWAY ("START","XBUS");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print(ret);</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print(Start node MODBUS.PLC1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;ret = CIMWAY ("START","MODBUS.PLC1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print(ret);</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print(Start scanning frame MODBUS.PLC1.WORD1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;ret = CIMWAY ("START","MODBUS.PLC1.WORD1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print(ret);</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'------ Stop a communication object.</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print("Stop MODBUS network");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;ret = CIMWAY ("STOP","XBUS");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print(ret);</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print(Stop node ModeBUS.PLC1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;ret = CIMWAY ("STOP","MODBUS.PLC1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print(ret);</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print(Stop scanning frame MODBUS.PLC1.WORD1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;ret = CIMWAY ("STOP","MODBUS.PLC1.WORD1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print(ret);</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'------ Check reading after a write command</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print ("No check reading on frame MODBUS.PLC1.WORD1");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;ret = CIMWAY("READAFTERWRITE","MODBUS.AP1.MOT16","NO");</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;print (ret);</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">END SUB</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

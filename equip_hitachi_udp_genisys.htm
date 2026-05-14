@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|Equipment|Driver references" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Hitachi Rail STS UDP Genisys MicroLok</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Hitachi Rail STS UDP Genisys MicroLok</h1>
+        <p class="SVnormal">This driver supports communication over UDP with VHLC and IXS devices, specifically designed to read Indication Bits and write Control Bits.</p>
+        <p class="SVnormal">At startup or when the device reconnects, the driver initiates a Recall (0xFD) and automatically switches to Poll (0xFB) upon receiving a valid response. A VHLC or IXS system consists of two redundant devices: Normal and Standby.</p>
+        <p class="SVnormal">The driver fully supports redundancy by sending requests to both addresses and includes an Indication Bit to show which device is currently returning the Indication Bits.</p>
+        <h2 class="SVheading2">Supported functions</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Code</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Function</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0xF1</p>
+                </td>
+                <td class="SVtable">
+                    <p>Acknowledge Master</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0xF2</p>
+                </td>
+                <td class="SVtable">
+                    <p>Indication Data Response</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0xF3</td>
+                <td class="SVtable">Control Check-Back</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0xF8</td>
+                <td class="SVtable">Date/Time Update</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0xF9</td>
+                <td class="SVtable">Common Control</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0xFA</td>
+                <td class="SVtable">Acknowledge Slave</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0xFB</td>
+                <td class="SVtable">Poll</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0xFC</td>
+                <td class="SVtable">Control</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0xFD</td>
+                <td class="SVtable">Recall</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0xFE</td>
+                <td class="SVtable">Execute</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Network properties</h2>
+        <p class="SVnormal">This topic only includes a reference of objects' properties.<br /></p>
+        <p class="SVnormal">See the topic <a href="equipment_configure_comm_objects.htm">How to configure networks devices and frames</a> for more information about how to configure communication objects.</p>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the network</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the network (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the network will start upon Equipment communication start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Use default value</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Networking</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Servers</p>
+                </td>
+                <td class="SVtable">
+                    <p>The list of <span class="mc-variable OEM.ProductName variable">PcVue</span> stations where the network will be active</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 317px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading" colspan="2">Connection</td>
+                </tr>
+                <tr>
+                    <td>Listening port</td>
+                    <td>The UDP port used to listen for packets. The default value is 51003.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Device properties</h2>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the device</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the device (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Equipment type</td>
+                    <td class="SVtable">Select the type of equipment that best suits the field device you want  communicate with.<br />The list of frame types and address ranges depend on the equipment type.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Address</td>
+                    <td class="SVtable">The Ip address of the field device.<br />Some drivers also support configuration by host name.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the device will start upon network start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Connection</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum waiting time between a request and the reply from the equipment</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Port number</p>
+                </td>
+                <td class="SVtable">
+                    <p>The port number of the field device</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Slave address</td>
+                    <td class="SVtable">The slave address of the field device<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 311px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Standby Ip address</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Ip address of a standby device used to provide redundancy, enabling the system to switch if the primary device becomes unavailable.</p>
+                        <p class="SVtable">The ip4sameclassstandby parameter must be manually set to 0 in the COMM.DAT file for the ipxstandby fields to be applied. For example:</p>
+                        <p class="SVtable">10#33#86#22#50003#122#1 indicates that both devices listen on port 50003, where:</p>
+                        <p class="SVtable">The normal device TCP address is 10.33.86.22.</p>
+                        <p class="SVtable">The standby device TCP address is 10.33.86.122.</p>
+                        <p class="SVtable">If all values are set to 0, the default values are used.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Miscellaneous</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Virtual</p>
+                </td>
+                <td class="SVtable">
+                    <p>Reserved. Do not select.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Message delay</td>
+                <td class="SVtable">Reserved. Leave default value 0.</td>
+            </tr>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 309px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Interoperability issues - Force write if all 0</td>
+                    <td class="SVtable">If enabled, write operations explicitly send 0 values, even when all data in the request is zero. This is useful for devices that require explicit commands to reset or clear states. It enhances compatibility with such devices but may slightly increase network traffic.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Frame addressing</h2>
+        <p class="SVnormal">Depending on the equipment type you have selected when configuring the device, you have access to the following type of frames.</p>
+        <p class="SVnormal">The Starting address
+ and Quantity properties define the memory address range for each frame, how it
+ is read from and written to, and how it is interpreted in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col style="width: 173px;" />
+            <col />
+            <col />
+            <tbody>
+                <tr style="height: 28px;">
+                    <td style="font-weight: bold;" class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Access</td>
+                    <td style="font-weight: bold;" class="SVtableHeading">Max quantity</td>
+                    <td class="SVtableHeading">Starting address</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr style="height: 28px;">
+                    <td style="font-weight: bold;text-align: left;" colspan="5" class="SVtable">Bit</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Controls</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">524280</td>
+                    <td class="SVtable">
+                        <p>0..65535</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Offset 1.0 – Word 1 bit 0</p>
+                        <p>Offset 1.1 – Word 1 bit 1</p>
+                        <p>…</p>
+                        <p>Offset x.y – Word x bit y</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Indications</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">524280</td>
+                    <td class="SVtable">0..65535</td>
+                    <td class="SVtable">
+                        <p>Offset 1.0 – Word 1 bit 0</p>
+                        <p>Offset 1.1 – Word 1 bit 1</p>
+                        <p>…</p>
+                        <p>Offset x.y – Word x bit y</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Information</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">16</td>
+                    <td class="SVtable">0..16</td>
+                    <td class="SVtable">
+                        <p>Read / Write bit:</p>
+                        <ul>
+                            <li>Offset 0 – Set date time: Sent on 0 to 1 transition</li>
+                            <li>Offset 1 – Checkback control: 0 = Not valid   1 = valid</li>
+                            <li>Offset 2 – Non-Secure polls: 0 = Secure polls  1 = Non secure polls</li>
+                            <li>Offset 3 – Common Control: 0 = Not supported   1 = Supported</li>
+                        </ul>
+                        <p>Read only bit</p>
+                        <ul>
+                            <li>
+                                <p>Offset 8 – Active equipment:</p>
+                                <p>0 = Normal equipment communicating</p>
+                                <p>1 = Standby equipment communicating</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Driver status</h2>
+        <p class="SVnormal">The driver status provides driver-specific 
+ information to supplement the <b>frame general status</b>. For more information 
+ on status in general, refer to the topic <a href="equipment_comm_status.htm">General communication status</a>.</p>
+        <table style="border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;width:100%" cellspacing="0">
+            <col style="width: 150px;" />
+            <col style="width: 497px;" />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Driver status</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Description</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0x8001</td>
+                <td class="SVtable">Data not yet initialized. This should be a transitional state at start up.</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0x8002</td>
+                <td class="SVtable">UDP socket error. No UDP message was received from the equipment within the specified timeout. Verify that the machine and the equipment can communicate with each other, and ensure that the indication frame scan rate is shorter than the specified timeout.</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0x8003</td>
+                <td class="SVtable">Bad CRC receive for the message.</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0x8004</td>
+                <td class="SVtable">Problem in the number of data received.</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0x8005</td>
+                <td class="SVtable">Unexpected response type.</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0x8006</td>
+                <td class="SVtable">Response from the wrong equipment.</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0x8007</td>
+                <td class="SVtable">Timeout error. The operation did not complete within the expected time frame</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0x8008</td>
+                <td class="SVtable">Error on start network command (1043) Invalid dongle protection.</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">SCADA Basic scripting</h2>
+        <p class="SVnormal">You can control communication with this driver in SCADA Basic scripts with the CIMWAY instruction.</p>
+        <div class="note">See the topic <a href="equipment_msg_exchange.htm">Message exchange mechanisms in <span class="mc-variable OEM.ProductName variable">PcVue</span></a> for more information about what to optimize and how you can send commands from scripts. </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

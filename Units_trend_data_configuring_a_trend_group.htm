@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Archives|Configuring archive units|Database archive unit|Configuring trend data recording" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuring a trend group to record</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body lang="EN-US">
+        <h1 class="SVheading1"><a name="kanchor75"></a>Configuring a Trend Group</h1>
+        <p class="SVnormal">A Trend Group is used to configure the recording properties, for one or more variables, when recorded in a database archive unit. The properties must be given careful consideration to make sure variables are only recorded when necessary. Recording variables more often that necessary by using too small a Period or Deadband can rapidly fill a database.</p>
+        <h2 class="SVheading2">How to configure a trend group for exception recording</h2>
+        <ol>
+            <li value="1">
+                <p>Open the Application Explorer and expand the configuration 
+ tree to select the Trend Group folder.</p>
+            </li>
+            <li value="2">
+                <p>From the task list, 
+ select <u>Add 
+ a trend group</u>.</p>
+            </li>
+            <li value="3">
+                <p>In the <u>Name</u> 
+ field, enter a name by which the Trend Group will be known. You can enter 
+ an optional comment in the <u>Description</u> 
+ field.</p>
+            </li>
+            <li value="4">
+                <p>Tick the <u>Set 
+ as default</u> tick box if the trend group is to be used as the default. 
+ The <u>Set 
+ as default</u> tick box is only available if you have created two or 
+ more trend groups. </p>
+                <div class="note">
+                    <p class="SVnormal">There can be one, and only one, Trend Group with the property 
+ <u>Set 
+ as default</u> ticked.</p>
+                </div>
+            </li>
+            <li value="5">
+                <p>Enter the <u>Period</u> for the group in hours, minutes, seconds and milliseconds. The minimum  is 0 seconds and the maximum 
+ 100 hours. See the topic <a href="Units_trend_data_period.htm">Understanding the trend period</a> for a detailed explanation of how the trend period works.</p>
+            </li>
+            <li value="6">
+                <p>Enter the <u>Deadband</u> 
+ for the group as a percentage of the variable range. This deadband is in addition to any deadband set in the variable configuration. See below for an explanation.</p>
+                <div class="note">
+                    <p class="SVnormal">While the Deadband is optional, it is recommended that 
+ it is always used. When measuring analogue values digitally there is always 
+ a small variation in the measured value, even if the process value is 
+ steady, due to the way in which analogue to digital converters work.</p>
+                </div>
+            </li>
+            <li value="7">
+                <p>Click the <u>OK</u> 
+ button to confirm the configuration and close the dialog.</p>
+            </li>
+        </ol>
+        <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+        </p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/AE/Archives/units_trend_group_general_tab.png" style="border-style: none;border: none;float: none;" border="0" />
+            </p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">If the minimum update rate of 0 seconds is used, the value, timestamp, or quality
+ of all variables allocated to that group will be recorded every time they 
+ change. </p>
+        </div>
+        <h2 class="SVheading2">How the deadband affects recording</h2>
+        <p class="SVnormal">When deciding what deadband to use in a Trend Group you must also consider any deadband configured in the variable's configuration will be in addition to that in the Trend Group. The effect is sometimes not obvious and is best illustrated by a simple example.
+</p>
+        <p class="SVnormal">The value from the equipment increments by 1 every second. The register variable to which it is linked is configured with a physical deadband of 3. Hence, the real-time value of the variable increases in 3's. 3, 6, 9, 12, 15 etc. The register is also recorded using a Trend Group with a deadband of 10%. The register's range is 0 to 100 hence, the deadband represents a physical value of 10. The value that is recorded will increment in 12's (remember that the real-time value increments in 3's). The following picture illustrates this. The white trace represents the raw value from the equipment. The green trace represents the real-time value of the register and the yellow trace what is actually recorded. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Archives/units_trend_deadband.png" MadCap:targetName="t2" style="display: none;" />
+        </p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

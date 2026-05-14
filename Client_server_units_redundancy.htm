@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Archives|Using client-server archive units" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Using Redundant Servers with Client-Server Archive </title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor122"></a>Using Redundant Servers with Client-Server Archive 
+ Units</h1>
+        <p class="SVnormal">When configuring client-server archive units using redundant 
+ servers, two station lists are selected as part of the archive unit configuration.</p>
+        <ul>
+            <li class="SVbulleted">A client list (containing 
+ the name of one or more stations)</li>
+            <li class="SVbulleted">A historical server 
+ list (containing the name of a single historical association) </li>
+        </ul>
+        <p class="SVnormal">When the project runs on either of the two stations named 
+ in the historical association, the archive unit is created and records 
+ data normally.</p>
+        <p class="SVnormal">When the project runs on a station named in the server 
+ list, the archive unit is not created and historic data is not recorded. 
+ Requests for historic data are redirected to, and processed by, one of 
+ the two stations named in the historical association.</p>
+        <h2 class="SVheading2">How does a client select which of the redundant historic 
+ servers to request data from?</h2>
+        <p class="SVnormal">Requests for historic data from the client archive units 
+ are routed to one or other of the historic servers as follows.</p>
+        <ul style="list-style: disc;" type="disc">
+            <li class="SVnormal">If only one of the servers 
+ is available then the request for historic data is sent to that server.</li>
+            <li class="SVnormal">If both servers are available, 
+ the request is sent to the server with the greater <u>Available 
+ rate</u>. See below for information about configuring the <u>Available 
+ rate</u> property. If the rates are identical then the request is sent 
+ to the server with the lowest station number.</li>
+        </ul>
+        <div class="tip">
+            <p class="SVnormal">If you want to record and play back data on the same station, 
+ its name must be included in both the client server list and the historical 
+ association named in the server list.</p>
+        </div>
+        <h2 class="SVheading2">How to configure a client-server archive unit using 
+ dual redundant servers</h2>
+        <ol>
+            <li class="SVnumbered" value="1">Open the Application Explorer and configure an archive 
+ unit in the normal way. You can use client-server with either proprietary 
+ or database type archive units.</li>
+            <li class="SVnumbered" value="2">In the archive unit 
+ configuration dialog select the <u>Networking</u> tab.  
+ <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t2" style="display: none;"><p><img src="../../Resources/Images/AE/Archives/client_server_network_tab.png" style="border-style: none;border: none;float: none;" border="0" /></p></div></li>
+            <li class="SVnumbered" value="3">Select the <u>Servers</u> and <u>Clients</u> Network lists. Note that the lists must have been previously configured 
+ as part of the network station configuration. The server station list 
+ must contain the name of a single historic association.</li>
+            <li class="SVnumbered" value="4">Select the <span style="text-decoration: underline;">OK</span> 
+ button to confirm the configuration and close the dialog.</li>
+        </ol>
+        <h2 class="SVheading2">Configuring, displaying and changing the <u>Available 
+ rate</u> property</h2>
+        <p class="SVnormal">The <u>Available 
+ rate</u> property is configured as part of the station configuration 
+ when configuring the network architecture. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a> 
+ See the book on Networking for further information.</p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/AE/Comm_Networking/station_settings_tab.png" style="border-style: none;border: none;float: none;" border="0" />
+            </p>
+        </div>
+        <p class="SVnormal">The value of the <u>Available 
+ rate</u> for a particular station in an association is available from 
+ the system variable SYSTEM.&lt;<i>ASSOC_NUM</i>&gt;.&lt;<i>STATION_NUM</i>&gt;.AVAILABLE_RATE 
+ where &lt;<i>ASSOC_NUM</i>&gt; and &lt;<i>STATION_NUM</i>&gt; are the numbers allocated 
+ to the historic association and station respectively.</p>
+        <p class="SVnormal">The <u>Available 
+ rate</u> can be changed dynamically using the LAN instruction in a 
+ SCADA Basic program. By changing the <u>Available 
+ rate</u> you can change the server from which clients request their 
+ historic data. You may want to do this for a number of reasons - for example:</p>
+        <ul>
+            <li class="SVbulleted">If you want data 
+ from a particular time, when you know one of the servers was not running.</li>
+            <li class="SVbulleted">If one of the servers 
+ is going to be busy (making a back-up for example) or is going to be off-line 
+ for maintenance.</li>
+        </ul>
+        <h2 class="SVheading2">Replacing missing data in a redundant historic server 
+ archive unit</h2>
+        <p class="SVnormal">It is quite likely that sometime during the life of 
+ a project there will be periods where one or other of the historic servers 
+ will have gaps in the historic data recorded in their archive units. This 
+ could be due to a variety of reasons including routine maintenance, hardware 
+ failure etc. If 
+ you are using a database type archive unit, you can replace the missing 
+ data on one server with the corresponding data on the other. This process 
+ takes place off-line using the Database Manager tool supplied with <span class="mc-variable OEM.ProductName variable">PcVue</span>. See the help for the Database Manager for more information.</p>
+        <div class="warning">
+            <p class="SVnormal">You cannot replace missing data in a proprietary archive 
+ unit.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

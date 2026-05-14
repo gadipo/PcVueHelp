@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Reference topics" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to use instructions that have asynchronous behavior</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="Asynchronous_Ref" />
+    </head>
+    <body>
+        <h1 class="SVheading1">How to Use Instructions That Have Asynchronous Behavior</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc401">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="EXPORT_Instruct" />
+                <param name="Item3" value="EXPORT_LOG_Instruct" />
+                <param name="Item4" value="EXPORT_TREND_Instruct" />
+                <param name="Item5" value="FILETRANSFER_Instruct" />
+                <param name="Item6" value="HISTORY_Instruct" />
+                <param name="Item7" value="MAPDISPLAY_Instruc" />
+                <param name="Item8" value="SELECTOR_Instruct" />
+                <param name="Item9" value="SVBATCH_Instruct" />
+                <param name="Item10" value="SVLOG_Instruct" />
+                <param name="Item11" value="SVTREND_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc401.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <h2 class="SVheading2">What is asynchronous behavior?</h2>
+        <p class="SVnormal">Asynchronous behavior is when the execution of an instruction starts a process that runs independently of the SCADA Basic program that called it. The calling SCADA Basic program execution continues without waiting for the result of the independent process. Most of the instructions that delegate part or all of the processing to another module behave in this way to avoid unacceptable delay in the calling program execution or it being blocked (waiting for the other processing to be completed). For example,, instructions related to:</p>
+        <ul>
+            <li>Access to historical data where waiting for the data would result in an unacceptable delay,</li>
+            <li>Handling of communication objects (start, stop...) where waiting for the end to end execution can take a long time depending on your configuration (time-out), driver and network performances,</li>
+            <li>Script instructions requiring processing on another <span class="mc-variable OEM.ProductName variable">PcVue</span> station on the network, having a producer station (server) doing the actual task when the calling program is executing on a consumer station (client) for instance.<br /></li>
+        </ul>
+        <p class="SVnormal">The syntax of all these instructions includes an argument that is the name of a variable. The real-time value of the variable indicates the progress status of the independent process. For some instructions, the variable is mandatory and a change in variable value is used to initiate further action on an event when the independent process is complete. For other instructions the variable is optional and may be used to initiate further action, or as an indication to the user.</p>
+        <h2 class="SVheading2">Example of instructions and modes that have asynchronous behavior</h2>
+        <table style="border-collapse: collapse;">
+            <col style="width: 120px;" />
+            <col style="width: 480px;" />
+            <col style="width: 120px;" />
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtableHeading">Instruction</td>
+                    <td style="vertical-align: top;" class="SVtableHeading">Modes</td>
+                    <td class="SVtableHeading" style="vertical-align: top;">Status variable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">EXPORT</td>
+                    <td style="vertical-align: top;" class="SVtable">GENERATE, GENERATE_DATES AND GENERATE_PERIOD</td>
+                    <td style="vertical-align: top;">Optional</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">EXPORT_LOG</td>
+                    <td style="vertical-align: top;" class="SVtable"> GETRECORD and GETSTATISTIC</td>
+                    <td style="vertical-align: top;">Mandatory</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">EXPORT_TREND</td>
+                    <td style="vertical-align: top;" class="SVtable">GETRAW, GETSAMPLED, GETSTATISTIC and GETAGGREGATED</td>
+                    <td style="vertical-align: top;">Mandatory</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">FILETRANSFER</td>
+                    <td style="vertical-align: top;" class="SVtable">DOWNLOAD, DOWNLOAD_DIRECTORY and DELETE</td>
+                    <td style="vertical-align: top;">Optional</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">HISTORY</td>
+                    <td style="vertical-align: top;" class="SVtable">GETTREND</td>
+                    <td style="vertical-align: top;">Optional</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">MAPDISPLAY</td>
+                    <td style="vertical-align: top;" class="SVtable">LOADMARKERS</td>
+                    <td style="vertical-align: top;">Optional</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">SELECTOR</td>
+                    <td style="vertical-align: top;" class="SVtable">HISTORICAL</td>
+                    <td style="vertical-align: top;">Optional</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">SVBATCH</td>
+                    <td style="vertical-align: top;" class="SVtable">SELECT</td>
+                    <td style="vertical-align: top;">Optional</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">SVLOG</td>
+                    <td style="vertical-align: top;" class="SVtable">EXTRACT</td>
+                    <td style="vertical-align: top;">Optional</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">SVTREND</td>
+                    <td style="vertical-align: top;" class="SVtable">GETTREND</td>
+                    <td style="vertical-align: top;">Optional</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning">
+            <p class="SVnormal">The status variable is optional in the syntax although should be considered mandatory in all but the most trivial of uses.</p>
+            <p class="SVnormal">As of version 12 and the introduction of scope 'session' for variables, events and cyclic functions, it is strongly advise to use session variables for variable ResultVar when calling an asynchronous instruction. The goal is to avoid the risk of concurrency races if the same (asynchronous) script can be executed at the same time in multiple user sessions. Designing asynchronous scripting by taking advantage of variables, events and cyclic with scope 'session' allows for isolating asynchronous script execution as part of a user session, therefore avoiding the complexity of handling concurrency,  or the risk triggering an event in all user sessions in cases only one user session is involved.</p>
+        </div>
+        <h2 class="SVheading2">How to use the status variable to initiate processing of the results</h2>
+        <p>The program must monitor the change in value of the status variable in order to take informed decisions depending on the execution progress and success or failure to complete of the asynchronous process.</p>
+        <p class="SVnormal">The accepted method to use the status variable is to programmatically add an event that is triggered by the change in value of the status variable. The event then runs a program that processes the result of the asynchronous instruction. The event is added before execution of the asynchronous instruction and deleted after the result of the asynchronous instruction has been processed. Its structure might look something like this.</p>
+        <p class="SVprogramCode">'Content of the script file MyProgram</p>
+        <p class="SVprogramCode">Sub Initialize ()</p>
+        <p class="SVprogramCode">'-------- Add event</p>
+        <p class="SVprogramCode">&#160;&#160;EVENT("ADDPROG", "StatusVarName", "TriggerCondition", "MyProgram", "", "ProcessResult");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-------- Asynchronous instruction</p>
+        <p class="SVprogramCode">&#160;&#160;INSTRUCTION1("MODE", "P1", "P2",...., "StatusVarname");</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub ProcessResult ()</p>
+        <p class="SVprogramCode">'-------- Delete event</p>
+        <p class="SVprogramCode">&#160;&#160;EVENT("DELPROG", "StatusVarName", "TriggerCondition", "MyProgram", "", "ProcessResult");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-------- Process result of asynchronous instruction</p>
+        <p class="SVprogramCode">&#160;&#160;INSTRUCTION1;</p>
+        <p class="SVprogramCode">&#160;&#160;INSTRUCTION2;</p>
+        <p class="SVprogramCode">&#160;&#160;.....</p>
+        <p class="SVprogramCode">&#160;&#160;.....</p>
+        <p class="SVprogramCode">End Sub</p>
+        <div class="warning">
+            <p class="SVnormal">Using the DELAY instruction is not a solution with regard to the asynchronous nature of such instructions. It must not be used as a replacement to correctly handling status variables because:</p>
+            <ul>
+                <li>
+                    <p class="SVbulleted">It blocks the execution of the caller script for the duration of the delay,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">There is no guarantee that the asynchronous operation is completed within the delay.</p>
+                </li>
+            </ul>
+        </div>
+        <h2 class="SVheading2">Example</h2>
+        <p class="SVprogramCode">'-------- Simplified Export_Log example</p>
+        <p class="SVprogramCode">Sub Export_Log_EX1()</p>
+        <p class="SVprogramCode"> &#160;Const BIT_TO_0 = 8192, BIT_TO_1 = 16384;</p>
+        <p class="SVprogramCode"> &#160;Dim dTimenow as Double, dEvents As Double;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-------- Initialise variables</p>
+        <p class="SVprogramCode">&#160;&#160;dTimeNow = DateTimeValue();</p>
+        <p class="SVprogramCode">&#160;&#160;dEvents = BIT_TO_0 + BIT_TO_1;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-------- Set up event</p>
+        <p class="SVprogramCode">Event("ADDPROG", "SVB.ExportLogStatus", "S&gt;S", "E.svb", "", "OnChangeOfStatus");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-------- Start Export_Log</p>
+        <p class="SVprogramCode">&#160;&#160;Export_Log("GETRECORD", "Loglist02", dTimeNow - 600000, dTimeNow, dEvents, 0, 29, "", "@SVB.ExportLogStatus", ";", ",", 0, "#D/#M/#Y|#h:#m:#s|#E|#T", "Date|Time|Event|Title");</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-------- On change of status variable process if complete else clean up</p>
+        <p class="SVprogramCode">Sub OnChangeOfStatus()</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sStatus As Single;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim lBufferHandle As Long;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim iLines As Integer;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;sStatus = SVB.ExportLogStatus;</p>
+        <p class="SVprogramCode">&#160;&#160;If(sStatus==0 || sStatus==4 || sStatus ==5) Then  ' Export complete or reached limits</p>
+        <p class="SVprogramCode">&#160;&#160; &#160;Print("Export_Log complete - status is ", sStatus);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;lBufferHandle = Alloc_Buffer(102400);</p>
+        <p class="SVprogramCode">&#160;&#160; &#160;iLines = Export_Log("READBUFFER", lBufferHandle);</p>
+        <p class="SVprogramCode">&#160;&#160; &#160;If (iLines &gt; 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;BufToExcel(lBufferHandle, ";", ",", "export.xlsx", "ex1", "APPEND", iLines);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;Print("Exported ",iLines, " lines to Excel");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Export_Log("DISPOSE");</p>
+        <p class="SVprogramCode"> &#160;&#160;&#160;Free_Buffer(lBufferHandle);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Event("DELPROG", "SVB.ExportLogStatus", "S&gt;S", "E.svb", "", "OnChangeOfStatus");</p>
+        <p class="SVprogramCode"> &#160;Else</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;If(sStatus==1) Then  ' Export running - do nothing</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;Print("Export_Log running");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Else  ' Export failed - cancel and clean up</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;Print("Export_Log failed - status is ", sStatus);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;Export_Log("CANCEL");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;Export_Log("DISPOSE");</p>
+        <p class="SVprogramCode"> &#160;&#160;&#160;&#160;&#160;Event("DELPROG", "SVB.ExportLogStatus", "S&gt;S", "E.svb", "", "OnChangeOfStatus");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">End Sub</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

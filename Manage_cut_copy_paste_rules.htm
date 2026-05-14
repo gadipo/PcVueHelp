@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|Managing variables using the Application Explorer" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Limitations of cut, copy and paste</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Using Cut, Copy and Paste of Variables with Behaviors</h1>
+        <p class="SVnormal">When you copy and paste a variable with one or more behaviors, the behaviors are included in the paste and a duplicate behavior is created for the duplicate variable.</p>
+        <p class="SVnormal">Should the behavior be one that includes one or more variables in its configuration (threshold, chronometer, etc.) then those variables will also be duplicated as long as they are only used in a behavior of one variable.</p>
+        <p class="SVnormal">If several behaviors use the same variables in their configuration (for example a common reset variable for several chronometers), then those variables common to the behaviors will not be duplicated.</p>
+        <p class="SVnormal">The Application Explorer will determine the strategy to apply for a copy paste by analyzing both the name of the variable and the names of the variables involved in the behavior. It will duplicate the behavior variables as long as their names conform to the following rule.</p>
+        <ul>
+            <li>The full name (that is branch and leaf) of any variable included in a behavior that is to be copied and pasted should contain the name of the leaf of the variable to which the behavior is attached. </li>
+        </ul>
+        <p class="SVnormal">This example of a register with chronometer behavior, that follows this rule, illustrates this.</p>
+        <table style="border-collapse: collapse;width:100%">
+            <col style="width: 100px;" />
+            <col style="width: 250px;" />
+            <col style="width: 250px;" />
+            <col style="width: 250px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtableHeading">Original variables</td>
+                    <td class="SVtableHeading">Copy to new variable name<br />under the same branch</td>
+                    <td class="SVtableHeading">Copy same variable name to new branch Branch02</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Branch01.Register01</td>
+                    <td class="SVtable">Branch01.Register02</td>
+                    <td class="SVtable">Branch02.Register01</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Trigger bit</td>
+                    <td class="SVtable">Branch01.Register01.Trigger</td>
+                    <td class="SVtable">Branch01.Register02.Trigger</td>
+                    <td class="SVtable">Branch02.Register01.Trigger</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Init bit</td>
+                    <td class="SVtable">Branch01.Register01.Reset</td>
+                    <td class="SVtable">Branch01.Register02.Reset</td>
+                    <td class="SVtable">Branch02.Register01.Reset</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Branch01.Register01</td>
+                    <td class="SVtable">Branch01.Register02</td>
+                    <td class="SVtable">Branch02.Register01</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Trigger bit</td>
+                    <td class="SVtable">Branch01.Register01_Trigger</td>
+                    <td class="SVtable">Branch01.Register02_Trigger</td>
+                    <td class="SVtable">Branch02.Register01_Trigger</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Init bit</td>
+                    <td class="SVtable">Branch01.Register01_Reset</td>
+                    <td class="SVtable">Branch01.Register02_Reset</td>
+                    <td class="SVtable">Branch02.Register01_Reset</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">If the names used for the included variables do not follow this rule, the variables included in the behavior of the newly pasted variable will keep the original names.</p>
+        <table style="border-collapse: collapse;width:100%">
+            <col style="width: 100px;" />
+            <col style="width: 250px;" />
+            <col style="width: 250px;" />
+            <col style="width: 250px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">&#160;</td>
+                    <td class="SVtableHeading">Original variables</td>
+                    <td class="SVtableHeading">Copy to new variable name<br />under the same branch</td>
+                    <td class="SVtableHeading">Copy same variable name to new branch Branch02</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Branch01.Register01</td>
+                    <td class="SVtable">Branch01.Register02</td>
+                    <td class="SVtable">Branch02.Register01</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Trigger bit</td>
+                    <td class="SVtable">Branch01.Trigger</td>
+                    <td class="SVtable">Branch01.Trigger</td>
+                    <td class="SVtable">Branch01.Trigger</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Init bit</td>
+                    <td class="SVtable">Branch01.Reset</td>
+                    <td class="SVtable">Branch01.Reset</td>
+                    <td class="SVtable">Branch01.Reset</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Copy and paste of a register with threshold behavior</h2>
+        <p class="SVnormal">If you add a threshold behavior to a register, the names of the threshold variables that it automatically generates do not follow the above rule. The threshold variable name contains a modified copy of the register name including the threshold type. The copy paste behavior is modified to accommodate this. The following table illustrates this.</p>
+        <table style="border-collapse: collapse;width:100%">
+            <col style="width: 150px;" />
+            <col style="width: 250px;" />
+            <col style="width: 250px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">&#160;</td>
+                    <td class="SVtableHeading">Copied variable name</td>
+                    <td class="SVtableHeading">Pasted variable name</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Branch01.Register01</td>
+                    <td class="SVtable">Branch01.Register02</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Hi hi threshold</td>
+                    <td class="SVtable">Branch01.Register01_HiHi</td>
+                    <td class="SVtable">Branch01.Register02_HiHi</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">High threshold</td>
+                    <td class="SVtable">Branch01.Register01_High</td>
+                    <td class="SVtable">Branch01.Register02_High</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Low threshold</td>
+                    <td class="SVtable">Branch01.Register01_Low</td>
+                    <td class="SVtable">Branch01.Register02_Low</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Lo lo threshold</td>
+                    <td class="SVtable">Branch01.Register01_LoLo</td>
+                    <td class="SVtable">Branch01.Register02_LoLo</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning">
+            <p class="SVnormal">If the Variables Tree contains threshold behavior using a non-standard naming scheme you should avoid copy and paste of those particular variables as the paste will not work and may destroy the link between the original variable and its thresholds.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

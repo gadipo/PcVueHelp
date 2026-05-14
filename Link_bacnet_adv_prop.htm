@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Variables|The Variables Tree|Configuring variables|Linking a variable to its source|Linking a variable to a BACnet object" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Advanced properties specific to BACnet variables</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor64"></a>Advanced Properties Specific to BACnet Variables</h1>
+        <p class="SVnormal">The Advanced tab of the variable's properties dialog contains a number of properties only available when a BACnet source has been selected.       <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Variables/link_register_bacnet_properties.png" MadCap:targetName="t1" style="display: none;" />
+        </p>
+        <ul>
+            <li class="SVbulleted">Monitoring type
+ - The mechanism used to obtain a BACnet variable's value.<ul><li class="SVbulleted">Polling - The variable value is obtained by polling the device at the rate configured in the polling interval. This is the default setting.</li><li class="SVbulleted">Confirmed change of value (C-COV) - The variable value is obtained using the BACnet C-COV mechanism whereby the device sends changes of value as they occur without the need for polling. The driver confirms that the change in value has been received. </li><li class="SVbulleted">Unconfirmed change of value (U-COV) - The variable value is obtained using the BACnet U-COV mechanism whereby the device sends changes of value as they occur without the need for polling. The driver does not confirm that the change in value has been received.</li></ul></li>
+            <li class="SVbulleted">Write priority- The BACnet write priority, range 1 to 16, where 1 is the highest priority. The default is 16.</li>
+            <li class="SVbulleted">Fields - Used to specialize the mapping, including extraction of values from structured data types, specific deserialization or to specify how to map to a proprietary property. See below for more information.</li>
+            <li class="SVbulleted">Property - Used to define the name of the BACnet proprietary property to map to.</li>
+        </ul>
+        <h2 class="SVheading2">Using the Fields property for advanced mapping</h2>
+        <p class="SVnormal">The table below describes syntax elements that helps you configure ad'hoc BACnet value deserialization for the most advanced mapping needs.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 20%;" />
+            <col style="width: 80%;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">OctetString(x)</td>
+                    <td class="SVtable" style="vertical-align: top;">Return the value of the byte at position <i>x</i> in property of type <u>Octet_String</u>. Can be used with text, register and bit variables. If the specified byte does not exist in the string, the variable will have the quality NS FMT.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">BitString(x)</td>
+                    <td class="SVtable" style="vertical-align: top;">Return the value of the bit at position <i>x</i> in a property of type <u>Bit_String</u>. Can be used with text, register and bit variables. If the specified bit does not exist in the string, the variable will have the quality NS FMT.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Reference(Object_Type, Property_Id)</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Return the content of proprietary property in XML format that has a type already defined in the BACnet standard. </p>
+                        <p><u>Object_type</u> is the Id of the type of object.</p>
+                        <p><u>Property_ID</u> is the Id of the property within the object.</p>
+                        <p>Can only be used with text variables only. The result is returned in XML format.</p>
+                        <p>If the referenced type does not correspond with the format of the value, then the quality of the variable will be NS FMT.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">BACnetObjectIdentifier(x)</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p><u>BACnetObjectIdentifier</u> is a specific BACnet type. Generally used for the property <u>Object_Identifier</u> that identifies the BACnet object instance identified by two elements Object type and instance number.</p>
+                        <p>This type is defined as a data type in the BACnet specification and it is necessary to specify this type (using the position “x”)  to return one of these elements. Can be used with text variables only. If the specified instance does not exist in the string, the variable will have the quality NS FMT.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">BACnetObjectIdentifier</td>
+                    <td class="SVtable" style="vertical-align: top;">Similar to BACnetObjectIdentifier(x) above except you cannot specify the instance. Can be used with text variables only.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">BACnetArray(x)</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Returns the value at the position “x” in a property of type <u>BACnetArray</u> encoded as an integer. The range for “x” is linked to the property value. If the position is defined out of the range of array, the variable will be NS FMT. </p>
+                        <p>The syntax is : BACnetArray ([Position]) where Position is the position or index in the BACnet array. </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">IsBACnetArrayNull(x)</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Returns the state of the value defined at the position “x” ( NULL (1) or not (0), encoded as an Integer.</p>
+                        <p>The syntax is: IsBACnetArrayNull ([Position]) where <u>Position</u> is the position or index in the BACnet array. If the position is out of the range of the array, the variable quality will be NS FMT.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">FormattedXML()</td>
+                    <td class="SVtable" style="vertical-align: top;">Returns a string in XML format, including indentation. Used to deserialize structured BACnet properties such as Weekly-Schedule into a text variable. Can only be used with text variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">XML()</td>
+                    <td class="SVtable" style="vertical-align: top;">Similar to FormattedXML() except the deserialized string is in a raw XML format (no indentation).</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Syntax example:</h3>
+        <p class="SVnormal">To use the property <u>action-text</u> (ID = 3 as defined in the BACnet standard ) of the object <u>Command</u> (ID= 7 as defined in the BACnet standard) you could use either:</p>
+        <p class="SVdataListing">Reference(command,action-text)</p>
+        <p class="SVnormal">or</p>
+        <p class="SVdataListing">Reference(7,3)</p>
+        <h2 class="SVheading2">Using the Fields property to handle priority</h2>
+        <p class="SVnormal">The table below describes syntax elements that helps you handle the priority mechanism of BACnet for commandable objects.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 20%;" />
+            <col style="width: 80%;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">SetPriority(ValueOrVariableName, Priority)</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Applied to a commandable bit variable mapped on a BACnet object supporting the priority mechanism, it allows setting or resetting the value at a given priority for the object on which the bit variable is mapped.</p>
+                        <p>The parameter <u>ValueOrVariableName</u> is either the numeric value to set or the name of a register variable that holds the numeric value to set.</p>
+                        <p>The parameter <u>Priority</u> is the priority for writing to set or reset (1 to 16).</p>
+                        <p>When the bit variable is set to 0, the value NULL will be written to the BACnet item at the <u>Priority</u>.</p>
+                        <p>When the bit variable is set to 1, the value of the parameter <u>ValueOrVariableName</u> will be written to the BACnet item at the <u>Priority</u>.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">IsPrioritySet(Priority)</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Applied to a bit variable mapped on a BACnet object supporting the priority mechanism, it allows retrieving if the value at a given priority is set for the object on which the bit variable is mapped.</p>
+                        <p>The parameter <u>Priority</u> is the priority for writing to check (1 to 16).</p>
+                        <p>If the value for <u>Priority</u> is NULL, the bit variable is set to 0 (priority value not defined), otherwise it is set to 1 (priority value set).</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">ActivePriorityValue(Priority)</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Applied to a bit, register or text variable mapped on a BACnet object supporting the priority mechanism, it allows retrieving the value at a given priority for the object on which the variable is mapped.</p>
+                        <p>The parameter <u>Priority</u> is the priority for writing to check (1 to 16).</p>
+                        <p>If of type register or text, the value of the mapped variable is set with the value defined for the <u>Priority</u>.</p>
+                        <p>If of type bit, the value of the mapped variable is set to 0 if no value is defined for the <u>Priority</u> (NULL), and it is set to 1 if a value is defined.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">ActivePriority()</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Applied to a register variable mapped on a BACnet object supporting the priority mechanism, it allows retrieving the currently active priority  for the object on which the variable is mapped.</p>
+                        <p>The return value is a priority in the range [1..16].</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">IsActivePriority(Priority)</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Applied to a bit variable mapped on a BACnet object supporting the priority mechanism, it allows checking if the priority passed as parameter is the highest written priority  for the object on which the variable is mapped.</p>
+                        <p>The parameter <u>Priority</u> is the priority for writing to check (1 to 16).</p>
+                        <p>The value of the bit variable is set to 1 if <u>Priority</u> is the highest written priority, otherwise it is set to 0</p>
+                        <p>If the value at <u>Priority</u> is NULL, the value of the bit variable is also set to 0.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Using the Fields property to map on a proprietary property</h2>
+        <p class="SVnormal">Manufacturers sometimes define a property that is not in the BACnet standard. These are called proprietary properties.  There are three possibilities with proprietary properties.</p>
+        <ul style="list-style-type: disc;">
+            <li>Basic type - A simple type like boolean, unsigned integer, real, or a string of values (like byte string or bit string or character string).</li>
+            <li>Structured type defined in the BACnet standard. - For example, a character string array as defined for the property “action-text” of the BACnet object “command”,</li>
+            <li>Structured type not defined in the BACnet standard. It is currently not possible to use such proprietary properties with <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li>
+        </ul>
+        <p class="SVnormal">The format of a proprietary property can be defined by the <u>Fields</u> property to make it possible to map a variable on a proprietary property.</p>
+        <div class="note">
+            <p class="SVnormal">Since version 11.2, mapping to proprietary properties based on BACnet standard types is supported by a built-in mechanism of <span class="mc-variable OEM.ProductName variable">PcVue</span>. Using the <u>Fields</u> property for this purpose is obsolete and only necessary if your project was designed with a version earlier than 11.2.</p>
+        </div>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 20%;" />
+            <col style="width: 80%;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Boolean()</td>
+                    <td class="SVtable">Return the value of a proprietary property encoded as a <u>Boolean</u>. It can be used with bit, text and register variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Double() </td>
+                    <td class="SVtable">Return the value of a proprietary property, encoded as a <u>Double</u>. It can be used with bit, text and register variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Real()</td>
+                    <td class="SVtable">Return the value of a proprietary property, encoded as a <u>Real</u>. It can be used with bit, text and register variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Signed()</td>
+                    <td class="SVtable">Return the value of a proprietary property encoded as an <u>Signed integer</u>. It can be used with bit, text and register variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Unsigned()</td>
+                    <td class="SVtable" style="vertical-align: top;">Return the value of a proprietary property encoded as an <u>Unsigned integer</u>. It can be used with bit, text and register variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Date()</td>
+                    <td class="SVtable" style="vertical-align: top;">Return the value of a proprietary property encoded as a <u>Date</u>. It can be used with text variables only.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Time()</td>
+                    <td class="SVtable" style="vertical-align: top;">Return the value of a proprietary property encoded as a <u>Time</u>. It can be used  with text  variables only.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">OctetString()</td>
+                    <td class="SVtable" style="vertical-align: top;">Return the value of a proprietary property encoded as an <u>Octet_String</u> in a raw format, each byte value is separated by a comma. It can be used with text variables only.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">BitString()</td>
+                    <td class="SVtable" style="vertical-align: top;">Return the contents of a proprietary property encoded as a <u>Bit_String</u>, in a raw format, each bit value is separated by a comma. It can be used with text variables only.</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

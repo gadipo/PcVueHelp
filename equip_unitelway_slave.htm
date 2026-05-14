@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|Equipment|Driver references" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Schneider Unitelway slave</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Schneider Unitelway slave</h1>
+        <p class="SVnormal">This driver supports serial communication with Schneider Electric PLCs.</p>
+        <p class="SVnormal">In all exchanges, <span class="mc-variable OEM.ProductName variable">PcVue</span> is the slave and the field device is the master.</p>
+        <p class="SVnormal">Unitelway is a token passing network. A token is passed 
+ to each network device in turn. Only when a device has the token it is 
+ allowed to make requests on the network. The token is controlled by one 
+ of the devices on the network, normally a PLC. The device controlling 
+ the token is known as the master, all other devices, including <span class="mc-variable OEM.ProductName variable">PcVue</span>, are slaves.</p>
+        <h2 class="SVheading2">Network properties</h2>
+        <p class="SVnormal">This topic only includes a reference of objects' properties.<br /></p>
+        <p class="SVnormal">See the topic <a href="equipment_configure_comm_objects.htm">How to configure networks devices and frames</a> for more information about how to configure communication objects.</p>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the network</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the network (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">First virtual equipment address</td>
+                    <td class="SVtable">The slave address that <span class="mc-variable OEM.ProductName variable">PcVue</span> is to be. Range 1 to 98.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Number of virtual equipments</td>
+                    <td class="SVtable">
+                        <p>The number of contiguous addresses that <span class="mc-variable OEM.ProductName variable">PcVue</span> will occupy on the network. Range 1 to 7.</p>
+                        <p>When using the Unitelway slave driver, <span class="mc-variable OEM.ProductName variable">PcVue</span> is a slave device and only has the opportunity to make requests on the network when it has the token. This can be a problem it means it only has access to the network for short periods of time restricting the number frames it can read per second. To mitigate this problem, the driver can configured to respond to more than one slave address. For example if you configure the equipment address to be 10, and the number of virtual equipments to be 7, it will be able to respond to addresses 10, 11, 12 13, 14, 15, 16 and 17.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Serial port</td>
+                    <td class="SVtable">The COM port associated to the network</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the network will start upon Equipment communication start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Use default value</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Networking</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Servers</p>
+                </td>
+                <td class="SVtable">
+                    <p>The list of <span class="mc-variable OEM.ProductName variable">PcVue</span> stations where the network will be active</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Serial port parameters</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Baud rate</td>
+                <td class="SVtable">The baud rate on the serial line</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Data bits</td>
+                <td class="SVtable">The number of data bits on the serial line</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Parity</td>
+                <td class="SVtable">The parity set on the serial line</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Stop bit(s)</td>
+                <td class="SVtable">The number of stop bits on the serial line</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Modem handshaking</td>
+                <td class="SVtable">If enabled, modem handshaking is performed for flow control on the serial line</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Device properties</h2>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the device</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the device (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Equipment type</td>
+                    <td class="SVtable">Select the type of equipment that best suits the field device you want  communicate with.<br />The list of frame types and address ranges depend on the equipment type.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Network number</td>
+                    <td class="SVtable">The network number that the equipment is connected to. Range 0 to 127. A value of 0 means that the network number is ignored.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Station number</td>
+                    <td class="SVtable">The number of the station on the network. Range 0 to 63.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Gate number</td>
+                    <td class="SVtable">The gate number for the equipment. Set to 0 for access to the master PLC system objects. Set to 5 for access to slave PLC system objects.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Module number</td>
+                    <td class="SVtable">The module number of the equipment. This number is only defined if the gate number is 5, otherwise it is left set to the default of 0.<br />Used to define the geographical position of the master coupler of the network.<br />Module number = ( Rack Number * 16 ) + slot No. in the rack.<br />Or<br />255 if the coupler is integrated in the CPU (SCI connector) on TSX 47/67/87/107.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Channel number</td>
+                    <td class="SVtable">Master coupler channel number of the network. This number is only defined if the gate number is 5, otherwise its value must be 0.<br />Used to define the link address of the destination equipment on the network as follows:<br />If the bus master is a TSX37/57 PLC, then:<br />Channel number = Address of the destination equipment network.<br />Or<br />If the bus master is a TSX/PMX (TSX 47/67/87/107), then:<br />Channel number = 100 + address of the destination equipment on the network.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Connection</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum waiting time between a request and the reply from the equipment</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Miscellaneous</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Virtual</p>
+                </td>
+                <td class="SVtable">
+                    <p>Reserved. Do not select.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Message delay</td>
+                <td class="SVtable">Reserved. Leave default value 0.</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Frame addressing</h2>
+        <p class="SVnormal">Depending on the equipment type you have selected when configuring the device, you have access to the following type of frames.</p>
+        <p class="SVnormal">The Starting address
+ and Quantity properties define the memory address range for each frame, how it
+ is read from and written to, and how it is interpreted in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col style="width: 119px;" />
+            <col style="width: 127px;" />
+            <col style="width: 335px;" />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Data type</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Access</p>
+                </td>
+                <td class="SVtableHeading">Max quantity</td>
+                <td class="SVtableHeading">
+                    <p>Starting address </p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="4" style="text-align: left;" class="SVtableHeading">Byte</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable" style="text-align: left;">Free bytes</td>
+                <td class="SVtable" style="text-align: left;">-</td>
+                <td class="SVtable" style="text-align: left;">128</td>
+                <td class="SVtable" style="text-align: left;">0..127</td>
+            </tr>
+            <tr valign="top">
+                <td colspan="4" class="SVtableHeading">
+                    <p>Bit</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>%M</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>Read/Write</p>
+                </td>
+                <td rowspan="2" class="SVtable">
+                    <p>480</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>0..65535</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>%S</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="4" class="SVtableHeading">
+                    <p>Word</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>%MW</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>Read/Write</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>60</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>0..65535</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>%SW</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>%KW</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read/Write</p>
+                </td>
+                <td class="SVtable">60</td>
+                <td class="SVtable">0..65535</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Free word</p>
+                </td>
+                <td class="SVtable">
+                    <p>Write</p>
+                </td>
+                <td class="SVtable">
+                    <p>64</p>
+                </td>
+                <td class="SVtable">
+                    <p>0..63</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="4" class="SVtableHeading">
+                    <p>Double word</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>%KDW</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read/Write</p>
+                </td>
+                <td class="SVtable">
+                    <p>30</p>
+                </td>
+                <td class="SVtable">
+                    <p>0..65535</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">The Free frame can be used to send a Uni-te command (STOP, RUN, OPEN_DOWNLOAD, CLOSE_DOWNLOAD, OPEN_UPLOAD, CLOSE_UPLOAD, WRITE_DOWNLOAD etc.) to a PLC.</p>
+        <p class="SVnormal">To use it, map a register variable to the first index in the frame. To send a command you set the variable value to the command number. For example, to send a RUN command you set the value of the variable to 9223 (0x2407 hexadecimal).</p>
+        <p class="SVnormal">More information on Uni-te commands can be found in the documentation supplied by Schneider Electric.</p>
+        <h2 class="SVheading2">Driver status</h2>
+        <p class="SVnormal">The driver status provides driver-specific 
+ information to supplement the <b>frame general status</b>. For more information 
+ on status in general, refer to the topic <a href="equipment_comm_status.htm">General communication status</a>.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 150px;">
+            </col>
+            <col style="width: 532px;">
+            </col>
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Driver status</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Description</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>8002</p>
+                </td>
+                <td class="SVtable">
+                    <p>Incorrect CRC</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>8003</p>
+                </td>
+                <td class="SVtable">
+                    <p>Wrong slave address</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>8005</p>
+                </td>
+                <td class="SVtable">
+                    <p>Time out</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>8006</p>
+                </td>
+                <td class="SVtable">
+                    <p>Incorrect response</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>8007</p>
+                </td>
+                <td class="SVtable">
+                    <p>Data unknown</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>8008</p>
+                </td>
+                <td class="SVtable">
+                    <p>Incorrect number of data (synchro problem)</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">SCADA Basic scripting</h2>
+        <p class="SVnormal">You can control communication with this driver in SCADA Basic scripts with the CIMWAY instruction.</p>
+        <div class="note">See the topic <a href="equipment_msg_exchange.htm">Message exchange mechanisms in <span class="mc-variable OEM.ProductName variable">PcVue</span></a> for more information about what to optimize and how you can send commands from scripts. </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

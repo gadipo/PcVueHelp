@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Application Architect|Differentiation (Defining properties)" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>How the value of an input parameter is resolved</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How the Value of an Input Parameter is Resolved</h1>
+        <div class="note">
+            <p class="SVnormal">The manner in which Global Input Parameters and Input Parameters are resolved is different.</p>
+        </div>
+        <h2 class="SVheading2">A reminder of the three steps of using an Input Parameter</h2>
+        <ol>
+            <li value="1">Define the parameter.</li>
+            <li value="2">Add the property to the Parameters folder of a template to define at which level  the parameter value is to be entered at instantiation time. A Global Input Parameter can also be added to a template instance or the tree root.</li>
+            <li value="3">Use the parameter to define the value of one or more properties.</li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">The same parameter can be assigned to several templates on one or more levels. A different input value can be entered for each use.</p>
+        </div>
+        <h2 class="SVheading2">How the value of an Input Parameter is resolved</h2>
+        <p class="SVnormal">The value of an input parameter is resolved starting at the leaves of the instance tree moving through the hierarchy to the root.</p>
+        <p class="SVnormal">If no value is found in the tree for the parameter (instances or parent templates), the default value of the parameter is used. A value is considered to be found if it  was entered by the user and not left empty.</p>
+        <p class="SVnormal"> In practice, the easiest way to explain and understand how a parameter is resolved is by example. Consider the following representation of an instance tree.</p>
+        <ul style="list-style-type: disc;">
+            <li>BUILDING1 - An instance of the template BUILDING.<ul style="list-style-type: disc;"><li>FLOOR1 - An instance of the template FLOOR and subordinate to BUILDING1.<ul style="list-style-type: disc;"><li>LIGHT1 - An instance of the template LIGHT and subordinate to FLOOR1.<ul style="list-style-type: disc;"><li>CMD - A variable of the template LIGHT.</li></ul></li></ul></li></ul></li>
+        </ul>
+        <p class="SVnormal">A parameter used in the variable CMD is resolved as follows: </p>
+        <p class="SVnormal">If a value was entered for the parameter in the variable CMD then use this value </p>
+        <p class="SVnormal">Else if a value entered for the parameter in instance LIGHT1 then use this value</p>
+        <p class="SVnormal">Else If there is a default value for the parameter in template LIGHT then use this value </p>
+        <p class="SVnormal">Else if a value entered for the parameter in instance FLOOR1 then use this value </p>
+        <p class="SVnormal">Else if there is a default value for the parameter in template FLOOR then use this value</p>
+        <p class="SVnormal"> Else if a value entered for the parameter in instance BUILDING1 then use this value </p>
+        <p class="SVnormal">Else if there is a default value for the parameter in template BUILDING then use this value</p>
+        <p class="SVnormal">Else the value is unresolved.</p>
+        <h2 class="SVheading2">How the value of a Global Input Parameter is resolved</h2>
+        <p class="SVnormal">For Global Input Parameters a value found in the tree is considered valid even if it is empty, and it replaces the previous value. If it is empty, the default value is used. This mechanism can be used to limit the propagation of the value of a global parameter (in conjunction with the parameter's Impacted Elements configuration).</p>
+        <p>In practice, the easiest way to explain and understand how a global parameter is resolved is by example. Consider the following representation of an instance tree.</p>
+        <ul style="list-style-type: disc;">
+            <li>INSTANCES ROOT.<br />Global parameter gParam positioned on INSTANCES ROOT with value of <u>RootValue</u>.<ul style="list-style-type: disc;"><li>BUILDING1 - An instance of the template BUILDING.
+<ul style="list-style-type: disc;"><li>FLOOR1 - An instance of the template FLOOR and subordinate to BUILDING1.
+<br />Global parameter gParam positioned on FLOOR1 with value of <u>no input value</u>.
+<ul style="list-style-type: disc;"><li>LIGHT1 - An instance of the template LIGHT and subordinate to FLOOR1.
+<ul style="list-style-type: disc;"><li>CMD - A variable of the template LIGHT.</li></ul></li></ul></li></ul></li></ul></li>
+        </ul>
+        <p>The global parameter gParam is resolved as follows.</p>
+        <ul style="list-style-type: disc;">
+            <li>Objects of BUILDING1 will take the value <u>RootValue</u> for gParam.</li>
+            <li> 
+Objects of FLOOR1 (and subsequent instances) will take the default value for gParam. The parameter gParam found at the instance FLOOR1 overwrites that defined at the BUILDING1 instance. If a value was entered at FLOOR1, that value becomes the value of the parameter. If no value is entered then the default value of the parameter is used.</li>
+        </ul>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

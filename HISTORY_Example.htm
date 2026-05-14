@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>HISTORY example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="HISTORY_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor186"></a>HISTORY Example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc349">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="HISTORY_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc349.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <h2 class="SVheading2">Example 1</h2>
+        <p class="SVnormal">This program "EXTRACT1" extracts historic data 
+ to a text file:</p>
+        <p class="SVprogramCode">SUB Main ()<br /> DIM ret as long;<br />DIM hd as double;<br /> ' Loading of "EXTRACT2" if not loaded :<br /> If (Program ("Is_loaded", "EXTRACT2", "") == 0) Then<br />Program ("Preload", "EXTRACT2", "");<br />End if;</p>
+        <p class="SVprogramCode">' Programing of execution of function "EndExtract"<br />' of the program "EXTRACT2" when bit switches to 1<br />' "BitExtract" :<br />Event ( "ADD", "BitExtract", 1, "EXTRACT2", "","EndExtract");</p>
+        <p class="SVprogramCode">' Export of the trend variable "Valve1" in the<br />' file "C:\EXTRACT.TXT". The request for export<br />' is only valid for values archived in the current<br />' hour. The internal variables "BitExtract"<br />' (bit) and "ResultExtract" (register) must exist.<br />hd = DateTimeValue ();<br />ret = HISTORY ( "GetTrend", "Valve1", hd -3600000,hd, "C:\\EXTRACT.TXT", 0, <img src="../../Resources/Images/Scripting_SCADABasic/Example_arrow_split_line.png" /></p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;"#D/#M/###Y,#h:#m:#s.##l, #V", "BitExtract", "ResultExtract" );<br />If (ret == 0) Then<br />Print ("Error on GetTrend: ");<br />Event ("DEL", "EndExtract", 1);<br />Exit SUB;<br />End If<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Program "EXTRACT2"<br />SUB EndExtract ()<br />Print ("Export of variable Valve1 completed:");<br />If (ResultExtract &lt; 0) Then<br />Print ("Error code = ", ResultExtract);<br />Else<br />Print (ResultExtract, "values exported.");<br />End If<br />' Cancellation of the release :<br />Event ("DEL", "BitExtract", 1);<br />END SUB</p>
+        <p class="SVnormal">Example of file "C:\EXTRACT.TXT" after export:</p>
+        <p class="SVdataListing">23/03/1994, 14:01:03.130, ? <br />23/03/1994, 14:04:45.520, 12.3 <br />23/03/1994, 14:07:11.890, 11.9 <br />23/03/1994, 14:12:52.460, 11.7 <br />23/03/1994, 14:19:02.780, 11.4 <br />23/03/1994, 14:25:59.340, 11 <br />23/03/1994, 14:40:44.520, 11.2 <br />23/03/1994, 14:56:31.200, 11.5</p>
+        <div class="note">
+            <p class="SVnormal">The maximum number of values that can be exported at one 
+ time is 4,000. </p>
+        </div>
+        <p class="SVnormal">To export more than 4000 values the HISTORY instruction 
+ can be repeated, thus appending the results to the file.</p>
+        <h2 class="SVheading2">Example 2 </h2>
+        <p class="SVnormal">These programs import historic data:</p>
+        <p class="SVprogramCode">'Program "IMPORT1"<br />' Set up event for change of the Count variable<br />SUB Main()<br />Event("DELALL");<br />Event("ADD", "IMPORT.COUNT.MV1", "ALL&gt;S", "Import.pvb", "","CountMV1");<br />END SUB</p>
+        <p class="SVprogramCode">' Import Example 1. FORMAT and VARNAME keywords are<br />' contained in the import file<br />SUB LoadMV1()<br />HISTORY("IMPORTTREND","MV1.DAT", "IMPORT.STATUS.MV1","IMPORT.COUNT.MV1");<br />END SUB</p>
+        <p class="SVprogramCode">' Function to run when count variable changes<br />SUB CountMV1 ()<br />If (@IMPORT.COUNT.MV1 == -1) Then<br />@IMPORT.MESSAGE = "Starting import of MV1";<br />Else<br />If (@IMPORT.COUNT.MV1 == 0) Then<br />@IMPORT.MESSAGE = "No import - check error messages";<br />Else<br />@IMPORT.MESSAGE = Addstring("Import succesfull - number of records imported = ",<img src="../../Resources/Images/Scripting_SCADABasic/Example_arrow_split_line.png" /></p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;TOC(@IMPORT.COUNT.MV1));<br />End If<br />End If<br />END SUB</p>
+        <p class="SVnormal">Import Example 2. </p>
+        <p class="SVnormal">The FORMAT and VARNAME keywords are contained in the 
+ instruction.</p>
+        <p class="SVprogramCode">SUB LoadMV2()<br />HISTORY("IMPORTTREND","MV2.DAT", "IMPORT.STATUS.MV2","IMPORT.COUNT.MV2", <img src="../../Resources/Images/Scripting_SCADABasic/Example_arrow_split_line.png" /></p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;"FORMAT,0,0,5", "VARNAME,MV2");<br />END SUB</p>
+        <p class="SVnormal">Example of Import file for LoadMV1:</p>
+        <p class="SVprogramCode">FORMAT,0,0,5<br />VARNAME,MV1<br /><br />25/09/2000,00:00:00, 7.64<br />25/09/2000,00:10:00, 7.87<br />25/09/2000,00:20:00, 8.12<br />25/09/2000,00:30:00, 8.40<br />25/09/2000,00:40:00, 8.69<br />25/09/2000,00:50:00, 8.99</p>
+        <p class="SVnormal">Example of Import file for LoadMV2:</p>
+        <p class="SVnormal">The FORMAT and VARNAME keywords are contained in the 
+ instruction.</p>
+        <p class="SVprogramCode">25/09/2000,00:00:00, 7.64<br />25/09/2000,00:10:00, 7.87<br />25/09/2000,00:20:00, 8.12<br />25/09/2000,00:30:00, 8.40<br />25/09/2000,00:40:00, 8.69<br />25/09/2000,00:50:00, 8.99<br />25/09/2000,01:00:00, 9.30<br />25/09/2000,01:10:00, 9.62</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

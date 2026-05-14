@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Communication|Data acquisition|BACnet|BACnet Alarm and Event notifications" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to Configure PcVue to Receive Alarm and Event Notifications</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor40"></a>How to Configure <span class="mc-variable OEM.ProductName variable">PcVue</span> to Receive Alarm and Event Notifications</h1>
+        <p class="SVnormal">Adding Notification Class objects to the device in <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration is necessary to ensure a correct behavior at run-time.  <span class="mc-variable OEM.ProductName variable">PcVue</span> can then ensure it receives event notifications from that device and you are able to map the ChangeOfState  properties to variables.</p>
+        <div class="warning">
+            <p class="SVnormal">The process described below does not create the Notification Class object instance in the physical device if it does not exist. Notification Class objects can be created within the physical device using the              <a href="bacnet_notification_helper.htm">Alarm helper</a>, or the left pane of the <a href="bacnet_mapping_overview.htm">Mapping editor</a>.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">Once a Notification Class object has been added to its configuration, <span class="mc-variable OEM.ProductName variable">PcVue</span> checks to make sure it is in the Recipient List each time it connects or re-connects to the device. It also checks the notification conditions and makes sure the device is configured to send the expected list of transitions during the correct period (time and date). The Notification Class object’s configuration is changed by <span class="mc-variable OEM.ProductName variable">PcVue</span> if necessary.</p>
+        </div>
+        <p class="SVnormal">A Notification Class object can be added either from the Application Explorer or from the BACnet Mapping dialog. </p>
+        <h2 class="SVheading2">Adding a Notification Class object using the Application Explorer</h2>
+        <ol>
+            <li value="1">Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network and device.</li>
+            <li value="2">From the task pane, select <u>Add a Notification Class</u>. The Notification Class configuration dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_notification_ae.png" MadCap:targetName="t3" style="display: none;" /></li>
+            <li value="3">Click the Ellipsis button adjacent to the <u>Instance number</u> field. The Object Selection dialog opens containing a list of discovered Notification Class instances for that device. The list can be updated using the <u>Refresh</u> button. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_notification_selection_dialog.png" MadCap:targetName="t4" style="display: none;" /></li>
+            <li value="4">Select the Notification Class instance to use. The notification must be the one referenced in the object that you want to receive event notifications from.</li>
+            <li value="5">Click the <u>OK</u> button to close the Object Selection dialog.</li>
+            <li value="6">Check the configuration and click the <u>OK</u> button to close the Notification Class dialog. The notification appears in the configuration tree. 
+				
+			<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t5"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_device_with_notification.png" MadCap:targetName="t5" style="display: none;" /></li>
+        </ol>
+        <h2 class="SVheading2">Adding a Notification Class object using the BACnet Mapping dialog</h2>
+        <ol>
+            <li value="1">Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network.</li>
+            <li value="2">From the task pane, select <u>Mapping</u>. The BACnet Mapping dialog opens.</li>
+            <li value="3">Expand the devices and objects tree in the left pane and select an appropriate Notification Class object. Notification Class instances appears in the right pane.</li>
+            <li value="4">Right click on the instance to be mapped and select <u>Map Notification Class</u> from the context menu. The Notification Class configuration dialog opens, populated with information from the selected Notification Class instance. The Notification Class must be the one referenced in the object that you want to receive transitions from. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_notifications_dialog.png" MadCap:targetName="t1" style="display: none;" /></li>
+            <li value="5">Check the configuration and click <u>OK</u> button to close the Notification Class dialog. A new Notification Class object appears in the Mapping dialog in the Variable/Object column. 
+				
+			<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_mapping_notification.png" MadCap:targetName="t2" style="display: none;" /></li>
+        </ol>
+        <h2 class="SVheading2">The Notification Class Configuration dialog - Advanced tab</h2>
+        <p class="SVnormal">The following properties are available in the Notification Class Configuration dialog - Advanced tab. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="T6"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_notifications_advanced_dialog.png" MadCap:targetName="T6" style="display: none;" />
+        </p>
+        <ul style="list-style-type: disc;">
+            <li>Check recipient-list - The period at which the recipient-list property of the Notification Class object is checked. The default is 300 seconds (5 minutes).</li>
+            <li>Automatic re-subscription - If ticked, <span class="mc-variable OEM.ProductName variable">PcVue</span> re-subscribes automatically to the Notification Class (for example - after a reset). The default is ticked.</li>
+            <li>Notification mode - Use to configure the type of notification.<ul style="list-style-type: disc;"><li>Unconfirmed - The notification does not require confirmation.                    </li><li>Confirmed - The notification requires confirmation. This is the default value.</li></ul></li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

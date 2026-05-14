@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Instruction reference A to Z|F" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>FSEEK</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="FSEEK_Instruct" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor253"></a>FSEEK</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc127">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="File_Mgmt_InstbyCat" />
+            </object><a class="MCConceptLink_seealso_0" href="javascript:mc127.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />See also</a> <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc128"><param name="Command" value="ALink,MENU" /><param name="Item1" value="" /><param name="Item2" value="FSEEK_Ex" /></object><a class="MCConceptLink_example_0" href="javascript:mc128.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Example</a></p>
+        <p class="SVnormal">Move a file pointer to a new position.</p>
+        <p class="SVnormal">WebVue support - Yes.</p>
+        <div class="warning">
+            <p class="SVnormal">Before using any of the file management instructions, except FSTAT, RENAME, UNLINK, FILETOBUF or BUFTOFILE, you must first open the file using an FOPEN instruction.</p>
+            <p class="SVnormal">Before any program including the FOPEN instruction ends, it must execute an FCLOSE instruction.</p>
+        </div>
+        <h2 class="SVheading2">Syntax</h2>
+        <p class="SVnormal"><span style="font-style: italic;">IntVal</span> = FSEEK(<span style="font-style: italic;">Filename</span>, <span style="font-style: italic;">Offset</span>, 
+ <span style="font-style: italic;">Origin</span>);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">Filename</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The name of the file on which the operation is to be performed. 
+ Type STR.<br />If executed in a WebVue session context this instruction is processed by the computer that hosts the web back end and the referenced file is on that computer. </p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">Offset</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The offset in bytes by which the pointer is to be moved. 
+ Any numeric type.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">Origin</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The point from which the offset is taken. 0 specifies 
+ the start of the file, 1 the current position of the pointer and 2 the 
+ end of the file.</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <p class="SVnormal">The file pointer is moved to a new position. The next 
+ operation on the file will be made from there.</p>
+        <p class="SVnormal">Return: 1 if successful, else 0.</p>
+        <h2 class="SVheading2">Example</h2>
+        <p class="SVprogramCode">'move the pointer to the 20th byte from the start</p>
+        <p class="SVprogramCode">i1 = FSEEK("histo.fil",20,0);</p>
+        <p class="SVnormal">For further examples, select the Example link above.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

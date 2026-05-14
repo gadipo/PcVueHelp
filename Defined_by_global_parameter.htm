@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Application Architect|Differentiation (Defining properties)|Defining a property by a global parameter" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to create a global parameter</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor40"></a>How to Create a Global Parameter</h1>
+        <p class="SVnormal">A global parameter is a container for a value that is used instead of a fixed value for a specific property type. There is a one to one relationship between each global parameter and a property type. For example, you could create a global parameter called gDomain that is used whenever an object containing the property <u>Domain</u> is  instantiated. There are two types of global parameter, Input and Expression.</p>
+        <ul>
+            <li>Input - An input global parameter allows the setting of a value at a certain level of the instantiation tree. The level at which the value is set is defined by the instantiation level to which the input parameter is attached. The value is propagated to all subordinate levels (subject to the scope). For example, if a global parameter is associated with an instance of a building, the value will be propagated to subordinate floors of the building and  subordinate offices of the floors. See the topic <a href="Input_parameters_value.htm">How the value of an input parameter is resolved</a>.</li>
+            <li>Expression - An expression global parameter is a container for an expression. The expression is of the same form that can be entered directly in a property. When using a global parameter to contain an expression there are two possible scenarios for calculating the value.<ul><li>The value is calculated only once at the instance on which the global setting has been associated. This value is propagated to all sub-instances.</li><li>The value is calculated for each instance of the property type with which it has been linked.</li></ul></li>
+        </ul>
+        <h2 class="SVheading2">Creating a global parameter and configuring the general properties</h2>
+        <ol>
+            <li value="1">Select the Parameters tab and navigate the parameters configuration tree to select the folder under which the parameter is to be created. </li>
+            <li value="2">Select <u>Add a global parameter</u> followed by clicking the Enter key on the keyboard. A new global parameter is created with default properties.</li>
+            <li value="3">Enter a name for the parameter. You can either edit the name in the parameters configuration tree or edit the <u>Name</u> property in the properties grid. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t1" style="display: none;"><br /><img src="../Resources/Images/AA/global_param_configure.png" /><br /></div></li>
+            <li value="4">Enter a <u>Description</u> for the parameter. The description is optional.</li>
+            <li value="5">Select the <u>Data type</u>. The <u>Data type</u> property allows you to typecast a parameter for use in an expression. See below.</li>
+            <li value="6">Select the <u>Type</u> from either Input or Expression. The configuration that is now required depends on what you have selected.<ol style="list-style-type: lower-alpha;"><li value="1">For Input type. Enter a default value. This is the value that the parameter will have if it is not assigned a specific value when it is associated with a template or an instance. Optional.</li><li value="2">For Expression type. Enter the expression that will define the value  of the parameter. See the topic <a href="Expression_substitution.htm">Defining a property by an expression</a>. You can also configure the <u>Evaluation mode</u>. See below.<br /></li></ol></li>
+        </ol>
+        <h2 class="SVheading2">Using the Data type property</h2>
+        <p class="SVnormal">The <u>Data type</u> property allows you to typecast a parameter for use in an expression. The result of this can be illustrated using a simple example.</p>
+        <p class="SVnormal">Expression <u>=Params("Parameter01")+3</u>. Parameter01 is given a value of 5.</p>
+        <ul style="list-style-type: disc;">
+            <li>If Parameter01 were typecast as a string, the result would be 53. The + operator is treated as concatenation.</li>
+            <li>If Parameter01 were typecast as an integer, the result would be 8. The + operator is treated as addition.</li>
+        </ul>
+        <h2 class="SVheading2">Using the Evaluation mode property</h2>
+        <p class="SVnormal">The <u>Evaluation mode</u> property determines the level within the instances tree topology at which the expression is evaluated.</p>
+        <ul style="list-style-type: disc;">
+            <li>Once - The expression is calculated at the level in the topology at which it is assigned and the value is distributed to all child elements. For example, the global parameter called gDomain, linked to the Domain property and with the expression "Dom_ " + " Me.name", is assigned to an instance of the Building template. The expression produces the value Dom_Building01 that is then used as the value for the Domain of all variable instantiations sub-ordinate to the Building instance.</li>
+            <li>On each instance - The expression is evaluated at every instantiation. For example, for  the variable Bit01 the expression produces Dom_Bit01 that will be used as the Domain. The variable Register01 would have a Domain of Dom_Register01.</li>
+        </ul>
+        <h2 class="SVheading2">Configuring the Impacted Elements</h2>
+        <p class="SVnormal">The properties of the Impacted Elements group are used to select the element and property with which the parameter is associated, and the scope of the association.</p>
+        <ul style="list-style-type: disc;">
+            <li>Overwrite mode - Selects the conditions under which the parameter is used as the property value.<ul style="list-style-type: disc;"><li>Only if nothing is defined - The value generated by the global parameter is only used if the impacted property is not already defined. This is the default mode.</li><li>Force - The value generated by the global parameter is always used.</li></ul></li>
+            <li>Element type - The configured element in which the property, that is to be defined by the global parameter, is used. For example Variable. A few properties (currently just Server Station List and Client Station List) appear in more than one configuration element in which case you can select Any.</li>
+            <li>Property - The property type to be defined by the global parameter.</li>
+            <li>Selected elements - A filter, using the type and source of a variable, to select which of the elements will be affected by the global parameter. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t2" style="display: none;"><br /><img src="../Resources/Images/AA/selected_elements.png" /><br /></div><br />Only available for elements related to some aspect of variable configuration and therefore not the following:<ul style="list-style-type: disc;"><li>Cyclic</li><li>Graphic elements (mimics and symbols)</li><li>SNMP (Network, Device and Polling Group)</li></ul></li>
+        </ul>
+        <p>Where a filter is for a child of a variable element (for example, a trend, an event, a threshold ...), the filter is  applied according to the properties of the parent variable. For example, a global parameter is created for a property of a Trend. If the <u>Selected elements</u> filter is configured to select only alarms, then only the Trends of alarm variables will take into account the global parameter.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying server applications|Deploying the web server and the Web &amp; Mobile back end" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /> <title>All-in-one deployment</title><link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js"></script><script type="text/javascript" src="../SkinSupport/MadCapGlobal.js"></script><script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js"></script><script type="text/javascript" src="../SkinSupport/MadCapMerging.js"></script><script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js"></script><script type="text/javascript" src="../SkinSupport/MadCapUtilities.js"></script><script type="text/javascript" src="../SkinSupport/MadCapBody.js"></script><script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js"></script></head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor52"></a>All-in-one Deployment</h1>
+        <p class="SVnormal">See the topic <a href="Architecture_web.htm">Web based architecture examples</a> for a schematic.</p>
+        <h2 class="SVheading2">Requirements</h2>
+        <ol>
+            <li value="1">The deployment of this architecture requires a minimum level of network expertise.</li>
+            <li value="2">Requires all computers and mobile devices to be on the same subnet, typically the industrial network, including web and mobile clients, the web server and the <span class="mc-variable OEM.ProductName variable">PcVue</span> web back end station.</li>
+            <li value="3">Web clients on this network are supposed to trust the Web Server machine without reservation as they are on the same, and by definition, private network.</li>
+            <li value="4">This architecture works with minimum requirements towards the trustworthiness of the web server certificate. A certificate from a public certification authority is not mandatory to establish trust with the Web Server.</li>
+        </ol>
+        <h2 class="SVheading2">Benefits</h2>
+        <ol>
+            <li value="1">Only a single computer is necessary to host both the <span class="mc-variable OEM.ProductName variable">PcVue</span> web back end station and the web server. </li>
+            <li value="2">The computer only requires a single network interface card.</li>
+            <li value="3">Works out of the box when using the IP address of the web server computer to connect web and mobile clients.<ul style="list-style-type: disc;"><li>A DNS is not required for name resolution on Windows platforms. The web server computer may be addressed by its hostname from any Windows-based web clients.</li><li>Can work with a Windows desktop operating system such as Windows 10 on the web server computer if serving a limited number of users, although a server operating system is still recommended.</li><li>When using non-Windows client devices, Android, iOS, Linux etc., the presence of a DNS server is necessary for name resolution. This can be achieved by using a Windows Server operating system for the web back end station and the activation of the DNS server role.</li></ul></li>
+            <li value="4">While this cannot be recommended in production, usage of a self-signed certificate works out-of-box, with the need to add a security exception on the client's web browser or to enable the option <u>Ignore Certificate Errors</u> on mobile applications. If there is an Active Directory server accessible from the network, a domain certificate can be issued from the Active Directory server and trusted by all the clients of the domain (by domain policy or via a corporate MDM system).</li>
+        </ol>
+        <h2 class="SVheading2">Limitations</h2>
+        <ol>
+            <li value="1">Expect limitations when hosting the web server on a Windows desktop operating system. In particular, the maximum number of client connections that IIS can handle is limited.</li>
+            <li value="2">Microsoft® Edge does not allow storing cookies if the hostname is not a FQDN. This causes troubles with web components. It can be overcome by setting the web site binding to:<br />https://&lt;hostname&gt;.local</li>
+            <li value="3">Limited performance may be experienced, particularly during WebVue client loading, when using untrusted certificates because, in such circumstances, files are not cached by web browsers, and therefore re-downloaded at each connection.</li>
+        </ol>
+        <h2 class="SVheading2">Web Deployment Console</h2>
+        <p class="SVnormal">The WDC must be installed on the same computer as the web back end station and the web server. The architecture is easily deployed using the Quick Setup wizard of the WDC, with all settings at their default value.</p>
+        <h2 class="SVheading2">Firewall settings</h2>
+        <p>The following table describes the allowances required for this architecture to be operational. It is recommended that all other non-essential network traffic be denied. The port numbers listed here correspond to the default settings. It must be verified that these ports are not in use by 3rd party applications.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 200px;" />
+            <col style="width: 200px;" />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading">
+                        <p>Web Server</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">HTTPS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Type</td>
+                    <td class="SVtable">INBOUND</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Source IP</td>
+                    <td class="SVtable">ANY</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Source Port</td>
+                    <td class="SVtable">ANY</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Destination IP</td>
+                    <td class="SVtable">Web Server IP address</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Destination Port</td>
+                    <td class="SVtable">Port	443</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Protocol</td>
+                    <td class="SVtable">TCP</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Communication between the web back end and the web server can use the local loopback and requires no further configuration. However, it is advisable to check that the following ports are not open to incoming connections from other IP addresses:</p>
+        <ul style="list-style-type: disc;">
+            <li>TCP 8090  &amp; TCP 8091</li>
+            <li>TCP 8810 (Instant Messaging back end)</li>
+            <li>TCP 8811 (Geolocation back end)</li>
+        </ul>
+        <h2 class="SVheading2">Name resolution FAQ</h2>
+        <ol>
+            <li value="1">Hostnames<ul style="list-style-type: disc;"><li>Can be used if a means is available for name resolution.</li><li>NetBIOS will work if available and supported by web clients (Windows only, not a solution for mobile apps on Android and iOS).</li><li>DNS is not essential but is highly recommended.</li></ul></li>
+            <li value="2">IP address<ul style="list-style-type: disc;"><li>For TouchVue and SnapVue. Works when addressing the web server computer by its IP address as for mobile apps authorization, no redirection between the authorization server and the app is required.</li><li>For non-Windows WebVue web clients. Works when addressing the server by its IP address, given that the redirection between the authorization server and the WebVue app is also configured to be based on IP addresses.</li><li>For WebVue web clients on mixed platforms i.e. Windows plus at least one other type of operating system. Use the WDC to create two different web sites on the web server, one with a binding for access by hostname and one with a binding for access by IP address.</li></ul></li>
+        </ol>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

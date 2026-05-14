@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|EtherNET/IP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Ethernet/IP Example</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Ethernet/IP Example</h1>
+        <p class="SVnormal">This example explains how to access the variable ANA_IN_00 which is UINT format and in the global definition of a Control logic PLC. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Extras/ethernetip_ex1.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <h2 class="SVheading2">Configuration file</h2>
+        <ul style="list-style-type: disc;">
+            <li>The CPU is in slot 1 and the EtherNET/IP coupler is in slot 2.</li>
+            <li>The cable on the coupler is plugged into the physical port 1.</li>
+            <li>The IP address of the EtherNet/IP coupler is 192.168.0.31.</li>
+            <li>The IP address of the <span class="mc-variable OEM.ProductName variable">PcVue</span> host PC is 192.168.0.10.</li>
+        </ul>
+        <p class="SVnormal">This requires the following settings in the EthernetIP.ini configuration file:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[TaskParameters]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AttributeNumber = 4</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">LocalIpAddress = 192.168.0.10</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">nbEquipments = 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">nbPollingGroups = 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[PollingGroup1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name = Fast</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">RefreshRateInSec = 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Equipment1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name = EqtTest</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IpAddress1 = 192.168.0.31</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Port1 = 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Slot1 = 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TimeOutInSec = 2</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2">Variable definition</h2>
+        <p class="SVnormal">To access the variable ANA_IN_00, which is UINT format, you must use a register variable. The variable is configured with the following string in its extended attribute 4 (as specified in the .ini file AttributeNumber = 4). <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Extras/ethernetip_varconfig_ex1.png" MadCap:targetName="t2" style="display: none;" /></p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

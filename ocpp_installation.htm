@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|OCPP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to install and configure the OCPP driver</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to install and configure the OCPP driver</h1>
+        <p class="SVnormal">The OCPP driver is an Add-on implemented based on the SV Manager SDK. It is made up of:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">A dll named svmgrOCPP.dll  installed in the \Bin folder as part of the <span class="mc-variable OEM.ProductName variable">PcVue</span> installation.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">A shared library named SH_EV_Charging installed as part of the installation. It includes ready-to-use templates you can instantiate with the Application Architect.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Dependencies of the driver, not provided as part of the installation and to be copied in the folder \Bin\Modules\OCPP.</p>
+            </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">You should contact your local reseller to get a copy of the package containing the dependencies to be copied in the folder \Bin\Modules\OCPP.</p>
+        </div>
+        <h2 class="SVheading2">Prerequisites:</h2>
+        <ul>
+            <li>
+                <p class="SVbulleted">You have a license with the OCPP option enabled. The driver can run in demo mode for 1 hour with 1 charging point.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">You have the OCPP driver binary files, including the OCPP module dependencies,</p>
+            </li>
+            <li>
+                <p class="SVbulleted">You have the shared library with the templates for OCPP.</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Installing and activating the OCPP driver</h2>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">If <span class="mc-variable OEM.ProductName variable">PcVue</span> is running, make sure you shut it down.</p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Check that the driver's main dll named <b>svmgrOCPP.dll</b> is already installed in the \Bin folder.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Open the <b>usrmgr.dat</b> file in the <span class="mc-variable OEM.ProductName variable">PcVue</span>’s Bin folder, add the following content and save the modified file:</p>
+                <div class="codeSnippet_0 codeSnippet">
+                    <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: Bash;" class="codeSnippetBody_0 codeSnippetBody">
+                        <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                            <tbody>
+                                <tr>
+                                    <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[USRMGR\svmgrOcpp]&#160;</pre>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DLL=svmgrOcpp.dll</pre>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">Extract the driver's dependencies obtain from your your local reseller int the <b>\Bin\Modules\OCPP\</b> folder.</p>
+            </li>
+            <li value="5">
+                <p class="SVnumbered">Configure the endpoint by performing the Url namespace reservation as described in the next paragraph.</p>
+            </li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">If the <b>usrmgr.dat</b> file is missing, you can simply create it and place the above content in it.</p>
+        </div>
+        <h2 class="SVheading2">Configuring the endpoint</h2>
+        <p class="SVnormal">The OCPP driver is implemented based on the Microsoft Windows http.sys web server. Before the OCPP driver can receive and process requests from charge points, http.sys must be configured to dispatch them properly based on the Url namespace reservation mechanism. The reservation gives listed users the right to run a process that listen on that part of the namespace and should be performed for each Http endpoint configured in the <b>OCPPBinding</b> section of the .ini file.</p>
+        <div class="warning">
+            <p class="SVnormal">Reserving the Url namespace is mandatory so that <span class="mc-variable OEM.ProductName variable">PcVue</span> can listen to incoming requests when running without administrative privileges.</p>
+        </div>
+        <p class="SVnormal">Open a Windows command line or a PowerShell terminal and type the following command:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">netsh http add urlacl url=http://[HOSTNAME][PORT]/ user=[USER ACCOUNT]</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal"> Where:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">http://[HOSTNAME][PORT]/ is the Url of the <span class="mc-variable OEM.ProductName variable">PcVue</span> host charge points connected to.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">[USER ACCOUNT] is the name of the user or group of users running the main process of <span class="mc-variable OEM.ProductName variable">PcVue</span> (Sv32.exe).</p>
+            </li>
+        </ul>
+        <p class="SVnormal">Examples:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">netsh http add urlacl url=https://my-csms.local:8080/ user=Domain\Sv_Users</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">netsh http add urlacl url=https://+:8080/ user=Sv_User</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="note">
+            <p class="SVnormal">The firewall must also be configured to allow incoming Http requests.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">When creating a WebSocket connection to a 3rd party system <span class="mc-variable OEM.ProductName variable">PcVue</span> sends an HTTP header of type "Connection”. The value of this header consists of two directives: “Upgrade,Keep-Alive”. However, when evaluating the HTTP response to this message, <span class="mc-variable OEM.ProductName variable">PcVue</span> is unable to parse a value that contains more than one directive. In other words, the value of the HTTP header “Connection” in the HTTP response must be nothing else than “Upgrade”.</p>
+        </div>
+        <h2 class="SVheading2"><a name="Configuring"></a>Configuring the OCPP driver</h2>
+        <p class="SVnormal">The OCPP driver is configured using a .ini file named <b>ocppConfiguration.ini</b>. It includes:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">General settings.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">OCPP bindings configuration.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Charge points configuration.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Proxy configuration.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">Some fields of the ocppConfiguration.ini file are mandatory. If they are missing or invalid, the driver will fail to start. Other fields are optional and if they are missing or invalid, the task will use default values. The Event Viewer displays warning messages if a field is missing or invalid.</p>
+        <p class="SVnormal">To comment a line in the .ini file, you can enter a single quotation mark (’) at the beginning of the line.</p>
+        <div class="note">
+            <p class="SVnormal">If you plan to use the Application Architect and the predefined templates provided with the OCPP library, the <b>ocppConfiguration.ini</b> file will be generated automatically. Refer to the topic <a href="ocpp_lib_templates.htm">How to use the OCPP library</a> for more information.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Go to your <span class="mc-variable OEM.ProductName variable">PcVue</span> project's C directory and open the <b>ocppConfiguration.ini</b> file. Create the file if it does not exist. This file has several sections explained in the following table:</p>
+                <table style="width: 90%;">
+                    <col />
+                    <col style="width: 460px;" />
+                    <tbody>
+                        <tr>
+                            <td class="SVtableHeading" style="font-weight: bold;">Section</td>
+                            <td class="SVtableHeading" style="font-weight: bold;">Description</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">General</td>
+                            <td class="SVtable">Driver's general settings.</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">OcppBinding</td>
+                            <td class="SVtable">The TCP binding on which the OCPP server shall listen. Multiple bindings are possible, for instance http and https, or bindings for accessing the server from inside and outside of a public/private network boundary.</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Charge point</td>
+                            <td class="SVtable">Settings specific to an individual charge point. All charge points from which connections are accepted must be included under as many sections in the configuration file. The name of the section in the .ini file is the identifier of the charge point and must be unique, for example [CP1602]. The Id used as the section name shall match the identifier or name configured in the charge point itself (see the charge point vendor documentation for more information).</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Proxy</td>
+                            <td class="SVtable">Settings specific to proxying OCPP messages to a third-party central system. The name of the section is [Proxy:Name] where Name is used to identify the third-party central system and must be unique.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Define the names for all well-known charge points, each in a dedicated section and add the necessary keys to each section.</p>
+                <div class="note">
+                    <p class="SVnormal">If a section is defined for a charge point which incoming requests should be ignored, because it is not yet in service for example, we recommend setting at minimum the <b>Disabled</b> key.<br />For example:</p>
+                    <div class="codeSnippet_0 codeSnippet">
+                        <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                            <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                                <tbody>
+                                    <tr>
+                                        <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[CP1602]</pre>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Disabled=1</pre>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Add any necessary configuration for your project using  the settings reference table below.</p>
+            </li>
+        </ol>
+        <h2 class="SVheading2">ocppConfiguration.ini key references</h2>
+        <table style="width: 100%;">
+            <col style="width: 191px;" />
+            <col />
+            <col />
+            <col style="width: 98px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Setting Name</td>
+                    <td class="SVtableHeading">Section</td>
+                    <td class="SVtableHeading">Description</td>
+                    <td class="SVtableHeading">Default value</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">AttributeNumber</td>
+                    <td class="SVtable">General</td>
+                    <td class="SVtable">Sets which variable text extended attribute is used to define the OCPP mapping information.</td>
+                    <td class="SVtable">16</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">OCPP16Prefix</td>
+                    <td class="SVtable">General</td>
+                    <td class="SVtable">Prefix used on the extended attribute to indicate the variable source is a charging station supporting OCPP protocol revision 1.6.</td>
+                    <td class="SVtable">OCPP16</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">OCPP20Prefix</td>
+                    <td class="SVtable">General</td>
+                    <td class="SVtable">Prefix used on the extended attribute to indicate the variable source is a charging station supporting OCPP protocol revision 2.0.</td>
+                    <td class="SVtable">OCPP20</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">AttributeNumberStatusCode</td>
+                    <td class="SVtable">General</td>
+                    <td class="SVtable">Sets which variable text extended attribute is used to store additional status and error information, e.g., StatusNotification.Status in plaintext or StatusNotification.ErrorCode in plaintext.</td>
+                    <td class="SVtable">3</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ConfigurationDelimiter</td>
+                    <td class="SVtable">General</td>
+                    <td class="SVtable">Character used to delimit the configuration keys and values in GetConfiguration and ChangeConfiguration payloads or GetVariables and SetVariables payloads respectively.</td>
+                    <td class="SVtable">The semi-colon character (";")</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">HTTPEndpoint</td>
+                    <td class="SVtable">OCPPBinding</td>
+                    <td class="SVtable">One or multiple Http endpoints to listen to. Wildcards are allowed. Multiple bindings are comma delimited (for example: http://my-csms.local:80, https://my-csms.local:443).<br />The Url namespace shall be reserved as described above for each configured Http endpoint.</td>
+                    <td class="SVtable">http://+:8080/</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">UseHTTPBasicAuthentication</td>
+                    <td class="SVtable">OCPPBinding</td>
+                    <td class="SVtable">1 to enable Http basic authentication, 0 otherwise.</td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">HeartbeatInterval</td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">Heartbeat interval in seconds. Used in the boot notification response to tell the charge point which interval to use.</td>
+                    <td class="SVtable">30</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">HeartbeatTimeout</td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Interval in seconds before variables mapped on a charge point are set invalid after heartbeat message failure.<br />If set to 0 Heartbeat timeout is ignored.</p>
+                        <p class="SVtable">For example: <br />If HeartbeatInterval = 30 sec and HeartbeatTimeout = 10 sec, charge point variables will be set invalid 40 seconds after receiving the last heartbeat message.</p>
+                    </td>
+                    <td class="SVtable">10</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TimestampFormat</td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">Defines the format of the timestamp that is returned by the heartbeat message. If omitted, ISO8601 formatting is used ("2017-09-08T19:01:55.714942+03:00").</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ReceiveMessageTimeout</td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Receive message timeout in seconds. Interval after which an error response is sent back to the charge point in case the CSMS is not able to process the request in an adequate time.</p>
+                        <p class="SVtable">Applicable to the following messages:</p>
+                        <ul>
+                            <li class="SVtable">Authorize</li>
+                            <li class="SVtable">StartTransaction</li>
+                            <li class="SVtable">StopTransaction</li>
+                            <li class="SVtable">Etc.</li>
+                        </ul>
+                        <p class="SVtable">This setting shall also account for any performance constraints of the underlying network (connection over a mobile network for instance).<br />Normally, this value should be set to the same value as the heartbeat interval.</p>
+                    </td>
+                    <td class="SVtable">30</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">SendMessageTimeout</td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">Send message timeout in seconds. Interval after which a previously sent message is discarded and responses to which are no longer accepted. Interval after which the outbound channel is no longer blocked.</td>
+                    <td class="SVtable">30</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ReceiveBufferSize</td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">Websockets message receive buffer size (in bytes).</td>
+                    <td class="SVtable">65535</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Disabled</td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Used to temporarily disable a previously configured charge point. Optional.<br />0 = Enabled. 1 = Disabled.</p>
+                    </td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>TriggerBootNotification</p>
+                        <p>AtConnect</p>
+                    </td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Automatically triggers a BootNotification when a charge point goes online.</p>
+                        <p class="SVtable">Used to retrieve details about the charge point faceplate information when <span class="mc-variable OEM.ProductName variable">PcVue</span> restarts (vendor, serial number, firmware version, etc.).</p>
+                        <p class="SVtable">0 = Disabled. 1 = Enabled.</p>
+                    </td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>TriggerStatusNotification</p>
+                        <p>AtConnect</p>
+                    </td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Automatically triggers a StatusNotification when a charge point goes online.</p>
+                        <p class="SVtable">Used to retrieve charge point status inforrmation when the <span class="mc-variable OEM.ProductName variable">PcVue</span> restarts (charging or not, availability, etc.).</p>
+                        <p class="SVtable">0 = Disabled. 1 = Enabled.</p>
+                    </td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DateTimeKind</td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Used to define the timestamp format to be used by <span class="mc-variable OEM.ProductName variable">PcVue</span> when sending BootNotification response and Heartbeat response to the charge point.</p>
+                        <p class="SVtable">Allowed values: "Local" or" Utc"</p>
+                    </td>
+                    <td class="SVtable">"Local"</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">SendConfigurationAtBoot</td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Sends a predefined set of configuration settings to the charge point when a BootNotification is received.<br />0 = Disabled. 1 = Enabled</p>
+                    </td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr style="height: 336px;">
+                    <td class="SVtable">ConfigurationFile</td>
+                    <td class="SVtable">ChargePoint</td>
+                    <td class="SVtable">
+                        <p class="SVtable">The file that contains the predefined set of configuration settings to send when a BootNotification is received from the charge point.</p>
+                        <p class="SVtable">The file must be in Json format. It is by default located in the C folder of the <span class="mc-variable OEM.ProductName variable">PcVue</span> project, but a relative path is also allowed.</p>
+                        <p class="SVtable">Example (CP3211.json). Charge point predefined settings file:</p>
+                        <div class="codeSnippet_0 codeSnippet">
+                            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                                    <tbody>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">{</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">"AuthorizationCacheEnabled": false,</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">"HeartbeatInterval": 60000</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">}</pre>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <p class="SVtable">Multiple charge points may use the same configuration file. If SendConfigurationAtBoot is enabled this setting is mandatory.</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">WebSocketsEndpoint</td>
+                    <td class="SVtable">Proxy</td>
+                    <td class="SVtable">The endpoint Url of a third-party central system.</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ReconnectInterval</td>
+                    <td class="SVtable">Proxy</td>
+                    <td class="SVtable">The interval in seconds after which a new attempt is made to connect to the third-party system.</td>
+                    <td class="SVtable">30 </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">UseHttpBasicAuthentication</td>
+                    <td class="SVtable">Proxy</td>
+                    <td class="SVtable">1 to enable Http basic authentication, 0 otherwise.</td>
+                    <td class="SVtable">0</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Password</td>
+                    <td class="SVtable">Proxy</td>
+                    <td class="SVtable">The password used to authenticate at the third-party system. The password is the same for all outgoing connections to this system.</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">SendMessageTimeout</td>
+                    <td class="SVtable">Proxy</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">30</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ReceiveMessageTimeout</td>
+                    <td class="SVtable">Proxy</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">30 </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">ocppConfiguration.ini file example</h2>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[General]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">OCPP16Prefix=OCPP16</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">OCPP20Prefix=OCPP20</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AttributeNumber=16</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AttributeNumberStatusCode=3</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[OcppBinding]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">HttpEndpoint=http://my-csms.local:8082/</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">UseHttpBasicAuthentication=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[CP1601]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">ReceiveBufferSize=65535</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">HeartbeatInterval=30</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">HeartbeatTimeout=10</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SendMessageTimeout=30</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">ReceiveMessageTimeout=30</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Disabled=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TriggerBootNotificationAtConnect=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TriggerStatusNotificationAtConnect=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DateTimeKind=Local</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TimestampFormat=yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFK</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SendConfigurationAtBoot=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">ConfigurationFile=CP1601.json</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[CP1602]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">ReceiveBufferSize=65535</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">HeartbeatInterval=30</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">HeartbeatTimeout=10</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SendMessageTimeout=30</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">ReceiveMessageTimeout=30</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Disabled=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TriggerBootNotificationAtConnect=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TriggerStatusNotificationAtConnect=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DateTimeKind=Local</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TimestampFormat=yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFK</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SendConfigurationAtBoot=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">ConfigurationFile=CP1602.json</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[CP1603]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">ReceiveBufferSize=65535</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">HeartbeatInterval=30</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">HeartbeatTimeout=10</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SendMessageTimeout=30</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">ReceiveMessageTimeout=30</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Disabled=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TriggerBootNotificationAtConnect=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TriggerStatusNotificationAtConnect=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DateTimeKind=Local</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TimestampFormat=yyyy'-'MM'-'dd'T'HH':'mm':'ss.FFFK</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SendConfigurationAtBoot=0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">ConfigurationFile=CP1603.json</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Proxy:3rdPartySystem]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">WebSocketsEndpoint=ws://my-other-csms.com:9990/</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

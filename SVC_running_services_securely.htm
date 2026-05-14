@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying server applications|Running PcVue as a Windows service|How to run services more securely" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to run services more securely</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to run Services More Securely</h1>
+        <p class="SVnormal">The path to success in service security includes understanding the nature of the services available in the networked environment and establishing procedures to protect the use of them. This topic provides some core principles that you should follow when you plan to run services securely.</p>
+        <h2 class="SVheading2">Know your system</h2>
+        <p class="SVnormal">Although this recommendation seems obvious, many organizations are not fully aware of the roles and services that run on all their computers.</p>
+        <h2 class="SVheading2">Use the principle of least privilege</h2>
+        <p class="SVnormal">Most security-related documentation discuss implementing the principle of least privilege. This principle is simple, but the impact of its implementation greatly increases security and reduces risk. The principle of least privilege states that you give an entity the least amount of access it requires to do its job and nothing more. In Windows Server, this principle applies to both user accounts and computer accounts because in Active Directory both user accounts and computer accounts are security principals, which means that they can both be assigned permissions and privileges.</p>
+        <p class="SVnormal">One reason this principle works so well is that it forces you to assess your network resources and potential security risks. You must learn the access privileges that are actually needed for a given computer or user and then verify that only the required privileges are applied.</p>
+        <p class="SVnormal">Running services more securely requires you to deploy services using a least privilege approach.</p>
+        <h2 class="SVheading2">Apply the security principle of least service</h2>
+        <p class="SVnormal">The security principle of least service means, in a nutshell, if you do not absolutely require a specific Windows service, disable it. Note that we say disable the service and not simply set its startup type to Manual.</p>
+        <p class="SVnormal">More broadly, the principle of least service states that the operating system and the network protocols available on any networked device should run only the exact services and protocols required to support the targeted deployment.</p>
+        <p class="SVnormal">By performing this action, you not only conserve system and possibly network resources, but you also reduce the number of attack vectors a malicious user can employ to penetrate your network.</p>
+        <h2 class="SVheading2">Use separate domain user accounts for services and applications</h2>
+        <p class="SVnormal">The main reasons to use dedicated domain user accounts for service accounts instead of the built-in identities are as follows:</p>
+        <ul style="list-style-type: disc;">
+            <li>Using domain user accounts consistently makes it easier to manage multi-tier application infrastructures.</li>
+            <li>By using domain user accounts as service account logons, you can more granularly audit access locally and across your network.</li>
+            <li>Domain user accounts can be more definitively targeted with Group Policy.</li>
+        </ul>
+        <p class="SVnormal">Regarding Group Policy, you might want to ensure that your domain service accounts are denied the Log on Locally user right at the very least. This measure will prevent a malicious user from succeeding in an interactive logon attempt by using a breached service account.</p>
+        <h2 class="SVheading2">Be vigilant regarding the Everyone and Authenticated Users groups</h2>
+        <p class="SVnormal"><u>Everyone</u> and <u>Authenticated Users</u> are dynamic security principals, which means that their membership is controlled by your network environment itself and that administrators cannot control membership to these group identities.</p>
+        <p class="SVnormal">The <u>Everyone</u> identity includes all authenticated and unauthenticated network users (this includes Local Service).</p>
+        <p class="SVnormal">The <u>Authenticated Users</u> identity includes all domain user and computer accounts who have successfully authenticated to Active Directory. This group includes the Local System and Network Service built-in service account identities.</p>
+        <p class="SVnormal">Thus, a key point of security is to keep a careful eye on where and how we are assigning access permissions to these two special groups.</p>
+        <p class="SVnormal">You can control which accounts have which system privilege by using Local Security Policy that can be accessed from the Windows Control Panel or directly from the SV Core Management Console using Tools. Local Security Policy. The relevant Local Security Policy path is Security Settings\Local Policies\User Rights Assignment. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/local_security_policy.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <div class="tip">
+            <p class="SVnormal">System privileges are also called user rights. Either way, both refer to system-wide abilities such as logging on as a service, logging on locally, changing the system time, and so forth.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

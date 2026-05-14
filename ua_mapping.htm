@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|OPC UA Gateway Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Mapping variables to the UA Gateway</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Mapping Variables to the UA Gateway</h1>
+        <p class="SVnormal">With the majority of OPC DA Servers, the address space, as seen in the left pane of the <span class="mc-variable OEM.ProductName variable">PcVue</span> OPC Mapping dialog, has a one-to-one match with the OPC Item Id. <b>This is not a mandatory requirement; it is just something that is commonplace.</b> For example, in the following screenshot of a mapping dialog and a Kepware OPC DA server. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Extras/ua_gateway_kepware_mapping.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <p class="SVnormal">The ItemId <u>Simulation Examples.Functions.Ramp1</u> is the same as its location within the address space as seen in the left pane of the mapping dialog. </p>
+        <p class="SVnormal">When using the UA Gateway, the Address Space is similar to, but not the same as, the ItemId. This is normal behavior for the UA Gateway to avoid potential conflicts would two OPC servers expose items having the same Id. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Extras/ua_gateway_gateway_mapping.png" MadCap:targetName="t2" style="display: none;" /></p>
+        <p class="SVnormal">The ItemId <u>um:W10-TOLS-RM1:Kepware.KEPServerEX.V5:UAServer/KEPServerEX|Simulation.Functions.Ramp1</u> is different from its location in the Address Space (different prefix).</p>
+        <p class="SVnormal">The setting <u>Use alias as prefix in ItemId</u> in the <u>OPC COM ItemIDs</u> tab of the UA Gateway's Administration Tool can be used to simply the ItemId replacing the prefix with a much simpler alias. However, the Address Space remains unchanged. </p>
+        <h2 class="SVheading2">Deepening the UA Gateway browsing</h2>
+        <p>Depending on the complexity of the connected OPC UA server, the UA Gateway may not fully expose the objects through its OPC DA Server. This can be improved using the setting <u>Browse Next Level for Variables</u> in the <u>OPC DA (COM)</u> tab of the UA Gateway's Administration Tool.</p>
+        <h2 class="SVheading2">Timestamp setting</h2>
+        <p>The UA Gateway allows the selection of the timestamp source for OPC UA objects it exposes through its OPC DA Server. </p>
+        <p class="SVnormal">The selection is made using the setting <u>Timestamp Source</u> in the <u>OPC DA (COM)</u> tab of the UA Gateway's Administration tool. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Extras/ua_gateway_timestamp.png" MadCap:targetName="t3" style="display: none;" /></p>
+        <p class="SVnormal">The table below summarizes the resulting timestamping behavior depending on this UA gateway parameter combined with the configuration of the <span class="mc-variable OEM.ProductName variable">PcVue</span> OPC DA client:</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 240px;" />
+            <col style="width: 200px;" />
+            <col style="width: 240px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading" style="vertical-align: top;">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> OPC DA Client timestamp configuration</td>
+                    <td class="SVtableHeading" style="vertical-align: top;">UA Gateway timestamp source</td>
+                    <td class="SVtableHeading" style="vertical-align: top;">Mapped variables’ resulting timestamp</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">Default</td>
+                    <td style="vertical-align: top;">Internal</td>
+                    <td style="vertical-align: top;">OPC DA Client / SCADA host computer</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">Provided by server</td>
+                    <td style="vertical-align: top;">Internal</td>
+                    <td style="vertical-align: top;">OPC DA Client / SCADA host computer</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">Default</td>
+                    <td style="vertical-align: top;">ServerTimestamp</td>
+                    <td style="vertical-align: top;">OPC DA Client / SCADA host computer</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">Provided by server</td>
+                    <td style="vertical-align: top;">ServerTimestamp</td>
+                    <td style="vertical-align: top;">OPC UA Server / UA host computer</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">Default</td>
+                    <td style="vertical-align: top;">SourceTimestamp</td>
+                    <td style="vertical-align: top;">OPC DA Client / SCADA host computer</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">Provided by server</td>
+                    <td style="vertical-align: top;">SourceTimestamp</td>
+                    <td style="vertical-align: top;">OPC UA Server / UA host computer</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

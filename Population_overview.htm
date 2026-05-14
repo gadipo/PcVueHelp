@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|Population filters" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Population filters overview</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Population Filters Overview</h1>
+        <p class="SVnormal">A Population is a filter that can be applied to the variables managed by a station, in order to control the information a user can access during operations. Population filters are combined with user rights to determine the set of accessible information. Such type of filter can be changed on the fly during operations and has been designed to accommodate needs such as:</p>
+        <ul>
+            <li class="SVbulleted" value="1">Be able to hide some information during emergency or maintenance situations, in order to minimize the cognitive load for users.  </li>
+            <li class="SVbulleted" value="2">The other way round, be able to show additional information or allow particular control when the situation requires it.</li>
+            <li class="SVbulleted" value="3">Be able to modify the subset of information accessible to a user depending on its role and the day. For example, the case of a security gate station, with most alarms hidden during the day, and displayed at night or on week-ends when the other teams are off.  </li>
+        </ul>
+        <p class="SVnormal">The following features of <span class="mc-variable OEM.ProductName variable">PcVue</span> support populations filters:</p>
+        <ul>
+            <li class="SVbulleted" value="1">Alarm viewer - If alarms are excluded by the population filter, then these alarms are not displayed in alarm viewers.  </li>
+            <li class="SVbulleted" value="2">Log viewer - If variables or alarms are excluded by the population filter, then corresponding logged events are not displayed in log viewers.   </li>
+            <li class="SVbulleted" value="3">Log printers -  If variables or alarms are excluded by the population filter, then corresponding logged events are not printed.  </li>
+            <li class="SVbulleted" value="4">Archiving - It is possible to filter data archiving for logged events according to a population filter.  </li>
+            <li class="SVbulleted" value="5">User commands - Users cannot send commands for variables excluded by the population filter.  </li>
+            <li class="SVbulleted" value="6">Setting values in SCADA Basic - It is not possible to set values for variables excluded by the population filter.  </li>
+            <li class="SVbulleted" value="7">User actions on alarms in SCADA Basic - Users cannot send commands on alarms excluded by the population filter. </li>
+        </ul>
+        <p class="SVnormal">A population can be created from the Population node in the Application Explorer or by using the SCADA Basic instruction POPULATION. The  SCADA Basic instruction,  STATION_FILTER is used to apply a population so it can  be dynamically applied depending on a wide range of criteria determined by the application designer.</p>
+        <p class="SVnormal">The maximum number of populations that can be created is  512.</p>
+        <h2 class="SVheading2">How a population is defined</h2>
+        <p class="SVnormal">A population is defined by including, and/or excluding, variables using one or more of the following variable properties.</p>
+        <ul>
+            <li class="SVbulleted" value="1">  Type -, Bit, Alarm, Register or Text.   </li>
+            <li class="SVbulleted" value="4">Source - Internal,  Equipment, DDE, OPC, IEC 60870-5, DNP3, IEC 61850, LonWorks or SNMP.</li>
+            <li class="SVbulleted">Binary attribute</li>
+            <li class="SVbulleted">Domain (text attribute #1)</li>
+            <li class="SVbulleted">Nature (text attribute #2)</li>
+            <li class="SVbulleted">Text attributes #3 to #16</li>
+            <li class="SVbulleted">Full name</li>
+            <li class="SVbulleted">Branch (part of the name)</li>
+        </ul>
+        <p class="SVnormal">For example a Population could include all register variables  with an equipment source with the Domain Tank1 or Tank2, not having the Nature  Electrical.</p>
+        <div class="warning">
+            <p class="SVnormal">Population filtering based on the source is not supported to filter in log viewers (and log printing) when data are archived using a database archive unit (HDS).</p>
+        </div>
+        <p class="SVnormal">When you create a population it appears as an Sql like expression comprising one or more lines either including (IN) or excluding (NOT EXISTS) property values. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Variables/population_expression_example.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <h2 class="SVheading2">A note about the Sql terminology used in Population</h2>
+        <p class="SVnormal">
+            &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> supports the following Sql operators when defining a population.</p>
+        <ul style="list-style-type: disc;">
+            <li>IN - Multiple OR condition.</li>
+            <li>NOT - Negate a condition.</li>
+            <li>EXISTS - Condition is met.</li>
+            <li>AND - Two or more conditions.</li>
+        </ul>
+        <p class="SVnormal">NOT and EXISTS are used together as an exclusion.</p>
+        <div class="note">
+            <p class="SVnormal">In version 12 the NOT EXISTS operator replaces the OUT operator used in previous versions. The behavior is unchanged and applications that use population that were developed with previous versions are unaffected.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

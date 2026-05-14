@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Smart Generators" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to import an Echelon LNS configuration</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor3"></a>How to import an Echelon LNS configuration</h1>
+        <p class="SVnormal">The Smart Generator for LNS (LonWorks Network Operating System) imports configuration data from a LonWorks Network file of a LonWorks database. From that file, it generates the following configuration elements in <span class="mc-variable OEM.ProductName variable">PcVue</span>:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">LNS data acquisition network and nodes.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">I/O variables including mapping onto the LNS nodes.</p>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The names of the  variables generated in <span class="mc-variable OEM.ProductName variable">PcVue</span> are constructed from the names of the LNS network components as follows: Device.LonMark Object.Network variable.Variable field.</p>
+            <p class="SVnormal">The Smart Generator 'flattens' certain parts of the LNS data structure to avoid over-long branch paths. As a result duplicate device names may be generated from different LNS sub-networks which must be edited before the import is completed.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">For the smart generator to run, you must have the LonWorks software components installed on the PC including the LonWorks Object Server.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">Refer to the overview topic <a href="sg_overview.htm">Smart Generators overview</a> to learn more.</p>
+        </div>
+        <h2 class="SVheading2">Selecting the source data</h2>
+        <div class="warning">
+            <p class="SVnormal">Before you start the import process, we recommend that you back up the <span class="mc-variable OEM.ProductName variable">PcVue</span> variables configuration in case of any problems occurring during the import process. The variable configuration is stored in the file VAREXP.DAT in the project's C folder.</p>
+            <p class="SVnormal">Make sure that <span class="mc-variable OEM.ProductName variable">PcVue</span> is shut down before copying the file.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Go to <b>Configure</b> then Smart Generators and click <b>New LNS import</b>. The Smart Generator for LNS dialog opens with the import name specified. You can change this name.</p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Select an LNS network in the Network drop-down box. The drop down list box is populated with all networks known to the LonWorks database.</p>
+                <div class="note">
+                    <p class="SVnormal">The process of importing has no effect on the LNS project from which it extracts the data.</p>
+                </div>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Click <b>Next</b>, the LNS import variable dialog opens displaying the templates and nodes in the left pane. The template named LNS Network Interface is always present, representing the network interface (card) of the network concerned. The right pane of the dialog displays details of the selected template including its LonMark objects, network variables, and variable fields. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="import-vars"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_echelon_lns_import_vars.png" MadCap:targetName="import-vars" style="display: none;" />
+                </p>
+                <div class="note">
+                    <p class="SVnormal">The LNS subsystems are not shown by default and therefore you may sometimes see two or more devices in the left pane that have the same name. To display the subsystem for a particular device, point to it using the cursor and the subsystem is displayed in a tooltip.</p>
+                </div>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">To select variables to import, select a template from the left pane and expand it in the right pane, then select the network variable fields to import. Selecting a higher level component, for example a LonMark object, will automatically select all those components subordinate to it.</p>
+            </li>
+            <li value="5">
+                <p class="SVnumbered">To select devices to import, expand the configuration tree in the left pane to display the device instances (nodes) then select the devices you want to import. </p>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Selecting the variables and configuration properties to import</h2>
+        <p class="SVnormal">After importing and selecting the variables and devices to import, the next step is to customize these elements via the Import variables dialog.</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">To rename a configuration item, select it and press F2.</p>
+                <div class="note">
+                    <p class="SVnormal">If a variable is displayed in red, it means that it is invalid for use in <span class="mc-variable OEM.ProductName variable">PcVue</span> and will not be generated. Use the Rename variables dialog to ensure variable name compliance:</p>
+                    <ul>
+                        <li>The max length of a variable name is 255 characters.</li>
+                        <li>The max number of branch elements in a variable name is 12.</li>
+                        <li>The name of a branch element or the name of the leaf element cannot be empty (length =0) or exceed 255 characters.</li>
+                        <li>The name of a variable can only include letters, digits, or the underscore.</li>
+                        <li>Variable names shall be unique. Two variables cannot have the same name.</li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <p class="SVbulleted">To export the configuration of a template, right-click on a template, then click <b>Export device template configuration</b>. The export creates an XML file containing the template configuration with the selected variables and those that have been added manually. By default, the XML file is saved with the same name as the template, in the <span class="mc-variable OEM.ProductName variable">PcVue</span> BIN folder. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="import-export-vars"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p class="SVnumbered">
+                    <img src="../Resources/Images/SmartGen/sg_echelon_lns_import_export_vars.png" MadCap:targetName="import-export-vars" style="display: none;" />
+                </p>
+            </li>
+            <li>
+                <p class="SVbulleted">To import the configuration of a template, right-click on a template then click <b>Import device template configuration</b>. This imports other instances of the same template, either in the same or in another project.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">To add a variable, right-click a network variable object in the right pane and select <b>Add variable</b> from the pop-up menu then enter a variable name and select the expression using the Field drop-down box. Click <b>OK</b> to close the Properties dialog. The new variables  are automatically generated for each device based on the template configured.</p>
+                <div class="note">
+                    <p class="SVnormal">LonWorks variables sometimes have a complex structure and it is necessary to use an expression to select the correct data to be linked to <span class="mc-variable OEM.ProductName variable">PcVue</span> variables. This is normally done as part of the process of configuring variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                </div>
+            </li>
+            <li>
+                <p class="SVbulleted">To change the LNS monitoring behavior, right-click a network variable component in the  right pane and select Properties from the pop-up menu. The change made is applied to all imported variable fields below the network variable level. The following properties can be configured:</p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted">Use default parameters - If selected, It uses the values of the Bind this variable property and Poll interval property taken from the default set in the LonWorks Network configuration dialog.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Polling rate (seconds) - If specified, it defines the interval at which <span class="mc-variable OEM.ProductName variable">PcVue</span> polls the LonWorks node.</p>
+                    </li>
+                </ul>
+                <div class="note">
+                    <p class="SVnormal">The changes made to the variable's default configuration before import are applied to a template and will therefore affect variables generated from any device based on that template.</p>
+                </div>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <p class="SVbulleted">To change the property Permanent scan for mimics, click on a variable field component in the right pane and select Properties from the pop-up menu. The change  must be made per variable. The following properties can be configured:</p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted">None - If selected, it polls variable's real time value only when a mimic using it in an animation is open.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Server only - If selected, it polls the variable's real-time value permanently on the station where it is produced. On all other stations, it behaves as None.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">All stations - If selected, it polls  the variable's real-time value permanently on all stations.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <p class="SVnumbered">Click <b>Finish</b> and <b>Yes</b> in the Generation dialog to start the generation of variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>. A dialog is displayed indicating the progress. Any variables in the smart generator that already exist in <span class="mc-variable OEM.ProductName variable">PcVue</span> are discarded. The corresponding variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> are not overwritten or updated in any way.</p>
+        <div class="warning">
+            <p class="SVnormal">Any variables appearing in red are invalid and will not be generated when clicking <b>Finish</b>.</p>
+        </div>
+        <h2 class="SVheading2">Synchronizing an existing import</h2>
+        <p class="SVnormal">When you synchronize an import, the smart generator compares the configuration elements available in the import file with those that have been imported previously to <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <div class="warning">
+            <p class="SVnormal">The synchronizing process takes into account any filter that you may have used previously with the import. For example if there are 400 variables in the import file and the previous use of the import was with a filter and created 100 variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>, synchronization will inform you that there are 300 new variables available for import.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Select the import to synchronize in the right pane of the Smart Generators dialog. A list with actions appears under the Import references pane. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="workspace"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_workspace_synch.png" MadCap:targetName="workspace" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click Synchronize. This will open the smart generator dialog in which you can reconfigure the import. If variables have been added to the import file since the last import, the smart generator will display the Import new variables dialog, inviting you to make either a full or a custom import of the remaining variables.</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">If you select full import, all variables not already in <span class="mc-variable OEM.ProductName variable">PcVue</span> are imported.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">If you select custom import, you can filter the variables using the Select variables dialog.</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">If the smart generator finds variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> that no longer exist in the import file, a list of the variables is displayed. Using this list, you can choose to remove some or all of the variables from <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">You can choose to only remove imported configuration elements of a smart generator without removing the smart generator import itself. This can be done by right-clicking the import generated and selecting <b>Remove all imported objects</b>.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="General|Data connections" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to configure Sql queries</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor219"></a>How to configure Sql queries</h1>
+        <p class="SVnormal">Data connections enables you to create Sql read and Sql write queries. In general, a Sql read query takes advantage of statements such as SELECT and returns rows from a table, and a Sql write query sends a non-query request, using statements such as INSERT, UPDATE or DELETE, that performs some action on the database and eventually affects rows.</p>
+        <p class="SVnormal">Depending on your data data source and provider, a wizard is available to help you design your query, or you can type the query manually.</p>
+        <div class="note">
+            <p class="SVnormal">The pre-defined Sql read queries are used to map Sql variables. See the topic <a href="../Variables/Link_sqlquery_read.htm">Linking a Variable to a Sql Read Query</a> for more information.</p>
+            <p class="SVnormal">The pre-defined Sql write queries can be used with Sql variables that have the Command property set. See the topic <a href="../Variables/Link_sqlquery_write.htm">Linking a Variable to a Sql Write Query</a> for more information.</p>
+            <p class="SVnormal">They can also be used to populate the Grid control in a mimic. See the topic Sql grid control for more information.</p>
+        </div>
+        <h2 class="SVheading2">Prerequisites</h2>
+        <ul>
+            <li>You have configured a <a href="Datacon_sqlcon_configuration.htm">SQL connection</a>.</li>
+        </ul>
+        <h2 class="SVheading2">Creating a new query and configuring the general properties</h2>
+        <div class="warning">
+            <p class="SVnormal">A Sql query used to map Sql variables is able to handle a maximum of 5000 returned values, a value being a field of a row.</p>
+            <p class="SVnormal">For example, a Sql query returning 50 rows with 6 fields each corresponds to 300 values.</p>
+        </div>
+        <ol>
+            <li value="1">Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.</li>
+            <li value="2">Click on the <b>Add Sql query</b> button in the toolbar and choose whether to add a read or a write query. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sql-read-query-conf"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <p>
+                <img src="../../Resources/Images/AE/General/sql_query_conf_task.png" MadCap:targetName="sql-read-query-conf" alt="General parameters of a Sql read query" style="display: none;" />
+            </p>
+            <li value="3">Enter a query name and (optional) a description. The name is used as the Id of the query throughout the application.</li>
+            <li value="4">Select User interface in the Consumer type drop-down If you plan to use this Sql query with the Sql grid control. Only Read queries have this option.<br />If you plan to use the Sql query with the Sql variables driver, select Sql variables in the Consumer type drop-down.</li>
+            <div class="note">
+                <p class="SVnormal">Once you select User interface in the Consumer type, you only have the Parameters and the Traces tab to configure. The Parameters tab only appears if you have entered a parameter in the Query field.</p>
+            </div>
+            <li value="5">Select the scope of the Sql query. The scope is used to control the distribution of the Sql query results across user sessions. The scope is not available for User interface consumer type.</li>
+            <div class="warning">
+                <p class="SVnormal">The scope of the following variables must match the scope of the query: Inhibiting bit variable, triggering bit variable, execution status variable, and execution error variable.</p>
+                <p class="SVnormal">Refer to <a href="../Variables/Link_sqlquery_read.htm">Linking a variable to a Sql read query</a> and <a href="../Variables/Variables_scope_affected_features.htm">Configuration Items Affected by Scope</a> for more information about the Scope property.</p>
+            </div>
+            <li value="6">(For a Sql read query) Select the kind of data to be returned by the Sql command:</li>
+            <ul>
+                <li>Read rows - Used when a query is designed to return a set of rows comprising one or multiple fields.</li>
+                <li>Read a scalar value - Used when a query is designed to return a single scalar value.</li>
+            </ul>
+            <p class="SVnumbered">The Kind property is not available for User interface consumer type, only reading rows is of interest.</p>
+            <li value="7">Enter a query. The query must respect the Sql syntax as supported by the underlying data source and ADO.Net Data provider. Although the query editor highlights keywords, there is no auto-completion. The maximum query length is 10,000 characters.</li>
+            <div class="note">
+                <p class="SVnormal">We recommended to use tools such as a query editor and query performance profiler provided with your data source to design and test your queries. It will help you tune them before you configure the Sql queries in the Application Explorer. In general, poorly designed Sql requests negatively affects the system performances and availability, and in particular the time it takes the external source to process them.</p>
+            </div>
+            <ul>
+                <li>Use the Add a substitution parameter button to add a parameter to the query.</li>
+                <li>Use the Add snippet button to insert a predefined Sql query snippet. Query snippets availability depends on the data source and data provider selected when configuring the data connection.</li>
+                <li>Use the Open Sql query wizard button to facilitate the configuration of Sql queries. It is useful to create a new query from scratch and cannot be used to modify an existing one. See <a href="#using-sql-query-wizard">Using the Sql query wizard to configure a query</a> section to learn more.<br />The Sql query wizard availability depends on the data source and data provider selected when configuring the data connection.</li>
+            </ul>
+            <div class="tip">
+                <p class="SVnormal">As part of the query editing for certain built-in providers, you have the possibility to insert emojis.</p>
+            </div>
+        </ol>
+        <h2 class="SVheading2">Configuring the query parameters</h2>
+        <p class="SVnumbered">Parameter configuration allows the value of one or more fields within the query to be provided by the query execution context (for example the variable mapping).</p>
+        <div class="note">
+            <p class="SVnormal">The Parameters tab only appears if you added substitution parameters in the Query field in the General tab.</p>
+        </div>
+        <ol>
+            <li value="1">Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.</li>
+            <li value="2">Select and open a Sql query, then click on the Parameters tab of the Sql query creation dialog. Here you can configure the parameters added in the General tab. You can enter a description as well as define the following properties: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sql-read-query-param"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <p>
+                <img src="../../Resources/Images/AE/General/sql_query_conf_parameters_task.png" MadCap:targetName="sql-read-query-param" alt="Parameters tab of Sql read query" style="display: none;">
+                </img>
+            </p>
+            <ul>
+                <li>Max string length - The maximum number of characters between 1 and 2048. The default is 132.</li>
+                <li>Is numeric - If ticked, the parameter is checked to verify that its contents is numeric.</li>
+                <li>Block if escaped strings - If ticked, a parameter value containing an escape string will be blocked and the query will not be processed, for example if the parameter value includes: \0, 1F, 7F, simple or double quotes. If not ticked, the parameter values are not verified, they may contain escape string and be more susceptible to Sql injection risks.</li>
+                <li>Use default value - If ticked, the Default Value is used if the value of the parameter cannot be resolved.</li>
+                <li>Default value - A value, expression or an empty string.</li>
+            </ul>
+        </ol>
+        <div class="warning">
+            <p class="SVnormal">The default value is useful as a fallback if the parameter value cannot be resolved at runtime. For this reason, while the fallback can be an expression, we recommend not to reference an element that may not be resolvable at all times and in all circumstances.</p>
+            <p class="SVnormal">For example, if a parameter is defined by an expression to calculate a timespan depending on the timestamp of a variable (a query to retrieve data for the previous 10 minutes since a variable value has changed), a good fallback is to use TsNow(Ts_Utc) as default value because it will be a good approximation in many cases. Using the timestamp of another variable may not be helpful as default value if you consider that a variable may not be initialized.</p>
+            <p class="SVnormal">In particular, defining the default value of a parameter by an expression that includes the value of the parameter itself will never work properly (circular dependency).</p>
+        </div>
+        <h2 class="SVheading2">Configuring the execution properties</h2>
+        <ol>
+            <li value="1">Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.</li>
+            <li value="2">Select and open a Sql query, then click on the Execution tab of the Sql query creation dialog. Here you can configure when a query is executed. A query can be executed cyclically, on event and/or upon completion of another query. You can configure the following properties to fine tune query execution: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sql-read-query-exec"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <p class="SVnumbered">
+                <img src="../../Resources/Images/AE/General/sql_query_conf_exec_task.png" MadCap:targetName="sql-read-query-exec" alt="Execution tab of a Sql read query" style="display: none;" />
+            </p>
+            <ul>
+                <li>Cyclic - The cycle period is configurable from 10 seconds to 1 hour. There is no synchronization. For example, if you configure the period to be 0:10:00 (10 minutes) and the application start-up was at 12:05:15, the first execution will be at startup, the next one at 12:15:15, 12:25:15 etc.</li>
+                <li>Triggering bit - The name of a bit variable used to trigger the execution upon value change.</li>
+                <li>On query completed - If ticked, the query is executed upon completion of the query you select here. The condition under which the query is triggered depends on the execution status of the selected query. For example, you can trigger the query when the selected one succeeded and returned no row, or if it failed. The following matrix indicates if the query is executed depending on the configuration and results of the first query. Selection can be combined, for example to execute the query if no row is returned and also if the query failed:</li>
+            </ul>
+        </ol>
+        <table style="width: 100%;">
+            <col style="width: 298px;" />
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">&#160;</td>
+                    <td class="SVtableHeading">Query executed with success At least 1 row returned</td>
+                    <td class="SVtableHeading">Query executed with success 0 row returned</td>
+                    <td class="SVtableHeading">Query failed to execute</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">(For Sql read queries only) If With data is selected (For Sql write queries only) If With affected data is selected</td>
+                    <td class="SVtable">The query is triggered</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">(For Sql read queries only) If Without data is selected (For Sql write queries only) If Without affected data is selected</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">The query is triggered</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">If Failed is selected</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">The query is triggered</td>
+                </tr>
+            </tbody>
+        </table>
+        <ul>
+            <li>Allow loop execution - If ticked, allows query chaining that can potentially lead to an infinite loop. It should not be selected if you do not control query chaining precisely. But for example, it is necessary if you configure the query to be called on completion of a query that is itself chained on the execution of the query you are configuring.</li>
+            <li>Allow trigger by script - Enable the query to be triggered using the SQL_QUERY SCADA Basic instruction.</li>
+            <li>(For Sql write queries only) Allow trigger by variable change - Enable the query to be triggered if a mapped variable changes. Depending on the variable mapping, the query may be triggered on variable command or on value change or both.</li>
+            <li>(For Sql read queries only) Execution repeating - The Sql query can be configured in such a way that the execution is repeated if the number of received rows exceeds a maximum you define. It is useful if your query is designed to retrieve a certain amount of rows in nominal mode (with a Select TOP clause for example). However, in some rare cases such as a restart after a long period of time or an avalanche of new rows, you need the query to be repeated until all rows stored during the shutdown are retrieved.</li>
+            <ul style="list-style-type: circle;">
+                <li>Repeat query - Tick to activate the execution repeating. It can be used for both a cyclic query and a query executed on a triggering bit.</li>
+                <li>Max received row count - The threshold, in number of rows received, that will trigger a reiteration of the execution. The execution can be repeated more than once if the received row count is still greater or equal to the defined value.</li>
+            </ul>
+            <li>Inhibiting bit - The name of a bit variable that may be used to inhibit execution.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">Irrespective of the configuration in the Execution tab, a query is only executed once it has been mapped to at least one variable  if it has parameters defined.</p>
+            <p class="SVnormal">Contrary to a Sql read query, if there is no parameter defined, a Sql write query is executed if a trigger condition is met, even if no variable is mapped.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">A query triggered in background is not executed if it is still running from a previous execution.</p>
+        </div>
+        <h2 class="SVheading2">Configuring the advanced properties</h2>
+        <ol>
+            <li value="1">Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.</li>
+            <li value="2">Select a Sql query, then click on the Advanced tab. Here you can select variables to provide information about the status of the query, and queuing properties if trigger by script is enabled in the Execution tab. You can configure the following properties: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sql-read-query-advanced"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <p>
+                <img src="../../Resources/Images/AE/General/sql_query_conf_advanced_task.png" MadCap:targetName="sql-read-query-advanced" alt="Advanced tab of a Sql read query" style="display: none;" />
+            </p>
+            <ul>
+                <li>Execution status - The status that can be provided are:</li>
+                <ul>
+                    <li>0 = Successful.</li>
+                    <li>1 = Running.</li>
+                    <li>2 = Failed.</li>
+                    <li>3 = Canceled.</li>
+                </ul>
+                <li>Execution error - A text variable providing additional information when the status variable indicates a failure. In most cases, the error text itself comes directly from the ADO.NET Data provider.</li>
+                <li>Number of rows affected - A register variable providing the number of rows returned by the last execution of the query. Set to 0 if the query has failed.</li>
+            </ul>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">Each query has its own queue. When flow regulation is active, all query requests (calls) are queued and actually executed in the order they were added to the queue.</p>
+            <p class="SVnormal">Expression parameters for a query are evaluated at execution time and not when queuing.</p>
+        </div>
+        <h2 class="SVheading2">Activating traces</h2>
+        <ol>
+            <li value="1">Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.</li>
+            <li value="2">Select a Sql query, then click on the Traces tab. Here you can enable diagnostic trace messages. Each trace generates specific messages that are logged in the Trace Files and displayed in the Event Viewer dialog (F7). <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sql-read-query-traces"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <p>
+                <img src="../../Resources/Images/AE/General/sql_query_conf_traces_task.png" MadCap:targetName="sql-read-query-traces" alt="Traces tab of a Sql read query" style="display: none;" />
+            </p>
+        </ol>
+        <p class="SVnormal">The following are some of the traces you can activate:</p>
+        <ul>
+            <li>Trace 1: General - Enable general traces related to the handling of the Sql query.</li>
+            <li>Trace 2: Configuration - Enable traces specific to the configuration handling of the Sql query.</li>
+            <li>Trace 3: Runtime (Sql variable driver - General) - Enable general traces related to the Sql variable driver activity for this query.</li>
+            <li>Trace 4: Runtime (Sql variable driver - Triggers) - Enable traces related to the triggering of this query for the Sql variable driver.</li>
+            <li>Trace 5: Runtime (Sql variable driver - Queries) - Enable traces related to the handling of this query for the Sql variable driver.</li>
+            <li>Trace 6: Runtime (Sql variable driver - Queries with details) - Enable detailed traces related to the handling of this query for the Sql variable driver, including parameter substitutions and value extractions.</li>
+            <li>Trace 7: Runtime (Sql variable driver - Mapping) - Enable traces related to the mapping resolution of this query for the Sql variable driver.</li>
+            <li>Trace 8: Runtime (Sql variable driver - Performances) - Enable traces related to performances of this query for the Sql variable driver.</li>
+        </ul>
+        <h3 class="SVheading3"><a name="using-sql-query-wizard"></a>Using the Sql query wizard to configure a query</h3>
+        <p class="SVnormal">The Sql query wizard is a Sql query designer that helps you create a new query in a few clicks, even if you are not familiar with the Sql syntax.</p>
+        <div class="note">
+            <p class="SVnormal">The Sql query wizard availability depends on the data source and data provider selected when configuring the data connection. It may or may not be available for the data provider you are using.</p>
+            <p class="SVnormal">The datasource must be available to use the Sql query wizard. Iif necessary, a connection is established to browse tables and other elements that are the base for building queries.</p>
+        </div>
+        <ol>
+            <li value="1">Go to Configure, then select the Application Explorer and expand the configuration tree to select an existing Sql connection on the Data Connections node.</li>
+            <li value="2">Click on the <b>Add Sql query</b> button in the toolbar and choose whether to add a read or a write query, then click the button Open Sql query wizard in the Sql command section to start designing your query.</li>
+            <div class="tip">
+                <p>At any point in the wizard, you can test your queries by clicking the Test button in the bottom left corner. This opens the Sql query test dialog, where you can input parameter values and view the query results along with execution status details.</p>
+            </div>
+            <p class="SVnormal">For a typical Sql-based datasource such as Sql Server instance or an Oracle database server, the configuration is the following:</p>
+            <p class="SVnormal">For a Sql read query:</p>
+            <ol style="list-style-type: lower-alpha;">
+                <li value="1">Choose a table from the drop-down and use the control icons on the right of the table to select and order the data. The <b>Add calculation column</b> button allows you to add calculated columns based on tables columns.</li>
+                <li value="2">Click <b>Next</b>, select your Sql query elements using the drop-down fields of the table to filter the data to return (Where clause). You can also set the max number of rows to be returned and whether to only return distinct rows.<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sql-query-wizard"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+                <p>
+                    <img src="../../Resources/Images/AE/General/sql_query_wizard.png" MadCap:targetName="sql-query-wizard" style="display: none;" />
+                </p>
+                <li value="3">Click <b>Next</b>, define how you want to order and group results using the arrows on the right of the tables then click <b>Finish</b>.</li>
+            </ol>
+            <p class="SVnormal">For a Sql write query:</p>
+            <ol style="list-style-type: lower-alpha;">
+                <li value="1">Select whether the Sql query is designed to insert, update, or delete rows. The Sql query wizard dialog opens.</li>
+                <li value="2">Select from the drop-down, the table to modify and depending on the action selected in the previous dialog, you can:</li>
+                <ul>
+                    <li>Insert data by selecting column names and entering values for the selected columns.</li>
+                    <div class="note">
+                        <p>For CHAR/VARCHAR field types, use single quotes around 'null' to store it as a string rather than a NULL value.</p>
+                    </div>
+                    <li>Delete data by filtering the table selected to identify the rows to delete.</li>
+                    <li>Update data values by selecting columns and entering or replacing a value. Values can be set to null or replaced by the value of a parameter.</li>
+                </ul>
+                <li value="3">Click <b>Finish</b>.</li>
+            </ol>
+            <p class="SVnormal">For a typical REST-based API, the configuration is the following:</p>
+            <div class="note">
+                <p class="SVnormal">The configuration for read and write queries is similar, with the key difference being the method used. Write queries typically use POST, PUT, or PATCH, along with a body payload for data. Write requests generally don't include filtering or ordering, as these apply to data retrieval.</p>
+            </div>
+            <ol style="list-style-type: lower-alpha;">
+                <li value="1">Select a REST API method. The following HTTP methods are available: Get, Put, Post, Patch, and Delete.</li>
+                <li value="2">Enter the full API Uri, including query parameters. The Params grid is instantly populated with the query parameters included in the Uri of the request. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sql-query-rest"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+                <p>
+                    <img src="../../Resources/Images/AE/General/sql_query_wizard_rest.png" MadCap:targetName="sql-query-rest" style="display: none;" />
+                </p>
+                <li value="3">In the Header tab, add key and value pairs for headers required by the API.</li>
+                <li value="4">In the Body tab, enter the body string (if required by the API). There are three possible formats: application/json, text/plain, or x-www-form-urlencoded.</li>
+                <li value="5">In the Results pane, enter a limit  for parsing nested JSON. See the documentation of the provider you are using for more information.</li>
+                <li value="6">Click <b>Next</b>, select the fields you need from the query result. The <b>Add calculation column</b> button allows you to add calculated columns based on tables columns.</li>
+                <div class="tip">
+                    <p>You can rename the fields and  use the control icons on the right of the table to order them.</p>
+                </div>
+                <li value="7">Click <b>Next</b>, select your Sql query elements using the drop-down fields of the table to filter the data to return (Where clause). You can also set the max number of rows to be returned and whether to only return distinct rows.</li>
+                <li value="8">Click <b>Next</b>, define how you want to order and group results using the arrows on the right of the tables then click <b>Finish</b>.</li>
+            </ol>
+        </ol>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

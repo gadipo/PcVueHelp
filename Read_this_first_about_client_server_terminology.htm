@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Networked applications" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Client-Server terminology</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Client-Server Terminology</h1>
+        <p class="SVnormal">The terms Client 
+ and Server can have several different meanings depending on the context. Before 
+ configuring any aspect of <span class="mc-variable OEM.ProductName variable">PcVue</span>'s networking, it is essential 
+ to understand each meaning and the aspect of configuration to which it 
+ applies.</p>
+        <h2 class="SVheading2">Client and server licenses</h2>
+        <p class="SVnormal">
+              &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span>'s license is determined by the software 
+ protection key (dongle) that is in use on a given station.</p>
+        <ul>
+            <li class="SVbulleted">A client license 
+ implies that the software has no communication capability with field controllers (data acquisition), but is designed to communicate with other <span class="mc-variable OEM.ProductName variable">PcVue</span> stations having the role of data acquisition server. Data acquisition (native communication, 
+ OPC client, DDE, BACnet, IEC 60870-5...) is disabled.</li>
+            <li class="SVbulleted">A server license 
+ implies that the software does not have any mimic display capabilities. It is designed for data acquisition or archive servers for example.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">A station with a SCADA license is able to communicate 
+ with other <span class="mc-variable OEM.ProductName variable">PcVue</span> stations and has none of the above functional limitations (unless otherwise stated). 
+ You could consider it a combined client and server license.</p>
+        </div>
+        <h2 class="SVheading2">Client and server stations</h2>
+        <p class="SVnormal">A station's client and server capability is determined 
+ by the project's configuration.</p>
+        <ul>
+            <li class="SVbulleted">A station of <span class="mc-variable OEM.ProductName variable">PcVue</span> configured 
+ as a server can send changes in value of one or more of its 
+ variables to other (client) stations. A server station is said to produce 
+ the value of variables. In general, the value of a particular variable is produced on 
+ one server station at any one time.</li>
+            <li class="SVbulleted">A station of <span class="mc-variable OEM.ProductName variable">PcVue</span> configured 
+ as a client can obtain the value of one or more of its 
+ variables from another (server) station. A client station is said to consume 
+ the value of variables. The value of the same variable can be consumed on many 
+ client stations.</li>
+        </ul>
+        <p class="SVbulleted">By default, a station is configured as both a client 
+ and a server station. It is normal to leave it configured in this way 
+ although it might only be required to produce the value of variables OR 
+ consume the value of variables (depending on the configuration and use 
+ of the client and server lists). Application designer can tune such configuration  to minimize network exposure.</p>
+        <h2 class="SVheading2">Client and server lists</h2>
+        <p class="SVnormal">Client and server lists are created as part of the project 
+ configuration and are used to control the behavior of certain aspects 
+ of <span class="mc-variable OEM.ProductName variable">PcVue</span>'s project according to the station on which it is loaded. 
+ </p>
+        <ul>
+            <li class="SVbulleted">A server list contains 
+ the name of one or more server stations or associations.</li>
+            <li class="SVbulleted">A client list contains 
+ the name of one or more client stations.</li>
+        </ul>
+        <p class="SVnormal">The most frequent use of the client and server lists 
+ is to control on which station the real-time value of a variable is produced and 
+ on which stations it is consumed. They can also be used to control on which station an archive unit is an archive server (recording real-time data and producing historical data) and on which station it is an archive client (consuming historical data).</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>SQL_COMMAND and SQL_CONNECTION example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="SQL_CO_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor97"></a>SQL_COMMAND and SQL_CONNECTION example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc372">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="SQL_COMMAND_Instruct" />
+                <param name="Item3" value="SQL_CONNECTION_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc372.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">This example exercises modes of the SQL_COMMAND and SQL_CONNECTION commands.</p>
+        <p class="SVprogramCode">'***********************************************************************************************************************************************</p>
+        <p class="SVprogramCode">'</p>
+        <p class="SVprogramCode">'This example program requires to create 2 Data Connections using the Application Explorer:</p>
+        <p class="SVprogramCode">' - one for a CSV file</p>
+        <p class="SVprogramCode">' - one for a XLSX file</p>
+        <p class="SVprogramCode">'It uses only one connection at a time that can be defined in the Init function of this program</p>
+        <p class="SVprogramCode">'</p>
+        <p class="SVprogramCode">'To use the CSV file connection, create a Data Connection using the provider ".Net Framework Data Provider for OleDb"</p>
+        <p class="SVprogramCode">'and set a connection string similar to this:</p>
+        <p class="SVprogramCode">' 	provider=Microsoft.Jet.OLEDB.4.0;text;database=E:\;fmt=CSVDelimited;persist security info=True</p>
+        <p class="SVprogramCode">'where E:\ corresponds to the folder where the CSV file is located</p>
+        <p class="SVprogramCode">'</p>
+        <p class="SVprogramCode">'</p>
+        <p class="SVprogramCode">'To use the XLSX file connection, you first need to install the 32-bit version of the Microsoft Access redistribuable database engine that can be found here:</p>
+        <p class="SVprogramCode">'	https://www.microsoft.com/download/details.aspx?id=13255</p>
+        <p class="SVprogramCode">'Then create a Data Connection using  ".Net Framework Data Provider for OleDb" and set the a connection string similar to this:</p>
+        <p class="SVprogramCode">'	provider=Microsoft.ACE.OLEDB.12.0;data source=E:\status.xlsx;extended properties="Excel 12.0 Xml;hdr=yes"</p>
+        <p class="SVprogramCode">'where E:\status.xlsx correspond to file to read/write</p>
+        <p class="SVprogramCode">'</p>
+        <p class="SVprogramCode">'Sample CSV or XLSX file:</p>
+        <p class="SVprogramCode">'DeviceName,Capacity,Status,Load,LastUpdate</p>
+        <p class="SVprogramCode">'Device1,100,on,98,2019-03-06 15:42:47</p>
+        <p class="SVprogramCode">'Device2,100,off,12,2019-03-01 10:22:04</p>
+        <p class="SVprogramCode">'Device3,100,on,55,2019-02-27 14:35:05</p>
+        <p class="SVprogramCode">'</p>
+        <p class="SVprogramCode">'***********************************************************************************************************************************************</p>
+        <p class="SVprogramCode">'Global variables that needs to be set in the Init function</p>
+        <p class="SVprogramCode">Dim _Mode as Str;							'CSV or XLSX, depending on the driver to be tested</p>
+        <p class="SVprogramCode">Dim _XLSXConnectionName as Str;				'Name of the Data Connection declared in the project</p>
+        <p class="SVprogramCode">Dim _XLSXFilePath as Str;					'Full path of the XLSX file which contains the values, it must be the same as in the Data Connection</p>
+        <p class="SVprogramCode">Dim _XLSXSheetName as Str;					'Name of the sheet in the XLSX file which contains the values</p>
+        <p class="SVprogramCode">Dim _CSVConnectionName as Str;				'Name of the Data Connection declared in the project</p>
+        <p class="SVprogramCode">Dim _CSVFileName as Str;					'Name of the CSV file which contains the values</p>
+        <p class="SVprogramCode">Dim _CSVDirectory as Str;					'Name of the folder containing the CSV file (it must end by a \)</p>
+        <p class="SVprogramCode">Dim _StatusVariable as Str;					'Name of a register variable used for asynchronous requests execution</p>
+        <p class="SVprogramCode">Dim _ErrorTextVariable as Str;				'Name of a text variable used to return error text</p>
+        <p class="SVprogramCode">'Global variables used and updated by the programm</p>
+        <p class="SVprogramCode">Dim _ProgramName as Str;					'Name of the current program</p>
+        <p class="SVprogramCode">Dim _CSVFilePath as Str;</p>
+        <p class="SVprogramCode">Dim _TableName as Str;</p>
+        <p class="SVprogramCode">Dim _ConnectionName as Str;</p>
+        <p class="SVprogramCode">Dim _ExampleStep as Integer;</p>
+        <p class="SVprogramCode">Dim _CmdId as Integer;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub Main()</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Print("--------------------------------------------------");</p>
+        <p class="SVprogramCode">&#160;&#160;Print("Start the SQL_Connection and SQL_Command example");</p>
+        <p class="SVprogramCode">&#160;&#160;Init();</p>
+        <p class="SVprogramCode">&#160;&#160;_ExampleStep = 1;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;If (OpenConnection()== 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;ExampleSequence();</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">'Initialize the program global working variables</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub Init()</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'UPDATE here your values</p>
+        <p class="SVprogramCode">&#160;&#160;_Mode						= "CSV";				'either CSV or XLSX</p>
+        <p class="SVprogramCode">&#160;&#160;_XLSXConnectionName 		= "XLSXConnection";</p>
+        <p class="SVprogramCode">&#160;&#160;_XLSXFilePath 				= "E:\\status.xlsx";</p>
+        <p class="SVprogramCode">&#160;&#160;_XLSXSheetName 				= "Feuil1";</p>
+        <p class="SVprogramCode">&#160;&#160;_CSVConnectionName			= "CSVConnection";</p>
+        <p class="SVprogramCode">&#160;&#160;_CSVFileName 				= "status.csv";</p>
+        <p class="SVprogramCode">&#160;&#160;_CSVDirectory 				= "E:\\";</p>
+        <p class="SVprogramCode">&#160;&#160;_StatusVariable 			= "UDC.Status";</p>
+        <p class="SVprogramCode">&#160;&#160;_ErrorTextVariable 			= "UDC.Error";</p>
+        <p class="SVprogramCode">&#160;&#160;_ProgramName 				= "UDC_DEMO";</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Calculate full path or CSV File</p>
+        <p class="SVprogramCode">&#160;&#160;_CSVFilePath = AddString(_CSVDirectory, _CSVFileName);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Set the ConnectionName and Table name to use</p>
+        <p class="SVprogramCode">&#160;&#160;If (CmpString(_Mode,"XLSX") == 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("Using XLSX file");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;_TableName = AddString(_XLSXSheetName,"$");	'Sheet Name must end with a $ character with this ADO.Net provider</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;_ConnectionName = _XLSXConnectionName;</p>
+        <p class="SVprogramCode">&#160;&#160;Else</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("Using CSV file");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;_TableName = _CSVFileName;</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;_ConnectionName = _CSVConnectionName;</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Check if variables exist, otherwise create them</p>
+        <p class="SVprogramCode">&#160;&#160;'Use the scope 'session' is recommended if the script is supposed to be executed in the context of a user session</p>
+        <p class="SVprogramCode">&#160;&#160;If (Variable("STATUS", _StatusVariable, "EXIST") == 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Variable("ADD_HMIREG", _StatusVariable, 0, "", "", "", -32768, 32767);</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;If (Variable("STATUS", _ErrorTextVariable, "EXIST") == 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Variable("ADD_HMITXT", _ErrorTextVariable, 0, "", "", "", 1000);</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Recreate example files</p>
+        <p class="SVprogramCode">&#160;&#160;InitFile();</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">'Creates the samples files used for the demo</p>
+        <p class="SVprogramCode">'It consists in a table having 5 fields</p>
+        <p class="SVprogramCode">' - DeviceName</p>
+        <p class="SVprogramCode">' - Capacity</p>
+        <p class="SVprogramCode">' - Status</p>
+        <p class="SVprogramCode">' - Load</p>
+        <p class="SVprogramCode">' - LastUpdate</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub InitFile()</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim lHandle as Long;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sContent as Str;</p>
+        <p class="SVprogramCode">&#160;&#160;sContent = AddString("DeviceName,Capacity,Status,Load,LastUpdate", Chr(10));</p>
+        <p class="SVprogramCode">&#160;&#160;sContent = AddString(sContent, "Device1,100,on,", Toc(IRand(0,100)), ",", DateTimeString(DateTimeValue(), "U"), Chr(10));</p>
+        <p class="SVprogramCode">&#160;&#160;sContent = AddString(sContent, "Device2,100,off,", Toc(IRand(0,100)), ",", DateTimeString(DateTimeValue(), "U"), Chr(10));</p>
+        <p class="SVprogramCode">&#160;&#160;sContent = AddString(sContent, "Device3,100,on,", Toc(IRand(0,100)), ",", DateTimeString(DateTimeValue(), "U"), Chr(10));</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;lHandle = Alloc_Buffer(Len(sContent) + 1);</p>
+        <p class="SVprogramCode">&#160;&#160;Put_Buffer(lHandle, 0, sContent);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Fill-in sample data in the XLSX file</p>
+        <p class="SVprogramCode">&#160;&#160;BufToExcel(lHandle, Chr(10), ",", _XLSXFilePath, _XLSXSheetName, "CLEARSHEET");</p>
+        <p class="SVprogramCode">&#160;&#160;'Fill-in sample data in the CSV file</p>
+        <p class="SVprogramCode">&#160;&#160;BufToFile(lHandle, _CSVFilePath, "USEFULL_PART", "WRITE");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Free_Buffer(lHandle);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">'SQL_Command function being asynchronous, the function helps to advance to next step once one is finished</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub ExampleSequence()</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;If (_ExampleStep == 1) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("Step 1: Insert a new record (device)");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;InsertRecord("Device4", 100, "on", IRand(0, 100));</p>
+        <p class="SVprogramCode">&#160;&#160;Else If (_ExampleStep == 2) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("Step 2: Select all records (read all devices)");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;SelectRecords("Device%");</p>
+        <p class="SVprogramCode">&#160;&#160;Else If (_ExampleStep == 3) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("Step 3: Update a record (Device2 value)");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;UpdateRecord("Device2", 35);</p>
+        <p class="SVprogramCode">&#160;&#160;Else If (_ExampleStep == 4) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("Step 4: Select a record (read Device2 value to check if the update was Ok)");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;SelectRecords("Device2");</p>
+        <p class="SVprogramCode">&#160;&#160;Else If (_ExampleStep == 5) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("Step 5: Count records (active devices)");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;CountRecords();</p>
+        <p class="SVprogramCode">&#160;&#160;Else If (_ExampleStep == 6) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("Step 6: Delete a record (Device4)");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;DeleteRecord("Device4");</p>
+        <p class="SVprogramCode">&#160;&#160;Else If (_ExampleStep == 7) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("Step 7: Count records (active devices), to check Device4 was removed from the file");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;CountRecords();</p>
+        <p class="SVprogramCode">&#160;&#160;Else If (_ExampleStep == 8) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("Step 8: Close connection");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;CloseConnection();</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("--------------------------------------------------");</p>
+        <p class="SVprogramCode">&#160;&#160;End If '_ExampleStep = 8</p>
+        <p class="SVprogramCode">&#160;&#160;End If '_ExampleStep = 7</p>
+        <p class="SVprogramCode">&#160;&#160;End If '_ExampleStep = 6</p>
+        <p class="SVprogramCode">&#160;&#160;End If '_ExampleStep = 5</p>
+        <p class="SVprogramCode">&#160;&#160;End If '_ExampleStep = 4</p>
+        <p class="SVprogramCode">&#160;&#160;End If '_ExampleStep = 3</p>
+        <p class="SVprogramCode">&#160;&#160;End If '_ExampleStep = 2</p>
+        <p class="SVprogramCode">&#160;&#160;End If '_ExampleStep = 1</p>
+        <p class="SVprogramCode">&#160;&#160;_ExampleStep = _ExampleStep + 1;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">' Open the connection</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub OpenConnection()</p>
+        <p class="SVprogramCode">&#160;&#160;Dim iRet as Integer;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;iRet = Sql_Connection("START", _ConnectionName);</p>
+        <p class="SVprogramCode">&#160;&#160;Print("- Data Connection [", _ConnectionName, "] started with result ", Toc(iRet));</p>
+        <p class="SVprogramCode">&#160;&#160;If (iRet == 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;iRet = Sql_Command("INITCONNECTION", _ConnectionName, 1);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- Data Command [", _ConnectionName, "] initiated with result ", Toc(iRet));</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'The return value -15 corresponds to the error CONNECTION_ALREADY_INIT, it can be ignored</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;If (iRet == -15) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;iRet = 0;</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;If (iRet != 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to Init Command");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;Else</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to Start Connection");</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'return the connection result for error handling</p>
+        <p class="SVprogramCode">&#160;&#160;Return iRet;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">'Close the connection</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub CloseConnection()</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Sql_Command("CLOSECONNECTION", _ConnectionName);</p>
+        <p class="SVprogramCode">&#160;&#160;Print("- Data Command closed");</p>
+        <p class="SVprogramCode">&#160;&#160;Sql_Connection("STOP", _ConnectionName);</p>
+        <p class="SVprogramCode">&#160;&#160;Print("- Data Connection Stopped");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">'Retrieve the error text of a failed command</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub GetErrorText(iCmdId)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim lHandle as Long;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sErrorText as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;lHandle = Alloc_Buffer(5000);</p>
+        <p class="SVprogramCode">&#160;&#160;If (Sql_Command("GETCOMMANDINFO", "ERROR_TEXT", iCmdId, lHandle)==0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;sErrorText = Seq_Buffer("NEXTFIELD", lHandle, CHR(0), "STR");</p>
+        <p class="SVprogramCode">&#160;&#160;Else</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;sErrorText = "Unable to get the error";</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;Free_Buffer(lHandle);</p>
+        <p class="SVprogramCode">&#160;&#160;Return sErrorText;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">'Insert a new line in the file</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub InsertRecord(sDeviceName, iCapacity, sStatus, iLoad)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sSqlCmd as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Create the Event action for asynchronous handling</p>
+        <p class="SVprogramCode">&#160;&#160;Event("ADDPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "InsertRecordCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;'Build the SQL request string</p>
+        <p class="SVprogramCode">&#160;&#160;sSqlCmd = AddString("INSERT INTO [", _TableName, "] VALUES(");</p>
+        <p class="SVprogramCode">&#160;&#160;sSqlCmd = AddString(sSqlCmd, " '", sDeviceName, "'");</p>
+        <p class="SVprogramCode">&#160;&#160;sSqlCmd = AddString(sSqlCmd, ",'", Toc(iCapacity), "'");</p>
+        <p class="SVprogramCode">&#160;&#160;sSqlCmd = AddString(sSqlCmd, ",'", sStatus, "'");</p>
+        <p class="SVprogramCode">&#160;&#160;sSqlCmd = AddString(sSqlCmd, ",'", Toc(iLoad), "'");</p>
+        <p class="SVprogramCode">&#160;&#160;sSqlCmd = AddString(sSqlCmd, ",'", DateTimeString(DateTimeValue(), "U"), "'");</p>
+        <p class="SVprogramCode">&#160;&#160;sSqlCmd = AddString(sSqlCmd, ")");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Execute the SQL request</p>
+        <p class="SVprogramCode">&#160;&#160;_CmdId = Sql_Command("EXECNONQUERY", _ConnectionName, sSqlCmd, _StatusVariable, _ErrorTextVariable);</p>
+        <p class="SVprogramCode">&#160;&#160;'Check its immediate result and deal with error code (delete event and move to next step).</p>
+        <p class="SVprogramCode">&#160;&#160;'It can fail if the connection is closed or the instruction is not supported by the provider</p>
+        <p class="SVprogramCode">&#160;&#160;If (_CmdId &lt; 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to send Non-Query Insert command with error code: ", _CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Event("DELPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "InsertRecordCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;ExampleSequence();</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Associated asynchronous callback</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub InsertRecordCallback()</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim iNbInsertedRows as Integer;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim dStatus as Double;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sErrorText as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Check the status of the SQL request (in progress or completed)</p>
+        <p class="SVprogramCode">&#160;&#160;dStatus = GETARG("VARVALUE");</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 1) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'SQL request still in progress - do nothing</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Return;</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'If request is completed (failed, cancelled or succeeded), delete the event</p>
+        <p class="SVprogramCode">&#160;&#160;Event("DELPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "InsertRecordCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request failed</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 2) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;sErrorText = GetErrorText(_CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Insert request failed with error : ", sErrorText);</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request cancelled</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 3) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- Insert request cancelled");</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request succeeded</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'Simply display the number of inserted rows</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;iNbInsertedRows = Sql_Command("READAFFECTEDROW", _CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- Insert request succeeded with ", Toc(iNbInsertedRows), " rows inserted");</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;'Release the results to free-up resources</p>
+        <p class="SVprogramCode">&#160;&#160;Sql_Command("DISPOSE", _CmdId);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Go to Next step</p>
+        <p class="SVprogramCode">&#160;&#160;ExampleSequence();</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">'Read a list of device</p>
+        <p class="SVprogramCode">'the parameter sDeviceName supports wild chars (% and _)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub SelectRecords(sDeviceName)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sSqlCmd as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Create the Event action for asynchronous handling</p>
+        <p class="SVprogramCode">&#160;&#160;Event("ADDPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "SelectRecordsCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;'Build the SQL request string</p>
+        <p class="SVprogramCode">&#160;&#160;sSqlCmd = AddString("SELECT * FROM [", _TableName, "] WHERE DeviceName LIKE '", sDeviceName, "'");</p>
+        <p class="SVprogramCode">&#160;&#160;'Execute the SQL request</p>
+        <p class="SVprogramCode">&#160;&#160;_CmdId = Sql_Command("EXECREADER", _ConnectionName, sSqlCmd, _StatusVariable, _ErrorTextVariable, Chr(10), ",");</p>
+        <p class="SVprogramCode">&#160;&#160;'Check its immediate result and deal with error code (delete event and move to next step).</p>
+        <p class="SVprogramCode">&#160;&#160;'It can fail if the connection is closed or the instruction is not supported by the provider</p>
+        <p class="SVprogramCode">&#160;&#160;If (_CmdId &lt; 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to send Reader request command with error code: ", _CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Event("- DELPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "SelectRecordsCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;ExampleSequence();</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Associated asynchronous callback</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub SelectRecordsCallback()</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim iBufferSize as Integer;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim iBufferLines as Integer;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim lBufferHandle as Long;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim iCurrentLine as Integer;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sLineContent as Str;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim dStatus as Double;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sErrorText as Str;</p>
+        <p class="SVprogramCode">&#160;&#160;'Check the status of the SQL request (in progress or completed)</p>
+        <p class="SVprogramCode">&#160;&#160;dStatus = GETARG("VARVALUE");</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 1) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'SQL request still in progress - do nothing</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Return;</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'If request is completed (failed, cancelled or succeeded), delete the event</p>
+        <p class="SVprogramCode">&#160;&#160;Event("DELPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "SelectRecordsCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request failed</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 2) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;sErrorText = GetErrorText(_CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Read request failed with error : ", sErrorText);</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request cancelled</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 3) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- Read request cancelled");</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request succeeded</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- Read request succeded, returned lines:");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'Alloc a buffer to read result</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;iBufferSize = Sql_Command("BUFFERSIZE", _CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;lBufferHandle = Alloc_Buffer(iBufferSize + 1);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Sql_Command("READBUFFER", _CmdId, lBufferHandle);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'Get the number of lines</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;iBufferLines = Sql_Command("BUFFERLINECOUNT", _CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;iCurrentLine = 0;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'Parse the buffer to display each lines</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;While (iCurrentLine &lt;= iBufferLines-1)</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;sLineContent = Seq_Buffer("NEXTFIELD", lBufferHandle, Chr(10), "STR");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;Print(sLineContent);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;&#160;&#160;iCurrentLine = iCurrentLine + 1;</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Wend</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Free_Buffer(lBufferHandle);</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;'Release the results to free-up resources</p>
+        <p class="SVprogramCode">&#160;&#160;Sql_Command("DISPOSE", _CmdId);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Go to Next step</p>
+        <p class="SVprogramCode">&#160;&#160;ExampleSequence();</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">'Update the Load value of a Dvice with the input parameter and its LastUpadte value with the current DateTime</p>
+        <p class="SVprogramCode">'/!\ The CSV provider Microsoft.Jet.OLEDB.4.0 does not support Update requests</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub UpdateRecord(sDeviceName, iNewLoad)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sSqlCmd as Str;</p>
+        <p class="SVprogramCode">&#160;&#160;'Create the Event action for asynchronous handling</p>
+        <p class="SVprogramCode">&#160;&#160;Event("ADDPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "UpdateRecordCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;'Build the SQL request string</p>
+        <p class="SVprogramCode">&#160;&#160;sSqlCmd = AddString("UPDATE [", _TableName, "] SET Load='", Toc(iNewLoad), "', LastUpdate='", DateTimeString(DateTimeValue(), "U"), "' WHERE DeviceName='", sDeviceName, "'");</p>
+        <p class="SVprogramCode">&#160;&#160;'Execute the SQL request</p>
+        <p class="SVprogramCode">&#160;&#160;_CmdId = Sql_Command("EXECNONQUERY", _ConnectionName, sSqlCmd, _StatusVariable, _ErrorTextVariable);</p>
+        <p class="SVprogramCode">&#160;&#160;'Check its immediate result and deal with error code (delete event and move to next step).</p>
+        <p class="SVprogramCode">&#160;&#160;'It can fail if the connection is closed or the instruction is not supported by the provider</p>
+        <p class="SVprogramCode">&#160;&#160;If (_CmdId &lt; 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to send Non-Query Update command sent with error code: ", _CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Event("DELPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "UpdateRecordCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;ExampleSequence();</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Associated asynchronous callback</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub UpdateRecordCallback()</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim iNbUpdatedRows as Integer;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim dStatus as Double;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sErrorText as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Check the status of the SQL request (in progress or completed)</p>
+        <p class="SVprogramCode">&#160;&#160;dStatus = GETARG("VARVALUE");</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 1) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'SQL request still in progress - do nothing</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Return;</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'If request is completed (failed, cancelled or succeeded), delete the event</p>
+        <p class="SVprogramCode">&#160;&#160;Event("DELPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "UpdateRecordCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request failed</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 2) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;sErrorText = GetErrorText(_CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Update request failed with error : ", sErrorText);</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request cancelled</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 3) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- Update request cancelled");</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request succeeded</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'Simply display the number of updated rows</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;iNbUpdatedRows = Sql_Command("READAFFECTEDROW", _CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- Update request succeded with ", Toc(iNbUpdatedRows), " rows updated");</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;'Release the results to free-up resources</p>
+        <p class="SVprogramCode">&#160;&#160;Sql_Command("DISPOSE", _CmdId);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Go to Next step</p>
+        <p class="SVprogramCode">&#160;&#160;ExampleSequence();</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">'Delete a given device from the file</p>
+        <p class="SVprogramCode">'/!\ The CSV provider Microsoft.Jet.OLEDB.4.0 does not support Delete requests</p>
+        <p class="SVprogramCode">'/!\ The XLSX provider Microsoft.ACE.OLEDB.12.0 does not support Delete requests</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub DeleteRecord(sDeviceName)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sSqlCmd as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Create the Event action for asynchronous handling</p>
+        <p class="SVprogramCode">&#160;&#160;Event("ADDPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "DeleteRecordCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;'Build the SQL request string</p>
+        <p class="SVprogramCode">&#160;&#160;sSqlCmd = AddString("DELETE FROM [", _TableName, "] WHERE DeviceName='", sDeviceName, "'");</p>
+        <p class="SVprogramCode">&#160;&#160;'Execute the SQL request</p>
+        <p class="SVprogramCode">&#160;&#160;_CmdId = Sql_Command("EXECNONQUERY", _ConnectionName, sSqlCmd, _StatusVariable, _ErrorTextVariable);</p>
+        <p class="SVprogramCode">&#160;&#160;'Check its immediate result and deal with error code (delete event and move to next step).</p>
+        <p class="SVprogramCode">&#160;&#160;'It can fail if the connection is closed or the instruction is not supported by the provider</p>
+        <p class="SVprogramCode">&#160;&#160;If (_CmdId &lt; 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to send Non-Query Delete command sent with error code: ", _CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Event("DELPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "DeleteRecordCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;ExampleSequence();</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Associated asynchronous callback</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub DeleteRecordCallback()</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim iNbDeletedRows as Integer;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim dStatus as Double;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sErrorText as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Check the status of the SQL request (in progress or completed)</p>
+        <p class="SVprogramCode">&#160;&#160;dStatus = GETARG("VARVALUE");</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 1) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'SQL request still in progress - do nothing</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Return;</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'If request is completed (failed, cancelled or succeeded), delete the event</p>
+        <p class="SVprogramCode">&#160;&#160;Event("DELPROG", _StatusVariable, "ALL&gt;ALL", _ProgramName, "", "DeleteRecordCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request failed</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 2) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;sErrorText = GetErrorText(_CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Delete request failed with error : ", sErrorText);</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request cancelled</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 3) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print ("- Delete request cancelled");</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request succeeded</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'Simply display the number of deleted rows</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;iNbDeletedRows = Sql_Command("READAFFECTEDROW", _CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- Delete request succeded: ", Toc(iNbDeletedRows), " rows deleted");</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;'Release the results to free-up resources</p>
+        <p class="SVprogramCode">&#160;&#160;Sql_Command("DISPOSE", _CmdId);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Go to Next step</p>
+        <p class="SVprogramCode">&#160;&#160;ExampleSequence();</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'-----------------------------------------------------------------------------------------------------------</p>
+        <p class="SVprogramCode">'Return a scalar value indicating the number of Devices having the Status parameter set to "on"</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub CountRecords()</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sSqlCmd as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Create the Event action for asynchronous handling</p>
+        <p class="SVprogramCode">&#160;&#160;Event("ADDPROG", _StatusVariable, "ALL&gt;S", _ProgramName, "", "CountRecordsCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;'Build the SQL request string</p>
+        <p class="SVprogramCode">&#160;&#160;sSqlCmd = AddString("SELECT Count(*) FROM [", _TableName, "] WHERE Status='on'");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Execute the SQL request</p>
+        <p class="SVprogramCode">&#160;&#160;_CmdId = Sql_Command("EXECSCALAR", _ConnectionName, sSqlCmd, _StatusVariable, _ErrorTextVariable);</p>
+        <p class="SVprogramCode">&#160;&#160;'Check its immediate result and deal with error code (delete event and move to next step).</p>
+        <p class="SVprogramCode">&#160;&#160;'It can fail if the connection is closed or the instruction is not supported by the provider</p>
+        <p class="SVprogramCode">&#160;&#160;If (_CmdId &lt; 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Failed to send Non-Query Count command sent with error code: ", _CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Event("DELPROG", _StatusVariable, "ALL&gt;S", _ProgramName, "", "CountRecordsCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;ExampleSequence();</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Associated asynchronous callback</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub CountRecordsCallback()</p>
+        <p class="SVprogramCode">&#160;&#160;Dim lHandle as long;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim iNbDevices as Integer;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim dStatus as Double;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sErrorText as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Check the status of the SQL request (in progress or completed)</p>
+        <p class="SVprogramCode">&#160;&#160;dStatus = GETARG("VARVALUE");</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 1) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'SQL request still in progress - do nothing</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Return;</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'If request is completed (failed, cancelled or succeeded), delete the event</p>
+        <p class="SVprogramCode">&#160;&#160;Event("DELPROG", _StatusVariable, "ALL&gt;S", _ProgramName, "", "CountRecordsCallback");</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request failed</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 2) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;sErrorText = GetErrorText(_CmdId);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- !!! ERROR !!! Count request failed with error : ", sErrorText);</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request cancelled</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 3) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- Count request cancelled");</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'SQL request succeeded</p>
+        <p class="SVprogramCode">&#160;&#160;If (dStatus == 0) Then</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;'Allocate a buffer to store the scalar result (10 bytes is larger than what is needed here)</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;lHandle = Alloc_Buffer(10);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Sql_Command("READSCALARVALUE", _CmdId, lHandle);</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;iNbDevices = Seq_Buffer("NEXTFIELD", lHandle, Chr(0), "INT");	'Chr(0) represent the end of usefull data in the buffer</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Print("- Count request succeded: ", Toc(iNbDevices), " active devices");</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Free_Buffer(lHandle);</p>
+        <p class="SVprogramCode">&#160;&#160;End If</p>
+        <p class="SVprogramCode">&#160;&#160;'Release the results to free-up resources</p>
+        <p class="SVprogramCode">&#160;&#160;Sql_Command("DISPOSE", _CmdId);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'Go to Next step</p>
+        <p class="SVprogramCode">&#160;&#160;ExampleSequence();</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">End Sub</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

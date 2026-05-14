@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Geographical data" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to add and configure a zone</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor121"></a>How to Add and Configure a Zone</h1>
+        <p class="SVnormal">A zone usually represents a real world location such as a room in a building or a specific piece of equipment. Zones can, and will normally, be nested. For example Building1.Floor1.Room1.Chiller1. </p>
+        <p class="SVnormal">The geo-tags associated with a zone allow the <span class="mc-variable OEM.ProductName variable">PcVue</span> server to determine the location of the  SnapVue client user or its proximity to a given piece of equipment.</p>
+        <p class="SVnormal">The actions added to a zone define what the user of the SnapVue mobile app can visualize and operate when at that zone. Actions can also be cascaded from a parent zone.</p>
+        <div class="note">
+            <p class="SVnormal">When a user has been determined as being in a child zone they are, by definition, also in the parent zone.</p>
+        </div>
+        <ol>
+            <li value="1"> Select the Zones folder, or a zone that is already configured, in the Application Explorer and, from the task list, select <u>Add a zone</u>. The Zone Configuration dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t1" style="display: none;"><img src="../../Resources/Images/AE/Geodata/location_general_tab.png" /><br /><br /></div></li>
+            <li value="2">Enter a name by which the zone will be known.</li>
+            <li value="3">Enter a description of the zone.  The description is optional and only appears in the contents pane of the Application Explorer.</li>
+            <li value="4">Enter the <u>Local branch</u> of the zone. As for variables, branches associated to zones are hierarchical. The Context branch is a reminder of the parent zone's branch. The branch will be used as a filter for any variables available to an action. Branches are aggregated from parent zone, child zone and action unless preceded by the '@' character. For example, if the zone FLOOR01 has branch FL1 and a child zone ROOM1 has the branch RM1 any variables available to actions added to the ROOM1 will be filtered by the branch FL1.RM1.</li>
+            <li value="5">Select the <u>Browsing level</u>. For a user to have access to a zone they must have access to the corresponding level in the user profile.</li>
+            <li value="6"><u>Detection criteria</u> - It is the logic used to identify a zone based on the detection of several tags. For example, if a zone has two associated tags B1 and B2. <u>If all geo-tags are detected</u> means that a user must see both geo-tags to be detected in the zone. <u>If at least one geo-tag is detected</u> means that it is enough for a user to detect at least one of the geo-tags to be detected in the zone.</li>
+            <li value="7"><u>Detection in a single child zone at a time</u> - Defines if child zones are mutually exclusive or not. That is, if a user can be in more than one child zone at the same time. This is used in situations where geo-tags from more than one child zone are visible at the same time. Using this property, only the zone corresponding to the closest geo-tag is selected.<br />As part of the tracking process, each zone receives a score depending on the distance to its geo-tags as well as the scores of child zones. The better the score, the greater is the probability that the user is in the zone.</li>
+            <li value="8">Click <u>OK</u> to confirm the configuration and close the dialog.</li>
+        </ol>
+        <h2 class="SVheading2">Advanced tab</h2>
+        <p class="SVnormal">A zone has advanced properties. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t2" style="display: none;"><br /><img src="../../Resources/Images/AE/Geodata/location_advanced_tab.png" /><br /></div></p>
+        <ul style="list-style-type: disc;">
+            <li>Variables filtering - Properties that filter the variables available to actions and hence to the SnapVue client. Variables can be filtered by a branch and / or an expression.<ul style="list-style-type: disc;"><li>Sql expression - A Sql expression used to filter variables instead of, or as well as, the branch name. For example Domain = "MyDomain". See the topic <u>Using an Sql Expression to Filter the List of Variables</u> in the Grid Control book. If you use both a <u>Branch name</u> and <u>Sql expression</u> filter they are combined using a logical AND. </li></ul></li>
+            <li>Geospatial reference - The configured real world position of a zone in latitude, longitude and altitude. Used in conjunction with the GPS Position reported by the mobile client as a method of determining zone. The radius specifies the circle within which the position is valid.<ul style="list-style-type: disc;"><li>Use parent zone - Use the geospatial reference of the parent zone.</li><li>Use static value - Use the entered value. Latitude and Longitude are in degrees, Altitude and Radius are in meters.</li></ul></li>
+        </ul>
+        <h2 class="SVheading2">How to associate a geo-tag with a zone</h2>
+        <ol>
+            <li value="1"> Select a configured zone and, from the task list, select <u>Associate a geo-tag</u>. The geo-tag Association Configuration dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t3" style="display: none;"><br /><img src="../../Resources/Images/AE/Geodata/geotag_associate.png" /><br /></div></li>
+            <li value="2">Select the geo-tag <u>Tag name</u>. A given geo-tag can be associated to one or more zones.</li>
+            <li value="3">Enter the <u>Maximum detection distance</u>. If not entered the default of zero is used.</li>
+            <li value="4">Click <u>OK</u> to confirm the configuration and close the dialog.</li>
+        </ol>
+        <h2 class="SVheading2">Geo-tag priority and accuracy</h2>
+        <p class="SVnormal">If there is more than one detectable geo-tag type, there may be some conflict in the determined zone. To overcome this the SnapVue client reports geo-tag types using the following priority.</p>
+        <ol>
+            <li value="1">NFC or QR tags first because they are the most accurate. Their accuracy is under 1 meter and the most recent scanned takes priority.</li>
+            <li value="2">If no NFC or QR tags are seen, then Bluetooth tags are used. BLE beacon positioning accuracy is about 1-2 meters.</li>
+            <li value="3">Else, if no BLE is seen, then Wi-Fi is used. Wi-Fi Access Point positioning accuracy is about 10 meters.</li>
+            <li value="4">Else, if no Wi-Fi is seen, then GPS is used. GPS positioning accuracy is about 100 meters.</li>
+        </ol>
+        <h2 class="SVheading2">How to add an action to a zone</h2>
+        <ol>
+            <li value="1"> Select a configured zone and, from the task list, select the required action from the <u>Add an action</u> list. The Action Configuration dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t4" style="display: none;"><br /><img src="../../Resources/Images/AE/Geodata/action_add.png" /><br /></div></li>
+            <li value="2">Enter a <u>Name</u> for the action.</li>
+            <li value="3">Enter an optional <u>Description</u>.</li>
+            <li value="4">Select the Cascade display mode you need. This property drives how the action will be made visible to users detected in children zones and with which branch it will be resolved. There are 3 possible choices to combine:<ul><li>If the action should only be visible on this zone (the one where it is configured) or if it should also be visible to a user detected in a child zone.</li><li>If the action should always be resolved (branch-wise) in the context of the zone where the user is detected (either this zone or a child zone), or if it should always be resolved in the context of this zone (the one where it is configured)</li></ul></li>
+            <li value="5">Select the optional <u>Enabling bit</u> that can be used to dynamically enable and disable the action.</li>
+            <li value="6">Select the Parameters tab and configure the action parameters. See the <a href="Actions_in_general.htm">Actions</a> book.</li>
+            <li value="7">Select the Tile tab and configure the tile. The tile determines the appearance of the action within the SnapVue mobile application. See the <a href="Actions_in_general.htm">Actions</a> book.</li>
+            <li value="8">Click <u>OK</u> to confirm the configuration and close the dialog.</li>
+        </ol>
+        <p>For further information on the configuration of actions, see the <a href="Actions_in_general.htm">Actions</a> book.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

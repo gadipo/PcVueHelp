@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying server applications|Deploying the web server and the Web &amp; Mobile back end" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /> <title>Simplified NAT deployment</title><link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js"></script><script type="text/javascript" src="../SkinSupport/MadCapGlobal.js"></script><script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js"></script><script type="text/javascript" src="../SkinSupport/MadCapMerging.js"></script><script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js"></script><script type="text/javascript" src="../SkinSupport/MadCapUtilities.js"></script><script type="text/javascript" src="../SkinSupport/MadCapBody.js"></script><script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js"></script></head>
+    <body>
+        <h1 class="SVheading1">Simplified NAT Deployment</h1>
+        <p class="SVnormal">See the topic <a href="Architecture_web.htm">Web based architecture examples</a> for a schematic.</p>
+        <h2 class="SVheading2">Requirements</h2>
+        <ol>
+            <li value="1">The level of network and IT expertise required to deploy this architecture is low to intermediate.</li>
+            <li value="2">It is assumed that the connection between the private network and the Internet is with a typical ISP-provided set-top-box.</li>
+            <li value="3">Network Address Translation (NAT), or Port Forwarding, configured on the network boundary.</li>
+            <li value="4">To validate the identity of the Web Server computer on the lesser trusted network and to prevent Man-in-the-Middle attacks, usage of a fully trusted certificate is necessary.<ul style="list-style-type: disc;"><li>This certificate can be issued by the IT department via a public CA. Necessary if the Web Server is accessed by external Web and Mobile clients (typical access from the Internet by client devices / computers not in a trusted relationship with the corporate network infrastructure).</li></ul></li>
+            <li value="5">The web server computer must be accessible by the Web and Mobile clients from both network segments.<ul style="list-style-type: disc;"><li>This can be achieved if the web server is well known on both network segments under the same FQDN.</li><li>If this is not the case the possibility for the Web and Mobile clients to directly connect to the web server computer by using its FQDN without the Https requests having to leave the private network is better. Usage of NAT Loopback / Hairpinning is suggested in this case.</li><li>If none of these options is possible, it is recommended to create two different sites via the WDC, which both connect to the same web back end station.</li></ul></li>
+        </ol>
+        <h2 class="SVheading2">Benefits</h2>
+        <ol>
+            <li value="1">This architecture allows for convenient access for Web and Mobile clients located on the industrial network and on the internet.</li>
+            <li value="2">This architecture is a first step in a migration process of legacy WebVue systems offering remote web access.</li>
+        </ol>
+        <h2 class="SVheading2">Limitations</h2>
+        <p class="SVnormal">This deployment scenario offers limited network security if a specific device is not added to control the network perimeter:</p>
+        <ul style="list-style-type: disc;">
+            <li>You are relying on a set-top-box owned by an ISP to control the network perimeter and remote connection.</li>
+            <li>Consequently, a computer that is part of the Industrial Control System should be considered directly exposed to the Internet.</li>
+        </ul>
+        <p class="SVnormal">In a worst-case scenario, potential security vulnerabilities on several levels could be exploited by an attacker to gain access to the Industrial Control System.</p>
+        <div class="warning">
+            <p class="SVnormal">Because you do not operate the ISP-owned device, you should have limited trust in it, and add your own network security appliance between the set-top-box and the web server. This appliance will act as a router/firewall and VPN server, and will de-facto be the actual boundary of the network you control. </p>
+        </div>
+        <h2 class="SVheading2">Web Deployment Console</h2>
+        <p>This architecture can be deployed by using either of the WDC setup wizards. The WDC needs to be installed on the Web Server computer.</p>
+        <h2 class="SVheading2">Firewall settings</h2>
+        <p>The following table describes the allowances required for this architecture to be operational. It is recommended that all other non-essential network traffic be denied. The port numbers listed here correspond to the default settings. It must be verified that these ports are not in use by 3rd party applications.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 200px;" />
+            <col style="width: 200px;" />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading">Firewall</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">HTTPS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Type</td>
+                    <td class="SVtable">N/A</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Source IP</td>
+                    <td class="SVtable">ANY</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Source Port</td>
+                    <td class="SVtable">ANY</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Destination IP</td>
+                    <td class="SVtable">Router WAN or DynDNS IP address</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Destination Port</td>
+                    <td class="SVtable">443</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Protocol</td>
+                    <td class="SVtable">TCP</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 200px;" />
+            <col style="width: 200px;" />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading">Web Server Station</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">HTTPS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Type</td>
+                    <td class="SVtable">INBOUND</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Source IP</td>
+                    <td class="SVtable">ANY</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Source Port</td>
+                    <td class="SVtable">ANY</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Destination IP</td>
+                    <td class="SVtable">Web Server IP address</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Destination Port</td>
+                    <td class="SVtable">443</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Protocol</td>
+                    <td class="SVtable">TCP</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Communication between the web back end and the web server can use the local loopback and requires no further configuration. However, it is advisable to check that the following ports are not open to incoming connections from other IP addresses:</p>
+        <ul style="list-style-type: disc;">
+            <li>TCP 8090  &amp; TCP 8091</li>
+            <li>TCP 8810 (Instant Messaging back end)</li>
+            <li>TCP 8811 (Geolocation back end)</li>
+        </ul>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

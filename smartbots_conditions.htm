@@ -1,0 +1,1334 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="IM_SmartBots.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Conditions</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Conditions</h1>
+        <p class="SVnormal">The bot supports the following types of conditions:</p>
+        <ul>
+            <li>
+                <p class="SVnormal">Local database changed</p>
+            </li>
+            <li>
+                <p>Expression</p>
+            </li>
+            <li>
+                <p>User information changed</p>
+            </li>
+            <li>
+                <p>Schedule</p>
+            </li>
+            <li>
+                <p>Memory</p>
+            </li>
+            <li>
+                <p>Message</p>
+            </li>
+            <li>
+                <p>Register variable</p>
+            </li>
+            <li>
+                <p>Text variable</p>
+            </li>
+            <li>
+                <p>Bit variable</p>
+            </li>
+            <li>
+                <p>Delay</p>
+            </li>
+            <li>
+                <p>Webhooks</p>
+            </li>
+            <li>
+                <p>Event changed</p>
+            </li>
+        </ul>
+        <p class="SVnormal">To create a new condition, first select the transition or trigger to which the condition will be added. Then right click to open the context menu, or use the <u>New condition</u> button in the tool bar. Select the required operation from the drop-down menu.</p>
+        <h2 class="SVheading2">Local database changed</h2>
+        <p class="SVnormal">Monitors changes in the specified local database property. Note that the monitoring is starting only when the smart bot’s process starts to verify the condition. Thus, if the condition is in the trigger, then all database changes are captured. If the condition is in the transition, smart bot will verify only those changes that happened after entering the corresponding state.</p>
+        <p class="SVnormal">If the condition is in the trigger, corresponding database changes are monitored and collected in a queue for one hour. Thus if the smart bot detected an appropriate change and started to handle it, and meanwhile the second change has happened, it will be buffered and stored until the smart bot re-verifies the condition again or one hour passes.</p>
+        <p class="SVnormal">This condition has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">	String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Database name</td>
+                    <td class="SVtable" style="vertical-align: top;">	String</td>
+                    <td class="SVtable" style="vertical-align: top;">Name of the database table. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Change types</td>
+                    <td class="SVtable" style="vertical-align: top;">	Enum</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">Type of database changes to monitor. The following values are available.</p>
+                        <ul style="list-style-type: disc;">
+                            <li>
+                                <p class="SVnormal">Any change</p>
+                            </li>
+                            <li>
+                                <p class="SVnormal">Insert</p>
+                            </li>
+                            <li>
+                                <p class="SVnormal">Update</p>
+                            </li>
+                            <li>
+                                <p class="SVnormal">Delete</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Condition</td>
+                    <td class="SVtable" style="vertical-align: top;">C# lambda expression</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVnormal">C# lambda expression – function taking the database rows as an input and filtering which rows to verify. This property supports usage of internal bot variables.</p>
+                        <p class="SVnormal">As an example, the following string can be used to monitor all rows having the value of ABC property less than 30. x =&gt; x.ABC &lt; 30</p>
+                        <p class="SVnormal">The following string can be used to monitor all rows having the value of ABCD property equals to "test". x =&gt; x["ABCD"] == "test"</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">User information changed</h2>
+        <p class="SVnormal">Monitors changes in the specified user property. Condition can be satisfied only on the second read of the user information or later. The first read initializes the last known value, then subsequent reads are matched with the last known value. This condition has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">User name</td>
+                    <td class="SVtable" style="vertical-align: top;">String	</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Name of the user whose information needs to be monitored. This property supports usage of internal bot variables.<br />If value is left empty, all users will be monitored. Once the corresponding property is changed for one of them, the user name, the previous value and the new value are set as the current context and can be received by the Save to memory operation.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Information to retrieve</td>
+                    <td class="SVtable" style="vertical-align: top;">Enum</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>The property of a given user to monitor. The following values are available.</p>
+                        <ul>
+                            <li class="SVtable">
+                                <p>	Display name</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Description</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>E-mail</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Phone number</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Title</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>First name</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Last name</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Profile level</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Permission level – access level of the user in the current chat</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Occupation</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Availability – free/busy status of the user</p>
+                            </li>
+                        </ul>
+                        <div class="note">Runtime property initialized by the scheduler. Note that connected MS Graph plug-in is required to receive this property.</div>
+                        <ul>
+                            <li class="SVtable">
+                                <p>Mobile connectivity – specifies if the user is currently connected via Mobile application</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Latitude</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Longitude</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Name of the current zone</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Description of the current zone<br /></p>
+                            </li>
+                        </ul>
+                        <div class="note">The tracking feature is required to receive the position and location related properties.</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Message</h2>
+        <p class="SVnormal">Verifies the last message in the given chat. Condition will be satisfied when all the condition properties match the corresponding properties of the last message in the Chat. This condition has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Display name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Sender of the message. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Message type</td>
+                    <td class="SVtable" style="vertical-align: top;">String	</td>
+                    <td class="SVtable" style="vertical-align: top;">Type of the message or extension of the attachment. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Media type</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVnormal">Text, Audio, Photo, Video, Document</p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">Media type of the message. This property is used to specify which kind of messages is expected. E.g. Photo media type corresponds to all message types related to the Photo attachment.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">For the Text media type, more properties are available which appear when the media type is selected.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Text function</td>
+                    <td class="SVtable" style="vertical-align: top;">Functions</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">A function that will be applied to compare the actual text content of the message and the value of the Text property. The following functions are available.</p>
+                        <ul>
+                            <li class="SVtable">
+                                <p class="SVtable">Any – any message text is accepted.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Equals – the exact text matching is required.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Equals to any of the following strings – the exact text matching is required. Use one string per line to separate options.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Contains – the text content of the message must contain the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Contains any of the following strings – the text content of the message must contain any of the specified values. Use one string per line to separate values.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Starts with – the text content of the message must start with the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Starts with any of the following strings – the text content of the message must start with any of the specified values. Use one string per line to separate values.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Ends with – the text content of the message must end with the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Ends with any of the following strings – the text content of the message must end with any of the specified values. Use one string per line to separate values.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not equals – the text content of the message must not match the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not contains – the text content of the message must not contain the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not starts with – the text content of the message must not start with the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not ends with – the text content of the message must not end with the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Match regular expression – the text content of the message must match the specified regular expression.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Text</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Text or regular expression verified using the text function.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Ignore case</td>
+                    <td class="SVtable" style="vertical-align: top;">Boolean</td>
+                    <td class="SVtable" style="vertical-align: top;">Indicates whether the text casing need to be taken into account or not.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Delay</h2>
+        <p class="SVnormal">Verifies the time delay after the bot agent entered the state. This condition has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Delay</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Time delay. Text near the value is reformatted automatically after validating the input</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Schedule</h2>
+        <p class="SVnormal">Verifies the current time after the bot agent entered the state. Condition is satisfied when the current time falls into the specified time range. This condition has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Start time</td>
+                    <td class="SVtable" style="vertical-align: top;">Hours, Minutes, Seconds</td>
+                    <td class="SVtable" style="vertical-align: top;">Lower threshold for the time range. The current time must be greater than the specified value to satisfy the condition.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Limit the latest time</td>
+                    <td class="SVtable" style="vertical-align: top;">Boolean</td>
+                    <td class="SVtable" style="vertical-align: top;">If true, the time range must be bounded above.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Bit variable</h2>
+        <p class="SVnormal">Verifies the bit variable value. Value is checked every 500 milliseconds. This condition has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Variable name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Full name of the variable to check. The variable name is prefixed with the current bot’s branch unless the @ symbol is used.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Value</td>
+                    <td class="SVtable" style="vertical-align: top;">Boolean</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">The value of the Bit variable to satisfy the condition. The following options are available.</p>
+                        <ul>
+                            <li class="SVtable">
+                                <p class="SVtable">1 – the variable value equals to 1.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">0 – the variable value equals to 0.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not set – the variable value is not set or has bad quality.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed – the variable value changed while bot was in the state.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 0 to 1.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 0 to NS.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 0 to any.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 1 to 0.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 1 to NS.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 1 to any.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from NS to 0.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from NS to 1.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from NS to any.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Register variable</h2>
+        <p class="SVnormal">Verifies the register variable value. The value is checked every 500 milliseconds. This condition has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Variable name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Full name of the variable to check. The variable name is prefixed with the current bot’s branch unless the “@” symbol is used.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">A function that will be applied to compare the actual variable value and the specified values. The following functions are available.</p>
+                        <ul>
+                            <li class="SVtable">
+                                <p class="SVtable">Equals – The value is equal.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not equals – The value is not equal.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value is in range – The value is within the given range.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value is not in range – The value is outside of the given range.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed – Any change in value.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Text variable</h2>
+        <p class="SVnormal">Verifies the text variable value. Value is checked every 500 milliseconds. This condition has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Variable name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Full name of the variable to check. The variable name is prefixed with the current bot’s branch unless the “@” symbol is used.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Text function</td>
+                    <td class="SVtable" style="vertical-align: top;">Functions</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">A function that will be applied to compare the actual variable value and the specified value. The following functions are available.</p>
+                        <ul>
+                            <li class="SVtable">
+                                <p class="SVnormal">Any value – the exact text matching is required.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Value changed – the variable value changed while bot was in the state.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Equals – the exact text matching is required.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Equals to any of the following strings – the exact text matching is required. Use one string per line to separate options.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Contains – the variable value must contain the specified value.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Contains any of the following strings – the variable value must contain any of the specified values. Use one string per line to separate values.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Starts with – the variable value must start with the specified value.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Starts with any of the following strings – the variable value must start with any of the specified values. Use one string per line to separate values.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Ends with – variable value must end with the specified value.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Ends with any of the following strings – the variable value must end with any of the specified values. Use one string per line to separate values.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Not equals – the variable value must not match the specified value.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Not contains – the variable value must not contain the specified value.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Not starts with – the variable value must not start with the specified value.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Not ends with – the variable value must not end with the specified value.<br /></p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVnormal">Match regular expression – the variable value must match the specified regular expression.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Value</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Text or regular expression verified using the text function.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Ignore case</td>
+                    <td class="SVtable" style="vertical-align: top;">Boolean</td>
+                    <td class="SVtable" style="vertical-align: top;">Indicates whether the text casing need to be taken into account or not.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Memory</h2>
+        <p class="SVnormal">Verifies the value stored in the bot agent’s internal memory. Condition will be satisfied when all the condition properties match the corresponding properties of the value. This condition has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Key</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">Unique reference to the value in memory. This property supports usage of internal bot variables.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Type</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVnormal">Any, String, Numeric, Boolean</p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">Type of the expected value. Other properties depend on the selected type. If type is Any, then only the value existence is verified.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">For the String type, the following functions are available.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">A function that will be applied to compare the actual bot variable in memory and the specified text. The following functions are available.</p>
+                        <ul>
+                            <li class="SVtable">
+                                <p class="SVtable">Any value – the internal variable is defined.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Equals – the exact text matching is required.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Equals to any of the following strings – the exact text matching is required. Use one string per line to separate options.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Contains – the variable value must contain the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Contains any of the following strings – the variable value must contain any of the specified values. Use one string per line to separate values.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Starts with – the variable value must start with the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Starts with any of the following strings – the variable value must start with any of the specified values. Use one string per line to separate values.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Ends with – variable value must end with the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Ends with any of the following strings – the variable value must end with any of the specified values. Use one string per line to separate values.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not equals – the variable value must not match the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not contains – the variable value must not contain the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not starts with – the variable value must not start with the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not ends with – the variable value must not end with the specified value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Match regular expression – the variable value must match the specified regular expression.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Text</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Text or regular expression verified using the text Function.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Ignore case</td>
+                    <td class="SVtable" style="vertical-align: top;">Boolean</td>
+                    <td class="SVtable" style="vertical-align: top;">Indicates whether the text casing need to be taken into account or not.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">For the Numeric type, the following functions are available.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">A function that will be applied to compare the actual bot variable in memory and the specified values. The following functions are available.</p>
+                        <ul>
+                            <li class="SVtable">
+                                <p class="SVtable">Equals – The value is equal.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not equals – The value is not equal.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value is in range – The value is within the given range.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value is not in range – The value is outside of the given range.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed – Any change in value.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">For the Boolean type, the following functions are available.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">A function that will be applied to compare the actual bot variable in memory and the specified value. The following functions are available.</p>
+                        <ul>
+                            <li class="SVtable">
+                                <p class="SVtable">1 – the variable value equals to 1.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">0 – the variable value equals to 0.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Not set – the variable value is not set or has bad quality.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed – the variable value changed while bot was in the state.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 0 to 1.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 0 to NS.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 0 to any.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 1 to 0.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 1 to NS.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from 1 to any.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from NS to 0.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from NS to 1.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p class="SVtable">Value changed from NS to any.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Expression</h2>
+        <p class="SVnormal">Verifies the result of an expression. Condition will be satisfied when all the condition properties match the corresponding properties of the value. This condition has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Input value</td>
+                    <td class="SVtable" style="vertical-align: top;">C# lambda expression</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">C# lambda expression – function taking the current bot agent context as an input and returning the value to verify. This property supports usage of internal bot variables. The initial part of the expression (i.e. “x =&gt; ”) is automatically added if necessary.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Type</td>
+                    <td class="SVtable" style="vertical-align: top;">Any, String, Numeric, Boolean</td>
+                    <td class="SVtable" style="vertical-align: top;">Type of the expected value. Other properties depend on the selected type. If type is “Any”, then only the value existence is verified. </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">See Memory (above) for an explanation of Function.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">About regular expressions</h2>
+        <p class="SVnormal">For the case where a variable value must match the specified regular expression. For more information about regular expressions visit the Microsoft Docs website and search for Regex Class.</p>
+        <h2 class="SVheading2">Webhook</h2>
+        <p class="SVnormal">A Webhook condition allows bots to catch and handle external webhooks.</p>
+        <p class="SVnormal">The Webhook format is not standard, with each 3rd party system using webhooks defining their own API and payload for the webhook. Therefore there is a set of supported webhook definitions and types. When calling a webhook, a 3rd party system must specify a security code in the Webhook request. The Messaging Web Service ignores all requests without a code or with a wrong code. The correct code is defined in the Messaging Web Service configuration file. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="smartbot_mws"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p>
+            <img src="../Resources/Images/Extras/smartbots_mwsconfig.png" style="max-width: 100%;display: none;" MadCap:targetName="smartbot_mws" />
+        </p>
+        <p>When catching a webhook, the Bot saves its payload to a context that can be extracted using the SaveToMemory operation.</p>
+        <p class="SVnormal">The Webhook condition has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">Description</p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">String</p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">Type</p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">String</p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">The type of the webhook to catch. The following values are available.</p>
+                        <ul style="list-style-type: disc;">
+                            <li>
+                                <p class="SVtable">Custom JSON webhook</p>
+                            </li>
+                            <li>
+                                <p class="SVtable">Generic JSON webhook</p>
+                            </li>
+                            <li>
+                                <p class="SVtable">Azure Alert</p>
+                            </li>
+                            <li>
+                                <p class="SVtable">Kudu notification - Stripe</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">Condition</p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">C# lambda expression</p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">Function taking the webhook payload as an input and filtering which webhooks to catch. This property supports usage of internal bot variables.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted">Custom JSON webhook - For Custom JSON webhooks, the Messaging Web Service accepts ordinary get/post HTTP(s) requests on the following endpoint.<br />https://&lt;host&gt;/Messaging/v2/Webhook?code=&lt;securitycode&gt;&amp;&lt;other query arguments&gt; <br />For GET methods query parameters are used as webhook payload. For POST methods the body is expected to be in JSON format which is used as the webhook payload.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Generic JSON webhook - For Generic JSON webhooks the Messaging Web Service accepts post HTTP(s) requests on the following endpoint.<br />https://&lt;host&gt;/api/webhooks/incoming/genericJson</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Azure Alert - For Azure Alert webhooks the Messaging Web Service accepts post HTTP(s) requests on the following endpoint.<br />https://&lt;host&gt;/api/webhooks/incoming/azurealert</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Kudu notification - For Kudu notifications the Messaging Web Service accepts post HTTP(s) requests on the following endpoint.<br />https://&lt;host&gt;/api/webhooks/incoming/kudu</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Stripe - For Stripe webhooks the Messaging Web Service accepts Post HTTP(s) requests on the following endpoint.<br />https://&lt;host&gt;/api/webhooks/incoming/stripe</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Event changed</h2>
+        <p class="SVnormal">Monitors changes in the specified Scheduler. Note that the monitoring is starting only when the Smart bot’s process starts to verify the condition. Thus, if the condition is in a Trigger, then all changes are captured. If the condition is in a transition, the Smart bot will verify only those changes that happened after entering the corresponding state.</p>
+        <p class="SVnormal">If the condition is in a Trigger, corresponding database changes are monitored and collected in a queue during one hour. Thus if the Smart Bot detected an appropriate change and started to handle it and meanwhile the second change has happened, it will be buffered and stored until the Smart Bot re-verifies the condition again or one hour passes.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">Description</p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">String</p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">Displayed name of the condition. This property is only used in the HMI and has no effect at run-time.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Schedule names</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Names of the deployed schedules in which the event should be searched. Multiple ranges are separated with commas. This property supports Wildcard symbols:<br />“?” is a replacement for any single character<br />“*” is a replacement for any amount of characters.<br />This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Change types</td>
+                    <td class="SVtable" style="vertical-align: top;">Enum</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Type of event changes to monitor. The following values are available:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">Event added</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Event modified</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Event removed</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Event started</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Event stopped</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Event added, modified or removed</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Event started or stopped</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Any change</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Filter by attendees</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Selects only events with the specified attendees. If the field is empty, corresponding filter is not applied.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Filter by name</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>A function that will be applied to compare the actual event name and the value of the Name property. The following functions are available:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">Any value – any text is accepted</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals – the exact text matching is required</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals to any of the following strings – the exact text matching is required. Use one string per line to separate options</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains – the occupation string must contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains any of the following strings – the occupation string must contain any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with – the occupation string must start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with any of the following strings – the occupation string must start with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with – the occupation string must end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with any of the following strings – the occupation string must end with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not equals – the occupation string must not match the specified value -	Not contains – the occupation string must not contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not starts with – the occupation string must not start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not ends with – the occupation string must not end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Match regular expression – the occupation string must match the specified regular expression</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Text or Regular expression verified using the Filter by name function. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Filter by summary</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>A function that will be applied to compare the actual event summary and the value of the Summary property. The following functions are available:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">Any value – any text is accepted</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals – the exact text matching is required</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals to any of the following strings – the exact text matching is required. Use one string per line to separate options</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains – the occupation string must contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains any of the following strings – the occupation string must contain any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with – the occupation string must start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with any of the following strings – the occupation string must start with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with – the occupation string must end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with any of the following strings – the occupation string must end with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not equals – the occupation string must not match the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not contains – the occupation string must not contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not starts with – the occupation string must not start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not ends with – the occupation string must not end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Match regular expression – the occupation string must match the specified regular expression</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Summary</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Text or Regular expression verified using the Filter by summary function. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Filter by location</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>A function that will be applied to compare the actual event location and the value of the Location property. The following functions are available:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">Any value – any text is accepted</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals – the exact text matching is required</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals to any of the following strings – the exact text matching is required. Use one string per line to separate options</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains – the occupation string must contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains any of the following strings – the occupation string must contain any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with – the occupation string must start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with any of the following strings – the occupation string must start with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with – the occupation string must end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with any of the following strings – the occupation string must end with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not equals – the occupation string must not match the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not contains – the occupation string must not contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not starts with – the occupation string must not start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not ends with – the occupation string must not end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Match regular expression – the occupation string must match the specified regular expression</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Location</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Text or Regular expression verified using the Filter by location function. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Filter events creating a chat</td>
+                    <td class="SVtable" style="vertical-align: top;">Enum</td>
+                    <td class="SVtable" style="vertical-align: top;">Filter events creating of modifying a chat.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Filter by chat name</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>A function that will be applied to compare the actual event chat and the value of the Chat name property. The following functions are available:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">Any value – any text is accepted</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals – the exact text matching is required</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals to any of the following strings – the exact text matching is required. Use one string per line to separate options</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains – the occupation string must contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains any of the following strings – the occupation string must contain any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with – the occupation string must start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with any of the following strings – the occupation string must start with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with – the occupation string must end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with any of the following strings – the occupation string must end with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not equals – the occupation string must not match the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not contains – the occupation string must not contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not starts with – the occupation string must not start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not ends with – the occupation string must not end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Match regular expression – the occupation string must match the specified regular expression</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Chat name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Text or Regular expression verified using the Filter by chat name function. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Filter events by entry procedure</td>
+                    <td class="SVtable" style="vertical-align: top;">Enum</td>
+                    <td class="SVtable" style="vertical-align: top;">Filter events having Entry action specified.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Filter by Entry bot name</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>A function that will be applied to compare the actual event Entry bot name and the value of the Entry Bot name property. The following functions are available:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">Any value – any text is accepted</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals – the exact text matching is required</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals to any of the following strings – the exact text matching is required. Use one string per line to separate options</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains – the occupation string must contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains any of the following strings – the occupation string must contain any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with – the occupation string must start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with any of the following strings – the occupation string must start with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with – the occupation string must end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with any of the following strings – the occupation string must end with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not equals – the occupation string must not match the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not contains – the occupation string must not contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not starts with – the occupation string must not start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not ends with – the occupation string must not end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Match regular expression – the occupation string must match the specified regular expression</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Entry Bot name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Text or Regular expression verified using the Filter by Entry bot name function. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Filter events by exit procedure</td>
+                    <td class="SVtable" style="vertical-align: top;">Enum</td>
+                    <td class="SVtable" style="vertical-align: top;">Filter events having Entry action specified.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Filter by Exit bot name</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>A function that will be applied to compare the actual event Exit Bot name and the value of the Exit bot name property. The following functions are available:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">Any value – any text is accepted</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals – the exact text matching is required</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Equals to any of the following strings – the exact text matching is required. Use one string per line to separate options</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains – the occupation string must contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Contains any of the following strings – the occupation string must contain any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with – the occupation string must start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Starts with any of the following strings – the occupation string must start with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with – the occupation string must end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Ends with any of the following strings – the occupation string must end with any of the specified values. Use one string per line to separate values</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not equals – the occupation string must not match the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not contains – the occupation string must not contain the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not starts with – the occupation string must not start with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Not ends with – the occupation string must not end with the specified value</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Match regular expression – the occupation string must match the specified regular expression</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Exit Bot name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Text or Regular expression verified using the Filter by Exit bot name function. This property supports usage of internal bot variables.</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

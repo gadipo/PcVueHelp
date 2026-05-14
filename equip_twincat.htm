@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|Equipment|Driver references" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Beckhoff TwinCAT</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Beckhoff TwinCAT</h1>
+        <p class="SVnormal">This driver supports communication over Ip with Beckhoff TwinCAT PLCs.</p>
+        <p class="SVnormal">The Beckhoff software for the TwinCAT (The Windows Control and Automation Technology) system turns any compatible PC into a real-time controller with a multi-PLC system, Numerical Control (NC) axis control, programming environment and operating station. TwinCAT replaces conventional PLC and NC/CNC controllers as well as operating devices.</p>
+        <p class="SVnormal">The TwinCAT software devices can be distributed since TwinCAT PLC programs can run on PCs or on Beckhoff Bus Terminal Controllers.  The TwinCAT protocol enables connection to any TwinCAT system whether local or distributed over a TCP/IP network. It uses the AMS Router (message router) provided by Beckhoff to manage and distribute all of the messages, both within the system and via TCP/IP connections. In a distributed architecture, all communication is run over the standard Ethernet network interface of a PC.</p>
+        <p class="SVnormal">
+            <p class="SVnormal">In the communication, ADS is the transport layer but the requested TwinCAT device has to support the ADS commands. These are supported by TwinCAT PLCs with version numbers from 2.7 B511, from 2.8 B718 and 2.9</p>
+        </p>
+        <div class="tip">
+            <p class="SVnormal">You can configure the TwinCAT driver using the TwinCAT Smart Generator.</p>
+        </div>
+        <h2 class="SVheading2">Prerequisites</h2>
+        <p class="SVnormal">The message router has to be installed on the system that is running <span class="mc-variable OEM.ProductName variable">PcVue</span>. It comes with any TwinCAT software pack.  The earliest version to use is 2.9.</p>
+        <div class="note">
+            <p class="SVnormal">If you do not need a TwinCAT system, install TwinCAT-CP instead.</p>
+        </div>
+        <p class="SVnormal">In a distributed configuration, each PC on the network must have a unique AMS Net Id.  To allow two PCs to communicate you need to add the AMS router definition on the remote PC as follows.</p>
+        <ol>
+            <li class="SVnumbered" value="1">Right-click on the TwinCAT icon and select <u>Properties</u> to open the TwinCAT System Properties dialog. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t5"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t5" style="display: none;"><img src="../../Resources/Images/AE/Comm_DataAcq/equipment_twincat_about_menu.png" title="TwinCAT context menu" /></div></li>
+            <li class="SVnumbered" value="2">Select  the AMS Router tab. </li>
+            <li class="SVnumbered" value="3">Enter the <u>AMS Net Id</u> of your PC in the <u>Local computer</u> field.</li>
+            <li class="SVnumbered" value="4">Select <u>Add</u> to open the Add Remote Connection dialog and then enter the parameter for the remote computer. </li>
+            <li class="SVnumbered" value="5">Repeat the previous step for each PC that will be communicating and apply the same steps on the remote computer.</li>
+            <li class="SVnumbered" value="6">The message router needs to be started for the communication to work. You can do so either manually in the TwinCAT icon's context menu by selecting System.Start, or automatically by selecting Enable in  System tab of the System properties dialog.</li>
+        </ol>
+        <h2 class="SVheading2">Network properties</h2>
+        <p class="SVnormal">This topic only includes a reference of objects' properties.<br /></p>
+        <p class="SVnormal">See the topic <a href="equipment_configure_comm_objects.htm">How to configure networks devices and frames</a> for more information about how to configure communication objects.</p>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the network</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the network (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Protocol specific attributes</td>
+                    <td class="SVtable">Reserved - Do not change</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the network will start upon Equipment communication start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Use default value</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Networking</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Servers</p>
+                </td>
+                <td class="SVtable">
+                    <p>The list of <span class="mc-variable OEM.ProductName variable">PcVue</span> stations where the network will be active</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Protocol Id</td>
+                    <td class="SVtable">Reserved - Do not change</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Device properties</h2>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the device</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the device (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Equipment type</td>
+                    <td class="SVtable">Select the type of equipment that best suits the field device you want  communicate with.<br />The list of frame types and address ranges depend on the equipment type.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Address</td>
+                    <td class="SVtable">The 6-digit AMS Net Id of the remote PC. For example 192 168 0 12 1 1</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the device will start upon network start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Connection</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum waiting time between a request and the reply from the equipment</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Port number</p>
+                </td>
+                <td class="SVtable">
+                    <p>The port number of the field device</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Miscellaneous</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Virtual</p>
+                </td>
+                <td class="SVtable">
+                    <p>Reserved. Do not select.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Message delay</td>
+                <td class="SVtable">Reserved. Leave default value 0.</td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Port</h3>
+        <p class="SVnormal">By default, the driver will access the PLC port of the remote PC. If you wish to specify another port, change the port property as follows.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 300px;" />
+            <col style="width: 357px;" />
+            <tr>
+                <td class="SVtableHeading">Port</td>
+                <td class="SVtableHeading">Value</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Port for PLC</td>
+                <td class="SVtable">801</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Port for PLC (Runtime system 2)</td>
+                <td class="SVtable">811</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Port for PLC (Runtime system 3)</td>
+                <td class="SVtable">821</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Port for PLC (Runtime system 4)</td>
+                <td class="SVtable">831</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Port for logger</td>
+                <td class="SVtable">100</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Port for IO</td>
+                <td class="SVtable">300</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Port for SPS</td>
+                <td class="SVtable">400</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Port for  NC</td>
+                <td class="SVtable">500</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Port for  ISG</td>
+                <td class="SVtable">550</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Port for PCS</td>
+                <td class="SVtable">600</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Frame addressing</h2>
+        <p class="SVnormal">Depending on the equipment type you have selected when configuring the device, you have access to the following type of frames.</p>
+        <p class="SVnormal">The Starting address
+ and Quantity properties define the memory address range for each frame, how it
+ is read from and written to, and how it is interpreted in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <p class="SVnormal">The start address of the frames and the data type are not used by the driver, only the size is important.</p>
+        <div class="warning">The quantity of data must correspond to the total size of all of the variables you wish to access.</div>
+        <p class="SVnormal">
+            <p class="SVnormal">The TwinCAT variable definition for a frame is specified in an ASCII formatted file. The file must be located in the C folder of the project. Its name is made up of the network, device, and frame names (for example MyNet_MyDev_MyFrame.dat).</p>
+        </p>
+        <p class="SVnormal">The format of the file's content is composed of <i>Variable Name</i> which is the name of the variable in the TwinCAT program and <i>Size</i> which is the size of the variable in bytes.</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Variable Name,Size</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">
+            <p class="SVnormal">The order in which the variables in TwinCAT program are listed is significant as that is the sequence used for TwinCAT variables onto the frame.</p>
+            <div class="tip">
+                <p class="SVnormal">The TwinCAT Smart Generator automates this configuration step.</p>
+            </div>
+        </p>
+        <div class="warning">
+            <p class="SVnormal">The Word variable byte offset MUST be a multiple of 2.</p>
+            <p class="SVnormal">Double and Float variable byte offsets MUST be a multiple of 4.</p>
+        </div>
+        <p class="SVnormal">The PLC processes each request before it starts the next PLC cycle. For example, a request with 200,000 TwinCAT variables would cause the PLC to collect and copy 200,000 variables into a single ADS response before starting the next PLC cycle.  Such a large number of ADS sub-commands would disrupt the running of the PLCs. We recommend that you do not specify more than 500 TwinCAT variables per frame.</p>
+        <div class="warning">
+            <p class="SVnormal">The size of the Word frame defined in <span class="mc-variable OEM.ProductName variable">PcVue</span> must be greater than or equal to twice the total size of all of the variables defined in the Variable Definition file.</p>
+        </div>
+        <h2 class="SVheading2">Driver status</h2>
+        <p class="SVnormal">The driver status provides driver-specific 
+ information to supplement the <b>frame general status</b>. For more information 
+ on status in general, refer to the topic <a href="equipment_comm_status.htm">General communication status</a>.</p>
+        <h3 class="SVheading3">Most commonly occurring error codes</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col style="width: 557px;" />
+            <tr>
+                <td style="vertical-align: top;" class="SVtableHeading">Driver status</td>
+                <td style="vertical-align: top;" class="SVtableHeading">Description</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">0x0007</td>
+                <td style="vertical-align: top;" class="SVtable">Equipment (remote computer) not configured in the AMS Router</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">0x0012</td>
+                <td style="vertical-align: top;" class="SVtable">AMS Router not started</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">0x1000</td>
+                <td style="vertical-align: top;" class="SVtable">Cannot open the Variable Definition file. Please check that its name   is that of a valid frame name.</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">0x1001</td>
+                <td style="vertical-align: top;" class="SVtable">Error in allocating the driver's buffer memory</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">0x1002</td>
+                <td style="vertical-align: top;" class="SVtable">No variable found in the Write request</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">0x1003</td>
+                <td style="vertical-align: top;" class="SVtable">
+                    <p>The total size of the TwinCAT variable definition exceeds 2,097,152 bytes</p>
+                    <div class="note">
+                        <p class="SVnormal"> Each variable has an additional 4 bytes for error handling.</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">0x2751</td>
+                <td style="vertical-align: top;" class="SVtable">Network cable disconnected</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">0x3yyy</td>
+                <td style="vertical-align: top;" class="SVtable">Variable not found in the equipment</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">&#160;</td>
+                <td style="vertical-align: top;" class="SVtable"><i>xxx</i> is the index (in hexadecimal) of the variable in TwinCAT Variable Definition file</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">0x6yyy</td>
+                <td style="vertical-align: top;" class="SVtable">Size of variable mismatched</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">&#160;</td>
+                <td style="vertical-align: top;" class="SVtable"><i>yyy</i> is the index (in hexadecimal) of the variable in the TwinCAT Variable Definition file</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">0x6000</td>
+                <td style="vertical-align: top;" class="SVtable">Write request error</td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top;" class="SVtable">&#160;</td>
+                <td style="vertical-align: top;" class="SVtable">
+                    <p>The size of one of the variables written via the variable link differs from the size specified in the TwinCAT Variable Definition file.</p>
+                    <div class="note">
+                        <p class="SVnormal"> Write each variable in turn to find out which one is faulty.</p>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Less usual error codes</h3>
+        <br />
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col style="width: 554px;" />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Driver status</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Description</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0001</td>
+                <td class="SVtable">Internal error</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0002</td>
+                <td class="SVtable">No runtime</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0003</td>
+                <td class="SVtable">Allocation locked memory error</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0004</td>
+                <td class="SVtable">Insert mailbox error</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0005</td>
+                <td class="SVtable">Wrong receive HMSG</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0006</td>
+                <td class="SVtable">Target port not found</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0008</td>
+                <td class="SVtable">Unknown command ID</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0009</td>
+                <td class="SVtable">Incorrect task ID</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x000A</td>
+                <td class="SVtable">No I/O</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x000B</td>
+                <td class="SVtable">Unknown AMS command</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x000C</td>
+                <td class="SVtable">Win32 error</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x000D</td>
+                <td class="SVtable">Port not connected</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x000E</td>
+                <td class="SVtable">Invalid AMS length</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x000F</td>
+                <td class="SVtable">Invalid AMS Net ID</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0010</td>
+                <td class="SVtable">Low installation level</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0011</td>
+                <td class="SVtable">No debug available</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0013</td>
+                <td class="SVtable">Port already connected</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0014</td>
+                <td class="SVtable">AMS Sync - Win32 error</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0015</td>
+                <td class="SVtable">AMS Sync - Timeout</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0016</td>
+                <td class="SVtable">AMS Sync - AMS error</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0017</td>
+                <td class="SVtable">AMS Sync - no index map</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0018</td>
+                <td class="SVtable">Invalid AMS port</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0019</td>
+                <td class="SVtable">No memory</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x001A</td>
+                <td class="SVtable">TCP send error</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x001B</td>
+                <td class="SVtable">Host unreachable</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0500</td>
+                <td class="SVtable">Router: no locked memory</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0502</td>
+                <td class="SVtable">Router: mailbox full</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0700</td>
+                <td class="SVtable">Error class &lt;<i>device error</i>&gt;</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0701</td>
+                <td class="SVtable">Server does not support the service</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0702</td>
+                <td class="SVtable">Invalid index - group</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0703</td>
+                <td class="SVtable">Invalid index - offset</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0704</td>
+                <td class="SVtable">Reading/writing not permitted</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0705</td>
+                <td class="SVtable">Parameter size is incorrect</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0706</td>
+                <td class="SVtable">Invalid parameter value</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0707</td>
+                <td class="SVtable">Device is not in a ready state</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0708</td>
+                <td class="SVtable">Device is busy</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0709</td>
+                <td class="SVtable">Invalid context (must be in Windows)</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x070A</td>
+                <td class="SVtable">Out of memory</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x070B</td>
+                <td class="SVtable">Invalid parameter value</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x070C</td>
+                <td class="SVtable">Not found (files etc.)</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x070D</td>
+                <td class="SVtable">Syntax error in command or file</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x070E</td>
+                <td class="SVtable">Objects do not match</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x070F</td>
+                <td class="SVtable">Object already exists</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0710</td>
+                <td class="SVtable">Symbol not found</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0711</td>
+                <td class="SVtable">Symbol version invalid</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0712</td>
+                <td class="SVtable">Server is in an invalid state</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0713</td>
+                <td class="SVtable">AdsTransMode not supported</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0714</td>
+                <td class="SVtable">Notification handle is invalid</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0715</td>
+                <td class="SVtable">Notification client not registered</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0716</td>
+                <td class="SVtable">No more notification handles</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0717</td>
+                <td class="SVtable">Size for watch too big</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0718</td>
+                <td class="SVtable">Device not initialized</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0719</td>
+                <td class="SVtable">Device has a timeout</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x071A</td>
+                <td class="SVtable">Query interface failed</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x071B</td>
+                <td class="SVtable">Wrong interface required</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x071C</td>
+                <td class="SVtable">Class ID is invalid</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x071D</td>
+                <td class="SVtable">Object ID is invalid</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x071E</td>
+                <td class="SVtable">Request is pending</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x071F</td>
+                <td class="SVtable">Request aborted</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0720</td>
+                <td class="SVtable">Signal warning</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0721</td>
+                <td class="SVtable">Invalid array index</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0740</td>
+                <td class="SVtable">Error class &lt;<i>client error</i>&gt;</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0741</td>
+                <td class="SVtable">Invalid parameter at service</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0742</td>
+                <td class="SVtable">Polling list is empty</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0743</td>
+                <td class="SVtable">Var connection already in use</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0744</td>
+                <td class="SVtable">Invoke ID in use</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0745</td>
+                <td class="SVtable">Timeout elapsed</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0746</td>
+                <td class="SVtable">Error in Win32 subsystem</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0748</td>
+                <td class="SVtable">ADS-port not opened</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0750</td>
+                <td class="SVtable">Internal error in ADS sync</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0751</td>
+                <td class="SVtable">Hash table overflow</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0752</td>
+                <td class="SVtable">Key not found in hash</td>
+            </tr>
+            <tr>
+                <td class="SVtable">0x0753</td>
+                <td class="SVtable">No more symbols in cache</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">SCADA Basic scripting</h2>
+        <p class="SVnormal">You can control communication with this driver in SCADA Basic scripts with the CIMWAY instruction.</p>
+        <div class="note">See the topic <a href="equipment_msg_exchange.htm">Message exchange mechanisms in <span class="mc-variable OEM.ProductName variable">PcVue</span></a> for more information about what to optimize and how you can send commands from scripts. </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

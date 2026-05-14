@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|BACnet|BACnet Alarm and Event notifications" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Mapping Variables to the Events/Alarms</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor241"></a>Mapping Variables to the Events/Alarms</h1>
+        <p class="SVnormal">Variables are mapped to the Events/Alarms  in the same way that you map any variable used for data sharing. See the topic <a href="bacnet_mapping_overview.htm">The BACnet mapping dialog</a> and the book <u>BACnet data sharing</u>. </p>
+        <ul style="list-style-type: disc;">
+            <li>The Events/Alarms are those of the object that detect the condition to be notified. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_mapping_event.png" MadCap:targetName="t2" style="display: none;" /></li>
+            <li>The mapped variable will only receive a value if the appropriate Notification Class instance has been added to the device in <span class="mc-variable OEM.ProductName variable">PcVue</span> BACnet configuration. See the topic <a href="bacnet_adding_alarmevent_config.htm">How to configure <span class="mc-variable OEM.ProductName variable">PcVue</span> to receive alarm and event notifications</a>.</li>
+            <li>The BACnet <u>Monitoring</u> and <u>Archive Source</u> properties are not available in the variable configuration's Advanced tab as they are not applicable.</li>
+            <li>The variable is always a bit or an alarm. If an alarm is used then its acknowledgement status can be sent to the BACnet device. This behavior depends on the <u>Alarms - Remote Acknowledgment Management</u> setting. See the topic <a href="bacnet_port_settings.htm">BACnet settings</a>.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The BACnet Alarms helper can be used to visualize, and diagnose problems with, Alarm/Event notification configuration - in both <span class="mc-variable OEM.ProductName variable">PcVue</span> and the BACnet device itself. See the topic <a href="bacnet_notification_helper.htm">Using the BACnet Alarms helper</a>.</p>
+        </div>
+        <h2 class="SVheading2">BACnet event transitions and the value of the mapped variables</h2>
+        <p class="SVnormal">The BACnet standard identifies three event transitions. The following tables illustrate how these are mapped to variables.</p>
+        <table style="border-collapse: collapse;">
+            <col style="width: 200px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <tbody>
+                <tr>
+                    <td>&#160;</td>
+                    <td colspan="3" class="SVtableHeading" style="text-align: center;">Variable</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">BACnet transition</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Timestamp</td>
+                    <td class="SVtableHeading">Quality</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">To Normal</td>
+                    <td style="vertical-align: top;">0</td>
+                    <td rowspan="3" style="vertical-align: top;">From the notification</td>
+                    <td style="vertical-align: top;">Good</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">To OffNormal</td>
+                    <td style="vertical-align: top;">1</td>
+                    <td style="vertical-align: top;">Good</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">To Fault</td>
+                    <td style="vertical-align: top;">Unchanged</td>
+                    <td style="vertical-align: top;">Bad</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">If the BACnet object has an analog value, the behavior is modified, as there is a high threshold and low threshold to be taken into account. In this case,  two of variables are used.</p>
+        <table style="border-collapse: collapse;">
+            <col style="width: 300px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <tbody>
+                <tr>
+                    <td>&#160;</td>
+                    <td colspan="4" class="SVtableHeading" style="text-align: center;">Variables</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">BACnet transition</td>
+                    <td class="SVtableHeading">Value (High)</td>
+                    <td class="SVtableHeading">Value (Low)</td>
+                    <td class="SVtableHeading">Timestamp</td>
+                    <td class="SVtableHeading">Quality</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">To Normal</td>
+                    <td style="vertical-align: top;">0</td>
+                    <td style="vertical-align: top;">0</td>
+                    <td rowspan="4" style="vertical-align: top;">From the notification</td>
+                    <td style="vertical-align: top;">Good</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">To OffNormal (out of range is high limit)</td>
+                    <td style="vertical-align: top;">1</td>
+                    <td style="vertical-align: top;">0</td>
+                    <td style="vertical-align: top;">Good</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">To OffNormal (out of range is low limit)</td>
+                    <td style="vertical-align: top;">0</td>
+                    <td style="vertical-align: top;">1</td>
+                    <td style="vertical-align: top;">Good</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">To Fault</td>
+                    <td style="vertical-align: top;">Unchanged</td>
+                    <td style="vertical-align: top;">Unchanged</td>
+                    <td style="vertical-align: top;">Bad</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">The following BACnet objects support events. Those in a bold typeface are threshold type (high and low limit).</p>
+        <table style="border-collapse: collapse;">
+            <col style="width: 200px;" />
+            <col style="width: 200px;" />
+            <col style="width: 200px;" />
+            <tbody>
+                <tr>
+                    <td><b>analog_input</b>
+                    </td>
+                    <td>multi_state_input</td>
+                    <td><b>pulse_converter</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>analog_output</b>
+                    </td>
+                    <td>multi_state_output</td>
+                    <td>global_group</td>
+                </tr>
+                <tr>
+                    <td><b>analog_value</b>
+                    </td>
+                    <td>multi_state_value</td>
+                    <td>trend_log_multiple</td>
+                </tr>
+                <tr>
+                    <td>binary_input</td>
+                    <td>trend_log</td>
+                    <td>access_door</td>
+                </tr>
+                <tr>
+                    <td>binary_output</td>
+                    <td>life_safety_point</td>
+                    <td>access_point</td>
+                </tr>
+                <tr>
+                    <td>binary_value</td>
+                    <td>life_safety_zone</td>
+                    <td>access_zone</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;">loop</td>
+                    <td>accumulator</td>
+                    <td>load_control</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Acknowledgement of BACnet Alarms</h2>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> can acknowledge each of the three possible alarm transitions, To Normal, To OffNormal and To Fault, if required. How the acknowledgement is managed depends on the setting <u>Acknowledge alarm/event notifications</u>. See the topic <a href="bacnet_port_settings.htm">BACnet settings</a>.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

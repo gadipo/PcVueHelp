@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Servers|OPC DA servers" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>OPC DA server configuration</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">OPC DA server configuration</h1>
+        <p class="SVnormal">Each instance of <span class="mc-variable OEM.ProductName variable">PcVue</span> running on a computer host can expose an OPC DA server interface. For security reason, you can configure access control policies to define which <span class="mc-variable OEM.ProductName variable">PcVue</span> host shall have the OPC DA server interface available.<br />An OPC DA server access control policy defines if and how the server interacts with OPC clients, including authentication, browsing, logging, and communication handling. These policies ensure secure and efficient data exchange by managing how OPC DA client permissions enforcement, write operations, and error-handling are performed.</p>
+        <p>This topic covers how to configure an OPC DA access control list.</p>
+        <div class="note">
+            <p>By default, the OPC DA server interface is only accessible to <span class="mc-variable OEM.ProductName variable">PcVue</span> built-in components on all stations, in particular to the HDS for data archiving purpose.</p>
+            <p>If you are using third party OPC clients, add a policy for the list of <span class="mc-variable OEM.ProductName variable">PcVue</span> servers these OPC clients will connect to. We recommend you to select OPC clients that support OPC security and turn authentication on.</p>
+        </div>
+        <h2 class="SVheading2">Configuring an access control policy</h2>
+        <ol>
+            <li value="1">
+                <p class="SVnormal">Open the Application Explorer and expand Communication then Servers nodes.</p>
+            </li>
+            <li value="2">
+                <p class="SVnormal">Select the OPC DA servers and in the right pane, click <b>Add an OPC DA server policy</b>. The Policy creation dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="opc-da-policy"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../../Resources/Images/AE/Comm_Servers/opc_da_access.png" MadCap:targetName="opc-da-policy" style="display: none;" />
+                </p>
+            </li>
+            <li value="3">
+                <p class="SVnormal">Enter a name and (Optional) a description.</p>
+            </li>
+            <li value="4">
+                <p>Select the Advanced tab and define the advanced properties.</p>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Advanced properties</h2>
+        <ul>
+            <li>Access control:</li>
+            <ul>
+                <li>Exclusive - If ticked, restricts access to <span class="mc-variable OEM.ProductName variable">PcVue</span> built-in components, including the  HDS.</li>
+                <li>Turn on authentication - If ticked, requires OPC clients to authenticate before interaction. To enable authentication, you must configure one or more user accounts with a Name, Password, and Browsing levels in the User accounts configuration. Each variable have an assigned browsing level, which can be set in the Advanced dialog of the variable's configuration. Refer to <a href="../UserAccounts/User_conf.htm">How to configure a user</a> for more information.</li>
+                <div class="tip">
+                    <p class="SVnormal">A browsing level can also be assigned to a variable's extended attributes and the simulation properties. The browsing level assigned to a particular extended attribute is global - that is, it affects that attribute for all variables.</p>
+                </div>
+                <p>With authentication is enabled:</p>
+                <ul>
+                    <li>OPC clients can only see variables that match the browsing levels of the logged-in account.</li>
+                    <li>Write access is granted only if the account's command permissions match the variable's command level.</li>
+                    <li>OPC client actions, including logon/logoff and write operations, can be logged.</li>
+                </ul>
+                <li>Turn off authentication - If ticked, allows OPC clients to interact without authentication.</li>
+                <ul>
+                    <li>Allowed services:</li>
+                    <ul>
+                        <li>Writes - If ticked, allows an OPC client to write values via the <span class="mc-variable OEM.ProductName variable">PcVue</span>'s OPC server.</li>
+                        <li>Browsing - If ticked, allows an OPC client to browse <span class="mc-variable OEM.ProductName variable">PcVue</span>'s address space.</li>
+                    </ul>
+                </ul>
+                <div class="note">
+                    <p>If an OPC client does not log on, it inherits the browsing and command levels from the DEFPROFILE.</p>
+                </div>
+                <div class="warning">
+                    <p>Disabling authentication or logging weakens security and increases the risk of unauthorized access. Ensure changes comply with your organization's security policies.</p>
+                </div>
+            </ul>
+            <li>Log user actions:</li>
+            <div class="note">
+                <p>When using authentication, commands from the OPC client can be logged as if they were commands from a user logged onto <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+            </div>
+            <ul>
+                <li>Writes - If ticked, logs all write requests to <span class="mc-variable OEM.ProductName variable">PcVue</span> from an OPC client.</li>
+                <li>Logon/logoff - If ticked, logs the action of an OPC client logging on or off.</li>
+            </ul>
+            <li>Address space browsing:</li>
+            <ul>
+                <li>Display properties - If ticked, variable's properties (description, Domain, Nature etc.) are exposed in the address space (in addition to the variables themselves).</li>
+            </ul>
+            <li>Interoperability issues:</li>
+            <ul>
+                <li>Ignore client callback errors - If ticked, sets the action to be taken when the OPC server notifies an OPC client that a function call has failed. <br />If unticked, the result code is treated as a communication failure and the OPC connection is reset. The client then has to terminate the current connection and make a new one.<br />If ticked, the result code is ignored and the communication continues with the current connection.</li>
+                <li>Purge pending OnDataChange - If ticked, the OPC Server will purge data buffers if the subscribed OPC client failed to consume the data.</li>
+            </ul>
+            <li>Networking:</li>
+            <ul>
+                <li>Servers - Name of the servers list to which the access control policy applies. The OPC DA server will be exposed as defined by the policy on all stations belonging to the selected list.  Refer to the topic <a href="../Comm_Networking/Configure_station_lists.htm">How to configure station lists</a> to learn more.</li>
+                <div class="note">
+                    <p>The default policy applies to the OPC DA server of <span class="mc-variable OEM.ProductName variable">PcVue</span> stations for which no other access control policy matches.</p>
+                </div>
+            </ul>
+        </ul>
+        <h2 class="SVheading2">Activate traces</h2>
+        <p class="SVnormal">The traces in the OPC DA server access control policy are activated once you click <b>Apply</b> after having configured the general and advanced properties.</p>
+        <p>The following are some of the traces you can activate:</p>
+        <ul>
+            <li>Trace 1: General - Logs data related to the overall OPC DA server activity, including client connections, disconnections, and configuration changes.</li>
+            <li>Trace 4: Full details - Provide in-depth details for all currently active logs data.</li>
+            <li>Trace 5: IOPCCommon - Logs data related to basic OPC connection setup, such as locale and setting client’s name.</li>
+            <li>Trace 6: IOPCServer - Logs data on general OPC server operations, including namespace handling and group creation.</li>
+            <li>Trace 7: IOPCServer::GetStatus() - Logs status requests from OPC clients to monitor server health.</li>
+            <li>Trace 8 : IConnectionPointContainer - Logs request from OPC clients and groups to obtain valid connection points, including for IOPCShutdown.</li>
+            <li>Trace 9 : IOPCItemProperties - Logs requests for item properties such as descriptions, data types etc.</li>
+            <li>Trace 10 : IOPCBrowse ServerAddressSpace - Logs browsing operations in the OPC server’s address space.</li>
+            <li>Trace 11: IOPCSecurityPrivate/IOPCSecurityNT - Logs data related to the authentication and security-related operations.</li>
+            <li>Trace 13: IOPCGroupStateMgt - Logs changes in OPC group state, including creation, deletion, and updates.</li>
+            <li>Trace 14 : IOPCSyncIO - Logs synchronous read and write operations between OPC clients and the server.</li>
+            <li>Trace 15: IOPCAsyncIO - Logs asynchronous data access operations  relying on IDataObject between OPC clients and the server.</li>
+            <li>Trace 16 : IOPCAsyncIO2 - Logs asynchronous data access operations relying on IConnectionPointContainer and IOPCDataCallback between OPC clients and the server.</li>
+            <li>Trace 17 : IOPCItemMgt - Logs client requests to add or remove items in an OPC group.</li>
+            <li>Trace 18: IConnectionPointContainer -  Logs asynchronous data access operations relying on IConnectionPointContainer between OPC clients and the server.</li>
+            <li>Trace 19: IDataObject - Logs requests related to connection and data using the IDataObject interface.</li>
+            <li>Trace 21: IOPCGroupStateMgt2 - Logs additional changes on OPC group state (as per IOPCGroupStateMgt) and OPC group keep-alive related requests.</li>
+            <li>Trace 29: IOPCDataCallback - Logs data change notifications sent from the server to OPC clients.</li>
+            <li>Trace 30: IOPCShutdown - Logs data related to the shutdown events and notifications sent to OPC clients.</li>
+            <li>Trace 31: IAdviseSink - Logs OPC server interfaces notifications sent to the OPC clients.</li>
+            <li>Trace 32: IEnumOPCItemAttributes - Logs enumeration of item attributes requested by OPC clients.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

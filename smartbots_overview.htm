@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="IM_SmartBots.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Smart Bots overview</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Smart Bots overview</h1>
+        <p class="SVnormal">Smart Bots is a plug-in for the Instant Messaging Server. It allows the application designer to create and run automated programs, called bots, which execute a set of operations in response to fulfillment of conditions. Examples of the use of Smart Bots includes the following.</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted">Application forms.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Job orders.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Field Service Management.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">On-site inspections work flow.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Smart Assistants.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">Smart Bots are designed to automate recurrent daily tasks, currently executed by operators and administrators manually. Describing and formalizing the process in terms of parametrized states and transitions between them allows defining flexibly nearly any existing process.</p>
+        <h2 class="SVheading2">Deployment</h2>
+        <p class="SVnormal">The Smart Bots plug-in is available as part of <span class="mc-variable OEM.ProductName variable">PcVue</span>'s installation. To install it select the Custom installation and select the Smart Bot feature.</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted">Bots are loaded from the folder &lt;projectFolder&gt;/MsgData/Bots. Plugin and bots are started along with the Instant Messaging Server.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Bots store the local data in the folder &lt;projectFolder&gt;/MsgData/Bots/Data.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Schedules are loaded from the folder &lt;projectFolder&gt;/MsgData/Schedulers. Scheduler is started along with the Instant Messaging Server.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">The bots configuration file is loaded from the folder &lt;projectFolder&gt;/MsgData/C. This configuration is used by Smart Bots at run-time for corresponding operations.</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Smart Bots nomenclature</h2>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted">Smart Bot - A process blueprint described by a finite-state machine with a set of operations in each state and conditions defined for every transition. Sometimes abbreviated to just Bot.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Bot agent - A thread running the given Smart Bot in the given chat. An instance of Bot agent is created for every chat where this Smart Bot has access to. A bot agent runs a finite state machine with defined states and transitions between states. Every Smart Bot has an initial state. When the bot agent arrives to a defined state, a corresponding set of operations is executed. After that, a set of conditions is continuously verified. If a certain condition is met, the bot will pass to the next state following the transition.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Trigger - A special state containing conditions instead of operations. Triggers are only verified when the bot agent is idle, that is when it is running but cannot move forward on any transition. If all conditions of a trigger are met, the bot will pass to the trigger state. After the triggered scenario is finished, that is when bot agent arrives to the final state in the trigger branch, the bot will stop, return to the last state or reset from the initial state depending on the specified behavior.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Scheduler - A thread running at the Instant Messaging Server process. It monitors the loaded schedules and execute Bot agents at the planned time.</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Bot permissions</h2>
+        <p class="SVnormal">An independent bot agent is started for each chat that the bot has access to. This implies two cases:</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted">The bot agent is started in a chat when the bot is invited to the chat.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">The bot agent is started in a chat if the bot belongs to a super profile (with a profile level greater than the level of all chat participants).</p>
+            </li>
+        </ul>
+        <p class="SVnormal">Each bot agent has permissions according to its role in the chat. For example, if the bot agent is invited as a guest, it will be able to send and read messages, but will not be able to invite other users to the chat. See Instant Messaging book for further details on user permissions.</p>
+        <div class="note">The bot has the same set of permissions as any other user with the same role.</div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

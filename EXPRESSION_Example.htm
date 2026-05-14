@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>EXPRESSION example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="EXPRESSION_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor163"></a>EXPRESSION Example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc337">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="EXPRESSION_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc337.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">This example exercises several modes of the EXPRESSION 
+ command. </p>
+        <p class="SVprogramCode">'Variables used:</p>
+        <p class="SVprogramCode">'@STATE01 of type STATE</p>
+        <p class="SVprogramCode">'@STATE02 of type STATE</p>
+        <p class="SVprogramCode">'@AUTHORISATION of type STATE</p>
+        <p class="SVprogramCode">'@REGISTER01 of type REGISTER</p>
+        <p class="SVprogramCode">'@REGISTER02 of type REGISTER</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'contents of a file model:</p>
+        <p class="SVprogramCode">'EXPRM,"MODEL 01","STATE01 or STATE02",,,0,0,"expression model no01"</p>
+        <p class="SVprogramCode">'EXPRM,"MODEL 02","REGISTER01 + REGISTER02",,,0,0,"expression model no02"</p>
+        <p class="SVprogramCode">'contents of a file model:</p>
+        <p class="SVprogramCode">'EXPRV,@STATE02,NOT @STATE01 ,,,0,0,comment expression01</p>
+        <p class="SVprogramCode">'EXPRV,@REGISTER02,@REGISTER01 + 21,,,0,0, register variables </p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode IMPORT_FILE_TEMP or Mode 0 (syntax 2)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB expressionimportfiletemp()</p>
+        <p class="SVprogramCode">'Declare variables</p>
+        <p class="SVprogramCode">&#160;&#160;DIM intResult as integer;</p>
+        <p class="SVprogramCode">&#160;&#160;DIM strString01 as STR;</p>
+        <p class="SVprogramCode">&#160;&#160;strString01 = "file model expressions.txt";</p>
+        <p class="SVprogramCode">&#160;&#160;intResult = EXPRESSION("IMPORT_FILE_TEMP",strString01);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode IMPORT_BUFFER_TEMP or Mode 1 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB expressionimportbuffertemp()</p>
+        <p class="SVprogramCode">'Declare variables</p>
+        <p class="SVprogramCode">&#160;&#160;DIM lngBuffer as long;</p>
+        <p class="SVprogramCode">&#160;&#160;DIM intResult as integer;</p>
+        <p class="SVprogramCode">&#160;&#160;DIM strString01 as STR;</p>
+        <p class="SVprogramCode">' Format for version 10 onwards</p>
+        <p class="SVprogramCode">&#160;&#160;strString01 = "EXPRESSIONTEMPLATE,Expression01,,0,0,,,1,,@Bit01 OR @Bit02";</p>
+        <p class="SVprogramCode">&#160;&#160;lngBuffer = ALLOC_BUFFER(1000);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Put the strString01 into the buffer</p>
+        <p class="SVprogramCode">&#160;&#160;PUT_BUFFER(lngbuffer,0,strString01);</p>
+        <p class="SVprogramCode">&#160;&#160;intResult = EXPRESSION("IMPORT_BUFFER_TEMP",lngBuffer);</p>
+        <p class="SVprogramCode">&#160;&#160;FREE_BUFFER(lngBuffer);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode IMPORT_FILE_ONVAR or Mode 2 (syntax 2)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB expressionimportfileonvar()</p>
+        <p class="SVprogramCode">'Declare variables</p>
+        <p class="SVprogramCode">&#160;&#160;DIM intResult as integer;</p>
+        <p class="SVprogramCode">&#160;&#160;DIM strString01 as STR;</p>
+        <p class="SVprogramCode">&#160;&#160;strString01 = "file expressions.txt";</p>
+        <p class="SVprogramCode">&#160;&#160;intResult = EXPRESSION("IMPORT_FILE_ONVAR",strString01);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode IMPORT_BUFFER_ONVAR or Mode 3 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB expressionimportbufferonvar()</p>
+        <p class="SVprogramCode">'Declare variables</p>
+        <p class="SVprogramCode">&#160;&#160;DIM lngBuffer as long;</p>
+        <p class="SVprogramCode">&#160;&#160;DIM intResult as integer;</p>
+        <p class="SVprogramCode">&#160;&#160;DIM strString01 as STR;</p>
+        <p class="SVprogramCode">' Format for version 10.0 onwards</p>
+        <p class="SVprogramCode">&#160;&#160;strString01 = "EXPRESSIONONVAR,Expression02,,0,0,,,1,,Register01,,@Register02 + @Register03";</p>
+        <p class="SVprogramCode">&#160;&#160;lngBuffer = ALLOC_BUFFER(1000);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Put the string strString01 into the buffer</p>
+        <p class="SVprogramCode">&#160;&#160;PUT_BUFFER(lngbuffer,0,strString01);</p>
+        <p class="SVprogramCode">&#160;&#160;intResult = EXPRESSION("IMPORT_BUFFER_ONVAR",lngBuffer);</p>
+        <p class="SVprogramCode">&#160;&#160;FREE_BUFFER(lngBuffer);</p>
+        <p class="SVprogramCode">END SUB </p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

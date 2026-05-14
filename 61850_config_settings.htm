@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|IEC 61850" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>IEC 61850 settings</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">IEC 61850 settings</h1>
+        <p class="SVnormal">IEC 61850 settings are accessed from the Application Explorer by selecting <u>&lt;Project&gt;.Communication.Data acquisition.IEC 61850</u> and choosing the <u>Settings</u> command from the task list. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p>
+            <img src="../../Resources/Images/AE/Comm_DataAcq/61850_settings.png" MadCap:targetName="t1" style="display: none;" />
+        </p>
+        <ul style="list-style-type: disc;">
+            <li>Invalidate variables – Defines if variable status should be set to invalid upon connection failure.
+				<ul><li>Never - The variables are never made invalid. This can be used when there is intermittent communication with the server.</li><li>Immediately - The variables are made invalid immediately on a communication failure. This is the default value.</li><li>After a delay - The variables are made invalid after the specified delay.</li></ul></li>
+            <li>Invalidate variables (while producer switchover) – Defines if variable status should be set to invalid upon producer switchover.</li>
+            <li>Monitoring<ul><li>Double point<ul><li>Off – Defines how Off value should be interpreted by <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li><li>On – Defines how On value should be interpreted by <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li></ul></li></ul></li>
+            <li>MMS layer configuration<ul><li>Maximum size of an assembled MMS message<ul><li>Max PDU size – Defines the maximum size of PDUs. Depending on the devices you are communicating with, this setting may need to be changed.</li></ul></li></ul></li>
+            <li>Data<ul><li>Use timestamp quality – If not enabled, the quality of timestamp associated to data will be ignored.</li><li>Default originator category for select/operate of controls – Defines the value used for the OrCat parameter when sending Controls – Default to station-control.</li><li>Default originator identifier for select/operate of controls – Defines the value used for the OrIdent parameter when sending Controls (max 32 characters). Default to an empty string.</li><div class="tip"><p class="SVnormal">The originator identifier and category can be handled with the extended attributes of variables mapped onto controllable IEC 61850 objects. Refer to the <a href="../Variables/Link_61850_tab_properties_dialog.htm#extended-attr">Linking a variable to an IEC 61850 data object or data attribute</a> topic for more information.</p></div><li>Default Test for select/operate of controls – If ticked, all controls sent will be by default flagged as ‘Test’.</li><li>Default Check bitstring for select/operate of controls<ul><li>Synchrocheck – If ticked, all controls sent will be by default flagged for synchro-check.</li><li>Interlock-check – If ticked, all controls sent will be by default flagged for interlock-check.</li></ul></li></ul></li>
+            <li>Interoperability issues<ul><li>Enable discovery services. If disabled, the IEC 61850 driver will not attempt to check if the configuration of the physical devices fit the <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration. This setting only applies to devices configured to use SCL-based offline configuration, it is ignored for the others.  </li></ul></li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">Disabling the use of discovery services affects elements such as browsing and checking the existence of Logical devices, Logical nodes, Data objects, Data attributes, Datasets, Dataset members...<br />If disabled, it is the responsibility of the application designer to make sure that the configuration is consistent system-wide to ensure proper operations of the IEC 61850 driver and data mapping.</p>
+            <p class="SVnormal">In particular, when SCL files are associated with the IEC 61850 network for offline configuration, it is strongly recommended to store the SCL files in the TP folder of the project and to add them to the list of files managed as part of Central Project Management (if in use). See the topic <a href="61850_network_scl.htm">IEC 61850 Network - SCL Files</a> for more information.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">If in addition to disabling the use of discovery services, you wish to fully disable the use of IEC 61850 services that lead to changes of the configuration of physical devices, you must make sure that none of the following <a href="61850_datareport_advanced_tab.htm">Data report advanced properties</a> are activated:</p>
+            <ul>
+                <li>
+                    <p class="SVbulleted">Send buffer time to the device,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Send dataset configuration to the device,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Send integrity period to the device,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Send optional fields to the device,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Send report identifier to the device,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Send trigger option to the device.</p>
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

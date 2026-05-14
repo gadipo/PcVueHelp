@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|The Variables Tree|Configuring variables|Linking a variable to its source" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Scaling and Adding a Deadband to Register Variables</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Scaling and Adding a Deadband to Register Variables<a name="kanchor245"></a></h1>
+        <p class="SVnormal">Register variables that have a value sourced from outside <span class="mc-variable OEM.ProductName variable">PcVue</span> have additional properties to scale and bias the value and to incorporate a deadband. These properties are found in the Advanced tab.</p>
+        <h2 class="SVheading2">Scaling a register variable</h2>
+        <p class="SVnormal">When using analog values it is frequently the case that the representation 
+ of the value in the equipment is not in engineering units. For example, 
+ a temperature that has a range from -10 to 40 DegC might be represented by 
+ a value of 0 to 4096.</p>
+        <p class="SVnormal">To scale and bias the value of a register variable, so that it is in engineering units, you enter the <u>Minimum value</u> and <u>Maximum value</u> in engineering units in the General tab and the <u>Device minimum value</u> and <u>Device maximum value</u> in the Advanced tab. <span class="mc-variable OEM.ProductName variable">PcVue</span> automatically performs the scale and bias calculation each time the value in the equipment changes. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t2" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/AE/Variables/register_variable_scaled.png" style="border-style: none;border: none;float: none;" border="0" />
+            </p>
+        </div>
+        <h2 class="SVheading2">Adding a deadband</h2>
+        <p class="SVnormal">The deadband is how much the value of the variable must change before it is recognized as a change by the rest of <span class="mc-variable OEM.ProductName variable">PcVue</span>. The use of a deadband is essential to remove the jitter (constant changing in value) caused by the primary transducer and/or the A to D converter used by the equipment to convert the analog signal to its digital equivalent. As <span class="mc-variable OEM.ProductName variable">PcVue</span> is change driven, if you do not use a deadband a lot of processing time will be wasted dealing with insignificant changes in value.</p>
+        <p class="SVnormal">The deadband is configured for each variable in the Advanced tab of the variable's properties dialog. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Variables/register_variable_deadband.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <p class="SVnormal">The value for the deadband can be entered in three ways selected by the <u>Type</u> drop down list box. The three options for <u>Type</u> are <u>Absolute</u>, <u>Range percent</u> and <u>Value percent</u>.</p>
+        <ul>
+            <li>Absolute - The deadband is entered in engineering units. For example, if the deadband was 10 the value would have to change by 10 or more before it was recognized.</li>
+            <li>Range percent - The deadband is entered as a percentage of the range. For example, if the range was 0 - 4000 and the deadband was 10, the value would have to change by 400 or more before it was recognized.</li>
+            <li>Value percent - The deadband is entered as a percentage of the value. For example, if the deadband was 10 and the current value of the variable was 400, the value would have to change by 40 or more before it was recognized.</li>
+        </ul>
+        <p>At runtime, the deadband processing has precedence over the out-of-bounds handling (according to the min/max range configuration) to determine the status of a variable. In practice, upon a value change, deadbanding is applied before checking if the new value is within the range or out-of-bounds. This means that:</p>
+        <ul>
+            <li>
+                <p>If the value of a register is close to its minimum or maximum value and changes by less than the deadband, the new value will be discarded and the variable will remain within the range.</p>
+            </li>
+            <li>
+                <p>If the value of a register is close to its minimum or maximum value and changes by more than the deadband, the new value will be taken into account and the variable may become NSL if the new value is out-of-bounds.</p>
+            </li>
+        </ul>
+        <p>The same is true when a variable is out-of-bounds:</p>
+        <ul>
+            <li>
+                <p>If the value changes by less than the deadband, the new value will be discarded and the variable will remain with status NSL (out-of-bounds).</p>
+            </li>
+            <li>
+                <p>If the value changes by more than the deadband, the new value will be taken into account and the variable may become valid again if the new value is within the range.</p>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">In a networking architecture, the <u>Deadband</u> property is distributed. The behavior only depends on how the deadband is configured on the producer station of a variable. Changing it on a client station that is only a consumer of a variable has no effect.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

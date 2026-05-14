@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|IEC 60870-5" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Adding Sectors to an IEC 60870-5 device</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor185"></a>Adding Sectors to an IEC 60870-5 Device</h1>
+        <p>A sector object in <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration represents, and provides access to, a physical IEC 60870-5 sector. A sector normally represents a piece of discrete control equipment (for example a circuit breaker)  and is connected to the network via a device.</p>
+        <p class="SVnormal">On an IEC 60870-5 network, a sector is identified by the <i style="font-style: normal;text-decoration: underline;">Common address of ASDU</i>. In <span class="mc-variable OEM.ProductName variable">PcVue</span>, it is identified by the <u>Name</u> that you give it during the configuration.</p>
+        <h2 class="SVheading2">Adding a Sector</h2>
+        <ol>
+            <li value="1">Select an IEC 60870-5 device in the Application Explorer. From the task pane, select <u>Add a sector</u> to open the Sector dialog. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <div MadCap:targetName="t1" style="display: none;">
+                <br />
+                <img src="../../Resources/Images/AE/Comm_DataAcq/m104_sector_params_tab.png" />
+                <br />
+            </div>
+            <li value="2">In the <u>Name</u> field, enter a name for the IEC 60870-5 Sector.</li>
+            <li value="3">Enter the optional descriptive text in the <u>Description</u> field. The description is only used in the Application Explorer.</li>
+            <li value="4">In the <u>Common address of ADSU</u> filed, enter the Sector's address. This is the identity of the Sector within the Device through which it is connected.</li>
+            <li value="5">Tick <u>Activate at start-up</u> if the sector is to be activated when the device is started.</li>
+            <li value="6">Click on <u>OK</u> to confirm the configuration and close the dialog.</li>
+        </ol>
+        <h2 class="SVheading2">The Advanced tab</h2>
+        <p class="SVnormal">The Advanced tab contains the many sector properties, pre-set to recommended defaults and in most cases will not need to be changed. Please refer to the documentation provided by the device manufacturer for properties that must match the device configuration. 
+		<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t4" style="display: none;">
+            <img src="../../Resources/Images/AE/Comm_DataAcq/m104_sector_advanced_tab.png" />
+        </div>
+        <p class="SVnormal">The following properties are those that are most commonly changed.</p>
+        <ul>
+            <li>Communication properties<ul><li>Support activation termination (C_SE_ACTTERM) - If enabled, <span class="mc-variable OEM.ProductName variable">PcVue</span> expects to receive a C_SE_ACTTERM message upon command termination. If such a message is not received, the command is processed as failed. If disabled, the C_SE_ACTTERM message is not expected and is not used to handle command failure.</li><li>Address format - The format of the address of Information Objects.  See the topic <a href="m104_mapping.htm">IEC 60870-5 variable mapping</a>.<br />The IEC 101 prescribes formats structured or unstructured on 1, 2 or 3 bytes (MSB first), the IEC 104 prescribes formats structured or unstructured on 3 bytes (MSB first). Other address formats are provided for convenience to support communication with devices requiring such interop provisions.</li></ul></li>
+            <li>Data exchange mechanisms<ul><li>Upon reception of end of init (EOI) - The list of initialization requests to send upon receiving the EOI message.</li><li>When a device comes online - The list of initialization requests to send when a device comes online.</li><li>When a device comes online (after a short offline period) - The list of initialization requests to send when a device comes online after a short period offline.<ul><li>Short offline period definition - The maximum duration to consider an offline period as short and apply the corresponding initialization sequence.</li></ul></li><li>Support spontaneous transmission - If enabled, <span class="mc-variable OEM.ProductName variable">PcVue</span> listen for spontaneous transmission and process them to refresh variables. If disabled, only periodic requests are used to keep variables updated.</li></ul></li>
+            <li>Periodic requests<ul><li>General Interrogation (GI)<ul><li>Polling period - The time interval at which general interrogation requests are sent. Default 1 min.</li></ul></li><li>Interrogation of groups<ul><li>Group 1 to 16 - The time interval at which group interrogation requests are sent for each group number. Not activated by default.</li></ul></li><li>General Counter Interrogation<ul><li>Polling period - The time interval at which general counter interrogation requests are sent. Not activated by default.</li></ul></li><li>Interrogation of counter groups<ul><li>Group 1 to 4 - The time interval at which counter group interrogation requests are sent for each group number. Not activated by default.</li></ul></li><li>Clock synchronization<ul><li>Execution period - The time interval at which clock synch requests are sent. Not activated by default.</li></ul></li></ul></li>
+            <li>Monitoring<ul><li>Double-point<ul><li>Overwrite default values - If enabled, overwrite the settings related to Double-point raw value interpretation for all variables mapped on a double-point information object from the selected sector.</li></ul></li></ul></li>
+            <li>Data<ul><li>Timestamp<ul><li>UTC - If enabled, all timestamps received from the selected sector are interpreted as expressed in UTC and converted accordingly for processing and display.</li><li>Local - If enabled, all timestamps received from the selected sector are interpreted as expressed in the Local time zone  of the Data Acquisition Server and converted accordingly for processing and display.</li></ul></li></ul></li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The property <i>Overwriting threshold parameters</i> can only be enabled if the setting <i>Deadband property - Control direction - Overwrite threshold parameters</i> is activated.</p>
+            <p class="SVnormal">Because sending threshold parameters can take a significant amount of time, in the case of the initialization when a device comes online after a short period offline, you have the choice to restart the procedure, or resume the procedure if not completed. If you choose to resume, note that the thresholds parameters will not be sent at all if the procedure went to completion during an earlier initialization sequence and you are just facing short communication interruptions. </p>
+        </div>
+        <h2 class="SVheading2">The Traces tab</h2>
+        <p class="SVnormal">The Traces tab is used to enable debugging traces in the event of any problems with the Sector. Only use this if advised to do so by your support agency.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

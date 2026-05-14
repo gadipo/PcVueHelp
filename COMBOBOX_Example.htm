@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>COMBOBOX example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="COMBOBOX_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor226"></a><a name="kanchor227"></a>COMBOBOX Example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc321">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="COMBOBOX_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc321.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">This example contains a set of functions to support a pair of Combo-box List form controls using the COMBOBOX instruction.</p>
+        <p class="SVprogramCode">SUB Main()</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'declare variables:</p>
+        <p class="SVprogramCode">SUB cbxSel()</p>
+        <p class="SVprogramCode">DIM lRet As Long;</p>
+        <p class="SVprogramCode">DIM sCbxText As Str;</p>
+        <p class="SVprogramCode">DIM sCbxText1 As Str;</p>
+        <p class="SVprogramCode">DIM sCbxData As Str;</p>
+        <p class="SVprogramCode">DIM sCbxData1 As Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'retrieve contents of selected item in 1st control:</p>
+        <p class="SVprogramCode">lRet = COMBOBOX ( "GETSELECTEDINDEX", "ctrl","","cbx" );</p>
+        <p class="SVprogramCode">COMBOBOX ( "SETSELECTEDINDEX", "ctrl","","cbx1",  lRet);</p>
+        <p class="SVprogramCode">sCbxText =  COMBOBOX ( "GETTEXT", "ctrl","","cbx",  lRet);</p>
+        <p class="SVprogramCode">sCbxText1 =  COMBOBOX ( "GETTEXT", "ctrl","","cbx1",  lRet);</p>
+        <p class="SVprogramCode">sCbxData =  COMBOBOX ( "GETUSERDATA", "ctrl","","cbx",  lRet);</p>
+        <p class="SVprogramCode">sCbxData1 =  COMBOBOX ( "GETUSERDATA", "ctrl","","cbx1",  lRet);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'prepare to put its contents in a frame:</p>
+        <p class="SVprogramCode">SET ( "CbxText" , sCbxText);</p>
+        <p class="SVprogramCode">SET("CbxText1", sCbxText1);</p>
+        <p class="SVprogramCode">SET("CbxData", sCbxData);</p>
+        <p class="SVprogramCode">SET("CbxData1" , sCbxData1);</p>
+        <p class="SVprogramCode">SET("CbxCount" , COMBOBOX ( "COUNT", "ctrl","","cbx") );</p>
+        <p class="SVprogramCode">SET("CbxCount1" , COMBOBOX ( "COUNT", "ctrl","","cbx1"));</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'concatenate and load contents into a form control of each kind:</p>
+        <p class="SVprogramCode">COMBOBOX ( "LOAD", "ctrl","","cbx2", ADDSTRING("cbx",sCbxData));</p>
+        <p class="SVprogramCode">LISTBOX ( "LOAD", "ctrl","","lbx2", ADDSTRING("lbx",sCbxData));</p>
+        <p class="SVprogramCode">CHECKLIST ( "LOAD", "ctrl","","chk2", ADDSTRING("chk",sCbxData));</p>
+        <p class="SVprogramCode">OPTIONLIST ( "LOAD"a, "ctrl","","opt2", ADDSTRING("opt",sCbxData));</p>
+        <p class="SVprogramCode">TREEVIEW ( "LOAD", "ctrl","","tvw2", ADDSTRING("tvw",sCbxData));</p>
+        <p class="SVprogramCode">SENDLIST ("BLOC");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'retrieve content of selected item in 2nd control:</p>
+        <p class="SVprogramCode">SUB cbxSel1()</p>
+        <p class="SVprogramCode">DIM lRet As Long;</p>
+        <p class="SVprogramCode">DIM sCbxText As Str;</p>
+        <p class="SVprogramCode">DIM sCbxText1 As Str;</p>
+        <p class="SVprogramCode">DIM sCbxData As Str;</p>
+        <p class="SVprogramCode">DIM sCbxData1 As Str;</p>
+        <p class="SVprogramCode">lRet = COMBOBOX ( "GETSELECTEDINDEX", "ctrl","","cbx1" );</p>
+        <p class="SVprogramCode">COMBOBOX ( "SETSELECTEDINDEX", "ctrl","","cbx",  lRet);</p>
+        <p class="SVprogramCode">sCbxText =  COMBOBOX ( "GETTEXT", "ctrl","","cbx",  lRet);</p>
+        <p class="SVprogramCode">sCbxText1 =  COMBOBOX ( "GETTEXT", "ctrl","","cbx1",  lRet);</p>
+        <p class="SVprogramCode">sCbxData =  COMBOBOX ( "GETUSERDATA", "ctrl","","cbx",  lRet);</p>
+        <p class="SVprogramCode">sCbxData1 =  COMBOBOX ( "GETUSERDATA", "ctrl","","cbx1",  lRet);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'put its contents in a frame:</p>
+        <p class="SVprogramCode">lRet =  COMBOBOX ( "COUNT", "ctrl","","cbx1");</p>
+        <p class="SVprogramCode">SET ( "CbxText" , sCbxText);</p>
+        <p class="SVprogramCode">SET("CbxText1", sCbxText1);</p>
+        <p class="SVprogramCode">SET("CbxData", sCbxData);</p>
+        <p class="SVprogramCode">SET("CbxData1" , sCbxData1);</p>
+        <p class="SVprogramCode">SET("CbxCount" , COMBOBOX ( "COUNT", "ctrl","","cbx") );</p>
+        <p class="SVprogramCode">SET("CbxCount1" , COMBOBOX ( "COUNT", "ctrl","","cbx1"));</p>
+        <p class="SVprogramCode">SENDLIST ("BLOC");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'select 2nd item:</p>
+        <p class="SVprogramCode">SUB setSelcbx()</p>
+        <p class="SVprogramCode">DIM lRet As Long;</p>
+        <p class="SVprogramCode">COMBOBOX ( "SETSELECTEDINDEX", "ctrl","","cbx",  2);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

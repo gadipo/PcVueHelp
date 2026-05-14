@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|MQTT Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuration of the variables</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuration of the Variables</h1>
+        <p class="SVnormal">To define a variable as having an MQTT mapping, you can add the MQTT mapping definition in the variable's extended attribute, as configured in the svmgrMQTT.ini file.</p>
+        <p class="SVnormal">The mapping takes the form of a string using the following syntax, where [] denotes optional parameters:</p>
+        <p class="SVnormal">For a Subscribe-only variable: </p>
+        <p class="SVprogramCode">MQTT|PayloadType|BrokerName|SUB|QoS|SubTopicName[|Extraction|Filter|Timestamp|Quality]</p>
+        <p class="SVnormal">For a Publish-only variable:</p>
+        <p class="SVprogramCode">MQTT|PayloadType|BrokerName|PUB|QoS|Retain|PubTopicName[|PublishFormat]</p>
+        <p class="SVnormal">For a combined Subscribe and Publish variable:</p>
+        <p class="SVprogramCode">MQTT|PayloadType|BrokerName|PUB-SUB|QoS|Retain|PubTopicName|[PublishFormat]|SubTopicName[|Extraction|Filter|Timestamp|Quality]</p>
+        <p class="SVnormal">The definition of parameters can be done in a variety of ways. This one is the most straightforward, others are described in the <a href="#Mastering_Configuration">Mastering configuration</a> section.</p>
+        <div class="warning">
+            <p class="SVnormal">The configuration and mapping definitions are case sensitive.</p>
+        </div>
+        <h2 class="SVheading2"><a name="Parameters_common_to_SUB_PUB_and_PUB-SUB"></a>Parameters common to SUB, PUB and PUB-SUB</h2>
+        <ul style="list-style-type: disc;">
+            <li>MQTT - The key that defines the variable as having an MQTT mapping.</li>
+            <li>PayloadType - Specifies the type of the payload. Use the value Generic for SUB variables. For PUB-SUB variables, you can choose from three options:</li>
+            <ul style="list-style-type: circle;">
+                <li>Raw - Publishes only the value in the payload. The parameter PubFormat is ignored.</li>
+                <li>Generic - The default format, which publishes the payload as JSON. The parameter PubFormat can be used to customize the payload on a per variable basis.</li>
+                <li><i>CustomName</i> - Publishes a payload with a predefined custom format specified in the file PubTemplates.txt. Useful if several variables needs to be published with the same custom format.</li>
+            </ul>
+            <li>BrokerName - The name of the broker as defined in the svmgrMQTT.ini file. Please refer to the parameter <u>Name</u> in the [BrokerX] section.</li>
+            <li>QoS - The quality of service to apply to messages. Applies to both the subscriber and the publisher. Possible values are:<ul style="list-style-type: disc;"><li>“0” - At most once,</li><li>“1” - At least once,</li><li>“2” - Exactly once.</li></ul></li>
+            <li>
+                SubTopicName and PubTopicName - The name of the topic you want your variable to subscribe from or publish to respectively. See <a href="mqtt_traces.htm">Using MQTT topics</a> for more information on how to handle topic names.
+            </li>
+        </ul>
+        <h2 class="SVheading2"><a name="Parameters_specific_to_SUB"></a>Parameters specific to SUB</h2>
+        <div class="tip">
+            <p class="SVnormal">They also apply to subscription for PUB-SUB variables.</p>
+        </div>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p>Extraction - An optional parameter used to extract the value of the variable from the message received. If the Extraction parameter is empty, the full payload is used to set the variable value.</p>
+            </li>
+            <li>
+                <p>Filter - Optional parameter used to filter messages that have to be processed and their payload extracted. If a message does not matching the filter, it is ignored and not processed. The filter syntax complies with the Expression Engine specification.</p>
+            </li>
+            <li>Timestamp - Optional parameter used to retrieve the timestamp of the variable from the message received. If empty, the timestamp is set locally by the Add-on.</li>
+            <li>Quality  - Optional parameter used to retrieve the quality of the variable from the message received. If empty, the quality is set locally by the Add-on. See <a href="mqtt_publish_format.htm#Quality_values">How to customize the MQTT publish format</a> for more information on how quality values are mapped.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The syntax of the Extraction and Filter parameters  follows the Expression engine specification. See <a href="mqtt_Json_parsing.htm">Json parsing reference</a> and refer to the  Expression Engine book in the Application Explorer help for details about the available functions and operators. </p>
+        </div>
+        <h2 class="SVheading2"><a name="Parameters_specific_to_PUB"></a>Parameters specific to PUB</h2>
+        <div class="tip">
+            <p class="SVnormal">They also apply to publication for PUB-SUB variables.</p>
+        </div>
+        <ul style="list-style-type: disc;">
+            <li>Retain - If enabled, messages are published  with the retained flag set to true. As a consequence, the broker stores the last retained message and the corresponding QoS for that topic. The value must be one of the following.<ul style="list-style-type: disc;"><li>“0” if you don’t want a retained message (default),</li><li>“1” if you want your message to be retained.</li></ul></li>
+            <li>PublishFormat - A string describing the list of metadata to be published in sent messages along the value. Optional.<br />See <a href="mqtt_publish_format.htm">How to customize the MQTT publish format</a> for more information on the format used for publish and how to customize it.</li>
+        </ul>
+        <div class="tip">
+            <p class="SVnormal">See <a href="#Parameters_Retain_CleanSession_QoS">below</a> for more information on how the <u>Retain</u>, <u>CleanSession</u> and <u>QoS</u> parameters affect the message processing when combined together.</p>
+        </div>
+        <h2 class="SVheading2"><a name="Parameters_Retain_CleanSession_QoS"></a>Understanding how the parameters Retain, CleanSession and QoS affect message processing</h2>
+        <p class="SVnormal">These 3 parameters combined together modify how messages are processed, and in particular, if and what messages will be received (as a subscriber) or sent (as a publisher) upon connection. The table below details if initialization messages will be received/sent upon connection.</p>
+        <p class="SVnormal">When the Add-on is used as subscriber on a topic:</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Clean session</td>
+                    <td class="SVtableHeading">Subscribe QoS</td>
+                    <td class="SVtableHeading">Message received by the Add-on subscribing to a topic after a reconnection</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">False</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">False</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">True</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">True</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">Last message only</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">When the Add-on is used as publisher on a topic:</p>
+        <table style="width: 100%;">
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Retain</td>
+                    <td class="SVtableHeading">Publish QoS</td>
+                    <td class="SVtableHeading">Message sent to 3rd party subscriber upon reconnection</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">False</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">False</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">All messages</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">True</td>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">No</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">True</td>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">No</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note">
+            <p class="SVnormal">Note that QoS = 1 (at least once) and QoS = 2 (exactly once) produce the same result for both publish and subscribe.</p>
+            <p class="SVnormal">As a subscriber, the requested QoS can vary from one variable to another one. For a given topic subscription, the Add-on requests the broker for the highest QoS of all leaf topics configured on the broker.</p>
+        </div>
+        <h2 class="SVheading2"><a name="Mastering_Configuration"></a>Mastering configuration</h2>
+        <p class="SVnormal">Defining the MQTT mapping of variables requires configuration of:</p>
+        <ul>
+            <li>How to parse message payloads to extract the variable value,</li>
+            <li>Optionally, how to parse payloads to extract the variable timestamp,</li>
+            <li>Optionally, how to parse payloads to extract the variable quality,</li>
+            <li>Optionally, how to parse payloads to filter and skip useless messages.</li>
+        </ul>
+        <p class="SVnormal">As explained above, such configuration is done via the parameters called <u>Extraction</u>, <u>Timestamp</u>, <u>Quality</u> and <u>Filter</u> and can be achieved in a variety of ways.</p>
+        <p class="SVnormal" style="text-decoration: underline;">Parameter definition all directly in one extended attribute:</p>
+        <p class="SVnormal">As explained above, the mapping of a given variable can be defined in one of its Text extended attribute. The attribute used must be known by the Add-on, and thus needs to be predefined in the file svmgrMQTT.ini.</p>
+        <p class="SVnormal">For example, you can predefined that the Text extended attribute 16 (TATT16) is used for MQTT mapping and set it at a value such as: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVprogramCode">MQTT|Generic|Broker1|SUB|0|@MyTopic|JsonGetValue(value, 'metrics[0].value')</p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../Resources/Images/Extras/mqtt_variable_mapping_sample.png" style="border-style: none;border: none;float: none;" border="0" title="Harmonas wizard: the Select Project dialog." />
+            </p>
+        </div>
+        <p class="SVnormal" style="text-decoration: underline;">Parameter definition spread over more than one extended attribute:</p>
+        <p class="SVnormal" style="text-decoration: none;">Because extended attributes are limited to a length of 100 characters, it is also possible to spread the mapping definition over more than extended attribute.</p>
+        <p class="SVnormal">For example, you can predefined that the Text extended attribute 16 (TATT16) is used for MQTT mapping and set it at a value such as:</p>
+        <p class="SVprogramCode">MQTT|Generic|Broker1|SUB|0|@MyTopic|<b>TATT10</b>|<b>TATT11</b>|<b>TATT12</b>|<b>TATT13</b></p>
+        <p class="SVnormal">You will notice that this mapping definition refers to attributes 10 to 13 (TATT10 to TATT13), which should then be defined with values such as:</p>
+        <p class="SVprogramCode">JsonGetValue(value, 'metrics[0].value')</p>
+        <p class="SVprogramCode">StrEqualNoCase(JsonGetValue(value, 'sensorID'),A8F5L9B3Z5)</p>
+        <p class="SVprogramCode">JsonGetValue(value, 'metrics[0].timestamp')</p>
+        <p class="SVprogramCode">JsonGetValue(value, 'metrics[0].quality')</p>
+        <div class="note">
+            <p class="SVnormal">MQTT mapping defined via one or more extended attributes is dynamic. It can be changed on the fly while  running, and it is taken into account immediately by the MQTT Add-on.</p>
+        </div>
+        <p class="SVnormal" style="text-decoration: underline;">Referencing parameter definition from the file svmgrMQTT.ini:</p>
+        <p class="SVnormal" style="text-decoration: none;">If you have several sensors sending the same kind of payload, it is recommended to predefine the parsing parameters in the file svmgrMQTT.ini, and reference these definitions in the mapping.</p>
+        <p class="SVnormal" style="text-decoration: none;">For example, you can predefine the following parameters in the file svmgrMQTT.ini:</p>
+        <p class="SVprogramCode">[Extractors]</p>
+        <p class="SVprogramCode"><span>ExtractValueSensorTypeXY</span>= JsonGetValue(value, 'metrics[0].value')</p>
+        <p class="SVprogramCode">[Filters]</p>
+        <p class="SVprogramCode"><span>FilterSensorTypeXY</span>= StrEqualNoCase(JsonGetValue(value, 'sensorID'),A8F5L9B3Z5)</p>
+        <p class="SVprogramCode">[Timestamps]</p>
+        <p class="SVprogramCode"><span>ExtractTSSensorTypeXY</span>= JsonGetValue(value, 'metrics[0].timestamp')</p>
+        <p class="SVprogramCode">[Qualities]</p>
+        <p class="SVprogramCode"><span>ExtractQSensorTypeXY</span>= JsonGetValue(value, 'metrics[0].quality')</p>
+        <p class="SVnormal" style="text-decoration: none;">Then use the following syntax in the variable mapping definition:</p>
+        <p class="SVprogramCode">MQTT|Generic|Broker1|SUB|0|@MyTopic|ExtractValueSensorTypeXY|FilterSensorTypeXY|ExtractTSSensorTypeXY|ExtractQSensorTypeXY</p>
+        <div class="note">
+            <p class="SVnormal">The same goes for the <u>PublishFormat</u> parameter. It can be defined directly in the Extended attribute, be defined in another Extended attribute you refer to, or globally in the file svmgrMQTT.ini.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">If you map a text value on a register variable, the variable quality is set to NS FMT to indicate that the format is incorrect.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

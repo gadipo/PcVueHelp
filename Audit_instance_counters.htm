@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Project diagnostics &amp; settings|Audit &amp; diagnostics|The counters tab" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Instance counters</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Instance Counters<a name="kanchor303"></a></h1>
+        <p class="SVnormal">Each instance counter contains the current value, the accumulated value since the start of <span class="mc-variable OEM.ProductName variable">PcVue</span> and the allocated memory (in bytes) in current use. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t3" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/AE/Project/audit_instance_counters.png" />
+            </p>
+        </div>
+        <p class="SVnormal">Part of the instance counters reflect the message queuing and processing activity of the managers and represent quantity of messages sent by a manager or queued and waiting for processing.</p>
+        <p class="SVnormal">Other instance counters reflect the quantity of objects configured or being processed.</p>
+        <h2 class="SVheading2">Brief explanation of abbreviations used for <span class="mc-variable OEM.ProductName variable">PcVue</span>'s managers</h2>
+        <ul>
+            <li>Startup – Synchronize the start of all other managers and manage the Event Viewer.</li>
+            <li>Timer – Manage single shot and cyclic timers.</li>
+            <li>Eqt – Data acquisition manager for Equipment drivers only.</li>
+            <li>Var – Variables manager, alarms and other data acquisition mechanisms.</li>
+            <li>UI – User interface manager.</li>
+            <li>AlarmList – Alarm server for alarm viewer. Its main function is to manage subscription of the alarm filter lists.</li>
+            <li>His – Manager for historical data.</li>
+            <li>OpcSvr – OPC server. The manager hosting the OPC server.</li>
+            <li>CfgSvr – Configuration server</li>
+            <li>Alarm – Alarm manager.</li>
+            <li>Interop - Interop manager.</li>
+            <li>I104server - IEC 60870-5-104 Server.</li>
+            <li>RPC - Manager for inter-process communication.</li>
+            <li>Geo data - Manager for Geographical data.</li>
+        </ul>
+        <h2 class="SVheading2">Brief explanation of message types</h2>
+        <p>Messaging is a general term to designate the communication mechanism used between managers. It is based on mailboxes and message exchanges between managers. There are different types of messages including:</p>
+        <ul>
+            <li>Request – When you send a Request, the target (recipient) manager must always return a response. The response message can be a positive acknowledgement (Ack) or a negative one (Nack).</li>
+            <li>Good request response (Ack) – A positive acknowledgment of a Request message.</li>
+            <li>Bad request response (Nack) – A negative acknowledgment of a Request message.</li>
+            <li>Mail - Similar to a Request message except that the message is not acknowledged by the target manager. For example, a mail message is used to notify an event log to the Historical Manager.</li>
+            <li>Subscribe - This type of message is used to watch an object such as a variable. The target manager must immediately return a response, good if the object is found, otherwise bad. The target manager must also generate a message for every change of state of the watched object.</li>
+        </ul>
+        <h2 class="SVheading2">Brief explanation of variable kinds</h2>
+        <p class="SVnormal">In order to accommodate the variety of needs, there are different kinds of variables. In term of audit, the main characteristic is the manager in charge of handling them:</p>
+        <ul>
+            <li>Variables: The main kind of variables, handled by the variable manager</li>
+            <li>HMI variables: Kind of variable handled by the UI manager</li>
+            <li>Temporary variables: Kind of variable handled by the UI manager</li>
+            <li>% variables: Kind of variable handled by the UI manager</li>
+        </ul>
+        <p class="SVnormal">See the topic <a href="../Variables/Overview.htm">About the Variables Tree</a> for more information on these different kinds of variables.</p>
+        <h2 class="SVheading2">Counter of messages</h2>
+        <p class="SVnormal">The following categories of counters are available:</p>
+        <ul>
+            <li>Counter of pending messages in manager mailbox: Counters of messages waiting to be processed in a manager’s mailbox. The current value should be around 0. Counters are given with a breakdown by manager.</li>
+            <li>Counter of message by type and by source and target manager: Counters according to the type of message (see above), the target manager for the message and the source manager of the message. Counters are given with a breakdown by source manager, target manager and message type.</li>
+            <li>Counter of subscribe messages by source and target manager: Counters of messages of type Subscribe according to the source and target managers.  Counters are given with a breakdown by message type, source manager and target manager.</li>
+            <li>Counter of good response to subscribe messages by source and target manager and by local and remote managers: Subscribe message counters according to their source and target managers, and the location of the source and target managers (local or remote station).</li>
+            <li>Pending datachange by source: Current value should be around 0.</li>
+            <li>Pending write command messages on variable by source and type: Counter of write command messages in a pending state. To write a variable, a message is created and sent to the variable manager. When the variable manager receives it, it calls the source of variable to process the write command. This message is deleted when the write is completed.  Current value should be around 0. Counters are given with a breakdown by type of write command and variable source type.</li>
+            <li>Pending single write command messages on variable by source and type: Counter of single write command messages in a pending state. To write a variable, a message is created and sent to the variable manager. When the variable manager receives it, it calls the source of variable to process the write command. This message is deleted when the write is completed.  Current value should be around 0. Counters are given with a breakdown by  variable source type and variable type.</li>
+            <li>Pending write recipe command messages by type. Current value should be around 0.</li>
+            <li>Pending write command to the device by source of variable. Current value should be around 0.</li>
+            <li>Number of write command in error.</li>
+            <li>Pending read command message on variable. Current value should be around 0.</li>
+            <li>Pending read command by source of variable. Current value should be around 0.</li>
+        </ul>
+        <h2 class="SVheading2">Counters for the networking manager (Lan)</h2>
+        <p class="SVnormal">The following counters are available:</p>
+        <ul>
+            <li>Number of messages in waiting state before send</li>
+            <li>Requests Pending</li>
+            <li>Variable subscribes</li>
+            <li>Number of client connections ready</li>
+            <li>Cumulates packets sent</li>
+            <li>Cumulates messages sent</li>
+            <li>Cumulates bytes sent</li>
+            <li>Cumulates messages received</li>
+            <li>Cumulates bytes received</li>
+            <li>Cumulates client connections aborted</li>
+            <li>Cumulates server connections aborted</li>
+            <li>Routed requests from VAR      </li>
+        </ul>
+        <h2 class="SVheading2">Status on flow regulation</h2>
+        <ul>
+            <li>
+                <p class="SVnormal"> Current value=0 means regulation is off, </p>
+            </li>
+            <li>
+                <p class="SVnormal">Current value=1 means regulation is on. </p>
+            </li>
+            <li>
+                <p class="SVnormal">Cumulative value = number of off/on switches</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The following counters are available:</p>
+        <ul>
+            <li>Status of XXXX source: The status of the flow regulation for the source XXXX. If the current value is 0 then the regulation is off. If the current value is 1 then the regulation is on. The cumulative value is the number of times that the regulation has switched to active.</li>
+            <li>Waiting data changes in the FIFO: During active regulation, data change are not dispatched. Instead, the most recent value only is stored in a FIFO. This counter is the number of waiting data changes in the FIFO.</li>
+            <li>Lost transitions: During active regulation, only the most recent value is stored in FIFO. This counter is the number of lost values for all variables during current regulation period. It is reset when the regulation switches back to passive.</li>
+        </ul>
+        <h2 class="SVheading2">Counters related to data acquisition</h2>
+        <p class="SVnormal">There are counters specific to each data acquisition sources. They typically include configuration object counts, as well as counters reflecting the data acquisition activity. Because measuring activity cannot be the same for polling-based drivers and subscription or pub/sub drivers, these counters are mostly specific to the type of source.</p>
+        <p class="SVnormal">There are such counters for the following data source types and categories:</p>
+        <ul>
+            <li>Equipment: Equipment configuration</li>
+            <li>BACnet: BACnet configuration, BACnet runtime, BACnet command</li>
+            <li>DNP3: DNP3 configuration, DNP3 runtime</li>
+            <li>IEC 60870-5: IEC 60870-5 runtime</li>
+            <li>OPC client: OPC client runtime</li>
+            <li>LonWorks: LonWorks runtime</li>
+            <li>DDE: DDE runtime</li>
+            <li>IEC 61850</li>
+            <li>SNMP: SNMP Manager configuration, SNMP Manager runtime</li>
+        </ul>
+        <p class="SVnormal">Counters specific to the file transfer services are also available:</p>
+        <ul>
+            <li>Background file operation</li>
+            <li>Device file transfer</li>
+        </ul>
+        <h2 class="SVheading2">Counters for the variable manager (Var)</h2>
+        <p class="SVnormal">The following categories of counters are available:</p>
+        <p class="SVnormal">Counters of configuration objects in variable manager - Global context - By object type and scope: These counters are the number of configured objects handled by the variable manager in the global context. Counters are given with a breakdown by object type and scope.</p>
+        <p class="SVnormal">Counters of runtime objects in variable manager - Global context - By object type and scope: These counters are the number of runtime objects handled by the variable manager in the global context. Counters are given with a breakdown by object type and scope.</p>
+        <p class="SVnormal">Counters of configuration objects in variable manager - Web contexts - By object type and scope: These counters are the number of configured objects handled by the variable manager in web contexts. Counters are given with a breakdown by object type and scope.</p>
+        <p class="SVnormal">Counters of runtime objects in variable manager - Web contexts - By object type and scope: These counters are the number of runtime objects handled by the variable manager in web contexts. Counters are given with a breakdown by object type and scope.</p>
+        <h2 class="SVheading2">Counters for the UI manager (UI)</h2>
+        <p class="SVnormal">The following categories of counters are available:</p>
+        <p>Counters of runtime variable objects in UI manager - Global context - By variable kind and scope: These counters are the number of variable runtime objects handled by the UI manager in the global context. Counters are given with a breakdown by variable kind and scope.</p>
+        <p>Counters of runtime variable objects in UI manager - Web contexts - By variable kind and scope: These counters are the number of variable runtime objects handled by the UI manager in web contexts. Counters are given with a breakdown by variable kind and scope.</p>
+        <h2 class="SVheading2">Counters for actions</h2>
+        <p class="SVnormal">The following categories of counters are available:</p>
+        <p>Counters of configuration action objects - Global context - By object type and scope: These counters are the number of configured action objects in the global context. Counters are given with a breakdown by object type and scope.</p>
+        <p>Counters of configuration action objects - Web contexts - By object type and scope: These counters are the number of configured action objects in web contexts. Counters are given with a breakdown by object type and scope.</p>
+        <p>Counters of runtime action objects - Global context - By object type and scope:  These counters are the number of runtime action objects in the global context. Counters are given with a breakdown by object type and scope.</p>
+        <p>Counters of runtime action objects - Web contexts - By object type and scope: These counters are the number of runtime action objects in web contexts. Counters are given with a breakdown by object type and scope.</p>
+        <p>Associated actions configuration: These counters are the number of configured associated action objects. Counters are given with a breakdown by object type.</p>
+        <h2 class="SVheading2">Other counters</h2>
+        <p class="SVnormal">The following other categories of counters are available:</p>
+        <ul>
+            <li>Application Architect: Mostly configured object counters</li>
+            <li>Historical manager:  Mostly configured object counters</li>
+            <li>HDS: Mostly counters related to request handling</li>
+            <li>DbConnect: A counter giving the number of Sql connections</li>
+            <li>Alarm list manager: Mostly counters related to handling alarm list subscription, filtering and alarm counters</li>
+            <li>Web &amp; Mobile: Mostly a series of counters related to the handling of sessions, subscription and web services contexts</li>
+            <li>Geographical data: Mostly configured object counters</li>
+            <li>UIGA: A counter related to the number of animations being handled</li>
+            <li>Scada basic: A series of counters related to the SCADA Basic script engine, including information about loaded programs, and function execution.<br />The counter named ALLOC_BUFFER count is of particular interest. It is the counter of buffers that are allocated and not yet freed up. If in your application, this counter is always increasing, it means that at least one of your script is allocating buffers without freeing them after use, leading to memory leaks.</li>
+            <li>IEC 60870-5-104 server:<ul><li>Configuration: Number of outstations declared, number of clients allowed, number of points declared</li><li>Runtime: Number of clients connected, number of points written</li></ul></li>
+            <li>String management</li>
+            <li>Associated labels configuration</li>
+            <li>Log management</li>
+            <li>Timer</li>
+            <li>Miscellaneous runtime</li>
+            <li>Miscellaneous configuration</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

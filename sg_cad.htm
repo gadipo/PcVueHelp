@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Smart Generators" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to import a CAD drawing</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor133"></a>How to import a CAD drawing</h1>
+        <p class="SVnormal">The Smart Generator for CAD allows you to import drawings and metadata from  two of the most commonly available CAD file formats:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">DWG - AutoCAD’s built-in format for storing 2D and 3D drawings and meta data in binary files.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">DXF (Drawing eXchange Format) - Defined by AutoDesk Inc. for transferring CAD files between systems with different built-in formats, via ASCII encoded files.</p>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">Supported AutoCAD versions are: 12, 13, 14, 2000, 2004, 2007, 2010, and  2011.</p>
+        </div>
+        <p class="SVnormal">The Smart Generator converts the contents of the CAD file into an image (WMF, JPG, BMP or PNG) and creates a mimic in which the image is displayed. This mimic is known as the primary mimic. Additional mimics (and corresponding images) can be created from the same CAD file showing different views, zoom levels, layers etc. These mimics are known as sub-mimics. Each time that you create a sub-mimic, a corresponding link-open animation is automatically generated in the primary mimic.</p>
+        <p class="SVnormal">The CAD file components used by the smart generator are:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">Layers - Each CAD drawing contains one or more layers. All drawing elements are attached to one of the layers (layer 0 by default). Each layer is given a color that is used when the CAD drawing is rendered. Layers can be hidden or shown to aid visualization. The contents of the layers are used to generate the image. The layers used can be filtered and they can be rendered in their original CAD colors or a single selectable color.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Block and Block references - A block is a group of drawing elements similar to a symbol in a library of <span class="mc-variable OEM.ProductName variable">PcVue</span>. A block reference is an instance of a block similar to an instance of a symbol in a  mimic. Blocks can be filtered to decide which instances of them (block references) will appear in the generated image. In addition, a block can be substituted by one of the <span class="mc-variable OEM.ProductName variable">PcVue</span> symbol. Each block reference is then replaced with an instance of the symbol using a configurable variables branch.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Block attributes - A part of the definition of a block. They have a name and a value that may apply across all of their blocks of a particular type or to a single block. A block attribute is interpreted as a branch name for a symbol.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">X-Refs - A reference to another CAD file. The X-Ref CAD files are used to provide additional detail for the main CAD drawing. For example, the main CAD file might show a building's structure whilst one or more X-refs might provide detail on services, lighting etc. X-refs can be filtered and selectively included in the generated image.</p>
+            </li>
+        </ul>
+        <div class="tip">
+            <p class="SVnormal">Refer to the overview topic <a href="sg_overview.htm">Smart Generators overview</a> to learn more.</p>
+        </div>
+        <h2 class="SVheading2">Selecting the source data</h2>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Go to <b>Configure</b> then Smart Generators and click <b>New CAD import</b>. The New import dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-drawing"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_cad_select_project.png" MadCap:targetName="select-drawing" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click on the ellipsis button in the Main CAD file field and select a file with either a DWG or DXF extension.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Adjust the size in the fields on the right and below the drawing and adjust the position in the fields on the top left corner of the image. The mimic will be sized to fit the image if you are not using a mimic template.</p>
+                <div class="tip">
+                    <p class="SVnormal">You can use the Link icon button to retain the mimic's proportions when you set either the height or the width.</p>
+                </div>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">Click on the ellipses in the Default mimic template field to select a mimic template that has the standard look and feel you want to apply to the mimics created by the smart generator.</p>
+            </li>
+            <li value="5">
+                <p class="SVnumbered">Click <b>OK</b>. The Smart Generator for CAD dialog opens and the primary mimic is created.</p>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Navigating the main dialog of the Smart Generator for CAD</h2>
+        <p class="SVnumbered">The main dialog of the Smart Generator for CAD contains several panes to manipulate the contents of the CAD file before it is imported into <span class="mc-variable OEM.ProductName variable">PcVue</span> as a mimic. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="workspace"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p>
+            <img src="../Resources/Images/SmartGen/sg_cad_dialog.png" MadCap:targetName="workspace" style="display: none;" />
+        </p>
+        <p class="SVnormal">A - The top left pane lists the mimics that will be generated in <span class="mc-variable OEM.ProductName variable">PcVue</span> from the CAD file. As a minimum, the primary mimic is listed. Sub-mimics created by zooming or cropping are also listed.</p>
+        <p class="SVnormal">B - The bottom left pane displays the properties of the mimic that is currently selected. Some of the properties can be changed directly from here, for example, the layers that are displayed.</p>
+        <p class="SVnormal">C - The center pane displays a representation of how the generated mimics will appear in <span class="mc-variable OEM.ProductName variable">PcVue</span>. Each mimic is displayed in its own window. The Windows command on the menu can be use to change windows arrangement.</p>
+        <p class="SVnormal">D - The top right pane is used when substituting CAD blocks with <span class="mc-variable OEM.ProductName variable">PcVue</span> symbols and it displays the list of blocks that have been imported.</p>
+        <p class="SVnormal">E - The bottom right pane is also  used when substituting CAD blocks with <span class="mc-variable OEM.ProductName variable">PcVue</span> symbols and displays the properties of the block that is currently selected. Some of the properties can be changed directly from here, for example, the symbol that is to be substituted for the block.</p>
+        <p class="SVnormal">The toolbar is used to create and manipulate additional mimics (sub-mimics) based on the  CAD file. Some of the tools are not displayed by default and must be first enabled by clicking <b>Configuration</b> main element then <b>View</b>. Here you can select the tools to display in the toolbar. The toolbar allows you to:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">Create a new sub-mimic.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Save the configuration (zoom, crop, and rotation) of the CAD file within the selected sub-mimic.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Restore the original view of the CAD file within the selected mimic. Resets any zoom, crop or rotation operations.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Display a preview of the symbols.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Save the configuration of the CAD file within all mimics.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Changes the crop mode. There are two options: Free which allows any ratio of width (X) and height (Y) and Ratio which uses the width (X) and height (Y) ratio entered in the toolbar.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Define the zoom level and the rotation angle for the CAD file within the mimic.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Define the view zoom of the mimic.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The main menu gives you access to all of the usual buttons plus those specific to the Smart Generator for CAD such as the following:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">Global filters accessed from the Configuration menu element. The purpose of Global filters is to display and apply filters to the Xrefs, layers and blocks of all sub-mimics. See the section <a href="#Tuning_mimics">Tuning the mimic</a> below fore more information.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Windows - Change the way in which the windows containing the mimics are arranged. The following options are proposed: Cascade, Tile vertical, and Tile Horizontal.</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2"><a name="Tuning_mimics"></a>Tuning mimics</h2>
+        <p class="SVnormal">After you have imported the CAD drawing and getting familiar with the workspace, the next step is to refine how you want the CAD drawing to be imported as a background image, and how you want the containing mimic to look like.</p>
+        <div class="note">
+            <p class="SVnormal">You can zoom, crop, and rotate the CAD drawing in the Smart Generator's display of the primary mimic, but this is only for convenience of viewing as you have already defined the visible area at the time of selecting the CAD drawing. It is not taken into account when the mimic is generated.</p>
+            <p class="SVnormal">The same zoom, crop and rotate of the CAD drawing are used effectively when creating sub-mimics.</p>
+        </div>
+        <ul>
+            <li>
+                <p class="SVnumbered">To control the CAD drawing, adjust the panning, zooming, cropping or rotating settings in the toolbar. If these settings are hidden, right-click on the toolbar and select the controls you would like to use.</p>
+                <div class="tip">
+                    <p class="SVnormal">You can also use your  mouse to adjust the drawing:</p>
+                    <ul>
+                        <li>
+                            <p class="SVbulleted">To pan the CAD drawing (change its center relative to the center of the mimic), click and hold the right mouse button and drag.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">To zoom the CAD drawing using the scroll wheel on your mouse. Rotating the wheel forward increases the zoom level, backwards decreases it.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">To crop the CAD drawing, click and hold the left mouse button and drag the cursor. A dashed rectangle opens indicating the crop area. You can choose either Free cropping which allows any ratio of width and height or Ratio cropping which uses the width to height ratio entered in the toolbar.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">To rotate the drawing, click on the center button and move the mouse to the right  to rotate the image clockwise, or click the center button and move the mouse to the left to rotate the image counter clockwise.</p>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <p class="SVnumbered">To change the drawing color, click on the ellipsis button in the Drawing color field under Image in the left pane then select the new color. This new color is applied to all layers when image is generated. Typically in any CAD drawing, a different color is used for each layer.</p>
+            </li>
+            <li>
+                <p class="SVnumbered">To change the background color, click on the ellipsis button in the Background color field under Image in the left pane then select the color. The background color of a CAD drawing is often black, which may not be suitable for use in <span class="mc-variable OEM.ProductName variable">PcVue</span> mimics. In many cases, the transparent color is what you want to take advantage of the mimic background color.</p>
+            </li>
+            <li>
+                <p class="SVnumbered">To select the layers displayed, click on the ellipsis button in Layers field under Image in the left pane then select the layers as required. These layers are displayed with only the visible layers being used when the image is generated.</p>
+            </li>
+            <li>
+                <p class="SVnumbered">To select blocks, click on the ellipsis button in Blocks under Image  in the left pane then select the blocks as required. These blocks are displayed with only the visible blocks being used when the image is generated.</p>
+            </li>
+            <li>
+                <p class="SVnumbered">To configure the image size and location, adjust the image settings under Mimic in the left pane. The default image that is generated from the CAD drawing is sized so that it fills the entire mimic. Any space not occupied by the CAD drawing is filled with the background color. After you modify the image size the CAD drawing is automatically scaled to fit - you may then need to manually change this to suit your requirements.</p>
+                <div class="warning">
+                    <p class="SVnormal">You cannot change the image size or location of the image in the primary mimic.</p>
+                </div>
+            </li>
+            <li>
+                <p class="SVnumbered">To configure the graphical settings for your CAD drawing, click <b>Configuration</b> from the main menu, then <b>Options</b> and set the Global rotation angle and Display texts properties as required. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-options"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_cad_conf_options.png" MadCap:targetName="select-options" style="display: none;" />
+                </p>
+            </li>
+            <li>
+                <p class="SVnumbered">To configure the generated mimics properties, click <b>Configuration</b> from the main menu then <b>Options</b>. Here you can set the following properties:</p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVnumbered">Generate mimic links - If specified, it generates the mimics links.</p>
+                        <ul style="list-style-type: square;">
+                            <li>
+                                <p class="SVnumbered">Display mimic name in tooltip - If selected, it  provides tooltips to display the mimics names.</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p class="SVnumbered">Symbol position reference - If specified, it defines where the reference of each of <span class="mc-variable OEM.ProductName variable">PcVue</span> symbols is to be positioned. Either at the center or at the anchor of each block.</p>
+                    </li>
+                    <li>
+                        <p>For image formatting properties, see <a href="#Generating_the_mimics">Generating the mimics</a> section below.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <p class="SVnumbered">In addition to the primary mimic, you can also create sub-mimics by clicking and dragging the cursor to select the required part of the main drawing, then click the <b>Create new mimic</b> icon button on the toolbar. You are prompted to enter the name of the mimic and the size as well as location of the image. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="create-mimics"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p>
+            <img src="../Resources/Images/SmartGen/sg_cad_create_mimic.png" MadCap:targetName="create-mimics" style="display: none;" />
+        </p>
+        <h2 class="SVheading2">Substituting blocks with <span class="mc-variable OEM.ProductName variable">PcVue</span> symbols</h2>
+        <p class="SVnormal">After configuring the mimics containing the configured CAD drawings, you can substitute CAD blocks with <span class="mc-variable OEM.ProductName variable">PcVue</span> symbols before generating the mimics. When the mimics are generated, each block reference is replaced by an instance of the symbol and an optional branch. The symbol is overlaid on the image at the position of the original block reference.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">To substitute CAD blocks with <span class="mc-variable OEM.ProductName variable">PcVue</span> symbols, right-click in the top right pane of the  Smart Generator for CAD dialog and select Import CAD blocks from the pop-up menu. A dialog opens displaying the list of blocks available in the drawing. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="import-blocks"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_cad_import_blocks.png" MadCap:targetName="import-blocks" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Deselect those blocks that are not to be substituted by one of the <span class="mc-variable OEM.ProductName variable">PcVue</span> symbols, then click <b>OK</b> to close the dialog. A list of the selected blocks is now displayed in the top right pane.</p>
+                <div class="tip">
+                    <p class="SVnormal">You can deselect all the blocks by right-clicking and selecting <b>Uncheck all</b> from the pop-up menu.</p>
+                </div>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Select one of the blocks listed from the selected block's properties in the bottom pane, click on the ellipsis button in the Symbol name property. This opens a dialog displaying a list of <span class="mc-variable OEM.ProductName variable">PcVue</span> symbols to choose from to replace the block. Select the symbol to use for the selected block and click <b>OK</b>.</p>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">To change the mimic layers in which the symbol is to be visible, modify the Layers property. By default, a symbol will be visible in all layers.</p>
+            </li>
+            <li value="5">
+                <p class="SVnumbered">To change the visibility bound which is the mimic zoom level at which the symbol is visible, modify the Visibility bound property. The default behavior is that a symbol is visible throughout the <span class="mc-variable OEM.ProductName variable">PcVue</span> zoom range.</p>
+            </li>
+            <li value="6">
+                <p class="SVnumbered">To add a branch to be used with all instances of the symbol, click on the ellipsis button in the Symbol instantiation property. The Symbol branch editor opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="edit-branch"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p class="SVnumbered">
+                    <img src="../Resources/Images/SmartGen/sg_cad_edit_symbols.png" MadCap:targetName="edit-branch" style="display: none;" />
+                </p>
+                <p class="SVnormal">The branch is entered as an expression that can contain the following elements:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Fixed strings - These strings must be enclosed in quotation marks. For example "BUILDING_01.".</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Variable branches - Selected from the variables tree using the <b>Add a branch</b> icon button. These branches become fixed strings in the expression.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Block attributes - Any of the CAD block's attributes entered as Attribute("Name"). For example Attribute("NUMBER"). They can be added using the <b>Add an attribute</b> icon button.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">BlockReferenceName - The reference name of the CAD block.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Functions - A mathematical or string function. For example StrToLower. Functions can be typed or selected from a context menu that is displayed using the key combination Ctrl+Space.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Operators - An operator such as + (addition or concatenation depending on the context).</p>
+                        <div class="tip">
+                            <p class="SVnormal">For a complete list of functions, see the topic Expression Engine Overview.</p>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li value="7">
+                <p class="SVnumbered">To configure the individual block references, click on the ellipsis button in the References property under Imported CAD block. The References editor dialog opens. The left pane contains a list of the block references and the right pane contains the properties of the selected block reference.</p>
+            </li>
+            <li value="8">
+                <p class="SVnumbered">Deselect those block references that are not to be substituted by one of the <span class="mc-variable OEM.ProductName variable">PcVue</span> symbols. You can deselect all the blocks by right clicking and selecting <b>Uncheck all</b> from the pop-up menu.</p>
+            </li>
+            <li value="9">
+                <p class="SVnumbered">Select each of the selected block references in turn and click on the ellipsis button in Branch field to configure the variables tree branch to be used with the instance of the symbol for that reference then click <b>Close</b>. The branch is constructed by concatenating the Inherited branch with the Branch property. The branch is entered as an expression (See step 6).</p>
+                <div class="tip">
+                    <p class="SVnormal">When you select a reference in the References editor, a white rectangle opens around the corresponding block on the map. Conversely, when you click on a block's position on the map, its reference is highlighted in the Reference editor's list.</p>
+                </div>
+            </li>
+            <li value="10">
+                <p class="SVnumbered">To change the symbol used for a particular mimic, expand the Symbol associations property under Mimic in the bottom left pane and select the symbol, layers, and zoom level. The default behavior when substituting a block with one of the <span class="mc-variable OEM.ProductName variable">PcVue</span> symbols, the substitution applies to all mimics that are generated from that CAD drawing.</p>
+            </li>
+        </ol>
+        <h2 class="SVheading2"><a name="Generating_the_mimics"></a>Generating the mimics</h2>
+        <p class="SVnormal">Generating the mimics is the final step of the CAD drawing import process. For each mimic a corresponding image is generated.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Click <b>Configuration</b> from the main menu then <b>Options</b>. Here the following properties should be configured as they affect the generated output:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Image format - The format in which the image is generated. The following are available:</p>
+                        <ul style="list-style-type: circle;">
+                            <li>
+                                <p class="SVbulleted">WMF &amp; EMF - If selected, it generates the images at the same resolution as the original CAD drawing and then scales them to fit the specified size. No loss of detail but can generate very large files. Transparent background color is supported.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">BMP - If selected, it generates the image at the specified size, so this has considerable potential for loss of detail. It generates a medium sized file. Transparent background color is supported.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">JPG - If selected, it generates the image the specified size so this has considerable potential for loss of detail. It generates a small file. Transparent background is not supported.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">PNG.</p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">File extension of mimic output - If specified, it defines the file extension to be added to the name of the generated mimic file. The default is none.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Use mimic name as mimic title - If selected, it generates the mimic with the same title as the mimic file name, shown in the title bar.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Display texts - If selected, it renders any text strings that appear in the original CAD drawing in the image that is produced.</p>
+                    </li>
+                </ul>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click <b>Generate</b> from the main menu then <b>Generate mimics</b>. If you have not saved your recent changes, you are prompted to do so then the Select targets to generate dialog opens.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Deselect any mimics that are not to be generated then click <b>OK</b> to start the generation. A progress dialog is displayed. Click <b>Close</b> when it is done generating.</p>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Synchronizing an existing import</h2>
+        <p class="SVnormal">When you synchronize a CAD drawing, the smart generator updates the drawings contained in the mimics imported into <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Select the CAD import to synchronize from the right pane of the Smart Generators dialog. A list with actions appears under the Import references pane. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sg-workspace"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p class="SVnormal">
+                    <img src="../Resources/Images/SmartGen/sg_cad_synch_workspace.png" MadCap:targetName="sg-workspace" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click Synchronize. This will open the smart generator dialog in which you can reconfigure the import. The smart generator remembers all of your previous configurations to the drawing. All you have to do is update the drawing and select <b>Generate</b> from the main menu then <b>Generate mimics</b> to synchronize. For example if you add three new blocks to the drawing, the smart generator generates three more symbols in the appropriate mimic.</p>
+            </li>
+        </ol>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

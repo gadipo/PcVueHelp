@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Application Architect|Working with templates" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Templates overview</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor116"></a>Templates Overview</h1>
+        <p class="SVnormal">Templates are the building blocks of the Application Architect. The mechanism of identifying the necessary templates for an application is known as modeling. Templates can be saved in <span class="mc-variable OEM.ProductName variable">PcVue</span> libraries so that they can be re-used in further applications.       </p>
+        <h2 class="SVheading2">What is a template?</h2>
+        <p class="SVnormal">A template is a model of a real world object (for example a pump or a HVAC unit) made up of <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration elements.</p>
+        <p class="SVnormal">A template can contain  the following configuration elements:</p>
+        <ul>
+            <li>Parameters - Named parameters, containing either an expression or a value</li>
+            <li>Included templates</li>
+            <li>Configuration elements<ul><li>Variables - Only the final part (leaf) of the variable name is specified, the remaining branches come from the topology of the template instantiation. Variables can include trends, events, thresholds, alarm synthesis etc.</li><li>Cyclics - Cyclic actions</li><li>File references - References to third party files</li><li>File objects - Files, File items and Attributes</li><li>Associated labels</li><li>Archive units</li><li>Log lists</li><li>Geographical data - Geo-tags, Zones and Actions</li><li>Data analysis - Data export, Log page and Trend page</li><li>Communication - SNMP, BACnet, OPC, IEC 60870-5, IEC 61850 and DNP3</li></ul></li>
+            <li>Graphic elements:<ul><li>Mimics - The name of the mimic that will contain any symbols that are instantiated.</li><li>Symbols - Representing the template, and requiring instantiation in a mimic of higher level.</li></ul></li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">For detailed information about the configuration properties available for each element see the Application Explorer help:</p>
+            <ul>
+                <li>Variables -  Variables</li>
+                <li>Cyclics - Actions &gt; Cyclic actions</li>
+                <li>File references &gt; General &gt; File references</li>
+                <li>Associated labels - How to configure Labels</li>
+                <li>Archive units - Archives &gt; Configuring archive units</li>
+                <li>Log lists - Archives &gt; Configuring archive units &gt; Proprietary archive units &gt; Configuring log data recording</li>
+                <li>Geographical data &gt; Geographical data</li>
+                <li>Data analysis &gt; Data Analysis</li>
+                <li>Communication - Communication &gt; Data Acquisition</li>
+            </ul>
+        </div>
+        <div class="note">
+            <p class="SVnormal">Template configuration includes a Documentation tab from where the developer can add a textual explanation of its intended use, and where its dependencies are displayed.</p>
+        </div>
+        <h2 class="SVheading2">Inherited template</h2>
+        <p class="SVnormal">An inherited template is one that has another template as its parent. The same parent template can have any number of inherited templates. That is, there is a one to many relationship between parent and inherited templates. When the inherited template is instantiated, the instance will contain both its elements, and those of the parent template (if the parent template is instantiated it contains only its own elements).</p>
+        <p class="SVnormal">Example - The LIGHT template has one variable called STATUS. The DIMMER LIGHT template has one variable called LUX and is inherited from the LIGHT template. When the DIMMER LIGHT template is instantiated, the instance will have both the STATUS and LUX variables.</p>
+        <div class="note">
+            <p class="SVnormal">The concept of inheritance allows the definition of one or more specialized templates sharing a common base.</p>
+        </div>
+        <h2 class="SVheading2">Included template</h2>
+        <p class="SVnormal">An included template is an instance of a template that is embedded in another template. You can have one or more templates embedded in the same template. That is, there is a many to one relationship between the included and container templates. When the container template is instantiated, it has both its own elements plus those of its embedded templates         (if the embedded template is instantiated it contains only its own elements).</p>
+        <div class="note">
+            <p class="SVnormal">The concept of inclusion can produce complex templates by aggregating much simpler ones (like building bricks).</p>
+        </div>
+        <p class="SVnormal">Example - The OFFICE template has one variable called TEMPERATURE. The LIGHT template has one variable called STATUS. The OFFICE template includes four (embedded) instantiations of the LIGHT template (LIGHT_1, LIGHT_2 etc.). When the OFFICE template is instantiated, it will contain one TEMPERATURE variable plus four instances  of the STATUS variable (LIGHT_1.STATUS, LIGHT_2.STATUS etc.).</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

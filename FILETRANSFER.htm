@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Instruction reference A to Z|F" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>FILETRANSFER</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="FILETRANSFER_Instruct" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor294"></a>FILETRANSFER</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc110">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="Communication_InstbyCat" />
+                <param name="Item3" value="Asynchronous_Ref" />
+            </object><a class="MCConceptLink_seealso_0" href="javascript:mc110.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />See also</a>
+        </p>
+        <p class="SVnormal">Control file transfer services for data acquisition drivers.<br /></p>
+        <p class="SVnormal">WebVue support - Yes.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 50px;" />
+            <col style="width: 200px;" />
+            <col style="width: 53px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Mode</td>
+                    <td class="SVtableHeading">Mnemonic</td>
+                    <td class="SVtableHeading">Syntax</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">DOWNLOAD</td>
+                    <td class="SVtable"><a href="#Syntax1">1</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2</td>
+                    <td class="SVtable">DOWNLOAD_FOLDER</td>
+                    <td class="SVtable"><a href="#Syntax2">2</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">3</td>
+                    <td class="SVtable">DELETE</td>
+                    <td class="SVtable"><a href="#Syntax3">3</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note">
+            <p class="SVnormal">The verb FILETRANSFER is  currently used to support file transfer services for IEC 61850 and DNP3 devices. See <a href="M61850.htm">M61850</a> and <a href="MDNP3.htm">MDNP3</a> for more information.</p>
+        </div>
+        <h2 class="SVheading2"><a name="AllSyntaxes"></a>Arguments common to more than one mode</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" style="font-style: italic;" class="SVtable"><i>ComObj</i>
+                </td>
+                <td valign="top" class="SVtable">The full name of the communication object, as configured in the Application Explorer, to which the file transfer applies. For example, Network01.Device01. Type STR.</td>
+            </tr>
+            <tr>
+                <td valign="top" style="font-style: italic;" class="SVtable"><i>SourceFile</i>
+                </td>
+                <td valign="top" class="SVtable">The name of a file in the field device corresponding to the communication object. Type STR.</td>
+            </tr>
+            <tr>
+                <td valign="top" style="font-style: italic;" class="SVtable">DestinationFolder</td>
+                <td valign="top" class="SVtable">
+                    <p class="SVnormal">The destination folder is the project's TP folder by default. This will be used if the <i>DestinationFolder</i> parameter is empty. Type STR. </p>
+                    <p class="SVnormal">You can also use a full path like "C:\\MyFiles" or a relative path like "..\\..\\MyFiles".</p>
+                    <div class="note">
+                        <p class="SVnormal">If executed in a WebVue session context this instruction is processed by the computer that hosts the web back end and the destination folder is on that computer.</p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" style="font-style: italic;" class="SVtable">CurrentPositionVar</td>
+                <td valign="top" class="SVtable">The name of a register variable that will be regularly updated with the number of bytes downloaded. Type STR.</td>
+            </tr>
+            <tr>
+                <td valign="top" style="font-style: italic;" class="SVtable">MaxPositionVar</td>
+                <td valign="top" class="SVtable">The name of a register variable to represent the total file size. Type STR.</td>
+            </tr>
+            <tr>
+                <td valign="top" style="font-style: italic;" class="SVtable">ResultVar</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top">The name of a register variable in which a value, corresponding to the result of the instruction, is placed. See the table below for possible values and their meaning. Type STR.<br /></p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">The expected syntax for the argument <i>SourceFile</i> may vary depending on the field device model, for example, <i>MyFile.txt</i> or <i>\MyFile.txt</i>.<br />A way to verify the syntax expected by a given device model is to use the File transfer Helper available in the Application Explorer. When browsing files in an online device, the Helper displays file names as transmitted by the device, and therefore how one can expect the <i>SourceFile</i> argument to be passed.</p>
+        </div>
+        <h2 class="SVheading2"><span><a name="Syntax1"></a></span>Syntax 1</h2>
+        <p class="SVnormal"><i>IntVal</i> = FILETRANSFER(<i>Mode, ComObj, SourceFile, DestinationFolder [, ResultVar[, CurrentPositionVar[, MaxPositionVar]]]</i>);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">
+                    <p class="SVtable">1</p>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p class="SVtable">DOWNLOAD</p>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p valign="top">Download the named file from the field device corresponding to the communication object.</p>
+                    <p valign="top">Return: 0 if successful. A negative value is a parameter error, the value indicating which parameter is incorrect. For example, -3 means that parameter 3 is incorrect.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax2"></a>Syntax 2</h2>
+        <p class="SVnormal"><i>IntVal</i> = FILETRANSFER(<i>Mode, Sub-mode, ComObj, SourceFolder, DestinationFolder[, ResultVar[, CurrentFileVar[, MaxFileVar[, CurrentPositionVar[, MaxPositionVar]]]]]</i>);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top"><i>Sub-mode</i>
+                </td>
+                <td valign="top">
+                    <p valign="top">Sets the download behavior for the call. Type STR.</p>
+                    <p valign="top">Possible values:</p>
+                    <ul>
+                        <li>
+                            <p valign="top">DOWNLOAD - Download all files from the folder <i>SourceFolder</i> and store them in the <i>DestinationFolder</i>. Any file already present in the <i>DestinationFolder</i> is overwritten.</p>
+                        </li>
+                        <li>
+                            <p valign="top">UPDATE - Download from the folder <i>SourceFolder</i> any file not yet in the <i>DestinationFolder</i>.</p>
+                        </li>
+                        <li>
+                            <p valign="top">SYNC - Download from the folder <i>SourceFolder</i> any file already present in <i>DestinationFolder</i> but updated in the IED since the download.</p>
+                        </li>
+                        <li>
+                            <p valign="top">MIRROR - Download from the folder <i>SourceFolder</i> any file already present in <i>DestinationFolder</i> but updated in the IED since the download (same as SYNC), and delete from the <i>DestinationFolder</i> any file no longer available in the <i>SourceFolder</i> (.bak files are not deleted).</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>SourceFolder</i>
+                </td>
+                <td valign="top" class="SVtable">The name of a folder in the field device corresponding to the communication object. Type STR.</td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 200px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable" style="vertical-align: top;">
+                    <p class="SVtable">2</p>
+                </td>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p class="SVtable">DOWNLOAD_FOLDER</p>
+                </td>
+                <td valign="top" class="SVtable" style="vertical-align: top;">
+                    <p valign="top">Download all files from the specified folder of the field device corresponding to the communication object.</p>
+                    <p valign="top">Return: 0 if successful. A negative value is a parameter error, the value indicating which parameter is incorrect. For example, -3 means that parameter 3 is incorrect.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax3"></a>Syntax 3</h2>
+        <p><i>IntVal</i> = FILETRANSFER(<i>Mode, ComObj, SourceFile [, ResultVar]</i>);</p>
+        <p class="SVnormal">Return type: INTEGER.</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 200px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable" style="vertical-align: top;">
+                    <p class="SVtable">3</p>
+                </td>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p class="SVtable">DELETE</p>
+                </td>
+                <td valign="top" class="SVtable" style="vertical-align: top;">
+                    <p valign="top">Delete the specified file from the field device corresponding to the communication object.</p>
+                    <p valign="top">Return: 0 if successful. A negative value is a parameter error, the value indicating which parameter is incorrect. For example, -3 means that parameter 3 is incorrect.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">The FILETRANSFER instruction operates asynchronously. That is once a request has been generated, the script continues without waiting for the request to be completed. The <i>ResultVar</i> can be used to monitor the status of the request.</p>
+        </div>
+        <h2 class="SVheading2">Status variable values</h2>
+        <p class="SVnormal">The <i>ResultVar</i> variable can take the following values.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;">
+            <col style="width: 63px;" />
+            <col style="width: 567px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable"> 0</td>
+                    <td class="SVtable">Operation completed successfully</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-1</td>
+                    <td class="SVtable">Operation failed, unknown error</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-2</td>
+                    <td class="SVtable">Operation failed, internal Error</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-3</td>
+                    <td class="SVtable">No communication object</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-4</td>
+                    <td class="SVtable">Communication object not connected</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-5</td>
+                    <td class="SVtable">Operation failed, request not supported</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-6</td>
+                    <td class="SVtable">Operation failed, access denied</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-7</td>
+                    <td class="SVtable">Download could not be initialized</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-8</td>
+                    <td class="SVtable">Download failed</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-9</td>
+                    <td class="SVtable">Upload could not be initialized</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-10</td>
+                    <td class="SVtable">Upload failed</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-11</td>
+                    <td class="SVtable">Delete file failed</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-12</td>
+                    <td class="SVtable">Browsing failed</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-13</td>
+                    <td class="SVtable">Message routing failed</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-14</td>
+                    <td class="SVtable">No remote server</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-15</td>
+                    <td class="SVtable">No transaction</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-16</td>
+                    <td class="SVtable">No server</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-17</td>
+                    <td class="SVtable">Connection already close</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-18</td>
+                    <td class="SVtable">Protocol error, flow control activated</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-19</td>
+                    <td class="SVtable">Protocol error, max services reached</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-20</td>
+                    <td class="SVtable">Protocol error, no data read</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-21</td>
+                    <td class="SVtable">Protocol error, memory</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-22</td>
+                    <td class="SVtable">Protocol error, encoding error</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-23</td>
+                    <td class="SVtable">Protocol error, incorrect transaction</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-24</td>
+                    <td class="SVtable">Protocol error, connection closed</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-25</td>
+                    <td class="SVtable">Protocol error, time out</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-26</td>
+                    <td class="SVtable">Protocol error, connection state</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-27</td>
+                    <td class="SVtable">Protocol error, application</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-28</td>
+                    <td class="SVtable">Protocol error, parameters</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-29</td>
+                    <td class="SVtable">Protocol error, confirmed error</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-30</td>
+                    <td class="SVtable">Protocol error, reject</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-31</td>
+                    <td class="SVtable">Ambiguous file name</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-32</td>
+                    <td class="SVtable">Download failed, file is busy</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-33</td>
+                    <td class="SVtable">Download failed, file name syntax error</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-34</td>
+                    <td class="SVtable">Download failed, content type invalid</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-35</td>
+                    <td class="SVtable">Download failed, position invalid</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-36</td>
+                    <td class="SVtable">Download failed, access to the file denied</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-37</td>
+                    <td class="SVtable">Download failed, file not found. Occurs if you try to download a file the does not exist in the server</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-38</td>
+                    <td class="SVtable">Upload failed, duplicate file name in the file system</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-39</td>
+                    <td class="SVtable">Upload failed, insufficient space on the file system</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-40</td>
+                    <td class="SVtable">Device not started</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-41</td>
+                    <td class="SVtable">Device in error state</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-42</td>
+                    <td class="SVtable">Cannot access destination file</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-43</td>
+                    <td class="SVtable">Definition</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-44</td>
+                    <td class="SVtable">Browsing error, no file or no folder</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-45</td>
+                    <td class="SVtable">Moving file from the temporary directory to the final directory failed, access denied</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-46</td>
+                    <td class="SVtable">Moving file from the temporary directory to the final directory failed,  file not found</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-47</td>
+                    <td class="SVtable">Moving file from the temporary directory to the final directory failed, invalid name</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-48</td>
+                    <td class="SVtable">Moving file from the temporary directory to the final directory failed, file already exists and cannot be overridden</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

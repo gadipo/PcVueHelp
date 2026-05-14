@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html MadCap:ignoredWords="timestamping;timestamps" xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Graphic controls and Viewers|Log Viewer|Using the Log Viewer at run-time" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Sorting the contents of the Log Viewer by column</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Sorting the Contents of the Log Viewer by Column</h1>
+        <p class="SVnormal">The Log Viewer contents can be sorted order according to the contents of any column. By default, it is sorted according to the date and time with either  the most recent logs at the top, or the bottom, of the list. If configured to permit it, the sort direction and/or the column on which the sort is made can be changed at run-time by clicking on the column header. </p>
+        <p class="SVnormal">The sorting is intelligent and depends on the contents of the sorted column.</p>
+        <ul>
+            <li>A column containing numeric data only will cause a numeric sort. For example, using ascending sorting, 2 would be above 3. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <li>A column containing alphanumeric data will cause a character sort. For example, using ascending sorting, 20 RED CARS, would be above 3 GREEN CARS. The first character 2, comes before 3 in the ASCII character set. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <li>A column containing timestamp (time and/or date) information will cause a time/date sort. For example, using an ascending sort 12:08:37 is above 12:08:43. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+        </ul>
+        <div MadCap:targetName="t1" style="display: none;">
+            <br />
+            <img src="../../Resources/Images/HMI/Controls/LogViewer_ascending_number.png" />
+            <br />Ascending sort on a numeric column
+		    </div>
+        <div MadCap:targetName="t2" style="display: none;">
+            <br />
+            <img src="../../Resources/Images/HMI/Controls/LogViewer_ascending_char.png" />
+            <br />Ascending sort on an alphanumeric column
+			</div>
+        <div MadCap:targetName="t3" style="display: none;">
+            <br />
+            <img src="../../Resources/Images/HMI/Controls/LogViewer_ascending_time.png" />
+            <br />Ascending sort of a time/date column
+			</div>
+        <div class="note">
+            <p class="SVnormal">By <u>ascending</u>, we mean values get greater from the top to the bottom of the list.</p>
+        </div>
+        <h2 class="SVheading2">Understanding the effect of a historical request on the sorting</h2>
+        <p class="SVnormal">When a Log Viewer makes a historical request, it asks for records according to their timestamp. For example, when the container mimic is opened it will request  <i>Buffer Size</i> older records back from the current time. Only when the historic data arrives at the Log Viewer is it then sorted, for the display, according to the sort criteria that is active. It is important to understand the effect of this.</p>
+        <p class="SVnormal">For example,: The User has sorted the display according to the name of the variable and, because there are a lot of logs for a particular variable in the current display buffer, only logs for that one variable are visible. The User then makes a historical request. The new records that arrive at the Log Viewer do not include any for the variable that was previously visible in the display. The records are still sorted to the same criteria, but there will be none visible for the variable that previously occupied the display.</p>
+        <p class="SVnormal"><b>To summarize - A historical request is always made according to timestamp NOT according to the sort criteria.</b>
+        </p>
+        <div class="note">
+            <p class="SVnormal">&lt;<i>Buffer Size</i>&gt; is the number of lines specified by the Display Buffer property of the 
+ Log Viewer's configuration. Not the number of visible lines.</p>
+        </div>
+        <h2 class="SVheading2">Understanding the effect of using field equipment that supports timestamping</h2>
+        <p class="SVnormal">Both Proprietary and ODBC archive units record two timestamps for each record.</p>
+        <ol>
+            <li value="1">The time of <span class="mc-variable OEM.ProductName variable">PcVue</span> when the record was actually made.</li>
+            <li value="2">The time from the field equipment that is the source of the event - for example a PLC.</li>
+        </ol>
+        <p class="SVnormal">Most traditional types of field devices, (PLC, I/O etc.), do not support timestamping. In this case, <span class="mc-variable OEM.ProductName variable">PcVue</span>'s time is used for both timestamps. However, for equipment that does support timestamping it means that the two timestamps in each record could be different. It is important to understand the effect this has on the Log Viewer.</p>
+        <p class="SVnormal">When the Log Viewer makes a historical request, the timestamp in the request is matched with that of <span class="mc-variable OEM.ProductName variable">PcVue</span> in each record. However, when the historic data arrives at the Log Viewer, it is the Equipment timestamp that is used to sort the data and also used in the display. The effect of this is that you could see data in the Log Viewer with a timestamp that is apparently outside of that requested.</p>
+        <p class="SVnormal">In the following screen shot, the Historical Request tool of the Log Viewer is used to make a request for records between 17:00:00 and 17:05:00. However, Log Viewer has actually displayed some records that have, apparently, an older timestamp than that. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t4" style="display: none;">
+            <br />
+            <img src="../../Resources/Images/HMI/Controls/LogViewer_eqt_timestamp.png" />
+            <br />
+        </div>
+        <p class="SVnormal">If we look at the records in the archive unit we can see why. The equipment that was the source of the events with the description 3 RED CARS, has a time setting that is one hour different to that of <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <div>
+            <p>20130308T170038.823Z,1,512, ,Bit02,"3 RED CARS",0,20130308T160038.823Z,0,"                                        ","#@A1,#@A2,#@*A3",    7</p>
+            <p>20130308T170040.008Z,1,64, ,Bit01,"20 GREEN CARS",0,20130308T170040.008Z,0,"                                        ","#@A1,#@A2,#@*A3",    8</p>
+            <p>20130308T170047.808Z,1,64, ,Bit02,"3 RED CARS",0,<span style="color: #ff0000;">20130308T160047.808Z</span>,0,"                                        ","#@A1,#@A2,#@*A3",    9</p>
+            <p>20130308T170051.209Z,1,512, ,Bit01,"20 GREEN CARS",0,20130308T170051.209Z,0,"                                        ","#@A1,#@A2,#@*A3",   10</p>
+            <p>20130308T170102.223Z,1,64, ,Bit01,"20 GREEN CARS",0,20130308T170102.223Z,0,"                                        ","#@A1,#@A2,#@*A3",   11</p>
+            <p>20130308T170104.422Z,1,512, ,Bit01,"20 GREEN CARS",0,20130308T170104.422Z,0,"                                        ","#@A1,#@A2,#@*A3",   12</p>
+            <p>20130308T170112.222Z,1,512, ,Bit02,"3 RED CARS",0,<span style="color: #ff0000;">20130308T160112.222Z</span>,0,"                                        ","#@A1,#@A2,#@*A3",   13</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">This applies to Proprietary or ODBC archive units only. It does not apply to the HDS that only records a single timestamp, the field equipment's timestamp, or <span class="mc-variable OEM.ProductName variable">PcVue</span>'s timestamp if the field equipment does not support timestamping.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

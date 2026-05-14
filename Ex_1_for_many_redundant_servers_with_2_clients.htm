@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Communication|Networked applications|Architecture examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Architecture Examples - 1 for Many Redundant Servers </title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Architecture Examples - 1 for Many Redundant Servers 
+ and 2 Clients</h1>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Comm_Networking/architecture4.png" />
+        </p>
+        <h2 class="SVheading2">Project requirements</h2>
+        <ul>
+            <li class="SVbulleted">Station1 can communicate 
+ with PLCA and produce the value of variables.</li>
+            <li class="SVbulleted">Station2 can communicate 
+ with PLCB and produce the value of  variables.</li>
+            <li class="SVbulleted">Station3 can communicate with both PLCA and PLCB and produce the value of variables.</li>
+            <li class="SVbulleted"> Station3 
+is in two separate associations, one with Station1 and the other with Station2, providing redundancy for both stations.</li>
+            <li class="SVbulleted">Station4 consumes 
+ the value of variables from Association10 and Association20 and displays mimics.</li>
+            <li class="SVbulleted">Station5 consumes the value of variables from Association10 and Association20 and displays mimics.</li>
+        </ul>
+        <p class="SVnormal">The project configuration is identical on all stations.</p>
+        <h2 class="SVheading2">License requirements</h2>
+        <ul>
+            <li class="SVbulleted">Station1 requires 
+ a server license.</li>
+            <li class="SVbulleted">Station2 requires 
+ a server license.</li>
+            <li class="SVbulleted">Station3 requires 
+ a server license.</li>
+            <li class="SVbulleted">Station4 requires a client license.</li>
+            <li class="SVbulleted">Station5 requires a client license.</li>
+        </ul>
+        <h2 class="SVheading2">Network configuration</h2>
+        <ul>
+            <li class="SVbulleted">The default network 
+ configuration is used with all stations, configured as both client and 
+ server and with all links between all stations made.</li>
+            <li class="SVbulleted">An association, Association10, containing Station1 and Station3 is configured.</li>
+            <li class="SVbulleted">An association, Association20, containing Station2 and Station3 is configured.</li>
+            <li class="SVbulleted">Three station lists 
+ are required.<br />LASSOC10 – a server list containing the name Association10
+<br />LASSOC20 – a server list containing the name Association20<br />LCLIENT45 – a client list containing the names Station4 and Station5.</li>
+        </ul>
+        <h2 class="SVheading2">Variables tree configuration</h2>
+        <ul>
+            <li class="SVbulleted">Variables produced by Station1 or Station3 and consumed by Station4 and Station5 are allocated to the server list LASSOC10 and the client list LCLIENT45.</li>
+            <li class="SVbulleted">Variables produced by Station2 or Station3 and consumed by Station4 and Station5 are allocated to the server list LASSOC20 and the client list LCLIENT45.</li>
+        </ul>
+        <h2 class="SVheading2">How do the stations behave?</h2>
+        <p class="SVnormal">For the purpose of this explanation, it is assumed that  Station1 and Station2 were started before Station3. </p>
+        <ul>
+            <li>Station1 is active and produces the value of variables for Association10.<br />Station2 is active and produces the value of variables for Association20.<br />Station4 and Station5 consume the value of variables from both Association10 and Association20.</li>
+            <li>Station3 is entirely passive.<br />Station3 variables that are attached to server list LASSOC10 will consume values.<br />Station3 variables that are attached to server list LASSOC20 will consume values.</li>
+            <li>One of the active stations, for example Station1, fails. The variables in Station3 that are attached to LASSOC10 become active and produce values. The variables that are attached to LASSSOC20 remain passive and continue to consume values. Station3 is then the active partner in Association10 but remains the passive partner in Association20. When Station1 is restarted, it is passive, its variables consuming values. Station1 remains passive unless forced to active (by SCADA Basic for example), or Station3 fails.</li>
+        </ul>
+        <h2 class="SVheading2">Further notes about the single station used to provide redundancy</h2>
+        <ul>
+            <li>A single station can be used to provide redundancy in any number of associations as long as the license can accommodate  the number of variables and the PC itself has sufficient resources (memory, CPU speed, network capacity, etc.) to manage the load.</li>
+            <li>The status of the station within each association is managed separately. The station can be active in some associations and passive in others, or active in all associations or passive in all associations.</li>
+            <li>The physical connection to the equipment must be taken into account. That is, two different associations cannot use the same physical connection (for example COM1) as the station can be active in both associations at the same time and there would be a conflict.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

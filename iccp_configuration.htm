@@ -1,0 +1,2165 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|ICCP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Installation and configuration</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Installation and Configuration</h1>
+        <p class="SVnormal">For <span class="mc-variable OEM.ProductName variable">PcVue</span> to work with ICCP features, the application designer must:</p>
+        <ul>
+            <li>Have a license with ICCP Server option enabled. The driver can run in demo mode for one hour. However, any networking architectures do not work in demo mode.</li>
+            <li>Reference the svmgrICCP.dll file in the usrmgr.dat file that is in the Bin folder.</li>
+            <li>Have a configuration file, ICCP.ini, which must be located in the C folder of the project. It is used to configure the ICCP LCCs in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li>
+        </ul>
+        <p class="SVnormal">The usrmgr.dat file should have the following content:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[USRMGR\svmgrICCP]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DLL=svmgrICCP.dll</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2">ICCP.ini file</h2>
+        <p class="SVnormal">Some fields of the ICCP.ini file are mandatory. If they are missing or invalid, the driver fails to start. Other fields are optional and if they are missing or invalid, the task uses default values. The Event Viewer displays warning messages in the event of a missing or invalid field.</p>
+        <p class="SVnormal">To comment a line in the ICCP.ini file, you can enter a single quotation mark (’) at the beginning of the line.</p>
+        <p class="SVnormal">The following paragraphs describe the ICCP.ini file in more details.</p>
+        <div class="warning">
+            <p class="SVnormal"><u>Name</u> fields are used as unique identifiers for the configured items. Their value must be of type String with a max length of 20 characters.<br />Allowed characters are: [a-z], [A-Z], [0-9] and underscore.</p>
+        </div>
+        <h2 class="SVheading2">General parameters section</h2>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 200px;" />
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Field</td>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">LogMessageLevel</td>
+                    <td class="SVtable">Integer</td>
+                    <td class="SVtable">
+                        <p>1..4</p>
+                        <p>Default to 1</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Sets the level of trace details the user wants to have for general elements. Children elements use the general logging level if the default option is selected.</p>
+                        <p class="SVtable">Each level includes messages related to lower levels. The traces are essential for troubleshooting purposes.</p>
+                        <ul>
+                            <li class="SVbulleted">Level 1 - Minimum. Contains basic messages (errors, basic summary, etc.)</li>
+                            <li class="SVbulleted">Level 2 - Light details. Contains more detailed messages (connections details, extended summaries etc.).</li>
+                            <li class="SVbulleted">Level 3 - Full details. Contains full details.</li>
+                            <li class="SVbulleted">Level 4 - Stack. Contains all messages.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">AttributeNumber</td>
+                    <td class="SVtable">Integer</td>
+                    <td class="SVtable">
+                        <p>3..16</p>
+                        <p>Default to 16</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Sets which variable text extended attribute is used to define ICCP parameters.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">BranchSeparator</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Single character</p>
+                        <p>Default to '/'</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">The character used as the branch separator in the ICCP.ini and text extended attributes.</p>
+                        <p class="SVtable"> In the varexp.dat file, this character is used for separating the parameters in the extended attribute.<br />For example in extended attribute #16:</p>
+                        <div class="codeSnippet_0 codeSnippet">
+                            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                                    <tbody>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">ICCP/DiscreteVar/#F/DomainName/Discrete/Telemetered</pre>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Full7LayerStack</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">The input is not case sensitive.</p>
+                        <p class="SVtable">Sets whether the ICCP model runs with full 7 layer stack addressing.</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">If True is selected, then the model with run with full 7 layer stack addressing. This means that the driver allows creating several control centers that can occupy the same port.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">If False is selected, the user must use different ports if multiple control centers are configured.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">SystemVariableRefreshPeriod</td>
+                    <td class="SVtable">Integer</td>
+                    <td class="SVtable">
+                        <p>1..65535</p>
+                        <p>Default to 5</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Defines the period in seconds that the ICCP driver waits to refresh the value of statistic related system variables.</p>
+                        <p class="SVtable">For LCCs, the variables affected by this refresh period are:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">InformationReportsSent.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">DeviceSelectRequestsReceived.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">DeviceOperateRequestsReceived.</p>
+                            </li>
+                        </ul>
+                        <p class="SVtable">For RCCs, the variables affected by this refresh period are:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">InformationReportsReceived.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">DeviceSelectRequestsSent.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">DeviceOperateRequestsSent.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">VarNameCmdRequest</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Name of the variable used to send commands to the Add-on. See <a href="iccp_system_vars.htm#Commands">Commands</a> for more information.</p>
+                        <div class="warning">
+                            <p class="SVnormal">The variable must have the Control property set.</p>
+                        </div>
+                        <p class="SVtable">The variable is produced by a list containing all server stations configured to load the ICCP Add-on, and be consumed by all stations that potentially send commands.</p>
+                        <p class="SVtable">For example: @ICCP.CMD_Request</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">VarNameCmdResult</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&#160;</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional </p>
+                        <p class="SVtable">Name of the variable used to receive results from commands sent to the Add-on. See <a href="iccp_system_vars.htm#Commands">Commands</a> for more information.</p>
+                        <div class="warning">
+                            <p class="SVnormal">The variable must have the Control property set.</p>
+                        </div>
+                        <p class="SVtable"> The variable is produced by a list containing all server stations configured to load the ICCP Add-on, and be consumed by all stations that potentially send commands.</p>
+                        <p class="SVtable">For example: @ICCP.CMD_Result</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Example of General parameters sections in the  ICCP.ini file</h3>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[GeneralParameters]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">LogMessageLevel&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 2</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AttributeNumber&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 16</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">BranchSeparator&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= /</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Full7LayerStack&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= True</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SystemVariableRefreshPeriod&#160;&#160;&#160;&#160;= 5</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">VarNameCmdRequest&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= ICCP.DriverCMDs.Request</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">VarNameCMDResult&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= ICCP.DriverCMDs.Result</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2">Application References sections </h2>
+        <p class="SVnormal">The sections [ARn] in the  ICCP.ini file define the addressing information necessary to define LCCs or RCCs. Depending on the use of the AR, the fields are associated to either local or remote addresses.</p>
+        <p class="SVnormal">There are different functions to the application references depending on the Local Control Center type (Calling Client/Server, Called Client/Server, etc). Also, most of the fields in the ARs are optional, which can have different meanings:</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">If it is a Called type, omitting a specific field implies that upon remote connection, the local control center does not require an exact match of that field to accept or deny the connection.</li>
+            <li class="SVbulleted">If it is a Calling type, omitting a specific field implies that when the local control center sends the connection request to the remote, it does not include that field.</li>
+        </ul>
+        <p class="SVnormal">The exact requirements of each connection to a remote is handled between the two parties.</p>
+        <div class="warning">
+            <p class="SVnormal">The TSelector field is particularly important. To avoid connection issues, it is recommended to use different TSelectors for different LCCs.</p>
+            <p class="SVnormal">To differentiate application references, the user must create different blocks in the ICCP.ini file in a section called [ARX] where X is an increment starting from 1.</p>
+        </div>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 200px;" />
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Field</td>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;Name&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">Determines the name of the AR.</p>
+                        <p class="SVtable">Names must be unique among ARs. The input is case sensitive</p>
+                        <p class="SVtable">If this field is empty, the AR is not created.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">IPAddress</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&lt;IP Address&gt;</p>
+                        <p>Default to 0.0.0.0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Format: xxx.xxx.xxx.xxx. </p>
+                        <p class="SVtable">For example: 192.168.0.10.</p>
+                        <p class="SVtable">Determines the IP Address of the control center. The user can enter 0.0.0.0 or leave the field empty to use the localhost address.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">AppTitle</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;App Title&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Format: Integer values separated by commas: X,Y,Z,W.</p>
+                        <p class="SVtable"> For example: 1,1,999,1.</p>
+                        <p class="SVtable">It is part of the stack address of the control center.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">AEQualifier</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">&lt;AEQual&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Only positive values are valid. </p>
+                        <p class="SVtable">For example: 12.</p>
+                        <p class="SVtable">It is part of the stack address of the control center.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">APInvokeID</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">&lt;APInvoke&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Only positive values are valid.</p>
+                        <p class="SVtable">For example: 10.</p>
+                        <p class="SVtable">It is part of the stack address of the control center.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">PSelector</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;PSelector&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Format: Integers separated by spaces: XX YY ZZ WW. </p>
+                        <p class="SVtable">For example: 00 00 00 01.</p>
+                        <p class="SVtable">It is part of the stack address of the control center.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">SSelector</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;SSelector&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Format: Integers separated by spaces: XX YY ZZ WW.</p>
+                        <p class="SVtable">For example: 00 01.</p>
+                        <p class="SVtable">It is part of the stack address of the control center.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TSelector</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;TSelector&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Format: Integers separated by spaces: XX YY ZZ WW.</p>
+                        <p class="SVtable">For example: 00 01.</p>
+                        <p class="SVtable">It is part of the stack address of the control center.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Example of Application References sections in the ICCP.ini file</h3>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[AR1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name = LCC1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IPAddress = 192.168.0.29</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AppTitle = 1,1,999,1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AEQualifier = 12</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">APInvokeID = 10</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AEInvokeID= 10</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">PSelector = 00 00 00 01</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SSelector = 00 01</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TSelector= 00 01</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2">Networks sections</h2>
+        <p class="SVnormal">The sections [NetworkX] in the  ICCP.ini file define a Network that contains any number of Local Control Center objects. The Network is mainly useful to separate different <span class="mc-variable OEM.ProductName variable">PcVue</span> stations and behaviors. To differentiate networks, the user must create different sections in the ICCP.ini file, each named [NetworkX] where X starts at 1.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 200px;" />
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Field</td>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;Name&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">A string that must be unique among Networks. The input is case sensitive.</p>
+                        <p class="SVtable">Determines the name of the Network.</p>
+                        <div class="note">
+                            <p class="SVnormal">We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.</p>
+                        </div>
+                        <p class="SVtable">If it is empty, the Network is not created.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">LogMessageLevel</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..4</p>
+                        <p>Default to 0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines which level of trace details the user wants to have for the network. Children elements use this value if the default option is selected.</p>
+                        <p class="SVtable">Each level includes messages related to lower levels. The traces are essential for troubleshooting purposes:</p>
+                        <ul>
+                            <li class="SVbulleted">Level 0 - Default. Uses the Log Message Level that is set in the General Parameters section.</li>
+                            <li class="SVbulleted">Level 1 - Minimum. Contains basic messages (errors, basic summary, etc.)</li>
+                            <li class="SVbulleted">Level 2 - Light details. Contains more detailed messages (connections details, extended summaries, etc.).</li>
+                            <li class="SVbulleted">Level 3 - Full details. Contains full details.</li>
+                            <li class="SVbulleted">Level 4 - Stack. Contains all messages.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">AssociationName</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&lt;NetworkingName&gt;</p>
+                        <p>Default to empty string</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">Determines the name of the server association that produces the ICCP interface as part of the networking.</p>
+                        <p class="SVtable">For example: The project has an association called “ASSOC1”, then the same name must be entered in the AssociationName of the ICCP.ini file.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DelayWhenBecomingActive</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..2147483647</p>
+                        <p>Default to 0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines the period in seconds that the ICCP driver waits on a newly active station after a networking switchover before starting the communication objects.</p>
+                        <p class="SVtable">This parameter addresses the switchover being too fast where the newly active station could connect to a remote that was still connected to the newly passive station.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Example of Networks sections in the  ICCP.ini file</h3>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Network1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name = NET1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">LogMessageLevel&#160;&#160;&#160;&#160;= 3</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AssociationName&#160;&#160;&#160;&#160;= DAS_ASSOC1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DelayWhenBecomingActive = 2</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2">LCCs sections</h2>
+        <p class="SVnormal">The sections [NetworkX/LocalControlCenterY] in the  ICCP.ini file define the information of a local control center to be created. Multiple local control center can be created.</p>
+        <p class="SVnormal">If multiple LCCs are configured, it is important to pay close attention to:</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">The AR, in particular the IP Address and the Port that must be different for the different configured LCCs when not using Full 7 Layer Stack addressing.</li>
+            <li class="SVbulleted">All the AR fields when using Full 7 Layer Stack addressing. All the LCCs can share the same port in this case.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The TSelector field in the ARs is especially important to differentiate the different LCCs that are being created.</p>
+        </div>
+        <p class="SVnormal">All LCCs must be configured linked to a Network. To differentiate LCCs, the user must configure a different section for each LCC (in the ICCP.ini file) called [NetworkX/LocalControlCenterY] where X and Y increase starting from 1.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 200px;" />
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Field</td>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;Name&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">A string that must be unique among LCCs in a Network. The input is case sensitive.</p>
+                        <p class="SVtable">Determines the name of the local control center. </p>
+                        <div class="note">
+                            <p class="SVnormal">We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.</p>
+                        </div>
+                        <p class="SVtable">If this field is empty, the LCC is not created.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">LocalAR</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;ARName&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">A string that must match the Name of a defined AR. It is case sensitive.</p>
+                        <p class="SVtable">Determines the addressing information of the local control center with the information that is defined on the AR.</p>
+                        <p class="SVtable">If this field is empty, the LCC is not created.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">LogMessageLevel</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..4</p>
+                        <p>Default to 0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p>Determines which level of trace details the user wants to have for the LCC. Children elements use this value if the default option is selected.</p>
+                        <p class="SVtable">Each level includes messages related to lower levels. The traces are essential for troubleshooting purposes:</p>
+                        <ul>
+                            <li class="SVbulleted">Level 0 - Default. Uses the Log Message Level that is set in the Network section.</li>
+                            <li class="SVbulleted">Level 1 - Minimum. Contains basic messages (errors, basic summary, etc.)</li>
+                            <li class="SVbulleted">Level 2 - Light details. Contains more detailed messages (connections details, extended summaries, etc.).</li>
+                            <li class="SVbulleted">Level 3 - Full details. Contains full details.</li>
+                            <li class="SVbulleted">Level 4 - Stack. Contains all messages.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">IsServer</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">Determines whether the ICCP local control center is going to be a Server.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">IsClient</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">Determines whether the ICCP local control center is going to be a Client.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">InitiateCommunication</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">Determines whether the ICCP local control center initiates communication with RCCs or not (calling/called behavior). This field is only relevant if the local control center is a Client and a Server (bidirectional).</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Full7LayerStack</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">True/False</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines whether the ICCP model of this specific LCC runs with full 7 layer stack addressing.</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">If True is selected, then the model with run with full 7 layer stack addressing. This means that the driver allows to create several control centers that can occupy the same port.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">If False is selected, it does not run with full 7 layer stack addressing. In this case, the user must use different ports if multiple control centers are configured. This parameter also affects the creation of the Application References.</p>
+                            </li>
+                        </ul>
+                        <p class="SVtable">The default value is the option that was selected in the General Parameters section.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MajorVersion</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>1996/2000</p>
+                        <p>Default to 2000</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines the major version of the acting control center. The minor version is always 8.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MaxDSTS</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..100</p>
+                        <p>Default to 10</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines the maximum number of DS Transfer Sets that are available on the local server for each domain.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MaxPDUSize</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..65535</p>
+                        <p> Default to 65535</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines the maximum size of the PDUs.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Port</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..65535</p>
+                        <p>Default to 102</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines the TCP port that the ICCP control center uses.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">InitiateRetryDelay</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..65535</p>
+                        <p>Default to 30</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines the time in seconds that a calling control center waits before attempting to connect to the RCCs. Once the local control center attempts to connect to the entire list of Main and Backup remote IP addresses, it waits the time set with this parameter.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">CalledDisconnectTimeout</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..65535</p>
+                        <p>Default to 30</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines the time in seconds that a called control center waits for RCCs to reconnect before signaling a connection loss.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">InvertStateSingleBit</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive. </p>
+                        <p class="SVtable">Determines whether the ICCP model inverts the value of ICCP states in FULL mode mapping ID.</p>
+                        <p class="SVtable">For example:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">Normal mode:</p>
+                                <ul style="list-style-type: circle;">
+                                    <li>
+                                        <p class="SVbulleted">When a <span class="mc-variable OEM.ProductName variable">PcVue</span> bit is 0, the ICCP state that it represents is 1.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">When a <span class="mc-variable OEM.ProductName variable">PcVue</span> bit is 1, the ICCP state that it represents is 2.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">Inverted mode:</p>
+                                <ul style="list-style-type: circle;">
+                                    <li>
+                                        <p class="SVbulleted"> When a <span class="mc-variable OEM.ProductName variable">PcVue</span> bit is 0, the ICCP state that it represents is 2.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">When a <span class="mc-variable OEM.ProductName variable">PcVue</span> bit is 1, the ICCP state that it represents is 1.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MapSVSimuToEntered</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines whether an SV ICCP Server variable sends the ICCP Quality Current Source Entered flag when the <span class="mc-variable OEM.ProductName variable">PcVue</span> variable is simulated.</p>
+                        <p class="SVtable">If set to True, an SV ICCP server variable is sent with: </p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">The Quality Current Source flag set to Entered to the remote client if the variable is simulated.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">The Quality Current Source flag specified in the variables extended attribute if the variable is not simulated.</p>
+                            </li>
+                        </ul>
+                        <p class="SVtable">If set to False, an SV ICCP server variable is always sent with the Quality Current Source flag that is specified in the variable extended attribute.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">AuthMechanism</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>None, Password or Certificate</p>
+                        <p>Default to None</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines which ACSE authentication mechanism the parent ICCP Server or Client uses.</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">None - Non-secure ICCP communication.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Password - Password-based, ACSE level, non-secure ICCP communication.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Certificate - IEC 62351 based, secure ICCP communication based on certificates.</p>
+                            </li>
+                        </ul>
+                        <p class="SVtable">Selecting Password or Certificate requires the addition of another Security section as a child of the LCC ICCP.ini file. See section <a href="#Security">Security</a> of this topic for more information.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Example of LCCs sections in the ICCP.ini file</h3>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Network1/LocalControlCenter1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= LCC1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">LocalAR&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= Main_LCC</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">LogMessageLevel&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 3</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IsServer&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= true</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IsClient&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= true</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">InitiateCommunication&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= false</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Full7LayerStack&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= false</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">MajorVersion&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 2000</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">MaxDSTS&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 10</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">MaxPDUSize&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 32000</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Port&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 102</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">InitiateRetryDelay&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 15</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">CalledDisconnectTimeout&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 35</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">InvertStateSingleBit&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= false</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">MapSVSimuToEntered&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= true</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AuthMechanism&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= None</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2">Local Domains sections</h2>
+        <p class="SVnormal">The sections [NetworkX/LocalControlCenterY/LocalDomainZ] in the  ICCP.ini file define the information of a local domain to be created, specifically an ICC domain. The VCC domain is always created by default when a Local Control Center is created. All Local Domains must be created linked to a Local Control Center. To differentiate local domains, the user must create different sections in the ICCP.ini file called [NetworkX/LocalControlCenterY/LocalDomainZ] where X, Y and Z increase starting from 1.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 200px;" />
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Field</td>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>Name</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;Name&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">A string that must be unique among Local Domains in a Local Control Center. The input is case sensitive.</p>
+                        <p class="SVtable">Determines the name of the local domain that is created inside the corresponding local control center.</p>
+                        <div class="note">
+                            <p class="SVnormal">We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.</p>
+                        </div>
+                        <p class="SVtable">If this field is empty, the local domain is not created.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">BilateralTableID</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&lt;ID&gt;</p>
+                        <p>Max length 20 characters</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">A string that must be unique among created domains. The input is case sensitive.</p>
+                        <p class="SVtable">Determines the bilateral table ID associated to this local domain.</p>
+                        <p class="SVtable">If this field is empty, the local domain is not created.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Example of Local Domains sections in the  ICCP.ini file</h3>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Network1/LocalControlCenter1/LocalDomain1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MyLocalDomain</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">BilateralTableID&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MyBTID</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Network1/LocalControlCenter1/LocalDomain2]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MySecondLocalDomain</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">BilateralTableID&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MySecondBTID</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2">RCCs sections</h2>
+        <p class="SVnormal">The sections [NetworkX/LocalControlCenterY/RemoteControlCenterZ] in the  ICCP.ini file define the information of an RCC to be created. Multiple RCCs can be created for each local control center that is defined.</p>
+        <p class="SVnormal">Remote Domains are included in the fields of this section. The VCC remote domain is automatically create for each RCC.</p>
+        <p class="SVnormal">All RCCs must be created linked to a Local Control Center. To differentiate RCCs, the user must create different sections in the ICCP.ini file called [NetworkX/LocalControlCenterY/RemoteControlCenterZ] where X, Y and Z increase starting from 1.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 200px;" />
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Field</td>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;Name&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">A string that must be unique among RCCs in a Local Control Center. The input is case sensitive.</p>
+                        <p class="SVtable">Determines the name of the RCC that is created inside the corresponding local control center. </p>
+                        <div class="note">
+                            <p class="SVnormal">We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.</p>
+                        </div>
+                        <p class="SVtable">If this field is empty, the RCC is not created.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">LogMessageLevel</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..4</p>
+                        <p>Default to 0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines which level of trace details the user wants to have for the RCC. Children elements use this value if the default option is selected.</p>
+                        <p class="SVtable">Each level includes messages related to lower levels. The traces are essential for troubleshooting purposes:</p>
+                        <ul>
+                            <li class="SVbulleted">Level 0 - Default. Uses the Log Message Level that is set in the Local Control Center section.</li>
+                            <li class="SVbulleted">Level 1 - Minimum. Contains basic messages (errors, basic summary, etc.).</li>
+                            <li class="SVbulleted">Level 2 - Light details. Contains more detailed messages (connections details, extended summaries, etc.)</li>
+                            <li class="SVbulleted">Level 3 - Full details. Contains full details.</li>
+                            <li class="SVbulleted">Level 4 - Stack. Contains all messages.</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">RemoteAR1</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;ARName&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">A string that must match the Name of a defined AR. It is case sensitive.</p>
+                        <p class="SVtable">Determines the Main addressing information of the RCC with the information that is defined on the AR.</p>
+                        <p class="SVtable">If this field is empty, the RCC is not created.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">RemoteAR2</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;ARName&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">A string that must match the Name of a defined AR. It is case sensitive.</p>
+                        <p class="SVtable">Determines redundant addressing information of the RCC with the information that is defined on the AR.</p>
+                        <p class="SVtable">This is used when the local control center has calling behavior (Client only or Client/Server that initiates communication).</p>
+                        <p class="SVtable">It is used in the scenario that the main RCC becomes unavailable and the local control center tries to initiate communication with the redundant.</p>
+                        <p class="SVtable"> It is used when the local control center has called behavior (Server only or Client/Server that does not initiate communication). It establishes which other remote connection attempts are accepted.</p>
+                        <p class="SVtable">The default value is to not include any redundant ARs.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">RemoteAR3..RemoteAR10</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;ARName&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">A string that must match the Name of a defined AR. It is case sensitive.</p>
+                        <p class="SVtable">It is similar to RemoteAR2 for a second to 9<sup>th</sup> redundant remote.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">LocalDomain</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;DomainName&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">A string that must match the Name of a defined Local Domain in the Local Control Center. It is case sensitive.</p>
+                        <p class="SVtable">Determines which local domain the RCC has access to. This name must be consistent with the Remote Domain that is entered on the side of the third party RCC. If the LCC is Client Only type, then this field is not relevant and is ignored.</p>
+                        <p class="SVtable">If this field is empty, the RCC is not created.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">RemoteDomain</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;DomainName&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">A string that is the domain name of the RCC. It is case sensitive.</p>
+                        <p class="SVtable">Determines the domain on the RCC that the local control center has access to. The correct remote domain name is important to establish a proper connection, even if the user is interested in only VCC variables.</p>
+                        <p class="SVtable">This name must be consistent with the Local Domain that is entered from the point of view of the third party RCC.</p>
+                        <div class="note">
+                            <p class="SVnormal">We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.</p>
+                        </div>
+                        <p class="SVtable">If this field is empty, the RCC is not created.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">OverrideQualityNormalSource</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines whether the RCC ignores the quality normal source flag for data received from a remote.</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">If set to True, then the driver considers all variables to have a normal quality normal source, even if the remote sends an abnormal flag.</p>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">If set to False, then the driver behaves normally and considers the flag that is being received from the remote.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">AuthMechanism</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>None, Password or Certificate</p>
+                        <p>Default to None</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Determines which ACSE authentication mechanism the parent ICCP Server or Client uses.</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">None - Non-secure ICCP communication.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Password - Password-based, ACSE level, non-secure ICCP communication.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">Certificate - IEC 62351-based, secure ICCP communication based on certificates.</p>
+                            </li>
+                        </ul>
+                        <p class="SVbulleted">Selecting Password or Certificate requires the addition of another Security section as a child of the RCC in the ICCP.ini file. See section <a href="#Security">Security</a> for this topic for more information.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Example of RCCs sections in the ICCP.ini file</h3>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Network1/LocalControlCenter1/RemoteControlCenter1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MyRCC1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">LogMessageLevel&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">RemoteAR1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= LCC1_RCC1&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">RemoteAR2&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= BackupAR1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">RemoteAR3&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= BackupAR1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">LocalDomain&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= LCC1_Dom1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">RemoteDomain&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= SIM_Domain</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">OverrideQualityNormalSource&#160;&#160;&#160;&#160;&#160;= False</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AuthMechanism&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= None</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2">Data Sets &amp; Data Set Transfer Sets sections </h2>
+        <p class="SVnormal">The sections [NetworkX/LocalControlCenterY/RemoteControlCenterZ/DataSetW] in the  ICCP.ini file define the information related to the Remote Data Sets &amp; Transfer Sets to be created. Multiple Data Sets can be created for each RCC that is defined.</p>
+        <p class="SVnormal">Variables that are defined in future sections can only belong to one Data Set.</p>
+        <p class="SVnormal">All Data Sets must be created linked to an RCC. To differentiate data sets, the user must create different section in the ICCP.ini file named [NetworkX/LocalControlCenterY/RemoteControlCenterZ/DataSetW] where X, Y, Z and W increase starting from 1.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 199px;" />
+            <col style="width: 199px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Field</td>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;Name&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">A string that must be unique among RCCs. The input is case sensitive.</p>
+                        <p class="SVtable">Determines the name of the Data Set that is created inside the corresponding RCC.</p>
+                        <div class="note">
+                            <p class="SVnormal">We recommend to use a short name. A long name will affect variable creation, which is explained in following sections.</p>
+                        </div>
+                        <p class="SVtable"> If this field is empty, the remote domain is not created.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">IncludeTransferSetName</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">If set to True, the local control center requests the inclusion of the Transfer Set Name in the reports of this specific data set.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">IncludeTransferSetTimeStamp</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive. </p>
+                        <p class="SVtable">If set to True, the local control center requests the inclusion of the Transfer Set Time Stamp in the reports of that specific data set.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">IncludeDSConditionsDetected</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">If set to True, the local control center requests the inclusion of the DS Conditions Detected in the data set reports of that specific data set.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">IncludeEventCodeDetected</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">If set to True, the local control center requests the inclusion of the Event Code Detected in the data set reports of that specific data set.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSConds_IntervalTimout</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">If set to True, the RCC should send a report when the Interval Time is elapsed.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSConds_IntegrityTimeout</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False </p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">This field is optional. If set to True, the RCC should send a report of the entire Data Set when the Integrity Check time interval expires. This only applies when RBE is set to True.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSConds_ObjectChange</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to True</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">If set to True, the RCC should send a report when any object in the Data Set changes. Possible changes include a change of value, status or quality flags.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSConds_OperatorRequest</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False </p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">If set to True, the RCC should send a report when an operator at the RCC requests it.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSConds_ExternalEvent</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False </p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">If set to True, the RCC should send a report when any other external event condition that is not described in the other conditions becomes true.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSTSParam_StartTime</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..65535</p>
+                        <p>Default to 0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">The time value (in seconds) for the RCC to begin Condition Monitoring. If Start Time is 0, then the RCC assumes it to be its current time and begins Condition Monitoring immediately.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSTSParam_Interval</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..65535</p>
+                        <p>Default to 10</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">The time interval (in seconds) between Data Set Transfer reports. The Interval starts when the Start Time occurs.</p>
+                        <ul>
+                            <li>
+                                <p class="SVtable">If RBE is set to False, then the current state of all objects in the data set are reported when the Interval expires.</p>
+                            </li>
+                            <li>
+                                <p class="SVtable">If RBE is set to True, then the current state of only the changed objects in the data set are reported when the Interval expires.</p>
+                            </li>
+                            <li>
+                                <p class="SVtable">If multiple changes occur to the same object during the Interval, then only the final value is reported.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSTSParam_TLE</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..65535</p>
+                        <p>Default to 60</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">This is a time that is primarily relevant to the remote ICCP server. It is the time over which the remote ICCP server has to send the Data Set Transfer Report to the local ICCP control center. If the remote ICCP server anticipates that it cannot send the Data Set Transfer Report to the local ICCP control center within the TLE time, then it does not generate the report, and discards the data.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSTS_BufferTime</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..65535</p>
+                        <p>Default to 2</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">Time interval (in seconds) for buffering the ObjectChange condition before reporting to the local control center.</p>
+                        <p class="SVtable">The Buffer Time starts when the first ObjectChange condition occurs.</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">If DSTSParam_RBE is false, then the current states of all objects in the Data Set are reported when the Buffer Time expires.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">If DSTSParam_RBE is true, then the current state of only the changed objects in the Data Set are reported when the Buffer Time expires.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">If the Buffer Time is zero, then a report is generated for each change. If multiple changes occur to the same object during the Buffer Time, then only the final value is reported.</p>
+                            </li>
+                        </ul>
+                        <div class="note">A Buffer Time of 0 can cause an overflow of Data Set Transfer Reports and can affect overall network performance.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSTSParam_IntegrityCheck</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..65535</p>
+                        <p>Default to 30</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">The time value (in seconds) for integrity check when IntegrityTimeOut and RBE conditions are used.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSTSParam_BlockData</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False </p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">Controls the type of Transfer reporting mechanism to be used. If set to True, the transfer report uses the blocked mechanism.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSTSParam_Critical</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to False </p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">Controls the type of Transfer Report.</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">If set to True, the Transfer Report is critical and an acknowledgment from the local control center back to the RCC is expected.</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">If set to False, no acknowledgment is expected.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DSTSParam_RBE</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>True/False</p>
+                        <p>Default to True</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is not case sensitive.</p>
+                        <p class="SVtable">Indicates whether the RCC should use the Report by Exception mechanism. If set to True, only the changed objects are reported.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Example of Data Sets &amp; Data Set Transfer Sets sections in the  ICCP.ini file</h3>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Network1/LocalControlCenter1/RemoteControlCenter1/DataSet1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name = MyDataSet</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IncludeTransferSetName = true</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IncludeTransferSetTimeStamp = true</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IncludeDSConditionsDetected = true</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IncludeEventCodeDetected = true</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSConds_IntervalTimeout&#160;&#160;&#160;&#160;= false</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSConds_IntegrityTimeout = false</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSConds_ObjectChange = true</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSConds_OperatorRequest&#160;&#160;&#160;&#160;= false</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSConds_ExternalEvent = false</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSTSParam_StartTime = 0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSTSParam_Interval = 20</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSTSParam_TLE = 60</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSTSParam_BufferTime = 2</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSTSParam_IntegrityCheck = 5</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSTSParam_BlockData = false</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSTSParam_Critical = false</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DSTSParam_RBE = true</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2"><a name="Security"></a>Security</h2>
+        <p class="SVnormal">Defines the information that is required to setup security mechanisms. The Local Control Center and the RCC sections have a field called AuthMechanism where you can choose which authentication mechanism is used.</p>
+        <p class="SVnormal">If the you choose password based security or certificate based security, then a security section can be added for each Local Control Center or RCC.</p>
+        <div class="note">
+            <p class="SVnormal">Both Local Control Center and RCC security sections are the same and require the exact fields. However, the fields are different depending on the AuthMechanism.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">All Security sections must be created linked to either an LCC or an RCC. To differentiate Security sections, you must create different blocks in the ICCP.ini file.</p>
+        </div>
+        <p class="SVnormal">The security section has a structure like the following:</p>
+        <p class="SVnormal">For security applied to the Local Control Center:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">[NetworkX/LocalControlCenterY/Security]</p>
+            </li>
+        </ul>
+        <p class="SVnormal">For security applied to the RCC:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">[NetworkX/LocalControlCenterY/RemoteControlCenterZ/Security]</p>
+            </li>
+        </ul>
+        <p class="SVnormal">where X, Y and Z increase starting from 1.</p>
+        <div class="note">
+            <p class="SVnormal">The security section is loaded at startup with the parameters of the ICCP.ini at that moment. However, two ICCP Driver requests are available to dynamically reload the security configuration. Refer to the topic <a href="iccp_system_vars.htm">ICCP System Variables and commands</a> for more information.</p>
+        </div>
+        <h3 class="SVheading3">Password based security</h3>
+        <p class="SVnormal">This section of inputs defines the information required for a Security section to be created corresponding to a specific LCC or RCC.</p>
+        <div class="tip">
+            <p class="SVnormal">If Password based security is selected, then any Certificate based security fields are ignored.</p>
+        </div>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Field</td>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">WeakPassword</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&lt;Password&gt;</p>
+                        <p>Default to empty string</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">Determines the password for ACSE authentication.</p>
+                        <p class="SVtable">For example: The ICCP.ini file should contain:</p>
+                        <div class="codeSnippet_0 codeSnippet">
+                            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                                    <tbody>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Network1/LocalControlCenter1/Security]</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">WeakPassword&#160;&#160;&#160;&#160;= Secpw123!</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Network1/LocalControlCenter1/RemoteControlCenter1/Security]</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">WeakPassword = ClientSecpw123!</pre>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Certificate based security</h3>
+        <p class="SVnormal">This section of inputs defines the information required for a Security section to be created corresponding to a specific LCC or RCC.</p>
+        <div class="tip">
+            <p class="SVnormal">If Certificate based security is selected, then any Password based security fields are ignored.</p>
+        </div>
+        <table style="width: 100%;">
+            <col style="width: 178px;" />
+            <col style="width: 82px;" />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Field</td>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">PKI_Directory</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&lt;FolderPath&gt;</p>
+                        <p>Default to the built-in PKI folder</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">Indicates the general path used by the fields in this section that reference files. If the field is not defined, then any file that is used in the next fields uses the <span class="mc-variable OEM.ProductName variable">PcVue</span> built-in PKI structure. The information for each file can change and is described individually.</p>
+                        <p class="SVtable">If a path is defined, then any file that is used in the next fields uses this path as a base.</p>
+                        <p class="SVtable">For example: For a file called Cert.pem:</p>
+                        <ul>
+                            <li>
+                                <p class="SVbulleted">PKI_Directory = C:\PKI\</p>
+                            </li>
+                            <li>
+                                <p class="SVbulleted">FileField = Cert.pem</p>
+                            </li>
+                        </ul>
+                        <p class="SVtable">The driver searches for the combination of the path and the file name. C:\PKI\Cert.pem</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">CA_VerifyDepth</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Integer</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>0..31</p>
+                        <p>Default to 0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">The Certificate Authority Chaining Verification Depth.</p>
+                        <div class="note">
+                            <p class="SVnormal">CAs can refer to other CAs for authority.</p>
+                        </div>
+                        <p class="SVtable">For example: Company X can sign Company Y, who can sign a certificate. If you have Company X’s CA certificate and have a depth of 1, you can accept Company Y.  With a depth of 0 you cannot.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">CA_CertificateFile</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;FilePath&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">The path to the file containing the Certificate Authority Certificate. If the PKI_Directory field is the built-in PKI structure, then the file should be in the “PKI\Trusted\Certs” directory.</p>
+                        <div class="note">
+                            <p class="SVnormal">Only the filename should be written in the field.</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">CA_CRL</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;FilePath&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">The path to the file containing the Certificate Authority Certificate Revocation List. If the PKI_Directory field is the built-in PKI structure, then the file should be in the PKI\Trusted\CRL directory.</p>
+                        <div class="note">
+                            <p class="SVnormal">Only the filename should be written in the field.</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MMS_CommonName</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&lt;Name&gt;</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">The common name to expect in incoming MMS certificates.</p>
+                        <p class="SVtable">Empty string disables MMS related parameters.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MMS_PrivateKeyFile</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&lt;FilePath&gt;</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">The path to the file containing the private key for signing ACSE Authentication. If the PKI_Directory field is the built-in PKI structure, then the file should be in the PKI\Own\Private directory.</p>
+                        <div class="note">
+                            <p class="SVnormal">Only the filename should be written in the field.</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MMS_PrivateKeyPassPhrase</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&lt;PassPhrase&gt;</p>
+                        <p>Default to empty string</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">The PassPhrase for decrypting the private key.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MMS_PublicCertificateFile</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&lt;FilePath&gt;</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">The path to the file containing the public certificate. If the PKI_Directory field is the built-in PKI structure, then the file should be in the PKI\Own\Certs directory.</p>
+                        <div class="note">
+                            <p class="SVnormal">Only the filename should be written in the field.</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MMS_DisablesSecurity</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">True/False</p>
+                        <p class="SVtable">Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Allows you to disable certificate security on the MMS layer.<br />If set to True, security related to MMS layer is not used.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TLS_DisableSecurity</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Boolean</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">True/False</p>
+                        <p class="SVtable">Default to False</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Allows you to disable certificate security on the TLS layer.</p>
+                        <p class="SVtable">If set to True, security related to TLS layer is not used.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TLS_CommonName</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&lt;Name&gt;</p>
+                        <p>Default to empty string</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">The common name to expect in incoming TLS certificates.</p>
+                        <div class="note">
+                            <p class="SVnormal">Empty string disables TLS related parameters.</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TLS_RSA_PrivateKeyFile</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;FilePath&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">The path to the file containing the private key for RSA TLS ciphers. If the PKI_Directory field is the built-in PKI structure, then the file should be in the PKI\Own\Private directory.</p>
+                        <div class="note">
+                            <p class="SVnormal">Only the filename should be written in the field.</p>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TLS_RSA_PrivateKeyPassPhrase</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>&lt;PassPhrase&gt;</p>
+                        <p>Default to empty string</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Optional</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">The PassPhrase for decrypting the private key for RSA TLS ciphers.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TLS_RSA_PublicCertificateFile </td>
+                    <td class="SVtable">
+                        <p class="SVnormal">String</p>
+                    </td>
+                    <td class="SVtable">&lt;FilePath&gt;</td>
+                    <td class="SVtable">
+                        <p class="SVtable">Mandatory</p>
+                        <p class="SVtable">It is case sensitive.</p>
+                        <p class="SVtable">The path to the file containing the public certificate for key for RSA TLS ciphers. If the PKI_Directory field is the built-in PKI structure, then the file should be in the PKI\Own\Certs directory.</p>
+                        <div class="note">
+                            <p class="SVnormal">Only the filename should be written in the field.</p>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Example Security section the ICCP.ini file</h3>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Network1/LocalControlCenter1/Security]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;PKI_Directory&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= C:\PKI\</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;CA_VerifyDepth&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;CA_CertificateFile&#160;&#160;&#160;&#160;= sample_ca_rsa_public_certificate.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;CA_CRL&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= sample_ca_certificate_revocation_list.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;MMS_CommonName&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MMS</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;MMS_PrivateKeyFile&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= sample_mms_rsa_private_key.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;MMS_PrivateKeyPassPhrase&#160;&#160;&#160;&#160;&#160;= pwmms1234</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;MMS_PublicCertificateFile&#160;&#160;&#160;&#160;&#160;= sample_mms_rsa_public_cert.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;TLS_CommonName&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= TLS</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;TLS_RSA_PrivateKeyFile&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= sample_tls_rsa_private_key.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;TLS_RSA_PrivateKeyPassPhrase&#160;&#160;&#160;&#160;&#160;= pwtls1234</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;TLS_RSA_PublicCertificateFile&#160;&#160;&#160;&#160;&#160;= sample_tls_rsa_public_cert.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Network1/LocalControlCenter1/RemoteControlCenter1/Security]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;PKI_Directory&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= C:\PKI\</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;CA_VerifyDepth&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;CA_CertificateFile&#160;&#160;&#160;&#160;= client_sample_ca_rsa_public_certificate.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;CA_CRL&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= client_sample_ca_certificate_revocation_list.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;MMS_CommonName&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= MMS</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;MMS_PrivateKeyFile&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= client_sample_mms_rsa_private_key.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;MMS_PrivateKeyPassPhrase&#160;&#160;&#160;&#160;&#160;= Clientpwmms1234</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;MMS_PublicCertificateFile&#160;&#160;&#160;&#160;&#160;= client_sample_mms_rsa_public_cert.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;TLS_CommonName&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= TLS</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;TLS_RSA_PrivateKeyFile&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= client_sample_tls_rsa_private_key.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;TLS_RSA_PrivateKeyPassPhrase&#160;&#160;&#160;&#160;&#160;= Clientpwtls1234</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;TLS_RSA_PublicCertificateFile&#160;&#160;&#160;&#160;&#160;= client_sample_tls_rsa_public_cert.pem</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

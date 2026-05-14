@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|Alarm synthesis (formerly group alarm)" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Alarm synthesis overview</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Alarm Synthesis Overview</h1>
+        <p class="SVnormal">Alarm Synthesis allows you to create alarm counter and status variables for groups of alarms. Each alarm group produces several counter and status values. This is  similar to <span class="mc-variable OEM.ProductName variable">PcVue</span>'s integrated alarm counter variables except that it is configurable and far more flexible. The variable used for each counter or status  must be defined before configuring the alarm group. You can choose to use as many or few of an alarm group's counters as required.</p>
+        <p class="SVnormal">Alarm Syntheses is managed from the Alarm Syntheses node in the Application Explorer.</p>
+        <div class="note">
+            <p class="SVnormal">Alarm Synthesis is one of a range of special variable behaviors which, in earlier versions of <span class="mc-variable OEM.ProductName variable">PcVue</span>, could only be configured by manually editing a file named VARTREAT.DAT. There are other special behaviors that still require manual configuration of this file. See the book <a href="Vartreat_overview.htm">Vartreat- Special variable behaviors</a>.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">There are also three alarm variables associated with an alarm synthesis. They must be a special type of alarm known as an Enumerated Alarm. These can only be configured by manually editing VAREXP.DAT and ENUMALA.DAT. See the topic <a href="Vartreat_creating_group_alarm_counters.htm">Creating group alarm counters</a>.</p>
+        </div>
+        <h2 class="SVheading2">How is the group of alarms defined?</h2>
+        <p class="SVnormal">An alarm group is defined by a range of alarm levels (say from 0 to 29) and a filter that comprises variable branches, extended attributes and expressions. See the topic <a href="Alarm_synthesis_filters.htm">Configuring an alarm synthesis filter</a>.</p>
+        <h2 class="SVheading2">What alarm counters and status variables can be configured?</h2>
+        <p class="SVnormal">Each status and counter uses a register variable.</p>
+        <ul style="list-style-type: disc;">
+            <li>Status variables<ul style="list-style-type: disc;"><li>The level of the highest level (numerically) alarm that is on and not acknowledged</li><li>The level of the highest level (numerically) alarm that is on and acknowledged</li></ul></li>
+            <li>Counter variables. The number of alarms that are:<ul style="list-style-type: disc;"><li>On and acknowledged</li><li>On (acknowledged or not)</li><li>Off and not acknowledged</li><li>Off</li><li>Invalid</li><li>Masked</li><li>Masked by the user</li><li>Masked by program</li><li>Masked by dependence on another variable</li><li>Masked by an expression</li><li>On and in maintenance mode</li><li>Off and in maintenance mode</li><li>Inhibited</li></ul></li>
+        </ul>
+        <h2 class="SVheading2">What alarm variables can be configured?</h2>
+        <p class="SVnormal">The following alarm variables can be configured. They can only be configured by manually editing VAREXP.DAT. See the topic <a href="Vartreat_creating_group_alarm_counters.htm">Creating group alarm counters</a>. The variables must be Enumerated Alarms (see below).</p>
+        <ul>
+            <li>The level of the highest priority alarm that is:<ul><li>On and not acknowledged</li><li>On and acknowledged</li><li>On (acknowledged or not acknowledged)</li></ul></li>
+        </ul>
+        <h2 class="SVheading2">About  Enumerated alarms</h2>
+        <p class="SVnormal">Alarm Synthesis makes use of a special type of alarm variable known as an Enumerated Alarm. An Enumerated Alarm can be used in the Alarm Viewer to display different labels depending on the alarm value and language setting. This capability is used to display the level the highest priority alarm that is on for a particular alarm group. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a> <br /><img src="../../Resources/Images/AE/Variables/enumerated_alarm_example.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <p class="SVnormal">The configuration  to create an Enumerated Alarm requires manual editing of a file called ENUMALA.DAT. This is outside of the scope of this help. If your application requires this capability, please contact your technical support agency.</p>
+        <div class="note">
+            <p class="SVnormal">In computer programming, an enumerated type (also called enumeration or enum) is a data type consisting of a set of named values called elements, members or enumerators of the type. (cf. Wikipedia)</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

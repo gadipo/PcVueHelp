@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Reference topics" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Recipe buffer format</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="RecipeBuffer_Ref" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor120"></a><a name="kanchor121"></a>Recipe Buffer Format</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc407">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="RECIPE_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc407.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">The buffer used by the Recipe instruction modes READ 
+ and CREATE takes the following format.</p>
+        <p class="SVprogramCode">Recipe header<br />Recipe variable definition 1<br />Recipe variable definition 2<br />.&#160;.&#160;.&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<br />Recipe variable definition <i style="font-style: italic;">N</i></p>
+        <h2 class="SVheading2">Recipe header format</h2>
+        <p class="SVnormal"><i>H</i>,<i>Number</i>,<i>Name</i>,<i>Family</i>,<i>Level</i>,<i>AllowVar</i>,<i>TrackVar</i>,<i>Branch</i>,<i>Type</i>,<i>SendFlag</i>,<i>SendMode</i>,0,<i>OPCMode</i></p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>H</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">Always H. Flag indicating the start of 
+ the recipe header.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>Number</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">The recipe number.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>Name</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">The recipe name.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>Family</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">The recipe family. Optional.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>Level</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">The recipe level. Optional.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>AllowVar</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">The name of the recipe sending allowance 
+ bit variable. Optional.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>TrackVar</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">The name of the recipe tracking register 
+ or text variable. Optional.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>Branch</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">The recipe branch. Optional.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>Type</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">A flag indicating the recipe type.<br />0 = Proprietary<br />1 = Database</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>SendFlag</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">A flag indicating if the recipe should 
+ be sent if one or more of the variables is invalid.<br />0 = Don't send<br />1 = Send</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>SendMode</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">The send mode for the recipe.<br />0 = Multiple<br />1 = Block</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable" style="font-style: normal;"><i>OPCMode</i>
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable" style="font-style: normal;">The OPC mode.<br />0 = Optimized serialization<br />1 = Full serialization<br />2 = No optimization<br />3 = Full optimization</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Recipe variable format</h2>
+        <p class="SVnormal"><i>V</i>,<i>VarName</i>,1,<i>Value</i>,<i>Minimum</i>,<i>Maximum</i>,0,<i>ValueVarName</i></p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable">V</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Always V. Indicating the start of a variable definition.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable">VarName</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">The name of the variable.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable">Value</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">The value to which the variable is to be set or null 
+ if the value is contained in another variable.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable">Minimum</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">The minimum value to which the variable can be set. </p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable">Maximum</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">The maximum value to which the variable can be set.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top" style="font-style: italic;">
+                    <p class="SVtable">ValueVarName</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">The name of a variable containing the value to which the 
+ variable is to be set. Optional.</p>
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

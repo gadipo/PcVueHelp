@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Application Architect|Differentiation (Defining properties)" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Defining a Property by an Expression</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor23"></a>Defining a Property by an Expression</h1>
+        <p class="SVnormal">When a property is defined by an expression, the property value is replaced by an expression that is evaluated for each instance of the template. An expression can include fixed values and context sensitive operands such as the instance name or its description.</p>
+        <div class="note">
+            <p class="SVnormal">For information on expression syntax including how to use the expression editor, functions, operators and the use of variables, see the  Expression Engine book in the Application Explorer help.</p>
+        </div>
+        <h2 class="SVheading2">How to define a property by an expression</h2>
+        <ol>
+            <li value="1">Select the Templates tab.</li>
+            <li value="2">Navigate the templates configuration tree and open the properties grid that contains the property to be substituted.</li>
+            <li value="3">Right click on the property name (left column) and, from the pop-up menu, select <u>Define by</u> and <u>Expression</u>. The value of the property will change to the equality sign and it will be marked by a green icon <img src="../Resources/Images/AA/expression_icon.png" />. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t1" style="display: none;"><br /><img src="../Resources/Images/AA/expression_subs_configure.png" /><br /></div></li>
+            <li value="4">Click the down arrow button adjacent to the value field to open the expression editor.</li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">When the template is instantiated, the value that is produced by the expression is specific to the property for which it has been used and is not propagated anywhere else.</p>
+        </div>
+        <h2 class="SVheading2">How to enter an expression</h2>
+        <p class="SVnormal">When entering an expression in a parameter, or directly in a property, you can either type in the expression  directly or use the Expression Editor dialog. The Expression Editor dialog is displayed by clicking the down arrow button adjacent to the right of the field. Use of the Expression Editor dialog is recommended as it includes keyword auto-completion that helps to prevent errors.</p>
+        <h2 class="SVheading2">Expression syntax</h2>
+        <p class="SVnormal">An expression always starts with the equality operator (=) and will contain  one or more of the following elements.</p>
+        <ul>
+            <li>String value - A string delimited by quotation marks. For example, "Tank level".</li>
+            <li>Numeric value - For example 100.</li>
+            <li>Operators - See the Main functions and Operators topic in the Expression Engine book of the Application Explorer help.</li>
+            <li>Functions - See the Main functions and Operators topic in the Expression Engine book of the Application Explorer help.</li>
+            <li>Excel reference - See the Functions for referencing an Excel file topic in the Expression Engine book of the Application Explorer help.</li>
+            <li style="color: #000000;">The value of another parameter - The syntax is <span style="color: #0000ff;">Params(</span>"ParamName"). For example <span style="color: #0000ff;">Params</span>("pDomain").</li>
+            <li style="color: #000000;">A property of a configuration element - The syntax is <span style="color: #0000ff;">Navigation</span>.<span style="color: #6495ed;">Property</span>. For example <span style="color: #0000ff;">TemplateInstance</span>.<span style="color: #6495ed;">Name</span>. See below for the possible values of Navigation and Property.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal"><span style="color: #0000ff;">Navigation</span> is used to navigate through the template hierarchy to select the element that is to be referenced. </p>
+            <p class="SVnormal"><span style="color: #6495ed;">Property</span> selects the required property of that element.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">In expressions, some special characters needs to be prefixed by the backslash ("\") escape character so that they are interpreted correctly:</p>
+            <ul>
+                <li>
+                    <p>\\ for the backslash</p>
+                </li>
+                <li>
+                    <p>\' for the simple quote</p>
+                </li>
+                <li>
+                    <p>\" for the double quote</p>
+                </li>
+                <li>
+                    <p>\t for the tab</p>
+                </li>
+                <li>
+                    <p>\r for the carriage return</p>
+                </li>
+                <li>
+                    <p>\n for the new line</p>
+                </li>
+            </ul>
+            <p class="SVnormal"> For example to include a simple quote in an expression:<br />"Light " + Parent.Name + " doesn\'t work" </p>
+        </div>
+        <h2 class="SVheading2">Navigation keywords</h2>
+        <p class="SVnormal">The navigation keywords are used to navigate within the instances or modeling tree to the element from which you want to retrieve the property. Navigation keywords can be linked using the full stop character.          </p>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Keyword</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Me</td>
+                    <td class="SVtable">Current element. This keyword is optional and if no positioning keyword is specified, this corresponds to the use of "Me".</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Parent</td>
+                    <td class="SVtable">This keyword is used to go to an upper level in the hierarchy of elements.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TemplateInstance or Inst</td>
+                    <td class="SVtable">This keyword will allow us to go back up to the root of a template instance, but never leave it, the template is included or not.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Template or Tpl</td>
+                    <td class="SVtable">This keyword is a shortcut to be positioned directly on the root template, in modeling mode, but never leave it, the template is included or not.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TopTemplateInstance or TopInst</td>
+                    <td class="SVtable">This keyword is used to position on the highest root template, it means by going over the included template.
+The highest root template is the template instantiated by the user.
+</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TopTemplate or TopTpl</td>
+                    <td class="SVtable">This keyword is used to position on the highest root template, in modeling mode, it means by going over the included template.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Origin</td>
+                    <td class="SVtable">This keyword is used to position on the element used to instantiate the current element.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Property keywords</h2>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 10%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Keyword</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the element.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ShortName</td>
+                    <td class="SVtable">The name of the element up to and including the primary template.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Fullname</td>
+                    <td class="SVtable">The name of the element up to and including the root of the tree.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Branch</td>
+                    <td class="SVtable">The branch of the element.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ShortBranch</td>
+                    <td class="SVtable">The branch of the element up to and including the primary template.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">FullBranch</td>
+                    <td class="SVtable">The branch of the element up to and including the root of the tree.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the element.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">NamingRule</td>
+                    <td class="SVtable">The Naming Rule of the element</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">For more information on the keywords and examples of their use see the book <a href="Example_keyword.htm">Keyword examples</a>.</p>
+        <h2 class="SVheading2">Functions</h2>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 25%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Syntax</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ChildCount(eCountType[, str, num])</td>
+                    <td class="SVtable">Returns the number of child elements according to the arguments. See explanation below.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">NameSegment(num[, bool])</td>
+                    <td class="SVtable">Returns a string that contains the substring of the current FullName at the given zero based position (num) in string parameter that is delimited by “.”. By default bool is false and the zero based position is left. If bool is true the zero based position is right.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">BranchSegment(num[, bool])</td>
+                    <td class="SVtable">Same as NameSegment except that it works on the FullBranch string. See below.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">How to use the ChildCount function in an expression</h2>
+        <p class="SVnormal">The argument <u>eCountType</u> determines which types of child elements should be counted and on which criteria, child element's instance name or child element's template name.</p>
+        <p class="SVnormal">Possible values are as follow:</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Value</td>
+                    <td class="SVtableHeading">What kind of child elements will be counted</td>
+                    <td class="SVtableHeading">Expected value for argument str</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctInst</td>
+                    <td class="SVtable">Count the number of child instances (excluding the embedded instances)</td>
+                    <td class="SVtable">A regular expression on instance names</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctInst_ByType</td>
+                    <td class="SVtable">Count the number of child instances (excluding the embedded instances)</td>
+                    <td class="SVtable">A regular expression on the instance type (name of the template)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctEmbedded</td>
+                    <td class="SVtable">Count the number of embedded instances (excluding the child instances)</td>
+                    <td class="SVtable">A regular expression on instance names</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctEmbedded_ByType</td>
+                    <td class="SVtable">Count the number of embedded instances (excluding the child instances)</td>
+                    <td class="SVtable">A regular expression on the instance type (name of the template)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctInstAndEmbedded</td>
+                    <td class="SVtable">Count the number of child and embedded instances</td>
+                    <td class="SVtable">A regular expression on instance names</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctInstAndEmbedded_ByType</td>
+                    <td class="SVtable">Count the number of child and embedded instances</td>
+                    <td class="SVtable">A regular expression on the instance type (name of the template)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctVar</td>
+                    <td class="SVtable">
+                        <p class="SVnormal"> Count the number of child elements of type variable </p>
+                    </td>
+                    <td class="SVtable">A regular expression on variable names</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctVarBit</td>
+                    <td class="SVtable">
+                        <p class="SVnormal"> Count the number of child elements of type bit variables</p>
+                    </td>
+                    <td class="SVtable">A regular expression on variable names</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctVarReg</td>
+                    <td class="SVtable">Count the number of child elements of type register variables</td>
+                    <td class="SVtable">A regular expression on variable names</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctVarText</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Count the number of child elements of type text variables</p>
+                    </td>
+                    <td class="SVtable">A regular expression on variable names</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctMimic</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Count the number of child elements of type mimic</p>
+                    </td>
+                    <td class="SVtable">A regular expression on mimic names</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">_ctSymbol</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Count the number of child elements of type symbol</p>
+                    </td>
+                    <td class="SVtable">A regular expression on symbol names</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">The argument <u>str</u> is used to account for child elements that match a pattern based on a regular expression:</p>
+        <ul>
+            <li>* Matches one or more characters</li>
+            <li>? Matches any single character</li>
+            <li># Matches any number</li>
+            <li>[abc] Matches one character among {a; b; c}</li>
+            <li>[!abc] Matches one character other than {a; b; c}</li>
+            <li>[a-z] Matches one character between a and z</li>
+            <li>[!a-z] Matches a character not between a and z</li>
+        </ul>
+        <p class="SVnormal">The argument <u>num</u> is the depth level for matching child elements :</p>
+        <ul>
+            <li>If omitted (or -1): Count among child elements with no depth-level limit.</li>
+            <li>0: Count elements in the current instance and its embedded instances only (excluding any child item).</li>
+            <li>Any other positive value <i>n</i>: Count among child elements down to the n<sup>th</sup> level.</li>
+        </ul>
+        <p>Examples:</p>
+        <p>=Inst.ChildCount(_Var) returns the number of variables in the current instance, in its embedded instances and in all its child instances.</p>
+        <p>=Inst.ChildCount(_VarBit,"*",0) returns the number of bit variables in the current instance and its embedded instances.</p>
+        <p>=Inst.ChildCount(_ctInst,"Floor*",1) returns the number of child instances with a name starting with 'Floor', one level down the current instance.</p>
+        <p>=Inst.ChildCount(_ctInstAndEmbedded_ByType,"Valve") returns the number of child and embedded instances of type 'Valve' (template name), with no depth limit.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

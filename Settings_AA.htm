@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Application Architect" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Application Architect Settings</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor138"></a>Application Architect Settings</h1>
+        <p>The Application Architect's settings can be displayed either from the project settings in the Application Explorer or from <u>Tasks.Settings</u> in the Application Architect menu. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img style="DISPLAY: none;display: none;" src="../Resources/Images/AA/settings_aa.png" MadCap:targetName="t1" /></p>
+        <ul style="list-style-type: disc;">
+            <li>Show generation option box - Show the Options dialog when generating the configuration elements.</li>
+            <li>Consistency checking<ul style="list-style-type: disc;"><li> Check consistency at startup - If enabled, the consistency check is performed during the startup of <span class="mc-variable OEM.ProductName variable">PcVue</span>. While it comes with a performance penalty and is not recommended in production, it can be helpful on an engineering station.</li><li>Treat warning as error - If enabled, the occurrence of a warning has the same effect as the occurrence of an error. Saving is blocked and other actions may be interrupted.</li><li>Allow blank branch - Allows an empty (blank) branch at instantiation.*</li><li>Allow duplicate branch - Allows the use of duplicate branches within the same tree.*</li><li>Allow recursive property - Allows one property to be used in the expression of another parameter. See below. Must also be enabled if a parameter or expression is used in the Description property of any of the elements.</li></ul></li>
+            <li>Type of synchronization<ul style="list-style-type: disc;"><li> Full synchronization - Uses full synchronization when generating the application. See the topic on Generation for details.</li><li>Fast synchronization - Uses fast synchronization when generating the application. See the topic on Generation for details.</li></ul></li>
+            <li>Time optimization - Options to improve the responsiveness of the Application Architect's HMI.<ul style="list-style-type: disc;"><li>Skip reference calculations in the Application Architect's HMI - This setting affects the templates tab. Selecting it means that the calculation of properties requiring access to an Excel function (by parameter, expression, combination of two etc.) are not made. The properties are displayed as empty.</li><li>Skip reference calculations for generation - This setting affects the generation of properties requiring access to an Excel function. The properties are not generated in the output from the Application Architect. The affected properties do not exist - they are not just empty. This is to ensure the correct synch when de-selecting the option.**</li><li>Expand template composition one level only - This setting affects the templates tab. When displaying the composition of a template, if this setting is selected, the tree view is only expand to one level. So, for example, you will see variables but not the trends associated with the variables. This is used to improve the display of the Application Architect's HMI when the template contains many elements for which and the user does not need to see the entire expanded tree.</li><li>Do not display detail of included templates for instances - This setting affects the instances tab. If not selected when you click on a template instance, the inputs, input parameters and expressions appear in the lower part of the screen for both the selected instance and any child objects particularly those from included templates. If set, inputs, inputs parameters and expressions for the included templates are not displayed. This is used to improve the display of the Application Architect's HMI, particularly for templates including other templates that have many parameters to evaluate.</li></ul></li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">* If you enable these settings it may result in the generation of duplicate variables.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">** If you select, and then at a later time, de-select the <u>Skip reference calculations for generation</u> and then do a synchronization, it can be equivalent to a full synchronization if there are many properties affected. </p>
+        </div>
+        <h2 class="SVheading2">Allow recursive property</h2>
+        <p class="SVnormal">The <u>Allow recursive property</u> setting should be used with caution as it can cause an infinite loop during generation. This is best explained by two examples.</p>
+        <p class="SVnormal">Example 1 - The following can only be evaluated if <u>Allow recursive property</u> were enabled.</p>
+        <p class="SVdataListing">Parameter01: "=3 + 4"</p>
+        <p class="SVdataListing">Parameter02: "=Params["Parameter01"] + 7"</p>
+        <p class="SVnormal">Example 2 - The following would cause an infinite loop if <u>Allow recursive property</u> is enabled.</p>
+        <p class="SVdataListing">Parameter01: "= Params ["Parameter02"] + 4 "</p>
+        <p class="SVdataListing">Parameter02: "= Params ["Parameter01"] + 7 "</p>
+        <h2 class="SVheading2">Bilingualism and the Application Architect</h2>
+        <p class="SVnormal">If the <u>Enable bilingual text strings</u> setting, in Project Settings dialog, is ticked the <u>Description</u> property found in many Application Architect configuration elements becomes bilingual. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/AA/bilingual_description.png" MadCap:targetName="t2" style="display: none;" /></p>
+        <p class="SVnormal">The Description property is found in the following configuration elements.</p>
+        <ul style="list-style-type: disc;">
+            <li>Instances tree<ul style="list-style-type: disc;"><li>Tree root</li><li>Instances</li><li>Topological elements</li><li>Global parameters</li></ul></li>
+            <li>Templates<ul style="list-style-type: disc;"><li>Categories</li><li>Templates (simple, inherited and included)</li></ul></li>
+            <li>Parameters<ul style="list-style-type: disc;"><li>Categories</li><li>Parameters</li></ul></li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">If bilingual is used the Description must be entered text, it cannot be defined by an expression or parameter. </p>
+        </div>
+        <h2 class="SVheading2">Displaying thumbnails of the graphic elements</h2>
+        <p class="SVnormal"> Use the <u>View.Display thumbnails</u> command in the menu to enable the display of any graphic elements configured in the Application Architect as thumbnails. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/AA/display_thumbnails.png" MadCap:targetName="t3" style="display: none;" /></p>
+        <p class="SVnormal">By doing so, you will be able to graphically preview any mimic or symbol.</p>
+        <ul style="list-style-type: disc;">
+            <li><a name="kanchor139"></a>In the Templates tab, for each template.<ul style="list-style-type: disc;"><li>In the Properties sub-tab, clicking on the <u>Graphic elements</u> node will display all configured graphic elements as thumbnails. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a> <br />Clicking on an individual element under the Graphic Elements node will display a thumbnail for just that element.<br /><img src="../Resources/Images/AA/thumbnail1.png" MadCap:targetName="t4" style="display: none;" /></li><li>In the Documentation sub-tab, all graphics elements are always displayed except for mimics that are only displayed as a thumbnail if they use a mimic template. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t5"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/AA/thumbnail2.png" MadCap:targetName="t5" style="display: none;" /></li></ul></li>
+            <li>In the Instances tab for each instance. <ul style="list-style-type: disc;"><li>Clicking on any single graphic element (symbol or mimic) will display the corresponding thumbnail. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t6"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a> For mimics that have been generated the thumbnail is of the actual generated mimic including any symbols. For mimics that have not been generated the thumbnail is of the mimic template. <br /><img src="../Resources/Images/AA/thumbnail3.png" MadCap:targetName="t6" style="display: none;" /></li></ul></li>
+        </ul>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

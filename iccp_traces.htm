@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|ICCP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>ICCP log messages and traces</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">ICCP Log Messages and Traces</h1>
+        <p class="SVnormal">There are two types of traces that will appear in the Event Viewer of <span class="mc-variable OEM.ProductName variable">PcVue</span>, and in the Log Files: Log Messages and Traces.</p>
+        <h2 class="SVheading2">Log Messages</h2>
+        <p class="SVnormal">This type of message is used for events that occur when the project starts (ICCP Control Center object creation and variable creation/modification) and with different connection events (connect, disconnect, etc.). This type of message can be configured in the ICCP.ini file with the field LogMessageLevel. There is a hierarchy of Log Message Levels for the different types of ICCP objects (Global/Family, Network, Local Control Center and Remote Control Center). Each one has its own LogMessageLevel, and if Default is selected, the specific object will use the LogMessageLevel of its parent object. During runtime it is possible to modify the LogMessageLevel of each object with the SCADA Basic verbs. However, the changes done at runtime will only persist while the project is running, they will not be saved to the ICCP.ini file.</p>
+        <p class="SVnormal">It has five different level of details that the user can select for their purposes. A higher level includes the messages of all lower levels</p>
+        <ol>
+            <li class="SVnumbered" value="1">LogMessageLevel = 0: Default – This level is the default option for all ICCP objects (except for global). Using this level will apply the Log Message Level of the parent object.</li>
+            <li class="SVnumbered" value="2">LogMessageLevel = 1: Minimum – This level will show the most basic messages that include detected errors in the inputs of the ICCP.ini file and in the variable creation. It will also display a basic message for connections/disconnections of remote control centers.</li>
+            <li class="SVnumbered" value="3">LogMessageLevel = 2: Light details – This level includes more details of the control center creation, variable creation and connections/disconnections of a remote control center.</li>
+            <li class="SVnumbered" value="4">LogMessageLevel = 3: Full details – This level has the most level of detail of the different events while still maintaining a tracing structure.</li>
+            <li class="SVnumbered" value="5">LogMessageLevel = 4: Stack – This level includes messages directly from the underlying ICCP driver kernel. This implies that there will be less order in the messages.</li>
+        </ol>
+        <p>It is important to note that Log Messages are not designed to display events that occur cyclically, like variable updates.</p>
+        <h2 class="SVheading2">Traces</h2>
+        <p class="SVnormal">This type of messages are used for events that occur cyclically and must only be activated temporarily for diagnostic purpose. To enable these traces, the user must create a SCADA Basic program inside the <span class="mc-variable OEM.ProductName variable">PcVue</span> project that enables the traces. The code required is the following:</p>
+        <p class="SVnormal">To enable:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: CPP;" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">1</span><span style="color: #000000; ">,</span>&#160;<span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span>&#160;<span style="color: #df5000; ">"03"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">To disable:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: CPP;" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">0</span><span style="color: #000000; ">,</span>&#160;<span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span>&#160;<span style="color: #df5000; ">"03"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">The first argument can be 1 (to enable) or 0 (tor disable).</li>
+            <li class="SVbulleted">The second argument is the dll number that must be 11 if the ICCP dll is the first SV Manager Add-on currently loaded.</li>
+            <li class="SVbulleted">The third argument is an hexadecimal number that represents the bit mask that are selected for the trace to be enabled or disabled.</li>
+        </ul>
+        <p class="SVnormal">SCADA Basic example: To activate/deactivate Traces for bits 0, 1, 2, 3 and 4.</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: CPP;" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Sub <span style="color: #795da3; font-weight: bold; ">ActivateTraces</span><span style="color: #000000; ">()</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">1</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"1"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">1</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"2"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">1</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"4"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">1</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"8"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">1</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"10"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">End Sub</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Sub <span style="color: #795da3; font-weight: bold; ">DeactivateTraces</span><span style="color: #000000; ">()</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">0</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"1"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">0</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"2"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">0</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"4"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">0</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"8"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; font-weight: bold; ">TRACE</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">0</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">11</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"10"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">End Sub</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">The meaning of the bits are summarized in the following table. Information regarding variable updates are obtained with bits 1-4.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 50px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Bit</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">Errors</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">Basic information - Local changes: Local server data updates (to remote) and remote client device command updates (update to remote device)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2</td>
+                    <td class="SVtable">Basic information - Remote changes: Remote server data updates (from remote) or local client device updates (update from remote device)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">3</td>
+                    <td class="SVtable">Detailed information for Bit1</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable">Detailed information for Bit2</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">5</td>
+                    <td class="SVtable">General information</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">6</td>
+                    <td class="SVtable">Stack messages</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">7</td>
+                    <td class="SVtable">Other</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

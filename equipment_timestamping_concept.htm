@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|Equipment" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Timestamping overview</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Timestamping overview</h1>
+        <p class="SVnormal">By default, when a data source only provides values, variables' timestamps are set at the <span class="mc-variable OEM.ProductName variable">PcVue</span> level, upon reception of a value change. Most of the Equipment drivers are for protocols that do not provide timestamp (nor quality).<br />With the cost of an ad hoc code library in the field device program that is beyond the scope of this documentation, some Equipment drivers in <span class="mc-variable OEM.ProductName variable">PcVue</span> supports timestamping at the field device level.</p>
+        <p class="SVnormal">Timestamping at the source is useful in systems where the correlation of I/O variables and alarms coming from different field devices is important, for example to store a proper Sequence Of Events (SOE) for operations' traceability or post-mortem analysis purpose. Because timestamping at the source usually require the handling of a data buffer at the device level, it can also be useful to avoid losing data due to short disconnections, by retrieving timestamped value changes upon reconnection.</p>
+        <p class="SVnormal">In all cases, timestamping at the data source requires that all field devices and the computers hosting <span class="mc-variable OEM.ProductName variable">PcVue</span> data acquisition servers have their clock synchronized by a common system-wide master clock.</p>
+        <p class="SVnormal">The following drivers supports specific frame formats and behavior to handle timestamping at the source:</p>
+        <ul>
+            <li class="SVbulleted"><a href="equip_modbus_ip.htm">Modbus Ip</a>
+            </li>
+            <li class="SVbulleted"><a href="equip_s7_industrial_ethernet.htm">Siemens S7 Industrial Ethernet</a>
+            </li>
+            <li class="SVbulleted"><a href="equip_s7_fetch_write.htm">Siemens S7 Fetch/Write</a>
+            </li>
+            <li class="SVbulleted"><a href="equip_saia_sbus.htm">SAIA S-BUS</a>
+            </li>
+            <li class="SVbulleted"><a href="equip_gefanuc_srtp.htm">GE Fanuc SRTP</a>
+            </li>
+            <li class="SVbulleted"><a href="equip_modbus.htm">Modbus and Jbus</a>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">Refer to the driver reference topic for more information about the supported block structures.</p>
+        </div>
+        <h2 class="SVheading2">Principles of operation</h2>
+        <img src="../../Resources/Images/AE/Comm_DataAcq/equipment_ts_schema.png" style="border: none;float: none;" border="0" />
+        <h2 class="SVheading2">Configuration in <span class="mc-variable OEM.ProductName variable">PcVue</span>&#160;</h2>
+        <p class="SVnormal">To use timestamped data the communication must be configured as follows.</p>
+        <ul>
+            <li class="SVbulleted">For each device supporting timestamped frames, the <u>Enable source timestamping</u> advanced property must be ticked and the error address must be configured. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t1" style="display: none;"><img src="../../Resources/Images/AE/Comm_DataAcq/equipment_ts_device_with_timestamping.png" style="border-style: none;border: none;float: none;" border="0" /></div></li>
+            <li class="SVbulleted">Each frame to be used for timestamped data must have <u>Refreshed using timestamp block</u> property ticked. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br />These frames are known as timestamp enabled frames.<div MadCap:targetName="t2" style="display: none;"><img src="../../Resources/Images/AE/Comm_DataAcq/equipment_ts_frame_with_timestamping.png" style="border-style: none;border: none;float: none;" border="0" /></div></li>
+            <li class="SVbulleted">A single frame, with a timestamped address mnemonic, must be created for each device managing timestamped data. The <b>Starting address</b> property specifies the location of the first word of the timestamped data stack within the equipment data table. The <b>Quantity</b> property specifies the maximum number of timestamped blocks to be read. This frame is known as the Timestamped Management frame. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t3" style="display: none;"><img src="../../Resources/Images/AE/Comm_DataAcq/equipment_ts_frametype_timestamped.png" style="border-style: none;border: none;float: none;" border="0" /></div></li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The Timestamped Management frame must be linked to at least one variable, or the driver will not activate it. The variable has no other use and will not have a real time value.</p>
+        </div>
+        <h2 class="SVheading2">Program in the field device</h2>
+        <p class="SVnormal">The program in the field device must be modified to create and manage the timestamped data stack used for exchange of data with <span class="mc-variable OEM.ProductName variable">PcVue</span>. The structure of the data stack must match that of the Timestamped Management frame. </p>
+        <p class="SVnormal">The program in the field device must save the timestamped data in the stack and manage the exchange as explained below.</p>
+        <h2 class="SVheading2">Operation of <span class="mc-variable OEM.ProductName variable">PcVue</span>&#160;</h2>
+        <p class="SVnormal">The timestamp-enabled frames are not read cyclically from the field device. Instead, they are used by the Timestamped Management frame to match data table addresses with <span class="mc-variable OEM.ProductName variable">PcVue</span>'s variables.</p>
+        <p class="SVnormal">The Timestamped Management frame polls the equipment regularly. The number of words read depends on the number of timestamped blocks and the type of timestamp. After each poll, a frame containing a single word is written back to the equipment, with the block number set to 0 and a copy of the exchange number, as a confirmation of the read.</p>
+        <p class="SVnormal">Each poll of the Timestamped Management frame retrieves one or more values each with its own timestamp, type, and address. The type and address are matched with the configuration of the timestamp-enabled frames to select the variables that are updated with the value and timestamp.</p>
+        <div class="note">
+            <p class="SVnormal">Frames with the same type of data, that have the <u>T-stamped</u> property ticked, must not have overlapping address ranges as only the first frame will be refreshed with the value and timestamp.</p>
+        </div>
+        <h2 class="SVheading2">Operation of the equipment</h2>
+        <p class="SVnormal">The program in the field device must place data in the data table that is being used as the timestamped data stack (according to the configuration of the Timestamped Management frame). The program must monitor the field representing the number of blocks and, when it is set to 0 (by <span class="mc-variable OEM.ProductName variable">PcVue</span>), move the next block of data into the data table. Each time a new block of data is placed in the data table, the exchange number is incremented.</p>
+        <h2 class="SVheading2">Error address</h2>
+        <p class="SVnormal">The error address allow the field device to manage communication if a problem occurs, for example if the storage buffer is full.</p>
+        <p class="SVnormal">If the field device sets a timestamp block with the error address, as configured in the device configuration in <span class="mc-variable OEM.ProductName variable">PcVue</span>, the driver will trigger a single shot read for all the timestamp-enabled frames configured for the field device. This allow the variables to be refreshed with the most recent values. Once the single shot is complete, the frames are no longer polled and the refresh using the timestamp mechanism resumes.</p>
+        <div class="note">
+            <p class="SVnormal">When one of the addresses in the Timestamped Management frame corresponds to the error address, the data field has no meaning.</p>
+        </div>
+        <h2 class="SVheading2"> Timestamped data handling with redundant servers</h2>
+        <p class="SVnormal">When using timestamped data and redundant data acquisition servers, you can either use one or two  timestamped data stacks in the field device.</p>
+        <h3 class="SVheading3">Single timestamped data stack configuration</h3>
+        <p class="SVnormal">With this configuration, only the active server acquires data from the timestamped data table in the field device. If the active server fails, it is essential to force synchronization of the data on the new active server. To do this, all the timestamped frames must be temporarily forced to use the normal polling mechanism. You can do this using the SCADA Basic instruction CIMWAY, mode SENDMSG.</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: CPP;" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #795da3; font-weight: bold; ">CIMWAY</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">"SENDMSG"</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"MyNetwork"</span><span style="color: #000000; ">,</span><span style="color: #df5000; ">"SwitchAllToPollingMode"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">When all frames have been read once, the timestamp mechanism is automatically restarted.</p>
+        <h3 class="SVheading3">Two timestamped data stacks configuration</h3>
+        <p class="SVnormal">Using two timestamped data stacks in the field device helps ensure that timestamped data is not lost during the switchover from one server to another.</p>
+        <img src="../../Resources/Images/AE/Comm_DataAcq/equipment_ts_redundant.png">
+        </img>
+        <p class="SVnormal">In this example, Station 1 is the active server. At startup, Station 1 initially polls all the frames to get the current values. Once this initialization phase is complete, the data exchanges revert to the timestamped method. The Communications Manager copies the variable values, and their timestamps, from its cache to the Variable Manager (VAR). The Variable Manager in Station 2 is also provided with these values via the <span class="mc-variable OEM.ProductName variable">PcVue</span> networking.</p>
+        <p class="SVnormal">Station 2 is the passive server. At startup, it behaves in the same way as the active server except that the values and timestamps in the cache of the Communication Manager are not copied to the Variable Manager. The same values and timestamps will be present in both stacks on the field device and hence will be the same in both Communication Manager caches.</p>
+        <p class="SVnormal">Changeover from Station 1 to Station 2 as the active server takes place as follows.</p>
+        <p class="SVnormal">Initially there is a switchover phase when:</p>
+        <ul>
+            <li>The two stations are no longer synchronized</li>
+            <li>Each station updates its own Variable Manager</li>
+        </ul>
+        <p class="SVnormal">When Station 2 is fully active and Station 1 is passive:</p>
+        <ul>
+            <li>Both stations are visible on the local area network.</li>
+            <li>Station 1 updates its Communication Manager cache exchanging data with the field device.</li>
+            <li>Station 1's Variable Manager is updated from Station 2 via the <span class="mc-variable OEM.ProductName variable">PcVue</span> networking.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

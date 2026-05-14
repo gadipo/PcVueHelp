@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|IEC 61850|Adding a Data Report to an IEC 61850 device" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Adding a Data Report to an IEC 61850 device</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor44"></a><a name="kanchor45"></a>Adding a Data Report to an IEC 61850 Device</h1>
+        <p class="SVnormal">A data report provides access to all data objects and attributes of the linked dataset. It is the most efficient method to access data as data changes are sent automatically by the device each time the specified trigger conditions are met. No polling by <span class="mc-variable OEM.ProductName variable">PcVue</span> is required.</p>
+        <p class="SVnormal">To add a data report:</p>
+        <ol>
+            <li value="1">From the Application Explorer select an IEC 61850 network and device.</li>
+            <li value="2">Select the <u>Add a data report</u> task. The Data Report configuration dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <div MadCap:targetName="t1" style="display: none;">
+                <br />
+                <img src="../../Resources/Images/AE/Comm_DataAcq/61850_report_general_tab.png" />
+                <br />
+            </div>
+            <li value="3">Accept the default <u>Name</u> or enter one of your own choice. The Name is the identity of the data report within <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li>
+            <li value="4">Enter an optional <u>Description</u> (optional).</li>
+            <li value="5">Select the <u>Reporting type</u> as buffered or unbuffered. For an explanation of the difference, see the topic <a href="61850_datasets.htm">About Data Sets, Data Groups and Data Reports</a>.</li>
+            <li value="6">Select the <u>Original report name</u>. This is the name of the Report Control Block as exposed by the physical device. Depending on the device configuration, <span class="mc-variable OEM.ProductName variable">PcVue</span> obtains a list of the available data reports by browsing the connected physical device or by listing report control blocks defined in the SCL file associated to the device. See below for more information on how to configure the Original report name in redundant data acquisition architectures.</li>
+            <li value="7">Tick <u>Activate at start-up</u> if the data group is to start automatically at start-up.</li>
+            <li value="8">Click <u>OK</u> to confirm the settings and close the dialog or <u>Apply</u> to leave the dialog open.</li>
+        </ol>
+        <div class="warning">
+            <p class="SVnormal">Buffered reporting with a dynamic dataset requires the dataset to be configured for persistency at the physical device level.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">A newly created report group associated to a dynamic dataset is displayed with a warning icon until the dataset configuration is updated down to the physical device.</p>
+        </div>
+        <p class="SVnormal">Upon device communication start-up, the DatSet field of impacted data-report groups is forced to “” (blank string). If the writing request succeeds, the associated dataset is deleted and recreated to accommodate any potential modification.</p>
+        <p class="SVnormal">When deleting a data report associated to a dynamic dataset, <span class="mc-variable OEM.ProductName variable">PcVue</span> sends a request to the physical device in order to de-reference the dataset by setting the value to “” (blank string).</p>
+        <h2 class="SVheading2">The Advanced tab</h2>
+        <p class="SVnormal">See the topic <a href="61850_datareport_advanced_tab.htm">IEC 61850 Data Report - Advanced tab</a>. Note that the properties in the advanced tab are important as they determine how the Report Control Block is handled.</p>
+        <h2 class="SVheading2">Configuration for data acquisition redundancy</h2>
+        <p class="SVnormal">As specified by the IEC 61850 standard, handling reporting requires exclusive access to a Report Control Block. If 2 clients access the same RCB, correct reporting cannot be guaranteed and data may be lost.</p>
+        <p class="SVnormal">To cope with this constraint, when 2 or more redundant stations are in charge of data acquisition for a given Data Report, one need to define one RCB (original report name) per redundant data acquisition server. In practice, you have to define one redundant RCB per station in the association producing the IEC 61850 network:</p>
+        <ol>
+            <li value="1">Set the property <u>Original report name</u> to <u>(Network-dependent configuration)</u> on the Data report item.</li>
+            <li value="2">Select the data report in the data report list (top panel of the Application Explorer), go to the behavior panel (bottom panel) and click the <u>Add</u> button.</li>
+            <li value="3">Select the first data acquisition in the <u>Server station</u> list, and select the <u>Original report name</u> this station will be in charge of.</li>
+            <li value="4">Repeat steps 2 and 3 for each data acquisition server in the list, each time selecting another report name.</li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">We recommend avoiding non-persistent datasets in a redundant context because they would be deleted and recreated with each disconnection or station switch. Persistent datasets or redundant reports, however, maintain existing redundancy behavior.</p>
+        </div>
+        <p class="SVnormal">Data acquisition redundancy for reporting requires each IEC 61850 device to expose as many Report Control Block as there are redundant data acquisition servers in the association producing the network.</p>
+        <p class="SVnormal">Refer to the device manufacturer documentation for more information about support and configuration of report control blocks, support for multiple client connections and report control block reservation.</p>
+        <div class="note">
+            <p class="SVnormal">It is strongly recommended that such 'redundant' report control blocks be attached to the same dataset, which <span class="mc-variable OEM.ProductName variable">PcVue</span> is able to enforce if the data report is configured to send the dataset configuration at start-up (see <a href="61850_datareport_advanced_tab.htm">IEC 61850 Data Report - Advanced tab</a>).</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

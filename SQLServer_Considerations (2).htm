@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="C" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV_Installation.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Microsoft SQL Server related considerations</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Microsoft SQL Server related considerations</h1>
+        <p class="SVnormal">Microsoft's SQL Server and SSMS (SQL Server Management Studio) are required if you will be using the Historical Data Server (HDS) for either event logging and / or trend recording. See the topic <a href="Operating_system_and_PC_requirements.htm">Operating System and PC Requirements</a> for a list of supported SQL Server versions.</p>
+        <div class="note">
+            <p class="SVnormal">The use of the HDS is not mandatory. You can alternatively use the other types of archive units supported by <span class="mc-variable OEM.ProductName variable">PcVue</span> for event logging and trend recording.</p>
+        </div>
+        <h2 class="SVheading2">SQL Server Express Edition</h2>
+        <p class="SVnormal">Small to medium sized projects may find the free and download-able Express edition is suitable. The main limitations of the Express edition are as follows.</p>
+        <ul style="list-style-type: disc;">
+            <li>The maximum size of each relational database is 10GB</li>
+            <li>The maximum memory that can be used by the SQL Server Database Engine is 1GB.</li>
+            <li>The SQL Agent administration tool is not included in Express.</li>
+            <li>The limit on the buffer cache for each instance is 1MB of RAM.</li>
+            <li>The relational database engine is restricted to the lesser of 1 socket or 4 cores.</li>
+        </ul>
+        <p class="SVnormal">SQL Server Express can be downloaded from <a href="https://www.microsoft.com/sql-server/sql-server-downloads" target="_blank">https://www.microsoft.com/sql-server/sql-server-downloads</a></p>
+        <p class="SVnormal">SQL Server Management Studio can be downloaded from <a href="https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms" target="_blank">https://docs.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms</a></p>
+        <h2 class="SVheading2">Installation recommendations</h2>
+        <p class="SVnormal">The installation process may vary depending on the exact version you are installing and the operating system. The following is a recommendation for a typical installation of the Express edition.</p>
+        <ol>
+            <li value="1">Start the installation by running the installable executable. It will be named something like SQLEXPRWT_x64_ENU.exe. The SQL Server Installation Center dialog is displayed. First run the <u>System Configuration Checker</u> to make sure the PC is ready to install SQL Server Express Edition.<br /></li>
+            <li value="2">A setup support check will run. If there is any error or warning, then that must be investigated and corrected. When all rules in the System Configuration Check have passed, the dialog closes automatically. </li>
+            <li value="3">Click on <u>Options</u> at the SQL Server Installation Center. Confirm or select the architecture  to install and then click on <u>Installation</u>.
+<br /></li>
+            <li value="4">Select <u>New SQL Server stand-alone installation or add features to an existing installation</u>.
+<br /></li>
+            <li value="5">The SQL Server Setup will now appear starting at the License Terms. Read, and if you agree with them tick the box <u>I accept the license terms</u> and click Next to continue. </li>
+            <li value="6">If you have an Internet connection, the setup will then check for any product updates. Depending on your IT strategy, you can choose to accept them or not.</li>
+            <li value="7">Click <u>Install</u> to install the Setup Support Files. <br /></li>
+            <li value="8">In the Feature Selection dialog, select <u>Database Engine Services</u> and <u>Management Tools - Complete</u> then click <u>Next</u>. Note the list of prerequisites displayed in the right pane.
+<br /></li>
+            <li value="9">In the Instance Configuration dialog, select a named instance for your installation. You can either specify a unique name or use the default instance. Click <u>Next</u>.
+<br /></li>
+            <li value="10">In the Server Configuration dialog, change the SQL Server Browser's Startup Type to <u>Automatic</u> and then click <u>Next</u>.
+<br /></li>
+            <li value="11">In the Database Engine Configuration page, you can either use the default of  Windows Authentication Mode only or select Mixed Mode (SQL Server authentication and Windows authentication).
+            <ul><li>Windows Authentication - Allows the user to connect to the database server without having to enter a password. The Windows credentials (username and password) in use at connection time are used. If this option is selected, SQL authentication is disabled. In the case of connecting to a database through a network, the user must be known (i.e. have a domain) on both computers. This method is recommended when the SQL Server is on the same PC as <span class="mc-variable OEM.ProductName variable">PcVue</span> and you are not using replication. The replication process will not work in Windows Authentication mode.</li><li>	SQL Authentication - The user will have to enter a login and a password at connection time. If this option is selected, the Windows Authentication remains active and you can still connect in this way. If the SQL Server is not on the same PC as <span class="mc-variable OEM.ProductName variable">PcVue</span> or you are using replication, it is recommended that you use SQL Authentication.
+            If you are using SQL Authentication, you must select the option button <u>Mixed Mode</u> then enter and confirm the SQL Server system administrator (SA) password. Any blank or weak password will be rejected.
+            </li></ul></li>
+            <p>Before you can continue, you must also specify the groups that are to have unrestricted access to SQL Server. Click <u>Add...</u> and select the groups. We recommend that you at least add Administrators and the current user. Use <u>Add Current User</u>. When you have finished, click<u> Next</u>. The installation then starts.
+</p>
+            <li value="12">You can monitor the setup's progress in the Installation Progress dialog. When the installation is finished, click <u>Next</u>.
+<br /></li>
+            <li value="13">Close the SQL Server Configuration Manager.<br /></li>
+        </ol>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

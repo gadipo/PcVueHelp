@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>VARIABLE example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="VARIABLE_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor21"></a>VARIABLE Examples</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc386">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="VARIABLE_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc386.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <h2 class="SVheading2">Example 1 </h2>
+        <p class="SVnormal">This example exercises several modes of the VARIABLE 
+ command.</p>
+        <p class="SVprogramCode">'Mode STATUS or Mode 1 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablestatus()</p>
+        <p class="SVprogramCode">PRINT("--STATUS @STATE01--");</p>
+        <p class="SVprogramCode">PRINT("EXIST = ",VARIABLE("STATUS","@STATE01",1));</p>
+        <p class="SVprogramCode">PRINT("VALID = ",VARIABLE("STATUS","@STATE01",2));</p>
+        <p class="SVprogramCode">PRINT("MASK = ",VARIABLE("STATUS","@STATE01",3));</p>
+        <p class="SVprogramCode">PRINT("ENABLE = ",VARIABLE("STATUS","@STATE01",4));</p>
+        <p class="SVprogramCode">PRINT("COM = ",VARIABLE("STATUS","@STATE01",5));</p>
+        <p class="SVprogramCode">PRINT("HDATE = ",VARIABLE("STATUS","@STATE01",6));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode MASK or Mode 2 (syntax 2)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablemask()</p>
+        <p class="SVprogramCode">PRINT("--MASK @STATE01--");</p>
+        <p class="SVprogramCode">PRINT("USERPROG1 = ",VARIABLE ("MASK", "@STATE01", 1));</p>
+        <p class="SVprogramCode">PRINT("USERPROG2 = ",VARIABLE ("MASK", "@STATE01", 2));</p>
+        <p class="SVprogramCode">PRINT("USERPROG3 = ",VARIABLE ("MASK", "@STATE01", 4);
+</p>
+        <p class="SVprogramCode">PRINT("USERPROG4 = ",VARIABLE ("MASK", "@STATE01", 8));
+</p>
+        <p class="SVprogramCode">PRINT("OPERATOR = ",VARIABLE ("MASK", "@STATE01", 16));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode UNMASK or Mode 3 (syntax 2)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variableunmask()</p>
+        <p class="SVprogramCode">PRINT("--UNMASK @STATE01--");</p>
+        <p class="SVprogramCode">PRINT("USERPROG1 = ",VARIABLE ("UNMASK", "@STATE01", 1));</p>
+        <p class="SVprogramCode">PRINT("USERPROG2 = ",VARIABLE ("UNMASK", "@STATE01", 2));</p>
+        <p class="SVprogramCode">PRINT("USERPROG3 = ",VARIABLE ("UNMASK", "@STATE01", 4));</p>
+        <p class="SVprogramCode">PRINT("USERPROG4 = ",VARIABLE ("UNMASK", "@STATE01", 8));</p>
+        <p class="SVprogramCode">PRINT("OPERATOR = ",VARIABLE ("UNMASK", "@STATE01", 16));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode ENABLE or Mode 4 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variableenable()</p>
+        <p class="SVprogramCode">PRINT("--ENABLE @STATE01--");</p>
+        <p class="SVprogramCode">PRINT("ENABLE = ",VARIABLE ("ENABLE","STATE01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode DISABLE or Mode 5 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variabledisable()</p>
+        <p class="SVprogramCode">PRINT("--DISABLE @STATE01--");</p>
+        <p class="SVprogramCode">PRINT("DISABLE = ",VARIABLE ("DISABLE","STATE01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode LONGLABEL or Mode 6 (syntax 4)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablelonglabel()</p>
+        <p class="SVprogramCode">PRINT("--LONGLABEL @STATE01--");</p>
+        <p class="SVprogramCode">PRINT("LONGLABEL = ",VARIABLE ("LONGLABEL","STATE01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode ASSOCLABEL or Mode 7 (syntax 4)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variableassoclabel()</p>
+        <p class="SVprogramCode">PRINT("--ASSOCLABEL @STATE01--");</p>
+        <p class="SVprogramCode">PRINT("ASSOCLABEL = ",VARIABLE ("ASSOCLABEL","STATE01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SIMU or Mode 8 (syntax 5)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablesimuon()</p>
+        <p class="SVprogramCode">PRINT("--SIMU @STATE02--");</p>
+        <p class="SVprogramCode">PRINT("SIMU ON= ",VARIABLE ("SIMU","STATE02",1));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablesimuoff()</p>
+        <p class="SVprogramCode">PRINT("--SIMU @STATE02--");</p>
+        <p class="SVprogramCode">PRINT("SIMU OFF= ",VARIABLE ("SIMU","STATE02",0));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode DOMAIN or Mode 9 (syntax 4)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variabledomain()</p>
+        <p class="SVprogramCode">PRINT("--DOMAIN @STATE01--");</p>
+        <p class="SVprogramCode">PRINT("DOMAIN = ",VARIABLE ("DOMAIN","STATE01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode Nature or Mode 10 (syntax 4)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variableNature()</p>
+        <p class="SVprogramCode">PRINT("--Nature @STATE01--");</p>
+        <p class="SVprogramCode">PRINT("Nature = ",VARIABLE ("Nature","STATE01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode UNIT or Mode 11 (syntax 4)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variableunit()</p>
+        <p class="SVprogramCode">PRINT("--UNIT @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("UNIT = ",VARIABLE ("UNIT","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode NUMBER or Mode 12 (syntax 6)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablenumber()</p>
+        <p class="SVprogramCode">PRINT("--NUMBER @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("NUMBER = ",VARIABLE ("NUMBER","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode THRESHOLD_GETTYPE or Mode 13 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablethresholdgettype()</p>
+        <p class="SVprogramCode">PRINT("--THRESHOLD_GETTYPE @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("THRESHOLD_GETTYPE = ",VARIABLE ("THRESHOLD_GETTYPE","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode THRESHOLD_GETVALUE or Mode 14 (syntax 7)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablethresholdgetvalue()</p>
+        <p class="SVprogramCode">PRINT("--THRESHOLD_GETVALUE @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("THRESHOLD_GETVALUE = ",VARIABLE ("THRESHOLD_GETVALUE","REGISTER01", 1));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode THRESHOLD_SETVALUE or Mode 15 (syntax 8)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablethresholdsetvalue()</p>
+        <p class="SVprogramCode">DIM intValue as integer;</p>
+        <p class="SVprogramCode">intValue= 8;</p>
+        <p class="SVprogramCode">PRINT("--THRESHOLD_SETVALUE @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("THRESHOLD_SETVALUE = ",VARIABLE ("THRESHOLD_SETVALUE","REGISTER01",1,intValue,1));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode BATT or Mode 22 (syntax 9)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablebatt()</p>
+        <p class="SVprogramCode">PRINT("--BATT @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("BATT = ",VARIABLE ("BATT","REGISTER01",2));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode TATT or Mode 23 (syntax 10)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variabletatt()</p>
+        <p class="SVprogramCode">PRINT("--TATT @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("TATT = ",VARIABLE ("TATT","REGISTER01",3));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode WRITE or Mode 24 (syntax 11)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablewrite()</p>
+        <p class="SVprogramCode">PRINT("--WRITE--");</p>
+        <p class="SVprogramCode">'PRINT("WRITE = ",VARIABLE ("WRITE",0)); 'WRITE OFF</p>
+        <p class="SVprogramCode">PRINT("WRITE = ",VARIABLE ("WRITE",1)); 'WRITE ON</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode LOCKTONODE or Mode 25 (syntax 12)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablelocktonode()</p>
+        <p class="SVprogramCode">PRINT("--LOCKTONODE--");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Lock messages to station 2</p>
+        <p class="SVprogramCode">PRINT("LOCKTONODE = ",VARIABLE ("LOCKTONODE",2));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode UNLOCKTONODE or Mode 26 (syntax 12)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variableunlocktonode()</p>
+        <p class="SVprogramCode">PRINT("--UNLOCKTONODE--");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Unlock messages to station no. 2</p>
+        <p class="SVprogramCode">PRINT("UNLOCKTONODE = ",VARIABLE ("UNLOCKTONODE",2));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode FLOWPARAMTONODE or Mode 27 (syntax 13)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Control all variables for remote client station no.2</p>
+        <p class="SVprogramCode">' with a stopping threshold of 100 and activation threshold of 150</p>
+        <p class="SVprogramCode">SUB variableFlowParamToNode()</p>
+        <p class="SVprogramCode">VARIABLE("FLOWPARAMTONODE",2,100,150,15);</p>
+        <p class="SVprogramCode">END SUB </p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Control of register and text variables for client station no.5,</p>
+        <p class="SVprogramCode">' with a stopping threshold of 50 and activation threshold of 60</p>
+        <p class="SVprogramCode">SUB variableFlowParamToNode2()</p>
+        <p class="SVprogramCode">VARIABLE("FLOWPARAMTONODE",5,50,60,12);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode IMPORTBUFFER or Mode 28 (syntax 14)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variableimportbuffer()</p>
+        <p class="SVprogramCode">DIM lngbuffer1 as long;</p>
+        <p class="SVprogramCode">lngbuffer1 = FILETOBUF("var.txt");</p>
+        <p class="SVprogramCode">PRINT("--IMPORTBUFFER--");</p>
+        <p class="SVprogramCode">PRINT("IMPORTBUFFER = ",VARIABLE ("IMPORTBUFFER",lngbuffer1));</p>
+        <p class="SVprogramCode">FREE_BUFFER(lngbuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode IMPORTFILE or Mode 29 (syntax 15)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variableimportfile()</p>
+        <p class="SVprogramCode">PRINT("--IMPORTFILE--");</p>
+        <p class="SVprogramCode">PRINT("IMPORTFILE = ",VARIABLE ("IMPORTFILE","var.txt"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode STOPWATCHLIST or Mode 31 (syntax 17)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablestartwatchlist()</p>
+        <p class="SVprogramCode">DIM lngbuffer1 as long;</p>
+        <p class="SVprogramCode">DIM lngbuffer2 as long;</p>
+        <p class="SVprogramCode">DIM intResult as integer;</p>
+        <p class="SVprogramCode">lngbuffer1 = FILETOBUF("var2.txt");</p>
+        <p class="SVprogramCode">PRINT("--STARTWATCHLIST--");</p>
+        <p class="SVprogramCode">lngbuffer2 = VARIABLE("STARTWATCHLIST","",lngbuffer1,"STATE02",1));</p>
+        <p class="SVprogramCode">intResult = VARIABLE("STOPWATCHLIST",lngbuffer2);</p>
+        <p class="SVprogramCode">FREE_BUFFER(lngbuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_LONG_IN_DB or Mode 32 (syntax 18)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegetlongindb()</p>
+        <p class="SVprogramCode">PRINT("--GET_LONG_IN_DB--");</p>
+        <p class="SVprogramCode">PRINT("GET_LONG_IN_DB = ",VARIABLE ("GET_LONG_IN_DB","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_DOUBLE_IN_DB or Mode 33 (syntax 19)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegetdoubleindb()</p>
+        <p class="SVprogramCode">PRINT("--GET_DOUBLE_IN_DB--");</p>
+        <p class="SVprogramCode">PRINT("GET_DOUBLE_IN_DB = ",VARIABLE ("GET_DOUBLE_IN_DB","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_PHYSICAL_MIN or Mode 34 (syntax 19)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegetphysicalmin()</p>
+        <p class="SVprogramCode">PRINT("--GET_PHYSICAL_MIN--");</p>
+        <p class="SVprogramCode">PRINT("GET_PHYSICAL_MIN = ",VARIABLE ("GET_PHYSICAL_MIN","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_PHYSICAL_MAX or Mode 35 (syntax 19)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegetphysicalmax()</p>
+        <p class="SVprogramCode">PRINT("--GET_PHYSICAL_MAX--");</p>
+        <p class="SVprogramCode">PRINT("GET_PHYSICAL_MAX = ",VARIABLE ("GET_PHYSICAL_MAX","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_CONTROL_MIN or Mode 36 (syntax 19)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegetcontrolmin()</p>
+        <p class="SVprogramCode">PRINT("--GET_CONTROL_MIN--");</p>
+        <p class="SVprogramCode">PRINT("GET_CONTROL_MIN = ",VARIABLE ("GET_CONTROL_MIN","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_CONTROL_MAX or Mode 37 (syntax 19)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegetcontrolmax()</p>
+        <p class="SVprogramCode">PRINT("--GET_CONTROL_MAX--");</p>
+        <p class="SVprogramCode">PRINT("GET_CONTROL_MAX = ",VARIABLE ("GET_CONTROL_MAX","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SETBATT or Mode 38 (syntax 20)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablesetbatt()</p>
+        <p class="SVprogramCode">PRINT("--SETBATT @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("SETBATT = ",VARIABLE ("SETBATT","REGISTER01",2));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SETTATT or Mode 39 (syntax 21)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablesettatt()</p>
+        <p class="SVprogramCode">PRINT("--SETTATT @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("SETTATT = ",VARIABLE ("SETTATT","REGISTER01",3));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SAVE or Mode 40 (syntax 22)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablesave()</p>
+        <p class="SVprogramCode">PRINT("--SAVE *--");</p>
+        <p class="SVprogramCode">PRINT("SAVE = ",VARIABLE ("SAVE"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_ALARM_PRIORITY or Mode 42 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegetalarmpriority()</p>
+        <p class="SVprogramCode">PRINT("--GET_ALARM_PRIORITY @ALARM01--");</p>
+        <p class="SVprogramCode">PRINT("GET_ALARM_PRIORITY = ",VARIABLE ("GET_ALARM_PRIORITY","ALARM01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_COMMAND_LEVEL or Mode 43 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegetcommandlevel()</p>
+        <p class="SVprogramCode">PRINT("--GET_COMMAND_LEVEL @ALARM01--");</p>
+        <p class="SVprogramCode">PRINT("GET_COMMAND_LEVEL = ",VARIABLE ("GET_COMMAND_LEVEL","ALARM01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_CONTROL_LEVEL or Mode 44 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegetcontrollevel()</p>
+        <p class="SVprogramCode">PRINT("--GET_CONTROL_LEVEL @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("GET_CONTROL_LEVEL = ",VARIABLE ("GET_CONTROL_LEVEL","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_TEXT_LEVEL or Mode 45 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegettextlevel()</p>
+        <p class="SVprogramCode">PRINT("--GET_TEXT_LEVEL @TEXT01--");</p>
+        <p class="SVprogramCode">PRINT("GET_TEXT_LEVEL = ",VARIABLE ("GET_TEXT_LEVEL","TEXT01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_TYPE or Mode 46 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegettype()</p>
+        <p class="SVprogramCode">PRINT("--GET_TYPE @TEXT01--");</p>
+        <p class="SVprogramCode">PRINT("GET_TYPE = ",VARIABLE ("GET_TYPE","TEXT01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_DEADBAND_TYPE or Mode 53 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegetdeadbandtype()</p>
+        <p class="SVprogramCode">PRINT("--GET_DEADBAND_TYPE @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("GET_DEADBAND_TYPE = ",VARIABLE ("GET_DEADBAND_TYPE","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GET_DEADBAND_VALUE or Mode 54 (syntax 23)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablegetdeadbandvalue()</p>
+        <p class="SVprogramCode">PRINT("--GET_DEADBAND_VALUE @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("GET_DEADBAND_VALUE = ",VARIABLE ("GET_DEADBAND_VALUE","REGISTER01"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SET_DEADBAND or Mode 55 (syntax 24)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB variablesetdeadband()</p>
+        <p class="SVprogramCode">PRINT("--SET_DEADBAND @REGISTER01--");</p>
+        <p class="SVprogramCode">PRINT("SET_DEADBAND = ",VARIABLE ("SET_DEADBAND","REGISTER01", 3, 2));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <h2 class="SVheading2">Example 2 </h2>
+        <p class="SVnormal">This example shows several uses of the VARIABLE instruction.</p>
+        <p class="SVprogramCode">' Subroutine to return variable status<br />SUB status()<br />DIM res AS INTEGER;<br />res = VARIABLE("STATUS", setvar.name, "VALID");<br />IF (res == 0) THEN<br />setvar.valid = 0;<br />ELSE<br />setvar.valid = 1;<br />END IF<br />res = VARIABLE("STATUS", setvar.name, "ENABLE");<br />IF (res == 0) THEN<br />setvar.enable = 0;<br />ELSE<br />setvar.enable = 1;<br />END IF<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' Toggle inhibit/enable<br />SUB inhibit()<br />DIM res AS INTEGER;<br />IF (setvar.enable == 0) THEN<br />res = VARIABLE("DISABLE", setvar.name);<br />ELSE<br />res = VARIABLE("ENABLE", setvar.name);<br />END IF<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB threshold()<br />PRINT(VARIABLE("THRESHOLD_GETVALUE", "txremp", 0));<br />VARIABLE("THRESHOLD_SETVALUE", "txremp", 0, 52, 1);<br />PRINT(VARIABLE("THRESHOLD_GETTYPE", "txremp"));<br />END SUB</p>
+        <h2 class="SVheading2">Example 3</h2>
+        <p class="SVnormal">This example shows the use of the IMPORTFILE mode.</p>
+        <p class="SVdataListing">'********************************************************************</p>
+        <p class="SVdataListing">' ImportVarObject</p>
+        <p class="SVdataListing">' ---------------
+</p>
+        <p class="SVdataListing">' Import the objects in a file passed as an argument</p>
+        <p class="SVdataListing">'____________________________________________________________________
+</p>
+        <p class="SVdataListing">&#160;</p>
+        <p class="SVdataListing">SUB ImportVarObject()</p>
+        <p class="SVdataListing"> DIM a_strImpFileName AS STR; ' Name of the import file</p>
+        <p class="SVdataListing"> DIM l_RetCode AS INTEGER; ' Return code</p>
+        <p class="SVdataListing" />
+        <p class="SVdataListing"> DIM l_strPath AS STR; ' Project path</p>
+        <p class="SVdataListing"> DIM l_strFullImpFileName AS STR; ' Import file name and path</p>
+        <p class="SVdataListing"> DIM l_strFullReportFileName AS STR; ' Report file name and path</p>
+        <p class="SVdataListing"> DIM l_strFullErrorFileName  AS STR; ' Error file name and path</p>
+        <p class="SVdataListing">&#160;</p>
+        <p class="SVdataListing"> a_strImpFileName = GETARG("ARG1");</p>
+        <p class="SVdataListing"> l_strPath = GETPROJECTDIR();</p>
+        <p class="SVdataListing"> l_strFullImpFileName = ADDSTRING(l_strPath, "\\TP\\");</p>
+        <p class="SVdataListing"> l_strFullImpFileName = ADDSTRING(l_strFullImpFileName, a_strImpFileName);</p>
+        <p class="SVdataListing"> l_strFullReportFileName = ADDSTRING(l_strPath, "\\TP\\");</p>
+        <p class="SVdataListing"> l_strFullReportFileName = ADDSTRING(l_strFullReportFileName,"FileReport.log");</p>
+        <p class="SVdataListing"> l_strFullErrorFileName = ADDSTRING(l_strPath, "\\TP\\");</p>
+        <p class="SVdataListing"> l_strFullErrorFileName = ADDSTRING(l_strFullErrorFileName, "FileReport.err");</p>
+        <p class="SVdataListing">&#160;</p>
+        <p class="SVdataListing"> l_RetCode = VARIABLE("IMPORTFILE", l_strFullImpFileName, 0, "SYS.IMPORTRESULT", l_strFullReportFileName, l_strFullErrorFileName);</p>
+        <p class="SVdataListing"> Print("Variable import ", l_strFullImpFileName, " Ret code ", l_RetCode);</p>
+        <p class="SVdataListing">ENDSUB</p>
+        <h2 class="SVheading2">Example 4</h2>
+        <p class="SVnormal">This example imports the object in the file passed as a parameter from the command.</p>
+        <p class="SVprogramCode">' ImportVarObject
+</p>
+        <p class="SVprogramCode">' ---------------
+</p>
+        <p class="SVprogramCode">'Import variable
+</p>
+        <p class="SVprogramCode">SUB ImportVarObject()
+</p>
+        <p class="SVprogramCode">' [in] name of file to import
+</p>
+        <p class="SVprogramCode">DIM a_strImpFileName AS STR;	</p>
+        <p class="SVprogramCode">' result code
+</p>
+        <p class="SVprogramCode">DIM l_RetCode AS INTEGER;
+</p>
+        <p class="SVprogramCode">' project path
+</p>
+        <p class="SVprogramCode">DIM l_strPath AS STR;</p>
+        <p class="SVprogramCode">	
+' path &amp; name of file to import
+</p>
+        <p class="SVprogramCode">DIM l_strFullImpFileName AS STR;	</p>
+        <p class="SVprogramCode">	
+' path &amp; name of file containing the import report</p>
+        <p class="SVprogramCode">DIM l_strFullReportFileName AS	STR;	</p>
+        <p class="SVprogramCode">	
+' path &amp; name of file of formatting errors if any</p>
+        <p class="SVprogramCode">DIM l_strFullErrorFileName  AS	STR;	</p>
+        <p class="SVprogramCode">	
+
+a_strImpFileName = GETARG("ARG1");
+</p>
+        <p class="SVprogramCode">l_strPath = GETPROJECTDIR();
+</p>
+        <p class="SVprogramCode">l_strFullImpFileName	= ADDSTRING( l_strPath, "\\TP\\");
+</p>
+        <p class="SVprogramCode">l_strFullImpFileName 	= ADDSTRING( l_strFullImpFileName, a_strImpFileName);
+</p>
+        <p class="SVprogramCode">l_strFullReportFileName = ADDSTRING( l_strPath, "\\TP\\");
+</p>
+        <p class="SVprogramCode">l_strFullReportFileName = ADDSTRING( l_strFullReportFileName,"FileReport.log");
+</p>
+        <p class="SVprogramCode">l_strFullErrorFileName = ADDSTRING( l_strPath, "\\TP\\");
+</p>
+        <p class="SVprogramCode">l_strFullErrorFileName = ADDSTRING( l_strFullErrorFileName, "FileReport.err");
+</p>
+        <p class="SVprogramCode">	
+l_RetCode = VARIABLE(  "IMPORTFILE", l_strFullImpFileName, 0, "SYS.IMPORTRESULT", l_strFullReportFileName, l_strFullErrorFileName);
+</p>
+        <p class="SVprogramCode">	
+PRINT("Variable import ",  l_strFullImpFileName, " RetCode = ", l_RetCode);
+	
+</p>
+        <p class="SVprogramCode">END SUB
+</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

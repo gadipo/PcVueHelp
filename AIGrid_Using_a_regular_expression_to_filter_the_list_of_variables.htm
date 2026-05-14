@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Graphic controls and Viewers|Grid control|Using the Grid in variable tracking mode" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Using a regular expression to filter the list of variables</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor175"></a>Using a Regular Expression to Filter the List of Variables</h1>
+        <p class="SVnormal">The regular expressions used in the Grid are derived 
+ from the notation used in automata theory to describe formal languages 
+ and finite state machines. Regular expressions consist of characters (operands), 
+ such as "a", "O", and ", " and meta-characters 
+ (operators), such as "+", "|", and "[". 
+ </p>
+        <p class="SVnormal">A regular expression, which is similar to the familiar 
+ arithmetic expressions, can be either a basic expression or a complex 
+ expression that is formed by applying operators to several basic expressions. 
+ The regular expression meta-characters and their uses are as follows.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col style="width: 650px;" />
+            <tr valign="middle">
+                <td>
+                    <p class="SVtableHeading">Character</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Usage</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td>
+                    <p class="SVtable">\</p>
+                </td>
+                <td>
+                    <p class="SVtable">The escape character is used in escape sequences to specify 
+ characters that would otherwise have no representation. These are similar 
+ to those used in the C language.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">\b</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Backspace.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">\t</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Horizontal tab.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">\n</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">New line or line feed.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">\f</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">New page or form feed.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">\r</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Carriage return.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">\ddd</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Octal value.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">\c</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Where c represents any character string that is taken literally.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">^</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">The character matches the beginning of a string. For example, 
+ "^abc" matches only those strings which start with "abc". 
+ </p>
+                    <p class="SVtable">When used as the first character of a character class 
+ it denotes a negated class (exclusion) - See example below.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">$</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Matches the end of a string. For example, "z$" 
+ will only match strings with "z" as the last character.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">.</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Period/full stop matches any single character. Be careful 
+ as ".*" will match everything.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">[</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Denotes the start of a character class.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">]</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Denotes the end of a character class.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">|</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">The pipe character is the alternation operator, so that 
+ "a|b" will match either "a" or "b".</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">()</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Parentheses are used to group expressions in much the 
+ same way as with arithmetic expressions.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">*</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">The closure operator matches 0 or more instances of the 
+ specified string.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">+</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Indicates positive closure and matches 1 or more instances 
+ of the specified expression. For example, "+z" matches a string 
+ of 1 or more "z"s.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 108px;" valign="top" width="108px">
+                    <p class="SVtable">?</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Matches 0 or 1 instances of the specified expression. 
+ For example, "9?" matches either the null string or "9".</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">About character classes</h2>
+        <p class="SVnormal">Character classes are shorthand for matching one of several 
+ characters. For example, [AaBb] is the same as (A|a|B|b) and matches "A", 
+ "a", "B", and "b". There are also character 
+ ranges, such as [A-Z] that matches any uppercase character.</p>
+        <p class="SVnormal">Negated character 
+ classes specify characters that should not be matched. For example, [^A-Z] 
+ matches everything except upper case alpha characters.</p>
+        <h2 class="SVheading2">Examples of regular expressions</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 250px;" />
+            <col style="width: 500px;" />
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtableHeading">Filter</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Results</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td class="SVtable" style="vertical-align: top;">\System. \.*</td>
+                <td class="SVtable" style="vertical-align: top;">
+                    <p class="SVtable">All variable names that contain "System" as the first branch name.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td class="SVtable">*$[0-9]</td>
+                <td class="SVtable">All variable names that end in a number.</td>
+            </tr>
+        </table>
+        <p class="SVnormal">Consider a Variables Tree containing these variable names:</p>
+        <p class="SVnormal">API175.M75R05.XRR_SP<br />API175.M75R08.XRR_SP<br />API175.M75R09.XRR_SP<br />API175.M76R05.XRR_SP<br />API175.M80R05.XRR_SP<br />API175.MA.XRR_SP</p>
+        <p class="SVnormal">
+            <p class="SVnormal">The following filters would pass only the following variable names.<br /></p>
+            <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+                <col style="width: 250px;" />
+                <col style="width: 500px;" />
+                <tr valign="middle">
+                    <td valign="top">
+                        <p class="SVtableHeading">Filter</p>
+                    </td>
+                    <td valign="top">
+                        <p class="SVtableHeading">Results</p>
+                    </td>
+                </tr>
+                <tr valign="middle">
+                    <td class="SVtable" style="vertical-align: top;">API75.M75R0[^5]</td>
+                    <td class="SVtable" style="vertical-align: top;">API75.M75R08.XRR_SP<br />API75.M75R09.XRR_SP</td>
+                </tr>
+                <tr valign="middle">
+                    <td class="SVtable" style="vertical-align: top;">API75.M75R0[^5|9]</td>
+                    <td class="SVtable" style="vertical-align: top;">API75.M75R08.XRR_SP</td>
+                </tr>
+                <tr valign="middle">
+                    <td class="SVtable" style="vertical-align: top;">API75.M7[^5]</td>
+                    <td class="SVtable" style="vertical-align: top;">API75.M76R05.XRR_SP</td>
+                </tr>
+                <tr valign="middle">
+                    <td class="SVtable" style="vertical-align: top;">API75.M[^7]</td>
+                    <td class="SVtable" style="vertical-align: top;">API75.M80R05.XRR_SP<br />API75.MA.XRR_SP</td>
+                </tr>
+                <tr valign="middle">
+                    <td class="SVtable">API75.M7[^5]R05</td>
+                    <td class="SVtable">API75.M76R05.XRR_SP</td>
+                </tr>
+            </table>
+        </p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

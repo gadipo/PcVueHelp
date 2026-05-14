@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>ASCIIFIELD example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="ASCIIFIELD_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor145"></a>ASCIIFIELD Examples</h1>
+        <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc309">
+            <param name="Command" value="ALink,MENU" />
+            <param name="Item1" value="" />
+            <param name="Item2" value="ASCIIFIELD_Instruct" />
+        </object><a class="MCConceptLink_applies_0" href="javascript:mc309.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        <h2 class="SVheading2">Example 1</h2>
+        <p class="SVnormal">This program exercises several modes of the ASCIIFIELD command.</p>
+        <p class="SVprogramCode">'Retrieve, from an ASCII buffer, ASCII fields separated by a given character</p>
+        <p class="SVprogramCode">'Variable Tree config:</p>
+        <p class="SVprogramCode">'@STRING01 As Text</p>
+        <p class="SVprogramCode">'@STR01 As Text</p>
+        <p class="SVprogramCode">'@SEPA As Text</p>
+        <p class="SVprogramCode">'@LEN01 As Register</p>
+        <p class="SVprogramCode">'@INTEGER01 As Register</p>
+        <p class="SVprogramCode">'@LONG01 As Register</p>
+        <p class="SVprogramCode">'@DOUBLE01 As Register</p>
+        <p class="SVprogramCode">'@COUNT01 As Register</p>
+        <p class="SVprogramCode">'@INDEX01 As Register</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Retrieval of fields separated by a data character in the ASCII buffer </p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Variable Tree prerequisites:</p>
+        <p class="SVprogramCode">'@STRING01 of type TEXT</p>
+        <p class="SVprogramCode">'@STR01 of type TEXT</p>
+        <p class="SVprogramCode">'@SEPA of type TEXT</p>
+        <p class="SVprogramCode">'@LEN01 of type REGISTER</p>
+        <p class="SVprogramCode">'@INTEGER01 of type REGISTER</p>
+        <p class="SVprogramCode">'@LONG01 of type REGISTER</p>
+        <p class="SVprogramCode">'@DOUBLE01 of type REGISTER</p>
+        <p class="SVprogramCode">'@COUNT01 of type REGISTER</p>
+        <p class="SVprogramCode">'@INDEX01 of type REGISTER</p>
+        <p class="SVprogramCode">'For these examples you can use:</p>
+        <p class="SVprogramCode">'@STRING01 = "123.34;my string, here;345;123456789;hello world\n" </p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode LEN or Mode 1 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB AsciiFieldLen1()'declare code</p>
+        <p class="SVprogramCode">DIM lngbuffer1 As Long;</p>
+        <p class="SVprogramCode">DIM strline As Str;</p>
+        <p class="SVprogramCode">DIM intlengh As Integer;</p>
+        <p class="SVprogramCode">lngbuffer1 = ALLOC_BUFFER(110);</p>
+        <p class="SVprogramCode">strline = @STRING01;</p>
+        <p class="SVprogramCode">PUT_BUFFER(lngbuffer1, 0, strline);</p>
+        <p class="SVprogramCode">@LEN01 = TOD(ASCIIFIELD("LEN",lngbuffer1));</p>
+        <p class="SVprogramCode">FREE_BUFFER(lngbuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB AsciiFieldLen2()</p>
+        <p class="SVprogramCode">'declare code</p>
+        <p class="SVprogramCode">DIM lngbuffer1 As Long;</p>
+        <p class="SVprogramCode">DIM strline As Str;</p>
+        <p class="SVprogramCode">DIM intlengh As Integer;</p>
+        <p class="SVprogramCode">lngbuffer1 = ALLOC_BUFFER(110);</p>
+        <p class="SVprogramCode">strline = @STRING01;</p>
+        <p class="SVprogramCode">PUT_BUFFER(lngbuffer1, 0, strline);</p>
+        <p class="SVprogramCode">'@SEPA is equal to";"</p>
+        <p class="SVprogramCode">@LEN01 = TOD(ASCIIFIELD("LEN",lngbuffer1,1,@SEPA));</p>
+        <p class="SVprogramCode">FREE_BUFFER(lngbuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode COUNT or Mode 2  (syntax 2)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB AsciiFieldCount()</p>
+        <p class="SVprogramCode">'declare code</p>
+        <p class="SVprogramCode">DIM lngbuffer1 As Long;</p>
+        <p class="SVprogramCode">DIM strline As Str;</p>
+        <p class="SVprogramCode">DIM intcount As Integer;</p>
+        <p class="SVprogramCode">lngbuffer1 = ALLOC_BUFFER(110);</p>
+        <p class="SVprogramCode">strline = @STRING01;</p>
+        <p class="SVprogramCode">PUT_BUFFER(lngbuffer1, 0, strline);</p>
+        <p class="SVprogramCode">@COUNT01 = TOD(ASCIIFIELD("COUNT", lngbuffer1,@SEPA ));</p>
+        <p class="SVprogramCode">FREE_BUFFER(lngbuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode STR or Mode 3 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB AsciiFieldStr()</p>
+        <p class="SVprogramCode">'declare code</p>
+        <p class="SVprogramCode">DIM lngbuffer1 As Long;</p>
+        <p class="SVprogramCode">DIM strline As Str;</p>
+        <p class="SVprogramCode">DIM strchar As Str;</p>
+        <p class="SVprogramCode">lngbuffer1 = ALLOC_BUFFER(110);</p>
+        <p class="SVprogramCode">strline = @STRING01;</p>
+        <p class="SVprogramCode">PUT_BUFFER(lngbuffer1, 0, strline);</p>
+        <p class="SVprogramCode">@STR01 = ASCIIFIELD("STR",lngbuffer1,TOI(@INDEX01),@SEPA);</p>
+        <p class="SVprogramCode">FREE_BUFFER(lngbuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode INTEGER or Mode 4 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB AsciiFieldInteger()</p>
+        <p class="SVprogramCode">'declare code</p>
+        <p class="SVprogramCode">DIM lngbuffer1 As Long;</p>
+        <p class="SVprogramCode">DIM strline As Str;</p>
+        <p class="SVprogramCode">DIM intInteger As Integer;</p>
+        <p class="SVprogramCode">lngbuffer1 = ALLOC_BUFFER(110);</p>
+        <p class="SVprogramCode">strline = @STRING01;</p>
+        <p class="SVprogramCode">PUT_BUFFER(lngbuffer1, 0, strline);</p>
+        <p class="SVprogramCode">@INTEGER01 = TOD(ASCIIFIELD("INTEGER",lngbuffer1,TOI(@INDEX01),@SEPA));</p>
+        <p class="SVprogramCode">FREE_BUFFER(lngbuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode LONG or Mode 5 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB AsciiFieldLong()</p>
+        <p class="SVprogramCode">'declare code</p>
+        <p class="SVprogramCode">DIM lngbuffer1 As Long;</p>
+        <p class="SVprogramCode">DIM strline As Str;</p>
+        <p class="SVprogramCode">DIM lngLong As Long;</p>
+        <p class="SVprogramCode">lngbuffer1 = ALLOC_BUFFER(110);</p>
+        <p class="SVprogramCode">strline = @STRING01;</p>
+        <p class="SVprogramCode">PUT_BUFFER(lngbuffer1, 0, strline);</p>
+        <p class="SVprogramCode">@LONG01 = TOD(ASCIIFIELD("LONG",lngbuffer1,TOI(@INDEX01),@SEPA));</p>
+        <p class="SVprogramCode">FREE_BUFFER(lngbuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode DOUBLE or Mode 6 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB AsciiFieldDouble()</p>
+        <p class="SVprogramCode">'declare code</p>
+        <p class="SVprogramCode">DIM lngbuffer1 As Long;</p>
+        <p class="SVprogramCode">DIM strline As Str;</p>
+        <p class="SVprogramCode">DIM dbldouble As double;</p>
+        <p class="SVprogramCode">lngbuffer1 = ALLOC_BUFFER(110);</p>
+        <p class="SVprogramCode">strline = @STRING01;</p>
+        <p class="SVprogramCode">PUT_BUFFER(lngbuffer1, 0, strline);</p>
+        <p class="SVprogramCode">@DOUBLE01 = TOD(ASCIIFIELD("DOUBLE",lngbuffer1,TOI(@INDEX01),@SEPA));</p>
+        <p class="SVprogramCode">FREE_BUFFER(lngbuffer1);</p>
+        <p class="SVprogramCode">END SUB </p>
+        <h2 class="SVheading2">Example 2</h2>
+        <p class="SVnormal">This program displays ASCII fields in various formats. 
+ </p>
+        <p class="SVprogramCode">SUB main()<br />DIM hdl as long;<br />DIM line as str;<br />DIM ch as str;<br />DIM i as integer;<br />DIM l as long;<br />DIM d as double;<br />DIM count as integer;<br />DIM length as integer;<br />hdl = ALLOC_BUFFER(110);<br />line = "123.34;my string, here;345;123456789;hello world\n";<br />PUT_BUFFER(hdl, 0, line);<br />length = ASCIIFIELD("LEN",hdl);<br />PRINT(length);<br />length = ASCIIFIELD("LEN",hdl,4,";");<br />PRINT(length);<br />PRINT("count = ", ASCIIFIELD("COUNT",hdl,";"));<br />ch = ASCIIFIELD("STR",hdl,2,";");<br />i = ASCIIFIELD("INTEGER",hdl,3,";");<br />l = ASCIIFIELD("LONG",hdl,4,";");<br />d = ASCIIFIELD("DOUBLE",hdl,1,";");<br />PRINT(ch);<br />PRINT(i);<br />PRINT(l);<br />PRINT(d);<br />PRINT("&gt;",ASCIIFIELD("STR",hdl,5,";"),"&lt;");<br />free_buffer(hdl);<br />END SUB</p>
+        <p class="SVnormal">The program displays these lines in the Program Management 
+ debugging window:</p>
+        <p class="SVdataListing">110<br />9<br />count = 5<br />my string, here<br />345<br />123456789<br />123.34<br />&gt;hello world&lt;</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

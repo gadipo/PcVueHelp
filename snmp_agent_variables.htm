@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|SNMP Agent Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuring the PcVue variables exposed by the SNMP Agent Add-on</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuring the <span class="mc-variable OEM.ProductName variable">PcVue</span> variables exposed by the SNMP Agent Add-on</h1>
+        <p class="SVnormal">There are two methods by which a variable can be exposed by the SNMP Agent Add-on.</p>
+        <h2 class="SVheading2">By Browse Level</h2>
+        <p class="SVnormal">Variables whose Browsing Level property match that configured in SNMP Agent Add-on configuration file. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">If the variable is an alarm, its transitions are automatically sent as traps.<br /><img src="../Resources/Images/Extras/snmp_browselevel.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <h2 class="SVheading2">By Extended Attribute</h2>
+        <p class="SVnormal">Variables whose extended attribute number, as configured in the SNMP Agent Add-on configuration file, contains either of the following text.</p>
+        <ul style="list-style-type: disc;">
+            <li>SNMPAgent# - Expose the variable via SNMP making it available for reading by third-party SNMP Managers.</li>
+            <li>SNMPAgent#Trap - Expose the variable as an SNMP Trap.</li>
+            <li>SNMPAgent#Trap#GenericX - Expose the variable as an SNMP Generic Trap.  The format of the item linked to the trap, corresponds to the parameters defined for GenericX.</li>
+        </ul>
+        <h2 class="SVheading2">MIB file generation</h2>
+        <p class="SVnormal">The SNMP Agent Add-on automatically generates a MIB file comprising the list of data exposed as SNMP items. The MIB file is named after the <span class="mc-variable OEM.ProductName variable">PcVue</span> project name &lt;Project Name&gt;-V2-MIB and is located in the project's PER directory.</p>
+        <p class="SVnormal">The MIB file includes both numerical OIDs and symbolic names (corresponding to variable names).</p>
+        <p class="SVnormal">To ensure consistency, once an OID has been used for a particular variable it is never used for another one even if the original is no longer exposed as an SNMP item or is deleted.</p>
+        <div class="note">
+            <p class="SVnormal">The SNMP Write method is willingly not implemented by the Add-on. Therefore, an SNMP Manager does not have the option to change <span class="mc-variable OEM.ProductName variable">PcVue</span> variable values.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

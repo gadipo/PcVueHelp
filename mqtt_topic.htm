@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|MQTT Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Using MQTT topics</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Using MQTT topics</h1>
+        <p class="SVnormal">Topics are at the heart of MQTT. They are a hierarchical tree-like structure, and MQTT subscribers subscribe to messages associated to a given topic.</p>
+        <p class="SVnormal">For example, an MQTT system could be based on a topic structure such as BuildingId/FloorId/ZoneId/DataId, which would lead to handling messages associated to the following topics:</p>
+        <ul>
+            <li>
+                <p>BuildingA/Floor7/ConferenceRoom/Temperature</p>
+            </li>
+            <li>
+                <p>BuildingA/Floor7/ConferenceRoom/Humidity</p>
+            </li>
+            <li>BuildingA/Floor7/ConferenceRoom/Light</li>
+        </ul>
+        <p class="SVnormal">MQTT includes a variety of mechanisms for handling topics, in particular the ability to subscribe to message based on wild cards.<br />In addition, the MQTT Add-on of the product <span class="mc-variable OEM.ProductName variable">PcVue</span> implements a series of mechanisms to make topic handling and configuration even easier:</p>
+        <ul>
+            <li>The ability to define a global generic root topic, so that variable mapping consists in setting the relative topic leaf only.</li>
+            <li>The ability to define a variable mapping with an absolute topic name (full topic name), and bypass the global generic root topic. This makes it possible to handle messages that are exceptions because they do not follow a general topic naming system applied across your MQTT system.</li>
+            <li>The ability to map variables to topics one-to-one. This makes variable mapping on topics very easy if the MQTT topic naming system is aligned with the variable naming system.</li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">Topics names, wild cards and GenericRootTopic are case sensitive.</p>
+        </div>
+        <h2 class="SVheading2">Wild cards</h2>
+        <p class="SVnormal">When a client subscribes to a topic, it can subscribe to the exact topic of a published message or it can use wild cards to simultaneously subscribe to multiple topics. There are two different kinds of wild cards. Please note that only one wild card can be used at a time.</p>
+        <ul>
+            <li>
+                <p>Single level wild card '+' - A single-level wild card replaces one topic level. The plus '+' symbol represents a single-level wild card in a topic name.<br />Example - An MQTT client subscribing to topic BuildingA/Floor7/+/Temperature will receive all Temperature-related messages for all Zones of Floor7 in BuildingA.</p>
+            </li>
+            <li>
+                <p>Multi-level wild card '#' - The multi-level wild card covers 1 or more topic levels. The hash '#' symbol represents the multi-level wild card in the topic name. For the broker to determine which topics match, the multi-level wild card can only be placed at the end and preceded by a forward slash (/).<br />Example - An MQTT client subscribing to topic BuildingA/Floor7/ConferenceRoom/# will receives all messages for the Zone ConferenceRoom of Floor7 in BuildingA.</p>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The use of wild cards to address topics only makes sense in the context of MQTT Subscribe messages. It does not makes sense in the context of MQTT Publish.</p>
+        </div>
+        <h2 class="SVheading2">Generic root topic</h2>
+        <p class="SVnormal">The Generic root topic mechanism was designed to take advantage of a naming scheme with a certain level of genericity for topic names, similar to recommendations related to designing the variable naming scheme (branches and leaves). It is best illustrated using an example. </p>
+        <p class="SVnormal">If you want to link 3 variables with the following topics:</p>
+        <ul>
+            <li>BuildingA/Floor7/ConferenceRoom/Temperature</li>
+            <li>BuildingA/Floor7/ConferenceRoom/Humidity</li>
+            <li>BuildingA/Floor7/ConferenceRoom/Light</li>
+        </ul>
+        <p class="SVnormal">If you are interested in processing and mapping all data related to this conference room, a good practice is to use the <u>GenericRootTopic</u> parameter (defined in svmgrMQTT.ini) with the following content, to predefine a "default branch" applicable to topics in the variable mapping:</p>
+        <ul>
+            <li>BuildingA/Floor7/ConferenceRoom/#</li>
+        </ul>
+        <p class="SVnormal">Then you can specify only the "leaf" topics names  in the variable mapping as follows:</p>
+        <ul>
+            <li>
+                <p>Temperature</p>
+            </li>
+            <li>
+                <p>Humidity</p>
+            </li>
+            <li>
+                <p>Light</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Absolute topic name</h2>
+        <p>If you want to link another variable, which is not using the same root, you can bypass the <u>GenericRootTopic</u> parameter using '@' before the whole topic name you want subscribe to as follows:</p>
+        <ul>
+            <li>@BuildingA/Floor7/Hall/Light<br /></li>
+        </ul>
+        <p class="SVnormal">These topics are called absolute topics. If no <u>GenericRootTopic</u> parameter is defined in the svmgrMQTT.ini file, all topic names used must be preceded by “@” symbol. The quality of service of the subscription is the highest quality of service of all leaf topics configured on a broker.</p>
+        <h2 class="SVheading2">Generic root and Absolute topic names for Publish</h2>
+        <p class="SVnormal">The <u>GenericRootTopic</u> is also used for published variables. For instance, if the <u>GenericRootTopic</u> parameter is defined with the following:</p>
+        <ul>
+            <li>BuildingA/Floor7/ConferenceRoom/#</li>
+        </ul>
+        <p class="SVnormal">And if the variable topic name defined in the attribute is:</p>
+        <ul>
+            <li>SetAC</li>
+        </ul>
+        <p class="SVnormal">The variables will be published on the topic:</p>
+        <ul>
+            <li>BuildingA/Floor7/ConferenceRoom/SetAC</li>
+        </ul>
+        <p class="SVnormal">As for a subscribed variable, if you want to bypass the <u>GenericRootTopic</u> and use an absolute topic name, then, the topic name of the variable must be preceded by “@” in the mapping of the published variable.</p>
+        <h2 class="SVheading2">Using the variable name as topic name automatically</h2>
+        <p class="SVnormal">Because the MQTT topic naming scheme and the variable naming scheme concept are very similar, there is a very easy way to configure the variable mapping when both naming schemes match. It consists in using the keyword <u>VarName</u> as the <u>SubTopicName</u> or <u>PubTopicName</u>.</p>
+        <p>If prefixed with the ‘@’ character, the full variable name will be used as topic name; if not prefixed with an '@', the <u>GenericRootTopic</u> is appended at the beginning of the topic name.</p>
+        <p class="SVnormal">Example:</p>
+        <p class="SVnormal">If the <u>GenericRootTopic</u> is defined as <span>CampusNorth</span>/# in the svmgrMQTT.ini file.</p>
+        <p class="SVnormal">For a variable which full name is BuildingA.Room3.Temp, defined with the following MQTT mapping parameters:</p>
+        <ul>
+            <li>MQTT|Generic|MyBroker|SUB|0|VarName<ul><li>The MQTT Add-on subscribes to messages having the topic CampusNorth/BuildingA/Room3/Temp that matches the <u>GenericRootTopic</u> concatenated with the variable name.</li></ul></li>
+            <li>MQTT|Generic|MyBroker|SUB|0|@VarName<ul><li>The MQTT Add-on subscribes to messages having the topic BuildingA/Room3/Temp that matches the full variable name.</li></ul></li>
+        </ul>
+        <p class="SVnormal">The same applies to Publication. For a variable which full name is BuildingA.Room3.Temp with the following MQTT mapping parameters:</p>
+        <ul>
+            <li>MQTT|Generic|MyBroker|PUB|0|0|VarName<ul><li>The MQTT Add-on will publish messages with the topic CampusNorth/BuildingA/Room3/Temp</li></ul></li>
+            <li>MQTT|Generic|MyBroker|PUB|0|0|@VarName<ul><li>The MQTT Add-on will publish messages with the topic BuildingA/Room3/Temp</li></ul></li>
+        </ul>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

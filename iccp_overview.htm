@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|ICCP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Overview of the ICCP Add-on</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Overview of the ICCP Add-on</h1>
+        <p class="SVnormal">ICCP is a protocol, also known as ICCP/TASE.2, standardized as part of the IEC 60870-6 series of standards. It operates over TCP/IP to  connect control centers in a power system. A control center identifies itself on the network with a series of parameters (IP Address, App Title, etc.). ICCP can connect a server to one or several clients as required. Data frames are delivered using MMS (Manufacturing Message Specification) messages. </p>
+        <p class="SVnormal">ICCP uses two mechanisms to transfer data: User requests and Object changes (exceptions).<br />There are two classes of data objects:</p>
+        <ul>
+            <li class="SVbulleted">Data value for monitoring,</li>
+            <li class="SVbulleted">Device command value for commands.</li>
+        </ul>
+        <h2 class="SVheading2">Abbreviations</h2>
+        <p class="SVnormal">The following abbreviations and acronyms may be found in this help book:</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">AE -	Application Entity</li>
+            <li class="SVbulleted">AP - Application Process</li>
+            <li class="SVbulleted">AR - Application Reference</li>
+            <li class="SVbulleted">BT - Bilateral Table</li>
+            <li class="SVbulleted">CBB - Conformance Building Block</li>
+            <li class="SVbulleted">DE - Direct Execute</li>
+            <li class="SVbulleted">DS - Data Set</li>
+            <li class="SVbulleted">DSTS - Data Set Transfer Set</li>
+            <li class="SVbulleted">ICC - Inter-Control Center </li>
+            <li class="SVbulleted">ICCP - Inter-Control Center Protocol </li>
+            <li class="SVbulleted">IEC - International Electrotechnical Commission </li>
+            <li class="SVbulleted">IP - Internet Protocol</li>
+            <li class="SVbulleted">LCC - Local Control Center </li>
+            <li class="SVbulleted">MMS - Manufacturing Messaging Specification</li>
+            <li class="SVbulleted">NS - Not Set</li>
+            <li class="SVbulleted">PDU - Protocol Data Unit</li>
+            <li class="SVbulleted">RCC - Remote Control Center</li>
+            <li class="SVbulleted">SBO - Select Before Operate</li>
+            <li class="SVbulleted">TASE - Telecontrol Application Service Element, IEC’s designation of an international standard protocol for utility data exchanges</li>
+            <li class="SVbulleted">TASE.2 - TASE version based on the ICCP protocol</li>
+            <li class="SVbulleted">TCP - Transmission Control Protocol</li>
+            <li class="SVbulleted">VCC - Virtual Control Center</li>
+            <li class="SVbulleted">VMD - Virtual Manufacturing Device</li>
+        </ul>
+        <h2 class="SVheading2">VCC vs ICC Domains</h2>
+        <p class="SVnormal">There are two types of domains in ICCP. The first one is the VCC, which is a global scope domain. The second is an ICC and it is a user-generated domain. The VCC scope is higher than an ICC scope. Domains are mainly used to group variables up.</p>
+        <p class="SVnormal">A remote client can access a local server's ICC domain and the variables the server publishes and still have access to any variables published in the VCC domain. However, the local server must have enough DSTransfer Sets available to share with all the remote clients that connect. If a remote client attempts to connect and the local server does not have an available DS Transfer Set, the remote will not be able to receive advanced data transmission schemes.</p>
+        <p class="SVnormal">The remote client requires the existence of a remote domain (a local domain in the <span class="mc-variable OEM.ProductName variable">PcVue</span> application’s perspective) in order to be able to connect. Because of this, a local Server or Client/Server has to create at least one Local Domain (ICC), even if the remote only require access to VCC variables.</p>
+        <h2 class="SVheading2">Basic ICCP model structure</h2>
+        <p class="SVnormal">To create a local ICCP server that can communicate with one or multiple clients the application designer must configure the following settings as a minimum.</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">The 7 layer stack settings for the local server to be created,</li>
+            <li class="SVbulleted">An ICC domain and bilateral table information,</li>
+            <li class="SVbulleted">Local variables belonging to either the ICC or the VCC for the server to publish.</li>
+        </ul>
+        <p class="SVnormal">More specific information can also be entered, however this is optional. The user can enter these ICCP parameters to be more specific when creating the Local Control Center. The optional parameters are explained in more detail in the following chapters.</p>
+        <p class="SVnormal">For the local ICCP client, it is necessary to have at a minimum:</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">The 7 layer stack information for the local client, which includes the 7 layer stack info of the remote,</li>
+            <li class="SVbulleted">One ICC domain defined,</li>
+            <li class="SVbulleted">One Data Set defined with its associated DS transfer set,</li>
+            <li class="SVbulleted">Remote variables belonging to either the ICC or the VCC for the client to subscribe to.</li>
+        </ul>
+        <p class="SVnormal">For the local server part, it is necessary to have at least one ICC domain and its associated bilateral table ID for the communication to work, even if the user does not want variables in the ICC Domain (and has all of the variables in the VCC).</p>
+        <p class="SVnormal">For every local domain that is created, the server will automatically create 10  DS Transfer sets for the clients to access from the local server. This parameter can be changed if required with the parameter <u>LocalServerMaxDSTS</u>.</p>
+        <p class="SVnormal">For the local client part, it is necessary to have the remote information that the client is connecting to, as well as the local addressing information.</p>
+        <p class="SVnormal">When creating a bidirectional exchange, it is necessary to define the parameter that indicate which control center is going to initiate the communication.</p>
+        <h2 class="SVheading2">Structure</h2>
+        <p class="SVnormal">In <span class="mc-variable OEM.ProductName variable">PcVue</span>, the ICCP model consists of different objects that are nested in the following way:</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">ICCP Family
+                <ul style="list-style-type: disc;"><li class="SVbulleted">ICCP AR</li><li class="SVbulleted">ICCP Network
+                        <ul style="list-style-type: disc;"><li class="SVbulleted">ICCP Local Control Centers
+                                <ul style="list-style-type: disc;"><li class="SVbulleted">ICCP Local Domains
+                                        <ul style="list-style-type: disc;"><li class="SVbulleted">ICCP DSTS</li></ul></li></ul></li><li class="SVbulleted">ICCP Remote Control Centers
+                                <ul style="list-style-type: disc;"><li class="SVbulleted">ICCP Remote Domains
+                                        <ul style="list-style-type: disc;"><li class="SVbulleted">ICCP DS
+                                                <ul style="list-style-type: disc;"><li class="SVbulleted">ICCP DSTS</li></ul></li></ul></li></ul></li></ul></li></ul></li>
+        </ul>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

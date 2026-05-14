@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>OPTIONLIST example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="OPTIONLIST_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor51"></a><a name="kanchor52"></a>OPTIONLIST Example</h1>
+        <p class="SVnormal"> <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc360"><param name="Command" value="ALink,MENU" /><param name="Item1" value="" /><param name="Item2" value="OPTIONLIST_Instruct" /></object><a class="MCConceptLink_applies_0" href="javascript:mc360.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a></p>
+        <p class="SVnormal">This example contains a set of functions to support a pair of Option-button list form controls using the OPTIONLIST instruction.</p>
+        <p class="SVprogramCode">SUB Main()</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'declare variables:</p>
+        <p class="SVprogramCode">SUB optSel()</p>
+        <p class="SVprogramCode">DIM lRet As Long;</p>
+        <p class="SVprogramCode">DIM soptText As Str;</p>
+        <p class="SVprogramCode">DIM soptText1 As Str;</p>
+        <p class="SVprogramCode">DIM soptData As Str;</p>
+        <p class="SVprogramCode">DIM soptData1 As Str;</p>
+        <p class="SVprogramCode">DIM lRet2 As Long;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'retrieve content of selected item in 1st control:</p>
+        <p class="SVprogramCode">lRet = OPTIONLIST ( "GETSELECTEDINDEX", "ctrl","","opt" );</p>
+        <p class="SVprogramCode">OPTIONLIST ( "SETSELECTEDINDEX", "ctrl","","opt1",  lRet);</p>
+        <p class="SVprogramCode">soptText =  OPTIONLIST ( "GETTEXT", "ctrl","","opt",  lRet);</p>
+        <p class="SVprogramCode">soptText1 =  OPTIONLIST ( "GETTEXT", "ctrl","","opt1",  lRet);</p>
+        <p class="SVprogramCode">soptData =  OPTIONLIST ( "GETUSERDATA", "ctrl","","opt",  lRet);</p>
+        <p class="SVprogramCode">soptData1 =  OPTIONLIST ( "GETUSERDATA", "ctrl","","opt1",  lRet);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'put its contents in a frame:</p>
+        <p class="SVprogramCode">SET ( "optText" , soptText);</p>
+        <p class="SVprogramCode">SET("optText1", soptText1);</p>
+        <p class="SVprogramCode">SET("optData", soptData);</p>
+        <p class="SVprogramCode">SET("optData1" , soptData1);</p>
+        <p class="SVprogramCode">SET("optCount" , OPTIONLIST ( "COUNT", "ctrl","","opt") );</p>
+        <p class="SVprogramCode">SET("optCount1" , OPTIONLIST ( "COUNT", "ctrl","","opt1"));</p>
+        <p class="SVprogramCode">SENDLIST ("BLOC");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'check the latest change</p>
+        <p class="SVprogramCode">' 1 Selection has changed; 2 Option has changed</p>
+        <p class="SVprogramCode">PRINT ( OPTIONLIST ( "GETEVENTTYPE", "ctrl","","opt") );</p>
+        <p class="SVprogramCode">If ( OPTIONLIST ( "GETEVENTTYPE", "ctrl","","opt") == 2 )</p>
+        <p class="SVprogramCode">Then</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">lRet2 = OPTIONLIST ( "GETSTATE", "ctrl","","opt", lRet);</p>
+        <p class="SVprogramCode">OPTIONLIST ( "SETSTATE", "ctrl","","opt1", lRet, lRet2);</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'concatenate and load contents into a form control of each kind:</p>
+        <p class="SVprogramCode">COMBOBOX ( "LOAD", "ctrl","","cbx2", ADDSTRING("cbx",soptData));</p>
+        <p class="SVprogramCode">LISTBOX ( "LOAD", "ctrl","","lbx2", ADDSTRING("lbx",soptData));</p>
+        <p class="SVprogramCode">CHECKLIST ( "LOAD", "ctrl","","chk2", ADDSTRING("chk",soptData));</p>
+        <p class="SVprogramCode">OPTIONLIST ( "LOAD", "ctrl","","opt2", ADDSTRING("opt",soptData));</p>
+        <p class="SVprogramCode">TREEVIEW ( "LOAD", "ctrl","","tvw2", ADDSTRING("tvw",soptData));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'retrieve content of selected item in 2nd control:</p>
+        <p class="SVprogramCode">SUB optSel1()</p>
+        <p class="SVprogramCode">DIM lRet As Long;</p>
+        <p class="SVprogramCode">DIM soptText As Str;</p>
+        <p class="SVprogramCode">DIM soptText1 As Str;</p>
+        <p class="SVprogramCode">DIM soptData As Str;</p>
+        <p class="SVprogramCode">DIM soptData1 As Str;</p>
+        <p class="SVprogramCode">lRet = OPTIONLIST ( "GETSELECTEDINDEX", "ctrl","","opt1" );</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">OPTIONLIST ( "SETSELECTEDINDEX", "ctrl","","opt",  lRet);</p>
+        <p class="SVprogramCode">soptText =  OPTIONLIST ( "GETTEXT", "ctrl","","opt",  lRet);</p>
+        <p class="SVprogramCode">soptText1 =  OPTIONLIST ( "GETTEXT", "ctrl","","opt1",  lRet);</p>
+        <p class="SVprogramCode">soptData =  OPTIONLIST ( "GETUSERDATA", "ctrl","","opt",  lRet);</p>
+        <p class="SVprogramCode">soptData1 =  OPTIONLIST ( "GETUSERDATA", "ctrl","","opt1",  lRet);</p>
+        <p class="SVprogramCode">lRet =  OPTIONLIST ( "COUNT", "ctrl","","opt");</p>
+        <p class="SVprogramCode">lRet =  OPTIONLIST ( "COUNT", "ctrl","","opt1");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'put its contents in a frame:</p>
+        <p class="SVprogramCode">SET ( "optText" , soptText);</p>
+        <p class="SVprogramCode">SET("optText1", soptText1);</p>
+        <p class="SVprogramCode">SET("optData", soptData);</p>
+        <p class="SVprogramCode">SET("optData1" , soptData1);</p>
+        <p class="SVprogramCode">SET("optCount" , OPTIONLIST ( "COUNT", "ctrl","","opt") );</p>
+        <p class="SVprogramCode">SET("optCount1" , OPTIONLIST ( "COUNT", "ctrl","","opt1"));</p>
+        <p class="SVprogramCode">SENDLIST ("BLOC");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'select 2nd item:</p>
+        <p class="SVprogramCode">SUB setSelopt()</p>
+        <p class="SVprogramCode">DIM lRet As Long;</p>
+        <p class="SVprogramCode">OPTIONLIST ( "SETSELECTEDINDEX", "ctrl","","opt",  2);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying desktop applications|Deploying PcVue on a RDS host|Overview of deploying PcVue using a RDS Host" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Overview of deploying PcVue using a RDS Host</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor170"></a>Overview of Deploying <span class="mc-variable OEM.ProductName variable">PcVue</span> Using a RD Session Host</h1>
+        <div class="note">
+            <p class="SVnormal">From Windows Server 2008 R2 onwards, Microsoft renamed many of the terms associated with the long established Terminal Server. In particular, Windows Terminal Server has become Windows Remote Desktop Session Host. This help frequently uses RD Session Host as a shortened form of this term.</p>
+        </div>
+        <h2 class="SVheading2">What is a Remote Desktop Session Host server (RD Session Host server)</h2>
+        <p class="SVnormal">Traditional PC  are essentially single user. Each PC has a single monitor, keyboard
+ and mouse from which one user at a time interacts with the PC
+ and any running applications. </p>
+        <p class="SVnormal">Windows Server, when configured with Remote Desktop Services, allows several users to concurrently use the resources of a single server and to execute applications installed on the server. A user interacts with applications using  a thin terminal connected to the server using a network. The process of a user connected to Windows Server in this manner is called a Remote Desktop Session and uses a standard known as the Remote Desktop Protocol (RDP). Thin terminals supporting RDP come in a variety of forms the most common of which is now a program running on another computer. Under Windows desktop for example, an RDP client is available from the Start menu (Start.Programs.Accessories.Remote Desktop Connection).</p>
+        <p class="SVnormal">In addition to running sessions using a remote desktop, Windows Server also runs a session using the local monitor, keyboard and mouse. This is referred to as the local session (or sometimes as a console session or interactive session).</p>
+        <h2 class="SVheading2">Running <span class="mc-variable OEM.ProductName variable">PcVue</span> on Windows Server configured with Remote Desktop Services</h2>
+        <p class="SVnormal">When running <span class="mc-variable OEM.ProductName variable">PcVue</span> on a RD Session Host server,  an instance of <span class="mc-variable OEM.ProductName variable">PcVue</span> can be run from each Remote Desktop Session and/or from the local session. Only a single copy of <span class="mc-variable OEM.ProductName variable">PcVue</span> is installed, but <u>a license is required for each instance of <span class="mc-variable OEM.ProductName variable">PcVue</span> that is running</u>. </p>
+        <div class="note">
+            <p class="SVnormal">The deployment of <span class="mc-variable OEM.ProductName variable">PcVue</span> on a Remote Desktop Server will be as a Desktop Application (as opposed to a Windows Service), so that Remote Desktop sessions can run it interactively. If deployed as a Windows Service, users in Remote Desktop Sessions will not be able to interact with <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        </div>
+        <ul style="list-style-type: disc;">
+            <li>When an instance of <span class="mc-variable OEM.ProductName variable">PcVue</span> runs from a local session it behaves in much the same way as it would on a desktop operating system, such as Windows 7, and obtains its license from the dongle plugged into the local PC.</li>
+            <li>When an instance of <span class="mc-variable OEM.ProductName variable">PcVue</span> runs in a Remote Desktop Session it cannot obtain its license directly from the dongle, instead it must acquire it via another instance of <span class="mc-variable OEM.ProductName variable">PcVue</span> that has been configured for that purpose. <span class="mc-variable OEM.ProductName variable">PcVue</span> supplying the license is the <u>license owner</u> and <span class="mc-variable OEM.ProductName variable">PcVue</span> acquiring the license is the <u>license renter</u>.</li>
+        </ul>
+        <p class="SVnormal">A typical example of networking architecture can consist in an instance of <span class="mc-variable OEM.ProductName variable">PcVue</span> running in the local session configured as a data acquisition server, and instances running in Remote Desktop Sessions configured as data clients. It is likely that the instance running in the local session is also configured as the license owner.
+</p>
+        <p class="SVnormal">Another example of networking architecture is that the data acquisition server runs on a standalone PC to which the dongle is connected. In such a case, the Remote Desktop Session Host server would only host data clients instances.</p>
+        <h2 class="SVheading2">The SYSTEM.WTS system variable </h2>
+        <p class="SVnormal">The register variable SYSTEM.WTS is set to zero when an instance of <span class="mc-variable OEM.ProductName variable">PcVue</span>
+ is running in the local session and one  when running in a  Remote Desktop Session.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

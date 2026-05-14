@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Smart Generators" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to import a Schneider Electric Unity configuration</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor83"></a>How to import a Schneider Electric Unity configuration</h1>
+        <p class="SVnormal">The Smart Generator for Unity allows you to import a Unity project file to generate I/O variables including mapping onto an OFS OPC Server.</p>
+        <div class="tip">
+            <p class="SVnormal">The Smart Generator for Schneider Unity is compatible with Unity Pro version 7.0.</p>
+        </div>
+        <h2 class="SVheading2">Supported data types</h2>
+        <p class="SVnormal">Unity variables are converted to <span class="mc-variable OEM.ProductName variable">PcVue</span> variables as follows:</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Unity data type</td>
+                    <td class="SVtableHeading"><span class="mc-variable OEM.ProductName variable">PcVue</span> variable type</td>
+                    <td class="SVtableHeading">Min value</td>
+                    <td class="SVtableHeading">Max value</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Dword</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Register</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">4294967295</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Bool</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Bit</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">1</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Byte</p>
+                    </td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">
+                        <p class="SVtable">0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">255</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Date</p>
+                    </td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">
+                        <p class="SVtable">-2147483648</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">2147483648</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Dt</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Text</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">N/A</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">N/A</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Dint</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Register</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">-2147483648</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">2147483648</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Ebool</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Bit</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">1</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Int</p>
+                    </td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">
+                        <p class="SVtable">-32768</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">32768</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Real</p>
+                    </td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">
+                        <p class="SVtable">-3.402824E+38</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">3.402824E+38</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">String</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">Text</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">N/A</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">N/A</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Time</p>
+                    </td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">
+                        <p class="SVtable">0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">4294967295</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Tod</p>
+                    </td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">
+                        <p class="SVtable">0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">4294967295</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Udint</p>
+                    </td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">
+                        <p class="SVtable">0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">4294967295</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p class="SVtable">Uint</p>
+                    </td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">
+                        <p class="SVtable">0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">65535</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Word</td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">
+                        <p class="SVtable">0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p class="SVtable">65535</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Structured Unity variables  are  imported as a branch and variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <p class="SVnormal">For example, if the structure DDT has three elements F1, F2, and F3. The instance, DDT1, will generate three variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>: DDT1.F1, DDT1.F2, and DDT1.F3.</p>
+        <p class="SVnormal">Tables of variables and variable tables which are imported as a branch and variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>:</p>
+        <ul style="list-style-type: circle;">
+            <li>
+                <p class="SVbulleted">A table of variables is a table of Elementary Data Types. </p>
+            </li>
+            <li>
+                <p class="SVbulleted">A variable table is an instance of a DDT type array (DDT may be an array or structure).</p>
+            </li>
+        </ul>
+        <p class="SVnormal">For example, the integer table MyIntegerTab[0..4 ] will generate five register variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>: MYINTEGERTAB.MYINTEGERTAB_0, MYINTEGERTAB.MYINTEGERTAB_1, MYINTEGERTAB.MYINTEGERTAB_2, MYINTEGERTAB.MYINTEGERTAB_3, and MYINTEGERTAB.MYINTEGERTAB_4.</p>
+        <h2 class="SVheading2">Prerequisites</h2>
+        <ul>
+            <li>
+                <p class="SVbulleted">You have configured an OPC connection to OFS in <span class="mc-variable OEM.ProductName variable">PcVue</span>. </p>
+            </li>
+            <li>
+                <p class="SVbulleted">You have configured one or more OPC groups. </p>
+            </li>
+            <li>
+                <p class="SVbulleted">You have configured OFS, in particular the link with the Unity PLC and its symbol tables file (STU).</p>
+            </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">For the smart generator to access the Symbol Table File (STU), <span class="mc-variable OEM.ProductName variable">PcVue</span> must be run as administrator.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">Refer to the overview topic <a href="sg_overview.htm">Smart Generators overview</a> to learn more.</p>
+        </div>
+        <h2 class="SVheading2">Selecting the source data</h2>
+        <div class="warning">
+            <p class="SVnormal">Before you start the import process, we recommend that you back up the <span class="mc-variable OEM.ProductName variable">PcVue</span> variables configuration in case of any problems occurring during the import process. The variable configuration is stored in the file VAREXP.DAT in the project's C folder.</p>
+            <p class="SVnormal">Make sure that <span class="mc-variable OEM.ProductName variable">PcVue</span> is shut down before copying the file.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Go to <b>Configure</b> then Smart Generators and click <b>New Unity import</b>. The Smart Generator for Unity dialog opens with the Import name field specified. You can change this name. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-project"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_schneider_electric_unity_select_project.png" style="border-style: none;border: none;float: none;display: none;" border="0" MadCap:targetName="select-project" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Select the Unity project filename. The file can be located on the local PC or any network location visible to the smart generator.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">(Optional) Enter a <b>Custom string</b>. This property pre-filters the import by matching the supplied string against the contents of the variable's comment field in the Unity project database. Only variables with comments containing the supplied string pass the pre-filter. For example, if you enter {hmi} in the Custom string field, the smart generator will only makes available items whose comment field contains {hmi}. This custom string does not support wildcards.</p>
+                <div class="note">The use of a custom string is highly recommended as the STU file may contain a large number of variables, many of which may not be relevant to the smart generator.</div>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">Select the Unity server location. The Unity server can be located on the local PC or any other PC visible to it. If this field is left blank, it is assumed that it is on the local PC.</p>
+                <div class="note">
+                    <p class="SVnormal">If you select the Open with profile option, you are prompted to enter a Login name and password when the smart generator connects to the Unity server. This protected mode of operation must be first activated within Unity Pro before it can be used.</p>
+                </div>
+            </li>
+            <li value="5">
+                <p class="SVnumbered">From the drop-down menus, select the OFS server alias and the OPC group in the Communication section. These are used when generating the configuration of <span class="mc-variable OEM.ProductName variable">PcVue</span> variables. The list of available server aliases is read from <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+            </li>
+            <li value="6">
+                <p class="SVnumbered">Select the Device alias. This is used when generating the configuration of <span class="mc-variable OEM.ProductName variable">PcVue</span> variables. The list of available device aliases is read from the OFS configuration. The symbol table file for the Device alias (in the OFS configuration) should be the same as the Unity project filename.</p>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Defining branches and selecting variables</h2>
+        <p class="SVnormal">After you have selected the source data and configured the networking lists and options of the import via the Select project dialog, the next step is to define the branches and select the variables you want to generate.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Click <b>Next</b>, the variable import process is initialized and the Select import type dialog opens. Select the type of import you need:</p>
+                <ul>
+                    <li>Custom import if you want to access the Select variables dialog in which you can filter and manually select the list of variables to import.</li>
+                    <li>Full import if you want to generate variables for all source data.</li>
+                </ul>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">(Custom import option) Adjust the filters to find the variables to import. The <b>Name</b> field allows to filter the list of variables according to the name in the source data. You can use wildcards, the asterisk (matches any number of characters) and the question mark (matches a single character).</p>
+                <p class="SVnumbered">For example:<br />'Pump1' would only match a source data named 'Pump1'. <br />'Pump?' would match 'Pump1' or 'Pump2' etc. but not 'Pump10'. <br />'Pump*' would match 'Pump1', 'Pump2' and 'Pump10' but also 'Pumpkin'.</p>
+                <p class="SVnumbered">The variables that match the filter appear in the Available Items pane.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">(Custom import option) Select the variables filtered in the Available items pane for import and click the right-arrow <b>-&gt;</b> button. The variables in the Selected items pane are to be imported and generated.</p>
+            </li>
+            <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-vars"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+            </p>
+            <p>
+                <img src="../Resources/Images/SmartGen/sg_schneider_electric_unity_select_vars.png" MadCap:targetName="select-vars" style="display: none;" />
+            </p>
+            <li value="4">
+                <p class="SVnumbered">Click <b>Next</b>, the Branch Management dialog opens. This step allows you to control how branches and variable names are derived from source data names so that the generated variables fit in the branching and naming logic of your project. First, you can enter a global branch if you want to prefix the name of all generated variables with a particular branch segment. You can also select branch separator options to control how source data names will be split into branch segments:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Use numeric characters as branch separator - If selected, a branch separator will be added after each numeric character. For example, a source data named MOT1DEFAULT1 will generate a variable named MOT1.DEFAULT1.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Use specific sequence character as branch separator - If selected, the sequence of characters you select will be replaced by a branch separator. For example, if you select the underscore ('_') as sequence character, a source data named CONTROLROOM_COMMAND will generate a variable named CONTROLROOM.COMMAND.</p>
+                    </li>
+                </ul>
+                <div class="note">
+                    <p class="SVnormal">A branch separator is not added when a numeric character is at the end of the name.</p>
+                </div>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Renaming and generating variables</h2>
+        <p class="SVnormal">After you have defined the branch and selected variables to generate via the Select variables dialog, the next step offers the possibility to edit the variables you have selected and prepare them for generation.</p>
+        <div class="note">
+            <p class="SVnormal">If a variable is displayed in red, it means that it is invalid for use in <span class="mc-variable OEM.ProductName variable">PcVue</span> and will not be generated. Use the Rename variables dialog to ensure variable name compliance:</p>
+            <ul>
+                <li>The max length of a variable name is 255 characters.</li>
+                <li>The max number of branch elements in a variable name is 12.</li>
+                <li>The name of a branch element or the name of the leaf element cannot be empty (length =0) or exceed 255 characters.</li>
+                <li>The name of a variable can only include letters, digits, or the underscore.</li>
+                <li>Variable names shall be unique. Two variables cannot have the same name.</li>
+            </ul>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnormal">Click <b>Next</b>. The Generate variables dialog opens, listing all variables selected for generation. To rename variables, either select variables and click <b>Rename selected</b>, or use the <b>Rename invalid</b> button. The Rename variables dialog displays variables in a grid and offers several actions.</p>
+                <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="rename-vars"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+                </p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_schneider_electric_unity_sg_rename_vars.png" MadCap:targetName="rename-vars" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">The Rename variables dialog is designed to make it easy to give a final polish to variable names and fix invalid ones, and also to bulk modify variable properties, to set the Command level or Alarm property for example.</p>
+                <p class="SVnumbered">The following operations are available:<br /></p>
+                <ul>
+                    <li>To modify a single variable, double click it, or select it and click <b>Properties</b>. You can edit its name in the General tab. Click <b>OK</b> to validate.</li>
+                    <div class="tip">
+                        <p class="SVnormal">You can edit the variable properties in the Details tab. These properties can be its type, domain, nature etc. </p>
+                    </div>
+                    <li>To add a leaf to one or more variables (to add a .Cmd or .AlarmTmpHigh for example), select them, then click <b>Suffix</b> and enter the suffix to be added. Click <b>OK</b> to validate.</li>
+                    <li>To replace characters in the name of one or more variables, select them, then click <u style="font-weight: bold; text-decoration: none;">Replace</u> to open the Replace dialog. Enter the strings to search and replace, then click <b>OK</b>.</li>
+                    <li>To replace branch segments, select the variables, then select the branch segments to be replaced by clicking on the column header and click <u style="font-weight: bold; text-decoration: none;">Replace</u> to open the Replace dialog. Enter the strings to search and replace, then click <b>OK</b>.</li>
+                    <li>To delete a branch segment, select the variables, then the branch segments to be removed by clicking on the column header and click <b>Delete</b>. The selected branch segments are then removed from the selected variables.</li>
+                    <li>To merge branches, select the variables, then the branch segments to be merged by clicking on the column header and click <u style="font-weight: bold; text-decoration: none;">Merge</u>. The selected branch segments are then deleted for the selected variables. You can only merge consecutive branch segments.</li>
+                </ul>
+                <div class="tip">
+                    <p class="SVnormal">You can use Shift+click to select a group of adjacent variables and branches or Ctrl+click to select several individual variables.</p>
+                </div>
+                <p class="SVnumbered">Once you are done editing the variables click <b>OK</b> to close the dialog.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Click <b>Finish</b> and <b>Yes</b> in the Generation dialog to start the generation of variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>. A dialog is displayed indicating the progress. Any variables in the smart generator that already exist in <span class="mc-variable OEM.ProductName variable">PcVue</span> are discarded. The corresponding variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> are not overwritten or updated in any way.</p>
+                <div class="warning">
+                    <p class="SVnormal">Any variables appearing in red are invalid and will not be generated when clicking <b>Finish</b>.</p>
+                </div>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Synchronizing an existing import</h2>
+        <p class="SVnormal">When you synchronize an import, the smart generator compares the configuration elements available in the import file with those that have been imported previously to <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <div class="warning">
+            <p class="SVnormal">The synchronizing process takes into account any filter that you may have used previously with the import. For example if there are 400 variables in the import file and the previous use of the import was with a filter and created 100 variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>, synchronization will inform you that there are 300 new variables available for import.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Select the import to synchronize in the right pane of the Smart Generators dialog. A list with actions appears under the Import references pane. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="workspace"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_workspace_synch.png" MadCap:targetName="workspace" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click Synchronize. This will open the smart generator dialog in which you can reconfigure the import. If variables have been added to the import file since the last import, the smart generator will display the Import new variables dialog, inviting you to make either a full or a custom import of the remaining variables.</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">If you select full import, all variables not already in <span class="mc-variable OEM.ProductName variable">PcVue</span> are imported.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">If you select custom import, you can filter the variables using the Select variables dialog.</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">If the smart generator finds variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> that no longer exist in the import file, a list of the variables is displayed. Using this list, you can choose to remove some or all of the variables from <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">You can choose to only remove imported configuration elements of a smart generator without removing the smart generator import itself. This can be done by right-clicking the import generated and selecting <b>Remove all imported objects</b>.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Graphic controls and Viewers|Form controls|Configuring a Form Control's behavior (Operations tab)" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Linking variables to a form control</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor151"></a>Linking Variables to a Form Control</h1>
+        <p class="SVnormal">You can configure a Form Control so that the current selection and/or latest change of state is linked to one or more variables. The variables are selected using the Operations tab. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/HMI/Controls/FormControls_control_vars.png" title="Check-box: Operations tab." MadCap:targetName="t3" style="display: none;" />
+        </p>
+        <p class="SVnormal">Changes in variable values operate in both directions.</p>
+        <ul>
+            <li>If you change the control's selection the variable value changes.</li>
+            <li>If you change the variable's value outside of the control, the selection in the control changes to follow it (assuming that the value is within a valid range).</li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">The variable must have the Command property set for its value to change when you change the control's selection. <br />The Command property must also be set if you to change the selection by using a Send register animation to change the variable value.</p>
+        </div>
+        <h2 class="SVheading2">Option tab properties used for selecting variables</h2>
+        <ul>
+            <li>Index - Returns the index of the most recently selected or changed item (register variable).</li>
+            <li>State - Returns the state of the most recently changed item. Check-box list only. A register variable that can have the following possible values.<br />0 - The selected item is not ticked.<br />1 - The selected item is ticked.<br />-1 - The selected item is undetermined.</li>
+            <li>User Data - Returns the user data of the most recently selected or changed item (text variable). </li>
+        </ul>
+        <h2 class="SVsyntaxheading">Enforcing  variables command level</h2>
+        <p class="SVnormal">Command level and related user permissions for variables you reference for operations of the control can be enforced or ignored depending on the <a href="../Settings/Settings_Mimic_options.htm">HMI setting</a> called <u>Apply command level in graphic controls</u>. You can override the global setting individually for each control instance using the <u>Command level</u> properties in the Operations tab. This applies to all the form control types except the Text box which does not reference any variables. The following properties apply.</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted">Apply command level - Defines how variables' command level properties and the corresponding user rights levels are enforced.</p>
+                <ul style="list-style-type: disc;">
+                    <li>
+                        <p class="SVbulleted">Default - Apply the default behavior as set in the HMI settings. This is the default setting.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Yes - Enforce the variables' command levels and the corresponding user rights levels. Only users having the required Command level permissions are able to operate the control. The <u>Level</u> property must then be set.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">No - Ignore the variables' command levels and the corresponding user rights levels. Any user having access to the mimic is able to operate the control, even if he does not have the required Command level permissions.</p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p class="SVbulleted">Level - The command level required for users to operate the control.</p>
+                <ul style="list-style-type: disc;">
+                    <li>
+                        <p class="SVbulleted">Auto - Use the command level as defined in each variable's configuration.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">
+                            <img src="../../Resources/Images/HMI/Animation/Register_Format_Custom_button.png" /> - Enter a fixed value for the command level.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">
+                            <img src="../../Resources/Images/HMI/Animation/Register_Format_from_Server_button.png" /> - Define the command level by the value of a selected variable. Clicking the button displays the variable browser to allow selection of the variable name.</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

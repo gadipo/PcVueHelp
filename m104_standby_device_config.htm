@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|IEC 60870-5" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Adding a standby device</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor5"></a>Adding a Standby Device</h1>
+        <h2 class="SVheading2">What is a standby device?</h2>
+        <p class="SVnormal">A standby device provides a redundant network path to the field device or a path to an alternate redundant field device (another IP address). Should the main device fail, communication is automatically switched to the standby device thereby providing continuous service.</p>
+        <p class="SVnormal">Sectors and variable mapping is not necessary for the standby device as it is assumed to be the same as the primary device.</p>
+        <h2 class="SVheading2">Adding a standby device</h2>
+        <ol>
+            <li value="1">Select an existing IEC 60870-5 network and device in the Application Explorer. In the lower right pane task bar, select       <u>Add a standby Device</u>. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <div MadCap:targetName="t1" style="display: none;">
+                <br />
+                <img src="../../Resources/Images/AE/Comm_DataAcq/m104_standby_dev_task.png" />
+                <br />
+            </div>
+            <li value="2">The Device Creation dialog opens with default properties.</li>
+            <li value="3">A device <u>Name</u> is generated automatically. You can either accept it or enter a name more appropriate to a standby device.</li>
+            <li value="4">Enter the <u>IP Address</u> for the standby device.</li>
+            <li value="5">Configure the other properties, including those in the Advanced tab. It is probable that they will need to be the same as the main device. See <a href="m104_adding_devices_config.htm">Adding Devices to an IEC 60870-5 network</a> for more information.</li>
+            <li value="6">Click on <u>OK</u> to confirm the configuration and close the dialog.</li>
+        </ol>
+        <h2 class="SVheading2">Standby device operation</h2>
+        <p class="SVnormal">When <span class="mc-variable OEM.ProductName variable">PcVue</span> starts, it will attempt to communicate with the main and standby devices to check their presence. If the primary device is available, it will retrieve the value of any mapped variables from it.</p>
+        <p class="SVnormal">If the primary device is not available at startup, or if it fails later, value retrieval for the mapped variables automatically switches to a standby device.</p>
+        <p class="SVnormal">
+            &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> will continue to try and establish communication with the failed primary device, but it will not automatically switch back when communication is re-established.</p>
+        <p class="SVnormal">You can force a switch back to the primary device using the following methods.</p>
+        <ul style="list-style-type: disc;">
+            <li>Restarting <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li>
+            <li>Manually, using the <u>Activate Device</u> task in the Application Explorer.</li>
+            <li>Using a SCADA Basic script incorporating the M60870_5 instruction, SWITCHOVER mode.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">You can create more than one standby device for a single main device. In the case of failure of the main device, the first standby device is selected. If that standby device also fails, the second standby device is selected, etc.</p>
+        </div>
+        <h2 class="SVheading2">System status variables</h2>
+        <p class="SVnormal">Specific system status variables are provided for standby device management. See the <a href="../Variables/Varsystem_m104.htm">IEC 60870-5 status variables</a> book for information.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

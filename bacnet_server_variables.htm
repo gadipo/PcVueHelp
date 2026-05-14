@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|BACnet Server Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Configuration of variables</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuration of the Variables</h1>
+        <p class="SVnormal">To define a variable so that it is exposed as a BACnet object, you enter its BACnet definition in the variable's text extended attribute as defined in the  BACnetServerConfig.xml.<br />It takes the form of a string with the following syntax.</p>
+        <p class="SVnormal">Analog objects - BACnet:&lt;ObjectType&gt;:&lt;InstanceNumber&gt;::::::&lt;COVIncrement&gt;</p>
+        <p class="SVnormal">Binary objects - BACnet:&lt;ObjectType&gt;:&lt;InstanceNumber&gt;:::::&lt;ActiveText&gt;:&lt;InactiveText&gt;</p>
+        <p class="SVnormal">Where:</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">BACnet - The keyword that indicates it is a variable exposed as a BACnet object,</li>
+            <li class="SVbulleted">&lt;ObjectType&gt; - Either AI, AO or AV for analog objects and BI, BO or BV for binary objects,</li>
+            <li class="SVbulleted">&lt;InstanceNumber&gt; - The object instance number,</li>
+            <li class="SVbulleted">&lt;COVIncrement&gt; - The minimum change in Present value required to trigger a COV notification for the subscribed COV clients,</li>
+            <li class="SVbulleted">&lt;ActiveText&gt; - A character string describing the Present value active state,</li>
+            <li class="SVbulleted">&lt;InactiveText&gt; - A character string describing the Present value inactive state.</li>
+        </ul>
+        <p class="SVnormal">Any variable defined as a BACnet object is only exposed after the project has been stopped and re-started. Any errors resulting from invalid object creation (incorrect syntax in the text attribute for example) will be detected and traced at that time.</p>
+        <div class="tip">
+            <p class="SVnormal">The following shorten syntax can also be used:</p>
+            <ul>
+                <li class="SVbulleted">For analog objects - BACnet:&lt;ObjectType&gt;:&lt;InstanceNumber&gt;</li>
+                <li class="SVbulleted">For binary objects - BACnet:&lt;ObjectType&gt;:&lt;InstanceNumber&gt;</li>
+            </ul>
+        </div>
+        <h2 class="SVheading2">How a variable's real time value is exposed as the BACnet Present Value property</h2>
+        <p class="SVnormal">Change in value of a variable results in a transfer to the Present Value property for the following object types:</p>
+        <ul style="list-style-type: disc;">
+            <li>Analog Input</li>
+            <li>Binary Input</li>
+        </ul>
+        <p class="SVnormal">Change in value of a variable also results in a transfer to the Present Value property for the following commandable object types but without any Priority Value, thus the Priority Array is left unchanged:</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p>Analog Output</p>
+            </li>
+            <li>Analog Value</li>
+            <li>
+                <p>Binary Output</p>
+            </li>
+            <li>Binary Value</li>
+        </ul>
+        <p>The Priority Array property of these objects is entirely initialized with NULL values, and in doing so, the Relinquish Default Property value is given to the Present Value Property on-start up.</p>
+        <h2 class="SVheading2">How a variable's Unit property is exposed as the BACnet object Units property</h2>
+        <p class="SVnormal">The Unit property of a register variable is a free text representing the unit associated with the value of the variable. For example:</p>
+        <ul style="list-style-type: disc;">
+            <li>The string can represent the symbol associated with the unit as defined in the SI or Imperial Units System such as "<sup>o</sup>C" for Celsius degrees or "<sup>o</sup>F" for Fahrenheit degrees,</li>
+            <li>
+                <p>The string can represent a commonly used abbreviation of a unit such as "mV" for millivolts or "rpm" for revolutions per minute,</p>
+            </li>
+            <li>
+                <p>The string can represent a complete word describing the unit (such as "meter" for American English or "metre" for British English).</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The correspondence between strings used in the Unit property of exposed register variables and BACnet Engineering Unit numeric Ids has to be pre-defined and stored in the file BACnetServerUnits.xml.<br />A sample file is provided and more unit correspondences can be added using the following format:</p>
+        <p class="SVdataListing">&lt;units tag="correspondence string"&gt;BACnetEngineeringUnits numeric Id&lt;/units&gt;</p>
+        <p class="SVnormal">For example:</p>
+        <p class="SVdataListing">&lt;units tag="square feet"&gt;1&lt;/units&gt;</p>
+        <div class="warning">
+            <p class="SVnormal">The string comparison is case sensitive. By default, or for an invalid string, the value 95 corresponding to NoUnits is exposed as the Unit property. The same applies if the file cannot be found.</p>
+        </div>
+        <h2 class="SVheading2">Other variable properties exposed as BACnet properties</h2>
+        <ul style="list-style-type: disc;">
+            <li>Name - Directly exposed as the  Name property,</li>
+            <li>Description - Directly exposed as the  Description property,</li>
+            <li>Minimum value - Directly exposed as the Min Pres Value property. This property is present for the Analog Input, Analog Output and Analog Value objects,</li>
+            <li>Maximum value - Directly exposed as the Max Pres Value property. Those properties are present for the Analog Input, Analog Output and Analog Value objects.</li>
+        </ul>
+        <p class="SVnormal">An auto-completion mechanism is available to help you define the BACnet Server mapping via an Extended text attribute</p>
+        <p class="SVnormal"> It is enabled via a property in the configuration file BACnetServerConfig.xml.</p>
+        <p class="SVnormal">After declaration of a BACnet object and restarting the project, the activated Extended String attribute offer auto-completion for the BACnet server syntax.</p>
+        <p class="SVnormal">For instance, an Analog Input object may have the following associated Extended String attribute.</p>
+        <p class="SVdataListing">BACnet:AI:1::::::COV_I</p>
+        <p class="SVnormal">Auto-completion suggests which parameters are available for a specific object depending on its type and by concatenating the declaration string  with a string containing the mnemonics of the parameters.</p>
+        <p class="SVnormal">The entire auto-completion strings are as follows.</p>
+        <p class="SVnormal"> For Analog Input, Analog Output and Analog Value objects:</p>
+        <p class="SVdataListing">::::::COV_I</p>
+        <p class="SVnormal">For Binary Input, Binary Output and Binary Value objects:</p>
+        <p class="SVdataListing">:::::ACT_T:INA_T</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

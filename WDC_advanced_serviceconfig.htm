@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying server applications|Deploying the web server and the Web &amp; Mobile back end|Using the Web Deployment Console|Custom setup" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Service configuration view</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Service Configuration View</h1>
+        <p class="SVnormal">The Services Configuration View is opened by clicking the Services Configuration button. It is used to manage settings for each of the site's web applications and web services. A list of the applications and services is displayed in a slide out pane. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/wdc_custom_serviceslist.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <p class="SVnormal">To view the setting for a particular service click on its name. Many of the setting are read only as they are generated automatically by the WDC at the time of deployment and require re-deploying the web site for taking any change into account. These are displayed in the <u>Information</u> tile. Those settings that can be changed are displayed in the <u>Settings</u> tile. The following screen-shot of the settings for the GraphicalData service. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/wdc_custom_graphicaldata_settings.png" MadCap:targetName="t2" style="display: none;" /></p>
+        <div class="warning">
+            <p class="SVnormal">Using the <u>Information</u> tab can be useful for diagnostics, but changing settings affects the behavior of the corresponding service or web application and will anyway be replaced at the next re-deployment if changes were not done using the WDC itself. You should not change them if not recommended to.</p>
+        </div>
+        <h2 class="SVheading2">Settings for the OAuth service</h2>
+        <ul style="list-style-type: disc;">
+            <li>Access token lifetime - The access token is a short-lived token used when accessing the services. The default is 20 minutes.</li>
+            <li>Refresh token lifetime - The refresh token is a long-lived token used when renewing the expired access token. Range 0 to 2147483647 minutes. The default is 10080 minutes (7 days). </li>
+            <li>Property Server endpoint - Reserved.</li>
+            <li>Allow Remember me - If activated, users of WebVue and the WebScheduler web apps will be offered the <u>Remember Me</u> tick box on the login page. Depending on your IT policy, you may or may not want to offer users this opportunity leading to storage of user credentials in a cookie. In all cases, users should be recommended not to tick this box when connecting from a device shared with other users.</li>
+            <li>Perform a reverse DNS lookup to get the client host address - If activated the OAuth service attempts to get the client host address using the IP address.</li>
+        </ul>
+        <h2 class="SVheading2">Settings for the WebClient web app</h2>
+        <ul style="list-style-type: disc;">
+            <li>Ignore certificate errors - If activated, a certificate will be accepted by the WebClient web app even if it is not trusted. You can activate it as a convenience on development and test machines if a self-signed certificate is in use. But it is recommended to use a valid certificate and disable this setting on web servers in production.</li>
+            <li>Use client host for redirect - Services perform several redirects to other services to handle Authentication. By default, the redirect URIs are generated by IIS based on the binding configuration. This leads to errors in case the IIS is behind a network device performing port translation. If enabled, the redirect URIs are generated based on the hostname that the clients sends in the Http request header. This setting must be enabled if a Gateway or a Router with Port Address Translation (PAT) is in place.</li>
+            <li>Enable PWA - If activated, allow installation of the WebClient (WebVue) as a PWA.</li>
+        </ul>
+        <h2 class="SVheading2">Settings for the WebScheduler web app</h2>
+        <ul style="list-style-type: disc;">
+            <li>Ignore certificate errors - If activated, a certificate will be accepted by the WebScheduler web app even if it is not trusted. You can activate it as a convenience on development and test machines if a self-signed certificate is in use. But it is recommended to use a valid certificate and disable this setting on web servers in production.</li>
+            <li>Use client host for redirect - Services perform several redirects to other services to handle Authentication. By default, the redirect URIs are generated by IIS based on its own binding. This leads to errors in case the IIS is hidden behind a network device performing port translation. If enabled, the redirect URIs are generated by the Host that the clients sends in the HTTP Request header. This setting must be enabled if a Gateway or a Router with Port Address Translation is in place.</li>
+            <li>Hide schedule status columns - If activated, the timetable status columns are not displayed in the Overview page of the WebScheduler portal (columns <u>Standard week is empty</u> and <u>Exception period is active</u>).</li>
+            <li>Enable help - If not activated, the user access to the help from the run-time WebScheduler portal is prevented.</li>
+        </ul>
+        <p>More settings are available, they are described in the topic <a href="../WebApps/WebSched_config_hmi.htm">WebScheduler Portal configuration</a>.</p>
+        <h2 class="SVheading2">Settings for the GraphicalData service</h2>
+        <ul style="list-style-type: disc;">
+            <li>Connection timeout - The amount of time to leave the web socket connection open and waiting for a response before closing it and opening a new connection. Defaults to 110 sec.</li>
+            <li>Disconnect timeout - The amount of time to wait after a web socket connection is lost before raising the Disconnected event. Defaults to 30 sec.</li>
+            <li>Keep alive - The interval in seconds at which the Core back end is pinged by the GraphicalData service to keep the session alive. Minimum value is 5 sec, maximum is 60 sec, default is 10 sec.</li>
+            <li>Output buffer size for messages - Each time something changes in a mimic, a message is sent from the GraphicalData service to the client. This setting defines how many of these messages are buffered in case that there are more updates in a mimic than the client can handle. If the connection is slow, it can help to increase the value of this setting, but it will also increase the memory consumption on the server. The minimum value is 32, maximum is 65535, default is 100.</li>
+            <li>Show detailed error messages - If enabled, detailed traces are generated by the service for diagnostic purpose.</li>
+            <li>Cache lifetime for images - The amount of time in seconds that will be transmitted to the Web browser for handle the caching of images and audio file when using WebVue (max-age cache Http header). The default value is 0, it correspond to requesting web browsers to refresh their cache after 'age of the file/10'. For example, if an image file is 100 days old, the cache lifetime on the web browser side will be 10 days, after which it will ask the resource again to the web server. This setting does not apply to caching of JavaScript and Html files.</li>
+            <li>Property Server endpoint - Reserved.</li>
+            <li>Property Server callback port - The TCP port used by the Core back end to call the web server back to notify about data changes. This port must be open (incoming) on the IIS web server computer (default 8091).</li>
+            <li>Machine name - This setting is related to the communication layer used between the GraphicalData service and the Core back end. When the connection is established, the client (GraphicalData service) needs to tell the back end where it listens to the callbacks.<br /><p> By default, the hostname (or IP) from the first NIC is used, this setting overrides the default. It is necessary to customize the Machine name setting if you need to tightly control which network interface is used on the IIS Web server for callbacks from the Core back end, for example, if you use a VPN tunnel between the 2 machines.</p></li>
+        </ul>
+        <h2 class="SVheading2">Settings for the other services - SessionContext, RealTimeAlarm, RealTimeData, HistoricalData, ScheduleData, Geolocation, Tracking and Messaging</h2>
+        <p class="SVnormal">The other services have no setting other than reserved.</p>
+        <div class="warning">
+            <p class="SVnormal">When the WDC detects that you select a certificate that cannot be validated (a self-signed cert for example), it automatically activates the <u>Ignore certificate errors</u> for WebVue and the WebScheduler. This is to make development and testing possible without a trusted certificate. </p>
+            <p class="SVnormal">This setting is defined automatically by the WDC at the time of 1<sup>st</sup> deployment and when importing a deployment configuration.</p>
+            <p class="SVnormal">It is important that you manually disable this setting from the Service configuration view if you replace an untrusted certificate by a trusted one on a web server. </p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

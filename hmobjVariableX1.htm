@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="HMI Object Model Reference|Examples" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../../" MadCap:HelpSystemFileName="SV_VBA.xml" MadCap:SearchType="Stem" MadCap:PreloadImages="false">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Variable Value Change Example</title> <link href="../../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="../../../SkinSupport/jquery-1.12.4.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapGlobal.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapSlideshow.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapMerging.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapAliasFile.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapUtilities.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapBody.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapHighlighter.js"></script><meta name="MS-HAID" content="hmobjVariableXL" /></head>
+    <body> <h1 class="SVheading1">Variable Value Change Example</h1><p class="SVprogramCode"><!-- EXAMPLE -->Private Sub objOPCVar_ValueChange()<br />'-------- Records the value of the variable<br />&#160;Const BufferSize 
+ = 50<br />&#160;Const LogFile 
+ = "HistoricLog.txt"<br />&#160;Static 
+ Buffer(BufferSize) As String<br />&#160;Static 
+ BPointer As Integer<br />'-------- Record in a string array<br />'-------- Note the use of the _ continuation character<br />&#160;Buffer(BPointer) 
+ = Format(Date, " dd/mm/yyyy") &amp; "," &amp; _<br />&#160;Format(Time, 
+ "hh:nn:ss") &amp; "," &amp; objOPCVar.Value<br />'-------- If string array full then flush to file and start again<br />&#160;If (BPointer 
+ &lt; BufferSize) Then<br />&#160;&#160;&#160;BPointer 
+ = BPointer + 1<br />&#160;Else<br />&#160;&#160;&#160;Open 
+ LogFile For Append As #1<br />&#160;&#160;&#160;For 
+ BPointer = 1 To BufferSize<br />&#160;&#160;&#160;&#160;&#160;Print 
+ #1, Buffer(BPointer)<br />&#160;&#160;&#160;Next 
+ BPointer<br />&#160;&#160;&#160;Close 
+ #1<br />&#160;&#160;&#160;BPointer 
+ = 1<br />&#160;End If<br />End Sub</p><script type="text/javascript" src="../../../SkinSupport/MadCapBodyEnd.js"></script></body>
+</html>

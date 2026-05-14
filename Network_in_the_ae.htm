@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Networked applications|Using the Application Explorer to configure the network architecture" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Managing networking in the Application Explorer</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Managing Networking in the Application Explorer</h1>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Comm_Networking/network_in_the_ae.png" />
+        </p>
+        <p class="SVnormal">A project's networking configuration is displayed under the Communication.Networking node. It includes Stations, Nodes, Lists and Associations. The Application Explorer is used for network configuration and diagnostics. It  displays run-time status information and offers commands for the configured network items which can be useful for troubleshooting.</p>
+        <div class="warning">
+            <p class="SVnormal">State information is "as-seen" by the local station, that is the one on which the Application explorer is running:</p>
+            <ul>
+                <li>
+                    <p class="SVbulleted">All information about the local station are retrieved locally, independently of any connection to other stations.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">All information about remote stations are retrieved through the Networking exchanges, and may or may not be available depending on the connection state with the selected remote station.</p>
+                </li>
+            </ul>
+            <p class="SVnormal">In particular, state information is for the connection between the local station, that is the one on which the Application explorer is running, and the selected station or node.</p>
+            <p class="SVnormal">The maximum number of stations in a single networked application is 500.</p>
+        </div>
+        <h2 class="SVheading2">Configuration tasks when the Networking folder is selected</h2>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 50px;" />
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">Task</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_settings.png" />
+                    </td>
+                    <td class="SVtable">Settings</td>
+                    <td class="SVtable">Display the general Network Settings dialog.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_remove_all.png" />
+                    </td>
+                    <td class="SVtable">Remove all configuration</td>
+                    <td class="SVtable">Remove all network configuration. </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_wizard.png" />
+                    </td>
+                    <td class="SVtable">Networking wizard</td>
+                    <td class="SVtable">Run the networking wizard.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Configuration tasks and run-time status information when the Stations folder is selected</h2>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 50px;" />
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">Task</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_add_station.png" />
+                    </td>
+                    <td class="SVtable">Add a station</td>
+                    <td class="SVtable">Add a network station and the first connection node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Variables/task_paste.png" />
+                    </td>
+                    <td class="SVtable">Paste</td>
+                    <td class="SVtable">Paste a station. Only available after a cut or copy.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">For each configured station, the following run-time information is displayed:</p>
+        <ul style="list-style-type: disc;">
+            <li>State - The state of the connection between the selected station and the local station. See the table below for more information.</li>
+            <li>License number - The Id of the license used on the selected station, or 'Trial' if the station is running in trial mode.</li>
+            <li>License role - The role of the station with regards to licensing. For example, the station can have the role of handling a local license, be a license owner, a license renter...</li>
+            <li>Project version - When using Central Project Management, the version of the project.</li>
+            <li>Library version - When using Central Project Management, the version of the library.</li>
+            <li>Product version - The product software version.</li>
+        </ul>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 50px;" />
+            <col style="width: 200px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">State</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_connected.png" />
+                    </td>
+                    <td class="SVtable">Connected or<br />Local station</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_disconnected.png" />
+                    </td>
+                    <td class="SVtable">Disconnected</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_disabled.png" />
+                    </td>
+                    <td class="SVtable">Disabled or<br />No connection due to license</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_notlinked.png" />
+                    </td>
+                    <td class="SVtable">Not linked</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Configuration and run-time tasks, and run-time status information when a station is selected</h2>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">Task</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_add_node.png" />
+                    </td>
+                    <td class="SVtable">Add a node</td>
+                    <td class="SVtable">Add a connection node to a station.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_open_connections.png" />
+                    </td>
+                    <td class="SVtable">Open and enable connections</td>
+                    <td class="SVtable">If the local station has a link configured with a node of the selected station, it connects to that station. Equivalent to the SCADA Basic instruction LAN mode START_CONNECTIONS.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_close_connections.png" />
+                    </td>
+                    <td class="SVtable">Close and disable connections</td>
+                    <td class="SVtable">If the local station has a link configured with a node of the selected station, it disconnects from that station. Equivalent to the SCADA Basic instruction LAN mode STOP_CONNECTIONS.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_ping.png" />
+                    </td>
+                    <td class="SVtable">Ping</td>
+                    <td class="SVtable">Opens a test dialog from where the path to the station can be checked using ping. Only available if the selected station has a single node configured.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_remove_station.png" />
+                    </td>
+                    <td class="SVtable">Remove</td>
+                    <td class="SVtable">Remove the selected station.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_properties.png" />
+                    </td>
+                    <td class="SVtable">Properties</td>
+                    <td class="SVtable">Display the Station Properties dialog.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Variables/task_copy.png" />
+                    </td>
+                    <td class="SVtable">Copy</td>
+                    <td class="SVtable">Copy the selected station.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Variables/task_cut.png" />
+                    </td>
+                    <td class="SVtable">Cut</td>
+                    <td class="SVtable">Cut the selected station.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Variables/task_paste.png" />
+                    </td>
+                    <td class="SVtable">Paste</td>
+                    <td class="SVtable">Paste a node. Only available after a cut or copy.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">When a station is selected, the following run-time information is displayed about its configured nodes:</p>
+        <ul style="list-style-type: disc;">
+            <li>Client connection state - The state of the client connection (if any). See the table below for more information.</li>
+            <li>Server connection state - The state of the server connection (if any). See the table below for more information.</li>
+        </ul>
+        <table style="width: 100px; border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <tbody>
+                <tr>
+                    <td>&#160;</td>
+                    <td colspan="7" class="SVtable" style="text-align: center;"><b style="color: #000000; font-weight: bold;">Server connection state</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="7"><b style="color: #000000; font-weight: bold;">Client connection state</b>
+                    </td>
+                    <td style="border-bottom-style: solid;border-bottom-width: 1px;border-right-style: solid;border-right-width: 1px;">&#160;</td>
+                    <td style="border-bottom-style: solid;border-bottom-width: 1px;">Connected</td>
+                    <td style="border-bottom-style: solid;border-bottom-width: 1px;">Disconnected</td>
+                    <td style="border-bottom-style: solid;border-bottom-width: 1px;">Disabled</td>
+                    <td style="border-bottom-style: solid;border-bottom-width: 1px;">Not linked</td>
+                    <td style="border-bottom-style: solid;border-bottom-width: 1px;">			Local station</td>
+                    <td style="border-bottom-style: solid;border-bottom-width: 1px;">No connection due to license</td>
+                </tr>
+                <tr>
+                    <td style="border-right-style: solid;border-right-width: 1px;">Connected</td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_connected.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disconnected.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disabled.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_connected.png" />
+                    </td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">NA</td>
+                </tr>
+                <tr>
+                    <td style="border-right-style: solid;border-right-width: 1px;">Disconnected</td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disconnected.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disconnected.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disabled.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disconnected.png" />
+                    </td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">NA</td>
+                </tr>
+                <tr>
+                    <td style="border-right-style: solid;border-right-width: 1px;">Disabled</td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disabled.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disabled.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disabled.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disabled.png" />
+                    </td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">NA</td>
+                </tr>
+                <tr>
+                    <td style="border-right-style: solid;border-right-width: 1px;">Not linked</td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_connected.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disconnected.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disabled.png" />
+                    </td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_notlinked.png" />
+                    </td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">NA</td>
+                </tr>
+                <tr>
+                    <td style="border-right-style: solid;border-right-width: 1px;">Local station</td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_connected.png" />
+                    </td>
+                    <td style="text-align: center;">NA</td>
+                </tr>
+                <tr>
+                    <td style="border-right-style: solid;border-right-width: 1px;">No connection due to license</td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">NA</td>
+                    <td style="text-align: center;">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_disabled.png" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">		Configuration and run-time tasks when a Node is selected</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col style="width: 600px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">Task</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_open_client.png" />
+                    </td>
+                    <td class="SVtable">Open client connection</td>
+                    <td class="SVtable">Connect the local station to the server connection of the selected node. Equivalent to the SCADA Basic instruction LAN mode START_CONNECTION.
+
+</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_close_client.png" />
+                    </td>
+                    <td class="SVtable">Close client connection</td>
+                    <td class="SVtable">Disconnect the local station from the server connection of the selected node. Equivalent to the SCADA Basic instruction LAN mode STOP_CONNECTION.
+</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_open_server.png" />
+                    </td>
+                    <td class="SVtable">Open server connection</td>
+                    <td class="SVtable">The local station accepts connection from the selected node. Equivalent to the SCADA Basic instruction LAN mode START_CONNECTION.
+</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_close_server.png" />
+                    </td>
+                    <td class="SVtable">Close server connection</td>
+                    <td class="SVtable">The local station closes its connection with the selected node. Equivalent to the SCADA Basic instruction LAN mode STOP_CONNECTION.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_ping.png" />
+                    </td>
+                    <td class="SVtable">Ping</td>
+                    <td class="SVtable">Opens a test dialog from where the path to the node can be checked using ping.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_remove_node.png" />
+                    </td>
+                    <td class="SVtable">Remove</td>
+                    <td class="SVtable">Remove the selected node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_node_properties.png" />
+                    </td>
+                    <td class="SVtable">Properties</td>
+                    <td class="SVtable">Display the Node Properties dialog.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Variables/task_copy.png" />
+                    </td>
+                    <td class="SVtable">Copy</td>
+                    <td class="SVtable">Copy the selected node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Variables/task_cut.png" />
+                    </td>
+                    <td class="SVtable">Cut</td>
+                    <td class="SVtable">Cut the selected node.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Configuration tasks when the Lists folder is selected</h2>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col style="width: 600px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">Task</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_add_client_list.png" />
+                    </td>
+                    <td class="SVtable">Add a client list</td>
+                    <td class="SVtable">Add a list of client stations (data consumers).</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_add_server_list.png" />
+                    </td>
+                    <td class="SVtable">Add a server list</td>
+                    <td class="SVtable">Add a list of server stations (data producers).</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_add_modif_list.png" />
+                    </td>
+                    <td class="SVtable">Add a modification client list</td>
+                    <td class="SVtable">Add a list of client stations that will be used to propagate modifications.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Variables/task_paste.png" />
+                    </td>
+                    <td class="SVtable">Paste</td>
+                    <td class="SVtable">Paste a list. Only available after a cut or copy.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Configuration tasks when a List is selected</h2>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 49px;" />
+            <col style="width: 151px;" />
+            <col style="width: 600px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">Task</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_add_station.png" />
+                    </td>
+                    <td class="SVtable">Add a station</td>
+                    <td class="SVtable">Add a station to the selected list.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_add_association.png" />
+                    </td>
+                    <td class="SVtable">Add an association</td>
+                    <td class="SVtable">For server and client lists only, add an association to the selected list.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_remove_list.png" />
+                    </td>
+                    <td class="SVtable">Remove</td>
+                    <td class="SVtable">Remove the selected list.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_prop_list.png" />
+                    </td>
+                    <td class="SVtable">Properties</td>
+                    <td class="SVtable">Display the List Properties dialog.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Variables/task_copy.png" />
+                    </td>
+                    <td class="SVtable">Copy</td>
+                    <td class="SVtable">Copy the selected list.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Variables/task_cut.png" />
+                    </td>
+                    <td class="SVtable">Cut</td>
+                    <td class="SVtable">Cut the selected list.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Configuration tasks when a station of a List is selected</h2>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col style="width: 600px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">Task</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_remove_station.png" />
+                    </td>
+                    <td class="SVtable">Remove</td>
+                    <td class="SVtable">Remove the selected station from the list.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_properties.png" />
+                    </td>
+                    <td class="SVtable">Properties</td>
+                    <td class="SVtable">Display the Station Properties dialog for the selected station.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Configuration tasks and run-time status information when the Associations folder is selected</h2>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col style="width: 600px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">Task</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_add_association.png" />
+                    </td>
+                    <td class="SVtable">Add an association</td>
+                    <td class="SVtable">Add an association. Associations are used for high availability architectures (clusters).</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">For each configured association, the following run-time status information is displayed:</p>
+        <ul style="list-style-type: disc;">
+            <li>State - The state of the connection between the association and the local station. See the table below for more information.</li>
+        </ul>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 50px;" />
+            <col style="width: 50px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Real-time</td>
+                    <td class="SVtableHeading">Historic</td>
+                    <td class="SVtableHeading">State</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_rt_connected.png" />
+                    </td>
+                    <td>
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_hist_connected.png" />
+                    </td>
+                    <td class="SVtable">Connected. At least one sever  of the association is connected</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_rt_disconnected.png" />
+                    </td>
+                    <td>
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_hist_disconnected.png" />
+                    </td>
+                    <td class="SVtable">Disconnected. No server of the association is connected</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_rt_disabled.png" />
+                    </td>
+                    <td>
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_hist_disabled.png" />
+                    </td>
+                    <td class="SVtable">Disabled</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_rt_notlinked.png" />
+                    </td>
+                    <td>
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_hist_notlinked.png" />
+                    </td>
+                    <td class="SVtable">Not linked</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_rt_local.png" />
+                    </td>
+                    <td>
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_hist_local.png" />
+                    </td>
+                    <td class="SVtable">Local station</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_rt_noright.png" />
+                    </td>
+                    <td>
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_assoc_hist_noright.png" />
+                    </td>
+                    <td class="SVtable">No connection due to license</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Configuration tasks and run-time status information when an Association is selected</h2>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">Task</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_association_remove.png" />
+                    </td>
+                    <td class="SVtable">Remove</td>
+                    <td class="SVtable">Remove the selected association.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_association_properties.png" />
+                    </td>
+                    <td class="SVtable">Properties</td>
+                    <td class="SVtable">Display the Association Properties dialog.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Variables/task_copy.png" />
+                    </td>
+                    <td class="SVtable">Copy</td>
+                    <td class="SVtable">Copy the selected association.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Variables/task_cut.png" />
+                    </td>
+                    <td class="SVtable">Cut</td>
+                    <td class="SVtable">Cut the selected association.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">When an association is selected, an additional pane is displayed with configuration tasks and run-time status information about the stations that make up the association. The following tasks and run-time status information is available when one of the stations, in the association, is selected.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">Task</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_forcepassive.png" />
+                    </td>
+                    <td class="SVtable">Force passive</td>
+                    <td class="SVtable">
+                        <p>Force the selected station to passive for the given association.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_forceactive.png" />
+                    </td>
+                    <td class="SVtable">Force active</td>
+                    <td class="SVtable">Force the selected station to active for the given association.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_rate.png" />
+                    </td>
+                    <td class="SVtable">Availability rate</td>
+                    <td class="SVtable">Change the selected station's Availability Rate.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">For each configured station, the following run-time status information is displayed:</p>
+        <ul style="list-style-type: disc;">
+            <li>State - The state of the station within the association as seen from the local station (where the Application Explorer is running). See the table below for more information.</li>
+            <li>Subscription mode - The subscription mode with each of the stations within the association with respect to the local station.<ul style="list-style-type: disc;"><li>Main</li><li>Standby active - See explanation below</li><li>Standby passive - See explanation below</li><li>Local station</li><li>Disconnected</li><li>Disabled</li><li>No connection due to license</li></ul></li>
+        </ul>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 50px;" />
+            <col style="width: 200px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Icon</td>
+                    <td class="SVtableHeading">State</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_forcepassive.png" />
+                    </td>
+                    <td class="SVtable">Passive</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_forceactive.png" />
+                    </td>
+                    <td class="SVtable">Active</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <img src="../../Resources/Images/AE/Comm_Networking/task_station_disconnected.png" />
+                    </td>
+                    <td class="SVtable">Disconnected</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">About the Standby Active and Standby Passive subscription modes</h2>
+        <p class="SVnormal">Consider the following architecture:</p>
+        <ul style="list-style-type: disc;">
+            <li>DAS01, DAS02 and DAS03 are Data Acquisition Servers, </li>
+            <li>DAS_ASSOC01 is a single active Data Acquisition Association including DAS01, DAS02 and DAS03,</li>
+            <li>Client01 is a client of the association.</li>
+        </ul>
+        <p class="SVnormal">If DAS01, DAS02, DAS03 are running, and the Availability Rates within the association DAS_ASSOC01 are DAS01 = <b>100</b>, DAS02 = 80, DAS03 = 60, then, in the Application Explorer running on the client station the following subscription modes are seen.</p>
+        <ul style="list-style-type: disc;">
+            <li>The subscription mode with the station DAS01 = Main</li>
+            <li>The subscription mode with the station DAS02 = Standby active</li>
+            <li>The subscription mode with the station DAS03 = Standby passive</li>
+        </ul>
+        <p class="SVnormal">If DAS01, DAS02, DAS03 are running, and the Availability Rates within the association DAS_ASSOC01 are DAS01 = <b>70</b>, DAS02 = 80, DAS03 = 60, then, in the Application Explorer running on the client station the following subscription modes are seen.</p>
+        <ul style="list-style-type: disc;">
+            <li>The subscription mode with the station DAS01 = Standby active</li>
+            <li>The subscription mode with the station DAS02 = Main</li>
+            <li>The subscription mode with the station DAS03 = Standby passive</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

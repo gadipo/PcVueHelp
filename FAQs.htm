@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Networked applications" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Network applications FAQ</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Networked Applications - Frequently Asked Questions</h1>
+        <h2 class="SVheading2">What is a station?</h2>
+        <p class="SVnormal">A station is an instance of the <span class="mc-variable OEM.ProductName variable">PcVue</span> software main process running on a given computer.</p>
+        <h2 class="SVheading2">What is a node?</h2>
+        <p class="SVnormal">A node defines the network access of a station. The node defines the connection type (TCP/IP or NetBios), 
+ the connection properties and if the station is to behave as a client 
+ or server or both.</p>
+        <h2 class="SVheading2">Can I configure more than one node per station?</h2>
+        <p class="SVnormal">It is possible to configure up to four nodes for each 
+ station. Additional nodes can be used for network redundancy or if a station requires access various sub-networks.</p>
+        <h2 class="SVheading2">What protocol can I use?</h2>
+        <p class="SVnormal">
+              &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span>'s networking can use either NetBios 
+ or TCP/IP (recommended).</p>
+        <h2 class="SVheading2">Can I mix NetBios and TCP/IP nodes on the same station?</h2>
+        <p class="SVnormal">Yes, it is possible to mix NetBios and TCP/IP nodes on 
+ the same station.</p>
+        <h2 class="SVheading2">How is a station identified?</h2>
+        <p class="SVnormal">Each station is identified by a unique station name and number.</p>
+        <p class="SVnormal"> 
+ If you are using TCP/IP a station's name and number is linked to its TCP/IP address or Computer Name. <br />If you are using NetBios a station’s name and number is linked to a LANA number.</p>
+        <h2 class="SVheading2">What is a server station?</h2>
+        <p class="SVnormal">A server station is a station that sends changes in value 
+ of one or more of its variables to other (client) stations. The 
+ origin of the value could be one of <span class="mc-variable OEM.ProductName variable">PcVue</span>'s Data Acquisition sources or internally generated (Expression, SCADA Basic etc.)</p>
+        <p class="SVnormal">The mechanism of sending changes in value is known as 
+ producing. In general, the value of a variable can only be produced on one station 
+ at any one time.</p>
+        <h2 class="SVheading2">What is a client station?</h2>
+        <p class="SVnormal">A client station is a station where the value of one 
+ or more of its variables is obtained from another (server) station. 
+ The mechanism of obtaining values in this way is known as consuming. The 
+ value of a variable can be consumed on many stations.</p>
+        <h2 class="SVheading2">Can a station be both client and server?</h2>
+        <p class="SVnormal">A station can be both client and server producing some 
+ variable values and consuming others.</p>
+        <h2 class="SVheading2">Can the value of a variable be changed on a client 
+ station?</h2>
+        <p class="SVnormal">The value of a variable can be changed on a client station 
+ if the variable's control attribute is enabled. The value can be changed 
+ by either a send type animation or a program. The client station sends 
+ the server station a request to change the value. The server station changes 
+ the value in its variables tree and then distributes it as it would any other 
+ value change. The client station does not change the value directly.</p>
+        <h2 class="SVheading2">How is a link between a server station and a client 
+ station established?</h2>
+        <p class="SVnormal">The client is responsible for establishing the link to 
+ the server. The server has no knowledge of the client until it makes a 
+ request for connection.</p>
+        <h2 class="SVheading2">How does a station know that it is to produce or consume 
+ the value of a particular variable?</h2>
+        <p class="SVnormal">When a variable is created, it is allocated to a client 
+ list and a server list. </p>
+        <ul>
+            <li class="SVbulleted">If the name of the 
+ local station appears in a variable's server list, the variable's value 
+ is to be produced on that station.</li>
+            <li class="SVbulleted">If the name of the 
+ local station appears in a variable's client list, the variable's value 
+ is to be consumed on that station.</li>
+            <li class="SVbulleted">If the name of the 
+ local station does not appear in either the variable's client or server 
+ list, the variable is not loaded and is not available on that station.</li>
+            <li class="SVbulleted">If the server list and the client list of a variable are not empty (not defined), this variable will produced and consumed locally on every station. Its value will not be shared among stations.</li>
+        </ul>
+        <h2 class="SVheading2">What is an Association?</h2>
+        <p class="SVnormal">An Association is a group of two or more servers operating 
+ together to provide redundant operation. As far as the client is concerned, 
+ an Association is treated in the same way as if it were just a single 
+ server station.</p>
+        <h2 class="SVheading2">What are the station lists?</h2>
+        <p class="SVbulleted">A station list contains the name of one or more stations. 
+ Station lists may contain the names of only server stations, only client 
+ stations or both.</p>
+        <div class="warning">
+            <p class="SVnormal">It is essential to understand the use of the station lists 
+ as they are used to control the behavior of a number of aspects of <span class="mc-variable OEM.ProductName variable">PcVue</span>'s so that the same project can be used on all 
+ stations in a multi-station application.</p>
+        </div>
+        <h2 class="SVheading2">How do I develop the projects for each station?</h2>
+        <p class="SVnormal">Projects are developed in the normal way. Careful use 
+ of the client and server station lists will allow an identical project 
+ to be used for all stations in the majority of cases. </p>
+        <h2 class="SVheading2">Does the network configuration have to be the same 
+ on all stations in the network?</h2>
+        <p class="SVnormal">Yes, the network configuration should be the same on each station, except in some very specific cases.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

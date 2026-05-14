@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to manage project and library versions</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to manage project and library versions</h1>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span>'s Central project management enables you to centrally manage <span class="mc-variable OEM.ProductName variable">PcVue</span> project and library versions. It is designed to help you manage successive versions of your project and libraries as part of your project lifecycle policy. It includes tools for the project designer and facilitates deployment.</p>
+        <p class="SVnormal">The original and main use of Central project management is for centralized project management of a networked, multi-station project. However, it can also be used for a single-station project or a system with multiple stations and different projects. In all cases, it is not designed for concurrent engineering. When updating a version, the local project or library is copied to the central storage and replaces the existing one as a whole.</p>
+        <p class="SVnormal">Central project management is neither a revision control software, nor a source code management tool (SCM). It is not designed to keep track of atomic changes done from one version to another in your <span class="mc-variable OEM.ProductName variable">PcVue</span> project, it does not compress, or do differential saving to economize storage space. For information about using PKZIP25 for that purpose, see the topic <a href="ProjectLib_Saving_and_restoring_projects.htm">Backing up and restoring projects and libraries</a>.</p>
+        <p class="SVnormal">Using Central project management, you can:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">Specify the central location where versions of projects are stored for deployment.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Save a project  to the central folder, either as a new version or as an update to an existing version.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">On a station, select the version of the project from the list stored in the central folder, load it and launch <span class="mc-variable OEM.ProductName variable">PcVue</span> with that version.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Manage the state of project versions in the central project folder in order to control which version should run on stations in production.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Do all the above with the shared and common libraries.</p>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">You can manage any number of projects in the same central project folder. However, from a particular station, you only see versions of the project that is currently being loaded on that station.</p>
+        </div>
+        <p class="SVnormal">Creating, updating, and managing versions takes place in your development and testing environment, typically on an engineering station running <span class="mc-variable OEM.ProductName variable">PcVue</span>. The Central project management helps you apply a project management and versionning policy, including the identification and follow-up of:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">Versions at development or testing stage.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Version at validation stage, prior to deployment in production.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Version of reference in production.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">History of operational versions, the ones that were once the reference in production.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The state machine behind Central project management is as follow. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="central-project-mgmt-states"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p>
+            <img src="../Resources/Images/Deployment/cpm_StateMachine.png" alt="The state machine of the Central project management" MadCap:targetName="central-project-mgmt-states" style="display: none;" />
+        </p>
+        <p class="SVnormal">Version numbering follows widely accepted software versionning schemes using three digits known as Major (a major version), Minor (a minor version), Revision digit (a revision to a Major/Minor version). For example 1.0.0. The major and minor digits can be set according to whatever version control standards are being followed. The revision digit starts at zero and is incremented automatically each time a new version of a particular Major/Minor version is created. If you are using an existing major/minor version, the update version number is updated automatically as the next in the sequence.</p>
+        <p>While Central project management does not enforce any policy, it has been designed so that you can set-up a development process for your <span class="mc-variable OEM.ProductName variable">PcVue</span> project, with typical, widely accepted rules.</p>
+        <p>In particular:</p>
+        <ul>
+            <li>
+                <p>The 3-digit version number allows you to identify and track major changes, minor changes and revisions of the configuration.</p>
+            </li>
+            <li>
+                <p>The status allows you to identify if a version is at development or unit tests stage (DEV), validation stage (PREREF), in production (REF), or has been the reference in production in the past (OPE).</p>
+            </li>
+            <li>
+                <p>In addition, you can associate tags to versions. Tags allow you to bypass the lifecycle proposed with the predefined states if your context requires a simpler workflow. For example, if all you need is to identify a version for production and another one for dev, you can ignore the concept of state, and simply use the tags Dev and Prod.</p>
+            </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">When using Central project management it is essential to make sure that the time is synchronized across all the involved host machines.</p>
+        </div>
+        <h2 class="SVheading2">Configuring the General parameters</h2>
+        <p class="SVnormal">After the creation of a project, or if you want to start using the Central project management with an existing project, the following parameters must be set.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Go to Configure then Projects and select Versions. When you select this for the first time, a dialog is displayed stating that the central folder has not been configured yet. Click on <b>OK</b> to open the Central project management dialog.</p>
+                <div class="tip">
+                    <p class="SVnormal">The Central project management dialog is also available as a Standard Action in the Function Key configuration dialog, although it is not allocated to a function key by default.</p>
+                </div>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click General parameters in the left pane of the Central project management dialog and tick Enable central project management box.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">In the Central versions folder field, select the folder where versions of the project and libraries will be stored. You can either type in the name directly or select it from the standard Windows browser dialog opened from the ellipsis button beside the field. The folder path is limited to 200 characters. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="central-project-mgmt-general"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/Deployment/central_projet_mgmt_folder_conf_task.png" alt="General parameters of the Central project management" MadCap:targetName="central-project-mgmt-general" style="display: none;" />
+                </p>
+                <div class="warning">
+                    <p class="SVnormal">For disaster recovery purpose, it is essential that you add this central folder in your backup procedures.</p>
+                </div>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">(Optional) To open the access to a network location that is not currently available, click on the <b>Map network drive to get the available space</b> button to open the Map Network Drive dialog box.</p>
+                <p class="SVnormal">The folder can be located anywhere on a computer acting as file server that all of the stations can access. Central project management requires bulk file copies, so it is best to choose a file server that has a fast access speed and enough storage space to accommodate the needs. The folder you choose as your central storage location must have the following permissions sets:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">The interactive user or service account running <span class="mc-variable OEM.ProductName variable">PcVue</span> must be able to browse folders, read and copy files from the central folder.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">In addition, the interactive user running <span class="mc-variable OEM.ProductName variable">PcVue</span> on engineering stations must be able to create and delete sub-folders, delete, create, write, and modify files on the central folder.</p>
+                    </li>
+                </ul>
+            </li>
+            <li value="5">
+                <p class="SVnumbered">(Optional) If you want to allow update of project versions with OPE or REF state, tick Enable updating of a version in OPE or REF status box. By default, only versions with DEV state can be updated.</p>
+            </li>
+            <li value="6">
+                <p class="SVnumbered">Click <b>Ok</b> button. A message appears in the status bar indicating that the versions folder is connected.</p>
+            </li>
+            <div class="tip">
+                <p class="SVnormal">The <u>Reload</u> button can be used when the connection to the central storage folder is lost while the dialog box is open. Click the <b>Reload</b> button once the connection is recovered to refresh the dialog box: List of versions, states etc.</p>
+            </div>
+        </ol>
+        <h2 class="SVheading2">Selecting the folders and files to include</h2>
+        <div class="warning">
+            <p class="SVnormal">Selecting the exact sub-set of libraries you actually use in your project is important to avoid the burden of copying several unused files when deploying or updating a station's libraries. It can be hundreds or thousands of files depending on library size.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Click Included folders and files under Project in the left pane of the Central project management dialog. Here you select which project folders and files are included when creating or updating a version of the project.</p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Tick and un-tick the project folders and files in the Project folders pane as required. To display the items that a folder contains, click on the '+' nodes to the left of the folder name. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="central-project-mgmt-folders-files"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/Deployment/cpm_dlg_Project_tab_included.png" alt="Included project folders and files tab in The Central Project Management dialog" MadCap:targetName="central-project-mgmt-folders-files" style="display: none;">
+                    </img>
+                </p>
+                <div class="warning">
+                    <p class="SVnormal">Unless you have special requirements and are familiar with the project folder structure, it is recommended that the default selection be used. If you have made changes but wish to restore the default settings, select the <u>Default</u> button to do so. In particular, strong recommendations apply to the following folders:</p>
+                    <ul>
+                        <li>
+                            <p class="SVbulleted">The \TH folder must be excluded to avoid overriding proprietary archive unit data.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">The \PER folder must be excluded to avoid overriding persistent data, including saved variable values.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">The \TP folder is dedicated to storing project-specific files. At design-time, it is recommended to clearly identify files that will have to be part of the version management (configuration files common to all stations), from files that should not be overridden upon version loading on a station. And based on this, to separate project-specific files in different sub-folders of \TP, some included to version management, and some others excluded.</p>
+                        </li>
+                    </ul>
+                    <p class="SVnormal">The project root folder is the same as the <span class="mc-variable OEM.ProductName variable">PcVue</span> root folder unless an alternative has been specified using the -b command line argument.</p>
+                </div>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Next, click Included folders under libraries in the left pane of the Central project management dialog. Here you select which folders are included when saving a version of the libraries.</p>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">Tick and un-tick the library folders as required. For the custom libraries, you can only select/de-select an entire library. For the common library, you can select/de-select each sub-folder individually. This selection process allows you to use Central project management for the entirety or part of the Common library and a sub-set or all Shared libraries.</p>
+                <div class="note">
+                    <p class="SVnormal">Central project management takes advantage of a file server you host on your network to store the history of projects and libraries version.</p>
+                </div>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Creating and updating project and library versions</h2>
+        <div class="warning">
+            <p class="SVnormal">Make sure all files are properly saved before creating or updating a version, including mimics and configuration files. If there is any unsaved file, the newly created or updated version will not match what runs locally.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Click Project in the left pane of the Central project management dialog. Here you can create a new version of the project, update or delete an existing one. The right pane changes to show details of the local project and of any versions of projects that are stored centrally. The same goes for Libraries except that you have to click on Libraries instead of Project.</p>
+                <div class="warning">
+                    <p class="SVnormal">Deleting a version is an irreversible operation that deletes all corresponding files in the central folder and cannot be reversed nor called off. To delete a version, select it and click <b>Delete version</b> button then click <b>Yes</b> to confirm deletion in confirmation dialog.</p>
+                </div>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">To create or update a project version, follow either of these two steps:</p>
+                <p class="SVnumbered">(Create a new version) Click the button <b>Create a new version</b>. The Create a new version dialog opens. Here you can choose new major and minor version numbers or use the existing one.  You can also add a description to reflect the changes brought by this new version then click <b>OK</b> to start the copying process. The new version is created in the central project folder by copying the selected files from the local project under a selected version number. The new version is given the DEV state and the local version number is updated to reflect the version you have created. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="central-project-mgmt-create"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <div class="note">
+                    <p class="SVnormal">The version number is used to name the sub-folder in which the version is centrally stored.</p>
+                    <p class="SVnormal">Version numbers are applied independently to projects and to libraries. For example, you can have at some point in time, libraries version 1.4.2 and project version 3.0.4. For instance, Project <i>XYZ</i> version 1.3 and version 1.3 of the libraries need not correspond to each other in any way.</p>
+                    <p class="SVnormal">Prior to <span class="mc-variable OEM.ProductName variable">PcVue</span> version 12.0, version numbering used two digits. Upon migration, the existing centrally stored versions are left untouched, and keep a 2-digit version. Any new version you create will have a 3-digit version number (with the revision digit set to 0).</p>
+                </div>
+                <p class="SVnumbered">
+                    <img src="../Resources/Images/Deployment/central_project_mgmt_version_conf_task.png" alt="Creating project version in the Central project management" MadCap:targetName="central-project-mgmt-create" style="display: none;" />
+                </p>
+                <p class="SVnumbered">(Update a version) Select the version to update and click the <b>Update version</b> button. Click <b>Yes</b> in the confirmation dialog and the Version update dialog appears allowing you to select the type of update you wish to do: A full update, a partial update since a given date or to just change the description. The selected local files are then copied to the central folder overriding any existing files.</p>
+                <div class="note">
+                    <p class="SVnormal">By default, you can only update a version that has the DEV or PREREF state. However, you can remove that restriction by checking the option  Enable updating of a version in OPE or REF status in the  General parameters pane.</p>
+                </div>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">(Optional) Select the version created and click the <b>Change version state</b> button to change the default DEV state associated to the version. This state determines the readiness of the version for deployment. There are four possible states to choose from to best represent the state of a version:</p>
+                <div class="warning">
+                    <p class="SVnormal">You cannot change straight from DEV to REF. If you do not wish to take advantage of the PREREF state for the validation stage, you must first change the state to PREREF and then you can set it to REF.</p>
+                </div>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Development (DEV): A version that is at dev-in-progress stage. You can have more than one version DEV. You can load, update, and delete a version in this state.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Pre-reference (PREREF): A  version that is being validated before deployment in production. You can only have one PREREF version at a time. You can load, update, and delete a version in this state.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Reference (REF): A  version that is validated for deployment in production, and typically used on all runtime stations of the system. You can only have one REF version at a time. You can load, but you cannot update a version in this state unless you enable updating General parameters pane.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Operational (OPE): A version that is used to be a REF in the past. Depending on your practices, the most recent OPE version may be used a fallback when the REF version proves to be faulty once deployed. You can load and delete, but you cannot update a version in this state unless you enable updating General parameters pane.</p>
+                        <div class="note">
+                            <p class="SVnormal">If you apply the REF state to a version when a REF version already exists, the latter is changed to OPE.</p>
+                            <p class="SVnormal">If you apply the PREREF state to a version when a PREREF version already exists, the latter is changed to DEV.</p>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">(Optional) Select the version created and click <b>Edit version tag</b> button to add a tag that can later be used to start up the version by using the '-d' command line. The tag should not be more than 12 characters, and it should not be duplicated. The list of allowed characters is [-_#$a-zA-Z0-9]. Refer to <a href="CPM_select_version.htm">How to select a project version at start-up</a> topic for more information.</p>
+                <div class="tip">
+                    <p class="SVnormal">You can use the Delete all other tags box in the Edit version tag dialog to delete tags associated to other versions.</p>
+                </div>
+            </li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">Project version information is saved in the file INFOS.DAT found in the project root. This file only exists for projects using Central project management, and appears in both the local project and versions in the central project store.</p>
+        </div>
+        <h2 class="SVheading2">Deploying a version</h2>
+        <p class="SVnormal">The process of selecting and loading a version of a project, and / or a version of the libraries, from the central project storage to a station takes place at start-up. It is controlled by command line arguments that you add to the <span class="mc-variable OEM.ProductName variable">PcVue</span> shortcuts.</p>
+        <p class="SVnormal">By using the proper shortcuts, you control that:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">Only a validated version is run in production.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">The user can pick any version on an engineering or test station.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">The user only run the proper version on validation stations.</p>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">See <a href="CPM_select_version.htm">How to select a project version at start-up</a> for more information. See the sub-book System variables for more information about system variables for Central project management.</p>
+        </div>
+        <h2 class="SVheading2">Example of  managing  versions with Central project management</h2>
+        <h3 class="SVheading3">The stations</h3>
+        <p class="SVnormal">An application has been live for some time but evolving requirements meaning that its configuration occasionally have to be upgraded. The station architecture is as follows:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">Two server stations, Station 10 and Station 11, are in an association  (for hot standby), Association 20.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Three client stations are connected to the association.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">One file server (\\MyFileServer) holds the central project store.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">Central project management is enabled on all stations with \\MyFileServer\CentralStore is configured as the central project store.</p>
+        <p class="SVnormal">Station 11 has a complete (development and run-time) license and is started with the command line argument -d.</p>
+        <p class="SVnormal">All other stations have run-time licenses and are started with the command line argument -r.</p>
+        <h3 class="SVheading3">The versions</h3>
+        <p class="SVnormal">The versions to be controlled are at various stages of the development cycle.</p>
+        <table>
+            <thead>
+                <tr>
+                    <td class="SVtableHeading">Version</td>
+                    <td class="SVtableHeading">Description</td>
+                    <td class="SVtableHeading">State</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="SVtable">1.7.0</td>
+                    <td class="SVtable">The final version of the previous release, archived if a rollback is necessary.</td>
+                    <td class="SVtable">OPE</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2.1.0</td>
+                    <td class="SVtable">The version currently in use on Stations 1 to 3, but due for replacement shortly.</td>
+                    <td class="SVtable">REF</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2.2.0</td>
+                    <td class="SVtable">Newly tested and in state PREREF during the validation phase.</td>
+                    <td class="SVtable">PREREF</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">3.0.0</td>
+                    <td class="SVtable">Under development.</td>
+                    <td class="SVtable">DEV</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">All of the versions are stored in the central project store on the file server. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="central-project-mgmt-example"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div>
+            <img src="../Resources/Images/Deployment/cpm_example_schematic.png" alt="Schematic of the versions on the PCs." MadCap:targetName="central-project-mgmt-example" style="display: none;" />
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVbulleted">Development and testing occurs on Station 11. As the development PC, it can download any of the versions for comparison and troubleshooting as required.</p>
+            </li>
+            <li value="2">
+                <p class="SVbulleted">When operational testing on a version is completed, it progresses to state PREREF. Version 2.2.0 is currently in that state.</p>
+            </li>
+            <li value="3">
+                <p class="SVbulleted"> The operational stations (stations 1 to 3) are configured with the -r switch to load the REF version when they are restarted. Version 2.1.0 currently has that state so it is loaded automatically on start-up of these stations.</p>
+            </li>
+            <li value="4">
+                <p class="SVbulleted">When the changeover to version 2.2.0 takes place, it is given REF state. Version 2.1.0 reverts to the OPE state and remains available for rollback.</p>
+            </li>
+            <li value="5">
+                <p class="SVbulleted">When each operational station (station 1 to 3) is next restarted, Central project management automatically downloads version 2.2.0 onto it.</p>
+            </li>
+            <li value="6">
+                <p class="SVbulleted">If there is a need to fall back temporarily, the administrator re-assigns the state of REF to version 2.1.0 then restarts the stations to load version 2.1.0 again. This assumes that versions 2.1.0 and 2.2.0 are interchangeable functionally and able to serve the users' basic needs.</p>
+            </li>
+            <li value="7">
+                <p class="SVbulleted">In this example, the libraries remain unchanged in support of versions 2.1.0 and 2.2.0 of the project. Version 1.7.0 is stored for practical reason only.</p>
+            </li>
+        </ol>
+        <h3 class="SVheading3">The result</h3>
+        <p class="SVnormal">After the changeover to version 2.2.0, the project versions are as follows.</p>
+        <table>
+            <thead>
+                <tr>
+                    <td class="SVtableHeading">Version</td>
+                    <td class="SVtableHeading">Description</td>
+                    <td class="SVtableHeading">State</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="SVtable">1.7.0</td>
+                    <td class="SVtable">The final version of the previous release, archived for troubleshooting purposes.</td>
+                    <td class="SVtable">OPE</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2.1.0</td>
+                    <td class="SVtable">The previous version available for fallback.</td>
+                    <td class="SVtable">OPE</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2.2.0</td>
+                    <td class="SVtable">The version currently in use on Stations 1 to 3.</td>
+                    <td class="SVtable">REF</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">3.0.0</td>
+                    <td class="SVtable">Under development.</td>
+                    <td class="SVtable">DEV</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|OCPP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to use the OCPP library</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to use the OCPP library</h1>
+        <p class="SVnormal">Charge point variables are the carriers of information exchanged between charge points on the network and <span class="mc-variable OEM.ProductName variable">PcVue</span>. A library of predefined templates is available to ease the mapping of OCPP charging stations data and management messages.</p>
+        <p class="SVnormal">The predefined library for OCPP includes:</p>
+        <ul>
+            <li>
+                <p class="SVnormal">Images</p>
+            </li>
+            <li>
+                <p>SCADA Basic scripts</p>
+            </li>
+            <li>
+                <p>Animated symbols</p>
+            </li>
+            <li>
+                <p>Templates and Parameters</p>
+            </li>
+            <li>
+                <p>Mimics</p>
+            </li>
+            <li>
+                <p>An archive unit</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Prerequisites: </h2>
+        <ul>
+            <li>
+                <p class="SVbulleted">You have installed and activated the OCCP driver, and performed Url namespace reservation as detailed in the topic <a href="ocpp_installation.htm">How to install and configure the OCPP driver</a>.</p>
+            </li>
+            <li>
+                <p>You have the OCPP shared library installed (folder \LIB\SH_EV_Charging).</p>
+            </li>
+            <li>
+                <p>You know how to use the Application Architect to <a href="../AA/Instanciating_templates.htm">instantiate existing templates</a>.</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Instantiating OCPP templates</h2>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Click Configure in the main menu of <span class="mc-variable OEM.ProductName variable">PcVue</span> then Application Architect.</p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click the plus button next to <b>OCPP</b> in the <b>Templates</b> tab. The categories OCPP 1.6 and 2.0 appear, containing templates for all OCPP variables. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="ocpp_aa_template"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <div>
+                    <img src="../Resources/Images/Extras/ocpp_aa_templates.png" MadCap:targetName="ocpp_aa_template" style="display: none;" />
+                </div>
+            </li>
+            <li value="3">
+                <p class="SVnumbered"><a href="../AA/Instanciating_templates.htm">Add an instance</a> of the <b>ChargePointProject</b> template and give it a name. This instance provides:</p>
+                <ul>
+                    <li>
+                        <p class="SVnumbered">Variables global to your charge point central monitoring system,</p>
+                    </li>
+                    <li>
+                        <p class="SVnumbered">The essential keys for the General and OcppBinding sections of the OcppConfiguration.ini file,</p>
+                    </li>
+                    <li>
+                        <p>The mimics global to your CSMS,</p>
+                    </li>
+                </ul>
+            </li>
+            <li value="4">
+                <p>Set the value of input parameters for the essential keys in the .ini file, at least the Http endpoint parameter.</p>
+            </li>
+            <li value="5">
+                <p class="SVnumbered">Add an instance of the <b>ChargePoint</b> template as a child of the <b>ChargePointProject</b> instance and give it a name that matches the Id of the actual charge point deployed on the field (for example CPxxxx). This instance provides:</p>
+                <ul>
+                    <li>
+                        <p class="SVnumbered">Variables to monitor the charge point,</p>
+                    </li>
+                    <li>
+                        <p>Inherited templates to support the related of OCPP messages: Status, authorization, handling of reservation, availability, charging profile, firmware update, etc.</p>
+                    </li>
+                </ul>
+                <div class="warning">
+                    <p class="SVnormal">Make sure that the name of the <b>ChargePoint</b> instance you add matches the name (or id) set in the corresponding charge point device. Refer to the charge point vendor documentation for more information.</p>
+                </div>
+            </li>
+            <li value="6">
+                <p>Set the value of input parameters as required by your set-up.</p>
+            </li>
+            <li value="7">
+                <p>For each connector on the charge point you have instantiated, add an instance of the <b>Connector</b> template as a child of the <b>ChargePoint</b> instance (index starts at 1). This instance provides variables and inherited templates to monitor the connector and support the related OCPP messages: Availability, electrical meter values, status, transaction, etc.</p>
+            </li>
+            <li value="8">
+                <p>Set the value of input parameters as required by your set-up. At least the ConnectorId according to the charge point vendor documentation.<br />The phase number is also important if the charge point has more than one phase (possible values are: L1, L2, L3, L1L2, L2L3, L3L1, L1N, L2N, L3N, N).</p>
+            </li>
+            <li value="9">
+                <p>Repeat steps 7 and 8 for each connector available on the charge point.</p>
+            </li>
+            <li value="10">
+                <p>Repeat steps 5 to 9 for each charge point.</p>
+            </li>
+            <li value="11">
+                <p class="SVnumbered">Save the configuration by clicking File.Save in upper menu then Tasks.Generate to generate the configuration.</p>
+            </li>
+            <li value="12">Click Configure.Application Explorer in upper menu of <span class="mc-variable OEM.ProductName variable">PcVue</span> then  open the charge point project from Variables tree. All charge point messages and variables generated are displayed. Pre-animated mimics are also generated. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="ocpp_ae_variables"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div><img src="../Resources/Images/Extras/ocpp_ae_variables.png" MadCap:targetName="ocpp_ae_variables" style="display: none;" /></div></li>
+            <div class="note">
+                <p class="SVnormal">An alarm is set by the OCPP driver and is activated when the charge point status is <b>Faulted</b> and deactivated when it is any other value. Alarm and bit variable values are defined in relation to the values set in the associated labels of the <b>Status</b> variable.<br />The OCPP driver also writes label string representations in extended attributes of alarm and bit variables such as <b>ChargePointErrorCode</b> written into extended attribute 3.</p>
+                <p class="SVnormal">We recommend you include additional details about charge point errors in other extended attributes.</p>
+            </div>
+        </ol>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

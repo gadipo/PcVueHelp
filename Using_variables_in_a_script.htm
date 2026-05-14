@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Introduction to VBA in PcVue|Using variables in a VBA script" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_VBA.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Using variables in a VBA script</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="hmobjVariablesCollectionCL" />
+        <meta name="MS-HAID" content="hmobjVariableCL" />
+        <meta name="MS-HAID" content="hmobjAddCL" />
+        <meta name="MS-HAID" content="hmobjRemoveCL" />
+        <meta name="MS-HAID" content="hmobjItemCL" />
+        <meta name="MS-HAID" content="hmobjValueCL" />
+        <meta name="MS-HAID" content="hmobjUsingHMIDrawingElementsCL" />
+        <meta name="MS-HAID" content="hmobjCodingEventsDynamicallyCL" />
+        <meta name="MS-HAID" content="hmobjValueChangeCL" />
+    </head>
+    <body>
+        <h1 class="SVheading1">Using variables in a VBA script</h1>
+        <p class="SVnormal">Before you can use the properties, methods and events of a variable configured in <span class="mc-variable OEM.ProductName variable">PcVue</span> in a script, the variable must first be subscribed.</p>
+        <p class="SVnormal">Variables are subscribed in the following ways:</p>
+        <ul>
+            <li class="SVbulleted">Automatically when used in an animation of any open mimic</li>
+            <li class="SVbulleted">Automatically whenever a variables value is referenced in a VBA program with the [] syntax</li>
+            <li class="SVbulleted">Manually by using the Add method of the Variables collection</li>
+        </ul>
+        <h2 class="SVheading2">Subscribing a variable</h2>
+        <p class="SVnormal">Any variables used in any animation in an opened mimic are automatically made available to VBA. It is unnecessary to programmatically subscribe to the variable as described below. However, when the last mimic using a particular variable in an animation is closed, that variable is no longer available to VBA unless it is (also) programmatically subscribed.</p>
+        <p class="SVnormal">To subscribe a variable by code, you use the Variables.Add method.</p>
+        <p class="SVnormal">For example:</p>
+        <p class="SVprogramCode">Variables.Add "Branch1.B1", fvVariableTypeBit<br />Variables.Add "CommentDisplay%", fvVariableTypeText</p>
+        <p class="SVnormal">The optional second parameter describes the variable type. For more information, see <a href="../SV_HMI/Collections/hmobjVariablesCollectionO.htm">the Variables Collection</a> topic.</p>
+        <p class="SVnormal">If the variable is already subscribed by an animation in the HMI, it may still be subscribed explicitly through VBA. When the mimic containing the animation is closed, the variable will then remain subscribed until the project is closed or it is unsubscribed in VBA.</p>
+        <div class="warning">
+            <p class="SVnormal">You must use the full variable name when you subscribe a variable.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">Some variables may need to be subscribed 'permanently' while the project is running. For example, variables for which a script must be executed upon value change, independently from open mimics. You can subscribe to these variables in the call-back script of the event <b>StartupComplete</b>, and unsubscribe in the call-back script of the event <b>BeforeQuit</b>.</p>
+        </div>
+        <h2 class="SVheading2">Unsubscribing a variable</h2>
+        <p class="SVnormal">To unsubscribe a variable you use the Variables.Remove method.</p>
+        <p class="SVnormal">For example:</p>
+        <p class="SVprogramCode">Variables.Remove "Branch1.B1"</p>
+        <p class="SVnormal">If you subscribe a variable more than once in VBA, you have to unsubscribe it that many times before the variable can become unsubscribed. Even then, it remains subscribed in the HMI so long as any mimic that uses it in animations remains open.</p>
+        <div class="note">
+            <p class="SVnormal">Each variable that you subscribe uses some slight system resources. It is recommended to unsubscribe a variable as soon as it is no longer needed.</p>
+        </div>
+        <h2 class="SVheading2">Shortcuts for accessing variables in VBA</h2>
+        <p class="SVnormal">There is a variety of syntax shortcuts to address a Variable and the Variables collection.</p>
+        <h3 class="SVheading3">The Item method</h3>
+        <p class="SVnormal">The Item method is the default for the Variables collection, and the Value property is the default for the Variable object. The default method and propety of an object can always be omitted. So:</p>
+        <p class="SVprogramCode">Variables("CommentDisplay") = "Hello World"</p>
+        <p class="SVnormal">is the equivalent of:</p>
+        <p class="SVprogramCode">Variables.Item("CommentDisplay").Value = "Hello World"</p>
+        <h3 class="SVheading3">The [...] syntax</h3>
+        <p class="SVnormal">The [...] syntax provides an additional shortcut to directly access a variable's value.</p>
+        <p class="SVprogramCode">[Main.Branch1.B1] </p>
+        <p class="SVnormal">is the equivalent of </p>
+        <p class="SVprogramCode">Variables("Main.Branch1.B1")</p>
+        <p class="SVnormal">It is recommended that you use this shortcut to make your code more readable.</p>
+        <div class="note">
+            <p class="SVnormal">When you use the [...] syntax, the variable is automatically subscribed and unsubscribed - there is no requirement to do it programmatically earlier in your code.</p>
+        </div>
+        <p class="SVnormal">Example:</p>
+        <p class="SVprogramCode">Private Sub Shape1_Click()<br /> If [Main.Branch1.B1] = True Then<br /> &#160;&#160;[Main.Branch1.B1] = False<br /> Else<br /> &#160;&#160;[Main.Branch1.B1] = True<br /> End If<br />End Sub</p>
+        <h2 class="SVheading2">Running VBA code when a variable's value changes</h2>
+        <p class="SVnormal">You can execute code when a variable's value changes, using the Dim WithEvents statement and the ValueChange event.</p>
+        <p class="SVnormal">This is best illustrated with a simple example:</p>
+        <p class="SVprogramCode">'------ This code must be placed in General Declarations<br />Dim WithEvents objVar As Variable<br /><br />'------ Execute to set up events<br />Private Sub fvProject_StartupComplete()<br />'------ Subscribe to variables<br /> Variables.Add "Branch1.B1", fvVariableTypeBit<br />' ------ Assigns an object reference to the variable and enable the events<br /> Set objVar = [Branch1.B1]<br /> objVar.EnableEvents = True<br />End Sub<br /><br />'------ Execute when value of Main:Branch1.B1 changes<br />Private Sub objVar_ValueChange()<br /> MsgBox objVar.Name &amp; " = " &amp; objVar.Value<br />End Sub</p>
+        <div class="note">
+            <p class="SVnormal">You must declare the Variable object using the WithEvents keyword and enable events for the object by setting the EnableEvents property to True.</p>
+        </div>
+        <p class="SVnormal">If the code is contained within a mimic, any references to objects are temporary. When the mimic is closed, or its mode changed (Run/Design), the reference is deleted and the event no longer fired. For the event to be fired again, the object must be reassigned to the variable and the events enabled again.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

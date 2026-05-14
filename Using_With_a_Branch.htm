@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Working with mimics|Creating and managing mimics" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Using mimics with a branch</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Using Mimics with a Branch</h1>
+        <p class="SVnormal">When a mimic is opened or created, it may be given a variable 
+ branch dynamically at opening time. Subsequently any reference to variables is relative to that branch. 
+ This technique can 
+ be used to reduce the number of mimics required and the subsequent development 
+ time.</p>
+        <h2 class="SVheading2">An example of using a mimic with a variable Branch</h2>
+        <p class="SVnormal">Consider an application where there are four identical 
+ gas turbines to be supervised. Each turbine has more than 100 variables 
+ associated with it. In <span class="mc-variable OEM.ProductName variable">PcVue</span>, each variable name starts with the 
+ turbine number.</p>
+        <p class="SVprogramCode" MadCap:conditions="Primary.SvOnly">@turbine1.speed, @turbine1.pressure etc.<br />@turbine2.speed, @turbine2.pressure etc.<br />@turbine3.speed, @turbine3.pressure etc.<br />@turbine4.speed, @turbine4.pressure etc.</p>
+        <p class="SVnormal">A mimic named Turbine is created initially with the Branch <i MadCap:conditions="Primary.SvOnly">turbine1</i>. Subsequently all variable references are relative to the branch <i MadCap:conditions="Primary.SvOnly">turbine1</i>, 
+ so <i>speed</i> actually refers to <MadCap:conditionalText MadCap:conditions="Primary.SvOnly"><i>@turbine1.speed</i></MadCap:conditionalText>. A further mimic named 
+ <i>Menu</i> is created with four buttons each one with an animation to open the 
+ Turbine mimic but using four different Branches each corresponding to 
+ one of the turbines (<i>turbine1</i>, <i>turbine2</i>, <i>turbine3</i> and <i>turbine4</i>).</p>
+        <p class="SVnormal">At runtime, the <i>Turbine</i> mimic may be opened four times, 
+ each time displaying a different group of variables.</p>
+        <p class="SVnormal">With this example, instead of creating four mimics it 
+ was only necessary to create one. This has the dual advantage of reducing 
+ development time and making maintenance much easier.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

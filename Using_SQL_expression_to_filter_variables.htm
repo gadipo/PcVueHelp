@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Graphic controls and Viewers|Grid control|Using the Grid in variable tracking mode" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Using a SQL expression to filter variables</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="FilterExp_Ref" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor152"></a>Using a SQL Expression to Filter the Variables</h1><a name="kanchor153"></a>
+        <p class="SVnormal">A SQL expression can be used in the Grid control<MadCap:conditionalText MadCap:conditions="Primary.SvOnly"> and the Alarm Viewer</MadCap:conditionalText> to 
+ filter the list of displayed variables or alarms.<MadCap:conditionalText MadCap:conditions="Primary.SvOnly"> It can also be used to set a filter via a SCADA Basic script using the instructions SELECTOR, ALARMDISPLAY and LOGDISPLAY.</MadCap:conditionalText></p>
+        <p class="SVnormal">The SQL expression takes the following 
+ form: &lt;<i>Criteria</i>&gt; &lt;<i>Operator</i>&gt; &lt;<i>Value</i>&gt; </p>
+        <h2 class="SVheading2">Criteria</h2>
+        <p class="SVnormal">Each of the criteria used in the expression represents 
+ one of the properties of a variable.</p>
+        <table style="width: 100%;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col style="width: 600px;" />
+            <tr valign="top">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;border-top-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtableHeading">Name</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;border-top-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtableHeading">Data type</p>
+                </td>
+                <td style="border-bottom-style: none;border-top-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtableHeading">Description</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Name</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">String</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Variable name.</p>
+                </td>
+            </tr>
+            <tr valign="top" MadCap:conditions="Primary.SvOnly">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Domain</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">String</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Domain name.</p>
+                </td>
+            </tr>
+            <tr valign="top" MadCap:conditions="Primary.SvOnly">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Nature</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">String</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Nature name.</p>
+                </td>
+            </tr>
+            <tr valign="top" MadCap:conditions="Primary.SvOnly">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">AssocLabel</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">String</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Associated Label name. Applies to Bit and Alarm variables only.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">AlarmLevel</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Integer</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Alarm level value. Applies to Alarm variables only.</p>
+                </td>
+            </tr>
+            <tr valign="top" MadCap:conditions="Primary.SvOnly">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">BinAttr</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Long</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Binary attributes as weighted bits.</p>
+                </td>
+            </tr>
+            <tr valign="top" MadCap:conditions="Primary.SvOnly">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">BinAttrbNN</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Boolean</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Individual binary attribute where NN is in the range 01 to 30.</p>
+                </td>
+            </tr>
+            <tr valign="top" MadCap:conditions="Primary.SvOnly">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">TextAttrNN</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">String</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Text attribute where NN is in the range 03 to 16.</p>
+                </td>
+            </tr>
+            <tr valign="top" MadCap:conditions="Primary.SvOnly">
+                <td colspan="1" rowspan="1" style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">TextIndAttrNN</p>
+                </td>
+                <td colspan="1" rowspan="1" style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">String</p>
+                </td>
+                <td colspan="1" rowspan="1" style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Indirect value of the text attribute where NN is in the range 03 to 16. The indirect value is the value of the variable whose 
+ name is contained in the text attribute.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Description</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">String</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Variable description. The description criteria is language 
+ dependent.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Unit</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">String</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Variable unit text. Applies to register variables only.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Format</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">String</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Variable display format. Applies to register and text variables only.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Threshold</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Double</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Threshold. Applies to alarm and bit variables defined as threshold of a register variable.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">LoValueLimit</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Double</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Minimum value. Applies to register variables only.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">HiValueLimit</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Double</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Maximum value. Applies to register variables only.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-bottom-style: none;border-right-style: none;border-left-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Simulated</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Boolean</p>
+                </td>
+                <td style="border-bottom-style: none;border-right-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Variable simulated status.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">Criteria names are not case sensitive. </p>
+        </div>
+        <h2 class="SVheading2">Operators</h2>
+        <p class="SVnormal">The following operators are available for the construction 
+ of the expression that compares the value of a variable property (criteria) 
+ to a user-defined value.</p>
+        <table style="width: 100%;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col style="width: 650px;" />
+            <tr valign="top">
+                <td style="border-left-style: none;border-top-style: none;border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtableHeading">Operator</p>
+                </td>
+                <td style="border-top-style: none;border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtableHeading">Description</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-left-style: none;border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">&lt;</p>
+                </td>
+                <td style="border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">To check if a property value is smaller than a user-defined value.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-left-style: none;border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">&gt;</p>
+                </td>
+                <td style="border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">To check if a property value is greater than a user-defined value.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-left-style: none;border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">&lt;=</p>
+                </td>
+                <td style="border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">To check if a property value is smaller than or equal to a user-defined value.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-left-style: none;border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">&gt;=</p>
+                </td>
+                <td style="border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">To check if a property value is greater than or equal to a user-defined value.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td colspan="1" rowspan="1" style="border-left-style: none;border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">&lt;&gt;</p>
+                </td>
+                <td colspan="1" rowspan="1" style="border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">To check if a property value is different from a user-defined value.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-left-style: none;border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">=</p>
+                </td>
+                <td style="border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">To check if a property value is equal to a user-defined value.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-left-style: none;border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Like</p>
+                </td>
+                <td style="border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">To check if a property string value is equal to a user-defined string value using wild characters. See the following section on values.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-left-style: none;border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">Unlike</p>
+                </td>
+                <td style="border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">
+                    <p class="SVtable">To check if a property string value is different than 
+ a user-defined string value using wild characters. See the following section 
+ on values.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td style="border-left-style: none;border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">In</td>
+                <td style="border-right-style: none;border-bottom-style: none;padding-left: 1px;padding-right: 1px;">To check if a property value is within a list of values. The list of values must be comma separated and contained within brackets.</td>
+            </tr>
+        </table>
+        <p class="SVnormal">Expressions can be combined by using parentheses and the following logical operators.</p>
+        <ul>
+            <li class="SVbulleted">AND - Combines two expressions where both expressions must be true for the result to be true.</li>
+            <li class="SVbulleted">OR - Combines two expressions where either or both expressions must be true for the result to be true.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">String comparisons are not case sensitive. </p>
+        </div>
+        <h2 class="SVheading2">Values</h2>
+        <p class="SVnormal">The user defined values, to which the property values are compared, can be a string, a Boolean or a numeric value, depending on the property data type.</p>
+        <ul>
+            <li class="SVbulleted">Boolean - The value can be 0, 1, true, false.</li>
+            <li class="SVbulleted">Integer - Any numeric value that can be represented by an integer and that is in the range of the property minimum and maximum limits.</li>
+            <li class="SVbulleted">Double - Any numeric value that can be represented by a double and that is in the range of the property minimum and maximum limits.</li>
+            <li class="SVbulleted">String - Any string value delimited by leading and ending double quotes.</li>
+        </ul>
+        <p class="SVnormal">When used with the LIKE or UNLIKE operator, a string value can also contain the following wild card characters.</p>
+        <ul>
+            <li class="SVbulleted">? - Represents any single character. A string value can contain several question mark characters, consecutively or not.</li>
+            <li class="SVbulleted">* - Represent any number of characters.</li>
+        </ul>
+        <h2 class="SVheading2">Using the Language property</h2>
+        <p class="SVnormal">The language property is used to select the language 
+ that the filtering process uses when executing string value comparisons. 
+ The combo-box lists the base and alternate languages and also provides 
+ a current option referring to the language selected at the time the filter 
+ is executed. If the project is not configured as bilingual then the Language 
+ property is not shown.</p>
+        <div class="note" MadCap:conditions="Primary.SvOnly">
+            <p class="SVnormal">Up until version 8.10, only the Description property is bilingual.</p>
+        </div>
+        <h2 class="SVheading2">Examples</h2>
+        <ul>
+            <li class="SVbulleted">Name='Building1.Room2.Lights' - Will display the variable with the name "Building1.Room2.Lights".</li>
+            <li class="SVbulleted">Name Like 'Building1.*' - Will display all the variables that have a name beginning with "Building1.".</li>
+            <li class="SVbulleted">Name Like 'Building?.*.Lights' - Will display all the variables that have a name beginning with "Building" immediately followed by any one and only one character and ending with ".Lights".</li>
+            <li class="SVbulleted">Name Unlike 'SYSTEM.*' - Will display all variables except those starting with SYSTEM (Excludes all system variables).</li>
+            <li class="SVbulleted" MadCap:conditions="Primary.SvOnly">BinAttrB01&lt;&gt;False - Will display all the variables which the binary attribute 1 is different from False.</li>
+            <li class="SVbulleted">LoValueLimit &gt;= 0 - Will display all the register variables that have a low limit value greater than or equal to 0.</li>
+            <li class="SVbulleted">(Name Like 'B*' 
+ OR Name Like 'M??') AND Simulated = False - Will display all 
+ the variables that have a name beginning with "B" or a name 
+ beginning with “M” immediately followed by any combination of two characters 
+ and not defined as simulated variables.</li>
+            <li class="SVbulleted">AlarmLevel In (1,3,5) - Will display all variable with an alarm level of 1, 3 or 5.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

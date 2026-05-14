@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Reference topics" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Regular Expressions</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="RegularExp_Ref" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor228"></a><a name="kanchor229"></a>Regular Expressions</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc406">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="SELECTOR_Instruct" />
+                <param name="Item3" value="VariablesTree_Concept" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc406.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">The regular expressions used by SELECTOR are derived 
+ from the notation used in automata theory to describe formal languages 
+ and finite state machines. </p>
+        <p class="SVnormal">Regular expressions consist of characters: operands such 
+ as "a", "O", and ", " and meta-characters 
+ (operators) such as "+", "|", and "[". A 
+ regular expression, which is similar to the familiar arithmetic expressions, 
+ can be either a basic expression or a complex expression that is formed 
+ by applying operators to several basic expressions.</p>
+        <p class="SVnormal">The regular meta-characters for expressions, and their 
+ uses, are as follows:</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtableHeading">Operator</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtableHeading">Used for</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">\</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Used in escape sequences to specify characters that would 
+ otherwise have no representation (similar to those used in the C language).</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">\b</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Backspace.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">\t</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Horizontal tab.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">\n</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Newline or linefeed.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">\f</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">New page or form feed.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">\r</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Carriage return.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">\<span style="font-style: italic;">ddd</span></p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Octal value.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">\<span style="font-style: italic;">c</span></p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable"><span style="font-style: italic;">c</span> represents 
+ any character string that is taken literally.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">^</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The carat matches the beginning of a string. For example,, 
+ "^abc" matches only those strings which start with "abc". 
+ When used as the first character of a character class it denotes a negated 
+ class.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">$</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The dollar matches the end of a string. For example,, "$z" 
+ will only match strings with "z" as the last character.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">.</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The full stop matches any single character. Be careful 
+ as ".*" will match everything.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">[</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The open bracket denotes the start of a character class.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">]</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The closed bracket denotes the end of a character class.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">|</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The pipe character is the alternation operator, a|b" 
+ matched either "a" or "b".</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">()</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Parentheses are used to group expressions in much the 
+ same way as for arithmetic expressions.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">*</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The closure operator matches 0 or more instances of 
+ the specified string.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">+</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The plus sign indicates positive closure and matches 1 
+ or more of the specified expression. For example,, "+z" matches 
+ a string of 1 or more "z"s.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td valign="top">
+                    <p class="SVtable">?</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The question mark matches 0 or 1 instance 
+ of the specified expression. For example, "?9" matches 
+ either the null string or "9".</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Character classes</h2>
+        <p class="SVnormal">Character classes are shorthand for matching one of several 
+ characters. </p>
+        <p class="SVnormal">For example, [AaBb] is the same as (A|a|B|b)and matches 
+ "A", "a", "B", and "b". </p>
+        <p class="SVnormal">There are also character ranges, such as [A-Z] that 
+ matches any uppercase character. </p>
+        <p class="SVnormal">Negated character classes specify characters that should 
+ not be matched. For example,, [^A-Z] matches everything except upper case 
+ alpha characters.</p>
+        <h2 class="SVheading2">Examples of Regular Expressions</h2>
+        <p class="SVnormal">All variable names that have a first branch of "System":</p>
+        <p class="SVprogramCode">^System</p>
+        <p class="SVnormal">All variable names that end in a number:</p>
+        <p class="SVprogramCode">[0-9]$</p>
+        <p class="SVnormal">All variable names:</p>
+        <p class="SVprogramCode">.*</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

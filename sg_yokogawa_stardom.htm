@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Smart Generators" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to import a Yokogawa Stardom configuration</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor122"></a>How to import a Yokogawa Stardom configuration</h1>
+        <p class="SVnormal">The Smart Generator for Stardom generates the following in the <span class="mc-variable OEM.ProductName variable">PcVue</span> project based on a Yokogawa Stardom configuration:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">OPC data acquisition between <span class="mc-variable OEM.ProductName variable">PcVue</span> and the Stardom FCN-FCJ OPC Server.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">I/O variables including mapping onto the OPC-DA client driver.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Mimics by associating HMI symbols with the Stardom project's Program Organization Units (POUs). The mimics that can be generated are: Trend mimics, control group mimics, graphics mimics (free mimics), and the system overview mimic. The latter mimic includes: One controller symbol for each controller and an information panel (Faceplate) for each controller type (FCN and FCJ).</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The smart generator uses the Stardom Library to provide the specialized components for the HMI:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">The Toolbox mimic.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Mimic templates.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Function key settings.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">NPAS/POU symbols.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Global variable symbols.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Other symbols.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">See the <a href="#library-folder">Stardom Library folder</a> section of this topic for more information.</p>
+        <h2 class="SVheading2">Prerequisites</h2>
+        <ul>
+            <li>
+                <p class="SVbulleted">You have exported the Stardom project. This is a file  exported from the Yokogawa Stardom Logic Designer in IEC61131-3 (ASCII) format.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">You have installed and stored the Stardom library folder  in the <span class="mc-variable OEM.ProductName variable">PcVue</span> project sub-folder LIB.</p>
+            </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">To operate <span class="mc-variable OEM.ProductName variable">PcVue</span> in communication with the Stardom network, the Stardom FCN-FCJ OPC Server must be running.</p>
+            <p class="SVnormal">The Stardom Logic Designer does not need to be running during the import process.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">Refer to the overview topic <a href="sg_overview.htm">Smart Generators overview</a> to learn more.</p>
+        </div>
+        <h2 class="SVheading2">Selecting the source data</h2>
+        <div class="warning">
+            <p class="SVnormal">Before you start the import process, we recommend that you back up the <span class="mc-variable OEM.ProductName variable">PcVue</span> variables configuration in case of any problems occurring during the import process. The variable configuration is stored in the file VAREXP.DAT in the project's C folder.</p>
+            <p class="SVnormal">Make sure that <span class="mc-variable OEM.ProductName variable">PcVue</span> is shut down before copying the file.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Go to <b>Configure</b> then Smart Generators and click <b>New Stardom import</b>. The Smart Generator Stardom dialog opens with the Import name field specified. You can change this name. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-project"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p class="SVnumbered">
+                    <img src="../Resources/Images/SmartGen/sg_yokogawa_stardom_select_project.png" MadCap:targetName="select-project" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click on ellipses button in Exported files field and select the location of the Stardom project files to import. The exported files should be in the IEC 61131 format.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Click the <b>Advanced/Options</b> button, then select a server list and a client list in the <b>Networking list</b> tab to define the behavior of <span class="mc-variable OEM.ProductName variable">PcVue</span> variables for a multi-station project.</p>
+                <div class="warning">
+                    <p class="SVnormal">The lists of servers and clients must already have been created in <span class="mc-variable OEM.ProductName variable">PcVue</span> and the station from which you run the smart generator must be in the servers list.</p>
+                </div>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">Select the <b>OPC server</b> tab and select from the drop downs the default OPC server and group. This configuration applies to global variables only.</p>
+                <div class="warning">
+                    <p class="SVnormal">The resources declared in the OPC server configuration file (FCXCNF.CSV) must be the same as those declared in the Stardom project.</p>
+                </div>
+            </li>
+            <li value="5">
+                <p class="SVnumbered">Select the <b>Options</b> tab and select from the drop-down the encoding for the exported files then click <b>OK</b> to validate.</p>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Selecting POUs and import type</h2>
+        <p class="SVnormal">After you have selected the source data and configured the networking lists and options of the import via the Select project dialog, the next step is to select the POUs (Program Organization Unit) you want to import and the import type.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Click <b>Next</b>, the Select POUs dialog opens. Here the POUs are displayed in a tree structure of three levels. The first level is the Controller, the second one is the Task and the third is the Program. Select the items to be imported. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-pou"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p class="SVbulleted">
+                    <img src="../Resources/Images/SmartGen/sg_yokogawa_stardom_select_items.png" MadCap:targetName="select-pou" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">To customize POUs, select them and click <b>Customize</b>. This opens the POUs dialog which enables you to configure several properties for all instances of POUs selected. The list view pane on the left displays the instance name of the selected items. For example: FCX01/Task0/PRG1/PAS_PID_1. The right side of the list view displays the variables. For example: PAS_PID.</p>
+                <div class="tip">
+                    <p class="SVnormal">In the list view, you can sort the list by clicking on the column headers.</p>
+                    <p class="SVnormal">You can also use the Windows keyboard shortcuts for making multiple selections. (Shift+Click and Ctrl+Click).</p>
+                </div>
+                <p class="SVnumbered">The grid pane of the right of the dialog displays the properties configured in the STARDOMIMPORTCONFIGURATION.XML file. Click <b>Apply</b> to apply the property changes to the selected POU instances.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Click <b>Next</b>, the Import type dialog opens. Select the import type you need. There are three options:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Import data - If selected, it only imports the configuration necessary to generate <span class="mc-variable OEM.ProductName variable">PcVue</span> variables.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Import HMI- If selected, it only imports the configuration necessary to generate and structure <span class="mc-variable OEM.ProductName variable">PcVue</span> mimics (HMI).</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Full import -  If selected, it imports the configuration and generate both the variables and mimics (HMI).</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Selecting and customizing the variables</h2>
+        <p class="SVnormal">After you have selected the POUs to import and the import type via the Select import type dialog, the next step is to select the import type for the global variables, then to select and customize the variables you want to generate.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Click <b>Next</b>, the variable import process is initialized and the Select import type dialog opens. Select the type of import you need:</p>
+                <ul>
+                    <li>Custom import if you want to access the Select variables dialog in which you can filter and manually select the list of variables to import.</li>
+                    <li>Full import if you want to generate variables for all source data.</li>
+                </ul>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">(Custom import option) Adjust the filters to find the variables to import. The <b>Name</b> field allows to filter the list of variables according to the name in the source data. You can use wildcards, the asterisk (matches any number of characters) and the question mark (matches a single character).</p>
+                <p class="SVnumbered">For example:<br />'Pump1' would only match a source data named 'Pump1'. <br />'Pump?' would match 'Pump1' or 'Pump2' etc. but not 'Pump10'. <br />'Pump*' would match 'Pump1', 'Pump2' and 'Pump10' but also 'Pumpkin'.</p>
+                <p class="SVnumbered">The variables that match the filter appear in the Available Items pane.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">(Custom import option) Select the variables filtered in the Available items pane for import and click the right-arrow <b>-&gt;</b> button. The variables in the Selected items pane are to be imported and generated.</p>
+                <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-vars"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+                </p>
+                <p class="SVnormal">
+                    <img src="../Resources/Images/SmartGen/sg_yokogawa_stardom_select_vars.png" MadCap:targetName="select-vars" style="display: none;" />
+                </p>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">Click <b>Next</b>, the Customize global variables dialog opens. This dialog allows you to modify the properties of multiple variables at a time. Select the variables to modify in the left pane and adjust the properties that are not grayed out in the right pane. Each property that you modify will be applied to all selected variables.</p>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Configuring the HMI</h2>
+        <p class="SVnormal">After selecting and customizing the variables to import  via the Customize global variables dialog, the next step is to configure the HMI items to be imported.</p>
+        <div class="warning">
+            <p class="SVnormal">After making any changes to the properties of an element, you must use click <b>Apply</b> button in the toolbar before selecting another element or clicking <b>Finish</b>. Failing to do so results in the loss of any changes made.</p>
+        </div>
+        <p class="SVnumbered">Click <b>Next</b>, the Smart Generator HMI Configuration dialog opens. Here you can configure the structure and some of the contents of the mimics that form the HMI. In addition to the menu and toolbar, the dialog contains two main areas:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">The Categories configuration tree in the left pane. Right clicking on a node in the configuration tree displays a context menu. Categories are groups that contain the mimics generated by the Smart Generator. Categories are displayed and selected at run-time using the Toolbox mimic. One Category is automatically generated for each Unit. By default, each Category contains one Control Group (mimic), one Trend (mimic), and one Graphic (process mimic).</p>
+            </li>
+            <li>
+                <p class="SVbulleted"> The properties for the item selected in the Categories tree in the right pane.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The following are all possible ways in which you can modify the structure and some of the contents of the mimics that form the HMI:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">To add a new category, click in the category tree then the <b>Add</b> icon button in the menu. A new category, with default properties, is added to the end of the category tree. Category ID's are assigned automatically and cannot be edited. A maximum of 1000 categories can be created. The following properties can be edited: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="add-category"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted">Name - Language 1 - The identity of the category, if language 1 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Name - Language 2 - The identity of the category, if language 2 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Number of control groups - The number of control group mimics in the selected category. Range: 1..1000.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Number of graphics - The number of process mimics in the selected category. Range: 1..1000.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Number of trends - The number of trend mimics in the selected category. Range: 1..1000.</p>
+                    </li>
+                </ul>
+                <p class="SVbulleted">To delete a category, select it then click the <b>Delete</b> icon button in the toolbar. The category and all its mimics are deleted.</p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_azbil_harmonas_yokogawa_stardom_conf_hmi.png" MadCap:targetName="add-category" style="display: none;" />
+                </p>
+            </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">The order in which categories appear in the menu mimics at run-time is the same as configured in the categories tree. Be careful when adding or deleting categories as there are no specific tools to reorder them.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">If you reduce the number of nodes below that were previously configured, a dialog warns you that related mimics will be deleted. Deleted mimics are moved to the project's sub folder \W\BAK.</p>
+        </div>
+        <ul>
+            <li>
+                <p class="SVbulleted">To add a new control group, select the node representing the category to which the control group is to be added then click Control groups in the main menu then Add control group. A new control group with default properties will be created with the following language properties: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="add-control-group"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted">Name - Language 1 - The name of the control group. If language 1 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Name - Language 2 - The name of the control group. If language 2 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                </ul>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_azbil_harmonas_control_group_tab.png" MadCap:targetName="add-control-group" style="display: none;" />
+                </p>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <p class="SVbulleted">To display the faceplate type and instance name, expand the tree structure of object PAS/POU in the right pane and select one of the eight faceplate (symbol) slots then double-click on the object's entry in the tree structure. Its faceplate type and instance name are shown in the slot's header and the next slot to the right is selected.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">To add a new graphic, select the node representing the category to which the graphic is to be added then click Graphics in the main menu then <b>Add graphics</b>. A new graphic with default properties will be created with the following language properties:</p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted">Name Language 1 - The name of the graphic. If language 1 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Name Language 2 - The name of the graphic. If language 2 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                </ul>
+                <p class="SVbulleted">To delete a graphic, select it then using the <b>Delete</b> icon button in the toolbar. The node is removed from the tree structure.</p>
+                <div class="tip">
+                    <p class="SVnormal">The HMI objects are designed for a display resolution of 1280x1024 pixels and for Full HDMI.</p>
+                </div>
+            </li>
+            <li>
+                <p class="SVbulleted">To configure mimic links, select a graphics from the Categories tree. The Graphics configuration is displayed in the right pane. You can configure links with up to six other mimics, two each of control groups, graphics and trends, within the category. For each link, you can configure the following properties: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="add-graphics"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <ul>
+                    <ul style="list-style-type: circle;">
+                        <li>
+                            <p class="SVbulleted">Link - If selected, it enables the link configuration.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">Name - If specified, it opens the names of the control group/graphic/trend.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">Branch - If specified, it defines the branch (if any) for the link.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">Title Language 1 - If specified, it defines the text that appears on the button at run-time if using language 1.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">Title Language 2 - If specified, it defines the text that will appear on the button at run-time if using language 2.</p>
+                            <p>
+                                <img src="../Resources/Images/SmartGen/sg_azbil_harmonas_yokogawa_stardom_conf_hmi_graph.png" MadCap:targetName="add-graphics" style="display: none;" />
+                            </p>
+                            <div class="note">By default, the two links for graphics are populated with the previous and next mimic in the category.</div>
+                        </li>
+                    </ul>
+                </ul>
+            </li>
+            <li>
+                <p class="SVbulleted">To add a new trend, select the node representing the category to which the trend is to be added then click Trends in the main menu then <b>Add trends</b>. A new trend with default properties will be created with the following language properties:</p>
+                <ul style="list-style-type: circle;">
+                    <li>
+                        <p class="SVbulleted">Name Language 1 - The name of the trend. If language 1 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Name Language 2 - The name of the trend. If language 2 is selected, The name appears in the menu mimics at runtime. Up to 20 characters or ideograms.</p>
+                    </li>
+                </ul>
+                <div class="warning">
+                    <p class="SVnormal">You must manually configure the Trend viewer after the Smart Generator has completed the generation. This is because each trend mimic created by the Smart Generator contains a single unconfigured Trend viewer.</p>
+                </div>
+            </li>
+        </ul>
+        <p class="SVnumbered">Click <b>Finish</b> to complete the generation process.</p>
+        <h2 class="SVheading2">Synchronizing an existing import</h2>
+        <p class="SVnormal">When you synchronize an import, the smart generator compares the configuration elements available in the import file with those that have been imported previously to <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <div class="warning">
+            <p class="SVnormal">The synchronizing process takes into account any filter that you may have used previously with the import. For example if there are 400 variables in the import file and the previous use of the import was with a filter and created 100 variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>, synchronization will inform you that there are 300 new variables available for import.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Select the import to synchronize in the right pane of the Smart Generators dialog. A list with actions appears under the Import references pane. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="workspace"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_workspace_synch.png" MadCap:targetName="workspace" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click Synchronize. This will open the smart generator dialog in which you can reconfigure the import. If variables have been added to the import file since the last import, the smart generator will display the Import new variables dialog, inviting you to make either a full or a custom import of the remaining variables.</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">If you select full import, all variables not already in <span class="mc-variable OEM.ProductName variable">PcVue</span> are imported.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">If you select custom import, you can filter the variables using the Select variables dialog.</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">If the smart generator finds variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> that no longer exist in the import file, a list of the variables is displayed. Using this list, you can choose to remove some or all of the variables from <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">You can choose to only remove imported configuration elements of a smart generator without removing the smart generator import itself. This can be done by right-clicking the import generated and selecting <b>Remove all imported objects</b>.</p>
+        </div>
+        <h2 class="SVheading2"><a name="library-folder"></a>Stardom Library folder</h2>
+        <p class="SVnormal">The smart generator uses the Stardom Library to provide the specialized components for the HMI:</p>
+        <ul>
+            <li>
+                <p class="SVbulleted">The Toolbox mimic.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Mimic templates.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Function key settings.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">NPAS/POU symbols.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Global variable symbols.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">Other symbols.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The Library folder for Stardom is stored in the <span class="mc-variable OEM.ProductName variable">PcVue</span> library folder that by default is in the  project sub-folder LIB. Here is a list of the files supplied in the library.</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Name</td>
+                    <td class="SVtableHeading">Subfolder</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="SVtableHeading">Configuration files</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">STARDOMIMPORTCONFIGURATION.XML</td>
+                    <td class="SVtable">TP</td>
+                    <td class="SVtable">Includes Templates for all controllers, program instances and POUs as well as global definitions such as OPC groups.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">STARDOMIMPORTCONFIGURATIONHMI.XML</td>
+                    <td class="SVtable">TP</td>
+                    <td class="SVtable">A list of configuration items that are to be created for each category (Control Group, Graphics and Trend).</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="SVtableHeading">Mimic templates</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TPL_ALARMS</td>
+                    <td class="SVtable">WT</td>
+                    <td class="SVtable">For Alarm mimics.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TPL_CONTROLGROUP</td>
+                    <td class="SVtable">WT</td>
+                    <td class="SVtable">For Control Group mimics.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TPL_TRENDS</td>
+                    <td class="SVtable">WT</td>
+                    <td class="SVtable">For Trend mimics.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TPL_GRAPHICS</td>
+                    <td class="SVtable">WT</td>
+                    <td class="SVtable">For Graphics mimics.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TPL_MENU</td>
+                    <td class="SVtable">WT</td>
+                    <td class="SVtable">For Menu mimics.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TPL_SYSTEM</td>
+                    <td class="SVtable">WT</td>
+                    <td class="SVtable">For System mimics.</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="SVtableHeading">Template files</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TOOLBOX.SIT</td>
+                    <td class="SVtable">W</td>
+                    <td class="SVtable">For Toolbox mimic.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TOOLBOX.SIT.BINARY</td>
+                    <td class="SVtable">-</td>
+                    <td class="SVtable">-</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TRD_<i>xxxx</i>.SIT</td>
+                    <td class="SVtable">W</td>
+                    <td class="SVtable">For Trend mimics.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">GRA_<i>xxxx</i>.SIT</td>
+                    <td class="SVtable">W</td>
+                    <td class="SVtable">For Graphics mimics.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">CGR_<i>xxxx</i>.SIT</td>
+                    <td class="SVtable">W</td>
+                    <td class="SVtable">For Control Group mimics.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ALA_<i>xxxx</i>.SIT</td>
+                    <td class="SVtable">W
+				</td>
+                    <td class="SVtable">For Alarm mimics.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">SYS_<i>xxxx</i>.SIT</td>
+                    <td class="SVtable">W</td>
+                    <td class="SVtable">For System Overview mimics.
+				</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="SVtableHeading">Mimics</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MENU_CONTROLGROUPS</td>
+                    <td class="SVtable">W</td>
+                    <td class="SVtable">Including the Control Group menu.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MENU_GRAPHICS</td>
+                    <td class="SVtable">W</td>
+                    <td class="SVtable">Including the Graphics menu.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MENU_TRENDS</td>
+                    <td class="SVtable">W</td>
+                    <td class="SVtable">Including the Trends menu.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable"><i>[POU Name]</i>_Settings</td>
+                    <td class="SVtable">W</td>
+                    <td class="SVtable">Settings mimic. One for each supported POU.</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="SVtableHeading">Symbols</td>
+                </tr>
+                <tr>
+                    <td class="SVtable"><i>[POU Name]</i>
+                    </td>
+                    <td class="SVtable">S</td>
+                    <td class="SVtable">POU symbol. One for each supported POU.</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="SVtableHeading">Images</td>
+                </tr>
+                <tr>
+                    <td class="SVtable"><i>[POU Name]</i>.png</td>
+                    <td class="SVtable">B</td>
+                    <td class="SVtable">Images of POU symbols to be used by the smart generator.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">POU_GENERIC.png</td>
+                    <td class="SVtable">B</td>
+                    <td class="SVtable">Image to be used by the smart generator for POUs without an image of their symbol.</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

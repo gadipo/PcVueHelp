@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="HMI Object Model Reference|Examples" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../../" MadCap:HelpSystemFileName="SV_VBA.xml" MadCap:SearchType="Stem" MadCap:PreloadImages="false">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Server Variable Information Example</title> <link href="../../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="../../../SkinSupport/jquery-1.12.4.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapGlobal.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapSlideshow.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapMerging.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapAliasFile.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapUtilities.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapBody.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapHighlighter.js"></script><meta name="MS-HAID" content="hmobjVariableXL" /></head>
+    <body> <h1 class="SVheading1">Server Variable Information Example</h1><p class="SVprogramCode"><!-- EXAMPLE -->Private Sub TextGetVarInfo_Click()<br />'-------- Gets and display information about a server variable<br />'-------- NOTE the variable must be subscribed<br />&#160;Dim WorkVariable 
+ As Object<br />&#160;Dim VarName 
+ As String<br />&#160;VarName 
+ = TextInput.Text ' Name of variable to test<br />&#160;Set WorkVariable 
+ = TheseVariables.Item(VarName)<br />'-------- Get properties common to all variables<br />&#160;Text102.Text 
+ = "Description: " &amp; WorkVariable.Description<br />&#160;Select 
+ Case WorkVariable.Status<br />&#160;&#160;&#160;Case 
+ fvVariableStatusWaiting<br />&#160;&#160;&#160;&#160;&#160;Text103.Text 
+ = "Status: Waiting"<br />&#160;&#160;&#160;Case 
+ fvVariableStatusGood<br />&#160;&#160;&#160;&#160;&#160;Text103.Text 
+ = "Status: Good"<br />&#160;&#160;&#160;Case 
+ fvVariableStatusBad<br />&#160;&#160;&#160;&#160;Text103.Text 
+ = "Status: Bad"<br />&#160;&#160;&#160;Case 
+ fvVariableStatusConfigError<br />&#160;&#160;&#160;&#160;&#160;Text103.Text 
+ = "Status: Configuration error"<br />&#160;&#160;&#160;Case 
+ fvVariableStatusNotConnected<br />&#160;&#160;&#160;&#160;&#160;Text103.Text 
+ = "Status: Not Connected"<br />&#160;&#160;&#160;Case 
+ Else<br />&#160;&#160;&#160;&#160;&#160;Text103.Text 
+ = "Status: Unknown"<br />&#160;End Select<br />'-------- Get properties specific to variable types<br />&#160;Select 
+ Case WorkVariable.Type<br />&#160;&#160;&#160;Case 
+ fvVariableTypeBit<br />&#160;&#160;&#160;&#160;&#160;Text104.Text 
+ = "Bit"<br />&#160;&#160;&#160;&#160;&#160;If 
+ (WorkVariable.Value = 0) Then<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;Text105.Text 
+ = "Value: " &amp; WorkVariable.CloseLabel<br />&#160;&#160;&#160;&#160;&#160;Else<br />&#160;&#160;&#160;&#160;&#160;&#160;&#160;Text105.Text 
+ = "Value: " &amp; WorkVariable.OpenLabel<br />&#160;&#160;&#160;&#160;&#160;End 
+ If<br />&#160;&#160;&#160;Case 
+ fvVariableTypeRegister<br />&#160;&#160;&#160;&#160;&#160;Text104.Text 
+ = "Type: Register"<br />&#160;&#160;&#160;&#160;&#160;Text105.Text 
+ = "Value: " &amp; WorkVariable.Value &amp; " " &amp; 
+ _ <br />&#160;&#160;&#160;&#160;&#160;WorkVariable.Units<br />&#160;&#160;&#160;Case 
+ fvVariableTypeText<br />&#160;&#160;&#160;&#160;&#160;Text104.Text 
+ = "Text"<br />&#160;&#160;&#160;&#160;&#160;Text105.Text 
+ = "Value: " &amp; WorkVariable.Value<br />&#160;&#160;&#160;Case 
+ Else<br />&#160;&#160;&#160;&#160;&#160;Text104.Text 
+ = "Unknown variable type: " &amp; WorkVariable.Type<br />&#160;End Select<br />End Sub</p><script type="text/javascript" src="../../../SkinSupport/MadCapBodyEnd.js"></script></body>
+</html>

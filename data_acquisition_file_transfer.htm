@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>File transfer</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">File Transfer</h1>
+        <p class="SVnormal">By file transfer, we mean the transfer of a file from a communication object to the <span class="mc-variable OEM.ProductName variable">PcVue</span> machine. At the time of writing, file transfer is supported for the following data acquisition drivers:</p>
+        <ul style="list-style-type: disc;">
+            <li>IEC 61850 - Transfer of files from an IEC 61850 device,</li>
+            <li>DNP3 - Transfer of files from DNP3 device.</li>
+        </ul>
+        <p class="SVnormal">File transfer can be implemented in three ways.</p>
+        <ul style="list-style-type: disc;">
+            <li>Mirroring - Automatic, periodic, transfer of files in background (without user interaction). Only supported for IEC 61850 devices.</li>
+            <li>File transfer helper - Transfer on demand, by a user, of one or more files and / or folders using the File Transfer Helper. The user must have the rights to access the Application Explorer.</li>
+            <li>SCADA Basic - Transfer of one or more files and / or folders by script.</li>
+        </ul>
+        <h2 class="SVheading2">File transfer settings</h2>
+        <p>The Data acquisition settings dialog box contains those settings defining the default behavior of the file transfer feature</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p>Backup file before download - When using file transfer, if this setting is activated, a backup copy of any file that already exists on the <span class="mc-variable OEM.ProductName variable">PcVue</span> machine is made before downloading it again. The existing file is renamed using a .bak extension.</p>
+            </li>
+            <li>
+                <p>Mirroring</p>
+                <ul style="list-style-type: disc;">
+                    <li>
+                        <p>Default destination folder - Defines the default storage folder for the File transfer feature.</p>
+                    </li>
+                    <li>
+                        <p>Default synchronization period - Defines the default synchronization period for the File transfer feature. Default is 10 minutes.</p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>Type - Type of action to perform as part of the file transfer:</p>
+                <ul style="list-style-type: disc;">
+                    <li>
+                        <p valign="top">Download all - Download all files from the folder Source folder and store them in the Destination folder. Any file already present in the Destination folder is overwritten.</p>
+                    </li>
+                    <li>
+                        <p valign="top">Update - Download from the folder Source folder any file not yet in the Destination folder.</p>
+                    </li>
+                    <li>
+                        <p valign="top">Synchronization - Download from the folder Source folder any file already present in Destination folder but updated in the IED since the download.</p>
+                    </li>
+                    <li>
+                        <p valign="top">Mirror - Download from the folder Source folder any file already present in Destination folder but updated in the IED since the download (same as Synchronization), and delete from the Destination folder any file no longer available in the Source folder (.bak files are not deleted).</p>
+                    </li>
+                </ul>
+                <p>The Source folder is defined as part of the Device configuration.</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Using mirroring with the IEC 61850 driver</h2>
+        <p class="SVnormal">Mirroring is enabled and configured at the IEC 61850 device level using the following advanced properties. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <div MadCap:targetName="t1" style="display: none;">
+                <img src="../../Resources/Images/AE/Comm_DataAcq/61850_device_filetransfer_props.png" />
+            </div>
+        </p>
+        <ul style="list-style-type: disc;">
+            <li>File transfer<ul><li>Mirroring<ul><li>Use mirroring - Enable automatic, periodic, file transfer from the device to the <span class="mc-variable OEM.ProductName variable">PcVue</span> machine in background.<ul><li>Type<ul><li>Default - Use the default mirroring method as configured in File transfer settings</li><li>Custom - Use a mirroring method specific to the device.</li></ul></li><li>Source -  The name of the folder to monitor on the device's filesystem. Any file in the folder will be transferred. If empty, the device root folder is monitored.</li><li>Destination - The destination folder for the transferred files on the <span class="mc-variable OEM.ProductName variable">PcVue</span> machine's filesystem.<ul><li>Default - Use the default folder as configured in File transfer settings. </li><li>Custom - Use a folder specific to the device. The folder location can be a full path like "C:\\MyFiles" or a relative path like "..\\..\\MyFiles". If the folder location is empty, the Project's TP folder is used.</li></ul></li><li>Synchronization period - The period at which the transfer takes place if new files are available.<ul><li>Default - Use the default period as configured in File transfer settings. </li><li>Custom - Use a specific period specified in minutes.</li></ul></li></ul></li></ul></li></ul></li>
+        </ul>
+        <h2 class="SVheading2">Using the File transfer helper</h2>
+        <p class="SVnormal">The File transfer helper can be opened from the Application Explorer when a data acquisition device supporting File transfer is selected in the configuration tree. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <div MadCap:targetName="t2" style="display: none;">
+                <img src="../../Resources/Images/AE/Comm_DataAcq/61850_transfer_task.png" />
+            </div>
+        </p>
+        <p class="SVnormal">On opening the Helper, <span class="mc-variable OEM.ProductName variable">PcVue</span> will browse for, and display the list of available files in the device. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <div MadCap:targetName="t3" style="display: none;">
+                <img src="../../Resources/Images/AE/Comm_DataAcq/data_acquisition_file_transfer_helper.png" />
+            </div>
+        </p>
+        <p class="SVnormal">Individual files can be downloaded or deleted using the tools on the toolbar or by clicking the File menu  and selecting the appropriate command. By default, files are downloaded to the project's TP folder but this can be changed during the download process if required. </p>
+        <h2 class="SVheading2">Using File transfer in SCADA Basic</h2>
+        <p class="SVnormal">See the topic FILETRANSFER for more information about performing file transfers via a SCADA Basic script.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

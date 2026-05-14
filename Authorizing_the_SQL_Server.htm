@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Replicating a database (SQL Server)|System Configuration for Replication" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="DatabaseManager.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Authorizing the SQL Server</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor2"></a>Authorizing the SQL Server</h1>
+        <h2 class="SVheading2">When should I authorize the service ?</h2>
+        <p class="SVnormal">By default, Microsoft's SQL Server Express Edition and SQL Server Developer Edition do not allow remote connections. The replication process or access to a remote SQL Server requires the service to be authorized.</p>
+        <h2 class="SVheading2">Authorizing the service</h2>
+        <p class="SVnormal">You must authorize SQL Server to use network connections. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t5"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t5" style="display: none;">
+            <p>
+                <img src="../Resources/Images/DatabaseManager/SQL_Server_Config_Mgr_dialog.png" style="border-style: none;border: none;" border="0" />
+            </p>
+        </div>
+        <ol>
+            <li class="SVnumbered" value="1">From the Windows Start menu, open Microsoft SQL Server. SQL Server Configuration Manager.</li>
+            <li class="SVnumbered" value="2">The Sql Server Configuration Manager dialog displays a tree view on the left and a list on the right.</li><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+            <div MadCap:targetName="t4" style="display: none;">
+                <p>
+                    <img src="../Resources/Images/DatabaseManager/SQL_Server_Config_Manager_dialog.png" style="border-style: none;border: none;" border="0" />
+                </p>
+            </div>
+            <li class="SVnumbered" value="3">In the left-hand pane, open the node SQL Server Network Configuration.</li>
+            <li class="SVnumbered" value="4">There is a sub-node for each SQL Server installed on the computer. Select 'Protocols for...' for the SQL Server for the server to be used in the replication process.</li>
+            <li class="SVnumbered" value="5"><a name="kanchor3"></a>In the right-hand pane, double-click on TCP/IP to open the TCP/IP Properties dialog.</li>
+            <li class="SVnumbered" value="6">Set the property Enabled to Yes.</li><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+            <div MadCap:targetName="t3" style="display: none;">
+                <p>
+                    <img src="../Resources/Images/DatabaseManager/TCPIP_Properties_Protocol_tab.png" style="border-style: none;border: none;" border="0" />
+                </p>
+            </div>
+            <li class="SVnumbered" value="7">Click on OK and confirm the message about restarting the service.</li>
+        </ol>
+        <p class="SVnormal">The change will only be applied after you restart the SQL Server service, as follows.</p>
+        <h2 class="SVheading2">Restarting</h2>
+        <p class="SVnormal">To restart an SQL Server service that is running:</p>
+        <ol>
+            <li class="SVnumbered" value="1"><a name="kanchor4"></a>In the left hand pane of the SQL Server Configuration Manager dialog, Select SQL Server Services.</li>
+            <li class="SVnumbered" value="2">In the right-hand pane, double-click on the SQL Server (<span style="font-style: italic;">InstanceName</span>), e.g. SQLEXPRESS.</li>
+            <li class="SVnumbered" value="3">Click the Restart button.</li><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+            <div MadCap:targetName="t1" style="display: none;">
+                <p>
+                    <img src="../Resources/Images/DatabaseManager/SQL_Server_Services_Properties_dialog_Restart.png" style="border-style: none;border: none;" border="0" />
+                </p>
+            </div>
+            <li class="SVnumbered" value="4">A time bar is displayed while Windows stops and then starts the service. Close the dialogs.</li>
+        </ol>
+        <h2 class="SVheading2">Checking</h2>
+        <p class="SVnormal">To test the service, try to connect locally and/or remotely as follows:</p>
+        <table style="width: 100%;border-spacing: ;" width="100%">
+            <col style="width: 21.982%;" />
+            <col style="width: 78.018%;" />
+            <tr>
+                <td style="width: 21.982%;" valign="top" width="21.982%">
+                    <p class="SVtableHeading">From</p>
+                </td>
+                <td style="width: 78.018%;" valign="top" width="78.018%">
+                    <p class="SVtableHeading">Method</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="width: 21.982%;" valign="top" width="21.982%">
+                    <p class="SVtable">A remote PC</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 78.018%;" valign="top" width="78.018%">
+                    <p class="SVtable">Use either:</p>
+                    <p class="SVtable" style="margin-left: 40px;">Microsoft SQL Server Management Studio / Studio Express (an administrative tool in Microsoft SQL Server / Express).</p>
+                    <p class="SVtable" style="margin-left: 40px;">This Database Manager.</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 21.982%;" valign="top" width="21.982%">
+                    <p class="SVtable">The local PC</p>
+                </td>
+                <td style="width: 78.018%;" valign="top" width="78.018%">
+                    <p class="SVtable">In Microsoft SQL Server Management Studio / Studio Express, use the SQL Server name without the computer name (e.g. .\SVSQLEXPRESS instead of <span style="font-style: italic;">computer_name</span>.\SVSQLEXPRESS).</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">For access to databases beyond a firewall, see the topic <a href="Config_Rep_via_firewall.htm">Replication Across a Firewall</a>.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

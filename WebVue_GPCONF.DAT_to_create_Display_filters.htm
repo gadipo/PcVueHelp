@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Web and mobile client applications|WebVue|Configuring a project for WebVue" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Using GPCONF.DAT to Create Alarm and Log Viewer Filters</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor165"></a><a name="kanchor166"></a><a name="kanchor167"></a><a name="kanchor168"></a><a name="kanchor169"></a>Using GPCONF.DAT to Create Alarm and Log Viewer Filters</h1>
+        <div class="warning">
+            <p class="SVnormal">To avoid overwriting a manually created file, <span class="mc-variable OEM.ProductName variable">PcVue</span> only creates GPCONF.DAT on startup if it does not already exist. If you configure additional Domains and/or Natures using the Application Explorer, they will only appear in GPCONF.DAT if <span class="mc-variable OEM.ProductName variable">PcVue</span> is shut down, the existing GPCONF.DAT is deleted, and <span class="mc-variable OEM.ProductName variable">PcVue</span> is restarted.</p>
+        </div>
+        <p class="SVnormal">When used in WebVue, the filters in the Log and Alarm
+ Viewers operate differently to when they are used in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <ul>
+            <li>When used in <span class="mc-variable OEM.ProductName variable">PcVue</span>, the filters only allow you to filter by a single Domain and/or
+ Nature. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t2" style="display: none;"><br /><img src="../Resources/Images/WebApps/webVue_alarmviewer_filter_sv.png" style="border-style: none;border: none;float: none;" border="0" title="Alarm Viewer dialog, Filters tab" /><br /></div></li>
+            <li>When used in WebVue,
+ the filters can be configured in the file GPCONF.DAT. This allows you to create
+ simple expression-based filters based on Domain, Nature and other extended
+ attributes. You click on the same button in the Log Viewer 
+			     but it opens a different dialog, Events and Filters with an Events Selector tab
+				<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a> and Filters Selector tab. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+        </ul>
+        <div MadCap:targetName="t1" style="display: none;">
+            <br />
+            <img src="../Resources/Images/WebApps/webVue_logviewer_filter_events_wv.png" style="border-style: none;border: none;float: none;" border="0" title="Events and Filters dialog, Events Selector tab." />
+            <br />
+        </div>
+        <div MadCap:targetName="t3" style="display: none;">
+            <br />
+            <img src="../Resources/Images/WebApps/webVue_logviewer_filter_filter_wv.png" title="Events and Filters dialog, Filters Selector tab." />
+            <br />
+        </div>
+        <h2 class="SVheading2">GPCONF.DAT syntax</h2>
+        <p class="SVnormal">GPCONF.DAT is a text file that is stored in the project's
+ C folder. It can be edited with a text editor such as Windows Notepad. It must not be edited while <span class="mc-variable OEM.ProductName variable">PcVue</span> is running.</p>
+        <p class="SVnormal">Each filter in GPCONF.DAT uses the following syntax.</p>
+        <p class="SVprogramCode">[FILTER\<i>Name</i>]<br />DESCRIPTION=<i>Description</i><br />LABEL_0=<i>Description for language 0</i><br />LABEL_1=<i>Description for language 1</i><br />MASK_0=<i>Mask for language 0</i><br />MASK_1=<i>Mask for language 1</i><br />Sql Cmde=<i>SQL expression</i></p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 200px;" />
+            <col style="width: 550px;" />
+            <tr valign="top">
+                <td class="SVtableHeading">Property</td>
+                <td class="SVtableHeading">Description</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p class="SVtable"><i>Name</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The name of the filter that will appear in the Alarm and
+ Log Viewer if DESCRIPTION and LABEL are not given.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p class="SVtable"><i>Description</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The name of the filter that will appear in the Alarm and
+ Log Viewer if LABEL is not given. Optional.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p class="SVtable"><i>Description for language 0</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The name of the filter that will appear in the Alarm and
+ Log Viewer for language 0. Optional.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p class="SVtable"><i>Description for language 1</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The name of the filter that will appear in the Alarm and
+ Log Viewer for language 1. Optional.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p class="SVtable"><i>Mask for language 0</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Determines whether the filter will be available when WebVue
+ is used in language 0. Optional.<br />ALARM|LOG = Available in both Alarm and Log Viewers.<br />ALARM = Available in Alarm Viewer only.<br />LOG = Available in Log Viewer only.<br />Null = Not available in either viewer.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p class="SVtable"><i>Mask for language 1</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Determines whether the filter will be available when WebVue
+ is used in language 1. Optional.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p class="SVtable"><i>SQL expression</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">See below.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Creating the SQL expression</h2>
+        <p class="SVnormal">The SQL expression takes the following format.</p>
+        <p class="SVnormal">[Attribute<i>n</i>] <i>Operator</i> <i>Value</i></p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 200px;" />
+            <col style="width: 550px;" />
+            <tr valign="top">
+                <td class="SVtableHeading">Property</td>
+                <td class="SVtableHeading">Description</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p class="SVtable"><i>n</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The number of a variable's extended attribute. Range 01
+ to 16. Attribute01 is Domain, Attribute02 is Nature.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p class="SVtable"><i>Operator</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">Either = (equality) or != (inequality).</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p class="SVtable"><i>Value</i>
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The value against which the attribute is to be tested,
+ contained within quotation marks.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">Expressions may be joined using the OR and AND operators.
+ Round brackets may be used to determine the order of execution.</p>
+        <p class="SVnormal">The following are all examples of valid SQL expressions.</p>
+        <p class="SVprogramCode">Sql Cmde=[Attribute02] = 'HVAC'</p>
+        <p class="SVprogramCode">Sql Cmde=[Attribute01] = 'ZONE1' and [Attribute02] = 'FIRE'</p>
+        <p class="SVprogramCode">Sql Cmde=[Attribute01] = 'ZONE1' or [Attribute01] = 'ZONE2' and [Attribute02] = 'FIRE' </p>
+        <p class="SVprogramCode">Sql Cmde=[Attribute03] != 'Out of service'</p>
+        <h2 class="SVheading2">Creating a default GPCONF.DAT</h2>
+        <p class="SVnormal">If GPCONF.DAT is deleted, a new file will be created
+ the next time <span class="mc-variable OEM.ProductName variable">PcVue</span> is started, containing one entry for each
+ of the configured Domains and Natures.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

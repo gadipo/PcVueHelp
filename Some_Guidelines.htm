@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Conceptual topics|Program environment" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>SCADA Basic Programming Guidelines</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="Some_Guidelines_Concept" />
+    </head>
+    <body>
+        <h1 class="SVheading1">SCADA Basic programming guidelines</h1>
+        <p class="SVnormal"><a name="kanchor38"></a><a name="kanchor39"></a>As SCADA Basic must share the processing capacity with 
+ the many other tasks the computer performs, it is worth thinking carefully 
+ about the design of programs to avoid excessive CPU 
+ load and loss of system performance. The following guidelines are provided 
+ to assist the design process:</p>
+        <ul>
+            <li class="SVbulleted">As soon as significant 
+ processing is required, for example in a complex calculation, it is preferable 
+ to call a dynamic link library (DLL) since it is compiled and hence much 
+ faster in execution.</li>
+            <li class="SVbulleted">DLL routines must 
+ be developed so they require the minimum amount of time to execute. While 
+ a DLL is being executed, all operations in <span class="mc-variable OEM.ProductName variable">PcVue</span> are suspended.</li>
+            <li class="SVbulleted">Independent programs 
+ such as a spreadsheet or database (EXCEL, ACCESS) may be executed without 
+ suspending <span class="mc-variable OEM.ProductName variable">PcVue</span>, using DDE for data transfer.</li>
+            <li class="SVbulleted">Use the TREE instruction 
+ for writing generic programs that may be re-used with variables 
+ of a different branch.</li>
+            <li class="SVbulleted">As a general rule, 
+ CYCLIC programs should be used with moderation and EVENT driven programs 
+ should be used in preference to them.</li>
+        </ul>
+        <ul>
+            <li class="SVbulleted">Following an assignment in a script, the actual update of the variable's value only takes place after return of control to the <span class="mc-variable OEM.ProductName variable">PcVue</span> software. </li>
+            <li class="SVbulleted"> It is 
+ essential to avoid long processing loops (such as WHILE or FOR), without 
+ periodic return of control to the <span class="mc-variable OEM.ProductName variable">PcVue</span> software.</li>
+            <li class="SVbulleted">For calculating the 
+ values of variables, consider using expressions. </li>
+            <li class="SVbulleted">Substitution strings are supported in a SCADA Basic when using the GETARG or WINDOW instructions.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">For more information about substitution strings supported in a SCADA Basic script, please refer to Using Substitution Strings or Variable Attributes in an Animation.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal"><span style="font-weight: bold;">Use the DELAY instruction 
+ with extreme care.</span> The program becomes suspended for the DELAY 
+ period. No other function can be executed in the program in that period.</p>
+            <p class="SVnormal">The use of DELAY within a function that is called cyclically or on event
+ may produce unpredictable results and should be avoided.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

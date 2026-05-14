@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="StandardWekkWrite;CalendarWrite;CalendarRead;StandardWeekWrite;SpecialDays;StandardWeekRead;StandardWeek;EffectivePeriod" MadCap:tocPath="Web and mobile client applications|WebScheduler|WebScheduler configuration" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Schedule access rights configuration</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor22"></a>Schedule Access Rights Configuration</h1>
+        <p class="SVnormal">The SchedulesAccess.dat file is used to configure the access permission of each WebScheduler user to each of the configured schedules. The file is of CSV (comma-separated value) format with three columns.</p>
+        <p class="SVnormal">It is located in the folder C:\inetpub\&lt;SV Website&gt;\ScheduleData\App_Data where &lt;SV Website&gt; is the name of the web site as defined with the Web Deployment Console at the time of deployment of the ScheduleData service.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 50px;" />
+            <col style="width: 120px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Column</td>
+                    <td class="SVtableHeading">Use</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">1</td>
+                    <td class="SVtable" style="vertical-align: top;">User Name</td>
+                    <td class="SVtable" style="vertical-align: top;">User name. The asterisk and question mark can be used to match several use names.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">2</td>
+                    <td class="SVtable" style="vertical-align: top;">Schedule Name</td>
+                    <td class="SVtable" style="vertical-align: top;">Schedule name. The asterisk and question mark can be used to match several schedule names.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">3</td>
+                    <td class="SVtable" style="vertical-align: top;">Access Level</td>
+                    <td class="SVtable" style="vertical-align: top;">None = 0
+<br />CalendarRead = 1<br />CalendarWrite = 16
+<br />StandardWeekRead = 256
+<br />StandardWeekWrite = 2048
+<br />Full = 65535
+</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Notes</h2>
+        <ul style="list-style-type: disc;">
+            <li>WebScheduler users must first be configured in the normal manner using the  Application Explorer. </li>
+            <li>File format<ul style="list-style-type: disc;"><li>There can be multiple lines for one specific user defining the user’s access rights to various schedules.
+</li><li>There can be multiple lines for one specific schedule defining the schedule’s access rights for different users.</li><li>The Schedule Name must be enclosed with double-quotes, the User Name must not.</li></ul></li>
+            <li>The default configuration of the WebScheduler is:<br />*,"*",65535<br />which provides full access for all users to all schedules.</li>
+            <li>Permissions<ul style="list-style-type: disc;"><li>The permissions StandardWeekRead and StandardWeekWrite control access not only to the <u>Standard Week</u> page but also to the   <u>Effective Period</u> and <u>Special Days Behavior</u> pages.</li><li>As the <u>Standard Week</u>, <u>Effective Period</u> and <u>Special Days Behavior</u> pages are only accessible after first selecting a <u>Calendar</u> page, the user must have at least the  permission level 1 (CalendarRead) to have access to these pages. Permissions 256 (StandardWeekRead) and 2048 (StandardWeekWrite) cannot be used by themselves. Instead you should use 257 (CalendarRead &amp; StandardWeekRead) and 2049 (CalendarWrite &amp; StandardWeekWrite).</li><li>Access to the <u>Special Days</u> page is controlled by the CalendarRead and CalendarWrite permissions</li></ul></li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">The configuration of ScheduleAccess.dat is only taken into account on IIS startup. Therefore, after editing this file you must restart IIS (Open the Windows Command Prompt with Administrator rights and type IISreset).</p>
+            <p class="SVnormal">For a user to have access to any of the schedules they must at least have at least permission level 1 (CalendarRead), permitting access to the <u>Calendar</u> page, which is the entry point to the schedules configuration.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">The WebScheduler controls user access to BACnet Schedule and Calendar objects based on "Timetables" privileges as defined in the connected user's profile. The file SchedulesAccess.dat is ignored. </p>
+            <p class="SVnormal">The WebScheduler controls user access to built-in Cron scheduler based on privileges defined in the file SchedulesAccess.dat.</p>
+        </div>
+        <h2 class="SVheading2">Example</h2>
+        <p class="SVnormal">There are three configured schedules, TT_01, TT_02 andTT_03, and two users WS_OPERATOR and WS_MANAGER.</p>
+        <p class="SVnormal">ScheduleAccess.dat is configured as follows.</p>
+        <p class="SVdataListing">WS_OPERATOR,TT_01,257</p>
+        <p class="SVdataListing">WS_OPERATOR,TT_02,257</p>
+        <p class="SVdataListing">WS_OPERATOR,TT_03,65535</p>
+        <p class="SVdataListing">WS_MANAGER,*,65535</p>
+        <p class="SVnormal">The following behavior can be observed.</p>
+        <p class="SVnormal">The user, WS_OPERATOR, can read only the TT_01 and TT_02 calendars and standard week.</p>
+        <p class="SVnormal">The user, WS_OPERATOR, can read and write the TT_03 calendar and standard week.</p>
+        <p class="SVnormal">The user, WS_MANAGER, can read and write everything.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

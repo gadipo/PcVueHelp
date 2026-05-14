@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|BACnet|Configuring a BACnet network" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuring a BACnet/IP Network Interface</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor15"></a>Configuring a BACnet/IP Network Interface</h1>
+        <p class="SVnormal">The configuration of the BACnet/IP Network Interface determines <span class="mc-variable OEM.ProductName variable">PcVue</span> connection to, and behavior on, the BACnet network. </p>
+        <p class="SVnormal">It includes the exact list of network interfaces each BACnet network producer station will use to access a BACnet network.  Each Network Interface includes several BACnet properties, in particular the Device Id that <span class="mc-variable OEM.ProductName variable">PcVue</span> uses for the BACnet device object it exposes to the other devices on the network.</p>
+        <p class="SVnormal">You need to configure one or more Network Interfaces if you are configuring a multi-station (networked) application or require something other than the default connection port properties.</p>
+        <p class="SVnormal">This configuration may need to be changed at deployment time if the IP addresses and Network Interface Cards are different on the development system to that of the installed system.</p>
+        <h2 class="SVheading2">The default connection interface</h2>
+        <p class="SVnormal">If you do not configure a connection, then, as soon as you configure a BACnet Network, a default connection is made using the following properties.</p>
+        <ul style="list-style-type: disc;">
+            <li>Station name - Local Station.</li>
+            <li>IP properties<ul style="list-style-type: disc;"><li>IP address - 127.0.0.1 (the IP loopback address).</li><li>Port number - 47808.</li></ul></li>
+            <li>BACnet properties<ul style="list-style-type: disc;"><li>Network Id - 0.</li><li>Device Id - 62400.</li></ul></li>
+        </ul>
+        <h2 class="SVheading2">How to configure a Network Interface</h2>
+        <ol>
+            <li value="1">Navigate the Application Explorer configuration tree and select a BACnet network.</li>
+            <li value="2">Select the Network Interface task. The Network Interface dialog opens. 
+			
+			<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t1" style="display: none;"><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_connection_port_dialog.png" /><br /></div></li>
+            <li value="3">Select <u>Add Network interface</u> from the toolbar. The Network interface properties dialog opens. The following screenshot was taken with the default configuration.
+			
+			<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t2" style="display: none;"><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_connection_port_properties_dialog.png" /><br /></div></li>
+            <li value="4">Enter the network interface <u>Name</u>. This is the name by which it will be identified in <span class="mc-variable OEM.ProductName variable">PcVue</span>. You can accept the proposed name or enter one of your own.</li>
+            <li value="5">Select the <u>Station Name</u>. If configuring a standalone application select <u>Local Station</u>. If configuring a networked application, select the station on which the network interface will be used (the same as the producer of the BACnet network).</li>
+            <li value="6">Enter the IP parameters.<ol style="list-style-type: lower-alpha;"><li value="1">If configuring a networked application select a node of the chosen networked station, or provide the IP address of the network interface on the station. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t10"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t10" style="display: none;"><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_network_station.png" /></div><br />OR</li><li value="2">If configuring a standalone application enter the IP address of the local station in the <u>IP address</u> field. The <u>Node</u> field is not used. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t11"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t11" style="display: none;"><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_local_station.png" /><br /></div></li></ol></li>
+            <li value="7">Change the UDP <u>Port number</u> if necessary.</li>
+            <li value="8">Configure the BACnet properties. You can change the <u>Network Id</u> and <u>Device Id</u> if necessary.</li>
+            <li value="9">Select <u>OK</u> to confirm the configuration and close the dialog. You must restart the network before the configuration takes effect.</li>
+        </ol>
+        <h2 class="SVheading2">Why is my configured Network Interface dimmed?</h2>
+        <p class="SVnumbered">Configured network interfaces are displayed, one on each line, in the Network Interfaces dialog. Only the active network interface is displayed in a normal font, all others will be dimmed. If you have just configured a network interface, it will be dimmed at least until the network is restarted.</p>
+        <h2 class="SVheading2">Advanced properties</h2>
+        <p class="SVnormal">A foreign device can be a full-time node on a foreign subnet that does not have a BBMD, or a part-time participant (for example a device accessed via a SLIP or PPP connection). You can configure a foreign device using the Network interface dialog, Advanced tab.
+		 <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_port_advanced.png" MadCap:targetName="t3" style="display: none;" /><br /></p>
+        <ul style="list-style-type: disc;">
+            <li>IP address - The IP address of the foreign device.</li>
+            <li>Port number - The port number of the foreign device.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

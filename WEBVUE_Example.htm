@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>WEBVUE example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="WEBVUE_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor167"></a>WEBVUE Examples</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc389">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="WEBVUE_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc389.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <h2 class="SVheading2">Example 1 - Data returned by WEBVUE mode LIST - Syntax 1</h2>
+        <p class="SVnormal">The following example  uses the mode LIST (syntax 1 text-based) to list all users connected via a Web
+ client.</p>
+        <p class="SVprogramCode">Sub ListSyntax1()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iRet as Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim strClientList as Str;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim hBuff as Long;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">hBuff = ALLOC_BUFFER(5000);		'Allocate a buffer of 5 kb</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = Webvue("LIST", hBuff);	'Retrieve the list of sessions</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode LIST Syntax 1 executed with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">if (iRet == -1) then	'List retrieval failed</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">Print("List retrieval failed - Memory buffer is too small");</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">else	'List retrieval is successful</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">strClientList = CGET_BUFFER(hBuff,0,255);</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">Print("Number of web clients: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">Print("List of web clients: ", strClientList);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">end if</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">FREE_BUFFER(hBuff);</p>
+        <p class="SVprogramCode">End Sub</p>
+        <h2 class="SVheading2">Example 2 - Data returned by WEBVUE mode LIST - Syntax 6</h2>
+        <p class="SVnormal">The following example using the mode LIST (syntax 6 XML-based) to list all users connected via a Web
+ client.</p>
+        <h3 class="SVheading3">Typical XML fragment returned by mode LIST - Syntax 6</h3>
+        <p class="SVprogramCode">&lt;list myid="767565456788"&gt;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">&lt;session&gt;</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">id="535625422312"</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">creationtime=xxxxxxx</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">username="User01"</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">clienttype="webvue"</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">clientip:xxx.xxx.x.xxx</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">clienthost: MM-MBP.local</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">useragent: Mozilla/5(Maintosh; intel Mac OS X 10_15_7)AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.3 Safari/</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">browser: Safari</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">os: Mac</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">devicetype: Desktop</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">&lt;/session&gt;</p>
+        <p class="SVprogramCode">&lt;/list&gt;</p>
+        <h3 class="SVheading3">Script to analyze the returned data</h3>
+        <p class="SVprogramCode">SUB LISTWEBVUESESSIONS()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">DIM iRet as Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">DIM hBuff as Long;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">DIM i As Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">DIM iSessionCount As Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">DIM sPath As Str;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Webvue("LIST"); 'Retrieve the list of sessions</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode LIST Syntax 6 executed");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iSessionCount = XMLPATH("COUNT","webvue/list","list/session"); 'Retrieve the list of sessions in the XML fragment</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print(iSessionCount, " Web session(s) currently active.");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">hBuff = XMLPATH("GET","webvue/list","list.myid");</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">If (hBuff != 0 ) Then</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">Print("myid - The session Id of the script caller is: ",CGET_BUFFER ( hBuff, 0, 255 ));</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">If (iSessionCount&gt;0) then</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">For (i=1; i&lt;=iSessionCount;i++) 'Iterate the collection of session elements in the XML fragment</p>
+        <p class="SVprogramCode" style="text-indent: 1.5in;">sPath = FORMAT("list.session[%d].id", i);</p>
+        <p class="SVprogramCode" style="text-indent: 1.5in;">hBuff = XMLPATH( "GET", "webvue/list", sPath );</p>
+        <p class="SVprogramCode" style="text-indent: 1.5in;">If (hBuff != 0) Then</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">Print("Web session number ",i);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">Print("\tid: ",CGET_BUFFER(hBuff,0,255));</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">sPath = FORMAT("list.session[%d].creationtime", i);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">Print("\tcreationtime: ",DATETIMESTRING(XMLPATH("GETDOUBLE","webvue/list",sPath)));</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">sPath = FORMAT("list.session[%d].username",i);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">hBuff = XMLPATH("GET","webvue/list",sPath );</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">Print("\tusername: ",CGET_BUFFER(hBuff,0,255));</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">sPath = FORMAT("list.session[%d].clienttype",i);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">hBuff = XMLPATH ("GET","webvue/list",sPath);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">Print("\tclienttype: ",CGET_BUFFER(hBuff,0,255));</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">sPath = FORMAT("list.session[%d].clientip",i);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">hBuff = XMLPATH ("GET","webvue/list",sPath);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">Print("\tclientip: ",CGET_BUFFER(hBuff,0,255));</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">sPath = FORMAT("list.session[%d].clienthost",i);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">hBuff = XMLPATH ("GET","webvue/list",sPath);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">Print("\tclienthost: ",CGET_BUFFER(hBuff,0,255));</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">sPath = FORMAT("list.session[%d].useragent",i);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">hBuff = XMLPATH ("GET","webvue/list",sPath);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">Print("\tuseragent: ",CGET_BUFFER(hBuff,0,255));</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">sPath = FORMAT("list.session[%d].browser",i);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">hBuff = XMLPATH ("GET","webvue/list",sPath);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">Print("\tbrowser: ",CGET_BUFFER(hBuff,0,255));</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">sPath = FORMAT("list.session[%d].os",i);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">hBuff = XMLPATH ("GET","webvue/list",sPath);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">Print("\tos: ",CGET_BUFFER(hBuff,0,255));</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">sPath = FORMAT("list.session[%d].devicetype",i);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">hBuff = XMLPATH ("GET","webvue/list",sPath);</p>
+        <p class="SVprogramCode" style="text-indent: 2in;">Print("\tdevicetype: ",CGET_BUFFER(hBuff,0,255));</p>
+        <p class="SVprogramCode" style="text-indent: 1.5in;">End If</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">Next</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">End If</p>
+        <p class="SVprogramCode">End Sub</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

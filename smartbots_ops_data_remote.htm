@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="IM_SmartBots.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Data remote operations</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Data remote operations</h1>
+        <p class="SVnormal">This category contains all operations related to remote data exchange APIs that can be used in a bot.</p>
+        <h2 class="SVheading2">Read variable value</h2>
+        <p class="SVnormal">Reads the value of a variable. This operation has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Key</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Unique reference to the value in memory. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Scope</td>
+                    <td class="SVtable" style="vertical-align: top;">Enum</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Accessibility scope of value in memory. The following values are available.</p>
+                        <ul>
+                            <li class="SVtable">
+                                <p>Private – value is available only for the current bot.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Internal – value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Shared – value is available for all bots.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Variable name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">The full variable name, including branch. The variable name is prefixed with the current bot's branch unless the @ symbol is used. This property supports usage of internal bot variables</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Send recipe</h2>
+        <p class="SVnormal">Sends a recipe to write one or several variables. This operation has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Variables list</td>
+                    <td class="SVtable" style="vertical-align: top;">Set</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>List of variables and corresponding values to command. Note that all variable values within a recipe will be modified with the same timestamp. Both variable name and value properties support usage of internal bot variables. In the Name column, use the full variable name, including branch. The variable name is prefixed with the current bot's branch unless the @ symbol is used. The list can have a maximum of 100 variables.</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Historical data request</h2>
+        <p class="SVnormal">Sends a request to the archived data base of a variable. This operation has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Key</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Unique reference to the value in memory. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Scope</td>
+                    <td class="SVtable" style="vertical-align: top;">Enum</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Accessibility scope of value in memory. The following values are available.</p>
+                        <ul>
+                            <li class="SVtable">
+                                <p>Private – value is available only for the current bot.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Internal – value is available for the current thread, i.e. for parent bots, for the current bot and for all children executed bots.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Shared – value is available for all bots.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Variable name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">The full variable name, including branch. The variable name is prefixed with the current bot's branch unless the @ symbol is used. This property supports usage of internal bot variables</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Unit name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Name of the archive Unit to be searched for the variable information. Smart bots access historical data using a unified API, so they can receive data from any supported archive Unit type.
+				</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Specify interval for the latest data</td>
+                    <td class="SVtable" style="vertical-align: top;">Boolean</td>
+                    <td class="SVtable" style="vertical-align: top;">Tick to specify the requested date range as the given time from now, e.g. latest 15 minutes, last 1 day, etc. False to specify the start and end dates explicitly.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Start date</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">A string representation of a date and time value for the start of the requested data period.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">End date
+			</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">A string representation of a date and time value for the end of the requested data period.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Padding interval
+			</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Human readable time interval. Text near the value is reformatted automatically after validating the input. Specify the padding interval to get a collection of the variable data points at the specified time range from the given archive unit using the given padding: i.e. data is spread over the specified time range with one data point every padding interval (e.g. one value every minute).</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Exclude NS data
+			</td>
+                    <td class="SVtable" style="vertical-align: top;">Boolean</td>
+                    <td class="SVtable" style="vertical-align: top;">Tick to return a collection of the variable data points only with good quality.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Filtering bit name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">The full variable name, including branch. The variable name is prefixed with the current bot’s branch unless the @ symbol is used. This property supports use of internal bot variables. Specify the variable name to get a collection of the variable data points at the specified time range from the given archive unit using the given padding, where the specified filter bit was ON (like a machine status signal). Values at the time when the filtering bit was OFF are ignored. Property is available only when padding interval is specified.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Custom filtering expression</td>
+                    <td class="SVtable" style="vertical-align: top;">C# lambda expression</td>
+                    <td class="SVtable" style="vertical-align: top;">C# lambda expression – function taking the resulting collection as an input and returning the filtered collection. This property supports usage of internal bot variables. As an example, the following string can be used to filter only the values are lower than 30.<br />x.Where(d =&gt; d.Value &lt; 30)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Aggregate function</td>
+                    <td class="SVtable" style="vertical-align: top;">Function</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>A function that will be applied to the resulting list of data points to aggregate them in a single value. The following functions are available.</p>
+                        <ul>
+                            <li class="SVtable">
+                                <p>Maximum – returns the maximum variable value with good quality.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Minimum – returns the minimum variable value with good quality.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>First – returns the first variable value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Last – returns the last variable value.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Average – returns the simple average of variable values with the good quality.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Sum – calculates the sum of all variable values with the good quality.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Standard deviation – calculates the standard deviation of variable values with the good quality.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Standard deviation in an entire population.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Excel STDEV.P function, calculates the standard deviation of variable values with the Good quality for an entire population.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Variance – calculates the variance of a sample with the good quality.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Variance in an entire population - Excel VAR.P function, returns the variance in an entire population.</p>
+                            </li>
+                            <li class="SVtable">
+                                <p>Custom – uses the custom aggregate function.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Custom aggregate function</td>
+                    <td class="SVtable" style="vertical-align: top;">C# lambda expression</td>
+                    <td class="SVtable" style="vertical-align: top;">C# lambda expression – function taking the resulting collection as an input and returning the value to store in memory. This property supports usage of internal bot variables. As an example, the following string can be used to calculate the 80<sup>th</sup> percentile for a set of data, inclusive (Excel PERCENTILE.INC function).<br />x =&gt; x.PercentileInc(q =&gt; q.Value, 0.8)</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Create database from historical data</h2>
+        <p class="SVnormal">Sends a request to the archived database of a variable. Result table is then saved to a database. This operation has the following properties.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Property name</td>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Description</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Displayed name of the operation. This property is only used in the HMI and has no effect at run-time.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Variable name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>The full variable name, including branch. The variable name is prefixed with the current bot’s branch unless the “@” symbol is used. This property supports usage of internal bot variables.</p>
+                        <div class="note">From version 16.2 onwards the Variable Name property is superseded by the Variables List property. <br />For backwards compatibility Variable Name is still supported at run-time but can no longer be configured.</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Variables list</td>
+                    <td class="SVtable" style="vertical-align: top;">&#160;</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">An array of the variable names in the request comprising the following fields.</p>
+                        <ul style="list-style-type: disc;">
+                            <li>
+                                <p class="SVtable">Archive unit name. Type string. The name of the archive unit where the variable information will be searched. Smart bots  can receive data from any supported archive unit type.</p>
+                            </li>
+                            <li>
+                                <p class="SVtable">Variable name. Type string. The full variable name, including branch. The variable name is prefixed with the current bot’s branch unless the @ symbol is used. This property supports usage of internal bot variables.</p>
+                            </li>
+                            <li>
+                                <p class="SVtable">Column name. Type string. The name of the database column to be inserted for storing the corresponding variable property. This property supports usage of internal bot variables.</p>
+                            </li>
+                            <li>
+                                <p class="SVtable">Property. Type enum. The property to retrieve from the variable object. The following values are available.</p>
+                                <ul style="list-style-type: disc;">
+                                    <li>
+                                        <p class="SVtable">Value – Value of the variable</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVtable">Quality – Quality of the variable.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVtable">Is good quality – Boolean value indicating if the quality is good.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVtable">Timestamp – Timestamp of the variable change.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVtable">Timestamp – Timestamp of the variable change in the local time zone.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVtable">Timestamp – Timestamp of the variable change in ticks format.</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Archive unit name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Name of the archive Unit where the variable information will be searched. Smart bots access Historical data using a unified API, so they can receive data from any supported archive Unit type.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Specify interval for the latest data</td>
+                    <td class="SVtable" style="vertical-align: top;">Boolean</td>
+                    <td class="SVtable" style="vertical-align: top;">True to specify the requested date range as the given time from now, e.g. latest 15 minutes, last 1 day, etc. False to specify the start and end dates explicitly.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Interval</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Human readable time interval. Text near the value is reformatted automatically after validating the input.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Start date</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">A string representation of a date and time value for the start of the requested data period.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">End date</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">A string representation of a date and time value for the end of the requested data period.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Sampling rate</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Human readable time interval. Text near the value is reformatted automatically after validating the input. Specify the padding interval to get a collection of the variable data points at the specified time range from the given archive unit using the given padding: i.e. data is spread over the specified time range with one data point every padding interval. For example one value every minute.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Exclude NS data</td>
+                    <td class="SVtable" style="vertical-align: top;">Boolean</td>
+                    <td class="SVtable" style="vertical-align: top;">True to return a collection of the variable data points only with the good quality.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Custom filtering expression</td>
+                    <td class="SVtable" style="vertical-align: top;">C# lambda expression</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p class="SVtable">C# lambda expression – function taking the resulting collection as an input and returning the filtered collection. This property supports usage of internal bot variables. As an example, the following string can be used to filter only the values are lower than 30.</p>
+                        <p class="SVtable">x.Where(d =&gt; d.Value &lt; 30)</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Database name</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Name of the database. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Drop existing database</td>
+                    <td class="SVtable" style="vertical-align: top;">Boolean</td>
+                    <td class="SVtable" style="vertical-align: top;">True to drop the specified database if exists before refilling it with the variable values. False to append the variable values to an existing database.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Column name for Timestamp (DateTime object)</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Name of the column for storing the timestamps of variable changes as objects. If value is empty, the corresponding column is not created. Storing timestamps as DataTime objects can be useful for further date and time related calculations. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Column name for Timestamp (Amount of Ticks)</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Name of the column for storing the timestamps of variable changes as ticks (the number of ticks that represent the corresponding date and time). If value is empty, the corresponding column is not created. Storing timestamps as numbers (ticks) can be useful for training AI models. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Column name for Value</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Name of the column for storing the variable values. If value is empty, the corresponding column is not created. This property supports usage of internal bot variables.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Column name for Quality</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Name of the column for storing the variable values quality. If value is empty, the corresponding column is not created. This property supports usage of internal bot variables.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Column name for Quality goodness</td>
+                    <td class="SVtable" style="vertical-align: top;">String</td>
+                    <td class="SVtable" style="vertical-align: top;">Name of the column for storing the variable values quality as Boolean. True is stored for Good quality values, False is stored for Bad quality values (NS, NS COM, etc). If value is empty, the corresponding column is not created. This property supports usage of internal bot variables.</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

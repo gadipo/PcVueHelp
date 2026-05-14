@@ -1,0 +1,1136 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" class="" MadCap:tocPath="Smart Generators" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to import a Siemens FactoryLink configuration</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor2"></a>How to import a Siemens FactoryLink configuration</h1>
+        <p class="SVnormal">The Smart Generator for FactoryLink allows you to import a FactoryLink project from which it generates the following <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration elements:</p>
+        <ul>
+            <li class="SVbulleted">Variables including array variables, alarms, historical, OPC and Modbus configuration.</li>
+            <li class="SVbulleted">Data acquisition for the OPC-DA client (OPC servers and OPC groups).</li>
+            <li class="SVbulleted">Mapping of variables onto OPC configuration elements. Only if you intend to use the FL OPC server with <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li>
+            <li class="SVbulleted">Math and logic procedures. Copy only - no automatic conversion.</li>
+            <li class="SVbulleted">Mimics and mimic templates.</li>
+            <li class="SVbulleted">Local library (symbols and images).</li>
+            <li class="SVbulleted">Shared libraries (symbols and images). Imported as <span class="mc-variable OEM.ProductName variable">PcVue</span> global libraries.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">This version of the Smart Generator can only import project files generated with version 7.5 of FL.</p>
+            <p class="SVnormal">The FL version 8.0 format of the file MLANG.DAT is supported.</p>
+        </div>
+        <h2 class="SVheading2">Differences between the FactoryLink animation engine  and <span class="mc-variable OEM.ProductName variable">PcVue</span>&#160;</h2>
+        <p class="SVnormal">There are some differences between FL Client Builder and <span class="mc-variable OEM.ProductName variable">PcVue</span> in regard to the animation engine:</p>
+        <div>
+            <ul>
+                <li>
+                    <p class="SVbulleted">Color on register level animation - There is an option in Client Builder (Ignore animation when less than) that has no effect in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Bit animation - In a Client Builder bit animation (such as Color on Bit), you can configure a register variable instead of a bit variable. This is not supported by <span class="mc-variable OEM.ProductName variable">PcVue</span>, so it creates an expression instead. If any register variables are found, they are replaced with the expression. For example =TANK1.LEVEL != 0.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Client Builder clusters - Some Client Builder tags may be prefixed with the cluster name. Before import, the smart generator reads the Client Builder file SERVERS.DAT. The list of cluster names enables it to resolve the expressions. The smart generator removes the cluster name. For example =OPCcluster:A_YEAR - OPCcluster:A_DAY becomes =A.YEAR - A.DAY.</p>
+                </li>
+                <li>
+                    <p>OPC array items - Client Builder uses two different syntaxes to address array items. For example TASKSTART_S[10] and TASKSTART_[10]_S refer the same OPC array item (TASKSTART_S). The Smart Generator is able to handle the two syntaxes so as to create as many variables as there are array elements and adapt animation configuration.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Send eSignature animation - The Client Builder animation eSignature has no equivalent in <span class="mc-variable OEM.ProductName variable">PcVue</span>. A warning is displayed when opening a mimic containing this animation and it is removed from the mimic.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Windows metafile support (.WMF) - Client Builder and <span class="mc-variable OEM.ProductName variable">PcVue</span> do not handle Windows metafile graphic files in the same way. However, the smart generator processes any imported .WMF  file so that it has the same appearance as in Client Builder.</p>
+                </li>
+                <li>
+                    <p class="SVnormal">Client Builder supports multiple languages and roles. By default, it is configured to support three languages, English, French and German, and four roles, Administrator, Supervisor, Operator and Other. Wherever you can enter text in Client Builder, you can enter a string for each of the roles for each of the languages making a potential for up to 12 strings for each text. <span class="mc-variable OEM.ProductName variable">PcVue</span> supports texts for two languages and does not support roles, so when importing the mimics from Client Builder you specify which Language/Role combinations you want to import</p>
+                </li>
+            </ul>
+            <h2 class="SVheading2">Prerequisites</h2>
+            <ul>
+                <li>
+                    <p class="SVbulleted">You have installed the FL application on the same machine as <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">You have converted the project's mimic and symbol files into ASCII format. If not, you an use the FL Client Builder's Library Converter to do so. For ECS elements, you must first convert the graphics to Client Builder using ECSCONVERT, a tool in the FL package.</p>
+                </li>
+            </ul>
+            <div class="tip">
+                <p class="SVnormal">Refer to the overview topic <a href="sg_overview.htm">Smart Generators overview</a> to learn more.</p>
+            </div>
+        </div>
+        <h2 class="SVheading2">Selecting the source data</h2>
+        <div class="warning">
+            <p class="SVnormal">Before you start the import process, we recommend that you back up the <span class="mc-variable OEM.ProductName variable">PcVue</span> variables configuration in case of any problems occurring during the import process. The variable configuration is stored in the file VAREXP.DAT in the project's C folder.</p>
+            <p class="SVnormal">Make sure that <span class="mc-variable OEM.ProductName variable">PcVue</span> is shut down before copying the file.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Go to <b>Configure</b> then Smart Generators and click <b>New FactoryLink import</b>. The Smart Generator FL dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-app"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_siemens_factorylink_select_project.png" MadCap:targetName="select-app" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p>Enter or select the path to the FL application folder in the <b>Path</b> field.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Enter the branch separator used in the FL application (defaults to '_'). It is replaced by the <span class="mc-variable OEM.ProductName variable">PcVue</span> branch separator '.'.</p>
+            </li>
+            <li value="4">
+                <p class="SVnumbered"> Select how variables will be imported, either as Internal variables or as OPC variables. If you select OPC in the <b>Type</b> field, you can tick the <b>Use FL as OPC server</b> box. This automatically configures the OPC Server, OPC Group, and OPC Item name in the variable mapping when importing to <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                <div class="tip">
+                    <p class="SVnumbered">Using FL as OPC Server offers a smooth migration path. It allows you to migrate the HMI part first, phase during which you continue to use FL as data acquisition server, and <span class="mc-variable OEM.ProductName variable">PcVue</span> as HMI. You can then migrate the data acquisition part of your system.</p>
+                </div>
+            </li>
+            <li value="5">
+                <p class="SVnumbered">Click the <b>Advanced/Options</b> button, then select a server list and a client list in the <b>Networking list</b> tab to define the behavior of <span class="mc-variable OEM.ProductName variable">PcVue</span> variables for a multi-station project.</p>
+                <div class="warning">
+                    <p class="SVnormal">The lists of servers and clients must already have been created in <span class="mc-variable OEM.ProductName variable">PcVue</span> and the station from which you run the smart generator must be in the servers list.</p>
+                </div>
+            </li>
+            <li value="6">
+                <p class="SVnumbered">Select the <b>Options</b> tab in the Options dialog. Here you can configure all the options affecting the import of configuration elements other than the HMI:</p>
+                <table style="width: 100%;">
+                    <col style="width: 123px;" />
+                    <col />
+                    <tbody>
+                        <tr>
+                            <td class="SVtableHeading">Properties</td>
+                            <td class="SVtableHeading">Description</td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">FL Tags</td>
+                            <td class="SVtable">
+                                <p class="SVnormal">The following options are available for FL tags:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Import "SHARED" tags only - If selected, it imports tags that share a common value on a multi-station application.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Import "USER" tags only - If selected, it imports tags that do not share a common value on a multi-station application.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Import both "SHARED" and "USER" tags - If selected,  it imports both tags that share a common value on a multi-station application and those that do not.</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Variables default values</td>
+                            <td class="SVtable">
+                                <p class="SVnormal">The following options are available for Variable default values:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Initialize internal bit tags to zero - If selected, it sets the option in <span class="mc-variable OEM.ProductName variable">PcVue</span> to initialize internal bit variables to a value of 0.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Import tags with default values as saved variables and generated persistence file - If selected, it sets the option to save variables so that their value is maintained through a shutdown and restart. Creates the corresponding persistence file.</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Domains</td>
+                            <td class="SVtable">
+                                <p class="SVnormal">The following options are available for Domains:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Generate USER and SHARED domains - If selected, it creates the USER and SHARED domains and adds the relevant domain to each of the imported variables.</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Arrays</td>
+                            <td class="SVtable">
+                                <p class="SVnormal">The following options are available for Arrays:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVnormal">Array formats - If selected, it controls the way in which the array index is converted to the branch via the following properties:</p>
+                                        <ul style="list-style-type: circle;">
+                                            <li>
+                                                <p class="SVbulleted">Standard arrayname.[dimension 1]...[dimension n]. For example in <span class="mc-variable OEM.ProductName variable">PcVue</span> PUMP.STATUS.1</p>
+                                            </li>
+                                            <li>
+                                                <p class="SVbulleted">Reversed [dimension 1]...[dimension n].arrayname. For example in <span class="mc-variable OEM.ProductName variable">PcVue</span> 1. PUMP.STATUS</p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Import multi-dimensional arrays - If selected, it allows the import of arrays with more than 1 dimension. The maximum theoretical number of dimensions is 5 (<span class="mc-variable OEM.ProductName variable">PcVue</span> variables can have a maximum of 6 elements).</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Add a leaf variable for a standard format array - If selected, it adds a specified leaf (final element) to the generated variable name. For example PUMP.STATUS.1.VAL. This is useful when you want to use the array variables in a symbol. The leaf is referenced within the symbol and the remainder of the variable name used as the branch when the symbol is instantiated.</p>
+                                    </li>
+                                </ul>
+                                <div class="note">
+                                    <p class="SVnormal">FL allows the use of single and multi-dimensional array variables in its projects. As array variables are not supported by <span class="mc-variable OEM.ProductName variable">PcVue</span>, when an array variable is imported the array index is converted to a variable branch. For example, a single dimensioned array in FL called PUMP_STATUS might be converted to the variables PUMP.STATUS.0, PUMP.STATUS.1 etc. in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Alarms</td>
+                            <td class="SVtable">
+                                <p class="SVnormal">The following options are available for Alarms:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Import alarms - If selected, it enables the import of alarms.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Log alarm transitions - If selected, it sets the Log to 0 and Log to 1 properties of the generated bit variables so they are eligible to be logged.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Generate a domain for each alarm group - If selected, it generates a Domain for each FL alarm group.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Import alarm descriptions - There two options to choose from:</p>
+                                        <ul style="list-style-type: circle;">
+                                            <li>
+                                                <p class="SVbulleted">Import FL tag description as alarm description.</p>
+                                            </li>
+                                            <li>
+                                                <p class="SVbulleted">Import FL alarm message as alarm description.</p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Import alarm status - If selected, it imports the alarm status.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Import alarm mask - If selected, it enables the import of alarm mask.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Import analog alarms as - There are three options to choose from:</p>
+                                        <ul style="list-style-type: circle;">
+                                            <li>
+                                                <p class="SVbulleted">Expressions only - If selected, it creates an expression and bit for each alarm condition.</p>
+                                            </li>
+                                            <li>
+                                                <p class="SVbulleted">Thresholds bit variables only - If selected, it creates a register variable with thresholds for each alarm condition.</p>
+                                            </li>
+                                            <li>
+                                                <p class="SVbulleted">Expressions or thresholds variables, depending of the alarm condition - If selected, it creates an expression and bit, or register with thresholds as applicable to the alarm condition.</p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <p class="SVnormal">See <a href="#alarm-example">the example below</a> to learn more about how alarms are imported.</p>
+                                <div class="note">
+                                    <p class="SVnormal">The FL Smart Generator generates additional properties when importing alarms. These properties are:</p>
+                                    <ul>
+                                        <li>
+                                            <p class="SVbulleted">A domain for each alarm group.</p>
+                                        </li>
+                                        <li>
+                                            <p class="SVbulleted">The alarm label in attribute 3 of the generated variable.</p>
+                                        </li>
+                                        <li>
+                                            <p class="SVbulleted">The variable that represents the condition in the attribute 5 of the generated variable.</p>
+                                        </li>
+                                        <li>
+                                            <p class="SVbulleted">The alarm group name in attribute 4 of the generated variable.</p>
+                                        </li>
+                                        <li>
+                                            <p class="SVbulleted">Alarm level (depending on the FL alarm's Priority).</p>
+                                        </li>
+                                        <li>
+                                            <p class="SVbulleted">Alarm mask (depending on the FL alarm's Hide tag).</p>
+                                        </li>
+                                        <li>
+                                            <p class="SVbulleted">Alarm acknowledgment bit (depending on the FL Alarm Status tag).</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Historical </td>
+                            <td class="SVtable">
+                                <p class="SVnormal">The following options are available for Historical:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Import Datapoint Logging as proprietary archiving - If selected, it imports the logging as trend recording in a proprietary archive unit.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Import Database Logging as proprietary archiving - If selected, it imports the logging as trend recording in a proprietary archive unit.</p>
+                                    </li>
+                                </ul>
+                                <p class="SVnormal">For example, in a table in which three FL tags are logged and the database alias name is MYDPLOG, the Smart Generator generates a proprietary archive unit MYDPLOG with the corresponding trend elements that can be found in Archive units node in the Application Explorer.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">OPC configuration</td>
+                            <td class="SVtable">
+                                <p class="SVnormal">The following options are available for OPC configuration:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Import OPC client configuration - If selected, it imports configuration elements for OPC communication, irrespective of the types of variables to be generated (OPC or internal).</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Import ODX OPC configuration - If selected, it  imports configuration elements for ODX (OPC Data eXchange). The import process is similar to that for OPC.</p>
+                                    </li>
+                                </ul>
+                                <p class="SVnormal">For example: Consider a configuration with three OPC server aliases: DIDI_IN, DIDI_OUT and FS. The FS alias represents a local ModbusExplorer OPC Server. An OPC group, GR1, has been configured. Attached to group GR1 are two FL tags mapped on the same OPC item ID. From this, the Smart Generator generates:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Three OPC servers and their associated OPC groups which appear in OPC in Data acquisition node in the Application Explorer.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">OPC variables which appear in the source tab of a variable if the OPC server is selected.</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Device configuration elements</td>
+                            <td class="SVtable">
+                                <p class="SVnormal">The following options are available for Device configuration elements:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Import Modbus TCP/IP configuration - If selected, it imports the FL configuration for the Modbus Ip driver. There are two equipment type options: JBUS_DEC and MODBUS_DEC.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Import GE TCP/IP configuration.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Import Telemecanique configuration as Modbus Ip.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Import Scaling configuration.</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">IML</td>
+                            <td class="SVtable">
+                                <p class="SVnormal">The following options are available for Math and Logic:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Generate SCADA Basic skeleton according to IML - If selected, it formats each procedure as a skeleton SCADA Basic program with a copied body as follows:</p>
+                                        <ul style="list-style-type: circle;">
+                                            <li>
+                                                <p class="SVbulleted">The SUB command.</p>
+                                            </li>
+                                            <li>
+                                                <p class="SVbulleted">The IML code, with each line marked as a comment.</p>
+                                            </li>
+                                            <li>
+                                                <p class="SVbulleted">The ENDSUB command.</p>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Import IML trigger variables as EVENTS or CYCLICS - If selected, it imports each IML trigger tag as an Event or Cyclic action, depending on the nature of the trigger tag.</p>
+                                    </li>
+                                </ul>
+                                <div class="note">
+                                    <p class="SVnormal">For details of their effects in <span class="mc-variable OEM.ProductName variable">PcVue</span>, refer to the Event actions sub-book and the Cyclic actions sub-book for more information.</p>
+                                </div>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Copy math and logic procedures to project program directory - If selected, it copies the IML procedures to the program directory of your project.</p>
+                                    </li>
+                                </ul>
+                                <p class="SVnormal">See <a href="#iml-example">the section below</a> to learn more about how IML procedures are imported.</p>
+                                <div class="note">
+                                    <p class="SVnormal">FL's Interpreted Math &amp; Logic procedures are similar to <span class="mc-variable OEM.ProductName variable">PcVue</span> SCADA Basic programs. Many Math and Logic procedures can be converted to SCADA Basic via a manual process. To assist with this, any Math and Logic procedures found by the Smart Generator are processed as follows:</p>
+                                    <ul>
+                                        <li>
+                                            <p class="SVbulleted">Shared procedures are copied to the Math and Logic (SHARED) sub-folder of the projects P folder.</p>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li>
+                                            <p class="SVbulleted">User procedures are copied to the Math and Logic (USER) sub-folder of the projects P folder.</p>
+                                        </li>
+                                        <li>
+                                            <p class="SVbulleted">The files (FLPROCS.DAT for SHARED and FLPROCU.DAT for USER) are generated. These contain one line for each procedure containing the tag, procedure name, and (optional) comment.</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="SVtable">Advanced</td>
+                            <td class="SVtable">
+                                <p class="SVnormal">The following options are available for Advanced:</p>
+                                <ul>
+                                    <li>
+                                        <p class="SVbulleted">Import report configuration - If selected, it imports report templates from the FL project. This generates a file containing the list of aliases and the corresponding variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> and a VBA module that enables you to generate the report. The report file is generated in project folder C and named IMPORTREPORT.TXT.</p>
+                                    </li>
+                                    <li>
+                                        <p class="SVbulleted">Generate a CSV file containing imported tag names before and after import (FLImport\renamed_variables.dat) - If selected, it creates a CSV formatted file containing, for each of the tags, the original FL tag name and the name of the corresponding variable in <span class="mc-variable OEM.ProductName variable">PcVue</span>. Not used by the application but a useful reference for debugging after the import.</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+        </ol>
+        <h3 class="SVheading3"><a name="alarm-example"></a>Understanding how FL alarms are imported</h3>
+        <p class="SVnormal">Consider the following Alarm Definition Information dialog from an example FactoryLink configuration. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="example-import-alarm"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p>
+            <img src="../Resources/Images/SmartGen/sg_siemens_factorylink_alarm_def_info.png" MadCap:targetName="example-import-alarm" style="display: none;">
+            </img>
+        </p>
+        <ul>
+            <li>
+                <p class="SVbulleted">FL alarm using a digital tag - VALVEA_AL is a FL digital tag. The Smart Generator generates the Bit variable BIT VALVEA.AL with the Alarm property set. The alarm will be configured to be active when the value is 1 as determined by the Condition having a value of ON.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">FL alarm using an analog tag (as an expression) - TANKA_INS is an analog tag. It is configured to produce an alarm when its value is NOT 0. The Smart Generator creates an expression TANKA.INS != 0 attached to the new Bit variable TANKA.INS_NE_0. The bit will have the Alarm property set and be configured to be active when the value is 1.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">FL alarm using an analog tag (as a threshold) - TEMP_VALUE is an analog tag and appears in four alarm conditions. The Smart Generator creates a new register variable TEMP.VALUE with a threshold value for each condition.</p>
+            </li>
+        </ul>
+        <h3 class="SVheading3"><a name="iml-example"></a>Understanding how FL math and logic procedures are imported</h3>
+        <p class="SVnormal">The Smart Generator can create a SCADA Basic program TempProg containing the corresponding IML procedure in comments as follows:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">sub TempProg()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">' proc TempProg</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">' begin</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">' if Temp_Value &gt; Temp_SetPoint then</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">' Temp_Value = Temp_Value - 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">' endif</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">' if Temp_Value &lt; Temp_SetPoint then</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">' Temp_Value = Temp_Value + 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">' endif</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">' end</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">end sub</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">It can also create an Event or Cyclic called TempProg to trigger it. After import of the FL application, you would rework the program into SCADA Basic as follows.</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">sub TempProg()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">if ( Temp.Value &gt; Temp.SetPoint) then</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Temp.Value = Temp.Value - 1;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">end if</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">if (Temp.Value &lt; Temp.SetPoint) then</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Temp.Value = Temp.Value + 1;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">end if</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">end sub</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">The Smart Generator creates new files listing the procedures (FLPROCS.DAT for SHARED and FLPROCU.DAT for USER) then creates the corresponding program files.</p>
+        <p class="SVnormal">Here is an example of PROCS.DAT contents (tag; procedure; description).</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IM_Lotstart[1];IM_Lotstart1;IM Lotstart procedure</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IM_Lotend[1];IM_Lotend1;IM Lotend procedure</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IM_Lotend_Rpt_Comp[1];IM_Lotend_Reset1;IM Reset Lotend</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">MM_Lotstart[1];MM_Lotstart1;MM Lotstart procedure</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">MM_Lotend[1];MM_Lotend1;MM Lotend procedure</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">MM_Lotend_Rpt_Comp[1];MM_Lotend_Reset1;MM Reset Lotend</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TM_Lotstart[1];TM_Lotstart1;TM Lotstart procedure</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TM_Lotend[1];TM_Lotend1;TM Lotend procedure</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TM_Lotend_Rpt_Comp[1];TM_Lotend_Reset1;TM Reset Lotend</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">After the import, the procedure files (.PRG) are accessible along with the FLPROCS.DAT file in the sub-folders of the P folder.</p>
+        <h2 class="SVheading2">Defining the arrays and selecting variables</h2>
+        <p class="SVnormal">After importing and configuring the networking list and options of the import via the Select application dialog, the next step is to define the arrays and select variables.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Click <b>Next</b>, the Array Format dialog opens. Here the arrays configured in the FL project are listed. Select arrays for which you want to choose the import format according to the Client Builder configuration (with index before or after the array name), then click <b>Change Format</b> button. You can also deselect arrays to exclude from the import list.</p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click <b>Next</b>, the variable import process is initialized and the Select import type dialog opens. Select the type of import you need:</p>
+                <ul>
+                    <li>Custom import if you want to access the Select variables dialog in which you can filter and manually select the list of variables to import.</li>
+                    <li>Full import if you want to generate variables for all source data.</li>
+                </ul>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">(Custom import option) Adjust the filters to find the variables to import. The <b>Name</b> field allows to filter the list of variables according to the name in the source data. You can use wildcards, the asterisk (matches any number of characters) and the question mark (matches a single character).</p>
+                <p class="SVnumbered">For example:<br />'Pump1' would only match a source data named 'Pump1'. <br />'Pump?' would match 'Pump1' or 'Pump2' etc. but not 'Pump10'. <br />'Pump*' would match 'Pump1', 'Pump2' and 'Pump10' but also 'Pumpkin'.</p>
+                <p class="SVnumbered">The variables that match the filter appear in the Available Items pane.</p>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">(Custom import option) Select the variables filtered in the Available items pane for import and click the right-arrow <b>-&gt;</b> button. The variables in the Selected items pane are to be imported and generated.</p>
+            </li>
+            <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-vars"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+            </p>
+            <p>
+                <img src="../Resources/Images/SmartGen/sg_siemens_factorylink_select_vars.png" MadCap:targetName="select-vars" style="display: none;" />
+            </p>
+        </ol>
+        <h2 class="SVheading2">Renaming and generating variables</h2>
+        <p class="SVnormal">After you have defined the branch and selected variables to generate via the Select variables dialog, the next step offers the possibility to edit the variables you have selected and prepare them for generation.</p>
+        <div class="note">
+            <p class="SVnormal">If a variable is displayed in red, it means that it is invalid for use in <span class="mc-variable OEM.ProductName variable">PcVue</span> and will not be generated. Use the Rename variables dialog to ensure variable name compliance:</p>
+            <ul>
+                <li>The max length of a variable name is 255 characters.</li>
+                <li>The max number of branch elements in a variable name is 12.</li>
+                <li>The name of a branch element or the name of the leaf element cannot be empty (length =0) or exceed 255 characters.</li>
+                <li>The name of a variable can only include letters, digits, or the underscore.</li>
+                <li>Variable names shall be unique. Two variables cannot have the same name.</li>
+            </ul>
+        </div>
+        <p class="SVnormal">After defining the arrays and selecting variables to generate via the Select variables dialog, the next step is to edit the variables selected and prepare them for generation.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnormal">Click <b>Next</b>. The Generate variables dialog opens, listing all variables selected for generation. To rename variables, either select variables and click <b>Rename selected</b>, or use the <b>Rename invalid</b> button. The Rename variables dialog displays variables in a grid and offers several actions.</p>
+                <p><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="rename-vars"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+                </p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_siemens_factorylink_rename_vars.png" MadCap:targetName="rename-vars" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">The Rename variables dialog is designed to make it easy to give a final polish to variable names and fix invalid ones, and also to bulk modify variable properties, to set the Command level or Alarm property for example.</p>
+                <p class="SVnumbered">The following operations are available:<br /></p>
+                <ul>
+                    <li>To modify a single variable, double click it, or select it and click <b>Properties</b>. You can edit its name in the General tab. Click <b>OK</b> to validate.</li>
+                    <div class="tip">
+                        <p class="SVnormal">You can edit the variable properties in the Details tab. These properties can be its type, domain, nature etc. </p>
+                    </div>
+                    <li>To add a leaf to one or more variables (to add a .Cmd or .AlarmTmpHigh for example), select them, then click <b>Suffix</b> and enter the suffix to be added. Click <b>OK</b> to validate.</li>
+                    <li>To replace characters in the name of one or more variables, select them, then click <u style="font-weight: bold; text-decoration: none;">Replace</u> to open the Replace dialog. Enter the strings to search and replace, then click <b>OK</b>.</li>
+                    <li>To replace branch segments, select the variables, then select the branch segments to be replaced by clicking on the column header and click <u style="font-weight: bold; text-decoration: none;">Replace</u> to open the Replace dialog. Enter the strings to search and replace, then click <b>OK</b>.</li>
+                    <li>To delete a branch segment, select the variables, then the branch segments to be removed by clicking on the column header and click <b>Delete</b>. The selected branch segments are then removed from the selected variables.</li>
+                    <li>To merge branches, select the variables, then the branch segments to be merged by clicking on the column header and click <u style="font-weight: bold; text-decoration: none;">Merge</u>. The selected branch segments are then deleted for the selected variables. You can only merge consecutive branch segments.</li>
+                </ul>
+                <div class="tip">
+                    <p class="SVnormal">You can use Shift+click to select a group of adjacent variables and branches or Ctrl+click to select several individual variables.</p>
+                </div>
+                <p class="SVnumbered">Once you are done editing the variables click <b>OK</b> to close the dialog.</p>
+                <div class="note">
+                    <p class="SVnormal">To avoid conflicts, if there is a FL tag named TIME, USER or DATE, the smart generator will automatically rename the variable concerned to FLTIME, FLUSER or FLDATE.</p>
+                </div>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Click the <b>Finish</b> button to import the variables only or click <b>Next</b> to import mimics or symbols from the Client Builder elements. If you click <b>Finish</b> button, any variables in the smart generator that already exist in <span class="mc-variable OEM.ProductName variable">PcVue</span> are discarded. The corresponding variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> are not overwritten or updated in any way.</p>
+                <div class="warning">
+                    <p class="SVnormal">Any variables appearing in red are invalid and will not be generated when clicking <b>Finish</b>.</p>
+                </div>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Importing graphics</h2>
+        <p class="SVnormal">After renaming variables and defining their overall structure  via the Rename variables dialog, the next step is to import symbols, images, and mimics.</p>
+        <div class="warning">
+            <p class="SVnormal">The Smart generator can only import mimics and symbols saved in ASCII format. You can convert mimics and symbols to ASCII format in bulk using Client Builder's Library Converter (menu <u>Display\Library converter</u>).</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Click <b>Next</b>, the Import Graphics dialog opens. Here you can configure the import of  mimics, symbols, and images contained within a Client Builder project, shared libraries, and template project. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="import-graphs"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_siemens_factorylink_import_graphs.png" MadCap:targetName="import-graphs" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click on ellipses button in the path fields and go to the folder where the Client Builder project (.FVP), shared libraries, and template project are located and select them individually.</p>
+                <p class="SVnumbered">The files are processed and copied to:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">The Client Builder project is copied in the <span class="mc-variable OEM.ProductName variable">PcVue</span> project.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">The Client Builder shared libraries are copied into the <span class="mc-variable OEM.ProductName variable">PcVue</span> shared libraries.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">The Client Builder project template folder is copied into the <span class="mc-variable OEM.ProductName variable">PcVue</span> root folder TPL.</p>
+                    </li>
+                </ul>
+            </li>
+            <div class="note">
+                <p class="SVnormal">If you import shared libraries, the file LIBRARY.DAT is updated. If an entry is already present in the LIBRARY.DAT file, a similar entry is not appended to it.</p>
+                <p class="SVnormal">If a symbol is contained in a mimic, this process is transparent. For instance, a symbol from the folder Shared Libraries\MySpecialLib will be copied to the folder Lib\MySpecialLib then processed.</p>
+                <p class="SVnormal">The destination folder for template project is TPL rather than USR\[Project Name].</p>
+            </div>
+            <li value="3">
+                <p class="SVnumbered">Click on the <b>Options</b> button. The <b>Languages</b> tab opens. Select which Language/Role combinations you want if you are importing from a multilingual project. If you do not select a language or role, the default setting imports the English/Administrator strings for both languages. You should ensure that Client Builder text has been filled in for the languages chosen. If not, the imported text will be empty in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                <div class="warning">
+                    <p class="SVnormal">If you want to import strings for two languages you must enable <span class="mc-variable OEM.ProductName variable">PcVue</span> bilingual text strings option from Languages dialog opened from <b>Configure</b> in the main menu, then <b>Project</b> <b>Settings</b>. Restart before starting the import.</p>
+                </div>
+            </li>
+            <li value="4">
+                <p class="SVnumbered">Select the <b>Options</b> tab. Here you can select or deselect the Client Builder elements you would like to import via the following properties:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Import mimics - If selected, the Smart Generator imports mimics from the Mimic Files folder.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Import symbols - If selected, the Smart Generator imports the symbols from the Symbol Files folder.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Import images, AVI etc. - If selected, the Smart Generator imports all images from the Image Files folder. Some images may be licensed only for use with FL and therefore must not be used with <span class="mc-variable OEM.ProductName variable">PcVue</span>. Make sure to check before you enable this option.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Import options - If selected, the Smart Generator imports FL configuration options.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Do not import VBA scripts - If selected, the Smart Generator does not allow the import of VBA scripts.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Import VBA scripts - If selected, the Smart Generator imports VBA scripts.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Import and comment VBA scripts - If selected, the Smart Generator imports VBA scripts but each line is commented out so that the scripts can be systematically reviewed before they are enabled.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Copy "Config Files" content to "C" folder - If selected, the Smart Generator copies the contents of the Client Builder Config Files folder to <span class="mc-variable OEM.ProductName variable">PcVue</span> C folder. Although this option copies files such as the color palette, some files will be overwritten when <span class="mc-variable OEM.ProductName variable">PcVue</span> shuts down. Client Builder files for which there is no equivalent in <span class="mc-variable OEM.ProductName variable">PcVue</span> are not copied (for example SERVERS.DAT and SECURITY.DAT).</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Rework files during import - If selected, the Smart Generator rework files during the import process by renaming variables etc.</p>
+                    </li>
+                </ul>
+                <div class="note">
+                    <p class="SVnormal">To import the Client Builder color palette if the  project uses any indexed colors (the 32 colors found in the lower half of the color palette), the PALCOL.DAT file which contains the color palette must be manually copied from the Config Files folder of the Client Builder project to the C folder of the <span class="mc-variable OEM.ProductName variable">PcVue</span> project before you change or use any of the default colors in the <span class="mc-variable OEM.ProductName variable">PcVue</span> palette.</p>
+                    <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> must not be running when you copy the file, since it would overwrite the file when it is next shut down.</p>
+                </div>
+            </li>
+            <li value="5">
+                <p class="SVnumbered">Click <b>OK</b> to close the Options dialog.</p>
+            </li>
+            <li value="6">
+                <p>Tick the option <u>Generate only graphics</u> if you want to import the graphic elements only (and not the variables).</p>
+            </li>
+            <li value="7">
+                <p class="SVnumbered"> Click <b>Finish</b> to proceed with the import.<br />The smart generator is able to convert both primary and secondary variables. For example, for a Send Register animation there is one primary variable and up to six secondary (optional) variables.</p>
+            </li>
+        </ol>
+        <div class="tip">
+            <p class="SVnormal">Image, video, audio etc. media files are copied to the destination folder corresponding to the FL source folder. You must ensure that their formats are compatible with <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+            <p class="SVnormal">By default, background schematics are generated as GIF files.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">If you choose not to import animation-related variables from FL, you must ensure that there are variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> with branch structure and names corresponding to those required in the animations in the graphic elements derived from FL.</p>
+        </div>
+        <h2 class="SVheading2">Synchronizing an existing import</h2>
+        <p class="SVnormal">When you synchronize an import, the smart generator compares the configuration elements available in the import file with those that have been imported previously to <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <div class="warning">
+            <p class="SVnormal">The synchronizing process takes into account any filter that you may have used previously with the import. For example if there are 400 variables in the import file and the previous use of the import was with a filter and created 100 variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>, synchronization will inform you that there are 300 new variables available for import.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Select the import to synchronize in the right pane of the Smart Generators dialog. A list with actions appears under the Import references pane. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="workspace"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_workspace_synch.png" MadCap:targetName="workspace" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click Synchronize. This will open the smart generator dialog in which you can reconfigure the import. If variables have been added to the import file since the last import, the smart generator will display the Import new variables dialog, inviting you to make either a full or a custom import of the remaining variables.</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">If you select full import, all variables not already in <span class="mc-variable OEM.ProductName variable">PcVue</span> are imported.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">If you select custom import, you can filter the variables using the Select variables dialog.</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">If the smart generator finds variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> that no longer exist in the import file, a list of the variables is displayed. Using this list, you can choose to remove some or all of the variables from <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">You can choose to only remove imported configuration elements of a smart generator without removing the smart generator import itself. This can be done by right-clicking the import generated and selecting <b>Remove all imported objects</b>.</p>
+        </div>
+        <h2 class="SVheading2">FactoryLink import report</h2>
+        <p class="SVnormal">A report file named IMPORTREPORT.TXT is generated in the project folder C. The following is an extract of such a report.</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Importing project "C:\Program Files\FL\Applications\Examples App\CBPROJ"</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Importing mimics...</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">-------------------</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Warning: file D:\100\USR\T4\W\s1 is not ASCII format</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Number of mimics processed : 10</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Importing mimic templates...</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">----------------------------</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Number of mimic templates processed : 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Importing symbols...</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">---------------------</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Warning: file D:\811\USR\T4\S\tp1 is not ASCII format</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Warning: file D:\811\USR\T4\S\ tp2 is not ASCII format</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Warning: file D:\811\USR\T4\S\ tp3 is not ASCII format</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Warning: file D:\811\USR\T4\S\ tp4 is not ASCII format</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Warning: file D:\811\USR\T4\S\ tp5 is not ASCII format</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Number of symbols processed : 29</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Importing images...</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">-------------------</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Number of images processed : 40</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2">Generated configuration elements references</h2>
+        <p class="SVnormal">Many configuration elements are generated during the import process. The tables below describe property values for OPC data acquisition elements and variables.</p>
+        <h3 class="SVheading3">OPC configuration</h3>
+        <p class="SVnormal">The OPC server properties are configured as follows.</p>
+        <table style="width: 80%;">
+            <col style="width: 149px;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading">Properties</td>
+                <td class="SVtableHeading">Value</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Alias</td>
+                <td class="SVtable">Default value: SERVER.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Network Node</td>
+                <td class="SVtable">Default value: empty (local machine).</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Server PROGID</td>
+                <td class="SVtable">
+                    <p class="SVtable">FL.OPCServer.1 or FL.DevOPCServer.1 if FL is used as an OPC Server, else unused.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Active at launch</p>
+                </td>
+                <td class="SVtable">
+                    <p>True</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">The OPC group properties are configured as follows.</p>
+        <table style="width: 80%;">
+            <col style="width: 149px;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading">Properties</td>
+                <td class="SVtableHeading">Value</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Alias</td>
+                <td class="SVtable">Default value: GRP1.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Scan Rate</td>
+                <td class="SVtable">Default value: 1 second.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Active at launch</td>
+                <td class="SVtable">True</td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Variables configuration</h3>
+        <p class="SVnormal">The variable properties are configured as follows.</p>
+        <table style="width: 80%;">
+            <col style="width: 150px;" />
+            <col style="width: 601px;" />
+            <tr>
+                <td class="SVtableHeading">Properties</td>
+                <td class="SVtableHeading">Value</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Name</td>
+                <td class="SVtable">
+                    <p class="SVtable">The default value is based on the FL tag name but you can modify that name during import.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Branch</td>
+                <td class="SVtable">According to the branch separator.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Domain</td>
+                <td class="SVtable">Optional, depending of the FL domain or alarm group.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Description</td>
+                <td class="SVtable">
+                    <p class="SVtable">This can be optionally derived from the FL tag description or from the alarm message.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Source</td>
+                <td class="SVtable">
+                    <p class="SVtable">OPC or Internal (import option).</p>
+                    <p class="SVtable">Equipment when importing Modbus TCP configuration.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Alarm</td>
+                <td class="SVtable">Depending on FL tag.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Alarm Level</td>
+                <td class="SVtable">Depending on FL alarm Priority.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Alarm Mask</td>
+                <td class="SVtable">Depending on FL alarm mask tag.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Alarm Ack bit</td>
+                <td class="SVtable">Depending on FL alarm Status tag.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Command</td>
+                <td class="SVtable">True.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">CommandLevel</td>
+                <td class="SVtable">0.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Variable type</td>
+                <td class="SVtable">
+                    <p class="SVtable">Variable type correspondence between FL and <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                    <ul>
+                        <li>
+                            <p class="SVbulleted">FL digital tags are imported as  Bit variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">FL analog, long analog, and float tags are imported as Register variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">FL message tags are imported as Text variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Min / Max</td>
+                <td class="SVtable">
+                    <p>FL Variable range.</p>
+                    <ul>
+                        <li>
+                            <p class="SVbulleted">Range for analog tags is -32768..32767. Analog is made up of 2 bytes.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">Range for long analog tags is -2147483648..2147483647. Long analog is made up of 4 bytes.</p>
+                        </li>
+                        <li>
+                            <p class="SVbulleted">Range for float tags is +/-10(-308)..+/-10(308). Float is made up of 8 bytes.</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Attribute3</td>
+                <td class="SVtable">FL alarm message text.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Attribute4</td>
+                <td class="SVtable">Alarm group name.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Attribute5</td>
+                <td class="SVtable">Name of the variable for the alarm.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Server List</td>
+                <td class="SVtable">Optional, user-provided.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Client List</td>
+                <td class="SVtable">Optional, user-provided.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Min</td>
+                <td class="SVtable">
+                    <p>According to the FL tag default value <i>tagname</i>.RAWMIN.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Max</td>
+                <td class="SVtable">According to the FL tag default value <i>tagname</i>.RAWMAX.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Scale Min</td>
+                <td class="SVtable">According to the FL tag default value <i>tagname</i>.EUMIN.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Scale Max</td>
+                <td class="SVtable">According to the FL tag default value <i>tagname</i>.EUMAX.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">Domain</td>
+                <td class="SVtable">Optional (SHARED, USER or NONE).</td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">OPC variables configuration</h3>
+        <p class="SVnormal">If the option <b>Use FL as OPC server</b> is set, the smart generator computes the OPC mapping properties of <span class="mc-variable OEM.ProductName variable">PcVue</span> variables.</p>
+        <table style="width: 80%;">
+            <col style="width: 151px;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading">Properties</td>
+                <td class="SVtableHeading">Value</td>
+            </tr>
+            <tr>
+                <td class="SVtable">OPC Server</td>
+                <td class="SVtable">OPC server configured alias (default: FLOPCSRV).</td>
+            </tr>
+            <tr>
+                <td class="SVtable">OPC Group</td>
+                <td class="SVtable">OPC group configured alias(default: G1S).</td>
+            </tr>
+            <tr>
+                <td class="SVtable">OPC Item ID</td>
+                <td class="SVtable">FL tag name.</td>
+            </tr>
+        </table>
+        <p class="SVnormal">If the option <u style="font-weight: bold; text-decoration: none;">Import OPC configuration</u> is set, the OPC mapping properties of <span class="mc-variable OEM.ProductName variable">PcVue</span> variables are defined as follow:</p>
+        <table style="width: 80%;">
+            <col style="width: 154px;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading">Properties</td>
+                <td class="SVtableHeading">Value</td>
+            </tr>
+            <tr>
+                <td class="SVtable">OPC Server</td>
+                <td class="SVtable">OPC server configured alias.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">OPC Group</td>
+                <td class="SVtable">OPC group configured alias.</td>
+            </tr>
+            <tr>
+                <td class="SVtable">OPC Item ID</td>
+                <td class="SVtable">OPC Item.</td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">Generated variables have their Command property selected to facilitate testing.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

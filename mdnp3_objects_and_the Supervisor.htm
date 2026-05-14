@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|DNP3" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>DNP3 Inputs and Outputs, Object Groups and Variations</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">DNP3 Inputs and Outputs, Object Groups and Variations</h1>
+        <p class="SVnormal">The following table lists the DNP3 input and output types that are supported by <span class="mc-variable OEM.ProductName variable">PcVue</span>. An input or output can correspond to a physical input or output or it can be calculated by the device. In addition to the inputs and outputs, there two other data types known as Internal Indications and Device Attributes that provide information about the device itself.</p>
+        <p class="SVnormal">The Object Groups define how the inputs and outputs are read and written. The actual messaging in DNP3 is quite complex but a highly simplified explanation of the groups is that, for each input and output type there are two groups, one that is used for polled messages and the other for event (exception driven) messages. For binary and analog outputs there is an additional group used for the write process.</p>
+        <table style="border-collapse: collapse;width:100%">
+            <col style="width: 200px;" />
+            <col style="width: 50px;" />
+            <col style="width: 500px;" />
+            <col style="width: 150px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Type</td>
+                    <td class="SVtableHeading">Group</td>
+                    <td class="SVtableHeading">Description</td>
+                    <td class="SVtableHeading">Variables tree</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Binary input</td>
+                    <td>1</td>
+                    <td class="SVtable" style="vertical-align: top;" rowspan="2">A two state value such as a simple on off switch.</td>
+                    <td rowspan="2" style="vertical-align: top;">Bit</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Binary input (event)</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;">Binary output</td>
+                    <td style="border-top-style: solid;border-top-width: 1px;">10</td>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;" rowspan="2">A two state output such as the open and close control for a circuit breaker.</td>
+                    <td style="vertical-align: top;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" rowspan="3">Bit</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Binary output (event)</td>
+                    <td>11</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Binary output (CROB)</td>
+                    <td>12</td>
+                    <td class="SVtable" style="vertical-align: top;">Control Relay Output Block. The mechanism used to write a binary output.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;">Running counters</td>
+                    <td style="border-top-style: solid;border-top-width: 1px;">20</td>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;" rowspan="2">A value that counts the number of occurrences of an event. For example the number of times a circuit breaker has tripped.</td>
+                    <td style="vertical-align: top;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" rowspan="2">Register</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Running counters (event)</td>
+                    <td>22</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;">Frozen counters</td>
+                    <td style="border-top-style: solid;border-top-width: 1px;">21</td>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;" rowspan="2">A value that counts the number of occurrences of an event at a particular point in time.</td>
+                    <td style="vertical-align: top;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" rowspan="2">Register</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Frozen counters (event)</td>
+                    <td>23</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;">Analog input</td>
+                    <td style="border-top-style: solid;border-top-width: 1px;">30</td>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;" rowspan="2">A single analog input such as a phase voltage.</td>
+                    <td style="vertical-align: top;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" rowspan="2">Register</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Analog input (event)</td>
+                    <td>32</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;">Analog output</td>
+                    <td style="border-top-style: solid;border-top-width: 1px;">40</td>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;" rowspan="2">A single analog output such as a set-point.</td>
+                    <td style="vertical-align: top;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;" rowspan="3">Register</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Analog output (event)</td>
+                    <td>42</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Analog output (AOB)</td>
+                    <td>41</td>
+                    <td class="SVtable" style="vertical-align: top;">Analog Output Block. The mechanism used to write an analog output.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;">Internal indications</td>
+                    <td style="border-top-style: solid;border-top-width: 1px;">80</td>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;">A two state value that indicate the operational status of the device.</td>
+                    <td style="vertical-align: top;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Bit</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Device attributes</td>
+                    <td style="vertical-align: top;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">0</td>
+                    <td class="SVtable" style="vertical-align: top;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">String values representing static properties, and analog values representing configuration attributes, of the device. For example the manufacturer's name or the quantity of analog inputs.</td>
+                    <td style="vertical-align: top;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Register or text as appropriate</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning">
+            <p class="SVnormal">The double bit binary input is not currently supported.</p>
+        </div>
+        <h2 class="SVheading2">Variations</h2>
+        <p class="SVnormal">Variations are a specific range of formats in which the data can be presented in each Group. For example, analog inputs can be a 32 bit integer with flag, a 16 bit integer with no flags, etc. For a full list of the supported variations, see the topic <a href="../../Resources/PICS/PICS%20DNP3.htm">DNP3 implementation table</a>.</p>
+        <div class="tip">
+            <p class="SVnormal">For more information on the operation of the Variable Selector, see the book The Variable Selector.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

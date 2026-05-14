@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Instruction reference A to Z|D" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>DELAY</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="DELAY_Instruct" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor122"></a>DELAY</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc80">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="ProgExec_InstbyCat" />
+            </object><a class="MCConceptLink_seealso_0" href="javascript:mc80.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />See also</a>
+        </p>
+        <p class="SVnormal">Suspends execution of the current program for the given 
+ period.</p>
+        <p class="SVnormal">WebVue support - Yes.</p>
+        <h2 class="SVheading2">Syntax</h2>
+        <p class="SVnormal">DELAY(<span style="font-style: italic;">Period</span>);</p>
+        <p class="SVnormal">There is no return type.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">Period</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The number of seconds for the delay in the range 0.1 to 
+ 3277. Any numeric type.</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <p class="SVnormal">The current program relinquishes control to the <span class="mc-variable OEM.ProductName variable">PcVue</span> software and requests 
+ execution after the given delay.</p>
+        <div class="warning">
+            <p class="SVnormal">The use of the instruction DELAY is forbidden in functions that may run concurrently, in particular in:</p>
+            <ul>
+                <li>
+                    <p class="SVbulleted">Functions 
+ called by CYCLIC, EVENT, CRONTAB, KEY or SELECTOR</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Send Program animations,</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Actions associated to alarms.</p>
+                </li>
+            </ul>
+            <p class="SVnormal">A DELAY is global to a program and suspends the execution of all its functions.</p>
+            <p class="SVnormal">If the DELAY instruction is used in the GLOBAL program, 
+ it is the program that called GLOBAL which is suspended.</p>
+        </div>
+        <h2 class="SVheading2">Example</h2>
+        <p class="SVprogramCode">SUB MainDelay()</p>
+        <p class="SVprogramCode">DIM dblFrequency as double; 'in Hz</p>
+        <p class="SVprogramCode">DIM dblPeriod as double;' in ms</p>
+        <p class="SVprogramCode">DIM intSeconds as integer; ' seconds</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">dblFrequency = 1000;</p>
+        <p class="SVprogramCode">dblPeriod = 100;</p>
+        <p class="SVprogramCode">intSeconds = 4;</p>
+        <p class="SVprogramCode">BEEP (dblFrequency,dblPeriod);</p>
+        <p class="SVprogramCode">DELAY (intSeconds);</p>
+        <p class="SVprogramCode">BEEP (dblFrequency,dblPeriod);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

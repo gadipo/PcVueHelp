@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|OPC|Configuring an OPC group" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>The OPC group Advanced tab</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">The OPC Group Advanced Tab<a name="kanchor39"></a></h1>
+        <p class="SVnormal">The Advanced tab in the OPC Group properties 
+ box  is for tuning the OPC Server connection. Under 
+ normal circumstances, these properties will not need to be changed.</p>
+        <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+        </p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/AE/Comm_DataAcq/opc_group_properties_advanced_tab.png" style="border-style: none;border: none;float: none;" border="0" />
+            </p>
+            <div class="note">
+                <p class="SVnormal">The properties marked with * are only available when 
+ using OPC-DA Classic.</p>
+                <p class="SVnormal">The properties marked with ** are only available when using OPC-XML.</p>
+            </div>
+            <div class="warning">
+                <p class="SVnormal">Many of the properties that are configured here are sent 
+ directly to the OPC server. The resultant behavior will depend on the 
+ OPC server in use.</p>
+            </div>
+        </div>
+        <ul>
+            <li class="SVbulleted">Deadband </li>
+            <ul>
+                <li class="SVbulleted">Use deadband 
+ – A dead-band that is applied by the server to any analogue variables 
+ in the group. The variables must change by a value greater than the dead-band 
+ before they are sent to the client. The behavior of the dead-band depends 
+ on how it was implemented in the server. See the documentation supplied 
+ with the server for further information. The default is not ticked.</li>
+                <ul>
+                    <li class="SVbulleted">Deadband 
+ value - The deadband value in percent. The default is 0.</li>
+                </ul>
+            </ul>
+            <li class="SVbulleted">Timestamp</li>
+            <ul>
+                <li class="SVbulleted">Use timestamp 
+ provided by the server - The timestamp for each change in value of an 
+ item is supplied by the OPC server. The default is not ticked.</li>
+                <li class="SVbulleted">*Localization 
+ of timestamp provided by the server - The following properties decide 
+ how the timestamp is generated. The server refers to the PC where the 
+ OPC server is located. The client refers to the PC where <span class="mc-variable OEM.ProductName variable">PcVue</span> 
+ is located. TimeBias is the difference between GMT0 and the time zone 
+ selected in the Windows Date/Time Properties dialog.</li>
+                <ul>
+                    <li class="SVbulleted">*UTC (or 
+ GMT) - Timestamp = (server local time - server TimeBias) + client TimeBias. 
+ This is the default.</li>
+                    <li class="SVbulleted">*Local (Current 
+ time zone) - Timestamp = server local time - server TimeBias.</li>
+                    <li class="SVbulleted">*Customized 
+ - Timestamp = (Server Local Time - Server Time Bias) - TimeBias value.</li>
+                    <ul>
+                        <li class="SVbulleted">TimeBias 
+ value* – A time offset in minutes that may be applied to the timestamp 
+ of data from an OPC server on another PC (when using DCOM).</li>
+                        <li class="SVbulleted">Adjust with DST if required</li>
+                    </ul>
+                </ul>
+            </ul>
+            <li class="SVbulleted">Connection parameters</li>
+            <ul>
+                <li class="SVbulleted">Without flow 
+ regulation - If ticked allows a disconnected server to record value changes 
+ locally and then send them in a block when communication is re-established. 
+ The default is not ticked.</li>
+                <li class="SVbulleted">*Size of exchange 
+ block – The maximum number of items that can be contained in a message 
+ between the server and client. This is sometimes limited by the OPC server. 
+ See the documentation supplied with the server for further information.</li>
+            </ul>
+            <li class="SVbulleted">*Data update parameters</li>
+            <ul>
+                <li class="SVbulleted">Update data 
+ by notification - The server sends information to the client when it changes. 
+ This is normal operation and is the default selection.</li>
+                <li class="SVbulleted">*Update data 
+ by cyclic read - The client periodically polls the server for server for 
+ information. This is only used for old servers or servers that do not 
+ work correctly.</li>
+                <li class="SVbulleted">*Update data 
+ by user program - Normal update of data is stopped and update only occurs 
+ when requested by a SCADA Basic program using the OPC instruction.</li>
+            </ul>
+            <li class="SVbulleted">*Item advising </li>
+            <ul>
+                <li class="SVbulleted">*Inactive group 
+ while connecting items – If ticked, the group ceases to be refreshed whilst 
+ new items are added. This can be advantageous where the data is being 
+ read in frames from the filed device and the server must re-optimize the 
+ frame configuration each time a new item is added. The default is ticked.</li>
+            </ul>
+            <ul>
+                <li class="SVbulleted">*Synchronize database 
+ – These properties define how data is sent from the server to the client 
+ when the connection is first established. See the documentation supplied 
+ with the server for which options are supported.</li>
+                <ul>
+                    <li class="SVbulleted">*No synchronization 
+ – This should be selected if the server automatically refreshes all items 
+ after connection.<ul><li class="SVbulleted">*Preserve saved values if quality is bad - If the variable is saved, preserve the saved value on start-up if the OPC item quality is bad.</li></ul></li>
+                    <li class="SVbulleted">*Synchronize 
+ by cache refresh - The client database is refreshed from the OPC server 
+ cache. All the items are refreshed even those that already have known 
+ values.</li>
+                    <li class="SVbulleted">*Synchronize 
+ by device refresh - The client database is refreshed after the field devices 
+ have been polled. All the items are refreshed even those that already 
+ have known values.</li>
+                </ul>
+                <ul>
+                    <li class="SVbulleted">*Synchronize 
+ by cache read – The client database is refreshed from the OPC server cache. 
+ Only items with unknown values are read. This is the default selection.</li>
+                </ul>
+                <ul>
+                    <li class="SVbulleted">*Synchronize 
+ by device read – The client database is refreshed after the field devices 
+ have been polled. Only items with unknown values are read. </li>
+                </ul>
+            </ul>
+            <li class="SVbulleted">*Read</li>
+            <ul>
+                <li class="SVbulleted">*Read mode</li>
+                <ul>
+                    <li class="SVbulleted">*Automatic 
+ detection – The client attempts to use Asynchronous mode. If this is not 
+ supported by the server then it switches to Synchronous mode. This is 
+ the default selection.</li>
+                </ul>
+                <ul>
+                    <li class="SVbulleted">*Synchronous 
+ mode – The client makes a request for data and then waits for the answer 
+ from the server. This mode should be avoided if possible as whilst the 
+ client is waiting no other activity takes place.</li>
+                </ul>
+                <ul>
+                    <li class="SVbulleted">*Asynchronous 
+ mode – The client makes a request for data and the server informs 
+ the client when the data is Available.</li>
+                </ul>
+            </ul>
+            <li class="SVbulleted">Write </li>
+            <ul>
+                <li class="SVbulleted">*Write mode</li>
+                <ul>
+                    <li class="SVbulleted">*Automatic 
+ detection – See above.</li>
+                </ul>
+                <ul>
+                    <li class="SVbulleted">*Synchronous 
+ mode – See above.</li>
+                </ul>
+                <ul>
+                    <li class="SVbulleted">*Asynchronous 
+ mode – See above.</li>
+                </ul>
+                <li class="SVbulleted">Synchronize values 
+ after writing – Used to synchronize the client and server after a write 
+ has been performed. </li>
+                <ul>
+                    <li class="SVbulleted">No synchronization 
+ – No action taken. This is the default selection.</li>
+                </ul>
+                <ul>
+                    <li class="SVbulleted">Synchronize 
+ by cache read – The value in the client is read back from the server cache.</li>
+                </ul>
+                <ul>
+                    <li class="SVbulleted">Synchronize 
+ by device read – The value in the client is read back from the field device. </li>
+                </ul>
+                <li class="SVbulleted">Update the variable immediately with the written value - The variable value is updated immediately after the write rather than waiting for it to be read from the OPC server.</li>
+                <li class="SVbulleted">*Asynchronous write timeout<ul><li class="SVbulleted">*Warning timeout - If the server has not confirmed the write after this period a warning message is generated.</li><li class="SVbulleted">*Error timeout - If the server has not confirmed the write after this period it is treated as an error.</li></ul></li>
+            </ul>
+            <li class="SVbulleted">Data interpretation</li>
+            <ul>
+                <li class="SVbulleted">Value<ul><li class="SVbulleted">Byte swapping 
+ for word array as a string - Used for servers that send strings as a word 
+ array. If selected it swaps the bytes in each word so that the string 
+ arrives in the correct sequence. The default is ticked.</li><li class="SVbulleted">Data type conversion<ul><li class="SVbulleted">Done by the SCADA software - Any data type conversion necessary to accommodate the real time value in variables is done by <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li><li class="SVbulleted">Done by the OPC server - Any data type conversion necessary to accommodate the real time value in variables is done by the OPC server.</li></ul></li></ul></li>
+            </ul>
+            <li class="SVbulleted">Quality<ul><li class="SVbulleted">Invalidate variables - The action to take with the variables when there is a failure of communication to the OPC server.<ul><li class="SVbulleted">Never - The variables are never made invalid. This can be used when there is intermittent communication with the server.</li><li class="SVbulleted">Immediately - The variables are made invalid immediately on a communication failure. This is the default value.</li><li class="SVbulleted">After a delay - The variables are made invalid after the specified delay.</li></ul></li></ul></li>
+            <li class="SVbulleted">Interoperability issues<ul><li class="SVbulleted">*Group name imposed by the server - Use this property to designate the corresponding OPC ;group if the OPC server imposes a non-compliant group name  (imposed name too long or comprising characters that are not allowed). </li><li class="SVbulleted">**Wait time<ul><li class="SVbulleted">Use wait time -  Tick to activate the use of the OPC parameter Wait time. This is required by some OPC servers even if the hold time parameter is not used.</li></ul></li></ul></li>
+            <li class="SVbulleted">Servers - A 
+ drop down list box used in multi-station applications to start the OPC 
+ group only on a specific station or list of stations. For standalone applications, 
+ the list box will be empty.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

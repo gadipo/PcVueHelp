@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|OCPP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>OCPP protocol implementation statement</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">OCPP protocol implementation statement</h1>
+        <p class="SVnormal">OCPP specifies the exchange of messages between a charge point and a CSMS such as <span class="mc-variable OEM.ProductName variable">PcVue</span>. OCPP messages are grouped in profiles. This topic includes detailed information about the level of support of OCPP by <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <div class="note">
+            <p class="SVnormal">Only one CSMS can be connected with <span class="mc-variable OEM.ProductName variable">PcVue</span> proxy at the time of writing.</p>
+        </div>
+        <h2 class="SVheading2">Supported OCPP versions</h2>
+        <ul>
+            <li>
+                <p class="SVbulleted">OCPP protocol revision 1.6 - OCPP via Json over WebSocket.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">OCPP protocol revision 2.0.1.</p>
+            </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">When creating a WebSocket connection to a 3rd party system <span class="mc-variable OEM.ProductName variable">PcVue</span> sends an HTTP header of type "Connection”. The value of this header consists of two directives: “Upgrade,Keep-Alive”. However, when evaluating the HTTP response to this message, <span class="mc-variable OEM.ProductName variable">PcVue</span> is unable to parse a value that contains more than one directive. In other words, the value of the HTTP header “Connection” in the HTTP response must be nothing else than “Upgrade”.</p>
+        </div>
+        <h2 class="SVheading2">Supported OCPP profiles</h2>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Profile name</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">Basic charge point functionality. No support for firmware updates, local authorization list management and reservations</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Local Auth List Management</td>
+                    <td class="SVtable">Features to manage the local authorization list in charge point</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Reservation</td>
+                    <td class="SVtable">Support for reservation of a charge point</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Smart Charging</td>
+                    <td class="SVtable">Support for basic Smart Charging functionality, for instance, using control pilot</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Remote Trigger</td>
+                    <td class="SVtable">Support for remote triggering of charge point initiated messages</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Supported OCPP messages</h2>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Message</td>
+                    <td class="SVtableHeading">Profile</td>
+                    <td class="SVtableHeading">Initiated by</td>
+                    <td class="SVtableHeading">Responded directly by proxy</td>
+                    <td class="SVtableHeading">Forwarded by proxy</td>
+                    <td class="SVtableHeading">Requested/Responded from proxy routed to charge point</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Authorize (see note below)</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Client (Charge Point)</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>No</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">BootNotification</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Client (Charge Point)</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>No</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ChangeAvailability</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Client (Charge Point)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ChangeConfiguration</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ClearCache</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DataTransfer</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Client (Charge Point)</p>
+                        <p> / Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>No</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">GetConfiguration</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Client (Charge Point)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Heartbeat</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Client (Charge Point)</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>No</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MeterValues</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>No</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">RemoteStartTransaction</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">RemoteStopTransaction</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Reset</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">StartTransaction  (See note below)</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Client (Charge Point)</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>No</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">StatusNotification</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Client (Charge Point)</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>No</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">StopTransaction  (See note below)</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Client (Charge Point)</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>No</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">UnlockConnector</td>
+                    <td class="SVtable">Core</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">GetDiagnostics</td>
+                    <td class="SVtable">Firmware Management</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DiagnosticsStatusNotification</td>
+                    <td class="SVtable">Firmware Management</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Client (Charge Point)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>No</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">FirmwareStatusNotification</td>
+                    <td class="SVtable">Firmware Management</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Client (Charge Point)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>No</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">UpdateFirmware</td>
+                    <td class="SVtable">Firmware Management</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">GetLocalListVersion</td>
+                    <td class="SVtable">Local Auth List Management</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">SendLocalList</td>
+                    <td class="SVtable">Local Auth List Management</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">CancelReservation</td>
+                    <td class="SVtable">Reservation</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ReserveNow</td>
+                    <td class="SVtable">Reservation</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ClearChargingProfile</td>
+                    <td class="SVtable">Smart Charging</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">GetCompositeSchedule</td>
+                    <td class="SVtable">Smart Charging</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">SetChargingProfile</td>
+                    <td class="SVtable">Smart Charging</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TriggerMessage  (See note below)</td>
+                    <td class="SVtable">Remote Trigger</td>
+                    <td class="SVtable">
+                        <p class="SVnormal">Server (Central System)</p>
+                    </td>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Yes</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note">
+            <p class="SVnormal">For the messages Authorize, StartTransaction, StopTransation, and TriggerMessage to be processed, some form of trigger must be implemented as part of the <span class="mc-variable OEM.ProductName variable">PcVue</span> project. It typically consists of a SCADA Basic script to monitor and control the value of some variables but may vary depending on the design of your project (could be event-based, executed cyclically or upon a user action, etc.).</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

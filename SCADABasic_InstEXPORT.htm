@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Data analysis (Data export)|Generating the output" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Using the SCADA Basic instruction EXPORT</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Using the SCADA Basic Instruction EXPORT</h1>
+        <p class="SVnormal">If you want to automatically generate an export (without intervention of a user) then you must use a SCADA Basic script incorporating the EXPORT instruction. The EXPORT instruction is straightforward to use and has three modes.</p>
+        <ul style="list-style-type: disc;">
+            <li>GENERATE - Generates an Export using the default settings.</li>
+            <li>GENERATE_DATES - Generates an Export using specific start and end times.</li>
+            <li>GENERATE_PERIOD - Generates an Export using a reference time and a specific period.</li>
+        </ul>
+        <p class="SVnormal">There are unlimited possibilities in the way SCADA Basic can be used to generate an export but the most common are as follows. </p>
+        <ul style="list-style-type: disc;">
+            <li>To generate an export on the change of a variable use the Event mechanism to run the SCADA Basic script when the expected transition occurs on a variable or alarm.</li>
+            <li>To generate an export according to a configurable schedule use the Scheduler mechanism to run the SCADA Basic script (typically a recurring event).</li>
+            <li>To generate an export using a mimic button use the Run-Program animation to run the SCADA Basic script.</li>
+        </ul>
+        <p class="SVnormal">For more information on SCADA Basic, see the Programming Languages help book. </p>
+        <h2 class="SVheading2">Sample program</h2>
+        <p class="SVnormal">The following script was written to allow the properties for the Export to be passed as arguments.</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: CPP;" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Sub <span style="color: #795da3; font-weight: bold; ">TryGenerate</span>&#160;<span style="color: #000000; ">()</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;Dim iResult As Integer<span style="color: #000000; ">;&lt;/</span>p<span style="color: #000000; ">&gt;</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;Dim cExportName As Str<span style="color: #000000; ">,</span> cExportPage As Str<span style="color: #000000; ">,</span> cFileName As Str<span style="color: #000000; ">,</span> cStatusVar As Str<span style="color: #000000; ">;&lt;/</span>p<span style="color: #000000; ">&gt;</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;Dim dReferenceDate As Double<span style="color: #000000; ">;</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;cExportName <span style="color: #000000; ">=</span>&#160;<span style="color: #795da3; font-weight: bold; ">GetArg</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">"ARG1"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;cExportPage <span style="color: #000000; ">=</span>&#160;<span style="color: #795da3; font-weight: bold; ">GetArg</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">"ARG2"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;cFileName <span style="color: #000000; ">=</span>&#160;<span style="color: #795da3; font-weight: bold; ">GetArg</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">"ARG3"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;dReferenceDate <span style="color: #000000; ">=</span>&#160;<span style="color: #795da3; font-weight: bold; ">Dval</span><span style="color: #000000; ">(</span><span style="color: #795da3; font-weight: bold; ">GetArg</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">"ARG4"</span><span style="color: #000000; ">));</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;cStatusVar <span style="color: #000000; ">=</span>&#160;<span style="color: #795da3; font-weight: bold; ">GetArg</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">"ARG5"</span><span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;iResult <span style="color: #000000; ">=</span>&#160;<span style="color: #795da3; font-weight: bold; ">Export</span><span style="color: #000000; ">(</span><span style="color: #df5000; ">"GENERATE"</span><span style="color: #000000; ">,</span> cExportName<span style="color: #000000; ">,</span> cExportPage<span style="color: #000000; ">,</span> cFileName<span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; font-weight: bold; ">Print</span>&#160;<span style="color: #000000; ">(</span><span style="color: #df5000; ">"Result from GENERATE = "</span><span style="color: #000000; ">,</span> iResult<span style="color: #000000; ">);</span></pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">End Sub</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

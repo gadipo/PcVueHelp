@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying desktop applications|Deploying PcVue on a RDS host|Project related issues when deploying PcVue on a RDS Host|Project path when using a RD Session Host server" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Project path when using a RD Session Host server</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Project Path When Using a RD Session Host Server</h1>
+        <p class="SVnormal">If the property <u>Use a different working folder for each Remote Desktop session</u> has been selected in a station's configuration then a different working folder is used for each station name. By working folder, we mean both the project folder and the library folder.</p>
+        <div class="note">
+            <p class="SVnormal">If the property <u>Use same working folder for all Remote Desktop sessions</u> is chosen, the project and libraries on the host PC are shared by each <span class="mc-variable OEM.ProductName variable">PcVue</span> station running in a Remote Desktop session of the PC.</p>
+        </div>
+        <h2 class="SVheading2">Reminder about the project path for applications not running in a RD Session Host session</h2>
+        <p class="SVnormal">The project path, which for the sake of this explanation we will call &lt;HostProjectPath&gt; is either &lt;<span class="mc-variable OEM.ProductName variable">PcVue</span> Path&gt;\USR or, if the -b &lt;ProjectPath&gt; command line argument is used, &lt;ProjectPath&gt;\USR.</p>
+        <h2 class="SVheading2">Project path, local library folders, and the custom project library folder</h2>
+        <p class="SVnormal">The project path that we will call &lt;SessionFullProjectPath&gt; is calculated as follows.</p>
+        <p class="SVnormal">&lt;HostProjectPath&gt;\WTS\&lt;ProjectName&gt;_&lt;StationName&gt;</p>
+        <p class="SVnormal">The local library comprising of the folders,  B, P, S, W and WT, is located under the &lt;SessionProjectPath&gt;.</p>
+        <p class="SVnormal">The custom project library folder, LIB, is also located under the &lt;SessionFullProjectPath&gt;.</p>
+        <h2 class="SVheading2">The common library folder and custom common  library folder</h2>
+        <p class="SVnormal">The common library, comprising of the folders BMP, PRG, SYM, WIN and WTP normally found under <span class="mc-variable OEM.ProductName variable">PcVue</span> root, is relocated to:</p>
+        <p class="SVnormal"> &lt;Path&gt;\WTS_LIBS\&lt;ProjectName&gt;_&lt;StationName&gt;</p>
+        <p class="SVnormal">Where &lt;Path&gt; is either the &lt;<span class="mc-variable OEM.ProductName variable">PcVue</span> Root&gt; or &lt;ProjectPath&gt; if using the -b command line argument.</p>
+        <p class="SVnormal">The custom common library folder LIB is also relocated to this path.</p>
+        <h2 class="SVheading2">Example 1: Command line =  –wts AP, WTSClientList</h2>
+        <p class="SVnormal">
+            &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> is installed in C:\SV and the name of the station within the list WTSClientList, is WTSClient1.</p>
+        <ul>
+            <li>The path for the project, local library folders and custom project library folder is:<br /><b>C:\SV\USR\WTS\AP_WTSClient1</b></li>
+            <li>The path for the common library folders and custom common library folder is:<br /><b>C:\SV\WTS_LIBS\AP_WTSClient1</b></li>
+        </ul>
+        <h2 class="SVheading2">Example 2: Command line = -b D:\SV\Projects\10.0SP1 –wts AP, WTSClientList
+</h2>
+        <p class="SVnormal">The project path is D:\SV\Projects\10.0SP1 and the name of the station within the list WTSClientList, is WTSClient1.</p>
+        <ul>
+            <li>The path for the project, local library folders and custom project library folder is:<br /><b>D:\SV\Projects\10.0SP1 \USR\WTS\AP_WTSClient1</b> </li>
+            <li>The path for the common library folders and custom common library folder is:<br /><b>D:\SV\Projects\10.0SP1\WTS_LIBS\AP_ WTSClient1</b></li>
+        </ul>
+        <h2 class="SVheading2">Example 3: Command line = 
+-r -b D:\SV\Projects\10.0SP1 -wts AP, WTSClientList
+</h2>
+        <p class="SVnormal">The project path is D:\SV\Projects\10.0SP1 and the name of the station within the list WTSClientList, is WTSClient1. The -r option specifies the use of Central Version Management and to download the reference version if necessary.</p>
+        <ul>
+            <li>The path for the project, local library folders and custom project library folder is:<br /><b>D:\SV\Projects\10.0SP1 \USR\WTS\AP_WTSClient1</b></li>
+            <li>The path for the common library folders and custom common library folder is:<br /><b>D:\SV\Projects\10.0SP1\WTS_LIBS\AP_ WTSClient1</b></li>
+        </ul>
+        <h2 class="SVheading2">Additional important notes</h2>
+        <p class="SVnormal">If the version in the project folder is not the reference version, or the folder is empty, then the reference version of the project is copied from the central location.</p>
+        <p class="SVnormal"> 
+If the version in the libraries folder is not the reference version, or the folder is empty, then the reference version of the libraries is copied from the central location. </p>
+        <p class="SVnormal">If the name of the station has changed, a new project and new libraries are created with a new path. The old project and libraries are not deleted. </p>
+        <p class="SVnormal">If the station is deleted the project and libraries are not deleted.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

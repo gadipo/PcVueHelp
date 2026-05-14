@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Networked applications|Using the Application Explorer to configure the network architecture|Configuring stations" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How the station number and name is allocated to a physical PC</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How the Station Number and Name is Allocated to a Physical PC<a name="kanchor214"></a></h1>
+        <h2 class="SVheading2">Why is the Station Number and Name important?</h2>
+        <p class="SVnormal">The station number (and name) is the identity of a station within a network system based on <span class="mc-variable OEM.ProductName variable">PcVue</span>. It is the base to distribute roles within the client/server system, which station produces and which station consumes data acquisition flows, variables, archives...<br />The station number and name are also used in the construct of the names of the many system variables that provide status information about the station. For example SYSTEM.&lt;<i>StationName</i>&gt;.OK_NUMBER.</p>
+        <h2 class="SVheading2">Automatic allocation</h2>
+        <p class="SVnormal">By default, the station number is allocated automatically based on the project configuration.</p>
+        <p class="SVnormal">When <span class="mc-variable OEM.ProductName variable">PcVue</span> starts, it looks up the project's network configuration for either the computer host name or IP address (depending on which you have used in the project configuration). If the host name or IP address can be matched to that of a configured station, <span class="mc-variable OEM.ProductName variable">PcVue</span> allocates the corresponding station number.<br /></p>
+        <p class="SVnormal">In the following picture, if <span class="mc-variable OEM.ProductName variable">PcVue</span> finds that the host computer has the IP address 192.168.2.3 the station number is set to 3 and the station name to STATION3. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Comm_Networking/auto_station_number.png" MadCap:targetName="t1" style="display: none;" />
+        </p>
+        <h2 class="SVheading2">Allocation fallback with INI.DAT settings</h2>
+        <p class="SVnormal">If the host computer network interfaces cannot be looked up, <span class="mc-variable OEM.ProductName variable">PcVue</span> takes the station number you have defined
+ in the file ETC\INI.DAT. This may occur when the network interface cards is deactivated or a network cable is unplugged for example.<br />The same goes if the look up for automatic allocation does not find a match because neither the host name nor the IP address of the host computer can be found in the configuration of any station in the project.</p>
+        <p class="SVnormal">You can edit the ETC\INI.DAT text file with an editor such as Notepad. <span class="mc-variable OEM.ProductName variable">PcVue</span> must be shut down before you edit this file. </p>
+        <p class="SVnormal">The parameter that must be changed is the first after 
+ the keyword PINI. By default, it is set to 1. In the extract below, it has been set to 7.</p>
+        <p class="SVdataListing">PINI,7,,1,1,256000,1,0,0x0,21,0,0,0</p>
+        <p class="SVdataListing">POS,64,80,580,360</p>
+        <div class="note">
+            <p class="SVnormal">The allocation based on the INI.DAT is an important fallback mechanism in case the automatic allocation cannot find a match at startup. For this reason, it is important that you configure the INI.DAT properly on all <span class="mc-variable OEM.ProductName variable">PcVue</span> host computers.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">On an RDS host computer, the INI.DAT is used as fallback only for the allocation of a station number to the <span class="mc-variable OEM.ProductName variable">PcVue</span> instance running on the RDS host session. It is ignored for instances running in remote desktop sessions.</p>
+        </div>
+        <h2 class="SVheading2">Allocation using the -station_number 
+ command line argument</h2>
+        <p class="SVnormal">The station number can be forced via a command line argument.<br />This capability is only useful in specific cases when you want to bypass both the automatic allocation and the fallback mechanism, for example on an engineering station for the purpose of a specific one-time test.</p>
+        <p class="SVnormal">If the command line used to start <span class="mc-variable OEM.ProductName variable">PcVue</span> has the -station_number argument followed by a value, the value passed will be used as the station number. When defining the station number on the command line, the automatic allocation is bypassed and the default in INI.DAT is ignored.</p>
+        <p class="SVnormal">For example, the following command line allocates the station number 99.</p>
+        <p class="SVdataListing">C:\Program Files\SCADA\<span class="mc-variable OEM.ProductName variable">PcVue</span>\bin\sv32.exe -s -station_number 99</p>
+        <div class="warning">
+            <p class="SVnormal">We recommend you to be extra careful when allocating the station number via the command line to avoid duplicated station numbers on the network. As for IP addresses, duplicated station numbers for stations running at the same time on a network lead to unexpected behaviors that can affect operation safety and security.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

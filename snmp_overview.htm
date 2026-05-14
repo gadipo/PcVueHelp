@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|SNMP" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Overview of SNMP</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Overview of SNMP</h1>
+        <p class="SVnormal">SNMP is an acronym for Simple Network Management Protocol. Its primary use is the management of devices on an IP network. Devices that typically support SNMP include routers, switches, servers, printers etc.</p>
+        <p class="SVnormal">SNMP exposes device management data as a number of variables. These variables can be read, and sometimes written, by managing applications.</p>
+        <div class="note">
+            <p class="SVnormal">This book is for the <span class="mc-variable OEM.ProductName variable">PcVue</span> SNMP Manager driver. If what you are looking for is exposing <span class="mc-variable OEM.ProductName variable">PcVue</span> data to a third party SNMP Manager, refer to the SNMP Agent Add-on sub-book.</p>
+        </div>
+        <p class="SVnormal">An SNMP managed network has three key components.</p>
+        <ul style="list-style-type: disc;">
+            <li>The managed device - The physical hardware and software/firmware that together make the device.</li>
+            <li>Agent - The software/firmware on the device that is responsible for exposing the managed data as variables.</li>
+            <li>Network management station - The hardware and software used to manage the network. For the purpose of this help, a PC running MS Windows and <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li>
+        </ul>
+        <p class="SVnormal">SNMP uses the UDP protocol. Port 161 is used by the SNMP agent to receive the request sent by the Network Management Station (SNMP manager). Port 162 is reserved for the manager to receive traps. The following messages are used by the driver:</p>
+        <ul style="list-style-type: disc;">
+            <li>GET - To obtain information from the agent about an attribute of a managed object.</li>
+            <li>GETBULK - To obtain information about a group of data from the agent. SNMP V1 does not support GETBULK.</li>
+            <li>SET - To set the value of an attribute of a managed object.</li>
+            <li>TRAP - An unsolicited message from the agent to <span class="mc-variable OEM.ProductName variable">PcVue</span> telling it about some event on the managed device.</li>
+        </ul>
+        <h2 class="SVheading2">Management Information Base (MIB)</h2>
+        <p class="SVnormal">SNMP itself does not define the variables that a device should provide. Instead, SNMP uses an extensible design where the available information is defined by management information bases (MIBs). MIBs describe the data available from a device using a hierarchical structure containing object identifiers (OID) and similar to that of variables.</p>
+        <p class="SVnormal">Each OID is unique. The format that defines it is a sequence of numbers separated with full stops. There are two roots (starting points), iso (which is .1) and ccit (which is .0). In practice, most OIDs start with .1.3.6.1 (where 1 = iso, 3 = org, 6 = dod, 1 = Internet). Below Internet, there are several branches, the most commonly used being mgmt (.2) and private (.4). All standard OIDs (those that have been approved by the Internet Activities Board (IAB)) reside under mgmt. OIDs defined by equipment and software vendors reside under private. In fact, they are found under a sub-tree of private, called enterprises (.1).</p>
+        <p class="SVnormal">A branch, within the private.enterprises sub-tree, is allocated to each vendor that registers for an enterprises object identifier. For example Wago has the enterprise OID .13576. So all the variables we define for an application using a Wago device would fall under .1.3.6.1.4.1.13576 (.iso.org.dod.internet.private.enterprise.wago). Up unto the enterprise number, the uniqueness is maintained by the committee, after this, the uniqueness is maintained by each enterprise. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <br />
+            <img src="../../Resources/Images/AE/Comm_DataAcq/snmp_oid_tree.png" />
+            <br />
+        </div>
+        <p class="SVnormal">SNMP provides a mechanism by which the management station can query the device for its supported OID's. However, this is seldom convenient as only the most basic information is provided (numerical identifier and data type) and it means you can only obtain the information if the device is on-line. Instead, it is normal to make use of MIB files, which describe the OIDs in more detail and can be loaded by the management station to provide information about a device even if it is off-line. There are several MIB files that describe the standard OIDs, plus each device manufacturer supplies an MIB file specific to the device.</p>
+        <p class="SVnormal">One of the most useful pieces of information that the MIB files provide is the symbolic name. Instead of a management station referring to an OID using numerical notation, it can use symbolic notation that is much easier for a user to understand. For example, when using a Wago PLC:<br />.1.3.6.1.4.1.13576.1.1<br /> becomes<br /> .iso.org.dod.internet.private.enterprises.wago.wagoCompany.wagoName</p>
+        <h2 class="SVheading2">Scalar and Tabular Objects</h2>
+        <p class="SVnormal">An object that always has a single instance is called a scalar object. An object that has multiple instances is called a tabular object. When referencing an instance, the instance number is appended to the OID.</p>
+        <p class="SVnormal">With scalar objects, the instance number is always 0. For example:<br />.iso.org.dod.internet.private.enterprises.wago.wagoCompany.wagoName.0</p>
+        <p class="SVnormal">With tabular objects, you append the instance of the object.<br />.iso.org.dod.internet.private.enterprises.wago.wagoIOProducts.wioCommon.wioPlcData.wioPlcDataTable.wioPlcDataEntry.wioPlcDataReadArea.101</p>
+        <p class="SVnormal">Only the types of objects on the managed device are specified by the MIB, not the actual instances.</p>
+        <div class="note">
+            <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> provides a way to access and retrieve data that are managed in tables by certain equipments, in most cases to expose a dynamic list of alarms. This works by enabling the dynamic table management SNMP extension. Refer to the topic <a href="snmp_extension_addon.htm">SNMP dynamic table management extension</a> to learn more.</p>
+        </div>
+        <h2 class="SVheading2">Polling mechanism</h2>
+        <p class="SVnormal">The polling mechanism used by the driver uses separate processes to send and receive a message. This allows the driver to make multiple concurrent requests. The limitation is set by the property <u>Maximum number of concurrent requests</u> in the SNMP General Settings (default 150, maximum 500), and also that only one request can be sent to one device at a given time. The polling mechanism can be thought of as parallel across all devices but serial within one.</p>
+        <p class="SVnormal">Polling is supported for managed (SNMP) and unmanaged (PING) devices.</p>
+        <h2 class="SVheading2">Trap notifications</h2>
+        <p class="SVnormal">In addition to supplying information about a device as a result of a request from a management station,  agents also send unsolicited messages  when they detect some significant event. An unsolicited message of this sort is called a trap notification.</p>
+        <p class="SVnormal">There are just five standard traps (ColdStart, WarmStart, LinkUp, LinkDown, AuthenticationFalure and egpNeighborLoss), plus a sixth that is enterprise specific.</p>
+        <h2 class="SVheading2">SNMP Versions</h2>
+        <p class="SVnormal">There are three SNMP versions.</p>
+        <ul style="list-style-type: disc;">
+            <li>V1: This is the first protocol version defined by RFC1157. The security level of this version is very basic as the only check is based on the community string.</li>
+            <li>V2c (RFC 1441): This version is known as community string based SNMPv2. Its key advantage is the support of GETBULK function, which supports a multiple item read in one request speeding up the reading process.  It also support the Inform command that unlike a trap notification, requires the manager to positively acknowledge with a response message.</li>
+            <li>V3 (RFC 3411): This version enhances exchange security by implementing the following features.
+<ul style="list-style-type: disc;"><li><u>Authentication</u> is used to ensure that traps are read by only the intended recipient.
+</li><li><u>Privacy</u> encrypts the payload of the SNMP message to ensure that it cannot be read by unauthorized users. </li></ul></li>
+        </ul>
+        <h2 class="SVheading2">Support for Unmanaged Devices</h2>
+        <p class="SVnormal">SNMP provides no support for unmanaged devices. However, the <span class="mc-variable OEM.ProductName variable">PcVue</span> SNMP driver also supports unmanaged devices by making use of ICMP requests.</p>
+        <p class="SVnormal">The ICMP (Internet Control Message Protocol), more commonly known as PING, is used by network devices to send error messages. For example, that a host or router could not be reached. ICMP differs from protocols such as TCP and UDP in that it is not typically used to exchange data between systems. The PING function, within the SNMP driver, is implemented using the ICMP "Echo request" and "Echo reply" messages.</p>
+        <h2 class="SVheading2">SNMP driver licensing</h2>
+        <p class="SVnormal">The SNMP driver is a chargeable option and its use is protected by the license. The number of running devices is limited to 1000.</p>
+        <p class="SVnormal">As for any driver, the user can test the SNMP Manager in demo mode (without any license) with a time limitation fixed to one hour and a number of communication variables limited to 25.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

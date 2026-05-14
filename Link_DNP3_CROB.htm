@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Variables|The Variables Tree|Configuring variables|Linking a variable to its source|Linking a variable to a DNP3 source" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Using advanced properties to configure a DNP3 CROB</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor282"></a>Using Advanced Properties to Configure a DNP3 CROB</h1>
+        <p class="SVnormal">The DNP3 protocol uses a command structure called a CROB (Control Relay Output Block) to force the value of a binary output. A CROB does not just force a bit to 0 or 1 - it sends one of a selection of functions that is then interpreted by the Device as to the precise action. For example, set an output to 1 for a pre-defined length of time (pulse).</p>
+        <p class="SVnormal">A CROB can be sent using either SCADA Basic, or by forcing the value of a bit variable using a <u>Send bit</u> animation. When sending a CROB using an animation, the CROB parameters are configured in the Advanced properties of the corresponding bit variable. You can configure two CROB's, one that is sent when using an animation to force the bit to zero and the other that is sent when using an animation to force the bit to one.</p>
+        <div class="note">
+            <p class="SVnormal">The CROB parameters that can be sent by a send bit animation are limited to those considered to be most common. If you require something different, you can use the MDNP3 SCADA Basic instruction that is fully configurable.</p>
+        </div>
+        <h2 class="SVheading2">Configuring the CROB using a bit variable's advanced properties</h2>
+        <p class="SVnormal">The following properties are used to configure the CROBs. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <br />
+            <img src="../../Resources/Images/AE/Variables/link_register_dnp3_crob.png" />
+            <br />
+        </div>
+        <ul style="list-style-type: disc;">
+            <li>Control parameters
+- The method used to execute the CROBs.			<ul style="list-style-type: disc;"><li>Default - Use the default method configured in the DNP3 Network Settings dialog.</li><li>Direct operate - The master sends a message to the Device containing the necessary parameters. The message is acted on by the Device and an acknowledge is sent back.</li><li>Direct operate no ack - The master sends a message to the Device containing the necessary parameters. The message is acted on  by the Device but no acknowledge is sent back.</li><li>Select before operate - The master sends a select request message to the Device containing all the necessary parameters. The Device replies with a copy of the parameters. When the master has successfully compared the request and reply parameters, the operate message, also containing the parameters, is sent.</li></ul></li>
+            <li>CROB - The configuration of the CROB.<ul style="list-style-type: disc;"><li>Bit write to 0 - Configuration of the CROB that is sent when an animation is used to force the bit to zero.<ul style="list-style-type: disc;"><li>Enable a different address - Allows the CROB to reference a different binary output point to the one from which it is being sent.</li><li>Function - Selection of the CROB function. See the table below.</li><li>On-time - A period in seconds that is required by some of the CROB functions. Range 0 to 60 seconds.</li></ul></li><li>Bit write to 1 - Configuration of the CROB that is sent when an animation is used to force the bit to one. The parameters are the same as <u>for Bit write to 0</u>.</li></ul></li>
+        </ul>
+        <p class="SVnormal">The CROB functions supported by <span class="mc-variable OEM.ProductName variable">PcVue</span> when using a send bit animation are as follows.</p>
+        <table style="border-collapse: collapse;caption-side: top;width:100%">
+            <col style="width: 300px;" />
+            <col style="width: 150px;" />
+            <col style="width: 150px;" />
+            <col style="width: 200px;" />
+            <tr>
+                <td class="SVtableHeading" style="vertical-align: top;">Function in <span class="mc-variable OEM.ProductName variable">PcVue</span>&#160;</td>
+                <td class="SVtableHeading" style="vertical-align: top;">Trip close code</td>
+                <td class="SVtableHeading" style="vertical-align: top;">Operation type</td>
+                <td class="SVtableHeading" style="vertical-align: top;">On-time</td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">Latching relay ON*</td>
+                <td class="SVtable" style="vertical-align: top;">NULL (0)</td>
+                <td class="SVtable" style="vertical-align: top;">Latch On (3)</td>
+                <td class="SVtable" style="vertical-align: top;">Always zero</td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">Latching relay OFF*</td>
+                <td class="SVtable" style="vertical-align: top;">NULL (0)</td>
+                <td class="SVtable" style="vertical-align: top;">Latch Off (4)</td>
+                <td class="SVtable" style="vertical-align: top;">Always zero</td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">Unpaired momentary</td>
+                <td class="SVtable" style="vertical-align: top;">NULL (0)</td>
+                <td class="SVtable" style="vertical-align: top;">Pulse On (1)</td>
+                <td class="SVtable" style="vertical-align: top;">Configurable 0 to 60 sec</td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">Trip breaker/relay </td>
+                <td class="SVtable" style="vertical-align: top;">Trip (2)</td>
+                <td class="SVtable" style="vertical-align: top;">Pulse On (1)</td>
+                <td class="SVtable" style="vertical-align: top;">Configurable 0 to 60 sec</td>
+            </tr>
+            <tr>
+                <td class="SVtable" style="vertical-align: top;">Close Breaker/relay </td>
+                <td class="SVtable" style="vertical-align: top;">Close (1)</td>
+                <td class="SVtable" style="vertical-align: top;">Pulse On (1)</td>
+                <td class="SVtable" style="vertical-align: top;">Configurable 0 to 60 sec</td>
+            </tr>
+        </table>
+        <p class="SVnormal">* Default setting.</p>
+        <h2 class="SVheading2">Behavior</h2>
+        <p class="SVnormal">The behavior of a bit variable that is forced using a Send Bit animation and that is using a CROB is as follows.</p>
+        <ul style="list-style-type: disc;">
+            <li>The value of the bit variable is immediately set to that requested by the Send Bit animation. For example, if you used Send Bit to 1, the value of the bit is set to 1.</li>
+            <li>The value of the bit will be updated to reflect that of the actual value of binary output in the Device either by exception  or by the next background poll. The exact mechanism and how long it will take will depend on the configuration of the Device and of <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li>
+            <li>If the CROB fails, the bit is set to invalid (NS).</li>
+            <li>A CROB is not be sent if the bit variable is invalid.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

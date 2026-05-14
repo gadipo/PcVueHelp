@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Project and library" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Backing up and restoring projects and libraries</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Backing up and restoring projects and libraries</h1>
+        <p class="SVnormal">This topic is not a complete guide to backup and restore best practices. It includes the minimum precautions you should take, as a User, to avoid losing any components necessary to run your project.</p>
+        <div class="warning">
+            <p class="SVnormal">Having a backup process in place, and making sure that the backups are complete and useable to restore your application, is an essential part of development.</p>
+        </div>
+        <h2 class="SVheading2">Backing up</h2>
+        <p class="SVnormal">The contents that a backup of <span class="mc-variable OEM.ProductName variable">PcVue</span>'s application must contain as a minimum is:</p>
+        <ul style="list-style-type: disc;">
+            <li>The project itself.</li>
+            <li>Any shared libraries that are in use.</li>
+        </ul>
+        <p>In addition, your application may require third-party applications, tooling and files specific to your system set-up that are not described hereafter.</p>
+        <div class="tip">
+            <p class="SVnormal">The use of Central project management can help you manage the backup of your projects. See the topic <a href="central_project_mgmt_conf.htm">How to manage project and library versions</a>.</p>
+            <p class="SVnormal">See also the important note about libraries in the topic <a href="../Install/Maintaining_the_supervisor.htm">Maintaining <span class="mc-variable OEM.ProductName variable">PcVue</span> or the web deployment tools</a> in the Installation book.</p>
+        </div>
+        <h2 class="SVheading2">How to backup a project</h2>
+        <p class="SVnormal">Each project is contained within a folder with the same name as the project in the folder ROOT\USR, where ROOT is the project root. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/project_structure.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <p class="SVnormal">The project root is normally the same as that of <span class="mc-variable OEM.ProductName variable">PcVue</span> although it can be changed using the -b command line argument. If in doubt, check the properties of shortcut that you use to start <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <ul style="list-style-type: disc;">
+            <li>To backup a project use a compression tool to save the project contents as a single file.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">If the project contains any additional local libraries these are included in the project folder structure.</p>
+        </div>
+        <h2 class="SVheading2">How to backup shared libraries</h2>
+        <p class="SVnormal">Shared libraries are contained in the folder LIB located in the ROOT folder.</p>
+        <ul style="list-style-type: disc;">
+            <li>To backup a shared library use a compression tool to save the library and its contents as a single file.</li>
+        </ul>
+        <h2 class="SVheading2">How to restore a project from a backup</h2>
+        <ul style="list-style-type: disc;">
+            <li>Decompress the project backup file into the folder ROOT\USR.</li>
+        </ul>
+        <h2 class="SVheading2">How to restore shared libraries from a backup</h2>
+        <ol>
+            <li value="1">Decompress the LIB folder backup to a temporary location.</li>
+            <li value="2">Replace (not merge) the installed LIB folder with the LIB folder you have just decompressed.</li>
+        </ol>
+        <h2 class="SVheading2">How to use both the shared libraries supplied with the current version of <span class="mc-variable OEM.ProductName variable">PcVue</span> and libraries from a backup</h2>
+        <ol>
+            <li value="1">Decompress the LIB folder backup to a temporary location.</li>
+            <li value="2">Copy the folders of each library that you need to the LIB folder of the current version.</li>
+            <li value="3">Use the Library Manager in <span class="mc-variable OEM.ProductName variable">PcVue</span> to add each of the libraries you have imported from the backup to the project. See the topic How to add an existing library in the Application Explorer.Libraries book.</li>
+        </ol>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

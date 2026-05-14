@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|KNX data acquisition driver Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Configuration of the PcVue Variables</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuration of the <span class="mc-variable OEM.ProductName variable">PcVue</span> Variables for the KNX Data Acquisition Driver Add-on</h1>
+        <p class="SVnormal">To define a variable as having a KNX source you have to enter its KNX address in the extended attribute, as specified in the KNXInterfaces.ini file. It takes the form of a string with the following syntax.</p>
+        <p class="SVnormal">KNX#InterfaceName#GroupAddress#Format#Access</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">KNX - The key that indicates it is a variable with a KNX source.</li>
+            <li class="SVbulleted">InterfaceName - The name of the KNX/IP interface from which the KNX point is accessible as defined in the KNXInterfaces.ini file, Name parameter.</li>
+            <li class="SVbulleted">GroupAddress - The KNX group address. All three possible addressing types available within KNX are supported.<ul style="list-style-type: disc;"><li class="SVbulleted">3 level addressing format: x/y/z</li><li class="SVbulleted">2 level addressing format: x/y</li><li class="SVbulleted">Free addressing format: x</li></ul></li>
+            <li class="SVbulleted">Format - The KNX DPT format of the point. See table below.</li>
+            <li class="SVbulleted">Access - The access method. Specifies if the variable need to be read at start up, or cyclically, and / or if the variable can be written. In all cases, the variable is also refreshed when it changes.<ul style="list-style-type: disc;"><li class="SVbulleted">W - The variable can be written/controlled. If used this must be the first character in the string.</li><li class="SVbulleted">R - The variable is initialized at start-up.</li><li class="SVbulleted">Rx - The variable is read cyclically every x seconds.</li></ul><p>See examples below.</p></li>
+        </ul>
+        <h2 class="SVheading2">Format table</h2>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 100px;" />
+            <col style="width: 100px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Format</td>
+                    <td class="SVtableHeading">Scaling possible</td>
+                    <td class="SVtableHeading">Notes</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B1</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">Configuring a variable min and max does not trigger any scaling.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B2</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">Configuring a register 0 to 3 value<br />0 - No control (00)<br />1 - No control (01)<br />2 - Control function value 0 (10)<br />3 - Control function value 1 (11).</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">F16</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">Configuring a variable min and max does not trigger any scaling.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">xF16_index</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">
+                        <p><i>x</i> corresponds to the number of F16 words needed e.g. 3F16 for KNX ID 222.100</p>
+                        <p><i>index</i> corresponds to the offset of the word within the structure. Its value should be between 0 and (x-1). Configuring a variable min and max does not trigger any scaling.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">F32</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">Configuring a variable min and max does not trigger any scaling.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">N2</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">Configuring a variable min and max does not trigger any scaling.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">N8</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">Configuring a variable min and max does not trigger any scaling.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">U8</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">To enable scaling, the DPT range defined in the KNX document must be entered in the min &amp; max of the variable definition.<br />For example:<br />DPT_Scaling - variable min = 0, variable max = 100<br />If you do not want to apply scaling then the variable min and max should be 0 and 255 respectively</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">U16</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">To enable scaling, the DPT range defined in the KNX document must be entered in the min &amp; max of the variable definition.<br />For example:<br />DPT_TimePeriod10Msec - variable min = 0, variable max = 655,35<br />If you do not want to apply scaling then the variable min and max should be 0 and 65535 respectively</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">U32</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">To enable scaling, the DPT range defined in the KNX document must be entered in the min &amp; max of the variable definition.<br />At present there is no DPT of U32 format that perform scaling but you could put variable min = 0, variable max = 200<br />If you do not want to apply scaling then the variable min and max should be 0 and 4294967295 respectively.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">V8</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">Variable min and max specify does not trigger any scaling</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">V16</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">To enable scaling, the DPT range defined in the KNX document must be entered in the min &amp; max of the variable definition.<br />For example:<br />DPT_Percent_V16 - variable min -327,68, variable max 327,67<br />If you do not want to apply scaling then the variable min and max should be -32768 and 32768 respectively.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">xV16_index</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">
+                        <p><i>x</i> corresponds to the number of V16 words needed e.g. 3V16 for KND ID 212.100</p>
+                        <p><i>index</i> corresponds to the offset of the word within the structure. Its value should be between 0 and (x-1).</p>
+                        <p>As for V16 format, the DPT range defined in the KNX document must be entered in the min and max of the variable definition.<br />For example:</p>
+                        <p>DPT_Percent_V16: variable min = -327,68 variable max = 327,67</p>
+                        <p>If you do not want to apply any scaling, then the variable min and max should be: variable min = -32768 variable max = 32767</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">V32</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">Configuring a variable min and max does not trigger any scaling.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">r2U6</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">Configuring a variable min and max does not trigger any scaling.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Access method examples</h2>
+        <p class="SVnormal">#WR - The variable can be written from <span class="mc-variable OEM.ProductName variable">PcVue</span> and is read once at start-up. The variable is also refreshed on change.</p>
+        <p class="SVnormal">#R60 - The variable cannot be written but is read every minute. The variable is also refreshed on change.</p>
+        <p class="SVnormal"># - The variable is only refreshed on change.</p>
+        <p class="SVnormal">#R60W - Invalid syntax. The W must be placed first. The correct syntax would be #WR60.</p>
+        <div class="note">
+            <p class="SVnormal">The syntax KNX#InterfaceName#Disable can be used to map a bit variable for controlling the communication on the specified interface:</p>
+            <ul>
+                <li>
+                    <p class="SVnormal">Bit variable at 0 - Communication on the interface is enabled</p>
+                </li>
+                <li>
+                    <p class="SVnormal">Bit variable at 1 - Communication on the interface is disabled</p>
+                </li>
+            </ul>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

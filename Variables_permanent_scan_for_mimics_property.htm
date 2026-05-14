@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|The Variables Tree|Configuring variables|Configuring variables in general" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Tuning the Permanent scan for mimic property</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Tuning the Permanent Scan for Mimic property</h1>
+        <p class="SVnormal">The <u>Permanent scan for mimics</u> property is found in the Advanced tab of the Variables configuration dialog. This property deserves special attention because of its considerable effect on the performance and behavior of a project. The following values are available.</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">None - The variable's real time properties (including value, timestamp, quality and other distributed properties if any) are only updated when a mimic using them in an animation is open.</li>
+            <li class="SVbulleted">Server station - The variable's real-time properties are permanently updated on the station where it is produced. On all other stations, it behaves as None. This is the default setting.</li>
+            <li class="SVbulleted">All stations - The variable's real-time properties are permanently updated on all stations. </li>
+        </ul>
+        <p class="SVnormal">The more variables that have their <u>Permanent scan for mimics</u> property set to <u>None</u>, the better overall performance you get. But configuring a variable so that its real-time properties are only updated when a mimic using it is open has a number of effects both positive and negative.</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">The workload on the host PC is reduced when the mimic is not displayed. Although the amount of work required to update one variable is very small, on a large system with thousands of variables the saving is significant.</li>
+            <li class="SVbulleted">The workload on whatever is providing the source of the value (for example communication with a PLC) is reduced when no mimic using the variable is displayed.</li>
+            <li class="SVbulleted">When a mimic using the variable is displayed, depending on the source of the value, it may take a few seconds before the value is updated.</li>
+        </ul>
+        <p class="SVnormal">Before these properties are taken into account for individual 
+ variables, the property <u>Permanent scan for all variables</u>, in the main variable's <a href="../Project/Settings_variable.htm">Settings</a>, 
+ must also be de-selected.</p>
+        <div class="note">
+            <ul>
+                <li class="SVbulleted">If the variable has an equipment source, the communication frame will only stop being requested (and hence the load on the communications reduced) if all variables linked to it are not on scan.</li>
+                <li class="SVbulleted">The same applies to OPC (at group and server levels), LonWorks (node and network levels, BACnet (device and network levels) and all other data acquisition drivers.</li>
+                <li class="SVbulleted">The load on host platforms is also reduced for internal variables in a networked application. No client/server traffic takes place for a particular variable when no consumer is subscribed to the variable’s producer.</li>
+            </ul>
+        </div>
+        <div class="note">
+            <p>Register variables corresponding to process parameters or set-points are usually good candidates for having their property <u>Permanent scan for mimics</u> set to <u>None</u>, because:</p>
+            <ul>
+                <li class="SVbulleted">They generate a large amount of traffic if polled.</li>
+                <li class="SVbulleted">Their changes are not archived based on log list.</li>
+                <li class="SVbulleted">Logging of operator actions related to set-point commands are not affected.</li>
+                <li class="SVbulleted">They are only ever used when a mimic is open (as opposed to server-side background processing).</li>
+                <li class="SVbulleted">Discrepancy checking behavior does not apply to register variables.</li>
+            </ul>
+        </div>
+        <h2 class="SVheading2">Criteria for determining how to set the Permanent scan for mimics property value</h2>
+        <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+        </p>
+        <div>
+            <img src="../../Resources/Images/AE/Variables/permanent_scan_criteria.png" MadCap:targetName="t1" style="display: none;" />
+            <br />
+        </div>
+        <p class="SVnormal">
+        You can and should set the <u>Permanent scan for mimics</u> property to <u>None</u>:
+        </p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">If the variable or alarm is not logged (archiving)</li>
+            <li class="SVbulleted">And it is not used in SCADA Basic scripts (a script reading one or the other real time distributed property)</li>
+            <li class="SVbulleted">And it is not used in a discrepancy checking behavior</li>
+        </ul>
+        <p class="SVnormal">You must set the <u>Permanent scan for mimics</u> property to <u>All stations</u>:</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">If the variable or alarm is used in SCADA Basic scripts on a variable’s consumer station (a script reading one or the other real time distributed property).<br />Otherwise, the consumer station may not have the real time value of distributed properties when the script is executed.</li>
+        </ul>
+        <p class="SVnormal">In all other cases, the default value <u>Server stations</u> is fine and can be left as is.</p>
+        <p class="SVnormal">The configured value of the property <u>Permanent scan for mimics</u> is overridden according to the requirement to scan and keep real time properties updated in the background for all other potential <span class="mc-variable OEM.ProductName variable">PcVue</span> features: Alarming, Trending, Expressions, Alarm synthesis…</p>
+        <div class="note">
+            <p class="SVnormal">When a variable is produced by an association of servers, the variable's distributed properties in a passive server comes from the active server and we say that the passive server behaves as a variable consumer.</p>
+            <p class="SVnormal">However, for the purpose of the <u>Permanent Scan for mimics</u> option, a passive server is considered a Server station and all features affected by this property will work correctly for variables having this property set to <u>Server stations</u>.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

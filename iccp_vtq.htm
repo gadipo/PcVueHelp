@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|ICCP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>How the value, quality and timestamp are mapped</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How the Value, Quality and Timestamp are Mapped</h1>
+        <p class="SVnormal">The general rules for mapping ICCP variables to <span class="mc-variable OEM.ProductName variable">PcVue</span> variables are explained in the topic <a href="iccp_variable_types.htm">ICCP Variable Types</a>. The information in this topic explains how the value, quality and timestamp are mapped.</p>
+        <div class="note">
+            <p class="SVnormal">Note that there are four types of quality flags in ICCP: Quality Validity, Quality Timestamp, Quality Normal Source and Quality Current Source.</p>
+        </div>
+        <h2 class="SVheading2">Value</h2>
+        <p class="SVnormal">Controls work slightly different when the <span class="mc-variable OEM.ProductName variable">PcVue</span> variable is a bit or an alarm.</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">For Local bit/alarm controls, variables are updated with value 0 when receiving a 0 from the remote control center, and are updated with value 1 when receiving any value different from 0 from the remote control center.</li>
+            <li class="SVbulleted">For Remote bit/alarm controls, an operate command is sent to the remote control center with value 0 when updating the value in <span class="mc-variable OEM.ProductName variable">PcVue</span> to 0, and with value 1 when updating the value in <span class="mc-variable OEM.ProductName variable">PcVue</span> to any value different than 0.</li>
+        </ul>
+        <h2 class="SVheading2">Quality Validity</h2>
+        <p class="SVnormal">There are four possible values for this flag: Valid, Held, Suspect or Not Valid.</p>
+        <p class="SVnormal">Local <span class="mc-variable OEM.ProductName variable">PcVue</span> ICCP Server: <span class="mc-variable OEM.ProductName variable">PcVue</span> flags are mapped to ICCP flags. These are sent <b>to</b> a remote ICCP client.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> status</td>
+                    <td class="SVtableHeading">ICCP Quality Validity</td>
+                </tr>
+                <tr>
+                    <td>Other than NS</td>
+                    <td>Valid</td>
+                </tr>
+                <tr>
+                    <td>No flag mapped. Held is never sent</td>
+                    <td>Held</td>
+                </tr>
+                <tr>
+                    <td>No flag mapped. Suspect is never sent</td>
+                    <td>Suspect</td>
+                </tr>
+                <tr>
+                    <td>NS</td>
+                    <td>Not Valid</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Local <span class="mc-variable OEM.ProductName variable">PcVue</span> ICCP Client: ICCP flags are mapped to <span class="mc-variable OEM.ProductName variable">PcVue</span> flags. These are sent <b>from</b> a remote ICCP server</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">ICCP Quality Validity</td>
+                    <td class="SVtableHeading">
+                        &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> status</td>
+                </tr>
+                <tr>
+                    <td>Valid</td>
+                    <td>Set to Valid</td>
+                </tr>
+                <tr>
+                    <td>Held</td>
+                    <td>Set to NS WD.</td>
+                </tr>
+                <tr>
+                    <td>Suspect</td>
+                    <td>Set to NS. Shown in traces</td>
+                </tr>
+                <tr>
+                    <td>Not Valid</td>
+                    <td>Set to NS. Shown in traces</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Timestamp quality </h2>
+        <p>There are two possible values for this flag: Valid and Not Valid.</p>
+        <p class="SVnormal">Local <span class="mc-variable OEM.ProductName variable">PcVue</span> ICCP Server: <span class="mc-variable OEM.ProductName variable">PcVue</span> status are mapped to ICCP flags. These are sent <b>to</b> a remote ICCP client.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> status</td>
+                    <td class="SVtableHeading">ICCP Timestamp quality</td>
+                </tr>
+                <tr>
+                    <td>Timestamp OK</td>
+                    <td>Valid</td>
+                </tr>
+                <tr>
+                    <td>Timestamp not OK</td>
+                    <td>Not valid</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Local <span class="mc-variable OEM.ProductName variable">PcVue</span> ICCP Client: ICCP flags are mapped to <span class="mc-variable OEM.ProductName variable">PcVue</span> flags. These are sent <b>from</b> a remote ICCP server</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading"> ICCP Timestamp quality</td>
+                    <td class="SVtableHeading">
+                        &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> status</td>
+                </tr>
+                <tr>
+                    <td>Valid</td>
+                    <td>Timestamp OK</td>
+                </tr>
+                <tr>
+                    <td>Not valid</td>
+                    <td>Timestamp not OK</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Quality Normal Source</h2>
+        <p>There are two possible values for this flag: Valid and Not Valid.</p>
+        <p class="SVnormal">Local <span class="mc-variable OEM.ProductName variable">PcVue</span> ICCP Server: <span class="mc-variable OEM.ProductName variable">PcVue</span> status are mapped to ICCP flags. These are sent <b>to</b> a remote ICCP client.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">
+                        &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> status</td>
+                    <td class="SVtableHeading">ICCP Timestamp quality</td>
+                </tr>
+                <tr>
+                    <td>No <span class="mc-variable OEM.ProductName variable">PcVue</span> mapped. Normal is always sent</td>
+                    <td>Normal</td>
+                </tr>
+                <tr>
+                    <td>No <span class="mc-variable OEM.ProductName variable">PcVue</span> mapped. Abnormal is never sent</td>
+                    <td>Abnormal</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Local <span class="mc-variable OEM.ProductName variable">PcVue</span> ICCP Client: ICCP flags are mapped to <span class="mc-variable OEM.ProductName variable">PcVue</span> flags. These are sent <b>from</b> a remote ICCP server</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading"> ICCP Timestamp quality</td>
+                    <td class="SVtableHeading">
+                        &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> status</td>
+                </tr>
+                <tr>
+                    <td>Normal</td>
+                    <td>Set to valid</td>
+                </tr>
+                <tr>
+                    <td>Abnormal</td>
+                    <td>Set to NS FMT</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Quality Current Source</h2>
+        <p class="SVnormal">There are four possible values for this flag: Entered, Calculated, Estimated or Telemetered. These flags are related to how the data is obtained.</p>
+        <p class="SVnormal">Local <span class="mc-variable OEM.ProductName variable">PcVue</span> ICCP Server: <span class="mc-variable OEM.ProductName variable">PcVue</span> status are mapped to ICCP flags. These are sent <b>to</b> a remote ICCP client.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">
+                        &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> status</td>
+                    <td class="SVtableHeading">ICCP Quality Current Source</td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>As configured in field &lt;CurrentSource&gt;</p>
+                        <p>Or if variable is simulated and MapSVSimuToEntered is set to True</p>
+                    </td>
+                    <td>Entered</td>
+                </tr>
+                <tr>
+                    <td>As configured in field &lt;CurrentSource&gt;</td>
+                    <td>Calculated</td>
+                </tr>
+                <tr>
+                    <td>As configured in field &lt;CurrentSource&gt;</td>
+                    <td>Estimated</td>
+                </tr>
+                <tr>
+                    <td>As configured in field &lt;CurrentSource&gt;</td>
+                    <td>Telemetered</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Local <span class="mc-variable OEM.ProductName variable">PcVue</span> ICCP Client: ICCP flags are mapped to <span class="mc-variable OEM.ProductName variable">PcVue</span> status. These are sent <b>from</b> a remote ICCP server</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 300px;" />
+            <col style="width: 300px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">ICCP Quality Current Source</td>
+                    <td class="SVtableHeading">
+                        &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> status</td>
+                </tr>
+                <tr>
+                    <td>Entered</td>
+                    <td>Not mapped. Shown in traces</td>
+                </tr>
+                <tr>
+                    <td>Calculated</td>
+                    <td>Not mapped. Shown in traces</td>
+                </tr>
+                <tr>
+                    <td>Estimated</td>
+                    <td>Not mapped. Shown in traces</td>
+                </tr>
+                <tr>
+                    <td>Telemetered</td>
+                    <td>Not mapped. Shown in traces</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Timestamps</h2>
+        <p class="SVnormal">The origin of the timestamp that is sent to the remote control center via ICCP can be:</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">Internal: If this is the case (for internal variables or I/O variable not timestamped at the source), then the timestamp that is used is the one from <span class="mc-variable OEM.ProductName variable">PcVue</span> (SV status).</li>
+            <li class="SVbulleted">External: If the variable comes from a device supporting timestamping at the source (IE C104, DNP3, etc.) then the timestamp that is used is the one from the device (PLC status).</li>
+        </ul>
+        <p class="SVnormal">The timestamps that are received from the remote control center via ICCP can be:</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">Valid: It is marked by Good Quality in <span class="mc-variable OEM.ProductName variable">PcVue</span> and represented by the status PLC.</li>
+            <li class="SVbulleted">Not Valid: It is marked by Bad Quality in <span class="mc-variable OEM.ProductName variable">PcVue</span>. It does not have the status PLC.</li>
+        </ul>
+        <p class="SVnormal">The precision of the timestamp in ICCP depends on the variable type:</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">Second precision for some data types.</li>
+            <li class="SVbulleted">Millisecond precision for others.</li>
+        </ul>
+        <h2 class="SVheading2">Change of value counter (COV)</h2>
+        <p class="SVnormal">The COV counter is only available for DiscreteExtended, RealExtended and StateExtended ICCP variable types. This counter increases every time the value is updated. In the current version, the COV counter is not mapped.</p>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">For local server variables: The COV is updated and sent to the remote. The value can be seen in the traces for diagnostics.</li>
+            <li class="SVbulleted">For remote server variables: The COV is received from the remote. The value can be seen in the traces for diagnostics.</li>
+        </ul>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

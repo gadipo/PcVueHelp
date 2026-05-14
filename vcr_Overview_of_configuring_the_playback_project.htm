@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|The VCR Facility" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuring the playback station</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuring the Playback station</h1>
+        <p class="SVnormal">The project that runs is the same on the station that records VCR data and  on the playback station, with server and client lists configured accordingly on the VCR archive unit.</p>
+        <p class="SVnormal">The following configuration is required on the playback station:</p>
+        <table style="width: 100%;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 200px;" />
+            <col />
+            <tr>
+                <td style="width: 80px;" width="80px">
+                    <p class="SVtableHeading">Configuration</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Settings</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="width: 80px;" valign="top" width="80px">
+                    <p class="SVtable">Command line</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Add the -VCR switch to the command line used to start 
+ <span class="mc-variable OEM.ProductName variable">PcVue</span>. For example:</p>
+                    <p class="SVprogramCode">C:\SV32\bin\sv32.exe -vcr -b C:\SV32\Projects</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="width: 80px;" valign="top" width="80px">
+                    <p class="SVtable">VCR type archive unit</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">The playback station must be in the list of clients of the VCR archive unit, and the property <u>Path to files from dedicated station</u>, must be configured properly. 
+ Normally this will point to the path of the archive unit on the recording station.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">It is recommended that only client stations be used as playback stations.</p>
+            <p class="SVnormal">Because variables on playback stations are simulated, their value no longer reflect the current process state. No station requiring availability of live data should be used as playback station. In particular, a data acquisition server, an archive server or any other station due to distribute live data to other sub-systems (web back end, OPC server...) must not be used as playback station.</p>
+        </div>
+        <h2 class="SVheading2">Opening the VCR Player Data Dialog</h2>
+        <p class="SVnormal">The VCR Player dialog is opened by the user from a drawing element 
+ (such as a button) in a mimic. To create such 
+ an animation:</p>
+        <ol>
+            <li class="SVnumbered" value="1">Create a drawing 
+ element.</li>
+            <li class="SVnumbered" value="2">Right-click and select 
+ the animation Run.Macro to apply a Macro animation. </li>
+            <li class="SVnumbered" value="3">Put the single instruction 
+ IVCR_Open in the first line of the macro. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t1" style="display: none;"><p><img src="../Resources/Images/Extras/vcr_Open_macro.png" alt="Open VCR macro animation" style="border-style: none;border: none;float: none;" border="0" /></p></div></li>
+            <li class="SVnumbered" value="4">Select <u>OK</u> to confirm 
+ the action.</li>
+            <li class="SVnumbered" value="5">Select File.Save 
+ All to save the mimic.</li>
+        </ol>
+        <p class="SVnormal">To open the VCR dialog:</p>
+        <ol>
+            <li class="SVnumbered" value="1">Select Run mode.</li>
+            <li class="SVnumbered" value="2">Select the drawing 
+ element. The macro will open the VCR Player Data dialog.</li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">If that does not happen, check that you have applied the command line argument -VCR as described above.</p>
+        </div>
+        <h2 class="SVheading2">Using the SYSTEM.VCRMODE Variable</h2>
+        <p class="SVnormal">The register variable SYSTEM.VCRMODE is used to indicate 
+ to the User the mode in which <span class="mc-variable OEM.ProductName variable">PcVue</span> is running:</p>
+        <table style="width: 300;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0">
+            <col style="width: 31.502%;" />
+            <col style="width: 68.498%;" />
+            <tr>
+                <td>
+                    <p class="SVtableHeading">Value</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">0</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Normal mode</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">1</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">VCR mode</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">The variable is set according to the mode in which <span class="mc-variable OEM.ProductName variable">PcVue</span> was started. It does not imply that a VCR archive unit has been 
+ created.</p>
+        </div>
+        <h2 class="SVheading2">Limitations in the Playback Project</h2>
+        <p class="SVnormal">The VCR facility Player plays back recorded values through the 
+ variables at a speed that is not related to real time. Therefore, 
+ the following animations will not display anything meaningful and should not be used on a playback station.</p>
+        <ul>
+            <li class="SVbulleted">The Trend Viewer.</li>
+            <li class="SVbulleted">The Log Viewer. </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">These viewers should not be used for playback.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

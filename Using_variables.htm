@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Animation|What you can display using an animation" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Using variables in an animation</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Using Variables in an Animation</h1>
+        <p class="SVnormal">To use a variable in an animation you enter its name 
+ optionally preceded by the @ character. If you already know the name, you 
+ can enter it directly but it is normally easier to use the Variable Browser 
+ to select the name. The following are all examples of valid variable names.</p>
+        <p class="SVdataListing">Process.Engine1.Compressor1.B1</p>
+        <p class="SVdataListing">@Process.Engine1.Compressor1.B1<br />Process.Engine1.Compressor1.A1<br />CARD1.VARIABLESTREE.B1<br />Node1.DataTable3_256<br />Simulation.Square Waves.Int4<br />B1</p>
+        <p class="SVnormal" MadCap:conditions="Primary.SvOnly">For further information, see the topic <a href="../../AE/Variables/Variables_using_the_variable_selector.htm">Using the Variable Selector</a>.</p>
+        <h2 class="SVheading2">Using relative referencing</h2>
+        <p class="SVnormal">If the animation is in a window that has been opened 
+ with a branch (for example Process.Engine1) you can use relative referencing. 
+ With relative referencing, each variable reference uses only part of the 
+ variable name. For example, you might use the name Compressor1.B1. The 
+ other part of the variable name is supplied by the branch of the window. 
+ The variable names are automatically calculated at run-time by joining 
+ the branch with the relative name in the animation.</p>
+        <p class="SVnormal">When using the Variable Browser to select a variable 
+ in a window with a branch it automatically selects the correct part of 
+ the variable name for you. For example, if the window was opened with the 
+ branch Process.Engine2 and you selected the variable Process.Engine2.Compressor1.B1 
+ it would insert Compressor1.B1.</p>
+        <h2 class="SVheading2">Using the ?.VarName syntax</h2>
+        <p class="SVnormal">Unless prefixed with the @ character, variable names that you include in an expression are relative to any branch being used. However, it is possible to reference variables starting back from the root of the branch hierarchy by using the ?.VarName syntax. For example, the expression is used with the branch ProcessB.Machine2.Engine1 but you need to use the variable ProcessB.NumRunning. In that case you can use ?.NumRunning in the expression. The question mark tells to start from the root level in the branch hierarchy when resolving the variable name, and in this example, it would result in the variable name ProcessB.NumRunning being used in the expression at run-time.</p>
+        <p class="SVnormal">You can use more question marks to address all intermediate levels in the branch hierarchy. For example, ?.?.?.VarName would go down three levels from the root. </p>
+        <p class="SVnormal">This technique can also be used when designing symbols using relative referencing. See the topic <a href="../Symbols/Creating_a_Relative_Referencing.htm">Creating a relative referencing symbol</a>.</p>
+        <h2 class="SVheading2">Forcing direct referencing</h2>
+        <p class="SVnormal">Sometimes in a window that has been opened with a branch, 
+ you need to refer to a variable with a different branch or no branch at 
+ all. To achieve this you use direct referencing where the variable name 
+ is preceded by the @ character. For example, @CARD1.VARIABLESTREE.B1. When using 
+ direct referencing the same variable is always referred to whichever branch 
+ the window is opened with. If you use the Variable Browser to select the 
+ variable the @ character is inserted automatically when you select a variable 
+ with a different branch to that of the window.</p>
+        <div class="note">
+            <p class="SVnormal">The name of a variable with the prefix @ is known as the <u>full name</u> of this variable. When a variable is referenced in such a way in an animation, the reference is direct and any branch is ignored.</p>
+        </div>
+        <h2 class="SVheading2">Errors when selecting variables</h2>
+        <p class="SVnormal">The following error icons may appear alongside the support 
+ drawing element when you select a variable for an animation.</p>
+        <table style="width: 100%;border-spacing: 0px; border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtable">
+                    <p style="text-align: left;margin-bottom: 0;" align="left">
+                        <img src="../../Resources/Images/HMI/Animation/Error_Symbol_Exclam.png" title="Error icon: exclamation mark" />
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The variable does not exist.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p style="text-align: left;margin-bottom: 0;" align="left">
+                        <img src="../../Resources/Images/HMI/Animation/Error_Symbol_Questionmark.png" />
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The variable exists but it has a bad status (for example 
+ - out of limits). Depending on the HMI option <a href="../Settings/Settings_Mimic_options.htm">Variable warning display</a>, the icon with an exclamation mark may be used instead.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p style="text-align: left;margin-bottom: 0;" align="left">
+                        <img src="../../Resources/Images/HMI/Animation/Error_Symbol_InvalidObject.png" />
+                    </p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVtable">The object could not be initialized. This icon appears only for objects such as:</p>
+                    <ul>
+                        <li>ActiveX controls - Most probable cause is that the ActiveX is missing or not correctly registered on the computer.</li>
+                        <li>.Avi files - If the file cannot be found.</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

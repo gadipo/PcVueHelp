@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Smart Generators" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to import a Generic XML Import file</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor49"></a>How to import a Generic XML Import file</h1>
+        <p class="SVnormal">The XML import provides a vendor-independent means of importing configuration data to a project based on <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <p class="SVnormal">It is designed to imports an XML file containing elements and attributes that represents configuration items, plus values for their properties where appropriate.</p>
+        <p class="SVnormal">Prior to the availability of XML import, the go-to method for externally generating the <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration was by directly creating and editing <span class="mc-variable OEM.ProductName variable">PcVue</span> ASCII configuration files. Importing the configuration from XML files has major advantages over this method:</p>
+        <ul>
+            <li class="SVbulleted">Not all properties of a configuration object have to be given values in the XML file. Any properties without values will be set to a default value by <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li>
+            <li class="SVbulleted">Once you have imported the configuration, properties that did not have values in the XML file can be configured using <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration dialogs.</li>
+            <li class="SVbulleted">After the first import, you can synchronize changes made in the XML file with the <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration by importing it again. The synchronize mechanism recognizes whether any changes have been made using <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration dialogs and does not overwrite them.</li>
+        </ul>
+        <p class="SVnormal">The schema description of Generic Import XML files and a list of the supported configuration items is available in the SDK &amp; API documentation that you can install as part of the <span class="mc-variable OEM.ProductName variable">PcVue</span> installation.</p>
+        <div class="warning">
+            <p class="SVnormal">Some characters cannot be used as part of an XML file or the file would not validate against the XML specifications. Such characters must be replaced with substitute codes (ISO code).</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">Refer to the overview topic <a href="sg_overview.htm">Smart Generators overview</a> to learn more.</p>
+        </div>
+        <h2 class="SVheading2">Using the Smart Generator for Generic XML import</h2>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Go to <b>Configure</b> then Smart Generators and click <b>New import</b>. The Smart Generator for Generic XML dialog opens.</p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Enter an import name and click on the ellipsis button to select the XML file. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-project"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_generic_xml_select_project.png" MadCap:targetName="select-project" style="display: none;" />
+                </p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Click the <b>Finish</b> button to import the configuration described in the XML file.</p>
+            </li>
+        </ol>
+        <div class="tip">
+            <p class="SVnormal">During the import process, a dialog displays a time-bar of progress. If there is an error, the dialog reports it and the import stops. You can use the buttons <b>&gt;&gt;</b> and <b>&lt;&lt;</b> during and after the import to display or hide the details.</p>
+        </div>
+        <h2 class="SVheading2">Synchronizing an existing import</h2>
+        <p class="SVnormal">When you synchronize an import, the smart generator compares the configuration elements available in the import file with those that have been imported previously to <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <div class="warning">
+            <p class="SVnormal">The synchronizing process takes into account any filter that you may have used previously with the import. For example if there are 400 variables in the import file and the previous use of the import was with a filter and created 100 variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>, synchronization will inform you that there are 300 new variables available for import.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Select the import to synchronize in the right pane of the Smart Generators dialog. A list with actions appears under the Import references pane. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="workspace"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_workspace_synch.png" MadCap:targetName="workspace" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click Synchronize. This will open the smart generator dialog in which you can reconfigure the import. If variables have been added to the import file since the last import, the smart generator will display the Import new variables dialog, inviting you to make either a full or a custom import of the remaining variables.</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">If you select full import, all variables not already in <span class="mc-variable OEM.ProductName variable">PcVue</span> are imported.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">If you select custom import, you can filter the variables using the Select variables dialog.</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">If the smart generator finds variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> that no longer exist in the import file, a list of the variables is displayed. Using this list, you can choose to remove some or all of the variables from <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">You can choose to only remove imported configuration elements of a smart generator without removing the smart generator import itself. This can be done by right-clicking the import generated and selecting <b>Remove all imported objects</b>.</p>
+        </div>
+        <h2 class="SVheading2">Import using the command line</h2>
+        <p class="SVnormal">You can run a generic XML import from a command line by entering a command, set up a shortcut, or use a script to run the executable file XmlImporter.exe found in the BIN folder of <span class="mc-variable OEM.ProductName variable">PcVue</span>. The file XmlImporter.exe must not be moved from that folder.</p>
+        <p class="SVnormal">The syntax is as follows:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">XmlImporter.exe file1 [file2 [file3...]] [-synchro:fast|full] [-login:xxx -password:xxx]</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <p class="SVbulleted">fileX - The name of an XML file to be imported or the name of a file that contains a list of XML files to be imported.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">-synchro:fast - Fast synchronization is similar to full synchronization except that ONLY properties that have been changed are updated.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">-synchro:full - The XML import file is compared to any previous file that was imported and all new elements are created and those that no longer exist are deleted from the project's configuration.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">-login - The account name to be used to connect to <span class="mc-variable OEM.ProductName variable">PcVue</span> for the import.</p>
+            </li>
+            <li>
+                <p class="SVbulleted">-password - The password to be used for the account to connect to <span class="mc-variable OEM.ProductName variable">PcVue</span> used for the import.</p>
+            </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">The filenames are separated by spaces. They must not be separated by any other character (comma for example).</p>
+        </div>
+        <p class="SVnormal">When a file contains a list of other files to be imported, the list is itself XML-formatted as follows:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&lt;Imports&gt;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&lt;Import&gt;Import1.xml&lt;/Import&gt;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&lt;Import&gt;Import2.xml&lt;/Import&gt;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&lt;/Imports&gt;</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

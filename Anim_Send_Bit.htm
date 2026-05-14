@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Animation|Control zones|Sending bits" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Send Bit animation</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor126"></a>The Send Bit Animation</h1>
+        <p class="SVnormal">The Send Bit animation allows the user to force the state 
+ of a single bit. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t2" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/HMI/Animation/textproperties_bitsend.png" style="border-style: none;border: none;float: none;" border="0" title="Animation Bit Send tab." />
+            </p>
+        </div>
+        <p class="SVnormal">The behavior of the control zone is determined by the 
+ following properties.</p>
+        <ul>
+            <li class="SVbulleted">Reversed - The control 
+ zone sends the bit to the opposite of its current state. That is, if the 
+ bit was 0 it becomes 1 or if it was 1 it becomes 0.</li>
+            <li class="SVbulleted">To 1 - The control 
+ zone always forces the bit to 1. If it is already 1 then there is no change.</li>
+            <li class="SVbulleted">To 0 - The control 
+ zone always forces the bit to 0. If it is already 0 then there is no change.</li>
+            <li class="SVbulleted">Variable - At run 
+ time when the user clicks the control zone the state of the bit to be 
+ forced is copied from the state of another bit.</li>
+            <li class="SVbulleted">Direct - The control 
+ zone sends the bit without confirmation.</li>
+            <li class="SVbulleted">Label - See the explanation 
+ below.</li>
+            <li class="SVbulleted">Handled – The control 
+ zone behaves as a push-to-run button. At runtime, the bit is sent to the 
+ requested state while the user clicks and holds down the mouse button. 
+ When the button is released, the bit is sent to the opposite state.</li>
+            <li class="SVbulleted">Pulse - Sends the 
+ bit to the required state (0, 1 or reverse) for a period defined in seconds. 
+ After the period has elapsed the bit is returned to the original state.</li>
+            <li class="SVbulleted">Beep - Sound the 
+ PC's speaker when the command is made.</li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">The use of the <u>Reversed</u> behavior is strongly discouraged as it may have an undefined behavior depending on:</p>
+            <ul>
+                <li>
+                    <p class="SVbulleted">The data acquisition driver: For example in cases when there are 2 separate variables, one for monitoring (read) and another one for controlling (write).</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">The nature of the monitored value: Current process state or value of the previous command, in most cases, the exact behavior depends on how commands are managed at the automation controller level (PLC).</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">The state of the monitored value: Valid or invalid. No suitable behavior can be defined if the monitored value is invalid or goes invalid while processing the handled command.</p>
+                </li>
+            </ul>
+            <p class="SVnormal">In particular, using the <u>Reversed</u> behavior combined with the <u>Handled</u> or <u>Pulse</u> sending modes is not permitted.</p>
+            <p class="SVnormal">The use of the <u>Handled</u> sending mode  is also strongly discouraged, even solely, as it relies on the ability to reverse the command and as such may have the same undefined behavior.</p>
+            <p class="SVnormal">In addition, it can show potential unreliable execution timing depending on the quality of the communication links.</p>
+        </div>
+        <h2 class="SVheading2">Confirming a Command With a Label</h2>
+        <p class="SVnormal">If you choose the Label send mode, at runtime when the 
+ user clicks the control zone a dialog will appear in which the command may 
+ be confirmed or cancelled. The box displays the bit item description plus 
+ the appropriate string as entered in the Labels section of the Send Bit 
+ tab. In this way, the user is provided with a native language prompt for 
+ the action. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/HMI/Animation/Send_Bit_with_Label_annotated.png" style="border-style: none;border: none;float: none;" border="0" title="Example: Send Bit with Label dialog." />
+            </p>
+        </div>
+        <p class="SVnormal">By default, the label selection is set to Auto. This means 
+ that the HMI will attempt to get them from the variable definition in 
+ the server.</p>
+        <p class="SVnormal">If you want to 
+ use something different there are two other options accessed by clicking 
+ the buttons adjacent to the bound fields.</p>
+        <table style="width: 100%;border-spacing: 0px; border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col />
+            <tr valign="top">
+                <td>
+                    <p class="SVnormal">
+                        <img src="../../Resources/Images/HMI/Animation/Static_Value_Mode_button.png" />
+                    </p>
+                </td>
+                <td>
+                    <p class="SVtable">Clicking this button allows you to enter your own labels 
+ for the To 0 and To 1 conditions.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td>
+                    <p class="SVnormal">
+                        <img src="../../Resources/Images/HMI/Animation/Register_Format_from_Server_button.png" title="Register Format From Server button" />
+                    </p>
+                </td>
+                <td>
+                    <p class="SVtable">Clicking this button allows the labels to be defined by 
+ the real-time value of a text variable in the server. The variable browser 
+ is displayed to allow selection of the variable name.</p>
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

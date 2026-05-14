@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Introduction to VBA in PcVue|Using drawing elements in a VBA script" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_VBA.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Using drawing elements in a VBA script</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="hmobjRunningCodeWhenaVariablesValueChangesCL" />
+        <meta name="MS-HAID" content="hmobjCodingEventsDynamicallyCL" />
+        <meta name="MS-HAID" content="hmobjDisplayMouseInputCL" />
+    </head>
+    <body>
+        <h1 class="SVheading1">Using drawing elements in a VBA script</h1>
+        <p class="SVnormal">Before any HMI drawing element (Shape, Text, Image etc.) can be used in a VBA script, you must select VBA control in the pop-up menu displayed by right-clicking on the object.</p>
+        <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+        </p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/Scripting_VBA/popup_VBA_Control.png" alt="Popup for VBA Control" />
+            </p>
+        </div>
+        <p class="SVnormal">Once the drawing element has been enabled as a VBA control, it becomes visible in the VBA environment and its EnableEvents property is set to True.</p>
+        <ul>
+            <li class="SVbulleted">It can be selected using the left-hand combobox in the code window</li>
+            <li class="SVbulleted">Once it is selected in the left-hand combobox, you can select any of its events in the right-hand combobox and directly code the event</li>
+            <li class="SVbulleted">It is visible in the VBA property box</li>
+            <li class="SVbulleted">The object is directly known by its name (for example 'shape1') in the VBA Project</li>
+        </ul>
+        <p class="SVnormal">You can de-select the VBA control property at any time. The associated code is not lost if you de-select a control, it just becomes a function of the Project.</p>
+        <p class="SVnormal">It is possible for a drawing element to be a VBA control without the EnableEvents property being True. In this case, you will be able to change its properties by script, but not be able to run code on event.</p>
+        <p class="SVnormal">Each drawing element that is enabled as a VBA control requires additional resources from the host computer. Only enable drawing elements as VBA controls if you need to develop code for them.</p>
+        <h2 class="SVheading2">Making drawing elements respond to the mouse pointer</h2>
+        <p class="SVnormal">This topic describes how to make drawing elements respond visually when the mouse pointer is held over them.</p>
+        <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+        </p>
+        <div MadCap:targetName="t2" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/Scripting_VBA/mimic_DisplayMouseInput.png" />
+            </p>
+        </div>
+        <p class="SVnormal">How to make a drawing element respond to the mouse pointer:</p>
+        <ol>
+            <li class="SVnormal" value="1">Select a drawing element and open the Properties List (View.Properties List)</li>
+            <li class="SVnormal" value="2">Select the DisplayMouseInput property and set it to True. Click on the value, click on the button marked '...' and select True</li>
+        </ol>
+        <p class="SVnormal">If set as described above, when you hold the mouse pointer over the drawing element, it responds as if it had a Send animation. When elements overlap, the effects depend on the combination of the DisplayMouseInput property and configured animations.</p>
+        <table style="width: 100%;">
+            <col style="width: 50%;" />
+            <col style="width: 50%;" />
+            <tr>
+                <td valign="top" width="50%" class="SVtableHeading">Elements</td>
+                <td valign="top" width="50%" class="SVtableHeading">Effect</td>
+            </tr>
+            <tr>
+                <td width="50%" class="SVtable">One element with the property True</td>
+                <td width="50%" class="SVtable">It responds all over.</td>
+            </tr>
+            <tr>
+                <td width="50%" class="SVtable">
+                    <p width="50%">Two elements:</p>
+                    <ul>
+                        <li>
+                            <p width="50%">one with the property True</p>
+                        </li>
+                        <li>
+                            <p width="50%">one with an animation</p>
+                        </li>
+                    </ul>
+                </td>
+                <td width="50%" class="SVtable">Each element responds separately except that when the pointer is over the overlap, both respond.</td>
+            </tr>
+            <tr>
+                <td width="50%" class="SVtable">Two or more overlapping elements, both with the property True (or both with animations)</td>
+                <td width="50%" class="SVtable">Each element responds separately. Only the one in front responds in the overlapping area.</td>
+            </tr>
+            <tr>
+                <td width="50%" class="SVtable">Three or more overlapping elements.</td>
+                <td width="50%" class="SVtable">They respond separately except that when the pointer is over the overlap of a particular pair - one with the property True, the other with an animation - that pair will respond together.</td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

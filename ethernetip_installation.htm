@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|EtherNET/IP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Ethernet/IP Data Acquisition Driver Add-on Installation and Configuration</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Installation and Configuration of the Ethernet/IP Data Acquisition Driver Add-on</h1>
+        <p class="SVnormal">The Ethernet/IP Data Acquisition Driver Add-on of <span class="mc-variable OEM.ProductName variable">PcVue</span> comprises of two dll files that are installed in the \Bin folder as part of the installation. The files are:</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p>svmgrEIP.dll - The <span class="mc-variable OEM.ProductName variable">PcVue</span> Ethernet/IP driver.</p>
+            </li>
+            <li>
+                <p>EIP_Driver.dll - The Ethernet/IP communication stack.</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The driver, svmgrEIP.dll, was developed using the SV Manager Toolkit. In order for <span class="mc-variable OEM.ProductName variable">PcVue</span> to load the Add-on at startup, a text file USRMGR.DAT must also be added to the BIN folder. The file must contain the following lines:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[USRMGR\usrmgrEIP]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">DLL=svmgrEIP.dll</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <h2 class="SVheading2">Ethernet/IP Data Acquisition Driver Add-on configuration file</h2>
+        <p class="SVnormal">The Ethernet/IP Data Acquisition Driver Add-on is configured using a file called EtherNetIP.ini which must be created in the PER folder of the <span class="mc-variable OEM.ProductName variable">PcVue</span> project. The file has the following structure.</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[TaskParameters]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AttributeNumber = 16</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">LocalIpAddress = 192.168.56.1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">nbEquipments = 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">nbPollingGroups&#160;&#160;&#160;&#160;= 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[PollingGroup1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name = Fast</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">RefreshRateInSec = 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Equipment1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Name = EqtTest</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IpAddress1&#160;&#160;&#160;&#160;= 192.168.56.11</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Port1 = 0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Slot1 = 0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TimeOutInSec = 10</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">[TaskParameters]<ul style="list-style-type: disc;"><li>AttributeNumber - The variable's text extended attribute  that is used to configure the mapped EIP/ CIP variable. A number from 3 to 16. Defaults to 16.
+</li><li class="SVbulleted">LocalIpAddress - The IP Address of the PC on which the task runs. A string.</li><li class="SVbulleted">AssociationName - The association name in a redundant architecture.  The task will only be active on the active server. A string. If omitted there is no association.</li><li class="SVbulleted">NbEquipments - The number of equipments to which the driver is to connect. A number. If omitted the default is 0.</li><li class="SVbulleted">nbPollingGroups - The number of polling groups to be used. A number. If omitted the default is 0 polling groups.</li></ul></li>
+            <li class="SVbulleted">[PollingGroupN] - The definition of the polling group N. N is a number from 1 to <u>nbPollingGroups</u> as specified above. The values must be contiguous.<ul style="list-style-type: disc;"><li class="SVbulleted">Name - The name of the polling group. A string.  If omitted the default is PollingGroupN as defined in [PollingGroupN].</li><li class="SVbulleted">RefreshRateInSec - The polling rate for the group in seconds. A number. If omitted the default is Normal.</li></ul></li>
+            <li class="SVbulleted">[EquipmentN]<ul style="list-style-type: disc;"><li class="SVbulleted">Name - The name of the equipment. A string.  If omitted the default is EquipmentN as defined in [EquipmentN].</li><li class="SVbulleted">IpAddress1 - The first IP Address of the equipment. A string formatted x.x.x.x. The default is an empty string.</li><li class="SVbulleted">Port1 - Specify the physical port on which the Ethernet cable is plugged in. A number. If omitted the default is 0.</li><li class="SVbulleted">Slot1 - Specify the CPU equipment slot. A number. If omitted the default is 0.</li><li class="SVbulleted">IpAddress2 - The second IP Address of the equipment. A string formatted x.x.x.x. The default is an empty string.</li><li class="SVbulleted">Port2 - Specify the second physical port on which the Ethernet cable is plugged in. A number. If omitted the default is 0.</li><li class="SVbulleted">Slot2 - Specify the second CPU equipment slot. A number. If omitted the default is 0.</li><li class="SVbulleted">NbRetry - The number of retries prior to assuming a communication failure and setting any variables to NS COM. A number. If omitted the  default is 2.</li><li class="SVbulleted">TimeOutInSec - The timeout in seconds for a read or write request before considering the request has timed out. A number. If omitted the default is 10 (seconds).</li><li><p>DeviceType - The type of the equipment. A string either <u>LogixAccess</u> or <u>CIPAccess</u>. If omitted <u>LogixAccess</u> is used.</p></li><li><p>MultipleServiceSupport -  Specify if the equipment supports <u>Service 0x0a</u> meaning that several requests can be concatenated within one. A string either <u>Yes</u> or <u>No</u>. If omitted <u>Yes</u> is used.</p></li><li><p>CompactBitArray -  Specify if the equipment supports the compact bit array. If Yes an entire array is coded within a double word, else each bit of the array is coded within a single byte. A string either <u>Yes</u> or <u>No</u>. If omitted <u>Yes</u> is used.</p></li></ul></li>
+        </ul>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

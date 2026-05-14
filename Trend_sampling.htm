@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Data analysis (Data export)|Configuring Data Export|Adding pages to a Data Export |Adding a trend page" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuring the trend sampling</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuring the Trend Sampling<a name="kanchor275"></a></h1>
+        <p class="SVnormal">The <u>Data Mode</u> property in the Properties tab of the Trend Page Configuration dialog configures the mechanism used to populate the output with values extracted from the variable's trend recorded data. There are two basic methods.</p>
+        <ul style="list-style-type: disc;">
+            <li>Raw - Populates the output only with those values and timestamps that are actually recorded in the Archive Unit. As <span class="mc-variable OEM.ProductName variable">PcVue</span> records data only when it changes this means the export will produce an output with a variable number of rows depending on how frequently the raw value was changing at the time of recording. There are limitations when using  raw data mode. <ul style="list-style-type: disc;"><li>You can only add a single variable to the trend page.</li><li>Aggregated statistics cannot be generated.</li></ul></li>
+            <li>Sample - Populates the output with values at the configured sample rate. The export will always produce the same number of values (for a given period). The value for each sample is generated using the most recent older recorded value.  The sampling rate is set as a quantity of units where the units can be Milliseconds, Seconds, Minutes, Hours, Days, Weeks, Months or Years. When choosing the sample rate, remember to take into account the export period to produce an output with a sensible number of values. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><img src="../../Resources/Images/AE/DataExport/trendpage_sampling.png" MadCap:targetName="t1" style="display: none;" /></li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">There is a variation of sampling called Sampling With Synchro - see explanation below.</p>
+        </div>
+        <h2 class="SVheading2">Understanding the <u>Sampling With Synchro</u> data mode</h2>
+        <p class="SVnormal">The <u>Sampling with synchro</u> mode allow you to configure exactly when each sample is taken.</p>
+        <table style="width: 100%;border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 120px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Sampling rate</td>
+                    <td class="SVtableHeading">Time properties</td>
+                    <td class="SVtableHeading">Sample method</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Minute</td>
+                    <td class="SVtable">Second</td>
+                    <td class="SVtable">Every <u>Sampling rate</u> minutes on the specified second.<br />Example: Every 5  minutes at 30 seconds past the minute.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Hour</td>
+                    <td class="SVtable">Minutes and seconds</td>
+                    <td class="SVtable">Every <u>Sampling rate</u> hours on the specified minute and second.<br />Example: Every (1) hour at 59 minutes and 59 seconds past the hour.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Day</td>
+                    <td class="SVtable">Hours, minutes and seconds</td>
+                    <td class="SVtable">Every <u>Sampling rate</u> days on the specified hour, minute and second.<br />Example: Every (1) day at 0 hours, 0 minutes and 30 seconds past midnight.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Week</td>
+                    <td class="SVtable">Days, hours, minutes and seconds</td>
+                    <td class="SVtable">Every <u>Sampling rate</u> weeks on the specified day, hour, minute and second. (Day = 1 to 7).<br />Example: Every 4 weeks at 1 day, 0 hours, 0 minutes and 0  seconds after the start of the week.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Month</td>
+                    <td class="SVtable">Days, hours, minutes and seconds</td>
+                    <td class="SVtable">Every <u>Sampling rate</u> months on the specified day, hour, minute and second. (Day = 1 to 31).<br />Example: Every 1 month at 1 days, 23 hours, 59 minutes and 59  seconds after the start of the month.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Year</td>
+                    <td class="SVtable">None</td>
+                    <td class="SVtable">Sample with synchronization year-based behaves as the sample without synchronization, e.g. it exports one sample corresponding to January 1st at 00:00:00.</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

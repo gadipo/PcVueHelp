@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Graphic controls and Viewers|Chart (XY Plot)|Creating and configuring a Chart" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuring a Chart's X data source</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor127"></a>Configuring a Chart's X Data Source</h1>
+        <p class="SVnormal">This topic is for the features configured by the Chart's X Data Source tab that are used to configure the data source used for the X axis. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /> <img src="../../Resources/Images/HMI/Controls/chart_xdatasource_tab.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <h2 class="SVheading2">Selecting the data source</h2>
+        <p class="SVnormal">Normally the data source will be a variable from the Variables Tree. As the Chart uses the historical data created by trend recording, the variable must be configured as Trend Recorded in the Application Explorer.</p>
+        <p class="SVnormal">Alternatively, the variable field can be left blank and both the X and Y values supplied programmatically.</p>
+        <h2 class="SVheading2">About the sampling and how it works</h2>
+        <p class="SVnormal">When plotting more than one series it is mandatory to have the same number of data points for each series, plotted at identical time intervals. However, by default <span class="mc-variable OEM.ProductName variable">PcVue</span>'s historical system uses exception recording which records data when it changes and not at regular intervals. Therefore, the Chart animation employs a sampling mechanism that takes <span class="mc-variable OEM.ProductName variable">PcVue</span>'s raw data and generates data points at a known interval. This has the further advantage that you know exactly how many data points you will have. The operation of the sampling mechanism can be explained by a simple example. </p>
+        <p class="SVnormal">We require the X and Y values between 10:00 and 10:10 with sample period of one minute. We know this will produce 11 samples.</p>
+        <p class="SVnormal">A request is made to the historical system for data between 10:00 and 10:10 and it returns the following raw data comprising of 14 records. The data includes records for X and Y before the desired start time so the value at the actual start time is known. </p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <col style="width: 100px;" />
+            <col style="width: 40px;" />
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Time</td>
+                    <td class="SVtableHeading">Var</td>
+                    <td class="SVtableHeading">Value</td>
+                    <td>&#160;</td>
+                    <td class="SVtableHeading">Time</td>
+                    <td class="SVtableHeading">Var</td>
+                    <td class="SVtableHeading">Value</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">09:59:00</td>
+                    <td class="SVtable">X</td>
+                    <td class="SVtable">10</td>
+                    <td>&#160;</td>
+                    <td class="SVtable">10:01:53</td>
+                    <td class="SVtable">X</td>
+                    <td>35</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">09:59:51</td>
+                    <td class="SVtable">Y</td>
+                    <td class="SVtable">265</td>
+                    <td>&#160;</td>
+                    <td class="SVtable">10:03:25</td>
+                    <td class="SVtable">Y</td>
+                    <td>300</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:00:45</td>
+                    <td class="SVtable">Y</td>
+                    <td class="SVtable">280</td>
+                    <td>&#160;</td>
+                    <td class="SVtable">10:03:28</td>
+                    <td class="SVtable">Y</td>
+                    <td>310</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:01:25</td>
+                    <td class="SVtable">X</td>
+                    <td class="SVtable">15</td>
+                    <td>&#160;</td>
+                    <td class="SVtable">10:03:55</td>
+                    <td class="SVtable">Y</td>
+                    <td>312</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:01:33</td>
+                    <td class="SVtable">X</td>
+                    <td class="SVtable">18</td>
+                    <td>&#160;</td>
+                    <td class="SVtable">10:06:12</td>
+                    <td class="SVtable">X</td>
+                    <td>NS</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:01:43</td>
+                    <td class="SVtable">X</td>
+                    <td class="SVtable">25</td>
+                    <td>&#160;</td>
+                    <td class="SVtable">10:09:12</td>
+                    <td class="SVtable">Y</td>
+                    <td>450</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:01:48</td>
+                    <td class="SVtable"> X</td>
+                    <td class="SVtable">30</td>
+                    <td>&#160;</td>
+                    <td class="SVtable">10:09:15</td>
+                    <td class="SVtable">X</td>
+                    <td>15</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">The raw values are sampled at each required timestamp  (10:00, 10:01, 10:02 etc…) to get the last known value.</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <col style="width: 120px;" />
+            <col style="width: 160px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Time</td>
+                    <td class="SVtableHeading">X</td>
+                    <td class="SVtableHeading">Y</td>
+                    <td class="SVtableHeading">Point ID</td>
+                    <td class="SVtableHeading">Comment</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:00:00</td>
+                    <td class="SVtable">10</td>
+                    <td class="SVtable">265</td>
+                    <td class="SVtable">p1 (10, 265)</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:01:00</td>
+                    <td class="SVtable">10</td>
+                    <td class="SVtable">280</td>
+                    <td class="SVtable">p2 (10, 280)</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:02:00</td>
+                    <td class="SVtable">35</td>
+                    <td class="SVtable">280</td>
+                    <td class="SVtable">p3 (35, 280)</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:03:00</td>
+                    <td class="SVtable">35</td>
+                    <td class="SVtable">280</td>
+                    <td class="SVtable">p4 (35, 280)</td>
+                    <td class="SVtable">Same as previous</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:04:00</td>
+                    <td class="SVtable">35</td>
+                    <td class="SVtable"> 312</td>
+                    <td class="SVtable">p5 (35, 312)</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:05:00</td>
+                    <td class="SVtable"> 35</td>
+                    <td class="SVtable">312</td>
+                    <td class="SVtable">p6 (35, 312)</td>
+                    <td class="SVtable">Same as previous</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:06:00</td>
+                    <td class="SVtable">35</td>
+                    <td class="SVtable">312</td>
+                    <td class="SVtable">p7 (35, 312)</td>
+                    <td class="SVtable">Same as previous</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:07:00</td>
+                    <td class="SVtable">NS</td>
+                    <td class="SVtable">312</td>
+                    <td class="SVtable">p8 (NS, 312)</td>
+                    <td class="SVtable">X has no value</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:08:00</td>
+                    <td class="SVtable">NS</td>
+                    <td class="SVtable">312</td>
+                    <td class="SVtable">p9 (NS, 312)</td>
+                    <td class="SVtable">X has no value</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:09:00</td>
+                    <td class="SVtable">NS</td>
+                    <td class="SVtable">312</td>
+                    <td class="SVtable">p10 (NS, 312)</td>
+                    <td class="SVtable">X has no value</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10:10:00</td>
+                    <td class="SVtable">15</td>
+                    <td class="SVtable">450</td>
+                    <td class="SVtable">p11 (45, 450)</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">We have now 11 points to be displayed. But of the 11 points, p8, p9 and p10 contain NS values and will not be displayed. So only p1 (10, 265), p2 (10,280), p3 (35,280), p4 (35, 280),  p5 (35,312), p6 (35,312), p7 (35,312) and p11 (45,450) will actually be plotted on the chart. Some of these have the same values and so, although they have different timestamps, will be plotted at the same point. The chart might look like this. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/HMI/Controls/chart_ex_sampled.png" MadCap:targetName="t2" style="display: none;" /></p>
+        <p class="SVnormal">Note the cursor displaying three identical values on the same point but with different timestamps.</p>
+        <h2 class="SVheading2">Configuring the sampling</h2>
+        <p class="SVnormal">The main sampling properties are the <u>Display period</u> and the <u>Sampling</u> rate.</p>
+        <ul style="list-style-type: disc;">
+            <li>Display period - The period of time for which historical data is requested by the chart. If the <u>Start date</u> is not configured then the request is made using the actual time the mimic is opened, when the refresh tool is used, or when a refresh is requested programmatically. Range 1 second to 3600 days.</li>
+            <li>Sampling - The sampling period. Configurable from 10 milliseconds to 3600 days.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The maximum number of points for one series is 25,000. You cannot configure values for the <u>Display period</u> and the <u>Sampling</u> rate that would cause this to be exceeded.</p>
+        </div>
+        <p class="SVnormal">Using the <u>Start date</u> property you can force the start time of the Chart to a particular day and time relative to the current day. </p>
+        <ul>
+            <li>Every day - The current day. For example, if the current date and time was Tuesday 5th February 2013 09:15 the start would be 05/02/2013 (plus the configured hours and minutes).</li>
+            <li>Yesterday - Yesterday.  For example, if the current date and time was Tuesday 5th February 2013 09:15 the start would be 04/02/2013 (plus the configured hours and minutes).</li>
+            <li>Monday to Sunday - The first previous day corresponding to that selected.  For example, if the current date and time was Tuesday 5th February 2013 09:15, and Thursday was selected, the start would be 31/01/2013 (plus the configured hours and minutes).</li>
+            <li class="SVnormal">First day of the month - The first day of the current month.  For example, if the current date and time was Tuesday 5th February 2013 09:15 the start would be 01/02/2013 (plus the configured hours and minutes).</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

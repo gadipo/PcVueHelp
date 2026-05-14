@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Archives|Configuring archive units|Proprietary archive unit|Configuring a proprietary archive unit|Advanced information about proprietary archive units" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Management of the archive unit summary files</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Managing the Archive Unit Summary Files</h1>
+        <p class="SVnormal">For each archive unit that is created, a corresponding 
+ summary file is produced. The summary file contains essential information 
+ that is used by <span class="mc-variable OEM.ProductName variable">PcVue</span> to access the archive unit files. Should 
+ the summary file become corrupted the contents of the entire archive unit 
+ will be lost. </p>
+        <p class="SVnormal">To protect the summary file against corruption caused 
+ by hard disk errors, two copies are maintained. The main summary file takes 
+ the name of the archive unit plus a .SAV extension. For example, for an 
+ archive unit called PROP1, the file would be called PROP1.SAV. The copy 
+ just takes the name of the archive unit with no extension, for example 
+ PROP1. The two files are never opened at the same time. Both are held 
+ with the archive units, e.g. in the project's folder TH/&lt;<i>unit name</i>&gt;. 
+ <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/AE/Archives/Summary_file_with_copy.png" style="border-style: none;border: none;" border="0" />
+            </p>
+        </div>
+        <p class="SVnormal">Before it reads from or writes to the main summary file 
+ <span class="mc-variable OEM.ProductName variable">PcVue</span> checks its integrity. If it is found to be corrupted, its 
+ contents are replaced by the copy.</p>
+        <p class="SVnormal">Two system variable bits are provided that can be used 
+ to monitor the status of the summary files.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 320px;" />
+            <col />
+            <tr valign="middle">
+                <td style="width: 320px;" valign="top" width="320px">
+                    <p class="SVtableHeading">Variable</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td style="width: 320px;" valign="top" width="320px">
+                    <p class="SVtable">SYSTEM.UNIT.&lt;Archive Unit&gt;.SOM1_STATUS</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable" style="margin-left: 0px;">The status of the main summary file.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 320px;" valign="top" width="320px">
+                    <p class="SVtable">SYSTEM.UNIT.&lt;Archive Unit&gt;.SOM2_STATUS</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable" style="margin-left: 0px;">The status of the copy summary file.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">Each variable is set to a value of 0 if the file is healthy 
+ and to 1 if it is corrupt.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

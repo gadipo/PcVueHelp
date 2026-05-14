@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Replicating a database (SQL Server)" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="DatabaseManager.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Execution with Command Line</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor11"></a>Execution with Command Line</h1>
+        <p class="SVnormal" style="background-color: Transparent;">Once the configuration file 
+ has been created, the Command Line tool lets you to launch the replication.</p>
+        <p class="SVnormal" style="background-color: Transparent;">In the case of a scheduled replication that is <span style="text-decoration: underline;">not</span> on SQL Server Express, launching the replication means configuring creating the SQL 
+ agent by and creating a job to be executed according to the schedule.
+        </p>
+        <h2 class="SVheading2">Starting the replication tool</h2>
+        <p class="SVnormal" style="background-color: Transparent;">The tool's software file is named ReplicationManager.exe and is installed stored in the Bin folder of the software <span class="mc-variable OEM.ProductName variable">PcVue</span> project's BIN folder.</p>
+        <ul>
+            <li style="background-color: Transparent;">You can start it from there directly, via a command line or by first creating a shortcut to it.</li>
+        </ul>
+        <p class="SVnormal" style="background-color: Transparent;">The Command Line tool contains 
+ several options as follows.</p>
+        <h2 class="SVheading2">Mandatory arguments</h2>
+        <table style="width: 100%;border-spacing: ;border-collapse: collapse;margin-left: 0;margin-right: auto;" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td style="width: 12%;" valign="top" width="12%">
+                    <p class="SVtableHeading">Command</p>
+                </td>
+                <td style="width: 88%;" valign="top" width="88%">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="width: 12%;" valign="top" width="12%">
+                    <p class="SVtable">/N=</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 88%;" valign="top" width="88%">
+                    <p class="SVtable">Specify the replication name to launch (mandatory).</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Optional arguments</h2>
+        <p class="SVnormal">See the topic <a href="Configuring_the_replication.htm" title="Open the topic Configuring the Replication." alt="Open the topic Configuring the Replication.">Configuring the Replication</a> for details of how to create a named process for replication.</p>
+        <table style="width: 100%;border-spacing: ;border-collapse: collapse;margin-left: 0;margin-right: auto;" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td style="width: 12%;" valign="top" width="12%">
+                    <p class="SVtableHeading">Command</p>
+                </td>
+                <td style="width: 88%;" valign="top" width="88%">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="width: 12%;" valign="top" width="12%">
+                    <p class="SVtable">/F=</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 88%;" valign="top" width="88%">
+                    <p class="SVtable">Specify the name of the replication XML file (optional).</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 12%;" valign="top" width="12%">
+                    <p class="SVtable">/J=</p>
+                </td>
+                <td style="width: 88%;" valign="top" width="88%">
+                    <p class="SVtable">Specify the replication NOT to use a SQL server job (this 
+ is mandatory for SQL Express).</p>
+                    <p class="SVtable">The replication is followed step by step. You can get 
+ a log file with the result of the replication (i.e. the number of rows 
+ copied, grouped by time interval). See the topic <a href="Log_file.htm" title="Display the topic The Log File.">The 
+ Log File</a>.</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 12%;" valign="top" width="12%">/P = 1</td>
+                <td style="width: 88%;" valign="top" width="88%">Force deletion of records of a previously generated <i>TempTimeTable</i> table to prevent resuming steps of a previous, but failed, replication.</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Parameters for loading a once-off replication</h2>
+        <table style="width: 100%;border-spacing: ;border-collapse: collapse;margin-left: 0;margin-right: auto;" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td style="width: 12%;" valign="top" width="12%">
+                    <p class="SVtableHeading">Command</p>
+                </td>
+                <td style="width: 88%;" valign="top" width="88%">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="width: 12%;" valign="top" width="12%">
+                    <p class="SVtable">/S=</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 88%;" valign="top" width="88%">
+                    <p class="SVtable">Specify the earlier chronological limit. The date parameter 
+ in the configuration file is ignored.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="width: 12%;" valign="top" width="12%">
+                    <p class="SVtable">/E=</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 88%;" valign="top" width="88%">
+                    <p class="SVtable">Specify the later chronological limit. The date parameter 
+ in the configuration file is ignored.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Parameters to override a configured replication</h2>
+        <table style="width: 100%;border-spacing: ;border-collapse: collapse;margin-left: 0;margin-right: auto;" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td style="width: 12%;" valign="top" width="12%">
+                    <p class="SVtableHeading">Command</p>
+                </td>
+                <td style="width: 88%;" valign="top" width="88%">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="width: 12%;" valign="top" width="12%">
+                    <p class="SVtable">/T=</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 88%;" valign="top" width="88%">
+                    <p class="SVtable">Specify a time-span in hundreds of nanoseconds. The time-span in 
+ the configuration file is ignored.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Examples of using the Command Line tool </h2>
+        <p class="SVnormal" style="background-color: Transparent;">Example 1: loading a replication 
+ (without parameters)</p>
+        <p class="SVdataListing">/N=ReplicationName </p>
+        <p class="SVnormal" style="background-color: Transparent;">Example 2: loading a once-off 
+ replication with a date range</p>
+        <p class="SVdataListing">/N=ReplicationName /S=2018-03-28-30T15:45:14.9531250+02:00 /E=2018-03-28T15:45:14.9531250+02:00</p>
+        <p class="SVnormal" style="background-color: Transparent;">Example 3: loading a scheduled 
+ run to replicate the most recent hour of data</p>
+        <p class="SVdataListing">/N=ReplicationName /T=36000000000</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

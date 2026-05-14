@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|SNMP" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Adding a Polling Group to the SNMP configuration</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Adding a Polling Group to the SNMP Configuration<a name="kanchor355"></a></h1>
+        <p class="SVnormal">Polling Groups are used to define the period at which <span class="mc-variable OEM.ProductName variable">PcVue</span> requests data from either managed or unmanaged devices. A polling group can be used for one or more SNMP networks. When you map a Variables Tree variable to an OID or Ping you specify a Polling Group - <span class="mc-variable OEM.ProductName variable">PcVue</span> will then use the period defined in the group as the scan rate.</p>
+        <p class="SVnormal">By default, the driver creates one request, per Polling Group, per device. If you are reading a large number of variables from a device, using a single polling group, there is the possibility of exceeding the maximum number of OID's per request. In that case, a number of requests are created all at the same rate.</p>
+        <h2 class="SVheading2">Adding a Polling Group</h2>
+        <ol>
+            <li value="1">Using the Application Explorer, select the Polling folder sub-ordinate to SNMP. From the task pane, select <u>Add polling group</u>. The Polling Group dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <div MadCap:targetName="t1" style="display: none;">
+                <br />
+                <img src="../../Resources/Images/AE/Comm_DataAcq/snmp_polling_dialog.png" />
+                <br />
+            </div>
+            <li value="2">In the <u>Name</u> box, enter a name for the Polling Group. You can either accept the default or enter one of your own.</li>
+            <li value="3">Enter the optional descriptive text in the <u>Description</u> box. The description is only used in the Application Explorer.</li>
+            <li value="4">Enter the <u>Update Rate</u> in milliseconds. Range 1000 (1 second) to 86400000 (24 hours). The default is 60000 (1 minute).</li>
+            <li value="5">Click on <u>OK</u> to confirm the configuration and close the dialog.</li>
+        </ol>
+        <h2 class="SVheading2">Using multiple Polling Groups to segregate OIDs in a single device</h2>
+        <p class="SVnormal">In some devices, particularly those supporting SNMP V1, if one OID in a request is bad the device reports all OIDs in the same request as bad. You can improve this situation by using more than one polling group, and hence more than one request, for a device. Consider the following simple example.</p>
+        <p class="SVnormal">You want to read OIDs 10, 20, 30 and 40 from a device with the above characteristic.</p>
+        <ul style="list-style-type: disc;">
+            <li>If you use a single polling group then, if the event OID 10 is bad, all the other OIDs also become bad.</li>
+            <li>If you use two polling groups, one for OIDs 10 and 20 and the other for OIDs 30 and 40, if OID 10 is bad then OID 20 will also be bad but OIDs 30 and 40 will be OK.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

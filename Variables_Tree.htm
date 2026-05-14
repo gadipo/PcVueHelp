@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Conceptual topics|Variable declaration" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>I/O and internal variables - HMI variables</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="VariablesTree_Concept" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor131"></a>I/O and internal variables - HMI variables</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc6">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="Declaration_InstbyCat" />
+                <param name="Item3" value="VariablesTree_InstbyCat" />
+            </object><a class="MCConceptLink_seealso_0" href="javascript:mc6.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />See also</a>
+        </p>
+        <p class="SVnormal">All variables are available to all programs. </p>
+        <div class="warning">
+            <p class="SVnormal">If the value of a variable is to be changed from within a program, then the variable must have the Control attribute set.</p>
+        </div>
+        <p class="SVnormal">It must not be made globally in the program header 
+ nor passed as an argument from a Run Program animation. See example in 
+ the DIM instruction's topic.</p>
+        <p class="SVnormal">Variables may be referenced directly using their 
+ full name, or by using the branch instruction and then using a name relative 
+ to the branch. A working variable of type string may also be used to defer the resolution of the variable name.</p>
+        <div class="warning">
+            <p class="SVnormal">When referring to variables within a program, 
+ you must ensure that your program manages the variable type correctly 
+ as in the table below.</p>
+        </div>
+        <table style="width: 100%;border-spacing: 0px; border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 150px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr valign="top">
+                <td>
+                    <p class="SVtableHeading">Variable</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Type in program</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Range</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td>
+                    <p class="SVtable">Bit</p>
+                </td>
+                <td>
+                    <p class="SVtable">INTEGER</p>
+                </td>
+                <td>
+                    <p class="SVtable">0 or 1.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td>
+                    <p class="SVtable">Register</p>
+                </td>
+                <td>
+                    <p class="SVtable">DOUBLE</p>
+                </td>
+                <td>
+                    <p class="SVtable">2.225074 E–308 to 1.79769313 E+308 for positive values</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td>
+                    <p class="SVtable">String</p>
+                </td>
+                <td>
+                    <p class="SVtable">STR</p>
+                </td>
+                <td>
+                    <p class="SVtable">Up to 32,000 characters.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">In early versions of <span class="mc-variable OEM.ProductName variable">PcVue</span> a register was treated as type single. This was changed so that a register is treated as type double. For compatibility purposes the following features were added at the time of change.</p>
+            <ul style="list-style-type: disc;">
+                <li>
+                    <p class="SVbulleted">A register can be used as either type double or type single. Using as type single may result in loss of precision.</p>
+                </li>
+                <li>
+                    <p>A property, <u>Use register variables as double in SCADA Basic</u>, was added to Programs Settings. This is set to True by default but if changed to false enforces strict use of a register as type single.</p>
+                </li>
+            </ul>
+            <p>Some of the code examples were written before a register was treated as a double and therefore may contain unnecessary type conversions.</p>
+        </div>
+        <h2 class="SVheading2">Using a Branch</h2>
+        <p class="SVnormal">See the topic <a href="../References/Using_Progs_with_DB_Branch.htm">Using 
+ Programs With a Branch</a>.</p>
+        <h2 class="SVheading2">Using Deferred Naming</h2>
+        <p class="SVnormal">When referring to variables in a program, 
+ you can hard code the variable name as part of the program. Sometimes it is 
+ better to construct the name of the variable in the program itself so that the resolution is deferred and only performed at execution time, for 
+ example by passing the variable name as 
+ an argument, or calculating the name programmatically. When using this technique the variable name is stored in 
+ another (string) variable, usually a working variable. This is known as indirect or deferred naming and uses the "?" sign.</p>
+        <div class="warning">You can only use deferred naming in the operands of a value assignment with the = operator. It can be used as part of the left-side or right-side operands. It will not work in any other context. See the examples below.</div>
+        <div class="note">
+            <p class="SVnormal">If deferred naming is used, the working variable that contains 
+ the name of the variable must be declared inside the SUB function 
+ where it is used. See the examples below.</p>
+        </div>
+        <p class="SVnormal">To refer to the variable, you use the name of the string 
+ preceded by a question mark "?".  This is best illustrated by 
+ an example.</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: PlainText;" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB Init ()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;DIM VarName As Str;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;DIM Index as Integer;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;For Index = 0; Index &lt; 11; Index ++</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;VarName = AddString("Tank", TOC(Index));</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Varname = Addstring(Varname, ".Level.SP");</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'-------- Deferred variable referencing</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;?Varname = 0;&#160;&#160;'? used as part of the left-side operand</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;Next</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">You can also use deferred addressing to refer to only part of a variable name (although it must be a complete branch). The previous example could be re-written as follows.</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SUB Init ()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;DIM VarName As Str;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;DIM Index as Integer;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;For Index = 0; Index &lt; 11; Index ++</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;VarName = AddString("Tank", TOC(Index));</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'-------- Deferred variable referencing</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;?Varname.Level.SP = 0;&#160;&#160;'? with a work variable combined with additional hard coded branch/leaf segments</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;Next</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">END SUB</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVnormal">The follow example will not work as it attempts to use deferred addressing in a context other than the left-side operand of a value assignment.</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">'Prerequisite: The I/O or internal variable called Recipe.1.RecipeName has the value "hello".</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Sub Main()</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;Dim TxtContent as Str;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;Dim RecipeName as str;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;RecipeName="Recipe.1.RecipeName";</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;Print(?RecipeName);&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;'Same result as calling Print(RecipeName). Will print the string "Recipe.1.RecipeName" as opposed to the value of the variable called Recipe.1.RecipeName</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;TxtContent = ?RecipeName;&#160;&#160;&#160;&#160;'? used as part of the right-side operand - Will fail</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;Print(TxtContent);</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">End Sub</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Results:</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Recipe.1.RecipeName</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">hello</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="dataset;Datasets;datasets" MadCap:tocPath="Variables|The Variables Tree|Configuring variables|Linking a variable to its source" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Linking a variable to an IEC 61850 data object or data attribute</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor66"></a><a name="kanchor67"></a>Linking a variable to an IEC 61850 data object or data attribute</h1>
+        <p>The following properties appear in the Variable Properties dialog when a variable is mapped to an IEC 61850 data object or data attribute.  <a style="font-weight: bold;" href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p MadCap:targetName="t1" style="display: none;">
+            <img src="../../Resources/Images/AE/Variables/Link_bit_61850_source_tab.png" />
+        </p>
+        <h2 class="SVheading2">The Source tab</h2>
+        <ul>
+            <li>Device - The selected device. Clicking the down arrow adjacent to the field displays a list of all configured devices.</li>
+            <li>Monitoring object - The selected monitoring object. Clicking the down arrow adjacent to the field displays a list of all monitoring objects (data groups, datasets, and data reports).</li>
+            <li>Mapping - The type of data to map to, either <u>Data object</u>, <u>Data attribute</u> or <u>Control block</u>.</li>
+            <li>Member - The reference of the member of  the data set or data report. Clicking the down arrow adjacent to the field displays the list of available members, either by browsing the physical device or by discovery in the referenced SCL file. See below.</li>
+            <li>Field - The reference of any sub-object and attribute of the selected member. Clicking the down arrow adjacent to the field displays the list of available sub-objects and attributes, either by browsing the physical device or by discovery in the referenced SCL file. See below.</li>
+            <li>Common data class - The Common Data Class for the selected member and field. Clicking the down arrow adjacent to the field displays a list of relevant CDC's.</li>
+        </ul>
+        <div class="tip">
+            <p class="SVnormal">Mapping can be done offline or online:</p>
+            <ul>
+                <li>If SCL files have been associated to the network configuration element, you are doing offline mapping and the values proposed for the mapping properties are based on what is defined in the SCL files.</li>
+                <li>If no SCL file is associated to the network configuration element, you are doing online mapping. <span class="mc-variable OEM.ProductName variable">PcVue</span> must be connected to the actual network, physical devices must be operational, and the discovery services must be enabled so that drop-down lists can be filled. Other than that, you can also fill property values manually, in which case no consistency verification can be done until the actual physical device is connected.</li>
+            </ul>
+        </div>
+        <h2 class="SVheading2">Mapping with a dataset group or a report group</h2>
+        <p class="SVnormal">The <u>Member</u> and <u>Field</u> properties are concatenated to provide the full reference of the data attribute or data object. Two fields are required because when mapping with a Dataset or a Report group, <span class="mc-variable OEM.ProductName variable">PcVue</span> initially retrieves the names of the top-level Data objects only. These are made available for selection in the <u>Members</u> drop down list box.</p>
+        <p class="SVnormal">In general, monitoring requires mapping of variables on Data objects to take advantage of the timestamp and quality provided by the IED. In that case, selecting the <u>Member</u> and the <u>Common data class</u> properties is enough. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p MadCap:targetName="t2" style="display: none;">
+            <img src="../../Resources/Images/AE/Variables/Link_bit_61850_member2.png" />
+        </p>
+        <p class="SVnormal">For mapping on a sub-object or a Data attribute, the <u>Field</u> property must be used. Once the member is selected, <span class="mc-variable OEM.ProductName variable">PcVue</span> can then retrieve the names of any sub-objects and attributes which are made available for selection in the <u>Field</u> drop down list box. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t3" style="display: none;"><br /><img src="../../Resources/Images/AE/Variables/Link_register_61850_field.png" /><br /></div></p>
+        <p class="SVnormal">In the above screenshot, the full reference is <span style="font-family: monospace; background-color: #dddddd;">A1_MEASMeasurements/MMXU1$MX$A$phsA.cVal.mag.f</span>.</p>
+        <h2 class="SVheading2">Mapping with a data group</h2>
+        <p class="SVnormal">When mapping with a Data group, <span class="mc-variable OEM.ProductName variable">PcVue</span> retrieves the entire Data object and Data attribute tree at once. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">This is made available directly in the <u>Members</u> drop down list box and it is not necessary to use the <u>Field</u>.</p>
+        <p>
+            <img src="../../Resources/Images/AE/Variables/Link_register_61850_member.png" MadCap:targetName="t4" style="display: none;" />
+        </p>
+        <h2 class="SVheading2">Mapping a variable for control</h2>
+        <p class="SVnormal">Mapping a variable to handle a control requires the <u>Command</u> property to be checked in the <u>General</u> tab.</p>
+        <p class="SVnormal">In addition, the following steps are required in the <u>Source</u> tab: <a style="font-weight: bold;" href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t5"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <ol>
+            <li value="1">Select the network and device,</li>
+            <li value="2">Select the monitoring group. Use a data group if the controllable Data object is not available in any existing dataset or data report group,</li>
+            <li value="3">In the <u>Member</u> property, select the Data object under the <b>functional constraint ST</b>,</li>
+            <li value="4">Select the <b>controllable</b> <i style="font-style: normal; text-decoration: underline;">Common data class</i> matching the Data object (as behind the CO functional constraint), typically SPC, DPC...</li>
+            <li value="5">Adjust the Advanced properties, in particular if you want to force <span class="mc-variable OEM.ProductName variable">PcVue</span> to use a specific control model and validate.</li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">While selecting the Data object for control under the functional constraint ST may seem counter-intuitive, <span class="mc-variable OEM.ProductName variable">PcVue</span> will automatically find the corresponding controllable data object in the Logical node, and act on it using the proper control services.</p>
+        </div>
+        <p MadCap:targetName="t5" style="display: none;">
+            <img src="../../Resources/Images/AE/Variables/Link_bit_61850_control.png" />
+        </p>
+        <h2 class="SVheading2">Mapping with a setting group</h2>
+        <p class="SVnormal">When mapping with a setting group, you can map a variable onto a data object or a data attribute within a Setting Group Control Block, and also directly on the SGCB.</p>
+        <h2 class="SVheading2"><a name="extended-attr"></a>The Extended attributes tab</h2>
+        <p class="SVnormal">You can configure the project to handle raw IEC 61850 information via the text extended attributes of variables: Quality validity, quality details, AddCause, TextError, orIdent, orCat etc.</p>
+        <p class="SVnormal">Refer to the document describing the format of the file VarConf.dat in the Extra documentation for more information.</p>
+        <h2 class="SVheading2">The Advanced tab</h2>
+        <ul>
+            <li>Control model - The control model to use when forcing the value of the variable. Only displayed for a variable mapped on a controllable Common data class.<ul><li>Automatic detection - Control will use the control model as configured in the physical device (or SCL file). Default.</li><li>Direct execute, Direct execute with enhanced security, Select before operate, Select before operate with enhanced security) - <span class="mc-variable OEM.ProductName variable">PcVue</span> will force the use of the selected control model. Please note that controls may fail at run-time, for example if you force the use of a Direct execute where the IED requires an SBO or SBOw.<br /></li></ul></li>
+            <li>Data object options - Only displayed for a variable mapped on a Data object or Sub-object.<ul><li>Use time provided by device - If ticked, <span class="mc-variable OEM.ProductName variable">PcVue</span> uses the timestamp provided by the device.</li><li>Use quality provided by device - If ticked, <span class="mc-variable OEM.ProductName variable">PcVue</span> uses the quality send by the device. Information is logged in the client diagnostic traces if the quality is configured to be processed as invalid. The IEC 61850 quality can be stored in variable's extended attributes for further application-specific processing.</li></ul></li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

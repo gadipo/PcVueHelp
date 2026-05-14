@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="SQL server memory options" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="DatabaseManager.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>How the SQL Server Uses Memory</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How the SQL Server Uses Memory </h1>
+        <p class="SVnormal">There are two principal methods for setting the SQL Server 
+ memory options manually: </p>
+        <table style="width: 100%;border-spacing: ;" width="100%">
+            <col style="width: 41.146%;" />
+            <col style="width: 58.854%;" />
+            <tr>
+                <td width="41.146%">
+                    <p class="SVtableHeading">Method</p>
+                </td>
+                <td width="58.854%">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top" width="41.146%">
+                    <p class="SVtable">Set Min Server Memory and Max Server Memory:</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top" width="58.854%">
+                    <p class="SVtable">&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top" width="41.146%">
+                    <ul style="list-style: disc;" type="disc">
+                        <li>to span a range of memory 
+ values. </li>
+                    </ul>
+                </td>
+                <td colspan="1" rowspan="1" valign="top" width="58.854%">
+                    <p>This is useful in situations where system or database 
+ administrators want to configure an instance of SQL Server in conjunction 
+ with the memory requirements of other applications running on the same 
+ computer.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" width="41.146%">
+                    <ul style="list-style: disc;" type="disc">
+                        <li class="SVtable">to the same value. </li>
+                    </ul>
+                </td>
+                <td valign="top" width="58.854%">
+                    <p class="SVtable">This value corresponds to the fixed amount of memory that 
+ will be allocated to SQL Server.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Min Server Memory</h2>
+        <p class="SVnormal">You use Min Server Memory to guarantee a minimum amount 
+ of memory to an instance of SQL Server. </p>
+        <p class="SVnormal">SQL Server will not immediately allocate the amount of 
+ memory specified in Min Server Memory on startup. However, after memory 
+ usage has reached this value due to loading from client stations, SQL 
+ Server cannot free memory from the allocated buffer pool unless the value 
+ of Min Server Memory is reduced.</p>
+        <div class="warning">
+            <p class="SVnormal">SQL Server is not guaranteed to allocate the amount of 
+ memory specified in Min Server Memory. If the load on the server never 
+ necessitates the allocation of the amount of memory specified in Min Server 
+ Memory, then SQL Server will run with less memory.</p>
+        </div>
+        <p class="SVnormal">Only set Min Server Memory if the start time of new applications 
+ sharing the same server as SQL Server becomes a problem. It is better 
+ to let SQL Server use all of the available memory.</p>
+        <h2 class="SVheading2">Max Server Memory </h2>
+        <p class="SVnormal">You use Max Server Memory to prevent SQL Server from 
+ using more than the specified amount of memory, thus leaving the remaining 
+ memory available to start other applications quickly. SQL Server does 
+ not immediately allocate the memory specified in Max Server Memory on 
+ startup. Memory usage is increased as needed by SQL Server until it reaches 
+ the value specified in Max Server Memory. SQL Server cannot exceed this 
+ memory usage unless the value of Max Server Memory is raised.</p>
+        <p class="SVnormal">There is a short delay between the start of a new application 
+ and the time when SQL Server releases memory. Using Max Server Memory 
+ prevents this delay and may give better performance to the other application. 
+ </p>
+        <div class="note">
+            <p class="SVnormal">As you increase the amount of SQL Server memory, ensure 
+ that there is sufficient disk space to grow the operating system's virtual 
+ memory support file to accommodate additional memory.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

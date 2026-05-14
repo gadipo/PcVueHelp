@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Archives" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Using historical associations with the HDS and SQL server</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Using Historical Associations with the HDS and SQL Server</h1>
+        <p class="SVnormal">
+            &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> allows considerable flexibility when using an association of two or more historical servers and the HDS to record data in an SQL server database. The following are all possible configurations although in practice the configuration using a single active server is the likely to be the preferred solutions for reasons of practicality and cost.     </p>
+        <h2 class="SVheading2">Configuration 1 - Multiple active servers and multiple SQL servers</h2>
+        <p class="SVnormal">Each historical servers are active and records in its own dedicated SQL server. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Archives/2active_2sql.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <ul>
+            <li>Technical issues - A replication mechanism is advisable in case of server failure.</li>
+            <li>Configuration - Select <u>Multiple active servers</u> for the redundancy mode in the association configuration.</li>
+            <li>Advantage - The same project can be used on all servers.</li>
+            <li>Advantage - Each station records data in tables of the same name.</li>
+            <li>Disadvantage - High cost if using full versions of SQL Server as it requires one SQL server license for each server.</li>
+        </ul>
+        <h2 class="SVheading2">Configuration 2 - Multiple active servers and single SQL server with multiple tables</h2>
+        <p class="SVnormal">Each of historical servers are active and record in the same database in the same SQL server (on a dedicated computer) but in different tables. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Archives/2active_1sql.png" MadCap:targetName="t2" style="display: none;" /></p>
+        <ul>
+            <li>Technical issues - A replication mechanism is advisable in case of server failure.</li>
+            <li>Configuration - Select <u>Multiple active servers</u> for the redundancy mode in the association configuration.</li>
+            <li>Advantage - Lower cost if using full version of SQL Server as only one license required.</li>
+            <li>Disadvantage - Different projects must be used on each server because of the different table names.</li>
+        </ul>
+        <h2 class="SVheading2">Configuration 3 - Single active server and single SQL server</h2>
+        <p class="SVnormal">Only one of historical server is active at any one time. All of the historical servers record in the same table of the same database of the same SQL server. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Archives/1active_1sql.png" MadCap:targetName="t3" style="display: none;" /></p>
+        <ul>
+            <li>Technical issues - No replication mechanism required.</li>
+            <li>Technical issues - Double buffering in the HDS minimizes any loss of data during changeover of the active server.</li>
+            <li>Configuration - Select <u>Single active server</u> for the redundancy mode in the association configuration.</li>
+            <li>Advantage - The same project can be used on all of servers.</li>
+            <li>Advantage - Lower cost if using full version of SQL Server as only one license required. </li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

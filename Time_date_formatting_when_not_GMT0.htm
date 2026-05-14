@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Animation|Using custom display formats" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Using time and date formatting when not GMT0</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Using Time and Date Formatting When Not Using GMT0</h1>
+        <p>The host operating system's time zone is taken into account when using date and time formatting. The effect of this can be seen in the following examples.</p>
+        <p class="SVnormal">If the host operating system is set to a time zone other than GMT0 
+ the time zone offset (in hours) is added to the formatted value. This is best explained by an example.</p>
+        <ul style="list-style-type: disc;">
+            <li>A register formatted as dd/mm/yyy hh:nn:ss@s with an input value of 1483228800 will display:<ul style="list-style-type: disc;"><li>In a GMT0 time zone - 01/01/2017 00:00:00.</li><li>In a GMT+1 time zone - 01/01/2017 01:00:00</li></ul></li>
+            <li>A register formatted as hh:nn:ss@s with an input value of 3600 will display:<ul style="list-style-type: disc;"><li>In a GMT0 time zone - 01:00:00.</li><li>In a GMT+1 time zone - 02:00:00.</li></ul></li>
+        </ul>
+        <p class="SVnormal">This has an unexpected effect if you want to enter a time, including hours, on a non-GMT0 system. You will find that you are unable to enter a time less than the time zone offset. For example, for GMT+1 you cannot enter a time less than 01:00:00. The solution is to configure the hours as a duration rather than a time. That is, enclose the hours formatting character in square brackets. For example, with a received value of seconds the required format is: [hh]:nn:ss@s-[hh]:nn:ss.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

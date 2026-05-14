@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>SVALA Alarm Information example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="SVALA_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor77"></a>SVALA (Alarm Information) Examples</h1>
+        <p class="SVnormal"> <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc375"><param name="Command" value="ALink,MENU" /><param name="Item1" value="" /><param name="Item2" value="SVALA_Instruct" /></object><a class="MCConceptLink_applies_0" href="javascript:mc375.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a></p>
+        <h2 class="SVheading2">Example 1</h2>
+        <p class="SVnormal">This example exercises the SVALA command. </p>
+        <p class="SVnormal">Variables required:</p>
+        <ul>
+            <li class="SVbulleted">@ALAEND is a variable of type Bit.</li>
+            <li class="SVbulleted">@NB_ALARMS is a variable of type Register.</li>
+        </ul>
+        <p class="SVnormal">The program also requires these <a href="../Concepts/Global_Program.htm">global
+ variables</a> to be declared:</p>
+        <ul>
+            <li class="SVbulleted">DIM hdbuffer As Long;</li>
+            <li class="SVbulleted">DIM hparam As Long;</li>
+        </ul>
+        <p class="SVnormal">The module "Main" must be run first to trigger
+ an event before module SvAla1 is run.</p>
+        <p class="SVprogramCode">SUB Main()</p>
+        <p class="SVprogramCode">EVENT("ADDPROG","@ALAEND","ALL&gt;1","sval.SCB","","putfile");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SvAla1()</p>
+        <p class="SVprogramCode">DIM GFilter As STR;</p>
+        <p class="SVprogramCode">DIM GFormat As STR;</p>
+        <p class="SVprogramCode">DIM GState1 As STR;</p>
+        <p class="SVprogramCode">DIM GState2 As STR;</p>
+        <p class="SVprogramCode">DIM GState3 As STR;</p>
+        <p class="SVprogramCode">DIM GState4 As STR;</p>
+        <p class="SVprogramCode">DIM GState5 As STR;</p>
+        <p class="SVprogramCode">DIM GState6 As STR;</p>
+        <p class="SVprogramCode">DIM Gminmax As STR;</p>
+        <p class="SVprogramCode">DIM Gmin As STR;</p>
+        <p class="SVprogramCode">DIM Gmax As STR;</p>
+        <p class="SVprogramCode">DIM chParam As STR;</p>
+        <p class="SVprogramCode">chParam = "";</p>
+        <p class="SVprogramCode">hdbuffer = ALLOC_BUFFER ( 48000 );</p>
+        <p class="SVprogramCode">hparam = ALLOC_BUFFER ( 4000 );</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' &#160;&#160;LIMITATION ON LINES</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam,"0" ); </p>
+        <p class="SVprogramCode">'No. of lines ( 0 - no limitations,</p>
+        <p class="SVprogramCode">' if this is not the size of the buffer )</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , ",");</p>
+        <p class="SVprogramCode">'field separator</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' MODE taking into account MIN &amp; MAX</p>
+        <p class="SVprogramCode">GMinMax="0";</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , GMinMax);</p>
+        <p class="SVprogramCode">' equivalent - check all Min and Max boxes</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , ",");</p>
+        <p class="SVprogramCode">'field separator</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' MIN LEVEL </p>
+        <p class="SVprogramCode">Gmin = "0";</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , Gmin); </p>
+        <p class="SVprogramCode">'Priority‚ min</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , ",");</p>
+        <p class="SVprogramCode">'field separator</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' MAX LEVEL</p>
+        <p class="SVprogramCode">GMax="29";</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , GMax);</p>
+        <p class="SVprogramCode">'Priority‚ max</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , ",");</p>
+        <p class="SVprogramCode">'field separator</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' &#160;&#160;&#160;&#160;TYPES OF ALARM </p>
+        <p class="SVprogramCode">GState1 = "1"; 'taken into account</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , GState1);</p>
+        <p class="SVprogramCode">'taken into account present not ack</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , ",");</p>
+        <p class="SVprogramCode">'field separator</p>
+        <p class="SVprogramCode">GState2 = "1"; 'taken into account</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , GState2);</p>
+        <p class="SVprogramCode">'present ack</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , ",");</p>
+        <p class="SVprogramCode">'field separator</p>
+        <p class="SVprogramCode">GState3="1"; 'taken into account</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , GState3);</p>
+        <p class="SVprogramCode">'Hidden not ack</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , ",");</p>
+        <p class="SVprogramCode">'field separator</p>
+        <p class="SVprogramCode">GState4="1"; 'taken into account</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , GState4);</p>
+        <p class="SVprogramCode">'Inactive</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , ",");</p>
+        <p class="SVprogramCode">'field separator</p>
+        <p class="SVprogramCode">GState5 = "1"; 'taken into account</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , GState5);</p>
+        <p class="SVprogramCode">'Invalid</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , ",");</p>
+        <p class="SVprogramCode">'field separator</p>
+        <p class="SVprogramCode">GState6 = "0"; 'not taken into account</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , GState6);</p>
+        <p class="SVprogramCode">'User masked</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , ",");</p>
+        <p class="SVprogramCode">'field separator</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' &#160;&#160;&#160;&#160;FILTERING </p>
+        <p class="SVprogramCode">'GFilter = "";</p>
+        <p class="SVprogramCode">GFilter = "=(#A1 == DOM1)||(#A1 == DOM2)";</p>
+        <p class="SVprogramCode">'GFilter = "=(#A1 == DOM1)";</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam,GFilter);</p>
+        <p class="SVprogramCode">'filter variables with Domain DOM1 or DOM2</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam , ",");</p>
+        <p class="SVprogramCode">'field separator</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' &#160;&#160;&#160;&#160;FORMAT </p>
+        <p class="SVprogramCode">GFormat="#D/#M/#Y #h:#m:#s #t #@A1 #@A2";</p>
+        <p class="SVprogramCode">chParam = ADDSTRING(chParam, GFormat );</p>
+        <p class="SVprogramCode">'Format</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' &#160;&#160;&#160;&#160;MODIFYING THE BUFFER OF PARAMETERS </p>
+        <p class="SVprogramCode">PUT_BUFFER(hparam,0,chParam);</p>
+        <p class="SVprogramCode">PRINT("Extraced by SVALA :",SVALA(1,hdbuffer,hparam,"ALAEND",1,"NB_ALARMS"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB putfile()</p>
+        <p class="SVprogramCode">BUFTOFILE (hdbuffer, "SvAlaResult","USEFULL_PART","Append");</p>
+        <p class="SVprogramCode">FREE_BUFFER(hdbuffer);</p>
+        <p class="SVprogramCode">FREE_BUFFER(hparam);</p>
+        <p class="SVprogramCode">@ALAEND = 0;</p>
+        <p class="SVprogramCode">END SUB</p>
+        <h2 class="SVheading2">Example 2</h2>
+        <p class="SVnormal">This is another program to extract information on alarms.
+ It uses the CYCLIC and EVENT commands to activate SVALA functions.</p>
+        <p class="SVprogramCode">DIM hdl As LONG;<br />DIM hparam As LONG;<br />DIM hdl2 As LONG;<br />DIM hdl3 As LONG;<br />DIM GFilter As STR;<br />DIM GFormat As STR;<br />DIM Gstate1 As STR;<br />DIM Gstate2 As STR;<br />DIM Gstate3 As STR;<br />DIM Gstate4 As STR;<br />DIM Gstate5 As STR;<br />DIM Gstate6 As STR;<br />DIM Gminmax As STR;<br />DIM Gmin As STR;<br />DIM Gmax As STR;<br />DIM Lock As INTEGER;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB Main()<br />hdl = 0;<br />hdl2 = 0;<br />hdl3 = 0;<br />hparam = 0;<br />Lock = 0 ;<br />END SUB<br /></p>
+        <p class="SVprogramCode">SUB AlarmExtract()<br />If ( Lock == 1 ) Then<br />PRINT ( "request in progress " );<br />CYCLIC ( "DEL" , 2 , "SvAla" ,"", "Filter2" );<br />CYCLIC ( "ADDPROG" , 2 , "SvAla" ,"", "Filter2" );<br />Return;<br />End If<br />Lock = 1 ;<br />@STATE = 0;<br />@ANA = 0;<br />GFilter = "";<br />GFilter = ADDSTRING(GFilter, @FILTER);<br />GFormat = "";<br />GFormat = ADDSTRING(GFormat, @ALAFORMAT);<br />GMinMax = FORMAT ( "%d" , @MINMAX );<br />GMin1 = FORMAT ( "%d" , @MIN );<br />GMin2 = FORMAT ( "%d" , @MAX );<br />GState1 =FORMAT ( "%d" , @ETAT1 );<br />GState2 =FORMAT ( "%d" , @ETAT2 );<br />GState3 =FORMAT ( "%d" , @ETAT3 );<br />GState4 =FORMAT ( "%d" , @ETAT4 );<br />GState5 =FORMAT ( "%d" , @ETAT5 );<br />GState6 =FORMAT ( "%d" , @ETAT6 );<br />DoAlarmExtract();<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB DoAlarmExtract()<br />DIM i As Integer;<br />DIM chParam As Str;<br />chParam = "";<br />If ( hdl == 0 ) Then<br />hdl = ALLOC_BUFFER ( 16000 );<br />End If<br />If ( hparam == 0 ) Then<br />hparam = ALLOC_BUFFER ( 2000 );<br />End If</p>
+        <p class="SVprogramCode">&#160; </p>
+        <p class="SVprogramCode">' Number of lines. 0 = no limitation<br />chParam = ADDSTRING(chParam,"0," ); '<br />' Level filter (0,1 or 2)<br />chParam = ADDSTRING(chParam , GMinMax<br />chParam = ADDSTRING(chParam , ",");<br />' Minimum priority<br />chParam = ADDSTRING(chParam , Gmin)<br />chParam = ADDSTRING(chParam , ",");<br />' Maximum priority<br />chParam = ADDSTRING(chParam , GMax);<br />chParam = ADDSTRING(chParam , ",");<br />' Alarms on and not acknowledged<br />chParam = ADDSTRING(chParam , GState1);<br />chParam = ADDSTRING(chParam , ",");<br />' Alarms on and acknowledged<br />chParam = ADDSTRING(chParam , GState2);<br />chParam = ADDSTRING(chParam , ",");<br />' Alarms off and not acknowledged<br />chParam = ADDSTRING(chParam , GState3);<br />chParam = ADDSTRING(chParam , ",");<br />' Alarms off<br />chParam = ADDSTRING(chParam , GState4);<br />chParam = ADDSTRING(chParam , ",");<br />' Invalid alarms<br />chParam = ADDSTRING(chParam , GState5);<br />chParam = ADDSTRING(chParam , ",");<br />' Alarms masked by the operator<br />chParam = ADDSTRING(chParam , GState6);<br />chParam = ADDSTRING(chParam , ",");<br />' Filter - Alarms of nature ELEC and starting with the name WORKSHOP</p>
+        <p class="SVprogramCode">GFilter = "=(#t BEG WORKSHOP)&amp;&amp;(#A2 == ELEC)";<br />chParam = ADDSTRING(chParam,GFilter);<br />' Line format<br />chParam = ADDSTRING(chParam, GFormat );<br />PUT_BUFFER(hparam,0,chParam);<br />i=EVENT("ADDPROG","ETAT",1,"SVALA","","RcvEvt" );<br />i = SVALA ( "EXTRACT" , hdl, hparam , "ETAT" , 1 , "ANA" );<br />If ( i &lt; 1 ) Then<br />PRINT (" i " , i );<br />End If<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode"><span>SUB RcvEvt()<br />DIM i As Integer;<br />DIM j As Integer;<br />DIM p As Str;<br />DIM sep As Str;<br />DIM sep2 As Str;<br />DIM lig As Integer;<br />sep = "\n";<br />sep2 = ",";<br />If ( hdl2 == 0 ) Then<br />hdl2 = ALLOC_BUFFER ( 1000 );<br />End If<br />If ( hdl3 == 0 ) Then<br />hdl3 = ALLOC_BUFFER ( 1000 );<br />End If<br />SEQ_BUFFER ( "BEGIN" , hdl ); ' Start of buffer<br />i = 1;<br />While ( i != 0)<br />i = SEQ_BUFFER ( "NEXTFIELD" , hdl , sep , hdl2, 1000);<br />p = CGET_BUFFER ( hdl2 , 0 , 255 );<br />j = SEQ_BUFFER ( "BEGIN" , hdl2 );<br />j = 1;<br />While ( j != 0)<br />j = SEQ_BUFFER ( "NEXTFIELD" , hdl2 , sep2 , hdl3 , 1000 );<br />p = CGET_BUFFER ( hdl3 , 0 , 255 );<br />Wend<br />Wend<br />Lock = 0 ;<br />i=EVENT("DEL","STATE",1);<br />END SUB</span>
+        </p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="WebDeploymentTools.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuration of a remote web back end</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuration of a Remote Web Back End</h1>
+        <p class="SVnormal">One of the common requirements, often for security purposes, is to have the Web Server on a different computer and sub-net to that of <span class="mc-variable OEM.ProductName variable">PcVue</span>. This sub-net is often referred to as a DMZ (demilitarized zone) and its purpose is to segregate the organization's private Industrial network from the office network or the Internet. To accomplish this, you install the WDC on the computer that is to be the web server and use the WDC to configure the back end so that it points to the computer on which the <span class="mc-variable OEM.ProductName variable">PcVue</span> station due to play the role of Web back end resides.</p>
+        <h2 class="SVheading2">Installing the WDC and checking the IIS configuration</h2>
+        <p class="SVnormal">Install the WDC on the computer that is to be the Web server using the <span class="mc-variable OEM.ProductName variable">PcVue</span> installation media. Once the WDC is installed, use it to check that the IIS web server is installed and correctly configured. See the topic <a href="WDC_install_iis.htm">How to the Install IIS Web Server and Select the Required Features</a>.</p>
+        <h2 class="SVheading2">Configuring the back end</h2>
+        <p class="SVnormal">You must configure the back end so that it points to the computer on which the <span class="mc-variable OEM.ProductName variable">PcVue</span> Web back end is installed. To do this you manually enter the hostname or IP address of the computer on which <span class="mc-variable OEM.ProductName variable">PcVue</span> is installed. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/wdc_remote_backend.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <p class="SVnormal">See the topic <a href="WDC_config_start.htm">How to Configure the Back End and Web Server</a>  for general information on configuring a back end.</p>
+        <div class="warning">
+            <p class="SVnormal">If you intend to deploy WebVue, please note that a TCP port must be open so that the <span class="mc-variable OEM.ProductName variable">PcVue</span> web back end can connect back to the web server for notifying data changes. This callback port is the next available port, so if you have configured port 8090 as the incoming port (for the connection web server to web back end), then the port for the connection from the web back end to the web server is likely to be 8091.</p>
+            <p class="SVnormal">If this second port is not open, users will be able to log in, but the loading of the first mimic will fail.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

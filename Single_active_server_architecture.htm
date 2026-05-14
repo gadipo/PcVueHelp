@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Networked applications|Using redundant configurations - Associations|Using redundant configurations for real-time data" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Single active server architecture</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Single Active Server Architecture</h1>
+        <p class="SVnormal">With Single Active Server Architecture only one of the 
+ servers communicates with the industrial equipment at any one time, although 
+ the other servers remains permanently connected to the industrial 
+ network. The server communicating with the industrial network is known 
+ as the active server. The other servers are known as passive. This architecture 
+ is applicable under the following circumstances.</p>
+        <ul>
+            <li class="SVbulleted">When using a single 
+ master network such as Modbus.</li>
+            <li class="SVbulleted">When using a timestamped protocol.</li>
+            <li class="SVbulleted">When it is important 
+ to minimize the traffic on the industrial network. </li>
+        </ul>
+        <p class="SVnormal">The entire application will be identical on all servers.</p>
+        <p class="SVnormal">To configure this type of architecture you must select 
+ the option <u>Single 
+ active server</u> when configuring the association.</p>
+        <h2 class="SVheading2">Normal operation</h2>
+        <p class="SVnormal">The active server communicates with the industrial network 
+ and sends, on event, any change in data to the passive servers and any 
+ clients. </p>
+        <p class="SVnormal">The passive servers initialize their communications but 
+ do not process any communication requests and do not produce any values. 
+ Passive servers effectively become clients registered with the active 
+ server. The source of variables on the passive server is automatically changed 
+ to External and their values come from the active server. See the topic <a href="Behaviour_of_DB_Variables_on_Passive_Server.htm">Behavior 
+ of variables on a passive Server.</a></p>
+        <h2 class="SVheading2">Server failure</h2>
+        <p class="SVnormal">When the active server fails, the passive server automatically 
+ switches to active. The industrial communications become active and the 
+ new architecture is broadcast to all stations on the network. Any clients 
+ receive changes in real time values from the new active server.</p>
+        <h2 class="SVheading2">Server restart</h2>
+        <p class="SVnormal">When a server starts, there are 3 possible scenarios:</p>
+        <ul>
+            <li class="SVbulleted">No other servers 
+ running. The new server starts communication on the industrial network 
+ to refresh its variable values and switches to active mode. Any clients 
+ on the network are automatically registered with it and receive changes 
+ in real time values.</li>
+            <li class="SVbulleted">One active server 
+ already running and the new server has a lower or the same availability rate than the active server already running. The new server automatically switches to passive. Its 
+ variables switch to external mode and it registers with the active 
+ server as a client. Any clients on the network are automatically registered 
+ with it. Any changes in real-time value, received by the clients, from the passive server are kept in a temporary cache.</li>
+            <li class="SVbulleted">One active server 
+ already running and the new server has a higher available rate than the active server already running. The new server automatically switches to active and any clients on the network are registered with it. The server with the lower available rate that was already running switches to passive.  Its 
+ variables switch to external mode and it subscribes with the newly active 
+ server as a client. Any changes in real-time value, received by the clients, from the passive server are kept in a temporary cache.</li>
+        </ul>
+        <h2 class="SVheading2">Network failure</h2>
+        <p class="SVnormal">As part of an association, server stations exchange information about their status and current operation. If a server detects that it cannot get such information (network connection to the other servers lost), then it will automatically switch to active. This is a desired behavior to make sure clients stations always have the most options to be kept updated. It also explain why it can happen to have more than one server station active, even with single active server associations.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="StationName;AssocName;PacketItemDataChange;Var;RealTime" MadCap:tocPath="Project diagnostics &amp; settings|Audit &amp; diagnostics|The monitoring tab" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Audit system variables - data acquisition counters</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Audit System Variables - Data Acquisition Counters and Flow Regulation<a name="kanchor252"></a></h1>
+        <p class="SVnormal">The following variables reflect the number of data changes that are in a pending or waiting state. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div class="note">
+            <p class="SVnormal">To notify a data change to a destination manager, the source manager creates a message containing the data change and posts it to the destination manager mailbox. These messages are counted in the pending state counter. When there are too many data changes, the flow regulation is activated. In this state any data changes are not posted immediately, instead they are stored in a FIFO (only the most recent transition). The data changes in the FIFO are counted in the waiting state counter</p>
+        </div>
+        <p class="SVnormal">All the variables are registers except where indicated otherwise.</p>
+        <h2 class="SVheading2">System.Audit.&lt;Source&gt;.DA.Number.VariableDataChange.PendingInMailbox.&lt;Manager&gt;</h2>
+        <p class="SVnormal">The number of pending data changes for each manager.</p>
+        <p class="SVnormal">Example: System.Audit.Equipment.DA.Number.VariableDataChange.PendingInMailbox.UserInterface</p>
+        <h2 class="SVheading2">System.Audit.&lt;Source&gt;.DA.Number.SingleItemDataChange.PendingInMailbox.VarManager</h2>
+        <p class="SVnormal">The number of pending single data changes in the Variable Manager mailbox.</p>
+        <h2 class="SVheading2">System.Audit.&lt;Source&gt;.DA.Number.PacketItemDataChange.PendingInMailbox.VarManager</h2>
+        <p class="SVnormal">The number of pending packet data changes in the Variable Manager mailbox.</p>
+        <h2 class="SVheading2">System.Audit.&lt;Source&gt;.DA.Number.VariableDataChange.WaitingInFIFO.VarManager</h2>
+        <p class="SVnormal">The number of waiting data changes in the FIFO of the Variable Manager.</p>
+        <h2 class="SVheading2">System.Audit.&lt;Source&gt;.DA.Number.VariableDataChange.WaitingInFIFO.LAN</h2>
+        <p class="SVnormal">The number of waiting data changes in the FIFO of the LAN Manager.</p>
+        <h2 class="SVheading2">System.Audit.&lt;Source&gt;.DA.Number.VariableDataChange.Waiting.OPCServer</h2>
+        <p class="SVnormal">The number of waiting data changes in the list of the OPC server Manager.</p>
+        <h2 class="SVheading2">System.Audit.&lt;Source&gt;.DA.ElapsedTime.VariableDataChange.ActiveFlowRegulation</h2>
+        <p class="SVnormal">The elapsed time, in milliseconds, during which there has been active flow regulation. Reset on return to passive regulation.</p>
+        <h2 class="SVheading2">System.Audit.&lt;Source&gt;.DA.Number.VariableDataChange.LostTransitions</h2>
+        <p class="SVnormal">The number of lost transitions during active flow regulation. Reset on return to passive regulation.</p>
+        <h2 class="SVheading2">System.Audit.&lt;Source&gt;.State.VariableDataChange.ActiveFlowRegulation</h2>
+        <p class="SVnormal">Variable type: Bit.</p>
+        <p class="SVnormal">Set to 1 if flow regulation is active else 0.</p>
+        <p class="SVnormal">Example: System.Audit.Equipment.State.VariableDataChange.ActiveFlowRegulation</p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/AE/Project/audit_acq_pending.png" />
+            </p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

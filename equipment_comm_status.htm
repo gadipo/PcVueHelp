@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|Equipment" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>General communication status</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">General communication status</h1>
+        <p class="SVnormal">The communication status for each network, device and frame is available when selecting the corresponding folder in the configuration tree. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/AE/Comm_DataAcq/equipment_comm_status.png" style="border-style: none;border: none;" border="0" />
+            </p>
+        </div>
+        <p class="SVnormal">The following information is displayed. </p>
+        <ul style="list-style-type: disc;">
+            <li>State - The overall communication state of the item.</li>
+            <li>General status - The communication general status (formerly status word).</li>
+            <li>Driver status - The communication driver-specific status (formerly complementary status word). Most drivers only provide specific status information for frames. See the help for the driver in use for detailed information.</li>
+            <li>Failed requests - The number of requests that sent while the device is out of service.</li>
+            <li>Errors - The number of request attempts with no valid data returned by the device (typically requests completed by a time-out or an exception code was received).</li>
+            <li>Read requests/sec - The number of read requests per second.</li>
+            <li>Write requests/sec - The number of write requests per second.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The error counters display the number of failed frame requests and the number of sending attempts. For more information on how failed frame requests are managed see the topic <a href="equipment_msg_exchange.htm">Message exchange mechanisms in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</a></p>
+            <ul>
+                <li class="SVbulleted">The frame counters show the number of failures for each frame.</li>
+                <li class="SVbulleted">The device counters show the number of failures for all frames of that device .</li>
+                <li class="SVbulleted">The network counters show the number of failures for all frames for all devices on that network.</li>
+            </ul>
+            <p class="SVnormal">The counters are only reset when the communication is stopped and restarted, or when the counter value rolls over.</p>
+        </div>
+        <h2 class="SVheading2">Network general status</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col style="width: 550px;" />
+            <tr>
+                <td class="SVtableHeading">
+                    <p>Code</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Reasons</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Description</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>0700</p>
+                </td>
+                <td class="SVtable">
+                    <p>Network started OK</p>
+                </td>
+                <td class="SVtable">
+                    <p>Normal operating condition.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>0413</p>
+                </td>
+                <td class="SVtable">
+                    <p>Network did not start properly</p>
+                </td>
+                <td class="SVtable">
+                    <p>Possible causes:</p>
+                    <ul>
+                        <li>
+                            <p>Error with the network interface (port does not exist etc.).</p>
+                        </li>
+                        <li>
+                            <p>Incorrect or missing driver DLL file.</p>
+                        </li>
+                        <li>
+                            <p>Incorrect or inconsistent configuration.</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">0500</td>
+                <td class="SVtable">Passive server or no active frame on device</td>
+                <td class="SVtable">
+                    <p>Indicates that the network contains a passive server (not actively initiating communication) or that no active frames are being transmitted by a device on the network.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Device general status</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col style="width: 550px;" />
+            <tr>
+                <td class="SVtableHeading">
+                    <p>Code</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Reasons</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Description</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>0700</p>
+                </td>
+                <td class="SVtable">
+                    <p>Device started OK</p>
+                </td>
+                <td class="SVtable">
+                    <p>Normal operating condition.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>0701</p>
+                </td>
+                <td class="SVtable">
+                    <p>Error with one or more of the device's frames</p>
+                </td>
+                <td class="SVtable">
+                    <p>Check the frame error codes.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">0500</td>
+                <td class="SVtable">Passive server or no active frame on device</td>
+                <td class="SVtable">Indicates that the device is functioning as a passive server or is not transmitting active frames on the network.</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Frame general status</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col style="width: 550px;" />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Code</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Reason</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Description</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>a000</p>
+                </td>
+                <td class="SVtable">
+                    <p>Frame OK</p>
+                </td>
+                <td class="SVtable">
+                    <p>Normal for a read or read/write frame.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>e000</p>
+                </td>
+                <td class="SVtable">
+                    <p>Frame OK</p>
+                </td>
+                <td class="SVtable">
+                    <p>The frame is being scanned at a rate slower than that specified in the frame configuration. It is likely that there is too much traffic on the network. Reduce either the frame polling periods or the number of frames.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>ffff </p>
+                </td>
+                <td class="SVtable">
+                    <p>The frame is not being scanned</p>
+                </td>
+                <td class="SVtable">
+                    <p>The communication is stopped, or no variables are linked to the frame.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>8000</p>
+                </td>
+                <td class="SVtable">
+                    <p>Frame OK</p>
+                </td>
+                <td class="SVtable">
+                    <p>Normal for a write only frame.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>2025<br />2085<br />6025 6085</p>
+                </td>
+                <td class="SVtable">
+                    <p>Frame error</p>
+                </td>
+                <td class="SVtable">
+                    <p>Check the driver status. If the driver status is 0000 then it is probably an exchange time out or no reply. Check that the communication properties configured in <span class="mc-variable OEM.ProductName variable">PcVue</span> match those of the equipment.<br />Check that the physical connection (cable) is plugged correctly.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">About the hexadecimal status</h2>
+        <p class="SVnormal">General statuses for which most usual values are given above are actually made up of 16 status bits displayed as four hexadecimal characters. </p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <tr valign="top">
+                <td width="30px" class="SVtable">
+                    <p>B15</p>
+                </td>
+                <td width="30px" class="SVtable">
+                    <p>B14</p>
+                </td>
+                <td width="30px" class="SVtable">
+                    <p>B13</p>
+                </td>
+                <td width="30px" class="SVtable">
+                    <p>B12</p>
+                </td>
+                <td colspan="1" rowspan="1" width="30px" class="SVtable">
+                    <p>B11</p>
+                </td>
+                <td colspan="1" rowspan="1" width="30px" class="SVtable">
+                    <p>B10</p>
+                </td>
+                <td colspan="1" rowspan="1" width="30px" class="SVtable">
+                    <p>B9</p>
+                </td>
+                <td colspan="1" rowspan="1" width="30px" class="SVtable">
+                    <p>B8</p>
+                </td>
+                <td colspan="1" rowspan="1" width="30px" class="SVtable">
+                    <p>B7</p>
+                </td>
+                <td colspan="1" rowspan="1" width="30px" class="SVtable">
+                    <p>B6</p>
+                </td>
+                <td width="30px" class="SVtable">
+                    <p>B5</p>
+                </td>
+                <td width="30px" class="SVtable">
+                    <p>B4</p>
+                </td>
+                <td width="30px" class="SVtable">
+                    <p>B3</p>
+                </td>
+                <td width="30px" class="SVtable">
+                    <p>B2</p>
+                </td>
+                <td width="30px" class="SVtable">
+                    <p>B1</p>
+                </td>
+                <td width="30px" class="SVtable">
+                    <p>B0</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td rowspan="1" colspan="4" width="120px" class="SVtable">
+                    <p style="text-align: center;">Fourth digit</p>
+                </td>
+                <td colspan="4" rowspan="1" width="120px" class="SVtable">
+                    <p style="text-align: center;">Third digit</p>
+                </td>
+                <td colspan="4" rowspan="1" width="120px" class="SVtable">
+                    <p style="text-align: center;">Second digit</p>
+                </td>
+                <td rowspan="1" colspan="4" width="120px" class="SVtable">
+                    <p style="text-align: center;">First digit</p>
+                </td>
+            </tr>
+        </table>
+        <ul style="list-style-type: disc;">
+            <li>The network status provides information about the physical connection to the data acquisition network (network interface, can be serial, IP or based on a transport-specific communication board). With most networks, diagnosis at the network level is of little help and so, the status mainly indicates configuration correctness and if the network is started or stopped. </li>
+            <li>The device status provides information about a specific device on the network. Most drivers do not directly support device diagnostic messages and so, the status mainly indicates configuration correctness and if the device is started or stopped. However, if there is an error with a frame associated with a device this will be reported in the device status.</li>
+            <li>The frame status provide more information about the communication status as most the information is related to the success or failure of frame requests. In the event of abnormal operation, the frame status is also reported in the Event Viewer (F7).</li>
+        </ul>
+        <p class="SVnormal">Each bit in the 16-bit status value plays a critical role in determining the current state of the network, device, or frame. When a bit is set to "1," it indicates that the corresponding status condition is true (e.g., "Device out of service" or "Network out of service"). The combination of these set bits allows for a detailed diagnosis of the system's health. For instance, if multiple bits are set, such as B0 (Fault during last exchange) and B3 (Transmission error), it suggests a communication problem with the device, pointing to potential transmission issues or misconfiguration.</p>
+        <p class="SVnormal"> The driver statuses are specific to each driver. Most drivers only provide specific status information for the frame. See the help for the specific driver in use for detailed information.</p>
+        <p class="SVnormal">The next sections provides the exact meaning for each set status bit.</p>
+        <h2 class="SVheading2">Interpretation of the network general status</h2>
+        <p class="SVnormal">The following table provides help for interpreting the bit values of the network general status.</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">
+                        <p>Bit</p>
+                    </td>
+                    <td class="SVtableHeading">
+                        <p>Reason</p>
+                    </td>
+                    <td class="SVtableHeading">
+                        <p>Interpretation</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Network out of service</p>
+                    </td>
+                    <td class="SVtable">The network is currently unavailable or disconnected. No communication can take place with the network.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B1</p>
+                    </td>
+                    <td class="SVtable">Network initialization error</td>
+                    <td class="SVtable">The network initialization process failed. The network is not properly configured or has an issue at startup.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B2</p>
+                    </td>
+                    <td class="SVtable">Network shutdown error</td>
+                    <td class="SVtable">The network has been shut down unexpectedly, or there is a problem preventing it from shutting down properly.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B3</p>
+                    </td>
+                    <td class="SVtable">Network maintenance error</td>
+                    <td class="SVtable">A failure occurred during network maintenance, preventing the network from entering or completing maintenance mode.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B4</p>
+                    </td>
+                    <td class="SVtable">Fault during last command</td>
+                    <td class="SVtable">An error occurred while executing the last network command.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B5</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B6</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B7</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B8</td>
+                    <td class="SVtable">Network operational</td>
+                    <td class="SVtable">The network is functioning normally and is ready to support communication.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B9</td>
+                    <td class="SVtable">Repetitive actions active on the network</td>
+                    <td class="SVtable">Frequent requests or commands are currently active on the network.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B10</td>
+                    <td class="SVtable">Repetitive actions allowed on the network</td>
+                    <td class="SVtable">Frequent requests or commands are allowed to be performed on the network.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B11</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B12</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B13</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B14</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B15</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Interpretation of the device general status</h2>
+        <p class="SVnormal">The following table provides help for interpreting the bit values of the device general status.</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">
+                        <p>Bit</p>
+                    </td>
+                    <td class="SVtableHeading">
+                        <p>Reason</p>
+                    </td>
+                    <td class="SVtableHeading">
+                        <p>Interpretation</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B0</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Device out of service</p>
+                    </td>
+                    <td class="SVtable">The device is currently unavailable or disconnected within the network. No communication can take place with the device.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B1</p>
+                    </td>
+                    <td class="SVtable">Device unavailable</td>
+                    <td class="SVtable">The device cannot be accessed, either due to a failure or configuration issue preventing communication with the device.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B2</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Device initialization error</p>
+                    </td>
+                    <td class="SVtable">The device initialization process failed, meaning it could not be set up or configured correctly within the network.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B3</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Device shutdown error</p>
+                    </td>
+                    <td class="SVtable">The device has encountered an error during shutdown, preventing it from powering down or disconnecting properly.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B4</p>
+                    </td>
+                    <td class="SVtable">Fault during last command</td>
+                    <td class="SVtable">An error occurred during the last operation or command sent to the device, preventing successful execution.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B5</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Broadcast device</p>
+                    </td>
+                    <td class="SVtable">This device is functioning as a broadcast device, responsible for sending out data to other devices or systems.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">
+                        <p>B6</p>
+                    </td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B7</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B8</td>
+                    <td class="SVtable">Device operational</td>
+                    <td class="SVtable">The device is functioning normally and is ready to perform its designated tasks or operations.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B9</td>
+                    <td class="SVtable">Repetitive actions active on the device</td>
+                    <td class="SVtable">Frequent requests or commands are currently active on the device.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B10</td>
+                    <td class="SVtable">Repetitive actions allowed on the device</td>
+                    <td class="SVtable">Frequent requests or commands are allowed to be performed on the device.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B11</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B12</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B13</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B14</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B15</td>
+                    <td class="SVtable">
+                        <p>Not used</p>
+                    </td>
+                    <td class="SVtable">This bit is reserved for future use or not applicable to the current device status interpretation.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Interpretation of the frame general status</h2>
+        <p class="SVnormal">The following table provides help for interpreting the bit values of the frame general status.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 250px;" />
+            <col style="width: 450px;" />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Bit</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Reason</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Interpretation</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B0</p>
+                </td>
+                <td class="SVtable">
+                    <p>Fault during the last exchange</p>
+                </td>
+                <td class="SVtable">
+                    <p>There was a failure during the last exchange on this frame.<br />If set frequently without bits B3, B4 or B5 also set, it indicates that the device time-out has been set too short.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B1</p>
+                </td>
+                <td class="SVtable">
+                    <p>Network out of service</p>
+                </td>
+                <td class="SVtable">
+                    <p>The device time-out to one of the network devices has been exceeded.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B2</p>
+                </td>
+                <td class="SVtable">
+                    <p>Equipment out of service</p>
+                </td>
+                <td class="SVtable">
+                    <p>No correct replies received from the device.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B3</p>
+                </td>
+                <td class="SVtable">
+                    <p>Transmission error</p>
+                </td>
+                <td class="SVtable">
+                    <p>An error has been detected on the line. Depending on the driver, more information may be reported in the driver status.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B4</p>
+                </td>
+                <td class="SVtable">
+                    <p>Protocol error</p>
+                </td>
+                <td class="SVtable">
+                    <p>An error has been detected in the protocol. Depending on the driver, more information may be reported in the frame driver status.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B5</p>
+                </td>
+                <td class="SVtable">
+                    <p>Error reported by equipment</p>
+                </td>
+                <td class="SVtable">
+                    <p>Depending on the driver, more information may be reported in the device driver status.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B6</p>
+                </td>
+                <td class="SVtable">
+                    <p>Network error</p>
+                </td>
+                <td class="SVtable">
+                    <p>Depending on the driver, more information may be reported in the network driver status.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B7</p>
+                </td>
+                <td class="SVtable">
+                    <p>Exchange time out</p>
+                </td>
+                <td class="SVtable">
+                    <p>No response received, the frame request timed-out.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B8</p>
+                </td>
+                <td class="SVtable">
+                    <p>Application command queue</p>
+                </td>
+                <td class="SVtable">
+                    <p>Too many on-demand exchanges to be executed at a time - the number of 64 stored commands for a network has been exceeded. The last command will be lost.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B9</p>
+                </td>
+                <td class="SVtable">
+                    <p>Auto scan command queue full.</p>
+                </td>
+                <td class="SVtable">
+                    <p>Too many auto scan exchanges to be executed at a time - the number of 64 stored commands for a network has been exceeded. The last exchange command will be lost.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B10</p>
+                </td>
+                <td class="SVtable">
+                    <p>Priority command queue full.</p>
+                </td>
+                <td class="SVtable">
+                    <p>Too many priority exchanges to be executed at a time; the number of 20 stored commands for a network has been exceeded. The last exchange command will be lost.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B11</p>
+                </td>
+                <td class="SVtable">
+                    <p>Not used</p>
+                </td>
+                <td class="SVtable">
+                    <p>This bit is reserved for future use or not applicable to the current device status interpretation.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B12</p>
+                </td>
+                <td class="SVtable">
+                    <p>Last command is still being processed.</p>
+                </td>
+                <td class="SVtable">
+                    <p>The previous exchange command is still in the queue or is in course of execution.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B13</p>
+                </td>
+                <td class="SVtable">
+                    <p>Auto scan active</p>
+                </td>
+                <td class="SVtable">
+                    <p>Indicates that the system is actively performing automatic scanning or polling of devices to collect data or monitor their status at regular intervals.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B14</p>
+                </td>
+                <td class="SVtable">
+                    <p>Auto scan exchange already present in the queue.</p>
+                </td>
+                <td class="SVtable">
+                    <p>It is normal for this bit to be set occasionally. If set permanently, the scan period for this frame is too small. The request then remains constantly in the queue and the scan period may not be maintained.</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>B15</p>
+                </td>
+                <td class="SVtable">
+                    <p>Refreshed image table</p>
+                </td>
+                <td class="SVtable">
+                    <p>This table has been read in the device. A value has been changed since the last scan and the result of the read is stored in the table.</p>
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="HMI Object Model Reference|Examples" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../../" MadCap:HelpSystemFileName="SV_VBA.xml" MadCap:SearchType="Stem" MadCap:PreloadImages="false">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Scroll Window Content by Clicking a Graphic Object Example</title> <link href="../../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" /><script type="text/javascript" src="../../../SkinSupport/jquery-1.12.4.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapGlobal.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapSlideshow.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapMerging.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapAliasFile.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapUtilities.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapBody.js"></script><script type="text/javascript" src="../../../SkinSupport/MadCapHighlighter.js"></script><meta name="MS-HAID" content="hmobjGetScrollPositionXL" /><meta name="MS-HAID" content="hmobjSetScrollPositionXL" /><meta name="MS-HAID" content="hmobjGetScrollHighPositionXL" /></head>
+    <body> <h1 class="SVheading1">Scrolling a Window's Contents by Clicking a Graphic Object Example</h1><p class="SVnormal">This example shows how to scroll a window's contents by clicking on 
+ a graphic object.</p><p class="SVnormal"><span> Scrolling makes the 
+ drawing element overlap with the text in the mimic. That is the correct 
+ behaviour in this case.</span></p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'graphic object Click 
+ event</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Private Sub Shape1_Click()</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Dim HScrollPos As Long</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Dim VScrollPos As Long</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Dim HObjectPos As Long</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Dim VObjectPos As Long</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'retrieve the horizontal 
+ and vertical scroll bar control positions</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">HScrollPos = Me.Windows(1).GetScrollPosition(fvScrollHorizontal)</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">VScrollPos = Me.Windows(1).GetScrollPosition(fvScrollVertical)</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'If one of the position 
+ is 0 then retrieve the horizontal and vertical </p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">' high limit positions 
+ <span style="margin-top: 0pt;margin-bottom: 0pt;">of the scroll bar controls 
+ </span></p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">' (to scroll to the far 
+ bottom right corner of the Window content)</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">If HScrollPos = 0 Or VScrollPos 
+ = 0 Then</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;HScrollPos 
+ = Me.Windows(1).GetScrollHighPosition(fvScrollHorizontal)</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;VScrollPos 
+ = Me.Windows(1).GetScrollHighPosition(fvScrollVertical)</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">' or (if both positions 
+ are not equal to 0) retrieve the horizontal and</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">' vertical low limit positions 
+ (0) of the scroll bar </p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Else</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;HScrollPos 
+ = 0</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;VScrollPos 
+ = 0</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">End If</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'scroll the Window content 
+ &#160;</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Me.Windows(1).SetScrollPosition 
+ fvScrollHorizontal, HScrollPos</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Me.Windows(1).SetScrollPosition 
+ fvScrollVertical, VScrollPos</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">'move the graphic object 
+ </p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">HObjectPos = HScrollPos 
+ * (100 / Me.Windows(1).ZoomRatio)</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">VObjectPos = VScrollPos 
+ * (100 / Me.Windows(1).ZoomRatio)</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Shape1.Move HObjectPos, 
+ VObjectPos</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">End Sub</p><p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p><script type="text/javascript" src="../../../SkinSupport/MadCapBodyEnd.js"></script></body>
+</html>

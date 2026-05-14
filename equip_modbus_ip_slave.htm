@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|Equipment|Driver references" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Modbus Ip slave</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Modbus Ip slave</h1>
+        <p class="SVnormal">This driver supports communication over Ip with Modbus master field devices.</p>
+        <p class="SVnormal">In all exchanges, <span class="mc-variable OEM.ProductName variable">PcVue</span> is the slave
+ and the field device is the master. The driver only supports the RTU transmission
+ format.</p>
+        <div class="tip">
+            <p class="SVnormal">If you need the field device to be slave and <span class="mc-variable OEM.ProductName variable">PcVue</span> to be master, you should use the Modbus Ip driver instead.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">You can use the  Modbus master and Modbus slave drivers simultaneously.</p>
+        </div>
+        <h2 class="SVheading2">Supported functions</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 50px;" />
+            <col style="width: 547px;" />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Decimal</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Hex</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Function</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>1</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x01</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read coil status</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>2</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x02</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read input status</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>3</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x03</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read holding registers</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>4</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x04</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read input registers</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>5</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x05</p>
+                </td>
+                <td class="SVtable">
+                    <p>Force single coil</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>6</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x06</p>
+                </td>
+                <td class="SVtable">
+                    <p>Force single register</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>15</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x0F</p>
+                </td>
+                <td class="SVtable">
+                    <p>Force multiple coils</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>16</p>
+                </td>
+                <td class="SVtable">
+                    <p>0x10</p>
+                </td>
+                <td class="SVtable">
+                    <p>Force multiple registers</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Network properties</h2>
+        <p class="SVnormal">This topic only includes a reference of objects' properties.<br /></p>
+        <p class="SVnormal">See the topic <a href="equipment_configure_comm_objects.htm">How to configure networks devices and frames</a> for more information about how to configure communication objects.</p>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the network</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the network (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the network will start upon Equipment communication start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Use default value</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Networking</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Servers</p>
+                </td>
+                <td class="SVtable">
+                    <p>The list of <span class="mc-variable OEM.ProductName variable">PcVue</span> stations where the network will be active</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Device properties</h2>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the device</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the device (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Equipment type</td>
+                    <td class="SVtable">Select the type of equipment that best suits the field device you want  communicate with.<br />The list of frame types and address ranges depend on the equipment type.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">&#160;</td>
+                    <td class="SVtable">With the Modbus Ip slave driver, the property <u>Equipment type</u> allows you to select between Modbus and Jbus addressing, decimal and hexadecimal encoding of memory addresses.<br />Modbus frame addresses start at 1,
+    Jbus frame addresses start at 0.
+<br /></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Initial memory state</td>
+                    <td class="SVtable">
+                        <p>Defines how the slave memory areas are to be initialized at Equipment communication start-up:</p>
+                        <ul>
+                            <li>
+                                <p>Uninitialized - The memory will not be initialized, and the error code 0x040 is returned until values are available.</p>
+                            </li>
+                            <li>
+                                <p>Initialized to 0 - The memory is zeroed.</p>
+                            </li>
+                            <li>
+                                <p>Saved - The values in the memory zone are saved when Equipment communication is stopped and restored again on restart. The files in which the values are saved are found in the folder PER\CWIPXBUS\ of the project. The file name is constructed from the device name and memory area.</p>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Coils area</td>
+                    <td class="SVtable">The number of coil status bits the driver exposes to masters</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Input bits area</td>
+                    <td class="SVtable">The number of input status bits the driver exposes to masters</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Holding registers area</td>
+                    <td class="SVtable">The number of holding register words the driver exposes to masters</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Input registers area</td>
+                    <td class="SVtable">The number of input register words the driver exposes to masters</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Connection</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum waiting time between a request and the reply from the equipment</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Slave address</td>
+                    <td class="SVtable">The slave address exposed by the device</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Port number</p>
+                </td>
+                <td class="SVtable">
+                    <p>The port number on which the slave listens for incoming requests</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>Disconnect after silent interval</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum duration with no activity before the driver closes the TCP connection (i.e., if no request is received from the master).</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Miscellaneous</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Virtual</p>
+                </td>
+                <td class="SVtable">
+                    <p>Reserved. Do not select.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Message delay</td>
+                <td class="SVtable">Reserved. Leave default value 0.</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Frame addressing</h2>
+        <p class="SVnormal">Depending on the equipment type you have selected when configuring the device, you have access to the following type of frames.</p>
+        <p class="SVnormal">The Starting address
+ and Quantity properties define the memory address range for each frame, how it
+ is read from and written to, and how it is interpreted in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 247px;" />
+            <col style="width: 129px;" />
+            <col style="width: 139px;" />
+            <col style="width: 107px;" />
+            <tr valign="top" style="height: 25px;">
+                <td class="SVtableHeading">Data type</td>
+                <td class="SVtableHeading">Access</td>
+                <td class="SVtableHeading">Max quantity</td>
+                <td class="SVtableHeading">Starting address</td>
+            </tr>
+            <tr valign="top">
+                <th colspan="4" style="text-align: left;">Bit</th>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Input bits</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read</p>
+                </td>
+                <td class="SVtable">
+                    <p>65000</p>
+                </td>
+                <td class="SVtable">
+                    <p rowspan="6">0x0..0xFDE8</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Coils</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read/Write</p>
+                </td>
+                <td class="SVtable">65000</td>
+                <td class="SVtable">0x0..0xFDE8</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>WordBit Input registers LMsb</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>Read</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p rowspan="4">524272</p>
+                </td>
+                <td class="SVtable" rowspan="2">0x0..0xFDE8</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>WordBit Input registers MLsb</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>WordBit Holding registers LMsb</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>Read/Write</p>
+                </td>
+                <td class="SVtable" rowspan="2">524272</td>
+                <td class="SVtable" rowspan="2">0x0..0xFDE8</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>WordBit Holding registers MLsb</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <th colspan="4" style="font-weight: bold;text-align: left;">Byte</th>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Byte Input registers LMsb</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read</p>
+                </td>
+                <td class="SVtable">
+                    <p>65534</p>
+                </td>
+                <td class="SVtable">
+                    <p rowspan="2">0x0..0xFDE8</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Byte Holding registers LMsb</p>
+                </td>
+                <td class="SVtable">
+                    <p>Read/Write</p>
+                </td>
+                <td class="SVtable">65534</td>
+                <td class="SVtable">0x0..0xFDE8</td>
+            </tr>
+            <tr valign="top">
+                <th colspan="4" style="text-align: left;">Word</th>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">Input registers</td>
+                <td class="SVtable">
+                    <p>Read</p>
+                </td>
+                <td class="SVtable">32767</td>
+                <td class="SVtable">
+                    <p rowspan="2">0x0..0xFDE8</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">Holding registers</td>
+                <td class="SVtable">
+                    <p>Read/Write</p>
+                </td>
+                <td class="SVtable">32767</td>
+                <td class="SVtable">0x0..0xFDE8</td>
+            </tr>
+            <tr valign="top">
+                <th style="font-weight: bold;text-align: left;" colspan="4">Real</th>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Real Input registers LMsb</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>Read</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>16250</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p rowspan="4">0x0..0xFDE8</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Real Input registers MLsb</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Real Holding registers LMsb</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>Read/Write</p>
+                </td>
+                <td class="SVtable" rowspan="2">16250</td>
+                <td class="SVtable" rowspan="2">0x0..0xFDE8</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>Real Holding registers MLsb</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <th colspan="4" style="font-weight: bold;text-align: left;">Double word</th>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>DWord Input registers LMsb</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>Read</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>16250</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p rowspan="4">0x0..0xFDE8</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>DWord Input registers MLsb</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>DWord Holding registers LMsb</p>
+                </td>
+                <td class="SVtable" rowspan="2">
+                    <p>Read/Write</p>
+                </td>
+                <td class="SVtable" rowspan="2">16250</td>
+                <td class="SVtable" rowspan="2">0x0..0xFDE8</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>DWord Holding registers MLsb</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">The length of Wordbit frames must be a multiple of 16, error 0040 is returned otherwise.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">If a writable frame is configured with no polling period, all writes from a master are notified immediately with no delay refreshing the variables. This is the recommended setting unless the master is writing large amounts of data and swamping the slave.</p>
+        </div>
+        <h2 class="SVheading2">Driver status</h2>
+        <p class="SVnormal">The driver status provides driver-specific 
+ information to supplement the <b>frame general status</b>. For more information 
+ on status in general, refer to the topic <a href="equipment_comm_status.htm">General communication status</a>.</p>
+        <table style="border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;width:100%" cellspacing="0">
+            <col style="width: 150px;" />
+            <col style="width: 300px;" />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Driver status</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Description</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0001</td>
+                <td class="SVtable">Illegal function (error reported by equipment)</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0002</p>
+                </td>
+                <td class="SVtable">
+                    <p>Illegal data address in equipment</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0003</p>
+                </td>
+                <td class="SVtable">
+                    <p>Illegal data value, wrong size</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0004</p>
+                </td>
+                <td class="SVtable">
+                    <p>Slave device failure - The slave cannot reply</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0005</p>
+                </td>
+                <td class="SVtable">
+                    <p>Acknowledged - The slave has accepted the request and is processing it, but it will take a long time</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0006</p>
+                </td>
+                <td class="SVtable">
+                    <p>Slave device is busy - The slave is performing a long lasting execution (program command)</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0007</p>
+                </td>
+                <td class="SVtable">
+                    <p>Negative acknowledgment</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0008</p>
+                </td>
+                <td class="SVtable">
+                    <p>Memory parity error</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0102</p>
+                </td>
+                <td class="SVtable">
+                    <p class="SVnormal">Network error - Connection closed because of:</p>
+                    <ul style="list-style: disc;" type="disc">
+                        <li>
+                            <p class="SVnormal">Incorrect IP address</p>
+                        </li>
+                        <li>
+                            <p class="SVnormal">Incorrect port number</p>
+                        </li>
+                        <li>
+                            <p class="SVnormal">Equipment disconnected from network</p>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0000</p>
+                </td>
+                <td class="SVtable">
+                    <p>Time-out</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0106</td>
+                <td class="SVtable">Configuration error - Another slave device is already configured with the same port and slave address</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0040</td>
+                <td class="SVtable">Memory is not initialized or frame size not a multiple of 16 (only for WordBit frame type)</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">SCADA Basic scripting</h2>
+        <p class="SVnormal">You can control communication with this driver in SCADA Basic scripts with the CIMWAY instruction.</p>
+        <div class="note">See the topic <a href="equipment_msg_exchange.htm">Message exchange mechanisms in <span class="mc-variable OEM.ProductName variable">PcVue</span></a> for more information about what to optimize and how you can send commands from scripts. </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

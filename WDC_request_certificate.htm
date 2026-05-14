@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying server applications|Deploying the web server and the Web &amp; Mobile back end|Using the Web Deployment Console|Custom setup|Using certificates" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Request and import a certificate</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Request and Import a Certificate</h1>
+        <p class="SVnormal">Obtaining a proper certificate from  a recognized Certification Authority (CA) for usage in production is a 3-step process:</p>
+        <ul>
+            <li>Step 1 - Request a certificate, also known as generating a CSR or Certificate Signing Request,</li>
+            <li>Step 2 - Send the CSR to the Certificate Authority,</li>
+            <li>Step 3 - Import the certificate issued by the Certificate Authority into the web server.</li>
+        </ul>
+        <p class="SVnormal">The WDC is equipped to generate a CSR and help you in imported a certificate into the web server. By default, it uses the <i style="font-style: normal; text-decoration: underline;">Web hosting</i> certificate store.</p>
+        <div class="note">
+            <p>While the practical details vary, the 3 steps are similar for all Certificate Authorities, whether it is a public trusted third party or an internal CA within your organization.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">Certificates are not valid forever. Depending on their type and issuer, they may be valid for a few days (typically 30 days for a free test certificate), up to 2 or 3 years.</p>
+            <p class="SVnormal">It is recommended to monitor the validity of certificates and plan renewal a few weeks in advance, as the process can take time.</p>
+        </div>
+        <h2 class="SVheading2">How to request a certificate - Certificate Signing Request</h2>
+        <p class="SVnormal"><u>Prerequisite #1</u> - A 'proper' certificate means that it will be issued for a web server associated to a domain name that can be validated by the Certificate Authority:</p>
+        <ul>
+            <li>If the CA is internal to the organization, the domain may only be local.</li>
+            <li>However, if the CA is public, the domain must have been registered before any other attempt to obtain a certificate, and only the organization owner of the domain can be delivered a certificate for a web server associated to the domain.</li>
+        </ul>
+        <p class="SVnormal"><u>Prerequisite #2</u> - The domain name that will be associated to the web server and its certificate has to be used when defining the binding of the web site. Other than that, if for example you bind the web site on the IP address or any other name, web browsers will not recognize the certificate as valid, because the domain name on the certificate will not match the domain name you use to reach the web server.</p>
+        <p class="SVnormal">You can create a Certificate Signing Request with the WDC from the Site Bindings view of the deploy site wizard. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/wdc_add_certificate.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <ol>
+            <li value="1">Click the plus symbol <b>(+)</b> - the New certificate view opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/wdc_certwiz1.png" MadCap:targetName="t2" style="display: none;" /></li>
+            <li value="2">Select <u>create request</u>. You are prompted with the Create request form and will have to enter the following information: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/wdc_certwiz3.png" MadCap:targetName="t3" style="display: none;" /><ol style="list-style-type: lower-alpha;"><li value="1">Common name - Enter the domain name that was allocated to the web site, for example, lab.example.com</li><li value="2">DNS name - Enter the domain name again, same value as for the field <u>Common name</u>.</li><li value="3">Organization - Enter the name of your organization, it is the owner of the domain.</li><li value="4">Organizational unit - Usually optional.</li><li value="5">City - The city where the Organization is based.</li><li value="6">State - The state where the Organization is based.</li><li value="7">Country - The state where the Organization is based.</li></ol></li>
+        </ol>
+        <p class="SVnormal">And then click <u>create request</u>.</p>
+        <ol>
+            <li value="1">You are prompted to enter a password of your choice. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/wdc_certwiz4.png" MadCap:targetName="t4" style="display: none;" /><br />This password is the secret that will be required for all subsequent operations with the certificate, including its import. You should choose a proper, secure, unique password, and store it in a safe place.<br />Please note that CA require a certain strength for the password, and will not deliver the certificate if this criteria is not met. One of the strength criteria is the length (10 characters minimum is usual).<br /></li>
+            <li value="2">Upon clicking <u>save</u>, you will be prompted to select a directory where to save the files resulting from the request: <u>request.csr</u> and <u>requestKey.pkey</u>.<ul><li>The .pkey file contains your private key, derived from your password. It must be stored in a safe place and not be disclosed.</li><li>The .csr file will be transmitted to the CA.</li></ul></li>
+        </ol>
+        <p class="SVnormal">At that stage, your certificate request is ready.</p>
+        <p class="SVnormal">The next step consists in transmitting the Certificate Signing Request to the CA of your choice.</p>
+        <p class="SVnormal">The exact procedure vary, but you will be requested to fill in a form where you will confirm the information entered for generating the CSR (Common Name, DNS Name or Subject Alternate Name, Organization, Organization Unit, City, State and Country), as well as the .csr file generated by the WDC.</p>
+        <p class="SVnormal">After verification, a process that can take from a few minutes to a few days, you will be notified that the certificate is ready and can be downloaded.</p>
+        <h2 class="SVheading2">How to import a certificate</h2>
+        <p class="SVnormal">You can import a certificate with the WDC from the Site Bindings view of the deploy site wizard. </p>
+        <ol>
+            <li value="1">Click the plus symbol <b>(+)</b> - the New certificate view opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t5"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/wdc_certwiz1.png" MadCap:targetName="t5" style="display: none;" /></li>
+            <li value="2">Select <u>import a certificate</u>. You are prompted to select the certificate file supplied by the Certificate Authority. The WDC supports the following file formats for the import: PKCS#12 and PFX. <p class="SVnormal">And then click open.</p></li>
+            <li value="3">You are prompted to enter the password associated to the certificate.<br /></li>
+            <li value="4">Upon clicking <u>save</u>, the WDC imports the certificate, and you can select it in the list of available certificates of the web server.</li>
+            <li value="5">Finalize the deployment of the web site.</li>
+        </ol>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

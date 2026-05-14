@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Graphic controls and Viewers|Grid control|Using the Grid in historical mode" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_HMI.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuring the data request when using the Grid in historical mode</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuring the Data Request When Using the Grid in Historical Mode</h1>
+        <p class="SVnormal">The configuration of the Data Request is very similar to that of the <a href="TrendViewer_Export_Overview.htm">Data Export Wizard</a>. The main difference is the way in which the period is selected. </p>
+        <ul style="list-style-type: disc;">
+            <li>In the Data Export Wizard, the time range can be selected either by period or by entering start and end date and times.</li>
+            <li>In the Data Export Wizard, the time range can also be selected either by period or by entering start and end date and times. However, the period configuration has more options and the start and end date and times can be configured using variables, as for the pre-configured Data Export (Application Explorer). </li>
+        </ul>
+        <h2 class="SVheading2">How to configure the Data Request</h2>
+        <ol>
+            <li value="1">Select the data request type from either Raw Data, Sampled Data, Statistics or Aggregated Statistics.</li>
+            <li value="2">Configure the period. See below.</li>
+            <li value="3">Configure the sampling. See the <a href="TrendViewer_Export_Sampling.htm">Export Wizard Sampling</a> topic.</li>
+            <li value="4">If using the Statistics or Aggregated Statistics data request, select which statistics you require. See the <a href="TrendViewer_Export_Stats.htm">Export Wizard Statistics</a> topic.</li>
+            <li value="5">Configure the output format. See below.</li>
+        </ol>
+        <h2 class="SVheading2">Configuring a predefined period</h2>
+        <p class="SVnormal">A predefined period is  defined by using a quantity and type of time units. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <img src="../../Resources/Images/HMI/Controls/aigrid_period_period.png" />
+        </div>
+        <p class="SVnormal">The time units you can  select are as follows.</p>
+        <ul style="LIST-STYLE-TYPE: disc;">
+            <li value="1">Minutes  </li>
+            <li value="2">Hours  </li>
+            <li value="3">Days  </li>
+            <li value="4">Weeks - See note below about the first day of the week.  </li>
+            <li value="5">Months  </li>
+            <li value="6">Years </li>
+        </ul>
+        <p class="SVnormal">For example, you could select 2 hours, or 4 weeks, or 1 year  etc.</p>
+        <p class="SVnormal">The period is relative to when the request to the archive unit is made. Typically, when the mimic containing the Grid is opened, or when a user requests data manually, and  can either be the <u>Completed period</u> or the <u>Current period</u>.</p>
+        <ul style="LIST-STYLE-TYPE: disc;">
+            <li value="1">Completed period - The period is the time unit before to the request time. For example, if you selected 24 hours and the request was made at 22/05/2013 16:08:00, the completed period would be 21/05/2013  16:00:00 to 22/05/2013 16:00:00 (actually 22/05/2013 15:59:59.999). The incomplete 1 hour time period corresponding to the time of the request (from 16:00:00 to 17:00:00) is not included in the 24 hours time period that is requested.    </li>
+            <li value="2">Current period - The period is the time unit that includes the  request time. For example, if you selected 24 hours and the request was made at 22/05/2013 16:08:00, the request would display data for the period from 21/05/2013  17:00:00 to 22/05/2013 16:08:00. The current 1 hour time period corresponding to the time of the request (from 16:00:00 to 17:00:00) is included in the 24 hours time period asked for.</li>
+        </ul>
+        <p class="SVnormal">Requesting data for 1 day does not yield the same result as requesting data for 24 hours as the time unit is not the same. The same example with a request for 2 days would behave as follows.</p>
+        <ul style="list-style-type: disc;">
+            <li> Completed period - If you selected 2 days and the request was made at 22/05/2013 16:08:00, the request would display data for the period from 20/05/2013 00:00:00 to 21/05/2013 24:00:00 (actually 21/05/2013 23:59:59.999). That is the last completed 2 days period. The incomplete day and time period corresponding to the time of the request (22/05/2013) is not included in the time period requested.</li>
+            <li>Current period - If you selected 2 days and the request was made at 22/05/2013 16:08:00, the request would display data for the period from 21/05/2013 00:00:00 to 22/05/2013 16:08:00. The current day and time period corresponding to the time of the request (22/05/2013) is included in the time period requested.</li>
+            <li>This time period definition is very versatile when requiring sliding time windows.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The first day of the week is configured by the property <u>First day of week</u> in the Languages. Parameters section in the main Application Explorer Settings dialog</p>
+        </div>
+        <h2 class="SVheading2">Configuring the period by variable</h2>
+        <p class="SVnormal">The period start and end times defined by two  register variables. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t2" style="display: none;">
+            <img src="../../Resources/Images/HMI/Controls/aigrid_period_var.png" />
+        </div>
+        <p class="SVnormal">The variable must be of type DOUBLE and the time must be in a number of  milliseconds since 01/01/1970. For example, a suitable value is provided by the SCADA Basic  instruction DATETIMEVALUE. A register variable's default  maximum value of 65535 must be changed to accommodate this (suggested  9999999999999).</p>
+        <h2 class="SVheading2">Configuring the output format</h2>
+        <ul style="list-style-type: disc;">
+            <li>Number of decimal digits - The number of digits displayed to the right of the decimal point.</li>
+            <li>Date format - The time and date type selected from Date Only, Time Only, or Date and Time. The format in which the time and date stamp is displayed is selected by the project's Languages Settings. See the topic <a href="AIGrid_Using_AIGrid_to_display_historical_data.htm">Using the Grid to Display Historical Data</a>.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

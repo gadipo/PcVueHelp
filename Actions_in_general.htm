@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Geographical data" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Understanding actions</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Understanding actions</h1>
+        <p class="SVnormal">Whilst the types of action available to the SnapVue client are very different in functionality, the same basic procedure is used for configuration in <span class="mc-variable OEM.ProductName variable">PcVue</span> and they share some common behavior. For  how to add an action to a zones see the topic <a href="How_to_add_a_location.htm">How to add and configure a zone</a>.</p>
+        <h2 class="SVheading2">Available action types</h2>
+        <p class="SVnormal">The types of action available is the following, they offer a variety of possibility for the user to visualize information and send commands:</p>
+        <ul style="list-style-type: disc;">
+            <li>Send command - Allow the user to send a command or a set-point for a given variable. The value sent can be pre-configured or entered by the user.</li>
+            <li>Variable details - Display detailed information to the user for a variable, including timestamp, status and extended attributes.</li>
+            <li>List of variables - Display a list of variables and their values to the user.</li>
+            <li>Trend - Display a trend style view of up to 16 variables to the user. </li>
+            <li>List of alarms - Display a list of eligible alarms to the user.</li>
+            <li>List of logged events - Display a list of events from a selected Log List to the user.</li>
+            <li>Symbol - Display a graphic symbol selected at design time to the user.</li>
+            <li>Mimic - Display a mimic selected at design time to the user.</li>
+            <li>Execute program - Allow the user to execute a SCADA Basic script on the server.</li>
+            <li>Open Url - Allow the user to browse to a specific Url in an embedded web browser.</li>
+            <li>Open chat - Allow the user to open an existing chat, or create a new one.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">Whilst they provide similar functionality, the trend view, log view and alarm list view are not the same as the equivalent graphic controls in <span class="mc-variable OEM.ProductName variable">PcVue</span> desktop client or WebVue.</p>
+        </div>
+        <p class="SVnormal">Mimic and symbol rendering in mobile apps is similar to that of WebVue except for the following restrictions.</p>
+        <ul style="list-style-type: disc;">
+            <li>Mimics are displayed full size and cannot be scaled to fit the device screen. However, you can scroll a mimic  using touch and drag.</li>
+            <li>The Link-open animations are not executed, other than to open a single pop-up mimic.</li>
+            <li>The Link-close animations are not available to the user.</li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">For detailed information on the available mimic functionality, see the book Configuring a project for WebVue.</p>
+        </div>
+        <h2 class="SVheading2">Important note about the variables filter</h2>
+        <p class="SVnormal">All action types other than List of logged events and Open Url, inherit  the branch from the zone to which it is attached (if any). The branch is known as the Context and allows filtering / selecting the variables available to the action. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t1" style="display: none;"><br /><img src="../../Resources/Images/AE/Geodata/action_context.png" /><br /></div></p>
+        <p class="SVnormal"><a name="kanchor183"></a>Some actions also have an optional local branch. Any local branch is appended to the context branch unless it is preceded with the @ character which makes it absolute. For example:</p>
+        <ul style="list-style-type: disc;">
+            <li>If the context is BMS.B01 and the local branch is Floor01, the branch filter is BMS.B01.Floor1.</li>
+            <li>If the context is BMS.B01 and the local branch is @BMS.B02, the branch filter is BMS.B02.</li>
+        </ul>
+        <p class="SVnormal">Some actions, namely Send command, Variable details and List of variables, also inherit any  Sql expression from the zone. If a local Sql expression is configured it is ANDed to any branch filter.</p>
+        <div class="note">
+            <p class="SVnormal">The context branch is shown in the action but any inherited SQL expression is not.</p>
+        </div>
+        <h2 class="SVheading2">Action visibility</h2>
+        <p class="SVnormal">The actions visible to the user of the SnapVue mobile app primarily depend on what has been configured in the <span class="mc-variable OEM.ProductName variable">PcVue</span> server for the zone in which the user is detected. However, the following conditions must also be met.</p>
+        <ul style="list-style-type: disc;">
+            <li>Browsing level - The user, having been detected as being in a zone, must have the Browsing Level rights in their User Profile corresponding to that of the action.</li>
+            <li>Fully defined parameters - The parameters of the action must be fully defined. <ul style="list-style-type: disc;"><li>Open Url - The Url must be filled in.</li><li>Variable details - A single variable is found.</li><li>Trend and List of variables - At least one variable is found.</li><li>Symbol - The Symbol name must be filled in.</li><li>Mimic - The Mimic name must be filled in.</li><li>Execute Program - The Program name must be filled in.</li><li>List of logged events - The Log list name must be filled in.</li><li>List of alarms - Always displayed, if no alarm matches the filter, the list of alarm is empty.</li><li>Send command - A single variable is found.</li></ul></li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">In general, if no matching variable is found in the zone in which the action is defined, it will not be visible to a user located at that zone.</p>
+        </div>
+        <h2 class="SVheading2">The Tiles tab</h2>
+        <p class="SVnormal">The tiles tab configures the visual representation of each action on the SnapVue home view. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t2" style="display: none;">
+            <img src="../../Resources/Images/AE/Geodata/action_tile.png" />
+        </div>
+        <ul style="list-style-type: disc;">
+            <li>Miscellaneous
+				<ul style="list-style-type: disc;"><li>Browsing level - The browsing level, corresponding to that of a user's profile, that the user must have if the tile is to be displayed.</li></ul></li>
+            <li>Visual representation
+				<ul style="list-style-type: disc;"><li>Priority - The priority determines the position of the tile on the page. Tiles with a higher priority are positioned to the top and left of those with a lower priority. Range 0 to 100.</li><li>Title - Specifies where to display the title on the tile (default <u>On the left</u>). Select <u>Do not display</u> if you do not want to display the title.</li><li>Size - Area occupied by the tile. In the following screen-shot all tiles are 2 x 2 which is the default. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t3" style="display: none;"><br /><img src="../../Resources/Images/AE/Geodata/snapvue_tiles.png" /></div></li><li>Type
+						<ul style="list-style-type: disc;"><li>Image - The tile displays an image selected from a library. Images are automatically re-sized to fit the space available in the tile.</li><li>Symbol - The tile displays a symbol selected from a library. Symbols are automatically re-sized to fit the space available in the tile. Note that any control zone in the symbol is disabled. Tapping the symbol displays the tile's action.</li><li>Variable and variable value - The tile displays the value of the selected variable. It is also possible to select images as for the Image on register animation. If such a configuration is performed, the image is displayed on the side of the tile, along with the variable value.</li><li>Image on bit - The tile displays one of three selected images depending on the status and value of a selected bit variable (0, 1 or NS).</li><li>Image on register - The tile displays one of up to eight selected images depending on the value of a selected register variable. Additional images can be selected for display when the value is outside of the range or when it is not set (NS).</li></ul></li><li>Text color - The color of any displayed text. The default is black.</li><li>Background color - The background color, either solid or gradient. The default is solid white.</li></ul></li>
+        </ul>
+        <div class="tip">
+            <p class="SVnormal">Colors are selected from a palette or entered as a hexadecimal code, for example #FF000000</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Reference topics" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>SENDLIST send mode</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="SENDLIST_SendMode_Ref" />
+    </head>
+    <body>
+        <h1 class="SVheading1">SENDLIST Send Mode</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc408">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="SENDLIST_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc408.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">The sending mode (<i>OPCMode</i>) parameter of the SENDLIST instruction determines exactly how the variables are sent depending on the communication method being used. </p>
+        <h2 class="SVheading2">For equipment variables</h2>
+        <ul>
+            <li>BLOC - The variables are sorted according to the communication frame that they belong to. All variables between the highest and lowest address (according to the list created by SET) are sent including any not in the list.</li>
+            <li>MULTIPLE - The variables are sorted according to the communication frame that they belong to and into contiguous blocks. Only the variables from the list created by SET are sent, but a larger number of writes may be required (one write for each block).</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">If the list being sent by SENDLIST contains only OPC variables either mode can be used.</p>
+        </div>
+        <h2 class="SVheading2">For OPC variables</h2>
+        <p class="SVnormal">There are four options when sending  variables to an OPC server, selected by the <i>OPCMode</i> parameter. The options are best illustrated by example. </p>
+        <div class="note">
+            <p class="SVnormal">The order in which the variables are declared in the list directly affects the sequence in which they  are written to the OPC servers.</p>
+        </div>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> is connected to two OPC servers.
+
+OPC Server 1 contains variables MV1 and MV2. OPC Server 2 contains MV3 and MV4.
+<span class="mc-variable OEM.ProductName variable">PcVue</span> subscribes to MV1 and MV2 using the group Group1 and to MV3 and MV4 using Group2.
+A list is prepared that contains all 4 variables in the order MV3, MV1, MV2, MV4.</p>
+        <ul>
+            <li>Mode 0 Optimized serialization<ul><li>Write MV3 to OPC Server 2 and wait for the result.</li><li>If the result is OK, write MV1 and MV2 to OPC Server 1 and wait for the result.</li><li>If the result is OK, write MV4 and wait for the result.</li><li>The SENDLIST is completed. Three OPC writes are used.</li></ul></li>
+        </ul>
+        <ul>
+            <li>Mode 1 Full serialization<ul><li>Write MV3 to OPC Server 2 and wait for the result.</li><li>If the result is OK, write MV1 to OPC Server 1 and wait for the result.</li><li>If the result is OK, write MV2 to OPC Server 1 and wait for the result.</li><li>If the result is OK, write MV4 and wait for the result.</li><li>The SENDLIST is completed. Four OPC writes are used.</li></ul></li>
+            <li>Mode 2 No optimization<ul><li>Write MV3 to OPC Server 2.</li><li>Write MV1 to OPC Server 1.</li><li>Write MV2 to OPC Server 1.</li><li>Write MV4 to OPC Server 2.</li><li>Wait for all four results.</li><li>The SENDLIST is completed. Four OPC writes are used.</li></ul></li>
+            <li>Mode 3 Full optimization<ul><li>Write MV3 and MV4 to OPC Server 2.</li><li>Write MV1 and MV2 to OPC Server 1.</li><li>Wait for all two results.</li><li>The SENDLIST is completed. Two OPC writes are used.</li></ul></li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">If the list being sent by SENDLIST contains only OPC variables, either mode can be used.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

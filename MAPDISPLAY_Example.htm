@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>MAPDISPLAY example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="MAPDISPLAY_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor278"></a>MAPDISPLAY Example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc357">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="MAPDISPLAY_Instruc" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc357.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">This example exercises modes of the MAPDISPLAY command.</p>
+        <p class="SVprogramCode">Dim MimicName as Str;	'Name of a mimic containing the Map Control</p>
+        <p class="SVprogramCode">Dim MimicBranch as Str;	'Branch of the window containing the Map Control</p>
+        <p class="SVprogramCode">Dim Id as Str;		'Id of the Map control graphic object</p>
+        <p class="SVprogramCode">Dim LayerName as Str;	'Name of a layer</p>
+        <p class="SVprogramCode">Dim MarkerName as Str;	'Name of a marker.</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'This sub is used to initialize program variables</p>
+        <p class="SVprogramCode">SUB Main()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">MimicName = "WIN_MAP"; 'Name of the mimic containing the Map graphic control</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Id = "ID_MAP"; 'The If of the Map graphic control in the mimic</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">LayerName = "MyLayer"; 'Name of a Layer</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">MarkerName = "MyMarker";'Name of a marker</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'RESET</p>
+        <p class="SVprogramCode">'This sub can be called to reset a Map control runtime properties</p>
+        <p class="SVprogramCode">'and fall-back on configuration values defined at design-time</p>
+        <p class="SVprogramCode">SUB RESET()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iRet as Integer;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("LOADDEFAULT",MimicName,MimicBranch,Id);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode LOADDEFAULT executed with result: ", iRet);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'MAP_NAV</p>
+        <p class="SVprogramCode">'This sub gets and sets map navigation positions: Zoom level, latitude &amp; longitude</p>
+        <p class="SVprogramCode">SUB MAP_NAV()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iRet as Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim dRet as Double;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">'Get map navigation info</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">dRet = MAPDISPLAY("GETZOOM",MimicName,MimicBranch,Id);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETZOOM executed with result: ", dRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">dRet = MAPDISPLAY("GETLATITUDE",MimicName,MimicBranch,Id);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETLATITUDE executed with result: ", dRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">dRet = MAPDISPLAY("GETLONGITUDE",MimicName,MimicBranch,Id);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETLONGITUDE executed with result: ", dRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">'Set map navigation info</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETZOOM",MimicName,MimicBranch,Id,4);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETZOOM executed with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETLATITUDE",MimicName,MimicBranch,Id,12.5);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETLATITUDE executed with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETLONGITUDE",MimicName,MimicBranch,Id,45);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETLONGITUDE executed with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">'Center the map control on a marker</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("CENTERTOMARKER",MimicName,MimicBranch,Id,LayerName,MarkerName);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode CENTERTOMARKER executed with result: ", iRet);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'EXPORT_GPX</p>
+        <p class="SVprogramCode">'This sub can be called to export a Map control configuration to a .Gpx file: Layers and markers</p>
+        <p class="SVprogramCode">SUB EXPORT_GPX()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iRet as Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim Filename as Str; ' Name of the file to use as output - A path relative to the \GIS folder</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Filename = "ExportedMarkers.gpx";</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("EXPORT",MimicName,MimicBranch,Id,Filename);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode EXPORT executed with result: ", iRet);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'IMPORT_GPX</p>
+        <p class="SVprogramCode">'This sub can be called to import a .Gpx file</p>
+        <p class="SVprogramCode">'The import is asynchronous - The import completion is executed via the call-back sub IMPORT_GPX_CALLBACK</p>
+        <p class="SVprogramCode">SUB IMPORT_GPX()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iRet as Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim MarkersFilename as Str; ' Name of the file to use as input - A path relative to the \GIS folder</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim Asynch as Integer; 'Flag indicating whether the file should be loaded synchronously (0) or asynchronously (1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Asynch = 1;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">MarkersFilename = "MarkersForImport.gpx";</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">@VarResult = 0;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">'Add an event to call the call-back function whenever VarResult changes</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = EVENT("ADDPROG", "@VarResult", "ALL&gt;ALL", "LOADER", "", "IMPORT_GPX_CALLBACK");</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Call back event created with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("LOADMARKERS",MimicName,MimicBranch,Id,MarkersFilename,Asynch,"@VarResult");</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode LOADMARKERS executed with result: ", iRet);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB IMPORT_GPX_CALLBACK()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iRet as Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">if (@VarResult != 1) then	'Import no longer in progress (completed with success or failure)</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">'Delete the call-back event</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">iRet = EVENT("DELPROG", "@VarResult", "ALL&gt;ALL", "LOADER", "", "IMPORT_GPX_CALLBACK");</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">Print("Call back event deletion with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 1in;">Print("Mode LOADMARKERS completed with result: ", @VarResult);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">end if</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'LAYER_INFO</p>
+        <p class="SVprogramCode">'This sub gets and sets the visibility of a layer.</p>
+        <p class="SVprogramCode">SUB LAYER_INFO()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iRet as Integer;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETLAYERVISIBILITY",MimicName,MimicBranch,Id,LayerName,1);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETLAYERVISIBILITY executed with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("ISLAYERDISPLAYED",MimicName,MimicBranch,Id,LayerName);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode ISLAYERDISPLAYED executed with result: ", iRet);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'MARKER_INFO</p>
+        <p class="SVprogramCode">'This sub gets and sets several properties of a marker.</p>
+        <p class="SVprogramCode">SUB MARKER_INFO()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim dRet as Double;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iRet as Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim sRet as Str;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iChildMode as Integer;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">'Get the type of a marker</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("GETMARKERTYPE",MimicName,MimicBranch,Id,LayerName,MarkerName);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETMARKERTYPE executed with result: ", iRet);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">'Get the latitude &amp; longitude of a marker</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">dRet = MAPDISPLAY("GETMARKERLATITUDE",MimicName,MimicBranch,Id,LayerName,MarkerName);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETMARKERLATITUDE executed with result: ", dRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">dRet = MAPDISPLAY("GETMARKERLONGITUDE",MimicName,MimicBranch,Id,LayerName,MarkerName);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETMARKERLONGITUDE executed with result: ", dRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">'Set the latitude &amp; longitude of a marker</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETMARKERLATITUDE",MimicName,MimicBranch,Id,LayerName,MarkerName,50);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETMARKERLATITUDE executed with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETMARKERLONGITUDE",MimicName,MimicBranch,Id,LayerName,MarkerName,1);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETMARKERLONGITUDE executed with result: ", iRet);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">'Get and set the tooltip of a marker</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETMARKERTOOLTIP",MimicName,MimicBranch,Id,LayerName,MarkerName,"A tooltip set by script");</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETMARKERTOOLTIP executed with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">sRet = MAPDISPLAY("GETMARKERTOOLTIP",MimicName,MimicBranch,Id,LayerName,MarkerName);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETMARKERTOOLTIP executed with result: ", sRet);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">'Get and set the visibility of a marker</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("GETMARKERVISIBILITY",MimicName,MimicBranch,Id,LayerName,MarkerName);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETMARKERVISIBILITY executed with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETMARKERVISIBILITY",MimicName,MimicBranch,Id,LayerName,MarkerName,1);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETMARKERVISIBILITY executed with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">'Get and set the mimic associated to a marker</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">sRet = MAPDISPLAY("GETMARKERMIMIC",MimicName,MimicBranch,Id,LayerName,MarkerName);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETMARKERMIMIC executed with result: ", sRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">sRet = MAPDISPLAY("GETMARKERBRANCH",MimicName,MimicBranch,Id,LayerName,MarkerName);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETMARKERBRANCH executed with result: ", sRet);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iChildMode = 1;	'A pop-up mimic will be attached to the marker</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETMARKERMIMIC",MimicName,MimicBranch,Id,LayerName,MarkerName,"ChildMimic",iChildMode);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETMARKERMIMIC executed with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETMARKERBRANCH",MimicName,MimicBranch,Id,LayerName,MarkerName,"ChildBranch");</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETMARKERBRANCH executed with result: ", iRet);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'MARKER_USERDATA</p>
+        <p class="SVprogramCode">'This sub gets and sets user data associated to a marker.</p>
+        <p class="SVprogramCode">SUB MARKER_USERDATA()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim sRet as Str;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iRet as Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim sUserData as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">sUserData="MyUserData";</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">sRet = MAPDISPLAY("GETUSERDATAVARNAME",MimicName,MimicBranch,Id,LayerName,MarkerName,sUserData);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETUSERDATAVARNAME executed with result: ", sRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">sRet = MAPDISPLAY("GETUSERDATALABEL",MimicName,MimicBranch,Id,LayerName,MarkerName,sUserData);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETUSERDATALABEL executed with result: ", sRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">sRet = MAPDISPLAY("GETUSERDATAVALUE",MimicName,MimicBranch,Id,LayerName,MarkerName,sUserData);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode GETUSERDATAVALUE executed with result: ", sRet);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETUSERDATALABEL",MimicName,MimicBranch,Id,LayerName,MarkerName,sUserData,"A new userdata label");</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETUSERDATALABEL executed with result: ", iRet);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETUSERDATAVALUE",MimicName,MimicBranch,Id,LayerName,MarkerName,sUserData,"A new userdata value");</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETUSERDATAVALUE executed with result: ", iRet);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'ISLOADING</p>
+        <p class="SVprogramCode">'This sub can be called to know if the Map control loading is in progress or completed</p>
+        <p class="SVprogramCode">SUB ISLOADING()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iRet as Integer;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("ISLOADING",MimicName,MimicBranch,Id);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode ISLOADING executed with result: ", iRet);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'SETMAPPROVIDER</p>
+        <p class="SVprogramCode">'This sub can be called to change the Map tile provider at runtime</p>
+        <p class="SVprogramCode">SUB SETPROVIDER()</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iRet as Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim sProvider as Str;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iLocal as Integer;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Dim iCache as Integer;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">sProvider="MyNewProvider"; 'Name of the map provider - The map will be unusable if the value does not match a supported provider</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iLocal=1;'Example 'Local map or online.</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iCache=1;'Example 'Flag indicating to use the cache.</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">iRet = MAPDISPLAY("SETMAPPROVIDER",MimicName,MimicBranch,Id,sProvider,iLocal,iCache);</p>
+        <p class="SVprogramCode" style="text-indent: 0.5in;">Print("Mode SETMAPPROVIDER executed with result: ", iRet);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|OCPP Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>OCPP Add-on traces</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">OCPP Add-on traces</h1>
+        <h2 class="SVheading2">Event logging </h2>
+        <p class="SVnormal">Information regarding the OCPP Add-on is logged in the traces and  displayed in the Event Viewer with lines starting with '[OCPP]'.</p>
+        <h2 class="SVheading2">Diagnostic traces </h2>
+        <p class="SVnormal">Additional traces can be activated using the SCADA Basic instruction TRACE as follows.</p>
+        <p class="SVdataListing">TRACE(Mode, ManagerId, HexFlag);</p>
+        <ul style="list-style-type: disc;">
+            <li>Mode - Turn the additional trace on or off<ul style="list-style-type: disc;"><li>1 - On</li><li>0 - Off</li></ul></li>
+            <li>ManagerID - The identifier of the OCPP Add-on task. Set to 11 if OCPP is the only Add-on in use.</li>
+            <li>HexFlag	- Hexadecimal combination flag. The level of traces to activate/deactivate as per the table below.</li>
+        </ul>
+        <table style="width: 50%;">
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading" style="font-weight: bold;">Type</td>
+                    <td class="SVtableHeading" style="font-weight: bold;">Bit mask</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Raw message exchange with charge points</td>
+                    <td class="SVtable">0x0001</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Raw message exchange with CSMS (proxy)</td>
+                    <td class="SVtable">0x0002</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Incoming requests from charge points</td>
+                    <td class="SVtable">0x0400</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Outgoing requests to charge points</td>
+                    <td class="SVtable">0x0800</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Incoming responses from charge points</td>
+                    <td class="SVtable">0x1000</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Outgoing responses to charge points</td>
+                    <td class="SVtable">0x2000</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Incoming requests from CSMS (proxy)</td>
+                    <td class="SVtable">0x0800</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Outgoing responses to CSMS (proxy)</td>
+                    <td class="SVtable">0x10000</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Incoming responses from CSMS (proxy)</td>
+                    <td class="SVtable">0x20000</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Example of use of SCADA Basic TRACE instruction </h2>
+        <p class="SVdataListing">TRACE(1,11,”001”); ‘Turn on additional trace for raw message exchange with charge points</p>
+        <p class="SVdataListing">TRACE(1,11,”400”); ‘Turn on additional trace for incoming requests from charge points</p>
+        <p class="SVdataListing">TRACE(1,11,”1000”); ‘Turn on additional trace for incoming responses from charge points</p>
+        <p class="SVdataListing">&#160;</p>
+        <p class="SVdataListing">TRACE(0,11,”001”); ‘Turn off additional trace for raw message exchange with charge points</p>
+        <p class="SVdataListing">TRACE(0,11,”400”); ‘Turn off additional trace for incoming requests from charge points</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

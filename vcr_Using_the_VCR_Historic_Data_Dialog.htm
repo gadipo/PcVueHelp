@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|The VCR Facility" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Using the VCR Player dialog</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor74"></a><a name="kanchor75"></a><a name="kanchor76"></a>Using the VCR Player Dialog</h1>
+        <p class="SVnormal">The VCR Player dialog is used to control the replay of data recorded with a VCR archive unit. See the topic <a href="vcr_Overview_of_configuring_the_playback_project.htm">Configuring the Playback  station</a> for how to open it from a mimic. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../Resources/Images/Extras/vcr_player_playing.png" style="border-style: none;border: none;float: none;" border="0" title="Player control dialog" />
+            </p>
+        </div>
+        <p class="SVnormal">The VCR playback dialog can be controlled with SCADA Basic scripting. See the instruction SVVCR for details.</p>
+        <h2 class="SVheading2">Synchronizing the VCR data</h2>
+        <p class="SVnormal">Each time the VCR Player is opened, the recorded data are copied from the archive server to the local VCR archive unit, using the path specified in its configuration. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t2" style="display: none;">
+            <p>
+                <img src="../Resources/Images/Extras/vcr_unit_path.png" alt="" style="border-style: none;border: none;float: none;" border="0" title="archive unit recorder dialog" />
+            </p>
+        </div>
+        <p class="SVnormal">As the data is copied, the status line displays information about progress. Synchronizing data can take a significant time if they are very large or if the connection to the specified folder is slow.</p>
+        <p class="SVnormal">You can execute the synchronization manually using the menu command <u>Actions.Synchronize</u>, at any time events are not being played. Only data generated since the previous synchronization are processed. Data that has already been synchronized is not overwritten.  You can use the synchronization process at any time, even while the archive unit producer is running. However, the most recent archive data files will not be copied if still being processed in memory (and not yet recorded on the producer's file system).</p>
+        <h2 class="SVheading2">How to select the start date and time</h2>
+        <p class="SVnormal">When the VCR Player is opened, the date and time initialize to the date and time of opening. The date and time from where replay is to start is selected using the calendar and time slide bar, or time selection boxes. </p>
+        <div class="note">
+            <p class="SVnormal">If you choose a date and time for which there is any data, playback starts at the first record found.</p>
+        </div>
+        <h2 class="SVheading2">Controlling the playback of events</h2>
+        <p class="SVnormal">Playback starts after you have selected a date and time and clicked the <u>Play</u> button.</p>
+        <p class="SVnormal">All events from the selected date and time to the end of the most recent data is played unless you select one of the other control commands. The timestamp of the event currently being played is displayed in the <u>Current</u> field. The speed at which events are played back is unrelated to the frequency at which they were recorded. You can control the playback speed using the <u>Time Factor</u> (replay speed).</p>
+        <div class="warning">
+            <p class="SVnormal">The events in each step are played one after another with no pause. If the same variable changes several times in a step, you will only see the value at the end of the step.</p>
+        </div>
+        <p class="SVnormal">The following commands are used to control the playback of events.</p>
+        <table style="width: 100%;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 67px;" />
+            <col style="width: 146px;" />
+            <col />
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtableHeading">Button</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+                <td style="width: 71.388%;" width="71.388%">
+                    <p class="SVtableHeading">Effect</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">
+                        <img src="../Resources/Images/Extras/vcr_Start_button.png" alt="" style="border-style: none;border: none;float: none;" border="0" />
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Play</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 71.388%;" valign="top" width="71.388%">
+                    <p class="SVtable">Events are played from the start date and time. Playing continues until the end of the most recent photo is reached.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">
+                        <img src="../Resources/Images/Extras/vcr_Pause_button.png" style="border-style: none;border: none;" border="0" />
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Pause</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 71.388%;" valign="top" width="71.388%">
+                    <p class="SVtable">Playing of events is paused. When <u>Start</u> is selected, replay is resumed from where it was paused.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">
+                        <img src="../Resources/Images/Extras/vcr_Stop_button.png" alt="" style="border-style: none;border: none;float: none;" border="0" />
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Stop</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 71.388%;" valign="top" width="71.388%">
+                    <p class="SVtable">The playing of events is stopped. When <u>Start</u> is selected, play starts from the selected start date and time.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">
+                        <img src="../Resources/Images/Extras/vcr_First_Record_button.png" alt="" style="border-style: none;border: none;float: none;" border="0" />
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Return to start</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 71.388%;" valign="top" width="71.388%">
+                    <p class="SVtable">If playing, restart from the selected start date and time.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">
+                        <img src="../Resources/Images/Extras/vcr_Previous_Record_button.png" alt="" style="border-style: none;border: none;float: none;" border="0" />
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Back</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 71.388%;" valign="top" width="71.388%">
+                    <p class="SVtable">If playing, go backward by the time factor x10. If you click <u>Back</u> N times, with less than one second between each click, then the backward step will be N*Time factor*10.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">
+                        <img src="../Resources/Images/Extras/vcr_Next_Event_button.png" alt="" style="border-style: none;border: none;float: none;" border="0" />
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Next step</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 71.388%;" valign="top" width="71.388%">
+                    <p class="SVtable">If paused, play the next events that occurred during the Time factor x 1 sec.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">
+                        <img src="../Resources/Images/Extras/vcr_Next_Record_button.png" alt="" style="border-style: none;border: none;float: none;" border="0" />
+                    </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Forward</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 71.388%;" valign="top" width="71.388%">
+                    <p class="SVtable">If playing, go forward by the time factor x10. If you click <u>Forward</u> N times, with less than one second between each click, then the forward step will be N*Time factor*10.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">Even if the VCR Player is closed, events continue to be played, until the end of the data is reached, unless you have clicked the <u>Stop</u> or <u>Pause</u> button.</p>
+        </div>
+        <h2 class="SVheading2">Controlling the Time Factor</h2>
+        <p class="SVnormal">The speed at which events are played is controlled by the <u>Time factor</u>. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t3" style="display: none;">
+            <p>
+                <img src="../Resources/Images/Extras/vcr_player_timefactor.png" alt="" style="border-style: none;border: none;float: none;" border="0" title="player control time factor dialog" />
+            </p>
+        </div>
+        <p class="SVnormal">For example:</p>
+        <ul style="list-style-type: disc;">
+            <li>If the time factor is 1, then each second the events occurring during 1 second are played.</li>
+            <li>If the time factor is 10, then each second the events occurring during 10 seconds are played.</li>
+        </ul>
+        <p class="SVnormal">The time factor is selected using the up and down arrows from the following:</p>
+        <p class="SVdataListing">0.001, 0.01, 0.1, 0.5</p>
+        <p class="SVdataListing">1, 2, 5</p>
+        <p class="SVdataListing">10, 30, 60</p>
+        <p class="SVdataListing">120, 300, 600</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>SVLOG example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="SVLOG_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor90"></a>SVLOG Example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc377">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="SVLOG_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc377.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">This example shows the use of the SVLOG instruction to extract data logged in the previous hour from the Log Filter LIST1.</p>
+        <p class="SVprogramCode">' Constants for log data type:<br></br><br></br>const VALTRANSEV = 1; 'Bit transition<br></br>const ALARMACQEV = 2; 'Alarm acknowledge<br></br>const WRITECMDEEV = 4; 'Send a command<br></br>const WRITECTRLEV = 8; 'Send a control value<br></br>const WRITETEXTEV = 16; 'Send text<br></br>const WRITERECIPESEV = 32; 'Send a recipe<br></br>const STARTEXP = 128; 'Log on<br></br>const STOPEXP = 256; 'Log off<br></br>const TRANSETAT_0 = 64; 'Bit transition to 0<br></br>const TRANSETAT_1 = 512; 'Bit transition to 1<br></br>const TRANSETAT_NS = 1024; ' Bit transition to NS<br></br>const TRANSETAT_ALLALL = 1600; 'All bit transitions<br></br>const TRANSALA_PRSACQ = 2048; 'Alarm On Ack<br></br>const TRANSALA_PRSNOACQ = 4096; 'Alarm On Nack<br></br>const TRANSALA_ABSACQ = 8192; 'Alarm Off<br></br>const TRANSALA_ABSNOACQ = 16384; 'Alarm Off Nack<br></br>const TRANSALA_NS = 32768; 'Alarm NS.<br></br>const TRANSALA_ACQOPERATOR = 65536; 'Operator ack<br></br>const TRANSALA_ALLALL = 63488; 'All alm transitions<br></br>const FORCAGEPROG = 131072; 'Run program<br></br>const TRANSALA_OFF = 262144; 'Alarm off<br></br>const TRANSALA_ON = 524288; 'Alarm on</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' Global variable<br />&#160; DIM HandleDest As long; 'Buffer handle<br /><br />SUB Main()<br />&#160; DIM Ret as long;<br />&#160; DIM HandleParam as long;<br />&#160; DIM Hd1 as double;<br />&#160; DIM Hd2 as double;<br />&#160; DIM Mask as long;<br />&#160; DIM ChParam as STR;<br />&#160; EVENT ("ADDPROG", "Extract.Fin", 1, "LOG", "", "EndExtract");<br />&#160; ' Create the filter parameters buffer<br /><br />&#160; HandleParam = alloc_buffer(1000);<br />&#160; Mask=0;<br />&#160; Mask = LOGICAL("OR",Mask, WRITECTRLEV);<br />&#160; Mask = LOGICAL("OR",Mask, TRANSETAT_ALLALL);<br />&#160; Hd1 = DateTimeValue();<br />&#160; Hd2 = Hd1 - 3600000;<br />&#160; chParam = addstring(chParam,"LIST1");<br />&#160; chParam = addstring(chParam,",");<br />&#160; chParam = addstring(chParam, format("%.0f",Hd2));<br />&#160; chParam = addstring(chParam,",");<br />&#160; chParam = addstring(chParam, format("%.0f",Hd1));<br />&#160; chParam = addstring(chParam,",");<br />&#160; chParam = addstring(chParam, "0"); ' Max lines<br />&#160; chParam = addstring(chParam,",");<br />&#160; chParam = addstring(chParam, "0"); ' Direction<br />&#160; chParam = addstring(chParam,",");<br />&#160; chParam = addstring(chParam, TOC(Mask)); ' Mask<br />&#160; chParam = addstring(chParam,",");<br />&#160; chParam = addstring(chParam, "0"); ' Min priority<br />&#160; chParam = addstring(chParam,",");<br />&#160; chParam = addstring(chParam, "15"); ' Max priority<br />&#160; chParam = addstring(chParam,",");<br />&#160; ' Selection filter<br />&#160; chParam = addstring(chParam, "=(#A1 == DOM1)||(#A1 == DOM2)");<br />&#160; chParam = addstring(chParam,",");<br />&#160; ' Output format<br />&#160; chParam = addstring(chParam, "#h:#m:#s #E #O #T #t #C #c #d #n");<br />&#160; put_buffer(HandleParam,0,chParam);<br />&#160; ' Create the output buffer<br /> ' ----------------------------------------------------<br />&#160; HandleDest = alloc_buffer(20000);<br />&#160; ' Execute the extract function <br />' ----------------------------------------------------<br />&#160; Ret = SvLog("Extract", HandleDest, HandleParam, "Extract.Fin","Extract.Status",</p>
+        <p class="SVprogramCode"> "Extract.Lignes", "Extract.HDeb","Extract.HFin");<br />&#160; If (Ret == 0) then<br />&#160; PRINT ("Error in extract function");<br />&#160; Event ("DelProg", "EndExtract", 1);<br />&#160; End if<br />&#160; ' Free buffers<br />&#160; Free_Buffer(HandleParam);<br />END SUB<br /><br />' Function to be executed when extraction is complete<br /><br />SUB EndExtract()<br />&#160; DIM NomApp as STR;<br />&#160; DIM Ret as INTEGER;<br />&#160; PRINT ("Extract complete");<br />&#160; If (Extract.Status == 0) then<br />&#160; PRINT ("All lines extracted");<br /> Else<br /> &#160;&#160;PRINT ("Buffer full - some data may be missing");<br /> End if<br /> PRINT ("The first archive date is ", DateTimeString(Extract.HDeb));<br /> PRINT ("The last archive date is ", DateTimeString (Extract.HFin));</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' Convert the buffer to a file</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SEQ_BUFFER("CRTOCRLF", HandleDest);</p>
+        <p class="SVprogramCode">BUFTOFILE(HandleDest,"Extract.txt", "USEFULL_PART");</p>
+        <p class="SVprogramCode">FREE_BUFFER(HandleDest);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">END SUB</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

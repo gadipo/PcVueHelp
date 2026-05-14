@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Introduction to VBA in PcVue|Error handling in VBA" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_VBA.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Error handling in VBA</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Error handling in VBA</h1>
+        <h2 class="SVheading2">Why is error handling important?</h2>
+        <p class="SVnormal">If no provision is taken in the code, when a VBA application encounters an error, script execution is stopped and an error box is displayed providing direct access to the VBA editor for debug. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/Scripting_VBA/runtime_error_dialog.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <p class="SVnormal">With <span class="mc-variable OEM.ProductName variable">PcVue</span>, if you have a Runtime license, this error box is disabled as it would give the user access to the VBA editor. Therefore, if there is an error, and no error handling is implemented, the script will stop and the user may be unaware. To avoid this you should add an error handler to all but the simplest of scripts.</p>
+        <h2 class="SVheading2">How to add an error handler to your scripts</h2>
+        <p class="SVnormal">There are two parts to adding an error handler to a script.</p>
+        <ul>
+            <li>You must tell the VBA engine that you have included an error handler.</li>
+            <li>You must provide the error handling code.</li>
+        </ul>
+        <p class="SVnormal">To tell VBA engine that you have included an error handler you use the On Error statement. The On Error statement points to a block of code to which the runtime will jump when it encounters an error. A simple example is shown below.</p>
+        <p class="SVprogramCode">Sub OnErrorStatementDemo()</p>
+        <p class="SVprogramCode"> On Error GoTo ErrorHandler   &#160;&#160;&#160;&#160;&#160;&#160; ' Enable error-handling routine.  </p>
+        <p class="SVprogramCode"> Open "TESTFILE" For Output As #1    ' Open file for output.</p>
+        <p class="SVprogramCode"> Kill "TESTFILE"  &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;  ' Attempt to delete an open file to force error.</p>
+        <p class="SVprogramCode"> Exit Sub       &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; ' Exit to avoid handler.</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode"> ErrorHandler:   &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; ' Error-handling routine.</p>
+        <p class="SVprogramCode"> &#160;Select Case Err.Number   &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; ' Evaluate error number.</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;Case 55    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;' "File already open" error.</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;Close #1    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;' Close open file</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;Case Else</p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;' Handle other situations here...</p>
+        <p class="SVprogramCode">&#160;&#160;End Select</p>
+        <p class="SVprogramCode">&#160;Resume    &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;' Resume execution at same line that caused the error.
+End Sub
+</p>
+        <div class="note">
+            <p class="SVnormal">A full explanation of error handling in VBA is beyond the scope of this help. For more information, see Microsoft's help for VBA or one of the many available resources.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

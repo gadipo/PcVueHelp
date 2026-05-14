@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>SVSQL Database example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="SVSQL_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor223"></a>SVSQL Database Example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc378">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="SVSQL_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc378.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">This example uses a mimic (SQLTEST) containing two arrays 
+ (TITLE and DATA) in which the results of executing a SQL command are placed. 
+ </p>
+        <p class="SVnormal">The User enters the name of the database in the text 
+ variable @DATABASE.NAME and the SQL command in the variable @DATABASE.SQL. 
+ The variable @DATABASE.ERROR is used to report the status and any error 
+ to the User.</p>
+        <p class="SVprogramCode">DIM HBase as long; 'Handle for database connection<br />DIM RetSQL as long; 'Return from SVSQL command<br /><br />SUB Main ()<br />&#160; HBase = 0;<br />END SUB<br /><br />SUB Connect()<br />@DATABASE.ERROR = ADDSTRING("Connecting to database", UCase(@DATABASE.NAME));<br />Delay(0.1);<br />ClearArray();<br />If (HBase &gt; 0) Then<br />&#160; &#160;&#160;@DATABASE.ERROR = "Database already connected";<br />Return(0);<br />Else<br /> If (CmpString(@DATABASE.NAME, "") ==0) Then<br /> &#160;&#160;@DATABASE.ERROR = "Please enter database name";<br /> &#160;&#160;&#160;&#160;RETURN(0);<br /> Else<br /> &#160;&#160;&#160;&#160;HBase = SVSQL("CONNECT",@DATABASE.NAME);<br /> End If<br />End If<br />If (HBase &gt; 0) then<br /> &#160;&#160;@DATABASE.ERROR = "Database connected OK";<br />Else<br /> &#160;&#160;@DATABASE.ERROR = "Database failed to connect";<br />End If<br />Print(Hbase);<br />END SUB<br /></p>
+
+&#160;
+
+<p class="SVprogramCode">SUB Disconnect()<br /> Print (Hbase);<br /> @DATABASE.ERROR = AddString("Disconnecting database " , UCase(@DATABASE.NAME));<br /> Delay(0.1);<br /> If (HBase &lt;= 0) Then<br /> @DATABASE.ERROR = "Database not connected";<br /> &#160;&#160;RETURN(0);<br /> End if<br /> RetSQL = SVSQL("DISCONNECT",HBase);<br /> If (RetSQL == -1) Then<br /> &#160;&#160;@DATABASE.ERROR = "Error disconnecting database";<br /> &#160;&#160;RETURN(0);<br /> Else<br /> &#160;&#160;If (RetSQL == -2) Then<br /> &#160;&#160;&#160;&#160;@DATABASE.ERROR = "Incorrect database handle";<br /> &#160;&#160;&#160;&#160;RETURN(0);<br /> &#160;&#160;Else<br /> &#160;&#160;&#160;&#160;@DATABASE.ERROR = "Disconnected OK";<br /> &#160;&#160;&#160;&#160;Hbase = 0;<br /> &#160;&#160;&#160;&#160;ClearArray();<br /> &#160;&#160;End If<br /> End If<br />END SUB<br /></p><p class="SVprogramCode">SUB ExecuteSQL()<br /> DIM HBufErr as long; ' Handle of error buffer<br /> DIM HField as long; ' Handle of SQL buffer<br /> DIM NbTableCol As Integer;<br /> DIM NbCol As Long;<br /> DIM i As Integer;<br /> DIM j As Integer;<br /> Const NbMaxRow = 15;<br /> Const NbMaxCol = 5;</p>
+
+&#160;
+
+<p class="SVprogramCode">&#160;@DATABASE.ERROR = "Executing query";<br /> Delay(0.1);<br /> If (HBase &lt;= 0) Then<br /> &#160;&#160;@DATABASE.ERROR = "Database not connected";<br /> &#160;&#160;RETURN(0);<br /> End If<br /><br />' Initialise buffers<br /><br /> HBufErr = alloc_buffer(255);<br /> HField = alloc_buffer(255);<br /> ClearArray();<br /><br />' Search for information<br /><br /> RetSQL = SVSQL("EXECUTE", HBase, @DATABASE.SQL);<br /> If (RetSQL &lt; 0) Then<br /> &#160;&#160;RetSQL = SVSQL("ERROR", HBase , HBufErr);<br /> &#160;&#160;@DATABASE.ERROR = Cget_Buffer(HBufErr, 0, RetSQL, 1);<br /> &#160;&#160;RETURN(0);<br /> Else<br /> &#160;&#160;NbCol = SVSQL("NUMCOL", HBase);<br /> End if<br /> If (NbCol &gt; NbMaxCol) then<br /> &#160;&#160;NbTableCol = NbMaxCol;<br /> Else<br /> &#160;&#160;NbTableCol = TOI(NbCol);<br /> End if<br /></p><p class="SVprogramCode">' Get column names from table<br /></p><p class="SVprogramCode">&#160;For (i=1 ; i&lt;=NbTableCol; i++)<br /> &#160;&#160;RetSQL = SVSQL("GETCOLNAME", HBase , I, HField);<br /> &#160;&#160;If (RetSQL &lt; 0) then<br /> &#160;&#160;&#160;&#160;RetSQL = SVSQL("ERROR", HBase , HBufErr);<br /> &#160;&#160;&#160;&#160;@DATABASE.ERROR = Cget_Buffer(HBufErr, 0, RetSQL, 1);<br /> &#160;&#160;&#160;&#160;RETURN(0);<br /> &#160;&#160;End If<br /> &#160;&#160;SELECTOR("PUTCELL", "SQLTEST", "", "TITLE", 0, i-1, Cget_Buffer(HField, 0, RetSQL, 1));<br /> Next i;<br /></p><p class="SVprogramCode">&#160;For (i=NbTableCol+1 ; i&lt;=5; i++)<br /> SELECTOR("PUTCELL", "SQLTEST", "", "TITLE", 0, i-1, "---");<br /> Next i;<br /><br />' Retrieve values and write to table<br /><br /> For(i=1; i&lt;=NbMaxRow; i++)<br /> &#160;&#160;RetSQL = SVSQL("FETCH", HBase);<br /> &#160;&#160;If (RetSQL != 0) Then<br /> &#160;&#160;&#160;&#160;BREAK();<br /> &#160;&#160;End If<br /> &#160;&#160;DELAY(0.1);<br /> &#160;&#160;For (j=1 ; j&lt;=NbTableCol; j++)<br /> &#160;&#160;&#160;&#160;RetSQL = SVSQL("GETCOL", HBase , j, HField);<br /> &#160;&#160;&#160;&#160;SELECTOR("PUTCELL", "SQLTEST", "", "DATA", i-1, j-1, Cget_Buffer(HField, 0, RetSQL, 1));<br /> &#160;&#160;Next j;<br /> Next i;<br /> @DATABASE.ERROR = "Query complete";<br />END SUB<br /><br />SUB ClearArray()<br /> SELECTOR("CLEAR", "SQLTEST", "", "TITLE");<br /> SELECTOR("CLEAR", "SQLTEST", "", "DATA");<br />END SUB</p><script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js"></script></body>
+</html>

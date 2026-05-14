@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Archives|Configuring archive units|Proprietary archive unit|Configuring log data recording" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Log List advanced configuration</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor175"></a>Log List Advanced Configuration</h1>
+        <p class="SVnormal">The following properties are all found in the log list's 
+ Advanced tab.</p>
+        <h2 class="SVheading2">Changing what attributes are recorded each time an 
+ event is logged</h2>
+        <p class="SVnormal">When used with a proprietary archive unit you can customize 
+ the log list so that one or more of a variable's extended attributes are 
+ logged along with the normal information. The value of these extended 
+ attributes can then be displayed in the Log Viewer. The attributes that 
+ are recorded are selected by format elements entered in the <u>Attributes 
+ to record</u> string.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 160px;" />
+            <col />
+            <tr valign="middle">
+                <td style="width: 160px;" valign="top" width="160px">
+                    <p class="SVtableHeading">Format elements</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">To record</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td style="width: 160px;" valign="top" width="160px">
+                    <p class="SVtable">#@A1 to #@A16</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Extended text attributes A1 to A16. #A1 and #A2 represent 
+ the variable's Domain and Nature respectively and are the default setting.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 160px;" valign="top" width="160px">
+                    <p class="SVtable">#@B</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Extended binary attribute.</p>
+                </td>
+            </tr>
+            <tr valign="middle">
+                <td colspan="1" rowspan="1" style="width: 160px;" valign="top" width="160px">
+                    <p class="SVtable">#@*A3 to #@*A16</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Deferred extended text attributes. The real time value 
+ of the variable named in the extended attributes A3 to A16 is 
+ recorded.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Changing the output buffer</h2>
+        <p class="SVnormal">When used with a proprietary format archive unit, the 
+ output from a log list is buffered to reduce how often data is written 
+ to the archive unit thereby reducing activity on the media on which it 
+ resides. The operation of the buffer is controlled by the following properties.</p>
+        <ul>
+            <li class="SVbulleted">Cache memory size - The 
+ size of the memory buffer used. If set to zero then it is disabled.</li>
+            <li class="SVbulleted">Write period - The 
+ frequency at which the cache is flushed to HISTO.SAV.</li>
+        </ul>
+        <p class="SVnormal">See the topic <a href="Units_prop_cache_works.htm">How the proprietary archive unit cache works</a> for a description of the operation of the output buffer (cache).</p>
+        <p class="SVnormal">The <span style="text-decoration: underline;">Cache memory size</span> and <span style="text-decoration: underline;">Write 
+ period</span> properties are found in the Advanced tab of the Report dialog.</p>
+        <h2 class="SVheading2">Configuring a time ordered buffer</h2>
+        <p class="SVnormal">Under some special circumstances related to how data is timestamped, it can be useful to delay storage to overcome small time lags. For this purpose, each 
+ log list has an optional buffer in which data may be sorted before being 
+ output. The operation of the time ordered buffer is controlled using the 
+ following properties.</p>
+        <ul>
+            <li class="SVbulleted">Memory size - The 
+ size of the memory buffer used to sort data before it is copied to disk.</li>
+            <li class="SVbulleted">Period - The period 
+ for which data is sorted. If this is zero then no sorting takes place.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">If you need to archive data timestamped at the device level, it is recommended to use Database archiving (HDS). In general, the native recording system (proprietary archive unit) does not provide a reliable data sequence.</p>
+        </div>
+        <h2 class="SVheading2">Inhibiting a log list using a database bit</h2>
+        <p class="SVnormal">The output from a log list can be temporarily suspended 
+ using a database bit variable. You can choose one or zero as the state 
+ during which the log list operation is suspended. </p>
+        <div class="note">
+            <p class="SVnormal">While a log list is suspended, all events that would have 
+ passed its filter criteria are lost.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

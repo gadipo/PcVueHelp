@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="HDS Object Model Reference|Examples" MadCap:InPreviewMode="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../../" MadCap:HelpSystemFileName="SV_VBA.xml" MadCap:SearchType="Stem" MadCap:PreloadImages="false">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Export a Database</title>
+        <link href="../../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Export a Database</h1>
+        <p>Declare internal variables:</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;font-size: 8pt;"><span style="font-size: 10pt;">Dim ExportFormat As HDSMgtLib.HDSMgtExportFormat</span>
+        </p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Dim ExportType As Integer</p>
+        <p>Pause database recording:</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Private Sub Text15_Click()</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Dim dbMgt As New HDSMgt</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Dim DB As HDSMgtDatabase</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;Set
+ DB = dbMgt.Databases("DefaultDB")</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;DB.PauseRecording</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">End Sub</p>
+        <p>Set the export format to Text:</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">Private Sub Text13_Click()</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;ExportFormat
+ = HIS_SRV_EXPORT_TXT</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;DBexport</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">End Sub</p>
+        <p>Export the database records to C:\temp:</p>
+        <p class="SVprogramCode">Private Sub DBexport()<br />Dim
+ dbMgt As New HDSMgt<br />Dim DB As HDSMgtDatabase</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;Set
+ DB = dbMgt.Databases("DefaultDB")</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;Call
+ DB.StartExport(PurgeDateStart, _</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;PurgeDateEnd,
+ "c:\temp", "dat", _</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;&#160;&#160;&#160;&#160;&#160;HIS_SRV_EXPORT_TXT,
+ True, ";", "Null")</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">End Sub</p>
+        <p class="SVprogramCode" style="margin-top: 0pt;margin-bottom: 0pt;">&#160;</p>
+        <script type="text/javascript" src="../../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

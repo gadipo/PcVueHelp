@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>LAN example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="LAN_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor64"></a>LAN (Network Configuration) Example</h1>
+        <p class="SVnormal"> <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc352"><param name="Command" value="ALink,MENU" /><param name="Item1" value="" /><param name="Item2" value="LAN_Instruct" /></object><a class="MCConceptLink_applies_0" href="javascript:mc352.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a></p>
+        <p class="SVnormal">This example exercises several modes of the LAN command.</p>
+        <p class="SVnormal">The network structure is as follows:</p>
+        <ul>
+            <li class="SVbulleted">An association of
+ two servers.</li>
+            <li class="SVbulleted">The number and name of the of the
+ association is: 1 and ASSOC01 respectively</li>
+            <li class="SVbulleted">The number of the local server station is: 12</li>
+            <li class="SVbulleted">The number of the remote server station is: 11</li>
+        </ul>
+        <p class="SVprogramCode">SUB Main()</p>
+        <p class="SVprogramCode">langetlists();</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode CONNECT or Mode 1 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB lanconnect()</p>
+        <p class="SVprogramCode">DIM iResult as Integer;</p>
+        <p class="SVprogramCode">iResult = LAN("CONNECT","SERVER11S0");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SET_SERVER_MODE or Mode 5 (syntax 5)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'A function to enable the local server station of the association (ASSOC01) </p>
+        <p class="SVprogramCode">'to be forced into the active state </p>
+        <p class="SVprogramCode">SUB Force_Active()</p>
+        <p class="SVprogramCode">&#160;&#160;LAN("SET_SERVER_MODE", "ASSOC01", SYSTEM.STATION_NAME, "SET_SERVER_ACTIF");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'A function to enable the local server station of the association (ASSO10) </p>
+        <p class="SVprogramCode">'to be forced into the passive state </p>
+        <p class="SVprogramCode">SUB Force_Passive()</p>
+        <p class="SVprogramCode">&#160;&#160;LAN("SET_SERVER_MODE", "ASSOC01", SYSTEM.STATION_NAME, "SET_SERVER_PASSIF");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <h2 class="SVheading2">Example of modes 13, 14, 15 and 16</h2>
+        <p class="SVprogramCode">' StartConnections()</p>
+        <p class="SVprogramCode">' -----------------
+</p>
+        <p class="SVprogramCode">' Function for starting a connection with a remote station (passed in a parameter)      </p>
+        <p class="SVprogramCode">' ARG1 = name of the remote station</p>
+        <p class="SVprogramCode">'
+
+ 
+
+</p>
+        <p class="SVprogramCode">SUB StartConnections()
+</p>
+        <p class="SVprogramCode">&#160;&#160;DIM l_Ret AS INTEGER;
+</p>
+        <p class="SVprogramCode">&#160;&#160;l_Ret = LAN( "START_CONNECTIONS", GETARG("ARG1"));
+</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT(@TIME, " StartConnections "" ", GETARG("ARG1"), " l_Ret = ", l_Ret);</p>
+        <p class="SVprogramCode">END SUB
+
+ 
+
+</p>
+        <p class="SVprogramCode">' StopConnections()
+</p>
+        <p class="SVprogramCode">' -----------------
+
+</p>
+        <p class="SVprogramCode">' Function for stopping a connection with a remote station (passed in a parameter) 
+</p>
+        <p class="SVprogramCode">' ARG1 = name of the remote station</p>
+        <p class="SVprogramCode">'
+
+ 
+
+</p>
+        <p class="SVprogramCode">SUB StopConnections()
+</p>
+        <p class="SVprogramCode">&#160;&#160;DIM l_Ret AS INTEGER;
+</p>
+        <p class="SVprogramCode">&#160;&#160;l_Ret = LAN( "STOP_CONNECTIONS", GETARG("ARG1"));
+
+ 
+
+            </p>
+        <p class="SVprogramCode">&#160;&#160;PRINT(@TIME, " StopConnections "" ", GETARG("ARG1"), " l_Ret = ", l_Ret);</p>
+        <p class="SVprogramCode">END SUB
+        </p>
+        <p class="SVprogramCode">' StartConnection()
+</p>
+        <p class="SVprogramCode">' -----------------
+</p>
+        <p class="SVprogramCode">' Function for starting a connection with a remote station (passed in a parameter) 
+
+</p>
+        <p class="SVprogramCode">' ARG1 = name of the remote station</p>
+        <p class="SVprogramCode">' ARG2 = name of the remote connection
+</p>
+        <p class="SVprogramCode">'
+
+ 
+
+</p>
+        <p class="SVprogramCode">SUB StartConnection()
+</p>
+        <p class="SVprogramCode">&#160;&#160;DIM l_Ret AS INTEGER;
+</p>
+        <p class="SVprogramCode">&#160;&#160;l_Ret = LAN( "START_CONNECTION", GETARG("ARG1"), GETARG("ARG2"));
+</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT(@TIME, " StartConnection Remote station ", GETARG("ARG1"), " Remote connection ",GETARG("ARG2"), " l_Ret = ", l_Ret);</p>
+        <p class="SVprogramCode">END SUB
+</p>
+        <p class="SVprogramCode">' StopConnection()
+</p>
+        <p class="SVprogramCode">' -----------------
+</p>
+        <p class="SVprogramCode">' Function for stopping a connection with a remote station (passed in a parameter)      </p>
+        <p class="SVprogramCode">' ARG1 = name of the remote station
+</p>
+        <p class="SVprogramCode">' ARG2 = name of the remote connection
+</p>
+        <p class="SVprogramCode">'
+
+ 
+
+</p>
+        <p class="SVprogramCode">SUB StopConnection()
+
+ 
+
+            </p>
+        <p class="SVprogramCode">&#160;&#160;DIM l_Ret AS INTEGER;
+</p>
+        <p class="SVprogramCode">&#160;&#160;l_Ret = LAN( "STOP_CONNECTION", GETARG("ARG1"), GETARG("ARG2"));
+
+ 
+
+            </p>
+        <p class="SVprogramCode">&#160;&#160;PRINT(@TIME, " StopConnection Remote station ", GETARG("ARG1"), " Remote connection ",GETARG("ARG2"), " l_Ret = ", l_Ret);
+</p>
+        <p class="SVprogramCode">END SUB</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

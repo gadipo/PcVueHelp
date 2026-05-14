@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Deployment overview</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor33"></a>Deployment Overview</h1>
+        <p class="SVnormal">This book explains the options for deploying  <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <p class="SVnormal">Deployment is the process of allocating roles to workstations and servers, setting-up a web server and client applications (web or desktop apps)  to fulfill the system requirements in a given physical network architecture.</p>
+        <p class="SVnormal">For the purpose of this topic, we will consider that <span class="mc-variable OEM.ProductName variable">PcVue</span> has the following main functions.</p>
+        <ul style="list-style-type: disc;">
+            <li>Data acquisition - The collection of real-time data, representing process or calculated values, using a communication protocol such as Modbus, OPC... </li>
+            <li>Historical data recording - The recording of real-time data so that it can be accessed at a later time by either <span class="mc-variable OEM.ProductName variable">PcVue</span> itself or a third party application.</li>
+            <li>Alarms - Alarm generation and management.</li>
+            <li>HMI - Human Machine Interface. The graphical interface that is the presentation layer and enables operators to interact with the monitored system.</li>
+            <li>Inter-station networking - The mechanism by which <span class="mc-variable OEM.ProductName variable">PcVue</span> distributes real-time and historical data between stations in networked architectures.</li>
+            <li>Web server - Comprising components used to interface <span class="mc-variable OEM.ProductName variable">PcVue</span> core architecture with web and mobile clients. </li>
+            <li>Interface to 3rd party systems - Such as CMMS, GIS, ERP, MES...</li>
+        </ul>
+        <p>Functions and roles allocation cannot be achieved independently from the licenses. For more information about licensing, see the book about <a href="../Install/SV_Licensing_the_software.htm">Licensing</a> in the Installation section.</p>
+        <h2 class="SVheading2">Further information in the help</h2>
+        <p class="SVnormal">Multi-station in general - The Application Explorer.Communication.Networked applications</p>
+        <p class="SVnormal">Multi-station redundant and high availability - The Application Explorer.Communication.Networked applications.Using redundant configurations</p>
+        <p class="SVnormal">Multi-station historical server - The Application Explorer.Archives.Using client-server archive units</p>
+        <p class="SVnormal">Multi-station RDS - <a href="RDS_sv_on_RDS_host.htm">Deploying <span class="mc-variable OEM.ProductName variable">PcVue</span> using an RDS host</a>.</p>
+        <p class="SVnormal">Web server - <a href="Deploy_web_server_role.htm">Role of the web server &amp; web back end</a>, <a href="WDC_overview.htm">Web Deployment Console Overview</a>, <a href="Deploy_webvue.htm">Deploying the WebVue client</a> and <a href="Deploy_mobile_apps_installation.htm">Deploying the mobile applications</a>.</p>
+        <p class="SVnormal">Other related topics:</p>
+        <ul>
+            <li><a href="../Install/Operating_system_and_PC_requirements.htm">Operating System and PC Requirements</a>,</li>
+            <li><a href="../Install/Operating_System_Considerations.htm">Operating System Related Considerations</a>,</li>
+            <li><a href="../Install/SQLServer_Considerations.htm">Microsoft SQL Server Related Considerations</a>,</li>
+            <li><a href="central_project_mgmt_conf.htm">How to manage project and library versions</a>,</li>
+            <li><a href="SVC_Overview_windows_service.htm">Overview of running <span class="mc-variable OEM.ProductName variable">PcVue</span> as a Windows service.</a>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Architectures</h2>
+        <p class="SVnormal">The typical architectures are as follows:</p>
+        <ul style="list-style-type: disc;">
+            <li>Standalone - All SCADA functions are incorporated into a single station.</li>
+            <li>Multi-station architecture - The SCADA functions span across two or more stations in a client/server architecture. </li>
+            <li>High availability architecture - The SCADA functions and roles are distributed  to offer better resilience and scalability. Multi-station deployment includes the following particular scenarios.<ul style="list-style-type: disc;"><li>Data acquisition redundancy - Two or more stations are configured as redundant (hot standby).</li><li>Historical data redundancy - Two or more stations are configured as redundant (hot standby).</li><li>Mutualized servers.</li></ul></li>
+            <li>Three-level architecture - Using one or more stations as a gateway</li>
+            <li>Engineering station with version management</li>
+            <li>Web based - All-in-one deployment or Network isolation and DMZ.</li>
+        </ul>
+        <h2 class="SVheading2">Roles</h2>
+        <p>The architectures above require allocation of the following roles:</p>
+        <ul style="list-style-type: disc;">
+            <li>Data acquisition<ul style="list-style-type: disc;"><li>Communication with field devices,</li><li>Real time data and alarm production,</li><li>Serves real time data and alarms to other stations.</li></ul></li>
+            <li>Historical data<ul style="list-style-type: disc;"><li>Consume real time data and alarms produced by other stations,</li><li>Handles  data storage, the recording and replay of historical data,</li><li>Manages connections to RDBMS,</li><li>Serves historical data to other stations.</li></ul></li>
+            <li>Web &amp; Mobile back end<ul style="list-style-type: disc;"><li>Act as a gateway to provide data to the web server.</li></ul></li>
+            <li>Web  server<ul style="list-style-type: disc;"><li>Runs Microsoft Internet Information Server,</li><li>Hosts <span class="mc-variable OEM.ProductName variable">PcVue</span> web services required to serve the web &amp; mobile applications,</li><li>Consume real time data, alarms and historical data provided by the web &amp; Mobile back end station,</li><li>Serves Web and mobile clients including WebVue clients, TouchVue &amp; SnapVue mobile applications, the WebScheduler and the Web Services Toolkit clients.</li></ul></li>
+            <li>Gateway </li>
+            <ul style="list-style-type: disc;">
+                <li>For the secure transfer of data between 2 networks</li>
+                <li>Consume real time data, alarms and historical data produced by other stations on one network,</li>
+                <li> Serves real time data, alarms and historical data to stations on another network.</li>
+            </ul>
+            <li>HMI<ul style="list-style-type: disc;"><li>Display mimics, graphics, alarm viewer, log viewer, trend viewer... to the user.</li></ul></li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">Depending on the combination of roles, <span class="mc-variable OEM.ProductName variable">PcVue</span> stations are better deployed on a desktop operating system or a server operating system. See the table below for more information.</p>
+        </div>
+        <h2 class="SVheading2">Architecture Building Blocks</h2>
+        <p class="SVnormal">
+            &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> is available as the following building blocks.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 250px;" />
+            <col />
+            <col style="width: 250px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading" style="vertical-align: top;">Building block</td>
+                    <td class="SVtableHeading" style="vertical-align: top;">Typical roles</td>
+                    <td class="SVtableHeading" style="vertical-align: top;">Typical deployment mode</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="border-bottom-style: solid;border-bottom-width: 1px;vertical-align: top;">
+                        <p>Standalone station</p>
+                        <p>
+                            <img src="../Resources/Images/Deployment/buildingblock_standalone_hmi.png" />
+                        </p>
+                    </td>
+                    <td class="SVtable" style="border-bottom-style: solid;border-bottom-width: 1px;vertical-align: top;">
+                        <ul style="list-style-type: disc;">
+                            <li>Data Acquisition</li>
+                            <li>Historical data</li>
+                            <li>HMI</li>
+                            <li>Does not have the capability to exchange data with other stations</li>
+                        </ul>
+                    </td>
+                    <td class="SVtable" style="border-bottom-style: solid;border-bottom-width: 1px;vertical-align: top;">
+                        <ul style="list-style-type: disc;">
+                            <li>As a Desktop Application</li>
+                            <li>Under a desktop OS</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <p>SCADA station</p>
+                        <p>
+                            <img src="../Resources/Images/Deployment/buildingblock_scada.png" />
+                        </p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>Data Acquisition</li>
+                            <li>Historical data</li>
+                            <li> HMI</li>
+                        </ul>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>As a Desktop Application if it requires an HMI</li>
+                            <li>Under a desktop OS</li>
+                        </ul>
+                        <p style="margin-left: 1cm;">Or</p>
+                        <ul style="list-style-type: disc;">
+                            <li>As a Windows Service if an HMI is not required</li>
+                            <li>Under a server OS</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <p>Data acquisition server</p>
+                        <p>
+                            <img src="../Resources/Images/Deployment/buildingblock_data_acqusition_server.png" />
+                        </p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <ul style="list-style-type: disc;">
+                            <li>Data Acquisition</li>
+                        </ul>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;">
+                        <ul style="list-style-type: disc;">
+                            <li>As a Windows Service</li>
+                            <li>Under a server OS</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <p>Client station</p>
+                        <p>
+                            <img src="../Resources/Images/Deployment/buildingblock_client.png" />
+                        </p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>HMI</li>
+                        </ul>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>As a Desktop Application </li>
+                            <li>Under a desktop OS</li>
+                            <li>Or with a server OS hosting Remote Desktop Services combined with lightweight terminals used as operator workstations</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <p>Historical data server</p>
+                        <p>
+                            <img src="../Resources/Images/Deployment/buildingblock_historical_data_server.png" />
+                        </p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>Historical data</li>
+                        </ul>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>As a Windows Service</li>
+                            <li>Under a server OS</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <p>Web &amp; Mobile back end</p>
+                        <p>
+                            <img src="../Resources/Images/Deployment/buildingblock_backend.png" />
+                        </p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>Web &amp; Mobile back end</li>
+                        </ul>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>As a Windows Service</li>
+                            <li>Under a server OS</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <p>Web server</p>
+                        <p>
+                            <img src="../Resources/Images/Deployment/buildingblock_web_server.png" />
+                        </p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>Web server</li>
+                        </ul>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>Requires Microsoft IIS</li>
+                            <li>Under a server OS</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <p>Web clients</p>
+                        <p>
+                            <img src="../Resources/Images/Deployment/buildingblock_webvue_client67.png" />
+                        </p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>Remote monitoring and control over the Internet or Intranet.</li>
+                            <li>WebVue clients and TouchVue &amp; SnapVue mobile applications.</li>
+                        </ul>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>Using a Web browser or a Mobile App</li>
+                            <li>On a desktop PC or a mobile device</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <p>Engineering station</p>
+                        <p>
+                            <img src="../Resources/Images/Deployment/buildingblock_engineering_station.png" />
+                        </p>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>Depending on the architecture and project design, an engineering station can have very different roles, ranging from those of a data acquisition server (for testing communication with field devices), to archive server or just an HMI workstation (to design mimics).</li>
+                            <li>Project development and maintenance.</li>
+                            <li>Project and libraries version management.</li>
+                            <li>Interoperability with third-party generation tools.</li>
+                        </ul>
+                    </td>
+                    <td class="SVtable" style="vertical-align: top;border-bottom-style: solid;border-bottom-width: 1px">
+                        <ul style="list-style-type: disc;">
+                            <li>As a Desktop Application</li>
+                            <li>Under a desktop OS</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|21 CFR Part 11|Providing an audit trail" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Logging the previous value of a register</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor107"></a>Logging the Previous Value of a Register Variable</h1>
+        <p class="SVnormal">When logging the change in value of a register variable 
+ as a result of a Send-Register animation it can be useful to log the previous 
+ value of the register as well as the new value. The new value is logged 
+ by default and may be displayed using the #C mnemonic in the Log Viewer configuration.</p>
+        <p class="SVnormal">You log the previous value of the register by using an 
+ extended attribute configured to display the previous control value. To 
+ configure that 
+ you must manually edit the configuration file VARCONF.DAT to add the line </p>
+        <p class="SVdataListing">Set=%PreviousControlValue% </p>
+        <p class="SVnormal">after the attribute's definition.</p>
+        <p class="SVnormal">In the following example attribute 5 has been configured 
+ in this way.</p>
+        <p class="SVprogramCode">[ATTRIBUTE\TextAttribute1]<br />DistributedMode=Static<br />[ATTRIBUTE\TextAttribute2]<br />DistributedMode=Static<br />[ATTRIBUTE\TextAttribute3]<br />DistributedMode=Static<br />[ATTRIBUTE\TextAttribute4]<br />DistributedMode=Dynamic<br />[ATTRIBUTE\TextAttribute5]<br />DistributedMode=Dynamic<br /><span style="color: #ff0000;">Set=%PreviousControlValue%</span><br />[ATTRIBUTE\TextAttribute6]<br />DistributedMode=Dynamic<br />[ATTRIBUTE\TextAttribute7]<br />DistributedMode=Static<br />[ATTRIBUTE\TextAttribute8]<br />DistributedMode=Dynamic<br />[ATTRIBUTE\TextAttribute9]<br />DistributedMode=Static<br />[ATTRIBUTE\TextAttribute10]<br />DistributedMode=Dynamic<br />[ATTRIBUTE\TextAttribute11]<br />DistributedMode=Static<br />[ATTRIBUTE\TextAttribute12]<br />DistributedMode=Dynamic<br />[ATTRIBUTE\TextAttribute13]<br />DistributedMode=Static<br />[ATTRIBUTE\TextAttribute14]<br />DistributedMode=Dynamic<br />[ATTRIBUTE\TextAttribute15]<br />DistributedMode=Static<br />[ATTRIBUTE\TextAttribute16]<br />DistributedMode=Dynamic<br />[ATTRIBUTE\BoolAttribute1]<br />DistributedMode=Dynamic</p>
+        <p class="SVnormal">Once this change has been made you can log the previous 
+ control value by adding the attribute to the <u>Attributes to record</u> field 
+ of the Log Filter configuration, for example #@A5.</p>
+        <p class="SVnormal">To display the previous control value in the Log Viewer  you add the attribute to the <u>Column Format</u> field of its configuration 
+ dialog. </p>
+        <div class="warning">
+            <p class="SVnormal">You must shut down <span class="mc-variable OEM.ProductName variable">PcVue</span> before editing the file VARCONF.DAT.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

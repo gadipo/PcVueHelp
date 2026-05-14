@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:ignoredWords="C" MadCap:tocPath="" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV_Installation.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Operating system related considerations</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor1"></a>Operating system related considerations</h1>
+        <p class="SVnormal">This topic is to alert you to, and to describe, the steps you need to take to successfully install, deploy and run <span class="mc-variable OEM.ProductName variable">PcVue</span> with regards to the operating system platform and its security features. The steps are not specific to <span class="mc-variable OEM.ProductName variable">PcVue</span>, however you are liable to encounter them as you install, deploy and run the software on a target computer.</p>
+        <h2 class="SVheading2">User Account Control</h2>
+        <p class="SVnormal">By default, for security reasons, operating systems display a dialog whenever a user action requires a privilege elevation, for example when installing a  program. This feature is designed to prevent undesired actions from being executed by background processes such as virus, spyware and other potentially harmful programs. </p>
+        <p class="SVnormal">Accept the user privilege elevation if you are at the origin of the action and approve it.</p>
+        <div class="note">
+            <p class="SVnormal">
+                &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> complies with the User Account Control feature. It is strongly recommended to keep it enabled at all times, for installing, configuring, deploying or running the application.</p>
+        </div>
+        <h2 class="SVheading2">User privileges for installation</h2>
+        <p class="SVnormal">The user that installs <span class="mc-variable OEM.ProductName variable">PcVue</span> must have Administrator
+ privileges. This is mandatory for the installation process to execute properly.</p>
+        <p class="SVnormal">You must acknowledge the User Account Control (UAC) privilege elevation  for the installation process to run correctly.</p>
+        <div class="warning">
+            <p class="SVnormal">Windows operating systems have a security feature called Data Execution Prevention (DEP) to help prevent damage from viruses and other security threats.<br /></p>
+            <p class="SVnormal">At startup, <span class="mc-variable OEM.ProductName variable">PcVue</span> overrides the system-wide policy by attempting to automatically disable DEP for<MadCap:conditionalText MadCap:conditions="Primary.SvOnly"> Sv32.exe</MadCap:conditionalText>. The system DEP policy setting must be OptIn (default setting for Windows client versions), OptOut (default setting for Windows Server versions), or AlwaysOff.<br />If the system DEP policy is AlwaysOn, the <span class="mc-variable OEM.ProductName variable">PcVue</span> application returns an error on startup and then stop. In such a case, you should contact your system administrator.</p>
+        </div>
+        <h2 class="SVheading2">User permissions for the installation folders</h2>
+        <div class="note" MadCap:conditions="Primary.SvOnly">
+            <p class="SVnormal">This paragraph describes general requirements for permissions on installation folders. More detailed information can be found in the following topics:</p>
+            <p class="SVnormal">Specific recommendations when running <span class="mc-variable OEM.ProductName variable">PcVue</span> as a Windows service</p>
+            <ul>
+                <li>
+                    <p class="SVnormal">Options for selecting the Service Account</p>
+                </li>
+                <li>
+                    <p class="SVnormal">Creating a Specific Service Account to Run <span class="mc-variable OEM.ProductName variable">PcVue</span></p>
+                </li>
+                <li>
+                    <p class="SVnormal">How to run Services More Securely</p>
+                </li>
+            </ul>
+            <p class="SVnormal">Specific recommendations when running <span class="mc-variable OEM.ProductName variable">PcVue</span> in a Remote Desktop environment</p>
+            <ul>
+                <li>
+                    <p class="SVnormal">Overview of Deploying <span class="mc-variable OEM.ProductName variable">PcVue</span> Using a RD Session Host</p>
+                </li>
+                <li>
+                    <p class="SVnormal">Configuring User Permissions for <span class="mc-variable OEM.ProductName variable">PcVue</span>'s Folders When Running on an RD Session Host Session</p>
+                </li>
+            </ul>
+        </div>
+        <p class="SVnormal">The Windows user account that runs <span class="mc-variable OEM.ProductName variable">PcVue</span> must have the <u>Modify Permission</u> for the installation folders, including:</p>
+        <ul>
+            <li>The root folder of <MadCap:conditionalText MadCap:conditions="Primary.SvOnly">Bin, Etc, Usr and Lib</MadCap:conditionalText>. That is the topmost folder of the <span class="mc-variable OEM.ProductName variable">PcVue</span><i> Path</i></li>
+            <li MadCap:conditions="Primary.SvOnly">The topmost folder of the <i>ProjectPath</i> if the -b <i>ProjectPath</i> command line argument is used</li>
+            <li MadCap:conditions="Primary.SvOnly">The Central Versions folder if Central Project Management is being used</li>
+        </ul>
+        <p class="SVnormal">There may be differences in default permissions depending on the operating systems, in particular desktop OS vs server OS. It also and mainly depends on the target partition and folder (system partition vs other partitions).</p>
+        <p class="SVnormal">In most cases, permissions need to be changed because the installation was run by an administrator user account and the software will be run afterward with standard user accounts.</p>
+        <p class="SVnormal">For this reason, it is strongly recommended to create a dedicated User Group for all Windows user accounts that are due to run the software. This allows for setting permissions on the installation folders once, and ease user account changes. In addition, it securely isolates who can affect <span class="mc-variable OEM.ProductName variable">PcVue</span> files.</p>
+        <div class="note">
+            <p class="SVnormal">A tool is provided with <span class="mc-variable OEM.ProductName variable">PcVue</span> that can be used to view the permissions of the current User on selected folders. The tool is named ViewEffectivePermissions.exe and is found in <span class="mc-variable OEM.ProductName variable">PcVue</span> <MadCap:conditionalText MadCap:conditions="Primary.SvOnly">\Bin</MadCap:conditionalText> folder. </p>
+        </div>
+        <h2 class="SVheading2">Running <span class="mc-variable OEM.ProductName variable">PcVue</span>&#160;</h2>
+        <p class="SVnormal">During start-up, <span class="mc-variable OEM.ProductName variable">PcVue</span> checks that permissions and security features are set correctly for the most common uses.</p>
+        <div class="warning">
+            <p class="SVnormal">For security reasons, it is strongly recommended to apply the least privilege principle by not running <span class="mc-variable OEM.ProductName variable">PcVue</span> with Windows administrator privileges.</p>
+        </div>
+        <p class="SVnormal">If you have several versions of <span class="mc-variable OEM.ProductName variable">PcVue</span> on the
+ same computer, you must register the components every time when switching from one version to another version, using the Component Registration tool.
+See below for more information.</p>
+        <p class="SVnormal">The start-up of <span class="mc-variable OEM.ProductName variable">PcVue</span> will be aborted if one of the following element is not set accordingly: Permissions, DEP exception, missing or incorrectly registered components.</p>
+        <h2 class="SVheading2">Registering a Previously Installed Version</h2>
+        <div class="note">
+            <p class="SVnormal">This procedure is only necessary  if you have two or more versions of <span class="mc-variable OEM.ProductName variable">PcVue</span> installed on the same computer.</p>
+        </div>
+        <p class="SVnormal">When you install <span class="mc-variable OEM.ProductName variable">PcVue</span>, its components are registered with Windows. If there was another version of <span class="mc-variable OEM.ProductName variable">PcVue</span> already installed, its registration is overwritten and it may no longer function correctly.</p>
+        <p class="SVnormal">To overcome this problem a Component Registration utility is supplied with each version of <span class="mc-variable OEM.ProductName variable">PcVue</span>. Each time that you want to run a different installed version of <span class="mc-variable OEM.ProductName variable">PcVue</span>, the corresponding Component Registration utility must be run first. A shortcut to the utility can be found on the Windows desktop and in the Start menu: <u>Start.Program Files.<span class="mc-variable OEM.ProductName variable">PcVue</span>.Tools.Component Registration</u>. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <img src="../Resources/Images/install/SV_component_reg.png" MadCap:targetName="t1" title="Component Registration Utility." MadCap:conditions="Primary.SvOnly" style="display: none;" />
+        </p>
+        <div class="warning" MadCap:conditions="Primary.SvOnly">
+            <p class="SVnormal">Running the Component Registration Utility resets all system settings associated with <span class="mc-variable OEM.ProductName variable">PcVue</span> processes to their installation defaults.</p>
+            <p class="SVnormal">This includes:</p>
+            <ul>
+                <li>
+                    <p class="SVnormal">Settings associated to the SV Core Daemon, SV DbConnect and SV Core Session Host services: Startup type, Recovery mode, Service account, Service dependencies.</p>
+                </li>
+                <li>
+                    <p class="SVnormal">Configuration of the 3 DCOM applications associated to <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                </li>
+            </ul>
+            <p class="SVnormal">We recommend you to document these settings as part of your project documentation so that you are able to set them again each time you update the <span class="mc-variable OEM.ProductName variable">PcVue</span> version, replace a computer or in any other situation requiring that you run the Component Registration Utility.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|KNX data acquisition driver Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>KNX Data Acquisition Driver Add-on Installation and Configuration</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Installation and Configuration of the KNX Data Acquisition Driver Add-on</h1>
+        <p class="SVnormal">The KNX Data Acquisition Driver Add-on of <span class="mc-variable OEM.ProductName variable">PcVue</span> comprises of a single dll file that must be copied to the \Bin folder. The file is named:</p>
+        <ul style="list-style-type: disc;">
+            <li>usrmgrFalconKNX.dll</li>
+        </ul>
+        <p class="SVnormal">The file named usrmgrFalconKNX.dll was developed using the SV Manager Toolkit. In order for <span class="mc-variable OEM.ProductName variable">PcVue</span> to load the Add-on at startup, a text file USRMGR.DAT must also be added to the BIN folder. The file must contain the following lines.</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[USRMGR\usrmgrfalcon]DLL=usrmgrFalconKNX.dll</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p class="SVprogramCode">[USRMGR\usrmgrfalcon]</p>
+        <p class="SVprogramCode">DLL=usrmgrFalconKNX.dll</p>
+        <h2 class="SVheading2">KNX Data Acquisition Driver Add-on configuration file</h2>
+        <p class="SVnormal">The KNX Data Acquisition Driver Add-on is configured using a file called KNXInterfaces.ini which must be created in the PER folder of the <span class="mc-variable OEM.ProductName variable">PcVue</span> project. The file has the following structure:</p>
+        <div class="codeSnippet_0 codeSnippet">
+            <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" class="codeSnippetBody_0 codeSnippetBody">
+                <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                    <tbody>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[TaskParameters]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AttributeNumber = 16</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">AssociationName =</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">NbInterfaces = 1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">TimeOutInSec = 10</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">ReconnectionPeriod = 60</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">[Interface1]</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">IpAddress&#160;&#160;&#160;&#160;= 192.168.1.1</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">Port&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 3671</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">NATmode&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= off</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">UseUSB&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;= 0</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">SleepInterval = 200</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">MaxQueueWrite = 10</pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">InitialReadItemsNumber = 200</pre>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <ul style="list-style-type: disc;">
+            <li class="SVbulleted">[TaskParameters]<ul style="list-style-type: disc;"><li>AttributeNumber - A variable's extended text attribute that is used to identify the corresponding variable as being acquired from a KNX interface. A number from 3 to 16. Defaults to 16.</li><li class="SVbulleted">AssociationName - The name of the data acquisition server's association if used in a redundant architecture.  The task is only activated on the active server. A string. Defaults to an empty string (no association).</li><li class="SVbulleted">NbInterfaces - The number of interfaces the task must communicate with. A number from 1 to 16. Defaults to 0.</li><li class="SVbulleted">TimeOutInSec - The delay in seconds before a read or write request  is timed out. A number. Defaults to 5 (seconds).</li><li class="SVbulleted">ReconnectionPeriod - The period in seconds after which the driver will attempt to reconnect to a failed, or in error, interface. A number. Defaults to 30 (seconds).</li><li class="SVbulleted">InitialReadItemsNumber - Specify the maximum number of items that are refresh at a given time on project start-up. The driver refreshes all the items flagged as R at the rate of TimeOutInSec*30 seconds until all the items are read. A number. If omitted. Defaults to 200.</li><li>DisableSetOrWriteOnSimulatedVariable - If set to True, the KNX Add-on does not force a variable on the KNX interface if it is simulated. Defaults to False.</li></ul></li>
+            <li class="SVbulleted">[InterfaceN] - The properties for interface number N. N is a number from 1 to NbInterfaces. The values must be contiguous.
+			<ul style="list-style-type: disc;"><li class="SVbulleted">Name - The interface name for the KNX /IP interface. A string. If omitted the default is InterfaceN as defined in [InterfaceN].</li><li class="SVbulleted">IpAddress - The IP address of the KNX/IP interface. A string. If omitted 127.0.0.1 is used.</li><li class="SVbulleted">Port - The port number used to communicate with the interface. A number. If omitted 3671 is used.</li><li class="SVbulleted">NATmode - Specify if the interface supports NAT mode. A string with only two possible values, ON or OFF. Defaults to OFF.</li><li class="SVbulleted">UseUSB - Specify if a USB connection is to be used to connect to the interface. A number, 0 = USB is not used, 1 = USB is used. Defaults to 0.</li><li class="SVbulleted">SleepInterval - The silence in milliseconds between consecutive requests to a device. A number. Defaults to  100.</li><li class="SVbulleted">MaxQueueWrite - The maximum number of write requests that can be queued for all KNX points. Defaults to 5.</li><li class="SVbulleted">VarStatus - The name of a register variable that holds the status of the KNX interface:<ul style="list-style-type: disc;"><li class="SVbulleted">0: Interface connected</li><li class="SVbulleted">1: Interface not connected</li><li class="SVbulleted">2: Interface error. It is likely to be necessary to shut down <span class="mc-variable OEM.ProductName variable">PcVue</span> and kill the Falcon task to recover.</li></ul></li></ul></li>
+            <li class="SVbulleted">[InterfaceUSB] - The definition of the USB interface if required.<ul style="list-style-type: disc;"><li class="SVbulleted">ConnectionString - The connection string used for the USB interface. Please refer to the manufacturer's documentation. Defaults to an empty string.</li></ul></li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">In addition to IP interfaces, the KNX Add-on also supports USB interfaces. Please contact your technical support for more information about the required USB configuration.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Architecture examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Web based architecture examples</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor48"></a>Web Based Architecture Examples</h1>
+        <h2 class="SVheading2">All in one</h2>
+        <p class="SVnormal">In this scenario the <span class="mc-variable OEM.ProductName variable">PcVue</span> Web &amp; Mobile back end station and the <span class="mc-variable OEM.ProductName variable">PcVue</span> web server components are hosted and run on the same computer. <a style="font-weight: bold;" href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="T1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/architecture_web1.png" MadCap:targetName="T1" style="display: none;" /></p>
+        <p class="SVnormal">Intended for simple deployment scenarios with the web and / or mobile client systems on the same network as the <span class="mc-variable OEM.ProductName variable">PcVue</span> web back end station. Typically used when the network is private and fully isolated from outside access.</p>
+        <p class="SVnormal">Should not be used when the network is open to incoming requests from outside networks or open for unprotected access from unknown devices. In particular, do not use this deployment strategy when access from web and mobile client on the Internet is required and there is no further means of network security (such as VPN-tunneling for instance) available.</p>
+        <h2 class="SVheading2">Network isolation and DMZ</h2>
+        <p class="SVnormal">In this scenario, the <span class="mc-variable OEM.ProductName variable">PcVue</span> Web &amp; Mobile back end station and the web and / or mobile client are on different networks segregated by a DMZ. The inner network (LAN side of the DMZ) is seen as a private network. The outer network (WAN side of the DMZ) is a less trusted network and typically an office network or the internet. The <span class="mc-variable OEM.ProductName variable">PcVue</span> web server components are hosted on a computer inside the DMZ and the Web back end station is on the private LAN. This architecture provides the best integration into IT infrastructures and allows for maximum compliance with IT policies and practices. <a style="font-weight: bold;" href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="T2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/architecture_web2.png" MadCap:targetName="T2" style="display: none;" /></p>
+        <p class="SVnormal">This architecture is recommended whenever the web and/or mobile clients are outside of the industrial automation network. This architecture provides maximum deployment security, in line with IT network segregation practices, ensuring no un-controlled direct incoming connection from outside networks to the inner industrial automation network.</p>
+        <p class="SVnormal">This architecture should be used whenever possible.</p>
+        <h2 class="SVheading2">Simplified NAT</h2>
+        <p class="SVnormal">This scenario has a single private LAN where the Web server, Web &amp; Mobile back end and, data acquisition server reside. Internet access is used to server a few remote web clients. The Web &amp; Mobile clients are distributed across both sides of a NAT boundary provided by a set-top-box supplied and operated by the ISP.</p>
+        <p class="SVnormal">This architecture is often the only option when a simple access from Internet is required with an ISP set-top box. Because you do not operate the ISP-owned device, you should have limited trust in it, and add your own network security appliance between the set-top-box and the web server. This appliance will act as a router/firewall and VPN server, and will the de-facto be the boundary of the network you control.</p>
+        <p class="SVnormal">Although it is technically feasible to deploy this architecture as is, it is not recommended without further security measures. </p>
+        <ul style="list-style-type: disc;">
+            <li>Use of a VPN and client address locking, in which case the architecture is logically equal to that described as <u>All-In-One</u>. </li>
+            <li>Using the network perimeter’s dedicated DMZ port for establishing a dedicated network segment, in which case the architecture is a simplified version of <u>Network Isolation and DMZ</u>. </li>
+        </ul>
+        <p class="SVnormal">It is also recommended to separate the Web back end and the Web Server as described in <u>Network Isolation and DMZ</u>. </p>
+        <p class="SVnormal"><a style="font-weight: bold;" href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="T3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+            <br />
+            <img src="../Resources/Images/Deployment/architecture_web3.png" MadCap:targetName="T3" style="display: none;" />
+        </p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

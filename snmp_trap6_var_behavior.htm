@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|SNMP|Mapping SNMP items to variables|Mapping to an SNMP trap" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Mapping trap#6</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Mapping The Enterprise Trap Supplementary OIDs</h1>
+        <p class="SVnormal">Trap#6 is the enterprise specific trap. The conditions under which it is generated are customized by the manufacturer and will be specific to a particular device type. Typically, a Trap#6 will be generated under a number of different conditions. To differentiate between them, when a Trap#6 message is sent it includes one or more  supplementary OIDs providing more information about the condition.</p>
+        <h2 class="SVheading2">Finding the supplementary OID's sent with Trap#6 using the Event Viewer</h2>
+        <p class="SVnormal">If you are able to reproduce the conditions under which Trap#6 is generated you can use the Event Viewer, to discover the supplementary OIDs that have been sent with the trap, using the following procedure. The following example is from a Moxa Industrial Ethernet Switch.</p>
+        <ol>
+            <li value="1">In the Device dialog Trace tab enable <u>Trace 5: Full details</u> and <u>Trace 11: Trap/Inform</u>.</li>
+            <li value="2">Reproduce the conditions that are known to generate the trap.</li>
+            <li value="3">Examine the trace in the Event Viewer. In it, you will see something similar to the following.<br /><br /><img src="../../Resources/Images/AE/Comm_DataAcq/snmp_enterprise_trap_trace.png" /><br /></li>
+        </ol>
+        <ol style="list-style-type: lower-alpha;">
+            <li value="1">The up-time of the device (SysUpTime).</li>
+            <li value="2">A generic OID that specifies the identity of the trap.</li>
+            <li value="3">The specific trap OID.</li>
+            <li value="4">The supplementary OIDs, their data types and values. Only one in this example.</li>
+        </ol>
+        <h2 class="SVheading2">How to map the supplementary OIDs so they can be logged</h2>
+        <p class="SVnormal">The following method allows the values supplied by the supplementary OID's to be logged, which is the most common requirement when receiving a trap. Once the data is logged, it can be played back through the Log Viewer in the normal manner.</p>
+        <ol>
+            <li value="1">Map the specific trap OID to a bit variable, for example MOXA.TRAP.POWER1. Set the <u>Updated By</u> property to <u>Trap and ad-hoc synchronization</u>. The <u>Log</u> property should be selected if it is to be logged.</li>
+            <li value="2">Map the supplementary OID to a register variable. For example MOXA.TRAP.POWER1_VAL1. Set the <u>Updated By</u> property to <u>Trap and ad-hoc synchronization</u>.</li>
+            <li value="3">Enter the name of the register variable in one of the extended text attributes (say TATT#3) of the bit variable.</li>
+            <li value="4">Configure the Log List through which the bit variable is to be logged so that it records the deferred extended attribute TATT#3. Recording the deferred extended attribute means that the value of the variable named in the text attribute is recorded.</li>
+        </ol>
+        <p>It is not essential to know the complete OID configuration for a device if you use this method. However if you open the OID Selector, from the Source tab of the Variable Configuration dialog, after the configuration is complete it will automatically navigate to the location of the OID. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/snmp_trap6_ex1.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

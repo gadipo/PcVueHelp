@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Instructions|Instruction reference A to Z|S" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>SQL_COMMAND</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="SQL_COMMAND_Instruct" />
+    </head>
+    <body>
+        <h1 class="SVheading1">SQL_COMMAND</h1><a name="kanchor15"></a>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc235">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="Input_Output_InstbyCat" />
+            </object><a class="MCConceptLink_seealso_0" href="javascript:mc235.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />See also</a> <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc236"><param name="Command" value="ALink,MENU" /><param name="Item1" value="" /><param name="Item2" value="SQL_CO_Ex" /></object><a class="MCConceptLink_example_0" href="javascript:mc236.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Example</a></p>
+        <p class="SVnormal">Sends Sql commands using a pre-configured  Sql connection.</p>
+        <p class="SVnormal">WebVue support - Yes.</p>
+        <div class="warning">
+            <p class="SVnormal">The use of pre-configured  Sql connections along with the instructions <a href="SQL_CONNECTION.htm">SQL_CONNECTION</a>, <a href="#" class="selected">SQL_COMMAND</a> and <a href="SQL_QUERY.htm">SQL_QUERY</a> is preferred to using the verb <a href="SVSQL.htm">SVSQL</a> (based on ODBC).</p>
+            <p class="SVnormal">Pre-configured Sql connections are configured in the Application Explorer. See the Data Connections book for information.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">Some of the modes are asynchronous. The application developer must ensure that the value of the status variable is monitored and take adequate actions when it changes.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">This verb can be executed either locally on the producer station of the  Sql connection or from any client station of the producer. In the latter case, commands and returned data are routed transparently through the multi-station messaging system. Multiple connections to the same data source are only allowed if using different <u>Sql Connections</u>. Multiple connections using the same <u>Sql Connection</u> will be refused, however, multiple simultaneous requests using the same <i style="font-style: normal; text-decoration: underline;">Sql Connection</i> is possible.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">A connection, and the data associated to it, are managed in the context of user sessions. A connection should only be handled in the context of the session that had originally initiated it; and all related objects must be properly released/closed before the session is ended. For example, it is not possible to initiate a connection at start up and have requests executed in any user context.</p>
+        </div>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 50px;" />
+            <col style="width: 200px;" />
+            <col style="width: 50px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Mode</td>
+                    <td class="SVtableHeading">Mnemonic</td>
+                    <td class="SVtableHeading">Syntax</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">1</td>
+                    <td class="SVtable">INITCONNECTION</td>
+                    <td class="SVtable"><a title="Click to view the syntax for this mode." href="#Syntax1">1</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">2</td>
+                    <td class="SVtable">CLOSECONNECTION</td>
+                    <td class="SVtable"><a title="Click to view the syntax for this mode." href="#Syntax2">2</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">3</td>
+                    <td class="SVtable">GETCONNECTIONLIST</td>
+                    <td class="SVtable"><a href="#Syntax3">3</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">4</td>
+                    <td class="SVtable">GETCONNECTIONINFO</td>
+                    <td class="SVtable"><a href="#Syntax4">4</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">5</td>
+                    <td class="SVtable">EXECREADER</td>
+                    <td class="SVtable"><a href="#Syntax5">5</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">6</td>
+                    <td class="SVtable">EXECSCALAR</td>
+                    <td class="SVtable"><a href="#Syntax6">6</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">7</td>
+                    <td class="SVtable">EXECNONQUERY</td>
+                    <td class="SVtable"><a href="#Syntax7">7</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">8</td>
+                    <td class="SVtable">GETCOMMANDLIST</td>
+                    <td class="SVtable"><a href="#Syntax8">8</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">9</td>
+                    <td class="SVtable">GETCOMMANDINFO</td>
+                    <td class="SVtable"><a href="#Syntax9">9</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">10</td>
+                    <td class="SVtable">READBUFFER</td>
+                    <td class="SVtable"><a href="#Syntax14">14</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">11</td>
+                    <td class="SVtable">SEEKBUFFER</td>
+                    <td class="SVtable"><a href="#Syntax10">10</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">12</td>
+                    <td class="SVtable">READBUFFERLINE</td>
+                    <td class="SVtable"><a href="#Syntax11">11</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">13</td>
+                    <td class="SVtable">READBUFFERCELL</td>
+                    <td class="SVtable"><a href="#Syntax12">12</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">14</td>
+                    <td class="SVtable">BUFFERLINECOUNT</td>
+                    <td class="SVtable"><a href="#Syntax13">13</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">15</td>
+                    <td class="SVtable">BUFFERFIELDCOUNT</td>
+                    <td class="SVtable"><a href="#Syntax13">13</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">16</td>
+                    <td class="SVtable">BUFFERFIELDNAME</td>
+                    <td class="SVtable"><a href="#Syntax14">14</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">17</td>
+                    <td class="SVtable">BUFFERFIELDTYPE</td>
+                    <td class="SVtable"><a href="#Syntax14">14</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">18</td>
+                    <td class="SVtable">BUFFERSIZE</td>
+                    <td class="SVtable"><a href="#Syntax13">13</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">19</td>
+                    <td class="SVtable">READSCALARVALUE</td>
+                    <td class="SVtable"><a href="#Syntax14">14</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">20</td>
+                    <td class="SVtable">READAFFECTEDROW</td>
+                    <td class="SVtable"><a href="#Syntax13">13</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">21</td>
+                    <td class="SVtable">CANCEL</td>
+                    <td class="SVtable"><a href="#Syntax13">13</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="SVtable">22</td>
+                    <td class="SVtable">DISPOSE</td>
+                    <td class="SVtable"><a href="#Syntax13">13</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Arguments common to more than one mode</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 200px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>SqlConnectionName</i>
+                </td>
+                <td valign="top" class="SVtable">The name of the Sql Connection as configured in <u>General.Data connections</u> in the Application Explorer. Type STR.</td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>BufferHandle</i>
+                </td>
+                <td valign="top" class="SVtable">The handle of a buffer as returned by ALLOC_BUFFER. Type LONG. All modes require the buffer to be allocated prior to calling the instruction.</td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>SqlCmd</i>
+                </td>
+                <td valign="top" class="SVtable">The Sql command to send. Type STR.</td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>StatusVariable</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">The name of the register variable used to monitor the status of an asynchronous operation. Type STR.</p>
+                    <p valign="top" class="SVtable">Succeeded = 0<br />Running = 1<br />Failed = 2<br />Canceled = 3
+</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>ErrortextVariable</i>
+                </td>
+                <td valign="top" class="SVtable">The name of a text variable used to return additional information when the status variable value is set to failed (2). Type STR.</td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>SubstituteNullValueWithEmptyString</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Substitute a null value with an empty string in returned data. Type INTEGER.</p>
+                    <p valign="top" class="SVtable">0 - a null value is represented by &lt;NULL&gt;<br />1 - a null value is represented by an empty string
+</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>LineNumber</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p valign="top">A line position in the result buffer  (first line is <i>LineNumber</i>  0). Type LONG.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>CmdId</i>
+                </td>
+                <td valign="top" class="SVtable">The command Id as returned by mode EXECREADER, EXECSCALAR or EXECNONQUERY. Type INTEGER.</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><span><a name="Syntax1"></a></span>Syntax 1</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode, SqlConnectionName [, MaxSimultaneousCommand]</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 200px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>MaxSimultaneousCommand</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p>The maximum number of simultaneous asynchronous commands. Type STR.</p>
+                    <p>The primary use is to limit the memory used by <span class="mc-variable OEM.ProductName variable">PcVue</span> for the reply buffer. The default value is 1. The maximum value is 100. If the value is incorrect, the default value is used instead.</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">1</td>
+                <td valign="top" class="SVtable">INITCONNECTION</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Initialize the runtime object necessary to handle the specified Sql connection.  It does not actually establish any end-to-end connection with the RDBMS. The Sql connection must be started prior to using this mode.</p>
+                    <p valign="top" class="SVtable">Return: 0 if successful, else a negative number indicating one of the following errors.<br />SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ<br />SQLCON_DOES_NOT_EXIST<br />CONNECTION_ALREADY_INIT<br />MAXIMUM_CONNECTION_REACH<br />CONNECTION_INIT_FAILED</p>
+                    <p class="SVtable">See the table below for  return values.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">Multiple connections to the same data source are only allowed if using different <u>Sql Connections</u>. Multiple connections using the same <u>Sql Connection</u> will be refused.</p>
+        </div>
+        <h2 class="SVheading2"><a name="Syntax2"></a>Syntax 2</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode[, SqlConnectionName]</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">2</td>
+                <td valign="top" class="SVtable">CLOSECONNECTION</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Free-up resources associated to the runtime object corresponding to the specified Sql connection. If the <i>SqlConnectionName</i> argument is omitted, all open connections will be closed.</p>
+                    <p valign="top" class="SVtable">Return: 0 if successful, else a negative number indicating one of the following errors.<br />SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ<br />CONNECTION_ALREADY_CLOSE_OR_NOT_INIT<br />CONNECTION_CLOSE_FAILED<br />SQLCON_DOES_NOT_EXIST</p>
+                    <p class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax3"></a>Syntax 3</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode, BufferHandle</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">3</td>
+                <td valign="top" class="SVtable">GETCONNECTIONLIST</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Get the name of all open Sql connections and return them in a buffer. Connection names are delimited with the comma character.</p>
+                    <p valign="top" class="SVtable">Return: 0 if successful, else a negative number indicating one of the following errors.<br />BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE<br />RESULT_BUFFER_EMPTY<br />RESULT_BUFFER_TOOSMALL<br /></p>
+                    <p class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax4"></a>Syntax 4</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode, ConnectionParam, SqlConnectionName, BufferHandle</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 200px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>ConnectionParam</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">The sub mode.  Type INTEGER or STR.</p>
+                    <p>1 or "NB_COMMAND" Get the number of active commands, e.g. ones that are not yet disposed of using the DISPOSE mode.<br />2 or "MAX_COMMAND" Get the maximum number of commands allowed for this connection (as set when calling the INITCONNECTION mode).</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">4</td>
+                <td valign="top" class="SVtable">GETCONNECTIONINFO</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Return information about the number of commands.</p>
+                    <p valign="top" class="SVtable">Return: 0 if successful, else a negative number indicating one of the following errors.<br />CONNECTION_PARAM_INVALID<br />SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ<br />BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE<br />RESULT_BUFFER_TOOSMALL<br />CONNECTION_ALREADY_CLOSE_OR_NOT_INIT <br /></p>
+                    <p class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax5"></a>Syntax 5</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode, SqlConnectionName, SqlCmd, StatusVariable, ErrorTextVariable, LineSeparator, FieldSeparator [, SubstituteNullValueWithEmptyString]</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 200px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable" style="font-style: italic;">LineSeparator</td>
+                <td valign="top" class="SVtable">The line separator character to be used in the buffer. Type STR.</td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable" style="font-style: italic;">FieldSeparator</td>
+                <td valign="top" class="SVtable">The field separator character to be used in the buffer. Type STR.</td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">5</td>
+                <td valign="top" class="SVtable">EXECREADER</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Execute a Sql query designed to return a set of records and store the result in a buffer. The contents are separated by the line and field separator arguments.</p>
+                    <p valign="top" class="SVtable">Return: Either a positive value representing the command Id, or a negative value indicating one of the following errors.<br />SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ<br />SQLCMD_PARAM_NOT_STR_OR_NOT_READ<br />STATUSVARIABLE_PARAM_NOT_STR_OR_NOT_READ<br />ERRORTEXTVARIABLE_PARAM_NOT_STR_OR_NOT_READ<br />LINESEPARATOR_PARAM_NOT_STR_OR_NOT_READ_OR_TOOLONG<br />FIELDSEPARATOR_PARAM_NOT_STR_OR_NOT_READ_OR_TOOLONG<br />STATUSVARIABLE_NOT_REGISTER_OR_DOES_NOT_EXIST<br />ERRORTEXTVARIABLE_NOT_TEXT_OR_DOES_NOT_EXIST<br />SQLCON_DOES_NOT_EXIST<br />MAXIMUM_COMMAND_REACH<br />SEND_COMMAND_FAILED</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">This mode is asynchronous. The program must monitor the value of the status variable and use either modes READBUFFER,  READBUFFERLINE or READBUFFERCELL to get the buffer result.</p>
+        </div>
+        <h2 class="SVheading2"><a name="Syntax6"></a>Syntax 6</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode, SqlConnectionName, SqlCmd, StatusVariable, ErrorTextVariable [, SubstituteNullValueWithEmptyString]</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">6</td>
+                <td valign="top" class="SVtable">EXECSCALAR</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Execute a Sql query designed to return a scalar value and store the scalar result in a buffer. The result is a single value.</p>
+                    <p valign="top" class="SVtable">Return: Either a positive value representing the command Id, or a negative value indicating one of the following errors.<br />SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ<br />SQLCMD_PARAM_NOT_STR_OR_NOT_READ<br />STATUSVARIABLE_PARAM_NOT_STR_OR_NOT_READ<br />ERRORTEXTVARIABLE_PARAM_NOT_STR_OR_NOT_READ<br />STATUSVARIABLE_NOT_REGISTER_OR_DOES_NOT_EXIST<br />ERRORTEXTVARIABLE_NOT_TEXT_OR_DOES_NOT_EXIST<br />SQLCON_DOES_NOT_EXIST<br />MAXIMUM_COMMAND_REACH<br />SEND_COMMAND_FAILED</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">This mode is asynchronous. The program must monitor the value of the status variable and use mode READSCALAR to get the value.</p>
+        </div>
+        <h2 class="SVheading2"><a name="Syntax7"></a>Syntax 7</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode, SqlConnectionName, SqlCmd, StatusVariable, ErrorTextVariable</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">7</td>
+                <td valign="top" class="SVtable">EXECNONQUERY</td>
+                <td valign="top" class="SVtable">
+                    <p class="SVtable">Execute a Sql request that does not query data from the database, but causes a certain operation to be executed on the data source side (as defined by the <i>SqlCmd</i> argument). Such requests usually return the result of the operation execution.</p>
+                    <p class="SVtable">Return:  Either a positive value representing the command Id, or a negative value indicating one of the following errors.<br />SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ<br />SQLCMD_PARAM_NOT_STR_OR_NOT_READ<br />STATUSVARIABLE_PARAM_NOT_STR_OR_NOT_READ<br />ERRORTEXTVARIABLE_PARAM_NOT_STR_OR_NOT_READ<br />STATUSVARIABLE_NOT_REGISTER_OR_DOES_NOT_EXIST<br />ERRORTEXTVARIABLE_NOT_TEXT_OR_DOES_NOT_EXIST<br />SQLCON_DOES_NOT_EXIST<br />MAXIMUM_COMMAND_REACH<br />SEND_COMMAND_FAILED</p>
+                    <p class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">This mode is asynchronous. The program must monitor the value of the status variable and use the mode READAFFECTEDROW to get the number of rows affected by the command.</p>
+        </div>
+        <h2 class="SVheading2"><a name="Syntax8"></a>Syntax 8</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode, SqlConnectionName, BufferHandle</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">8</td>
+                <td valign="top" class="SVtable">GETCOMMANDLIST</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Retrieve the command list associated with a connection. The command Ids are returned in the buffer separated by commas.</p>
+                    <p valign="top" class="SVtable">Return: Either a positive value representing the number of active commands, or a negative value indicating one of the following errors.</p>
+                    <p valign="top" class="SVtable">SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ<br />BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE<br />CONNECTION_ALREADY_CLOSE_OR_NOT_INIT<br />RESULT_BUFFER_EMPTY<br />RESULT_BUFFER_TOOSMALL</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax9"></a>Syntax 9</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode, RequestParam, CmdId, BufferHandle</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 200px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>RequestParam</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">The sub mode.  Type INTEGER or STR.</p>
+                    <p>1 or "TYPE".<br />2 or "STATUS" <br />3 or "ERROR_TEXT"<br />4 or "SQL_CMD"<br />5 or "STATUS_VARIABLE"<br />6 or "ERROR_TEXT_VARIABLE"</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">9</td>
+                <td valign="top" class="SVtable">GETCOMMANDINFO</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Retrieve information, in a buffer, about a command specified by its <i>CmdId</i>. The information returned depends on the sub mode.</p>
+                    <p valign="top" class="SVtable">TYPE - Retrieves the type of command that has been sent.<br />0 = EXECREADER<br />1 = EXECSCALAR<br />2 = EXECNONQUERY<br />STATUS - Retrieves the status of the request.<br />0 = Succeeded<br />1 =	Running<br />2 = Failed<br />3 =Canceled<br />ERROR_TEXT - Retrieves the error text corresponding to the command. Empty unless the command has failed.<br />SQL_CMD - The Sql request that has been sent.<br />STATUS_VARIABLE - The name of the status variable.<br />ERROR_TEXT_VARIABLE - The name of the error variable.</p>
+                    <p valign="top" class="SVtable">Return: 0 if successful, else a negative number indicating one of the following errors.<br />COMMAND_PARAM_INVALID<br />BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE<br />CMDID_DOES_NOT_EXIST<br />COMMAND_PARAM_INVALID<br />RESULT_BUFFER_TOOSMALL</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax10"></a>Syntax 10</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode, CmdId, LineNumber</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">11</td>
+                <td valign="top" class="SVtable">SEEKBUFFER</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Used to seek a line position in the buffer result, once the status variable is set to 0. First line is <i>LineNumber</i> 0.</p>
+                    <p valign="top" class="SVtable">Return: 0 if successful, else a negative number indicating one of the following errors.<br />LINENUMBER_PARAM_INVALID<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_FINISHED<br />RESULT_BUFFER_EMPTY</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax11"></a>Syntax 11</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode, CmdId, BufferHandle, LineNumber</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">12</td>
+                <td valign="top" class="SVtable">READBUFFERLINE</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Read a specific line in the buffer, produced as a result of the use of an EXECREADER function, once the status variable is set to 0.  First line is <i>LineNumber</i> 0.</p>
+                    <p valign="top" class="SVtable">Return: Either a positive value representing the number of lines read, or a negative value indicating one of the following errors.<br />BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE<br />LINENUMBER_PARAM_INVALID<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_FINISHED<br />RESULT_BUFFER_EMPTY<br />RESULT_BUFFER_TOOSMALL</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2"><a name="Syntax12"></a>Syntax 12</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode, CmdId, BufferHandle, LineNumber, FieldNumber</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 200px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>FieldNumber</i>
+                </td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">A field position in a line of the result buffer  (first field is <i>FieldNumber </i>0). Type LONG.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable"><i>LineNumber</i>
+                </td>
+                <td valign="top" class="SVtable">A line position in the result buffer . (first line is <i>LineNumber</i> 0). Type LONG.</td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">13</td>
+                <td valign="top" class="SVtable">READBUFFERCELL</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Read a specific field in a specific line of the buffer, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.</p>
+                    <p valign="top" class="SVtable">Return: Either a positive value representing the number of lines read, or a negative value indicating one of the following errors.<br />BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE<br />LINENUMBER_PARAM_INVALID<br />FIELDNUMBER_PARAM_INVALID<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_FINISHED<br />RESULT_BUFFER_EMPTY<br />RESULT_BUFFER_TOOSMALL</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal"> </p>
+        <h2 class="SVheading2"><a name="Syntax13"></a>Syntax 13</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode</i>, <i>CmdId</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">14</td>
+                <td valign="top" class="SVtable">BUFFERLINECOUNT</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Get the number of lines in the buffer, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.</p>
+                    <p valign="top" class="SVtable">Return: Either zero or a positive value representing the number of lines, or a negative value indicating one of the following errors.<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_FINISHED<br />RESULT_BUFFER_REACH_NBLINE_MAX (maximum is 2147483647)</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">15</td>
+                <td valign="top" class="SVtable">BUFFERFIELDCOUNT</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Get the number of fields in the buffer, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.</p>
+                    <p valign="top" class="SVtable">Return: Either zero or a positive value representing the number of fields, or a negative value indicating one of the following errors.<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_FINISHED</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">18</td>
+                <td valign="top" class="SVtable">BUFFERSIZE</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Get the size of the buffer, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.</p>
+                    <p valign="top" class="SVtable">Return: A positive value representing the number of bytes in the buffer, or a negative value indicating one of the following errors.<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_FINISHED<br />RESULT_BUFFER_REACH_SIZE_MAX (maximum 2147483647)</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">20</td>
+                <td valign="top" class="SVtable">READAFFECTEDROW</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Read the result of a EXECNONQUERY function, once the status variable is set to 0.</p>
+                    <p valign="top" class="SVtable">Return: A positive value representing the affected row count, or a negative value indicating one of the following errors.<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_FINISHED</p>
+                    <p valign="top" class="SVtable">See the table below for return values.<br /></p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">21</td>
+                <td valign="top" class="SVtable">CANCEL</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Cancel the request corresponding to the <i>Cmdld</i>.</p>
+                    <p valign="top" class="SVtable">Return: 0 if successful, else a negative number indicating one of the following errors.<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">22</td>
+                <td valign="top" class="SVtable">DISPOSE</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Release the context of a query including the internal buffer, corresponding to the <i>Cmdld</i>. Must be called after request result is processed to free up resources. The buffer result is no longer usable after the execution of the DISPOSE mode.</p>
+                    <p valign="top" class="SVtable">Return: 0 if successful, else a negative number indicating one of the following errors.<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_REMOVED</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="warning">
+            <p class="SVnormal">Failing to call the mode DISPOSE once you have completed a command and the processing of its result prevents from freeing up memory and may lead to an uncontrolled usage of computer resources.</p>
+        </div>
+        <h2 class="SVheading2"> <a name="Syntax14"></a>Syntax 14</h2>
+        <p class="SVnormal">IntVal = SQL_COMMAND(<i>Mode</i>, <i>CmdId</i>, <i>BufferHandle</i>);</p>
+        <p class="SVnormal">Return type: INTEGER</p>
+        <h3 class="SVheading3">Execution</h3>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 50px;" />
+            <col style="width: 150px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Mode</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Mnemonic</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Action</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">10</td>
+                <td style="vertical-align: top;">READBUFFER</td>
+                <td>
+                    <p valign="top" class="SVtable">Used to read the result of EXEC_READER query once the status variable value is set to 0. It may be necessary to run this function one or more times depending on the size of the buffer and the quantity of data returned.</p>
+                    <p valign="top" class="SVtable">Return: Either a positive value representing the number of lines read, or a negative value indicating one of the following errors.<br />BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_FINISHED<br />RESULT_BUFFER_EMPTY<br />RESULT_BUFFER_TOOSMALL</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">16</td>
+                <td valign="top" class="SVtable">BUFFERFIELDNAME</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Get the header names, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.</p>
+                    <p valign="top" class="SVtable">Return: 0 if successful, else a negative number indicating one of the following errors.<br />BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_FINISHED<br />RESULT_BUFFER_TOOSMALL</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">17</td>
+                <td valign="top" class="SVtable">BUFFERFIELDTYPE</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Get the datatypes corresponding to the fields, produced as a result of the use of the EXECREADER function, once the status variable is set to 0.</p>
+                    <p valign="top" class="SVtable">Return: 0 if successful, else a negative number indicating one of the following errors.<br />BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_FINISHED<br />RESULT_BUFFER_TOOSMALL</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="SVtable">19</td>
+                <td valign="top" class="SVtable">READSCALARVALUE</td>
+                <td valign="top" class="SVtable">
+                    <p valign="top" class="SVtable">Read the scalar value, produced by an EXECSCALAR function, once the status variable is set to 0.</p>
+                    <p valign="top" class="SVtable">Return: 0 if successful, else a negative number indicating one of the following errors.<br />BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE<br />CMDID_DOES_NOT_EXIST<br />CMD_TYPE_NOT_VALID<br />CMD_NOT_FINISHED<br />RESULT_BUFFER_TOOSMALL</p>
+                    <p valign="top" class="SVtable">See the table below for return values.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">List of possible return values and meanings</h2>
+        <table style="border-collapse: collapse;">
+            <col style="width: 102px;" />
+            <col style="width: 307px;" />
+            <col style="width: 580px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Return value</td>
+                    <td class="SVtableHeading">Enum</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">0</td>
+                    <td class="SVtable">OPERATION_SUCCEEDED</td>
+                    <td class="SVtable">Operation completed successfully</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-1</td>
+                    <td class="SVtable">SQLCONNAME_PARAM_NOT_STR_OR_NOT_READ</td>
+                    <td class="SVtable">The parameter <u style="font-style: italic; text-decoration: none;">SqlConnectionName</u> is not of type string or could not be read</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-2</td>
+                    <td class="SVtable">SQLCMD_PARAM_NOT_STR_OR_NOT_READ</td>
+                    <td class="SVtable">The parameter <u style="font-style: italic; text-decoration: none;">SqlCmd</u> is not of type string or could not be read</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-3</td>
+                    <td class="SVtable">STATUSVARIABLE_PARAM_NOT_STR_OR_NOT_READ</td>
+                    <td class="SVtable">The parameter <i>StatusVariable</i> is not of type string or could not be read</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-4</td>
+                    <td class="SVtable">LINESEPARATOR_PARAM_NOT_STR_OR_NOT_READ_OR_TOOLONG</td>
+                    <td class="SVtable">The parameter <i>LineSeparator</i> is not of type string, could not be read or is too long</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-5</td>
+                    <td class="SVtable">FIELDSEPARATOR_PARAM_NOT_STR_OR_NOT_READ_OR_TOOLONG</td>
+                    <td class="SVtable">The parameter <i>FieldSeparator</i> is not of type string, could not be read or is too long</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-6</td>
+                    <td class="SVtable">BUFFERHANDLE_PARAM_INVALID_OR_NULL_OR_NULLSIZE</td>
+                    <td class="SVtable">The parameter <i>BufferHandle</i> is invalid, Null or of Null size. The buffer allocation using ALLOC_BUFFER is probably missing or failed to execute properly</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-7</td>
+                    <td class="SVtable">LINENUMBER_PARAM_INVALID</td>
+                    <td class="SVtable">The parameter <i>LineNumber</i> is invalid</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-8</td>
+                    <td class="SVtable">FIELDNUMBER_PARAM_INVALID</td>
+                    <td class="SVtable">The parameter <i>FieldNumber</i> is invalid</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-9</td>
+                    <td class="SVtable">ERRORTEXTVARIABLE_PARAM_NOT_STR_OR_NOT_READ</td>
+                    <td class="SVtable">The parameter <i>ErrorTextVariable</i> is not of type string or could not be read</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-10</td>
+                    <td class="SVtable">CONNECTION_PARAM_INVALID</td>
+                    <td class="SVtable">The parameter <u style="font-style: italic; text-decoration: none;">ConnectionParam</u> is invalid</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-11</td>
+                    <td class="SVtable">COMMAND_PARAM_INVALID</td>
+                    <td class="SVtable">The parameter <i>CommandParam</i> is invalid</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-12</td>
+                    <td class="SVtable">
+                        <p>SQLCON_DOES_NOT_EXIST</p>
+                    </td>
+                    <td class="SVtable">The specified Sql connection does not exist in the configuration</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-13</td>
+                    <td class="SVtable">
+                        <p>STATUSVARIABLE_NOT_REGISTER_OR_DOES_NOT_EXIST         </p>
+                    </td>
+                    <td class="SVtable">The status variable passed as parameter (<i>StatusVariable</i>) is not a register variable or it does not exist</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-14</td>
+                    <td class="SVtable">
+                        <p>ERRORTEXTVARIABLE_NOT_TEXT_OR_DOES_NOT_EXIST              </p>
+                    </td>
+                    <td class="SVtable">The additional information variable passed as parameter (<i>ErrorTextVariable</i>) is not a text variable or it does not exist</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-15</td>
+                    <td class="SVtable">CONNECTION_ALREADY_INIT     </td>
+                    <td class="SVtable">The connection is already initialized</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-16</td>
+                    <td class="SVtable">CONNECTION_INIT_FAILED </td>
+                    <td class="SVtable">The connection could not be initialized</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-17</td>
+                    <td class="SVtable">CONNECTION_ALREADY_CLOSE_OR_NOT_INIT </td>
+                    <td class="SVtable">The connection is already closed or not initialized</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-18</td>
+                    <td class="SVtable">CONNECTION_CLOSE_FAILED </td>
+                    <td class="SVtable">Failed to close the connection</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-19</td>
+                    <td class="SVtable">SEND_COMMAND_FAILED </td>
+                    <td class="SVtable">Failed to send the Sql command. This error occurs if the underlying Windows service is stopped or if the user does not have enough privileges to execute the command</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-20</td>
+                    <td class="SVtable">MAXIMUM_COMMAND_REACH </td>
+                    <td class="SVtable">The maximum number of outstanding command is reached</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-21</td>
+                    <td class="SVtable">MAXIMUM_CONNECTION_REACH </td>
+                    <td class="SVtable">The maximum number of simultaneous connections is reached</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-22</td>
+                    <td class="SVtable">CMDID_DOES_NOT_EXIST</td>
+                    <td class="SVtable">The command <i>CmdId</i> passed as parameter does not exist</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-23</td>
+                    <td class="SVtable">CMD_TYPE_NOT_VALID</td>
+                    <td class="SVtable">The command type is invalid. For example, this error is raised when using the READ_BUFFER with a Command Id corresponding to a request of type non-query or scalar</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-24</td>
+                    <td class="SVtable">CMD_NOT_FINISHED  </td>
+                    <td class="SVtable">The command is not yet completed</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-25</td>
+                    <td class="SVtable">CMD_NOT_REMOVED  </td>
+                    <td class="SVtable">The command could not be removed</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-26</td>
+                    <td class="SVtable">RESULT_BUFFER_EMPTY </td>
+                    <td class="SVtable">The result buffer is empty</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-27</td>
+                    <td class="SVtable">RESULT_BUFFER_TOOSMALL </td>
+                    <td class="SVtable">The result buffer is too small</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-28</td>
+                    <td class="SVtable">RESULT_BUFFER_REACH_NBLINE_MAX </td>
+                    <td class="SVtable">Failure to return information about the number of lines in the bufffer because it exceeds the return value range</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">-29</td>
+                    <td class="SVtable">RESULT_BUFFER_REACH_SIZE_MAX </td>
+                    <td class="SVtable">Failure to return information about the buffer size because it exceeds the return value range</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

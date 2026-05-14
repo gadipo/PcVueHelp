@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|The Variables Tree|Overview" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>About the Variables Tree</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">About the Variables Tree</h1>
+        <p class="SVnormal">Before starting to build the Variables Tree, it is necessary 
+ to understand what it does and how it is structured.</p>
+        <p class="SVnormal">To the User, the Variables Tree is seen as a number 
+ of discreet variables. Physically, it is a collection of data structures, 
+ each one describing the behavior of a variable, together with 
+  real-time information including the value and timestamp.</p>
+        <p class="SVnormal">There are 4 main kinds of variables:</p>
+        <ul>
+            <li class="SVbulleted">Variables - Comprises variables mapped to I/O (data acquisition) and internal variables that can be distributed across stations or isolated in user sessions (according to their scope). They are managed by the Real Time Data module.</li>
+            <li class="SVbulleted">HMI variables - Are variables dedicated to displaying simple information linked to user mimic navigation or for handling user inputs in complex forms at runtime (requiring some form of memory persistence). They are managed by the User Interface modules and cannot be linked to I/O nor distributed across stations.</li>
+            <li class="SVbulleted">Percent variables or Mimic variables - Legacy kind of temporary variables managed by the User Interface modules. They cannot be pre-configured nor being used in SCADA Basic scripting. HMI variables supersedes them.</li>
+            <li class="SVbulleted">Temporary variables - Legacy kind of temporary variables managed by the Real Time data modules. They cannot be pre-configured and require scripting for creation with the instruction TEMPORARY_DB. HMI variables supersedes them.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The term "working variable" is used to designate variables declared with the keyword Dim in SCADA Basic scripts. See the SCADA Basic book for more information.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">Starting with version 12 and the introduction of HMI variables, temporary variables created with the instruction TEMPORARY_DB are obsolete. The TEMPORARY_DB instruction is only kept for compatibility with existing projects and should not be used in new projects. When migrating a project, we recommend you to replace the use of temporary variables by HMI variables. To make it easier, you can create HMI variables by script using the instruction VARIABLE.</p>
+        </div>
+        <p class="SVnormal">Variables are further classified by the format of the data they represent.</p>
+        <ul>
+            <li class="SVbulleted">Bit - Logical or 
+ two state data.<ul><li class="SVbulleted">Alarm - A sub-type of bit with additional properties. Not available for HMI variables.</li></ul></li>
+            <li class="SVbulleted">Register - All analogue 
+ data (byte, word, double word, float etc.)</li>
+            <li class="SVbulleted">Text - String data.</li>
+        </ul>
+        <p class="SVnormal">The majority of the topics in this book concern I/O and internal variables. The much simpler <a href="Variables_hmi.htm">HMI variables</a>  and <a href="Variables_temporary.htm">Temporary variables</a>  are covered by a single topic.</p>
+        <div class="note">
+            <p class="SVnormal">Prior to the availability of HMI variables, the only kind of variable in the variables tree was I/O and internal variables. Because of this, in most topics including this one, I/O and internal variables are referred to as just variables or variables tree variables.</p>
+        </div>
+        <p class="SVnormal">I/O and internal variables are stored in a comma delimited ASCII file called Varexp.Dat, and HMI variables in a comma delimited ASCII file called HMIVariables.Dat. Both are  located in the project's "C" directory. 
+ These files are generated automatically as part of the process 
+ of creating  variables with the Application Explorer, Application Architect or Smart Generator.  
+ The Variables Tree may also be imported and exported in a form suitable for 
+ manipulation by a spreadsheet such as Excel. For speed of access, the Variables Tree is loaded from disk into memory at start-up.</p>
+        <p class="SVnormal">The Variables Tree can be thought of as the engine in your 
+ project. Without it, there would be no live data to display in the 
+ mimics, record on disk or send to printers. The functionality it provides 
+ can be summarized as follows.</p>
+        <ul>
+            <li class="SVbulleted">Receive and send real-time values to and from other sources. 
+ The source may be any one of the following.<ul><li class="SVbulleted">Internal (for example from an expression)</li><li class="SVbulleted">One of the native communication drivers. Mainly used to communicate with PLC's and I/O modules (Modbus etc.)</li><li class="SVbulleted">OPC server - A third party supplied OPC server.</li><li class="SVbulleted">OPC UA built-in driver.</li><li class="SVbulleted">LonWorks - A specialized communication network normally associated with building management systems.</li><li class="SVbulleted">BACnet - A specialized communication network normally associated with building management systems.</li><li class="SVbulleted">IEC 60870-5 - A specialized communication network normally associated with power generation and distribution.</li><li class="SVbulleted">IEC 61850 - A specialized communication network normally associated with power generation and distribution.</li><li class="SVbulleted">DDE server - A third party supplied DDE server. The predecessor to OPC and included mainly for backwards compatibility. Sometimes used for communication with MS Office products such as Excel.</li><li class="SVbulleted">SNMP - A specialized communication network normally associate with IT devices and infrastructure.</li><li class="SVbulleted">Sql queries - To take advantage of the built-in Sql bridge (Sql connections and Sql query handling).</li></ul></li>
+            <li>Convert raw data 
+ into meaningful values according to defined behavior.</li>
+            <li class="SVbulleted">Generate values using expressions and formulae.</li>
+            <li class="SVbulleted">Compare analogue 
+ values with alarm limits and generate alarms.</li>
+            <li class="SVbulleted">Make discrepancy 
+ checks on digital values.</li>
+            <li class="SVbulleted">Make the value of variables available for recording and later retrieval by <span class="mc-variable OEM.ProductName variable">PcVue</span> or a third party product. </li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

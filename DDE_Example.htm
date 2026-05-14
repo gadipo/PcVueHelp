@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>DDE example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="DDE_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor232"></a>DDE Example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc327">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="DDE_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc327.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">This example shows modes of the DDE command.</p>
+        <p class="SVprogramCode">'Mode INITIATE or Mode 1 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB ddeinitiate()</p>
+        <p class="SVprogramCode">'Declare code return</p>
+        <p class="SVprogramCode">DIM lngReturn as long;</p>
+        <p class="SVprogramCode">DIM strServDdeName as Str;</p>
+        <p class="SVprogramCode">DIM strTopicName as Str;</p>
+        <p class="SVprogramCode">strServDdeName="EXCEL";</p>
+        <p class="SVprogramCode">strTopicName="[FOLDER1.XLS]Sheet1";</p>
+        <p class="SVprogramCode">lngReturn = DDE ("INITIATE",strServDdeName,strTopicName);</p>
+        <p class="SVprogramCode">If(lngReturn==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when opening DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode TERMINATE or Mode 2 (syntax 2)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB ddeterminate()</p>
+        <p class="SVprogramCode">'Declare code Return</p>
+        <p class="SVprogramCode">DIM lngChannel as long;</p>
+        <p class="SVprogramCode">DIM intResult as integer;</p>
+        <p class="SVprogramCode">DIM strServDdeName as Str;</p>
+        <p class="SVprogramCode">DIM strTopicName as Str;</p>
+        <p class="SVprogramCode">strServDdeName="EXCEL";</p>
+        <p class="SVprogramCode">strTopicName="[Folder1.XLS]Sheet1";</p>
+        <p class="SVprogramCode">lngChannel = DDE ("INITIATE",strServDdeName,strTopicName);</p>
+        <p class="SVprogramCode">If(lngChannel==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when opening DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">intResult = DDE ("TERMINATE",lngChannel);</p>
+        <p class="SVprogramCode">If(intResult==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when closing DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode TERMINATEALL or Mode 3 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB ddeterminateall()</p>
+        <p class="SVprogramCode">'Declare code Return</p>
+        <p class="SVprogramCode">DIM lngChannel as long;</p>
+        <p class="SVprogramCode">DIM intResult as integer;</p>
+        <p class="SVprogramCode">intResult = DDE ("TERMINATEALL");</p>
+        <p class="SVprogramCode">If(intResult==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when closing all DDE channels");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode TIMEOUT or Mode 4 (syntax 4)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB ddetimeout()</p>
+        <p class="SVprogramCode">'Declare code Return</p>
+        <p class="SVprogramCode">DIM lngChannel as long;</p>
+        <p class="SVprogramCode">DIM lngDdeTimeout as long;</p>
+        <p class="SVprogramCode">DIM intResult as integer;</p>
+        <p class="SVprogramCode">DIM strServDdeName as Str;</p>
+        <p class="SVprogramCode">DIM strTopicName as Str;</p>
+        <p class="SVprogramCode">strServDdeName="EXCEL";</p>
+        <p class="SVprogramCode">strTopicName="[Folder1.XLS]Sheet1";</p>
+        <p class="SVprogramCode">lngChannel = DDE ("INITIATE",strServDdeName,strTopicName);</p>
+        <p class="SVprogramCode">If(lngChannel==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when opening DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">lngDdeTimeout=500; ' in milliseconds =&gt; 500ms</p>
+        <p class="SVprogramCode">intResult = DDE ("TIMEOUT", lngChannel, lngDdeTimeout);</p>
+        <p class="SVprogramCode">If(intResult==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when modifying DDE timeout channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">intResult = DDE ("TERMINATE",lngChannel);</p>
+        <p class="SVprogramCode">If(intResult==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when closing DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode EXECUTE or Mode 5 (syntax 5)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB ddeexecute()</p>
+        <p class="SVprogramCode">'Declare code Return</p>
+        <p class="SVprogramCode">DIM lngChannel as long;</p>
+        <p class="SVprogramCode">DIM intResult as integer;</p>
+        <p class="SVprogramCode">DIM strDdeCmd as Str;</p>
+        <p class="SVprogramCode">DIM strServDdeName as Str;</p>
+        <p class="SVprogramCode">DIM strTopicName as Str;</p>
+        <p class="SVprogramCode">strServDdeName="EXCEL";</p>
+        <p class="SVprogramCode">'It is important to register the folder Folder2.xls</p>
+        <p class="SVprogramCode">' before and in the Excel default folder</p>
+        <p class="SVprogramCode">' so that Folder2.xls appears in the recent files list</p>
+        <p class="SVprogramCode">strTopicName="[Folder2.XLS]Sheet1";</p>
+        <p class="SVprogramCode">lngChannel = DDE ("INITIATE",strServDdeName,strTopicName);</p>
+        <p class="SVprogramCode">If(lngChannel==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when opening DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">strDdeCmd = "";</p>
+        <p class="SVprogramCode">intResult = DDE ("EXECUTE", lngChannel, strDdeCmd);</p>
+        <p class="SVprogramCode">If(intResult==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when executing the command ",strDdeCmd," on the DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">intResult = DDE ("TERMINATE",lngChannel);</p>
+        <p class="SVprogramCode">&#160;&#160;If(intResult==0)Then</p>
+        <p class="SVprogramCode">PRINT("Error when closing DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode REQUEST or Mode 6 (syntax 6)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB dderequest()</p>
+        <p class="SVprogramCode">'Declare code Return</p>
+        <p class="SVprogramCode">DIM lngChannel as long;</p>
+        <p class="SVprogramCode">DIM intResult as integer;</p>
+        <p class="SVprogramCode">DIM strDdeItem as Str;</p>
+        <p class="SVprogramCode">DIM strServDdeName as Str;</p>
+        <p class="SVprogramCode">DIM strTopicName as Str;</p>
+        <p class="SVprogramCode">strServDdeName="EXCEL";</p>
+        <p class="SVprogramCode">strTopicName="[Folder1.XLS]Sheet1";</p>
+        <p class="SVprogramCode">lngChannel = DDE ("INITIATE",strServDdeName,strTopicName);</p>
+        <p class="SVprogramCode">If(lngChannel==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when opening DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">strDdeItem = "L1C1";'ligne nø1 et Colonne nø1 du Folder ouvert</p>
+        <p class="SVprogramCode">intResult = DDE ("REQUEST", lngChannel, strDdeItem);</p>
+        <p class="SVprogramCode">If(intResult==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when querying the item ",strDdeItem," on the DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">intResult = DDE ("TERMINATE",lngChannel);</p>
+        <p class="SVprogramCode">If(intResult==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when closing DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode POKE or Mode 7 (syntax 7)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB ddepoke()</p>
+        <p class="SVprogramCode">'Declare code Return</p>
+        <p class="SVprogramCode">DIM lngChannel as long;</p>
+        <p class="SVprogramCode">DIM intResult as integer;</p>
+        <p class="SVprogramCode">DIM strDdeItem as Str;</p>
+        <p class="SVprogramCode">DIM strServDdeName as Str;</p>
+        <p class="SVprogramCode">DIM strTopicName as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'In Excel the line will be =EXCEL|[Folder2.xls]Sheet1!'L1C1'</p>
+        <p class="SVprogramCode">strServDdeName="EXCEL";</p>
+        <p class="SVprogramCode">strTopicName="[Folder1.XLS]Sheet1";</p>
+        <p class="SVprogramCode">lngChannel = DDE ("INITIATE",strServDdeName,strTopicName);</p>
+        <p class="SVprogramCode">If(lngChannel==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when opening DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">strDdeItem = "L1C1";</p>
+        <p class="SVprogramCode">strDdeValue = "test SV dde";</p>
+        <p class="SVprogramCode">intResult = DDE ("POKE", lngChannel, strDdeItem,strDdeValue);</p>
+        <p class="SVprogramCode">If(intResult==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error after changing ",strDdeValue," of item "<img src="../../Resources/Images/Scripting_SCADABasic/Example_arrow_split_line.png" /></p>
+        <p class="SVprogramCode">&#160;&#160;&#160;&#160;,strDdeItem," on DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">intResult = DDE ("TERMINATE",lngChannel);</p>
+        <p class="SVprogramCode">If(intResult==0)Then</p>
+        <p class="SVprogramCode">&#160;&#160;PRINT("Error when closing DDE channel");</p>
+        <p class="SVprogramCode">End If</p>
+        <p class="SVprogramCode">END SUB</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

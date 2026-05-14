@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying desktop applications|Deploying PcVue on a RDS host|Project related issues when deploying PcVue on a RDS Host|Managing Persistent variables when running PcVue in a RD Session Host Session" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Managing Persistent variables when running PcVue in a RD Session Host Session</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Managing Persistent Variables When Running <span class="mc-variable OEM.ProductName variable">PcVue</span> in a RD Session Host Session</h1>
+        <p class="SVnormal">Internal variables are configured as persistent using the <u>Saved</u> property in the variable's properties dialog. If the variables configured as such are <u>not</u> assigned to a Server Station list (no producer list), the value is saved when a project is stopped and restored on re-start. The values are saved in the following files.</p>
+        <ul>
+            <li>VariableSaved.dat for variables other than alarms</li>
+            <li> AlarmSaved.dat for bit variables configured as alarms</li>
+        </ul>
+        <p class="SVnormal">The files are normally located in the project's PER folder although, for backwards compatibility, this can be changed to the C folder by un-ticking the property <u>Write the persistent files in the Per directory</u> in the project's compatibility settings.</p>
+        <h2 class="SVheading2">Behavior when running in a Remote Desktop session and using the <u>Use the same working folder for all Remote Desktop sessions</u> property</h2>
+        <p class="SVnormal">The location of the files is modified and depends on the behavior properties in the Variables Settings dialog. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <br />
+            <img src="../Resources/Images/Deployment/wts_persistence.png" />
+            <br />
+        </div>
+        <ul>
+            <li>Local association - The saved variables files are found in the folder:<br />&lt;ProjectPath&gt;\USR\&lt;ProjectName&gt;\PER\WTS\&lt;StationName&gt;</li>
+            <li>User context - The saved variables files are found in the folder:<br />&lt;ProjectPath&gt;\USR\&lt;ProjectName&gt;\PER\WTS\&lt;UserName&gt;</li>
+        </ul>
+        <h2 class="SVheading2">Behavior when running in a Remote Desktop session and using the <u>Use a different working folder for each Remote Desktop sessions</u> property</h2>
+        <ul>
+            <li>Local association - The saved variables files are found in the folder:<br />&lt;ProjectPath&gt;\USR\WTS\&lt;ProjectName&gt;_&lt;StationName&gt;\PER</li>
+            <li>User context - The saved variables files are found in the folder:<br />&lt;ProjectPath&gt;\USR\&lt;ProjectName&gt;\PER\WTS\&lt;UserName&gt;<br />This folder is not suffixed or prefixed by &lt;StationName&gt; because the value of these variables is dependent on the user name rather than the station name. A user is only allowed to log on at one station at any one time on the same project.</li>
+        </ul>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|Dynamic Busbar Coloring" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Dynamic Busbar Coloring The PcVue Variables</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">
+            &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> Variables</h1>
+        <p class="SVnormal">When the Topology Engine runs:</p>
+        <ul style="list-style-type: disc;">
+            <li>It reads input information - switches positions and nodes injections - from <span class="mc-variable OEM.ProductName variable">PcVue</span> variables,</li>
+            <li>It writes calculation results - nodes voltages - to <span class="mc-variable OEM.ProductName variable">PcVue</span> variables.</li>
+        </ul>
+        <p class="SVnormal">To ensure correct calculations by the Topology Engine, and be able to use its results, all the variables declared in its configuration must exist and be configured correctly.</p>
+        <ul style="list-style-type: disc;">
+            <li>Node Injection Variables,</li>
+            <li>Node Voltage Variables,</li>
+            <li>Switch Position Variables.</li>
+        </ul>
+        <h2 class="SVheading2">Templates from the application Architect library</h2>
+        <p class="SVnormal">The library SH_ELEC_COLO is provided with the Topology Engine. It contains a number of templates  that correspond to the different topology items. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Extras/Busbar_dbus009.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <p class="SVnormal">These templates can be used to automatically generate the variables and their configuration.</p>
+        <table style="border-collapse: collapse;width:100%">
+            <col style="width: 250px;" />
+            <col style="width: 50px;" />
+            <col style="width: 50px;" />
+            <col style="width: 100px;" />
+            <col style="width: 400px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading" colspan="5">Node</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">Variable</td>
+                    <td class="SVtableHeading">Mandatory</td>
+                    <td class="SVtableHeading">I/O</td>
+                    <td class="SVtableHeading">Data Type</td>
+                    <td class="SVtableHeading">Remark</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Voltage</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">I</td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Logical output level. This variable name can be modified through the configuration file.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Injection</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Logical input level. This variable name can be modified through the configuration file.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">VoltageConflict</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Bit</td>
+                    <td class="SVtable">Set to 1 when there is a voltage conflict (e.g.: V1+V2)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">PotentialVoltageConflict</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Bit</td>
+                    <td class="SVtable">Set to 1 when there is a potential voltage conflict (e.g.: V1+V2’ or V1’+V2’)</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">MeasuredInjection</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">I</td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Real injection in Volt when Node is of type “Measured”. This variable is used by the symbols provided with the library.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">ManualInjection</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">I</td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Manual injection value when Node is of type “Measured” with a manual input. This variable is used by the symbols provided with the library.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="border-collapse: collapse;width:100%">
+            <col style="width: 250px;" />
+            <col style="width: 50px;" />
+            <col style="width: 50px;" />
+            <col style="width: 100px;" />
+            <col style="width: 400px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading" colspan="5">Switch</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">Variable</td>
+                    <td class="SVtableHeading">Mandatory</td>
+                    <td class="SVtableHeading">I/O</td>
+                    <td class="SVtableHeading">Data Type</td>
+                    <td class="SVtableHeading">Remark</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Position</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">I</td>
+                    <td class="SVtable">Bit</td>
+                    <td class="SVtable">Position of the Switch. 0 for open  1 for close. The variable name can be modified through the configuration file.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Upstream.Voltage</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Copy of the Voltage variable of the upstream Node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Upstream.VoltageConflict</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Bit</td>
+                    <td class="SVtable">Copy of the VoltageConflict variable of the upstream Node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Upstream.PotentialVoltageConflict</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Bit</td>
+                    <td class="SVtable">Copy of the PotentialVoltageConflict variable of the upstream Node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Downstream.Voltage</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Copy of the Voltage variable of the downstream Node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Downstream.VoltageConflict</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Bit</td>
+                    <td class="SVtable">Copy of the VoltageConflict variable of the downstream Node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Downstream.PotentialVoltageConflict</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Bit</td>
+                    <td class="SVtable">Copy of the PotentialVoltageConflict variable of the downstream Node.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="border-collapse: collapse;width:100%">
+            <col style="width: 250px;" />
+            <col style="width: 50px;" />
+            <col style="width: 50px;" />
+            <col style="width: 100px;" />
+            <col style="width: 400px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading" colspan="5">Transformer</td>
+                </tr>
+                <tr>
+                    <td class="SVtableHeading">Variable</td>
+                    <td class="SVtableHeading">Mandatory</td>
+                    <td class="SVtableHeading">I/O</td>
+                    <td class="SVtableHeading">Data Type</td>
+                    <td class="SVtableHeading">Remark</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Upstream.Voltage</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Copy of the Voltage variable of the upstream Node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Upstream.VoltageConflict</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Bit</td>
+                    <td class="SVtable">Copy of the VoltageConflict variable of the upstream Node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Upstream.PotentialVoltageConflict</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Bit</td>
+                    <td class="SVtable">Copy of the PotentialVoltageConflict variable of the upstream Node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Downstream.Voltage</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Register</td>
+                    <td class="SVtable">Copy of the Voltage variable of the downstream Node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Downstream.VoltageConflict</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Bit</td>
+                    <td class="SVtable">Copy of the VoltageConflict variable of the downstream Node.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Downstream.PotentialVoltageConflict</td>
+                    <td class="SVtable">No</td>
+                    <td class="SVtable">O</td>
+                    <td class="SVtable">Bit</td>
+                    <td class="SVtable">Copy of the PotentialVoltageConflict variable of the downstream Node.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Link with field variables</h2>
+        <p class="SVnormal">The Topology Engine includes another function that links field variables to Topology Engine Variables. Two types of variable are identified.</p>
+        <ul style="list-style-type: disc;">
+            <li>Injection variables</li>
+            <li>Switch position Variables</li>
+        </ul>
+        <p class="SVnormal">This feature enables the use of templates and graphical symbols provided in the SH_ELEC_COLO library without any modification, and only by editing the configuration file.</p>
+        <h2 class="SVheading2">Injection variables</h2>
+        <p class="SVnormal">To make the link between a field injection  variable and the Topology Engine variable, it is possible to use the properties <u>Field Injection Variable</u> and <u>Field Injection Scale</u> described in Nodes. At start-up, the Topology Engine automatically subscribes to the field variable and, according to the variable type, performs different actions.</p>
+        <p class="SVnormal">If it is a bit variable, then if its value is 0, the Topology Engine uses the voltage absence level (V0), and if the value is 1, it uses the Default Voltage Level of the node.</p>
+        <p class="SVnormal">If it is a register variable, then according to the scale and the Voltages configuration (see Voltages), the Topology Engine performs 2 actions.</p>
+        <ul style="list-style-type: disc;">
+            <li>Convert the value into a voltage level (V0 to V6)</li>
+            <li>Copy the value and quality into the MeasuredInjection variable (in Volts)</li>
+        </ul>
+        <h2 class="SVheading2">Switch position variables</h2>
+        <p class="SVnormal">To make the link between a field switch position variable and the Topology Engine variable, it is possible to use the properties <u>Field Position Variable</u>, <u>Field Open Position Value</u> and <u>Field Close Position Value</u> described in Switches.</p>
+        <p class="SVnormal">At start-up, the Topology Engine automatically subscribes to the field variable and each time there is a change, it compares the new value to both <u>Field Open Position Value</u> and <u>Field Close Position Value</u> to set the potentially new position. If the value does not correspond to any of them, the switch position is set to NS.</p>
+        <div class="note">
+            <p class="SVnormal">When using the SH_ELEC_COLO library without any modification, switch positions are animated based on calculated internal variables whose values are normalized (to accommodate normal position, inversions of value...). Using these internal variables for controlling switch positions is ineffective with communicating switches because variables for switch control have to be separated from these internal variables for practical reasons (data mapping, typing...). It is recommended to customize the symbols, at least for the switch control buttons.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

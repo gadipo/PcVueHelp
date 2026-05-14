@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>WEBBROWSER Example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="WEBBROWSER_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor343"></a>
+            WEBBROWSER Example</h1>
+        <p class="SVnormal"> <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc388"><param name="Command" value="ALink,MENU" /><param name="Item1" value="" /><param name="Item2" value="WEBBROWSER_Instruct" /></object><a class="MCConceptLink_applies_0" href="javascript:mc388.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a></p>
+        <p class="SVnormal">This example contains a set of functions to script the Web browser control using the WEBBROWSER instruction.</p>
+        <p class="SVprogramCode">Sub NavigateTo()</p>
+        <p class="SVprogramCode">&#160;&#160;Dim lRet as Long;</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sUri as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;'ARG1 is a valid Uri such as https://example.com or file://C:\MyFolder\MyFile.pdf</p>
+        <p class="SVprogramCode">&#160;&#160;'ARG1 can also be an absolute filename such as C:/MyFolder/MyFile.pdf</p>
+        <p class="SVprogramCode">&#160;&#160;sUri = GETARG("ARG1");</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;lRet = WebBrowser("NAVIGATE", "WebBrowserMimic", "", "WebBrowserCtrl", sUri);</p>
+        <p class="SVprogramCode">&#160;&#160;Print("Navigate to ", sUri, " executed with result: ",TOC(lRet));</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub NavigateBack()</p>
+        <p class="SVprogramCode">&#160;&#160;Dim lRet as Long;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;lRet = WebBrowser("BACK", "WebBrowserMimic", "", "WebBrowserCtrl");</p>
+        <p class="SVprogramCode">&#160;&#160;Print("Navigate back executed with result: ",TOC(lRet));</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub NavigateForward()</p>
+        <p class="SVprogramCode">&#160;&#160;Dim lRet as Long;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;lRet = WebBrowser("FORWARD", "WebBrowserMimic", "", "WebBrowserCtrl");</p>
+        <p class="SVprogramCode">&#160;&#160;Print("Navigate forward executed with result: ",TOC(lRet));</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub GetZoomFactor()</p>
+        <p class="SVprogramCode">&#160;&#160;Dim lRet as Long;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;lRet = WebBrowser("GETZOOMFACTOR", "WebBrowserMimic", "", "WebBrowserCtrl");</p>
+        <p class="SVprogramCode">&#160;&#160;Print("Zoom factor is: ",TOC(lRet));</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub GetInfo()</p>
+        <p class="SVprogramCode">&#160;&#160;Dim sRet as Str;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;sRet = WebBrowser("GETSOURCEINFO", "WebBrowserMimic", "", "WebBrowserCtrl",0);</p>
+        <p class="SVprogramCode">&#160;&#160;Print("The page Url is: ",sRet);</p>
+        <p class="SVprogramCode">&#160;&#160;sRet = WebBrowser("GETSOURCEINFO", "WebBrowserMimic", "", "WebBrowserCtrl",1);</p>
+        <p class="SVprogramCode">&#160;&#160;Print("The document title is: ",sRet);</p>
+        <p class="SVprogramCode">&#160;&#160;sRet = WebBrowser("GETSOURCEINFO", "WebBrowserMimic", "", "WrongCtrlId",1);</p>
+        <p class="SVprogramCode">&#160;&#160;Print("The document title if the Web ctrl Id is wrong is: ",sRet);</p>
+        <p class="SVprogramCode">End Sub</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">Sub PrintToPdf()</p>
+        <p class="SVprogramCode">&#160;&#160;Dim lRet as Long;</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">&#160;&#160;lRet = WebBrowser("PRINTTOPDF", "WebBrowserMimic", "", "WebBrowserCtrl", "PrintToPdf.pdf",1);</p>
+        <p class="SVprogramCode">&#160;&#160;Print("PrintToPdf executed with result: ",TOC(lRet));</p>
+        <p class="SVprogramCode">End Sub</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

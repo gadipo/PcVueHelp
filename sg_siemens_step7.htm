@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Smart Generators" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to import a Siemens Step7 configuration</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor32"></a>How to import a Siemens Step7 configuration</h1>
+        <p class="SVnormal">The Smart Generator for Step7 allows you to import data from a Step7 project to generate the following <span class="mc-variable OEM.ProductName variable">PcVue</span> configuration elements:</p>
+        <ul>
+            <li class="SVbulleted">Data acquisition network, devices, and frames for the S7 Ip Industrial Ethernet driver.</li>
+            <li class="SVbulleted">I/O variables including mapping onto frames.</li>
+        </ul>
+        <h2 class="SVheading2">Prerequisites</h2>
+        <ul>
+            <li class="SVbulleted">You have installed the Step7 software on the same PC as <span class="mc-variable OEM.ProductName variable">PcVue</span>. The Smart Generator is designed for pre-TIA Portal versions of Step7 and uses Step7's command interface and library (version 5.3 of Step7 Professional).</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The Smart Generator for Siemens Step7 helps you automate configuration for communicating with Siemens S7-200, S7-300 and S7-400 PLCs using the S7 Ip Industrial Ethernet driver. See Siemens S7 Ip Industrial Ethernet for more information about the driver.</p>
+            <p class="SVnormal">If you are using Siemens TIA Portal, check the <a href="sg_siemens_tia_portal.htm">Smart Generator for TIA Portal</a>.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">Refer to the overview topic <a href="sg_overview.htm">Smart Generators overview</a> to learn more.</p>
+        </div>
+        <h2 class="SVheading2">Supported data types</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 150px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">
+                        <table>
+                            <col />
+                            <col style="width: 233px;" />
+                            <col />
+                            <col />
+                            <thead>
+                                <tr>
+                                    <td class="SVtableHeading">Step7 data type</td>
+                                    <td class="SVtableHeading"><span class="mc-variable OEM.ProductName variable">PcVue</span>variable type</td>
+                                    <td style="text-align: left;" class="SVtableHeading">Min value</td>
+                                    <td style="text-align: left;" class="SVtableHeading">Max value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="SVtable">BOOL</td>
+                                    <td class="SVtable">
+                                        <p class="SVnormal">Bit</p>
+                                    </td>
+                                    <td style="text-align: left;" class="SVtable">&#160;</td>
+                                    <td style="text-align: left;" class="SVtable">&#160;</td>
+                                </tr>
+                                <tr>
+                                    <td class="SVtable">BYTE</td>
+                                    <td class="SVtable">
+                                        <p class="SVnormal">Register</p>
+                                    </td>
+                                    <td style="text-align: left;" class="SVtable">0</td>
+                                    <td style="text-align: left;" class="SVtable">255</td>
+                                </tr>
+                                <tr>
+                                    <td class="SVtable">WORD</td>
+                                    <td class="SVtable">
+                                        <p class="SVnormal">Register</p>
+                                    </td>
+                                    <td class="SVtable">0</td>
+                                    <td class="SVtable">65,535</td>
+                                </tr>
+                                <tr>
+                                    <td class="SVtable">DWORD</td>
+                                    <td class="SVtable">
+                                        <p class="SVnormal">Register</p>
+                                    </td>
+                                    <td class="SVtable">0</td>
+                                    <td class="SVtable">4,294,967,295</td>
+                                </tr>
+                                <tr>
+                                    <td class="SVtable">INT</td>
+                                    <td class="SVtable">
+                                        <p class="SVnormal">Register</p>
+                                    </td>
+                                    <td class="SVtable">-32,768</td>
+                                    <td class="SVtable">32,767</td>
+                                </tr>
+                                <tr>
+                                    <td class="SVtable">DINT</td>
+                                    <td class="SVtable">
+                                        <p class="SVnormal">Register</p>
+                                    </td>
+                                    <td class="SVtable">-2,147,483,648</td>
+                                    <td class="SVtable">2,147,483,647</td>
+                                </tr>
+                                <tr>
+                                    <td class="SVtable">REAL</td>
+                                    <td class="SVtable">
+                                        <p class="SVnormal">Register</p>
+                                    </td>
+                                    <td class="SVtable">-3.402822E+38</td>
+                                    <td class="SVtable">3.402822E+38</td>
+                                </tr>
+                                <tr>
+                                    <td class="SVtable">CHAR</td>
+                                    <td class="SVtable">
+                                        <p class="SVnormal">Text</p>
+                                    </td>
+                                    <td class="SVtable">&#160;</td>
+                                    <td class="SVtable">&#160;</td>
+                                </tr>
+                                <tr>
+                                    <td class="SVtable">STRING</td>
+                                    <td class="SVtable">
+                                        <p class="SVnormal">Text</p>
+                                    </td>
+                                    <td class="SVtable">&#160;</td>
+                                    <td class="SVtable">&#160;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Selecting the source data</h2>
+        <div class="warning">
+            <p class="SVnormal">Before you start the import process, we recommend that you back up the <span class="mc-variable OEM.ProductName variable">PcVue</span> variables configuration in case of any problems occurring during the import process. The variable configuration is stored in the file VAREXP.DAT in the project's C folder.</p>
+            <p class="SVnormal">Make sure that <span class="mc-variable OEM.ProductName variable">PcVue</span> is shut down before copying the file.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Go to <b>Configure</b> then Smart Generators and click <b>New STEP7 import</b>. The Smart Generator STEP7 dialog opens with the Import name field specified. You can change this name.</p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Select the project to import from the Step7 project drop-down. To only list the projects containing data blocks, select the option <b>Display only programs containing blocks</b>. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-project"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p class="SVnumbered">
+                    <img src="../Resources/Images/SmartGen/sg_siemens_step7_select_project.png" MadCap:targetName="select-project" style="display: none;" />
+                </p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Click the <b>Advanced/Options</b> button, then select a server list and a client list in the <b>Networking list</b> tab to define the behavior of <span class="mc-variable OEM.ProductName variable">PcVue</span> variables for a multi-station project.</p>
+                <div class="warning">
+                    <p class="SVnormal">The lists of servers and clients must already have been created in <span class="mc-variable OEM.ProductName variable">PcVue</span> and the station from which you run the smart generator must be in the servers list.</p>
+                </div>
+            </li>
+            <li value="4">
+                <p>Select the <b>Options</b> tab,  here you can configure the variables to be imported and communication frames via the following properties:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Command variables - If selected, it sets the command property for all variables  imported.  You can also specify the command level.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Data block variables branch -  If selected, it generates a branch for each variable imported from a data block. The branch can contain the data block (DB) name, the program name and DB name, or the project name, program name and DB name.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Use DB symbolic name - If selected, it generates variables according to data block name (unselected) or data block symbolic name (selected).</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Memory bit variables branch - If selected, it generates a branch for each variable imported from memory. The branch can contain either the program name or the project name and program name.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Add a leaf variable - If selected, it enables you to add a leaf variable when importing an array. For example if you choose a leaf called VALUE, VALVE_MOTOR[1] will be imported as VALVE.MOTOR.1.VALUE.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Communication frame size - If specified, it enables you to set the size, in bytes, of communication frames generated in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Selecting blocks and configuring the equipment</h2>
+        <p class="SVnormal">After you have selected the source data and configured the networking lists and options of the import via the Select project dialog, the next step is to select blocks and configure the communication.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Click <b>Next</b>, the Select blocks dialog opens, expand the blocks node and select the  data blocks  to be imported. Only data blocks of type instance, user type, or shared can be imported. You can also import memory variables by selecting the Memory variables node.</p>
+                <div class="tip">
+                    <p class="SVnormal">For details of the selected program, click on the Information button next to Program field.</p>
+                </div>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click <b>Next</b>, the Target equipment dialog opens, select a network and equipment device in the Equipment section. If there is no S7 Ip Industrial Ethernet network or device configured in the <span class="mc-variable OEM.ProductName variable">PcVue</span> project, you are prompted to create one. The Properties section is populated with the selected device's configuration. You can modify the configuration of these properties if needed.</p>
+                <div class="note">
+                    <p class="SVnormal">An import deals with one device (PLC). If there is more than one, you must run a separate import for each device.</p>
+                </div>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Click <b>Next</b>, the Check mapping dialog opens, select a data block to display its tags and their addresses. To change an address, select the tag then click the <b>Change Address</b> button and enter the required address. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="check-mapping"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p class="SVnumbered">
+                    <img src="../Resources/Images/SmartGen/sg_siemens_step7_check_mapping.png" MadCap:targetName="check-mapping" style="display: none;" />
+                </p>
+                <div class="warning">
+                    <p class="SVnormal">Some blocks may be protected or locked. If such a block is used in a data block, the smart generator will be unable to extract the corresponding variables and their addresses. You can check and change the mapping for all data blocks to be imported.</p>
+                </div>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Defining branches and selecting variables</h2>
+        <p class="SVnormal">After you have selected the source data and configured the networking lists and options of the import via the Select project dialog, the next step is to define the branches and select the variables you want to generate.</p>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Click <b>Next</b>, the variable import process is initialized and the Select import type dialog opens. Select the type of import you need:</p>
+                <ul>
+                    <li>Custom import if you want to access the Select variables dialog in which you can filter and manually select the list of variables to import.</li>
+                    <li>Full import if you want to generate variables for all source data.</li>
+                </ul>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">(Custom import option) Adjust the filters to find the variables to import. The <b>Name</b> field allows to filter the list of variables according to the name in the source data. You can use wildcards, the asterisk (matches any number of characters) and the question mark (matches a single character).</p>
+                <p class="SVnumbered">For example:<br />'Pump1' would only match a source data named 'Pump1'. <br />'Pump?' would match 'Pump1' or 'Pump2' etc. but not 'Pump10'. <br />'Pump*' would match 'Pump1', 'Pump2' and 'Pump10' but also 'Pumpkin'.</p>
+                <p class="SVnumbered">The variables that match the filter appear in the Available Items pane.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">(Custom import option) Select the variables filtered in the Available items pane for import and click the right-arrow <b>-&gt;</b> button. The variables in the Selected items pane are to be imported and generated.</p>
+            </li>
+            <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="select-vars"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+            </p>
+            <p>
+                <img src="../Resources/Images/SmartGen/sg_siemens_step7_select_vars.png" MadCap:targetName="select-vars" style="display: none;" />
+            </p>
+            <li value="4">
+                <p class="SVnumbered">Click <b>Next</b>, the Branch Management dialog opens. This step allows you to control how branches and variable names are derived from source data names so that the generated variables fit in the branching and naming logic of your project. First, you can enter a global branch if you want to prefix the name of all generated variables with a particular branch segment. You can also select branch separator options to control how source data names will be split into branch segments:</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">Use numeric characters as branch separator - If selected, a branch separator will be added after each numeric character. For example, a source data named MOT1DEFAULT1 will generate a variable named MOT1.DEFAULT1.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">Use specific sequence character as branch separator - If selected, the sequence of characters you select will be replaced by a branch separator. For example, if you select the underscore ('_') as sequence character, a source data named CONTROLROOM_COMMAND will generate a variable named CONTROLROOM.COMMAND.</p>
+                    </li>
+                </ul>
+                <div class="note">
+                    <p class="SVnormal">A branch separator is not added when a numeric character is at the end of the name.</p>
+                </div>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Renaming and generating variables</h2>
+        <p class="SVnormal">After you have defined the branch and selected variables to generate via the Select variables dialog, the next step offers the possibility to edit the variables you have selected and prepare them for generation.</p>
+        <div class="note">
+            <p class="SVnormal">If a variable is displayed in red, it means that it is invalid for use in <span class="mc-variable OEM.ProductName variable">PcVue</span> and will not be generated. Use the Rename variables dialog to ensure variable name compliance:</p>
+            <ul>
+                <li>The max length of a variable name is 255 characters.</li>
+                <li>The max number of branch elements in a variable name is 12.</li>
+                <li>The name of a branch element or the name of the leaf element cannot be empty (length =0) or exceed 255 characters.</li>
+                <li>The name of a variable can only include letters, digits, or the underscore.</li>
+                <li>Variable names shall be unique. Two variables cannot have the same name.</li>
+            </ul>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnormal">Click <b>Next</b>. The Generate variables dialog opens, listing all variables selected for generation. To rename variables, either select variables and click <b>Rename selected</b>, or use the <b>Rename invalid</b> button. The Rename variables dialog displays variables in a grid and offers several actions.</p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">The Rename variables dialog is designed to make it easy to give a final polish to variable names and fix invalid ones, and also to bulk modify variable properties, to set the Command level or Alarm property for example.</p>
+                <p class="SVnumbered">The following operations are available:<br /></p>
+                <ul>
+                    <li>To modify a single variable, double click it, or select it and click <b>Properties</b>. You can edit its name in the General tab. Click <b>OK</b> to validate.</li>
+                    <div class="tip">
+                        <p class="SVnormal">You can edit the variable properties in the Details tab. These properties can be its type, domain, nature etc. </p>
+                    </div>
+                    <li>To add a leaf to one or more variables (to add a .Cmd or .AlarmTmpHigh for example), select them, then click <b>Suffix</b> and enter the suffix to be added. Click <b>OK</b> to validate.</li>
+                    <li>To replace characters in the name of one or more variables, select them, then click <u style="font-weight: bold; text-decoration: none;">Replace</u> to open the Replace dialog. Enter the strings to search and replace, then click <b>OK</b>.</li>
+                    <li>To replace branch segments, select the variables, then select the branch segments to be replaced by clicking on the column header and click <u style="font-weight: bold; text-decoration: none;">Replace</u> to open the Replace dialog. Enter the strings to search and replace, then click <b>OK</b>.</li>
+                    <li>To delete a branch segment, select the variables, then the branch segments to be removed by clicking on the column header and click <b>Delete</b>. The selected branch segments are then removed from the selected variables.</li>
+                    <li>To merge branches, select the variables, then the branch segments to be merged by clicking on the column header and click <u style="font-weight: bold; text-decoration: none;">Merge</u>. The selected branch segments are then deleted for the selected variables. You can only merge consecutive branch segments.</li>
+                </ul>
+                <div class="tip">
+                    <p class="SVnormal">You can use Shift+click to select a group of adjacent variables and branches or Ctrl+click to select several individual variables.</p>
+                </div>
+                <p class="SVnumbered">Once you are done editing the variables click <b>OK</b> to close the dialog.</p>
+            </li>
+            <li value="3">
+                <p class="SVnumbered">Click <b>Finish</b> and <b>Yes</b> in the Generation dialog to start the generation of variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>. A dialog is displayed indicating the progress. Any variables in the smart generator that already exist in <span class="mc-variable OEM.ProductName variable">PcVue</span> are discarded. The corresponding variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> are not overwritten or updated in any way.</p>
+                <div class="warning">
+                    <p class="SVnormal">Any variables appearing in red are invalid and will not be generated when clicking <b>Finish</b>.</p>
+                </div>
+            </li>
+        </ol>
+        <h2 class="SVheading2">Synchronizing an existing import</h2>
+        <p class="SVnormal">When you synchronize an import, the smart generator compares the configuration elements available in the import file with those that have been imported previously to <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <div class="warning">
+            <p class="SVnormal">The synchronizing process takes into account any filter that you may have used previously with the import. For example if there are 400 variables in the import file and the previous use of the import was with a filter and created 100 variables in <span class="mc-variable OEM.ProductName variable">PcVue</span>, synchronization will inform you that there are 300 new variables available for import.</p>
+        </div>
+        <ol>
+            <li value="1">
+                <p class="SVnumbered">Select the import to synchronize in the right pane of the Smart Generators dialog. A list with actions appears under the Import references pane. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="workspace"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+                <p>
+                    <img src="../Resources/Images/SmartGen/sg_workspace_synch.png" MadCap:targetName="workspace" style="display: none;" />
+                </p>
+            </li>
+            <li value="2">
+                <p class="SVnumbered">Click Synchronize. This will open the smart generator dialog in which you can reconfigure the import. If variables have been added to the import file since the last import, the smart generator will display the Import new variables dialog, inviting you to make either a full or a custom import of the remaining variables.</p>
+                <ul>
+                    <li>
+                        <p class="SVbulleted">If you select full import, all variables not already in <span class="mc-variable OEM.ProductName variable">PcVue</span> are imported.</p>
+                    </li>
+                    <li>
+                        <p class="SVbulleted">If you select custom import, you can filter the variables using the Select variables dialog.</p>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">If the smart generator finds variables in <span class="mc-variable OEM.ProductName variable">PcVue</span> that no longer exist in the import file, a list of the variables is displayed. Using this list, you can choose to remove some or all of the variables from <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">You can choose to only remove imported configuration elements of a smart generator without removing the smart generator import itself. This can be done by right-clicking the import generated and selecting <b>Remove all imported objects</b>.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

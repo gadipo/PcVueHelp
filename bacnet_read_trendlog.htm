@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|BACnet|BACnet Trending" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to Configure PcVue to Retrieve BACnet Trend Records</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor147"></a>How to Configure <span class="mc-variable OEM.ProductName variable">PcVue</span> to Retrieve BACnet Trend Records</h1>
+        <p class="SVnormal">To configure <span class="mc-variable OEM.ProductName variable">PcVue</span> so it is able to retrieve a Trend Log object's records, you add the Trend Log or Trend Log Multiple object to the device in <span class="mc-variable OEM.ProductName variable">PcVue</span> BACnet configuration. It is then able to send a read request to the device to retrieve the recorded values. </p>
+        <p class="SVnormal">The application treats BACnet trend records in the same way as records it has generated itself by recording the real-time value of variables.  Records are accessed using the name of a register variable. A Trend Log object will be used as source for <span class="mc-variable OEM.ProductName variable">PcVue</span> trending of a given variable if the BACnet object and property on which the variable is mapped is found in one of the configured Trend Log object. Otherwise, the real time data source (Data Sharing) is used. See the topic <a href="bacnet_trendlog_variables.htm">Mapping variables for use with a Trend Log object</a>.</p>
+        <p class="SVnormal">If you want to read a Trend Log's recorded values using a notification you must also add the instance of the Notification Class object, as referenced in the Trend Log object, to the device configuration in <span class="mc-variable OEM.ProductName variable">PcVue</span> BACnet configuration. See the topic <a href="bacnet_adding_alarmevent_config.htm">How to configure <span class="mc-variable OEM.ProductName variable">PcVue</span> to receive alarm and event notifications</a>.</p>
+        <div class="warning">
+            <p class="SVnormal">The following process does not create a Trend Log object, within the physical device, if it does not already exist. Trend Log objects can be created using the <a href="bacnet_trendlog_helper1.htm">Logs helper</a>, or the left pane of the <a href="bacnet_mapping_overview.htm">Mapping editor</a>.</p>
+        </div>
+        <h2 class="SVheading2">Adding a Trend Log object using the Application Explorer</h2>
+        <div class="note">
+            <p class="SVnormal">The following explanation applies both to Trend Log and Trend Log Multiple objects.</p>
+        </div>
+        <ol>
+            <li value="1">Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network and device.</li>
+            <li value="2">From the task pane, select <u>Add a Trend Log</u>. The Trend Log Creation dialog opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="output"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_trendlog_ae.png" MadCap:targetName="output" style="display: none;" /></li>
+            <li value="3">Click the Ellipsis button adjacent to the <u>Instance number</u> field. The Object Selection dialog opens containing a list of discovered Trend Log instances for that device. The list can be updated using the <u>Refresh</u> button. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t12"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_trendlog_selection_dialog.png" MadCap:targetName="t12" style="display: none;" /></li>
+            <li value="4">Select the Trend Log to use. </li>
+            <li value="5">Click the <u>OK</u> button to close the Object Selection dialog.</li>
+            <li value="6">Click the <u>OK</u> button to close the Trend Log Configuration dialog. The Trend Log appears in the configuration tree. 
+				
+			<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_device_with_trendlog.png" MadCap:targetName="t3" style="display: none;" /></li>
+        </ol>
+        <h2 class="SVheading2">Adding a Trend Log object using the BACnet Mapping dialog</h2>
+        <div class="note">
+            <p class="SVnormal">The following explanation applies both to Trend Log and Trend Log Multiple objects.</p>
+        </div>
+        <ol>
+            <li value="1">Open the Application Explorer and expand the configuration tree to display a previously configured BACnet network. From the task pane, select <u>Mapping</u>. The BACnet Mapping dialog opens.</li>
+            <li value="2">Expand the devices and objects tree in the left pane and select an appropriate Trend Log object. Trend Log instances appears in the right pane.</li>
+            <li value="3">Right click on the instance to be mapped and select <u>Map Trend Log</u> from the context menu. The Trend Log configuration dialog opens, populated with information from the selected Trend Log instance. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_trendlog_dialog.png" MadCap:targetName="t1" style="display: none;" /></li>
+            <li value="4">Check the configuration and click <u>OK</u> button to close the Trend Log dialog. A new Trend Log object appears in the Mapping dialog in the Variable/Object column. 
+				
+			<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_mapping_trendlog.png" MadCap:targetName="t2" style="display: none;" /></li>
+        </ol>
+        <h2 class="SVheading2">The Trend Log Configuration dialog - Advanced tab</h2>
+        <p class="SVnormal">The following properties are available in the Trend Log Configuration dialog - Advanced tab. The screenshot shows the default configuration.
+		<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Comm_DataAcq/bacnet_trendlog_advanced.png" MadCap:targetName="t4" style="display: none;" /></p>
+        <ul style="list-style-type: disc;">
+            <li>Retrieval - The mechanisms used by <span class="mc-variable OEM.ProductName variable">PcVue</span> to retrieve records from the Trend Log object. The default retrieval mechanism is cyclic every 60 minutes.<ul style="list-style-type: disc;"><li>On demand only  - A read request is sent to the Trend Log object only when using the Trend Log helper or a SCADA Basic program.</li><li>By polling - A read request is sent to the Trend Log object periodically. The period range is 0 to 4294967295 minutes with a default of 60 minutes. In this mode, a read request is also sent when the  BACnet communication starts.</li><li>Upon notification reception - Accept notifications from the Notification Class associated with the Trend Log object and generate a read request as a result.</li><li>Max number of records - The maximum number of records for a read request. Range 1 to 10000.</li></ul></li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

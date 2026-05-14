@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying desktop applications" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Licensing PcVue using a network dongle</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Licensing <span class="mc-variable OEM.ProductName variable">PcVue</span> Using a Network Dongle</h1>
+        <p class="SVnormal">The network dongle (protection key) was originally conceived for multi-station 
+ systems where the project requirements meant all the license information 
+ had to be located in one dongle. The network dongle is physically the 
+ same as a normal dongle but contains more than one license. Each additional license 
+ is held in one of two slots along with other licenses of the same configuration. </p>
+        <p class="SVnormal">The network dongle is plugged into a PC running an instance of <span class="mc-variable OEM.ProductName variable">PcVue</span> known as the dongle owner. This <span class="mc-variable OEM.ProductName variable">PcVue</span> station is responsible 
+ for distributing the licenses to other instances of <span class="mc-variable OEM.ProductName variable">PcVue</span> as they 
+ start, and therefore must be started first.</p>
+        <p class="SVnormal">When starting another instance of <span class="mc-variable OEM.ProductName variable">PcVue</span> - either on another PC, a virtual machine, or in a Remote Desktop Session - <span class="mc-variable OEM.ProductName variable">PcVue</span> is instructed by the command line, or configuration option, to retrieve its license from the network dongle. The license is acquired 
+ each time <span class="mc-variable OEM.ProductName variable">PcVue</span> is started.</p>
+        <h2 class="SVheading2">How the licensing works in a network dongle</h2>
+        <p class="SVnormal">In a standard dongle, if you were able to view its properties 
+ it might look something like this. </p>
+        <p>
+            <img src="../Resources/Images/Deployment/standard_dongle.png" style="border-style: none;border: none;float: none;" border="0" title="Properties of a standard dongle." />
+        </p>
+        <p class="SVnormal">You can see properties representing the dongle number, the number of allowed 
+ tags, its type etc.</p>
+        <p class="SVnormal">In a network dongle, two additional sets of properties 
+ appear. If you were able to view its properties, it might look something 
+ like this.</p>
+        <p>
+            <img src="../Resources/Images/Deployment/network_dongle.png" style="border-style: none;border: none;float: none;" border="0" title="Schematic of base station and 2 networks." />
+        </p>
+        <p class="SVnormal">The BASE contains the license and properties for <span class="mc-variable OEM.ProductName variable">PcVue</span> running on the PC to which the dongle is physically connected. 
+ SLOT1 and SLOT2 contain licenses that may be accessed over a network.</p>
+        <p class="SVnormal">SLOT1 and SLOT2 contain not only license properties 
+ but also the number of licenses. In the picture above the dongle has the 
+ capability to run 7 instances of <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <ul>
+            <li class="SVbulleted">1 x 5,000 tag complete 
+ with networking (BASE)</li>
+            <li class="SVbulleted">2 x 2,000 tag run-time 
+ client (SLOT1)</li>
+            <li class="SVbulleted">4 x 1,000 tag run-time 
+ client (SLOT2)</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">A network dongle has only one number property and one 
+ version property hence all instances of <span class="mc-variable OEM.ProductName variable">PcVue</span> that are licensed 
+ from the dongle will appear to have the same dongle number and must be 
+ the same version.</p>
+        </div>
+        <h2 class="SVheading2">Using a network dongle when running <span class="mc-variable OEM.ProductName variable">PcVue</span> 
+ on RD Session Host server</h2>
+        <p class="SVnormal">When running <span class="mc-variable OEM.ProductName variable">PcVue</span> on a RD Session Host server it is likely that there will be several instances of <span class="mc-variable OEM.ProductName variable">PcVue</span> running concurrently 
+ on the same server. In such an architecture, a network 
+ dongle containing multiple licenses must be used.</p>
+        <p class="SVnormal">The network dongle will be located on another PC running another installation of <span class="mc-variable OEM.ProductName variable">PcVue</span>, configured as a license owner, connected to the RD Session Host server via a local area network.</p>
+        <div class="warning">
+            <p class="SVnormal">
+              &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> periodically checks for the presence of 
+ a license. If the <span class="mc-variable OEM.ProductName variable">PcVue</span> station distributing the license is shutdown, after 
+ a period of time the other instances of <span class="mc-variable OEM.ProductName variable">PcVue</span> will be unable to 
+ find their license and will also shutdown.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

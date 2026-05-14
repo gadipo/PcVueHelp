@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>EMAIL example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="EMAIL_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor56"></a>EMAIL Example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc331">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="EMAIL_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc331.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">This example exercises the EMAIL command. </p>
+        <p class="SVprogramCode">sub main ()</p>
+        <p class="SVprogramCode">email("SEND", "EmailProfile01", "a.n.other@company.com", "", "", "EmailSender Subject test", "EmailSender Message test");</p>
+        <p class="SVprogramCode">end sub</p>
+        <p class="SVnormal">where the file C\MAILCONFIG.XML has this minimal configuration:</p>
+        <p class="SVdataListing">&lt;?xml version="1.0" encoding="iso-8859-1"?&gt;</p>
+        <p class="SVdataListing">&lt;!--Message Configuration File--&gt;</p>
+        <p class="SVdataListing">&lt;MessageConfig&gt;</p>
+        <p class="SVdataListing">&lt;MailGeneralSettings DefaultTemplateName="" DefaultProfileName="" DefaultAttachmentEncoding="0" MaxAttachmentSize="1000" ProhibitedAttachmentFileExtensions="exe,dll,vbs,js" /&gt;</p>
+        <p class="SVdataListing">&lt;SmsGeneralSettings DefaultTemplateName="" DefaultProfileName="" /&gt;</p>
+        <p class="SVdataListing">&lt;MessageTemplates /&gt;</p>
+        <p class="SVdataListing">&lt;MailProfiles&gt;</p>
+        <p class="SVdataListing">&lt;MailProfile Name="EmailProfile01" Description=""&gt;</p>
+        <p class="SVdataListing">&lt;MailAccounts&gt;</p>
+        <p class="SVdataListing">&lt;MailAccount Name="EmailAccount01" Description="" SequenceNumber="1"&gt;</p>
+        <p class="SVdataListing">&lt;Sender Address="yourname@mycompany.com" DisplayName="" /&gt;</p>
+        <p class="SVdataListing">&lt;ReplyTo Address="" /&gt;</p>
+        <p class="SVdataListing">&lt;Server Type="0" Host="smtp.live.com" Port="25" DeliveryMethod="0" EncryptionMethod="1" AuthenticationMode="1" UserName="yourname@hotmail.com" UserPassword="yourpassword" /&gt;</p>
+        <p class="SVdataListing">&lt;/MailAccount&gt;</p>
+        <p class="SVdataListing">&lt;/MailAccounts&gt;</p>
+        <p class="SVdataListing">&lt;/MailProfile&gt;</p>
+        <p class="SVdataListing">&lt;/MailProfiles&gt;</p>
+        <p class="SVdataListing">&lt;SmsProfiles /&gt;</p>
+        <p class="SVdataListing">&lt;/MessageConfig&gt;</p>
+        <div class="note">
+            <p class="SVnormal">In the file content above, a Microsoft SMTP server is used as an example. You must have the proper SMTP server of the account in use for sending emails, with the Server Type line typically configured as follows:</p>
+            <p class="SVdataListing">&lt;Server Type="0" Host="smtp.example.com" Port="587" EncryptionMethod="1" AuthenticationMode="1" UserName=" yourname@example.com" UserPassword="yourpassword" /&gt;</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

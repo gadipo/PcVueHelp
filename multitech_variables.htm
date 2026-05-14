@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|MultiTech LoRaWAN gateway Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Configuration of the variables</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuration of the Variables</h1>
+        <p class="SVnormal">To define a variable as having a MultiTech LoRaWAN mapping, you can add the mapping definition in the variable's extended attribute, as configured in the svmgrMultiTechLoRa.ini file.</p>
+        <p class="SVnormal">The mapping takes the form of a string using the following syntax, where [] denotes optional parameters:</p>
+        <p class="SVprogramCode">LORA#GatewayName#DeviceEui#JsonKey[#Filter][#X:Y|#X.Z][#V:W]</p>
+        <div class="warning">
+            <p class="SVnormal">The configuration and mapping definitions are case sensitive.</p>
+        </div>
+        <ul style="list-style-type: disc;">
+            <li>LORA: The key that defines the variable as having a LoRaWAN mapping.</li>
+            <li>GatewayName: The name of the Gateway as defined in the svmgrMultiTechLoRa.ini file. Please refer to the parameter <u>Name</u> in the [Gateway_X] section).</li>
+            <li>DeviceEui: The EUI identifier of the device for which you want to extract data. Every LoRaWAN device has a unique EUI identifier of 8 hexadecimal bytes separated by hyphens.<br />Example: 00-18-b2-00-00-00-15-aa<br />If the format is invalid, a message is displayed in the Event Viewer.</li>
+            <li>JsonKey: The key of the Json Object which value is to be retrieved.<br />If omitted, the entire Json object is retrieved if the <span class="mc-variable OEM.ProductName variable">PcVue</span> variable is of type text.</li>
+            <li>Filter: Optional parameter used to filter messages that have to be processed and their payload extracted. If a message does not match the filter, it is ignored and not processed.<br />Example: xx-yy-zz The payload must start with either xx, yy or zz for the payload to be processed.</li>
+        </ul>
+        <h2 class="SVheading2">Json objects</h2>
+        <p class="SVnormal">A Json object is a dictionary of key and value pairs separated with a character ':' (semicolon). The MultiTech Gateway sends messages wrapped in a Json object. The purpose of this Add-on is to extract values from the Json object by specifying the corresponding key.</p>
+        <p class="SVnormal">Example: Using the following Json object and variable text extended attributes.</p>
+        <p class="SVprogramCode">{ "ack": false, "payload": [ 64, 96, 0, 7, 0, 0, 0, 0, 0, 1, 2 ], “freq”: “868.9” "eui": "00-18-b2-00-00-00-15-aa", "_msgid": "ee21c939.11de38" }</p>
+        <ul style="list-style-type: disc;">
+            <li>LORA#GW1#00-18-b2-00-00-00-15-aa#eui<br />Extract the value "00-18-b2-00-00-00-15-aa" if the message is received from GW1.</li>
+            <li>LORA#GW1#00-18-b2-00-00-00-15-aa#payload<br />Extract the value [ 64, 96, 0, 7, 0, 0, 0, 0, 0, 1, 2 ].</li>
+            <li>LORA#GW1#00-18-b2-00-00-00-15-aa#freq<br />Extract the value 868.90.</li>
+        </ul>
+        <h2 class="SVheading2">Optional parameters if the Json value is an integer</h2>
+        <p class="SVprogramCode">LORA#GatewayName#DeviceEui#JsonKey[#Filter]#X:Y</p>
+        <ul>
+            <li>X: If the Json value is an integer (decimal or hexadecimal) and you want to apply a byte mask to the value, this parameter is the offset in bytes for the mask.</li>
+            <li>Y: If the Json value is an integer (decimal or hexadecimal), size in bits of the mask to apply to the integer value. The Json value you want to retrieve should match the type of the <span class="mc-variable OEM.ProductName variable">PcVue</span> variable. However, in some cases, conversions are possible.</li>
+        </ul>
+        <p class="SVnormal">Example: The value “ffa0” is retrieved from key “freq”.</p>
+        <ul style="list-style-type: disc;">
+            <li>To extract value "a":<br />Use LORA#GW1#00-18-b2-00-00-00-15-aa#freq#1:4<br />Starting at the 2<sup>nd</sup>  byte (offset X=1), extract the next 4 bits (size Y=4).</li>
+            <li>
+                <p>To extract value “ff”: offset X=0, size Y=8<br />Use LORA#GW1#00-18-b2-00-00-00-15-aa#freq#0:8</p>
+            </li>
+        </ul>
+        <h2 class="SVheading2">Optional parameters if the Json value is an array</h2>
+        <p class="SVprogramCode">LORA#GatewayName#DeviceEui#JsonKey[#Filter]#X:Y</p>
+        <p class="SVprogramCode">LORA#GatewayName#DeviceEui#JsonKey[#Filter]#X.Z</p>
+        <ul>
+            <li>X: If the Json value is an array, the index of the first element to extract from the array (starts at 0).</li>
+            <li>Y: If the Json value is an array, the number of elements to extract starting from the array index X.</li>
+            <li>Z: If the Json value is an array, offset of the bit to extract.</li>
+        </ul>
+        <p class="SVnormal">If the array contains numerical values, you can extract them using the index of the first element and number of elements to extract (X:Y).</p>
+        <p class="SVnormal">Examples:<br />0:1 extracts the first element of the array.<br />4:1 extracts the fifth element of the array.</p>
+        <p class="SVnormal">If the array contains numerical values, you can extract a bit using the index of the element to extract and offset of the bit (X.Z). Implicitly, the number of elements to extract Y is 1.</p>
+        <p class="SVnormal">Example.<br />2.5 extracts the 6<sup>th</sup> bit of the 3<sup>rd</sup> element of the array.</p>
+        <div class="warning">
+            <p class="SVnormal">If the number of elements to extract is greater than 1 (ex: 0:3), the Add-on will consider each value to be a byte and will aggregate them together as bytes.</p>
+        </div>
+        <p class="SVnormal">Examples: Using the same Json object as above.</p>
+        <ul style="list-style-type: disc;">
+            <li>Using LORA#GW1#00-18-b2-00-00-00-15-aa#payload#3:1<br />Extract a numerical value of “7”.</li>
+            <li>Using LORA#GW1#00-18-b2-00-00-00-15-aa#payload#0:2<br />Extract a numerical value of 64*2<sup>8</sup>  + 96= 16480</li>
+            <li>Using LORA#GW1#00-18-b2-00-00-00-15-aa#payload#1.2<br />Extract the 3<sup>rd</sup> bit of 96 (hexa) or 1001 0110 = 1.</li>
+        </ul>
+        <h2 class="SVheading2">Tips when extracting integer values or arrays</h2>
+        <ul style="list-style-type: disc;">
+            <li>If the Json value type is unknown, you can use a text variable to receive a string representation of the Json value corresponding to the specified key. Increase the text size (more than 1000 characters).</li>
+            <li>If a Json string contains a numerical value, the conversion is possible. You can use a register variable to receive the value. If the value is an integer, you can also apply a bit mask using index and number of elements.</li>
+            <li>If the Json value is a Boolean (true or false).<br />You should always use a bit variable to receive the value. Use the X.Z format.</li>
+        </ul>
+        <h2 class="SVheading2">Additional parameters to filter the message according to the payload content</h2>
+        <p class="SVnormal">Normally when a new message is received, the variable value is updated. But an IoT end-device can send different types of payload (data frame, configuration frame, status frame, alarm frame, etc.).</p>
+        <p class="SVnormal">In this case, you can use the format #V:W as a filter for not updating the mapped variable based on the payload value.</p>
+        <ul style="list-style-type: disc;">
+            <li>V: Index of the element to test.</li>
+            <li>W: Value in hexadecimal (0x) to test.</li>
+        </ul>
+        <p class="SVnormal">If the filter matches the Json payload, then the message is taken into account and the value of the variable is updated based on the received payload. Otherwise, the message is ignored and there is no update of the variable.</p>
+        <p class="SVnormal">Example: Using the same Json object as above.</p>
+        <p class="SVprogramCode">{ "ack": false, "payload": [ 64, 96, 0, 7, 0, 0, 0, 0, 0, 1, 2 ], “freq”: “868.9” "eui": "00-18-b2-00-00-00-15-aa", "_msgid": "ee21c939.11de38" }</p>
+        <ul style="list-style-type: disc;">
+            <li>Using LORA#GW1#00-18-b2-00-00-00-15-aa#payload#2:3#0:0x40<br />You want to test the value of the 1<sup>st</sup> byte (index 0) and compare it against the value 0x40 = 64. The test is positive, the variable value will be updated.</li>
+            <li>Using LORA#GW1#00-18-b2-00-00-00-15-aa#payload#2:3#4:0x53<br />You want to test the value of the 5<sup>th</sup> byte (index 4) and test it against 0x53 = 83. The test is negative, the variable value will not be updated.</li>
+        </ul>
+        <h2 class="SVheading2">Variable status</h2>
+        <ul style="list-style-type: disc;">
+            <li>Invalid – NS COM<br />The variable is properly configured but the desired Json value could not be retrieved from the device. This could be either if no Json object was received or if the desired key was not found.<br />Check the traces and event viewer for further information.</li>
+            <li>Invalid – NS FMT<br />The extended attribute format for mapping is incorrect. It can be either that the gateway was not found in usrmgrLoRaTCP.ini, or the device EUI has an invalid format.<br />This can also happen if the mapping parameters do not match the type of variable.<br />Check the traces and event viewer for further information.</li>
+        </ul>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

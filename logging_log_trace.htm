@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Logging and tracing</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Logging and tracing</h1>
+        <p class="SVnormal">In addition to traces for diagnostic purpose for which more information is available in the <a href="../Troubleshooting/Log_files_overview.htm">Troubleshooting</a> book, <span class="mc-variable OEM.ProductName variable">PcVue</span> also supports logging and tracing for the purpose of activity monitoring.<br />Activity monitoring is an important facet of deployment in production as it permits collecting events relevant to alerting and incident management, forensic investigations and post mortem analysis. Logging is typically used in conjunction with the <a href="../Extras/snmp_agent_overview.htm">SNMP Agent Add-on</a>. It also plays a major role in auditing and regulatory compliance activities.</p>
+        <p class="SVnormal">Logging and tracing features support the following type of targets:</p>
+        <ul>
+            <li>
+                <p class="SVnormal">Storage of events in local log files and display with the Log monitor</p>
+            </li>
+            <li>
+                <p class="SVnormal">Windows event logs and display with the Windows event viewer</p>
+            </li>
+            <li>
+                <p class="SVnormal">Event sending for collection by external log aggregators, including Syslog servers</p>
+            </li>
+        </ul>
+        <p class="SVnormal">This topic describes how to customize the logging and tracing default settings and how to configure a Syslog target.</p>
+        <div class="note">
+            <p class="SVnormal">Logging and tracing in <span class="mc-variable OEM.ProductName variable">PcVue</span> is based on the NLog open source project.<br />NLog is a flexible logging platform, it makes it easy to send events to several targets including files, databases and log aggregators. More information is available at <a href="https://github.com/NLog/NLog" target="_blank">https://github.com/NLog/NLog</a></p>
+            <p class="SVnormal">Please contact your reseller if your requirements go beyond the information in this topic and need assistance to customize logging and tracing.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">Because of its potential impact on the IT infrastructure, the configuration of logging and tracing targets shall be done according to the applicable IT policy and under the supervision of a responsible system administrator.</p>
+        </div>
+        <h2 class="SVheading2">Default NLog settings</h2>
+        <p class="SVnormal">NLog is configured using an Xml file called NLog.Common.config found in the <span class="mc-variable OEM.ProductName variable">PcVue</span> Bin folder. The configuration file provided by default as part of the installation defines two local targets, a file output called <b>sv.log</b> and the <b>Windows event log</b>. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show file</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <div class="codeSnippet_0 codeSnippet">
+                <div class="codeSnippetCaption_0 codeSnippetCaption">
+                    <p>NLog.Common.config</p>
+                </div>
+                <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: XML;" class="codeSnippetBody_0 codeSnippetBody">
+                    <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                        <tbody>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #969896; ">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&lt;nlog</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;<span style="color: #795da3; ">xmlns</span><span style="color: #df5000; ">="http://www.nlog-project.org/schemas/NLog.xsd"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;xmlns:<span style="color: #795da3; ">xsi</span><span style="color: #df5000; ">="http://www.w3.org/2001/XMLSchema-instance"</span>&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #969896; ">&lt;!-- go to https://github.com/nlog/NLog/wiki/Configuration-file for more information --&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;extensions&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;add <span style="color: #795da3; ">assemblyFile</span><span style="color: #df5000; ">="NLogAI.dll"</span>/&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/extensions&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;variable <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="logFilesDir"</span>&#160;<span style="color: #795da3; ">value</span><span style="color: #df5000; ">="${binDir}\Log Files"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #969896; ">&lt;!--&lt;variable name="logFilesDir" value="${binDir}\..\Logs" /&gt;--&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;variable <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="localDateTime"</span>&#160;<span style="color: #795da3; ">value</span><span style="color: #df5000; ">="${date:format=yyyy/MM/ddTHH\:mm\:ss.fffzzz}"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;variable <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="universalDateTime"</span>&#160;<span style="color: #795da3; ">value</span><span style="color: #df5000; ">="${date:universalTime=true:</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; "><span style="color: #df5000; ">&#160;&#160;&#160;&#160;format=yyyy/MM/ddTHH\:mm\:ss.fffZ}"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;variable <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="sessionId"</span>&#160;<span style="color: #795da3; ">value</span><span style="color: #df5000; ">="${processinfo:property=SessionId}"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;variable <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="userName"</span>&#160;<span style="color: #795da3; ">value</span><span style="color: #df5000; ">="${windows-identity:userName=true:domain=false}"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;variable <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="userNameWithDomain"</span>&#160;<span style="color: #795da3; ">value</span><span style="color: #df5000; ">="${windows-identity:userName=true:domain=true}"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;variable <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="shortProcessName"</span>&#160;<span style="color: #795da3; ">value</span><span style="color: #df5000; ">="${processname:fullName=false}"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;variable <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="fullProcessName"</span>&#160;<span style="color: #795da3; ">value</span><span style="color: #df5000; ">="${processname:fullName=true}"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;targets&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;default-target-parameters xsi:<span style="color: #795da3; ">type</span><span style="color: #df5000; ">="File"</span>&#160;<span style="color: #795da3; ">encoding</span><span style="color: #df5000; ">="utf-8"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;target</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">name</span><span style="color: #df5000; ">="sv.aiXml"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;xsi:<span style="color: #795da3; ">type</span><span style="color: #df5000; ">="File"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">fileName</span><span style="color: #df5000; ">="${logFilesDir}\sv.log"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">archiveFileName</span><span style="color: #df5000; ">="${logFilesDir}\sv-{#}.log"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">archiveAboveSize</span><span style="color: #df5000; ">="52428800"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">archiveNumbering</span><span style="color: #df5000; ">="Rolling"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">maxArchiveFiles</span><span style="color: #df5000; ">="3"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">layout</span><span style="color: #df5000; ">="${aiXmlEvent:indent=true:newLineOnAttributes=false:</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; "><span style="color: #df5000; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;includeSourceInfo=false:includeCallSite=false:includeStackTrace=false}"</span>&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/target&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/targets&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;targets&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;target</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">name</span><span style="color: #df5000; ">="sv.EventLog"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;xsi:<span style="color: #795da3; ">type</span><span style="color: #df5000; ">="EventLog"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">log</span><span style="color: #df5000; ">="Application"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">source</span><span style="color: #df5000; ">="SV Applications"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #795da3; ">layout</span><span style="color: #df5000; ">="[${logger}]${newline}${message}${newline}${newline}</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; "><span style="color: #df5000; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;UserAccount: ${userNameWithDomain}${newline}SessionId:</span></span>&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; "><span style="color: #df5000; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;${sessionId}${newline}ProcessName: ${shortProcessName}</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; "><span style="color: #df5000; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;${newline}ProcessId: ${processid}${newline}ThreadId: ${threadid}"</span>&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/target&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/targets&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;rules&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;logger <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="*"</span>&#160;<span style="color: #795da3; ">minlevel</span><span style="color: #df5000; ">="Debug"</span>&#160;<span style="color: #795da3; ">writeTo</span><span style="color: #df5000; ">="sv.aiXml"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;logger <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="*"</span>&#160;<span style="color: #795da3; ">minlevel</span><span style="color: #df5000; ">="Info"</span>&#160;<span style="color: #795da3; ">writeTo</span><span style="color: #df5000; ">="sv.EventLog"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/rules&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;include <span style="color: #795da3; ">file</span><span style="color: #df5000; ">="NLog.Syslog.config"</span>&#160;<span style="color: #795da3; ">ignoreErrors</span><span style="color: #df5000; ">="true"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;include <span style="color: #795da3; ">file</span><span style="color: #df5000; ">="NLog.Custom.config"</span>&#160;<span style="color: #795da3; ">ignoreErrors</span><span style="color: #df5000; ">="true"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&lt;/nlog&gt;</span></pre>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <p class="SVnormal">It is outside the scope of this help to provide a full description of every element, but the basic structure is as follows. The following are top level element with targets and rules mandatory in any configuration:</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted">targets - Defines the log targets / outputs</p>
+            </li>
+            <li>
+                <p class="SVbulleted">rules - Defines which logger objects and log levels are active, and their output targets</p>
+            </li>
+            <li>
+                <p class="SVbulleted">extensions – loads NLog extensions from a *.dll file</p>
+            </li>
+            <li>
+                <p class="SVbulleted">include - Include external configuration file</p>
+            </li>
+            <li>
+                <p class="SVbulleted">variable - Defines configuration variables and their values. For example <br />&lt;variable name="logFilesDir" value="${binDir}\Log Files" /&gt; defines the location of <span class="mc-variable OEM.ProductName variable">PcVue</span>'s log files folder</p>
+            </li>
+        </ul>
+        <p class="SVbulleted">Each target is represented by a target element. There are two mandatory attributes for each target:</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted">name - The name by which the target is known in the configuration file</p>
+            </li>
+            <li>
+                <p class="SVbulleted">xsi:type - The type of target - for example File or Database<br /></p>
+            </li>
+        </ul>
+        <p class="SVbulleted">In addition to these attributes, targets accept other attributes dependent on the target type. For example, for the file target:</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted"> fileName defines the name of the actual target file</p>
+            </li>
+            <li>
+                <p class="SVbulleted">archiveFileName, archiveAboveSize, archiveNumbering and maxArchiveFiles control the size of the target file and how it is archived once that size is reached</p>
+            </li>
+            <li>
+                <p class="SVbulleted">layout - The contents and structure of the output</p>
+            </li>
+        </ul>
+        <p class="SVbulleted">And for the Windows event log target.</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p>source - The source of the messages which will appear in the Windows Event Viewer</p>
+            </li>
+            <li>
+                <p>layout - The contents and structure of the output</p>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">A full description of the NLog configuration elements can be found at <a href="https://github.com/nlog/NLog/wiki/Configuration-file" target="_blank">https://github.com/nlog/NLog/wiki/Configuration-file</a></p>
+        </div>
+        <h2 class="SVheading2">Log levels</h2>
+        <p class="SVnormal">Each log entry has a level. And each logger is configured to include or ignore certain levels. A common configuration is to specify the minimum level where that level and higher levels are included. For example, if the minimum level is Info, then Info, Warn, Error and Fatal are logged, but Debug and Trace are ignored.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 80%;">
+            <col />
+            <col />
+            <col style="width: 287px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Log level</td>
+                    <td class="SVtableHeading">Description</td>
+                    <td class="SVtableHeading">Example</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Trace</td>
+                    <td class="SVtable">Most verbose level. Used during application development for debugging</td>
+                    <td class="SVtable">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Debug</td>
+                    <td class="SVtable">Internal events of interest</td>
+                    <td class="SVtable">RunningAsService = false</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Info</td>
+                    <td class="SVtable">Information that highlights progress or application lifetime events</td>
+                    <td class="SVtable">Project loading steps</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Warn</td>
+                    <td class="SVtable">Warnings about validation issues or temporary failures that can be recovered</td>
+                    <td class="SVtable">Unable to find valid protection key</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Error</td>
+                    <td class="SVtable">Errors where functionality has failed or exceptions have been trapped</td>
+                    <td class="SVtable">Watchdog errors</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Fatal</td>
+                    <td class="SVtable">Critical level. Application is about to abort</td>
+                    <td class="SVtable">Winsock API version is invalid</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">The sv.log target and the Log Monitor</h2>
+        <p class="SVnormal">The default settings in the NLog configuration file includes a local log file target that generates a file called sv.log in the &lt;InstallDir&gt;\Bin\Log Files folder.  The generated file has a maximum size of 50 Mb, after which it is automatically archived,  and recording starts again. The archive files are named sv-n.log, where n is a number from 0 to 2 (sv-0.log is the most recent).</p>
+        <p class="SVnormal">The contents of the sv.log file can be viewed in real-time using the <a href="logging_log_monitor.htm">Log Monitor</a>. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div>
+            <img src="../Resources/Images/Deployment/logging_log_monitor_708x414.png" MadCap:targetName="t2" style="width: 708;height: 414;display: none;" />
+        </div>
+        <h2 class="SVheading2">The Windows event log target and the Windows event viewer</h2>
+        <p class="SVnormal">The default settings in the NLog configuration file includes a target that sends events to the Windows event log.<br />The Windows event log can be viewed using the Windows event viewer. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div>
+            <img src="../Resources/Images/Deployment/logging_event_viewer_698x414.png" MadCap:targetName="t3" style="width: 698;height: 414;display: none;" />
+        </div>
+        <h2 class="SVheading2">Settings for the Syslog target</h2>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span>'s implementation of NLog includes a Syslog target which allows sending events to a Syslog aggregator. Syslog is defined by several RFCs and the default configuration requires tuning to accommodate the specific requirements of the tools in use in your system. Briefly, the RFCs are as follow and available on the IETF web site:</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted">RFC 3164 - The original specification for the message format</p>
+            </li>
+            <li>
+                <p class="SVbulleted">RFC 5424 - Later specification originating from when Syslog became a recognized standard</p>
+            </li>
+            <li>
+                <p class="SVbulleted">RFC 5425 - Support for Syslog over TLS (transport layer security)</p>
+            </li>
+            <li>
+                <p class="SVbulleted">RFC 5426 - Support for Syslog over UDP</p>
+            </li>
+            <li>
+                <p>RFC 6587 - Transmission of Syslog Messages over TCP</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The Syslog target is configured by adding a file named NLog.Targets.Syslog.config in the Bin folder. To see an example of this file click here. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show file</a></p>
+        <div MadCap:targetName="t4" style="display: none;">
+            <div class="codeSnippet_0 codeSnippet">
+                <div class="codeSnippetCaption_0 codeSnippetCaption">
+                    <p>NLog.Syslog.config sample</p>
+                </div>
+                <div MadCap:useLineNumbers="False" MadCap:lineNumberStart="1" MadCap:continue="False" style="mc-code-lang: XML;" class="codeSnippetBody_0 codeSnippetBody">
+                    <table style="border-collapse: collapse; border-spacing: 0; border: none;">
+                        <tbody>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #969896; ">&lt;?xml version="1.0" encoding="utf-8" ?&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&lt;nlog</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;<span style="color: #795da3; ">xmlns</span><span style="color: #df5000; ">="http://www.nlog-project.org/schemas/NLog.xsd"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;xmlns:<span style="color: #795da3; ">sl</span><span style="color: #df5000; ">="http://www.nlog-project.org/schemas/NLog.Targets.Syslog.xsd"</span></span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&#160;&#160;xmlns:<span style="color: #795da3; ">xsi</span><span style="color: #df5000; ">="http://www.w3.org/2001/XMLSchema-instance"</span>&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;<span style="color: #969896; ">&lt;!-- go to https://github.com/luigiberrettini/NLog.Targets.Syslog for more information --&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;<span style="color: #63a35c; ">&lt;extensions&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;add <span style="color: #795da3; ">assemblyFile</span><span style="color: #df5000; ">="NLog.Targets.Syslog.dll"</span>/&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;<span style="color: #63a35c; ">&lt;/extensions&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;<span style="color: #63a35c; ">&lt;targets&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;target <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="sv.Syslog"</span> xsi:<span style="color: #795da3; ">type</span><span style="color: #df5000; ">="sl:Syslog"</span>&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:layout xsi:<span style="color: #795da3; ">type</span><span style="color: #df5000; ">="SimpleLayout"</span>&#160;<span style="color: #795da3; ">text</span><span style="color: #df5000; ">="${message}${exception:format=ToString,StackTrace}"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:enforcement&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:splitOnNewLine&gt;</span>false<span style="color: #63a35c; ">&lt;/sl:splitOnNewLine&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:transliterate&gt;</span>false<span style="color: #63a35c; ">&lt;/sl:transliterate&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:replaceInvalidCharacters&gt;</span>false<span style="color: #63a35c; ">&lt;/sl:replaceInvalidCharacters&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:truncateFieldsToMaxLength&gt;</span>true<span style="color: #63a35c; ">&lt;/sl:truncateFieldsToMaxLength&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:truncateMessageTo&gt;</span>1024<span style="color: #63a35c; ">&lt;/sl:truncateMessageTo&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/sl:enforcement&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:messageCreation&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #969896; ">&lt;!-- facility name: Local0, Local1, Local2, Local3, Local4, Local5, Local6 or Local7 --&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:facility&gt;</span>Local4<span style="color: #63a35c; ">&lt;/sl:facility&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:perLogLevelSeverity&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:fatal&gt;</span>Critical<span style="color: #63a35c; ">&lt;/sl:fatal&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:error&gt;</span>Error<span style="color: #63a35c; ">&lt;/sl:error&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:warn&gt;</span>Warning<span style="color: #63a35c; ">&lt;/sl:warn&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:info&gt;</span>Notice<span style="color: #63a35c; ">&lt;/sl:info&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:debug&gt;</span>Informational<span style="color: #63a35c; ">&lt;/sl:debug&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:trace&gt;</span>Debug<span style="color: #63a35c; ">&lt;/sl:trace&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/sl:perLogLevelSeverity&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #969896; ">&lt;!-- rfc: Rfc3164 or Rfc5424 --&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:rfc&gt;</span>Rfc5424<span style="color: #63a35c; ">&lt;/sl:rfc&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #969896; ">&lt;!-- settings related to RFC 3164 --&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:rfc3164 <span style="color: #795da3; ">hostname</span><span style="color: #df5000; ">="${machinename}"</span>&#160;<span style="color: #795da3; ">tag</span><span style="color: #df5000; ">="${logger}: "</span>&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:outputPri&gt;</span>true<span style="color: #63a35c; ">&lt;/sl:outputPri&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:outputHeader&gt;</span>true<span style="color: #63a35c; ">&lt;/sl:outputHeader&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/sl:rfc3164&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #969896; ">&lt;!-- settings related to RFC 5424 --&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:rfc5424 <span style="color: #795da3; ">hostname</span><span style="color: #df5000; ">="${machinename}"</span>&#160;<span style="color: #795da3; ">appName</span><span style="color: #df5000; ">="${logger}"</span>&#160;<span style="color: #795da3; ">procId</span><span style="color: #df5000; ">="${processid}"</span>&#160;<span style="color: #795da3; ">msgId</span><span style="color: #df5000; ">="-"</span>&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:disableBom&gt;</span>false<span style="color: #63a35c; ">&lt;/sl:disableBom&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/sl:rfc5424&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/sl:messageCreation&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:messageSend&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #969896; ">&lt;!-- protocol: UDP or TCP --&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:protocol&gt;</span>UDP<span style="color: #63a35c; ">&lt;/sl:protocol&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #969896; ">&lt;!-- settings related to UDP --&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:udp&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:server&gt;</span>127.0.0.1<span style="color: #63a35c; ">&lt;/sl:server&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:port&gt;</span>514<span style="color: #63a35c; ">&lt;/sl:port&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/sl:udp&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #969896; ">&lt;!-- settings related to TCP --&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:tcp&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:server&gt;</span>127.0.0.1<span style="color: #63a35c; ">&lt;/sl:server&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:port&gt;</span>1468<span style="color: #63a35c; ">&lt;/sl:port&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #969896; ">&lt;!-- framing: nonTransparent or octetCounting --&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:framing&gt;</span>octetCounting<span style="color: #63a35c; ">&lt;/sl:framing&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #969896; ">&lt;!-- settings related to TLS --&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:tls&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:enabled&gt;</span>false<span style="color: #63a35c; ">&lt;/sl:enabled&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:useClientCertificates&gt;</span>false<span style="color: #63a35c; ">&lt;/sl:useClientCertificates&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:certificateStoreLocation&gt;&lt;/sl:certificateStoreLocation&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:certificateStoreName&gt;&lt;/sl:certificateStoreName&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:certificateFilterType&gt;&lt;/sl:certificateFilterType&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;sl:certificateFilterValue&gt;&lt;/sl:certificateFilterValue&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/sl:tls&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/sl:tcp&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/sl:messageSend&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;/target&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;<span style="color: #63a35c; ">&lt;/targets&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;<span style="color: #63a35c; ">&lt;rules&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;&#160;&#160;<span style="color: #63a35c; ">&lt;logger <span style="color: #795da3; ">name</span><span style="color: #df5000; ">="*"</span>&#160;<span style="color: #795da3; ">minlevel</span><span style="color: #df5000; ">="Info"</span>&#160;<span style="color: #795da3; ">writeTo</span><span style="color: #df5000; ">="sv.Syslog"</span> /&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;&#160;<span style="color: #63a35c; ">&lt;/rules&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; "><span style="color: #63a35c; ">&lt;/nlog&gt;</span></pre>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td MadCap:isCodeCell="True" style="border: none; padding-left: 1em;"><pre style="margin: 0; font-family: 'Consolas'; ">&#160;</pre>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <p class="SVnormal">This sample file includes setting for both RFC 3164 or RFC 5424, both the TCP and UDP protocols, and TLS. If using this example as a basis for your configuration, make sure you set the <u>rfc</u> setting properly.</p>
+        <p class="SVnormal">It is outside the scope of this help to provide a full description of every element, but the basic structure of the Syslog target element is as follows:</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p class="SVbulleted"><u>enforcement</u> - Settings related to enforcing message rules. The maximum length of a message is defined by the supported RFC's and the setting  <u>TruncateMessageTo</u> must be set accordingly.</p>
+            </li>
+            <li>
+                <p class="SVbulleted"><u>messageCreation</u> - Settings related to message creation in the format defined by either RFC 3164 or RFC 5424.</p>
+            </li>
+            <li>
+                <p class="SVbulleted"><u>messageSend</u> - Settings related to how the message is sent. This includes the protocol used, either TCP or UDP, the server and port address and transport layer security parameters. </p>
+            </li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">A full description of the Syslog configuration elements for NLog can be found at <a href="https://github.com/luigiberrettini/NLog.Targets.Syslog/tree/v6.0.3" target="_blank">https://github.com/luigiberrettini/NLog.Targets.Syslog</a></p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">While the base NLog and Syslog components provided as part of the installation packages are kept up-to-date on a regular basis, some configuration elements described on the GitHub pages given here as references may only be applicable to a version of the components that is not yet provided with <span class="mc-variable OEM.ProductName variable">PcVue</span>&#160;.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">When using TCP, the setting called <u>framing</u>, defined in RFC 6587 (octetCounting vs nonTransparent), often need to be adjusted to fit the Syslog receiver's expectation. Please refer to the documentation of the Syslog aggregator you use.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

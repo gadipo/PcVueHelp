@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Replicating a database (SQL Server)" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="DatabaseManager.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Filtering and Scheduling the Replication</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor6"></a>Filtering and Scheduling the Replication</h1>
+        <p class="SVnormal">This continues with the Replication Setup Wizard from 
+ the previous topic. The process of configuring the filtering and scheduling 
+ is as follows. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t8"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show flowchart</a></p>
+        <div MadCap:targetName="t8" style="display: none;">
+            <p>
+                <img src="../Resources/Images/DatabaseManager/replication_mode_flowchart.png" style="border-style: none;border: none;" border="0" />
+            </p>
+        </div>
+        <p class="SVnormal">If at any interim stage you wish to change your choices, 
+ select the Back button and repeat the previous steps.</p>
+        <p class="SVnormal"><a name="kanchor7"></a>The Running Options dialog enables you to filter the 
+ data and to schedule the replication. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t7"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t7" style="display: none;">
+            <p>
+                <img src="../Resources/Images/DatabaseManager/Running_Options_dialog.png" style="border-style: none;border: none;float: none;" border="0" />
+            </p>
+        </div>
+        <h2 class="SVheading2">On demand execution</h2>
+        <ol start="1">
+            <li class="SVnumbered" value="1">In the Running Options 
+ dialog, select one of the options in the On Demand section.</li>
+        </ol>
+        <table style="border-spacing: ;border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 200px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Option</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Time-based absolute filter</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Select data between two dates.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Time-based filter</p>
+                </td>
+                <td colspan="1" rowspan="1">
+                    <p class="SVtable">Select data in a duration.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="SVtable">All data</p>
+                </td>
+                <td>
+                    <p class="SVtable">No filter - all data are passed.</p>
+                </td>
+            </tr>
+            <tr>
+                <td>Delete pending temporary records before starting</td>
+                <td>Force deletion of records of a previously generated <i>TempTimeTable</i> table to prevent resuming steps of a previous, but failed, replication.</td>
+            </tr>
+        </table>
+        <ol start="2">
+            <li class="SVnumbered" value="2">Click on Next.</li>
+        </ol>
+        <p class="SVnumbered" style="margin-left: 48px;">If you chose All Data, you are asked to 
+ confirm the configuration.</p>
+        <p class="SVnumbered" style="margin-left: 48px;">If you chose Time based absolute filter, 
+ the dialog Data to Replicate opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t6"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t6" style="display: none;">
+            <p>
+                <img src="../Resources/Images/DatabaseManager/Replication_Wizard_Filter_Timebased_absolute.png" style="border-style: none;border: none;float: none;" border="0" />
+            </p>
+        </div>
+        <p class="SVnumbered" style="margin-left: 48px;">If you chose Time based filter, the dialog 
+ Data to Replicate opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t5"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t5" style="display: none;">
+            <p>
+                <img src="../Resources/Images/DatabaseManager/Replication_Wizard_Filter_Timebased.png" style="border-style: none;border: none;float: none;" border="0" />
+            </p>
+        </div>
+        <ol start="3" style="list-style: decimal;list-style-type: decimal;">
+            <li class="SVnumbered" value="3">Use the drop-down 
+ boxes to set a start date and time and an end date and time. Click on 
+ Next.</li>
+        </ol>
+        <h2 class="SVheading2">Scheduled execution</h2>
+        <div class="note">
+            <p class="SVnormal">These options only apply if Microsoft SQL Server is used. 
+ In Microsoft SQL Server Express Edition, only the On Demand options 
+ are available.</p>
+        </div>
+        <ol>
+            <li class="SVnumbered" value="1">Select one of the 
+ options.</li>
+        </ol>
+        <table style="border-spacing: ;" width="100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td style="width: 16.795%;" valign="top" width="16.795%">
+                    <p class="SVtableHeading">Option</p>
+                </td>
+                <td style="width: 83.205%;" width="83.205%">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="width: 16.795%;" width="16.795%">
+                    <p class="SVtable">Time based filter</p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 83.205%;" width="83.205%">
+                    <p class="SVtable">Select data in a duration.</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 16.795%;" width="16.795%">
+                    <p class="SVtable">All data</p>
+                </td>
+                <td style="width: 83.205%;" width="83.205%">
+                    <p class="SVtable">No filter - all data are passed.</p>
+                </td>
+            </tr>
+        </table>
+        <ol start="2">
+            <li class="SVnumbered" value="2">Click on Next. If 
+ you selected All Data, this takes you to the dialog Schedule Your Application, 
+ below Step 3. If you chose Select Time Based Filter, the dialog Time Based Filter 
+ opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t4" style="display: none;"><p><img src="../Resources/Images/DatabaseManager/Replication_Wizard_Filter_Timebased.png" style="border-style: none;border: none;" border="0" /></p></div></li>
+        </ol>
+        <ol start="3">
+            <li class="SVnumbered" value="3">The dialog Schedule 
+ Your Application opens. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t3" style="display: none;"><p><img src="../Resources/Images/DatabaseManager/Replication_Wizard_Data_to_Replicate_dialog.png" style="border-style: none;border: none;" border="0" /></p></div></li>
+        </ol>
+        <table style="border-spacing: ;" width="100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td style="width: 16.795%;" valign="top" width="16.795%">
+                    <p class="SVtableHeading">Section</p>
+                </td>
+                <td style="width: 83.205%;" width="83.205%">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="width: 16.795%;" width="16.795%">
+                    <p class="SVtable">General </p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 83.205%;" width="83.205%">
+                    <p class="SVtable">Set a start date and time.</p>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 16.795%;" width="16.795%">
+                    <p class="SVtable">Repeat </p>
+                </td>
+                <td style="width: 83.205%;" width="83.205%">
+                    <p class="SVtable">Set the period (in hours/days/weeks/months/years - or 
+ None).</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" style="width: 16.795%;" width="16.795%">
+                    <p class="SVtable">End </p>
+                </td>
+                <td colspan="1" rowspan="1" style="width: 83.205%;" width="83.205%">
+                    <p class="SVtable">Optionally set an ending date and time.</p>
+                </td>
+            </tr>
+        </table>
+        <ol start="4" style="list-style: decimal;list-style-type: decimal;">
+            <li class="SVnumbered" value="4">Configure these options 
+ then click on Next.</li>
+        </ol>
+        <h2 class="SVheading2">Confirming the configuration</h2>
+        <ul start="2">
+            <li class="SVbulleted"><a name="kanchor8"></a>After the dialogs 
+ for Scheduled or On Demand Execution, a confirmation dialog opens. Click 
+ on Finish to complete the configuration. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t2" style="display: none;"><p><img src="../Resources/Images/DatabaseManager/Replication_Wizard_End_dialog.png" style="border-style: none;border: none;" border="0" /></p></div></li>
+        </ul>
+        <p class="SVnormal">The configured replication process appears in the Database 
+ Manager. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../Resources/Images/DatabaseManager/Replication_General_tab.png" style="border-style: none;border: none;" border="0" />
+            </p>
+        </div>
+        <h2 class="SVheading2">Where the configuration is stored</h2>
+        <div class="note">
+            <p class="SVnormal">At this stage, a configuration file has been created, but 
+ the replication process has not been sent to the SQL server nor launched, 
+ even for the option Run Now.</p>
+        </div>
+        <p class="SVnormal">The configuration file is named REPLICATIONCONFIGS.XML 
+ and is stored in the BIN folder of the software.</p>
+        <div class="note">
+            <p class="SVnormal">The periodic execution is not launched automatically on 
+ SQL Server Express Edition.</p>
+        </div>
+        <p class="SVnormal">SQL Server Express Edition does not include the Scheduler 
+ (an SQL Agent) for doing so. If you are using SQL Server Express Edition 
+ and you wish to use a Scheduled replication, please use the command line 
+ tool as described in the topic <a href="Using_the_Command_Line_tool.htm">Using 
+ the Command Line Tool</a>.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

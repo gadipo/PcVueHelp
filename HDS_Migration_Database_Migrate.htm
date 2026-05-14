@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Archives|Using the HDS to record data|Database migration" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to migrate the database structure manually</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to migrate the database structure manually</h1>
+        <p class="SVnormal">This topic explains how to migrate your HDS databases for a newer version of <span class="mc-variable OEM.ProductName variable">PcVue</span> without losing data in the case where the migration is not done automatically at startup.</p>
+        <p class="SVnormal">
+Depending on the amount of data in your databases, this migration can take a long time.</p>
+        <p class="SVnormal">
+If your <span class="mc-variable OEM.ProductName variable">PcVue</span> application takes advantage of multiple HDS databases and/or multiple SQL Server hosts, it is required to apply the following instructions to HDS database on each SQL Server host. </p>
+        <div class="warning">
+            <p class="SVnormal">It is strongly recommended that you take a full backup of your databases before launching your application with a new version of <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        </div>
+        <h2 class="SVheading2">
+Software required</h2>
+        <p class="SVnormal">The manual migration requires:</p>
+        <ul>
+            <li>
+                <p class="SVnormal">The SSMS tool installed on your computer</p>
+            </li>
+            <li>
+                <p class="SVnormal">The T-SQL template file named UpgradeDatabase.sql for migrating tables structures</p>
+            </li>
+        </ul>
+        <div class="tip">
+            <p class="SVnormal">The T-SQL template file can be found in the following folder:</p>
+            <p class="SVnormal">&lt;SVInstallDir&gt;\Bin\</p>
+            <p class="SVnormal">
+Where &lt;SVInstallDir&gt; is the installation directory of <span class="mc-variable OEM.ProductName variable">PcVue</span>.
+</p>
+        </div>
+        <p class="SVnormal">You will have to run the script separately for each HDS database you may have in your project. All Log tables and Trend tables of a particular database are migrated at once when running the provided T-SQL script. The database name is passed as a parameter to the script.</p>
+        <div class="warning">
+            <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> must not be running while the migration scripts are being executed.</p>
+        </div>
+        <h2 class="SVheading2">How to migrate tables</h2>
+        <ol>
+            <li class="SVnumbered" value="1">Launch the SSMS and connect to your database as explained in <a href="HDS_Migration_SQL_Server.htm">How to use the SQL Server Management Studio</a>: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <p class="SVnormal">
+                <img src="../../Resources/Images/AE/Archives/HDS_migration_Database_migrate.png" MadCap:targetName="t1" style="display: none;" />
+            </p>
+            <li class="SVnumbered" value="2">Expand the Object Explorer tree view and take note of the database name you need to migrate.</li>
+            <li value="3">
+                <p>Click on File &#8594; Open &#8594; File…</p>
+            </li>
+            <li class="SVnumbered" value="4">Open the T-SQL script file named UpgradeDatabase.sql. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></li>
+            <p>
+                <img src="../../Resources/Images/AE/Archives/HDS_migration_Database_migrate_2.png" MadCap:targetName="t2" style="display: none;" />
+            </p>
+            <li value="5">
+                <p>Click on Query &#8594; Specify values for template parameters. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+            </li>
+            <p>
+                <img src="../../Resources/Images/AE/Archives/HDS_migration_Database_migrate_3.png" MadCap:targetName="t3" style="display: none;" />
+            </p>
+            <li value="6">
+                <p>Enter the DatabaseName value for the first database you need to migrate and then click the <u>OK</u> button.</p>
+            </li>
+            <li value="7">
+                <p>Click on Query &#8594; Execute and wait for the script execution to complete. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+            </li>
+            <p>
+                <img src="../../Resources/Images/AE/Archives/HDS_migration_Database_migrate_4.png" MadCap:targetName="t4" style="display: none;" />
+            </p>
+            <li value="8">
+                <p>Check that all the steps succeeded and the migration script completed successfully. In particular, check that all Log and Trend Tables have been processed without error.</p>
+            </li>
+            <li value="9">
+                <p>Re-iterate for the other databases you need to migrate.</p>
+            </li>
+        </ol>
+        <div class="warning">
+            <p class="SVnormal">If the disk space used by the database has increased significantly, it is recommended that you shrink the database to avoid activating a contingent purge at the next startup of <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

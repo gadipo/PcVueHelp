@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|The Variables Tree|Configuring variables|Configuring variables in general" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Properties common to all variable types</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Properties Common to all Variable types</h1>
+        <p class="SVnormal">The following properties are common to all variable types (bit, alarm, register and text). Some are found in the General tab, the others in the Advanced tab.</p>
+        <ul>
+            <li class="SVbulleted">Name - The name for the variable. See the <a href="Variables_rules_for_naming.htm">Rules for Branch and Variable Naming</a> topic.</li>
+            <li class="SVbulleted">Description - A description for the variable up to 255 characters in length.  This string is bilingual. A variable's description and has a number of uses.</li>
+            <ul>
+                <li class="SVbulleted">It is displayed when the variable is selected in the Select Variable dialog box.</li>
+                <li class="SVbulleted">It appears as a prompt in the dialog box seen by a User when changing a variable's value.</li>
+                <li class="SVbulleted">It appears in the Alarm Viewer, and when an Alarm is printed.</li>
+                <li class="SVbulleted">It appears in the Log Viewer, and when a log is printed.</li>
+                <li class="SVbulleted">It may be displayed by certain animation types. </li>
+            </ul>
+            <li class="SVbulleted">Domain - The Domain to which the variable is allocated (optional).</li>
+            <li class="SVbulleted">Nature - The Nature to which the variable is allocated (optional).</li>
+            <li class="SVbulleted">Associated label - An associated label is used to display a variable's value as text strings instead of a boolean value or number. See the topic <a href="variables_assoc_labels.htm">Using Associated Labels with variables</a>.</li>
+            <li class="SVbulleted">Command - Enable the value of the variable to be set internally from a command type animation, a Recipe or a SCADA BASIC program.</li>
+            <li class="SVbulleted">Scope - Defines the scope of the variable, i.e. its distribution across stations and its accessibility across user sessions. For more information, see below and topics <a href="Variables_scope_overview.htm">Understanding how to use the scope</a> and <a href="Variables_scope_affected_features.htm">Configuration items affected by scope</a>.</li>
+        </ul>
+        <p class="SVnormal">The following properties are in the variable's Advanced configuration tab.</p>
+        <ul>
+            <li class="SVbulleted">Command</li>
+            <ul>
+                <li class="SVbulleted">Command level - The command level that must be enabled in the User Account in order for a User to change the value of the variable. Only visible when the <u>Command</u> property, in the General tab, is set.</li>
+            </ul>
+            <li class="SVbulleted">Miscellaneous</li>
+            <ul>
+                <li class="SVbulleted">Browsing level - The browsing level that the User Account must have in order to see the variable when using a browsing service of <span class="mc-variable OEM.ProductName variable">PcVue</span>.<br />See the topic <a href="../UserAccounts/Profile_properties_opc_access.htm">Properties that affect access by 3rd party applications</a> for further information about interfaces for which this privilege is enforced.<br />See the topic <a href="../Comm_Servers/opc_config.htm">OPC DA server configuration</a> for further information about OPC Security.</li>
+                <li class="SVbulleted">Inhibited - Temporarily disable the variable and all functions associated with it. The variable remains in the inventory but is not active.</li>
+                <li class="SVbulleted">Simulation</li>
+                <ul>
+                    <li class="SVbulleted">Simulated - Temporarily breaks the link between a variable's value and its data source, so that the variable can be set to an arbitrary value.</li>
+                    <li class="SVbulleted">Locked - If set, the variable's simulation state is locked, the Simulated property cannot be changed at runtime.</li>
+                    <li class="SVbulleted">With fallback value - A predefined fallback value assigned to ensure the variable maintains a consistent state when simulated.</li>
+                    <li class="SVbulleted">With expiration time - An expiration date for the simulation, set either manually or automatically, after which the variable will revert to live data acquisition from the configured data source.</li>
+                </ul>
+                <p>When a variable is in simulation mode, its status is set to <b>SIM</b> (simulated with a value) or <b>SIM NS</b> (simulated with no value set) and displayed in the Variable tree pane.</p>
+                <div class="warning">
+                    <p>To change the Simulated property at runtime, it must be commandable. See the topic <a href="../Project/Settings_variable.htm#Simulated">Variable Settings</a> for more details.</p>
+                </div>
+                <div class="note">
+                    <p>Access to simulation features depends on user permissions. Authorized users can set or reset variable simulation, and modify both the fallback value and expiration time based on the configured Command level for the Simulated property.</p>
+                </div>
+                <li class="SVbulleted">Saved - Save the variable so that the value of  its properties modified at run-time are persisted whilst <span class="mc-variable OEM.ProductName variable">PcVue</span>  is shutdown and restored at start-up.</li>
+                <li class="SVbulleted">VCR - Record the value of the variable for replay through a mimic using a special VCR project. See the topic on the VCR Facility for further information.</li>
+                <li class="SVbulleted">Remote access - The variable is flagged as being available for access by a third party software.</li>
+                <li class="SVbulleted">No context window - If selected the ability use a context window with the variable is disabled.</li>
+            </ul>
+            <li class="SVbulleted">Monitoring</li>
+            <ul>
+                <li class="SVbulleted">Permanent scan for mimics - See the topic <a href="Variables_permanent_scan_for_mimics_property.htm">Using the permanent scan for mimic option</a>.</li>
+            </ul>
+            <li class="SVbulleted">Networking.</li>
+            <ul>
+                <li class="SVbulleted">Servers – The name of a server station list. Used on multi-station applications to define on which station the variable will be available. See the topic, Configuring and Managing the Inventory, in the Networking book for further information.</li>
+                <li class="SVbulleted">Clients – The name of a client station list. Used on multi-station applications to define on which station the variable will be available. See the topic, Configuring and Managing the Inventory, in the Networking book for further information. </li>
+            </ul>
+            <li class="SVbulleted">Internal</li>
+            <ul>
+                <li class="SVbulleted">Broadcast - (Internal variables only) Broadcast the value of the variable on the local area network each time it changes. This is used to keep internal variables in step when <span class="mc-variable OEM.ProductName variable">PcVue</span> is used in redundant operation using two or more Stations with identical projects running in parallel.</li>
+            </ul>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">Because the Application Explorer only displays variables that the running station produce or consume, remember to always configure first the list that contains the running station when you create a new variable or modify networking lists of an existing variable. Failing to do so can lead to situations where the variable is configured but is not displayed in the Application Explorer.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">Because it is a configuration modification (as opposed to a runtime change), changing the value of the <i style="font-style: normal; text-decoration: underline;">Inhibited</i> property here is not archived as part of a log list.</p>
+            <p class="SVnormal">The modes ENABLE and DISABLE of the instruction VARIABLE are the only way to change the inhibition status of an alarm. As for any other type of variable, such changes done by script will be logged if the alarm is archived and the log list is configured appropriately.</p>
+        </div>
+        <h2 class="SVheading2">Understanding the behavior of the Saved property</h2>
+        <p class="SVnormal">When the <u>Saved</u> property is activated, <span class="mc-variable OEM.ProductName variable">PcVue</span> periodically saves the value of properties that are modified at run-time, so that they can be restored at start-up. The list of properties that are saved depends on the type of the variable, its source, and a number of settings related to variable properties. In details:</p>
+        <ul>
+            <li>General rule - Only variables mapped to I/O (data acquisition) and internal variables can be saved.<br />HMI variables, as well as percent and temporary variables cannot be saved.</li>
+            <li>The <u>Saved</u> property is ignored on system variables created automatically by <span class="mc-variable OEM.ProductName variable">PcVue</span>.</li>
+            <li>Saving Binary attributes, Text extended attributes or the Simulated property - If such run-time property is configured to be persistent (see the <a href="../Project/Settings_variable.htm">Variables</a> settings), it will be for any variable configured to be saved.</li>
+            <li>Saving alarms - Alarms can be saved, in which case only the alarm status is saved (acknowledged or not, masked or not...).</li>
+            <li>Saving internal variables - If an internal variable is saved, its value, timestamp and status is saved, as well as any saved attribute or run-time property configured to be persistent (see the <a href="../Project/Settings_variable.htm">Variables</a> settings). If this variable is an alarm, its alarm status is also saved.</li>
+            <li>Saving variables mapped to I/O - Such a variable mapped to I/O can be saved for 2 purposes:<ul><li>Saving Binary attributes, Text extended attributes or the Simulated property - As for internal variables.</li><li>Saving the alarm status - In which case the alarm status is saved.</li><li>In all cases, the value, timestamp and status of the variable itself is not saved.</li></ul></li>
+        </ul>
+        <p class="SVnormal"> The frequency at which variables are saved is configured in <a href="../Project/Settings_variable.htm">Variables</a> settings.</p>
+        <div class="warning">
+            <p class="SVnormal">To save Binary attributes, Text extended attributes or the Simulated property, you must configure them as persistent in the <a href="../Project/Settings_variable.htm">Variables</a> settings. These settings only apply to variables for which you have activated the property <u>Saved</u>.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">Properties related to variables are stored in the file \Per\VariablesSaved.dat of the project. This includes the VTQ of internal variables, attributes and other run-time properties.</p>
+            <p class="SVnormal">Properties related to alarms are  stored in the file \Per\AlarmSaved.dat of the project. This includes the status of alarms.</p>
+        </div>
+        <h2 class="SVheading2">How a variable's properties and behaviors are affected by scope</h2>
+        <p class="SVnormal">Because of the change in how a variable's value is distributed when the scope is either Client Context or Session Context, some variable properties and behaviors are not applicable and cannot be configured in the variable's configuration.</p>
+        <p class="SVnormal">In general:</p>
+        <ul>
+            <li>A variable of scope Session context cannot be logged nor trended,</li>
+            <li>A variable of scope Client context cannot be used as alarm, logged nor trended.</li>
+            <li>A variable is exposed via server interfaces such as the OPC Server, the IEC 104 outstation or the Web Services Toolkit only if its scope is Shared or Local station.</li>
+        </ul>
+        <p class="SVnormal">If you attempt to change the scope of a variable, with one of these properties or behaviors already configured, to Client Context or Session Context an error message is generated and the change in scope is canceled.</p>
+        <p class="SVnormal">The use of the following properties is affected by the variable's scope:</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Tab</td>
+                    <td class="SVtableHeading">Property</td>
+                    <td class="SVtableHeading">Shared</td>
+                    <td class="SVtableHeading">Local station</td>
+                    <td class="SVtableHeading">Session context</td>
+                    <td class="SVtableHeading">Client context</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">General</td>
+                    <td style="vertical-align: top;" class="SVtable">Alarm</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">General</td>
+                    <td style="vertical-align: top;" class="SVtable">Log</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Advanced</td>
+                    <td style="vertical-align: top;" class="SVtable">Archiving.Log on.Positive transition</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Advanced</td>
+                    <td style="vertical-align: top;" class="SVtable">Archiving.Log on.Negative transition</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Advanced</td>
+                    <td style="vertical-align: top;" class="SVtable">Miscellaneous.Saved</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Advanced</td>
+                    <td style="vertical-align: top;" class="SVtable">Miscellaneous.Recorder</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Advanced</td>
+                    <td style="vertical-align: top;" class="SVtable">Miscellaneous.Remote access</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Advanced</td>
+                    <td style="vertical-align: top;" class="SVtable">Miscellaneous.No context window</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Advanced</td>
+                    <td style="vertical-align: top;" class="SVtable">Networking.Servers</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Advanced</td>
+                    <td style="vertical-align: top;" class="SVtable">Networking.Clients</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Advanced</td>
+                    <td style="vertical-align: top;" class="SVtable">Internal.Broadcast</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">General</td>
+                    <td style="vertical-align: top;" class="SVtable">Maximum value (by variable)</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">General</td>
+                    <td style="vertical-align: top;" class="SVtable">Minimum value (by variable)</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Advanced</td>
+                    <td style="vertical-align: top;" class="SVtable">Command.Maximum value (by variable)</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Advanced</td>
+                    <td style="vertical-align: top;" class="SVtable">Command.Minimum value (by variable)</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">The use of the following behaviors is affected by the variable's scope:</p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;width:100%">
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Behavior</td>
+                    <td class="SVtableHeading">Shared</td>
+                    <td class="SVtableHeading">Local station</td>
+                    <td class="SVtableHeading">Session context</td>
+                    <td class="SVtableHeading">Client context</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Trend</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Discrepancy</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Not applicable</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Alarm.Acknowledgment transmission</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Alarm.Program action</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Alarm.Window action</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Alarm.Masking by variable</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;" class="SVtable">Alarm.Masking by expression template</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td class="SVtable">Yes</td>
+                    <td style="vertical-align: top;" class="SVtable">Not applicable</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Threshold behavior is unaffected other than the scope of the threshold variables follow that of the source variable.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

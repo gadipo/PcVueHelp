@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Project diagnostics &amp; settings|Audit &amp; diagnostics" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Audit files</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Audit Files</h1>
+        <p class="SVnormal">The information displayed in the Counters Tab of the Audit Dialog is periodically recorded in text files  to be available for later analysis. The files are located under <span class="mc-variable OEM.ProductName variable">PcVue</span>'s root folder  in <u>Bin\Log files</u>. The files are generated for each installed copy of <span class="mc-variable OEM.ProductName variable">PcVue</span>, not for each project. The number of audit files and the period at which they are generated is configurable.</p>
+        <h2 class="SVheading2">Counters</h2>
+        <p class="SVnormal">The main audit files in which all the counters are dumped.  The files are named <u>Audit.Counters.&lt;xxxx&gt;.txt</u> where &lt;xxxx&gt; is 0000 for the first file that is generated, 0001 for the second file etc. Once the maximum file number has been used (default 9999) the oldest file is discarded and the sequence starts again. By default, the files are generated every 30 minutes while the application is running. See the topic <a href="Settings_audit.htm">Audit &amp; diagnostics settings</a>.</p>
+        <h2 class="SVheading2">System resource counters</h2>
+        <p class="SVnormal">The system resource audit files contain counters connected with diagnosing memory or resource leaks. The files are named <u>Audit.SpecificCounters.&lt;xxxx&gt;.txt</u> and the mechanism by which they are generated is the same as for the main audit files. By default, the files are generated every 10 minutes while the application is running.  See the topic <a href="Settings_audit.htm">Audit &amp; diagnostics settings</a>.</p>
+        <h2 class="SVheading2">Watchdog counters</h2>
+        <p class="SVnormal">The watchdog audit files are only generated when a manager is in watchdog state. The files are named <u>Audit.Watchdog.&lt;xxxx&gt;.txt</u> and are the same format as the main audit files. The files are created as follows.</p>
+        <ul>
+            <li>The first six every 10 seconds</li>
+            <li>The next three every 20 seconds</li>
+            <li>The next two every 30 seconds</li>
+            <li>The next two every 60 seconds</li>
+            <li>Then every 5 minutes until the manager is no longer in the watchdog state</li>
+        </ul>
+        <h2 class="SVheading2">Audit.LoadedManagers.txt</h2>
+        <p class="SVnormal">Created during startup of the application when all the managers have loaded. Same format as Audit.Counters.&lt;xxxx&gt;.txt.</p>
+        <h2 class="SVheading2">Audit.StartedProject.txt</h2>
+        <p class="SVnormal">Created during startup of the application when the project has loaded in all the managers. Same format as Audit.Counters.&lt;xxxx&gt;.txt.</p>
+        <h2 class="SVheading2">Audit.LastMinute.txt</h2>
+        <p class="SVnormal">Updated (overwritten) once a minute while the application is running and then deleted when it is shutdown. Same format as Audit.Counters.&lt;xxxx&gt;.txt. If this file exists when the application is started (because of a crash or dirty previous shutdown) its contents is appended to the <u>T</u> file </p>
+        <h2 class="SVheading2">Audit.StoppedProject.txt</h2>
+        <p class="SVnormal">Created during shutdown of the application when the project has un-loaded in all the managers. Same format as Audit.Counters.&lt;xxxx&gt;.txt.</p>
+        <h2 class="SVheading2">Audit.DeletedProject.txt</h2>
+        <p class="SVnormal">Created during shutdown of the application when the instances of all the managers have been deleted. Same format as Audit.Counters.&lt;xxxx&gt;.txt.</p>
+        <h2 class="SVheading2">Audit.UnloadedManagers.txt</h2>
+        <p class="SVnormal">Created during shutdown of the application when the managers have un-loaded. Same format as Audit.Counters.&lt;xxxx&gt;.txt.</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

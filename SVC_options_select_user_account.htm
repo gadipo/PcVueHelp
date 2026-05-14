@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying server applications|Running PcVue as a Windows service|Options for selection the Service Account" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Options for selection the Service Account</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor97"></a>Options for selecting the Service Account</h1>
+        <p class="SVnormal">A service account is a Windows user identity that is associated with a Windows service executable for the purpose of providing a security context for that service.</p>
+        <p class="SVnormal">Windows 7 and Windows Server 2008 R2 have two new types of service accounts called managed service accounts (MSA) and virtual accounts. Managed service accounts and virtual accounts are designed to provide crucial applications such as SQL Server with the isolation of their own accounts. These types of service accounts are also a way to ease the administrative burden in managing service account passwords. The downside about these types of service accounts is that because they are still so new, their use is not supported universally, especially by applications based on DCOM technology such as <span class="mc-variable OEM.ProductName variable">PcVue</span>. </p>
+        <div class="warning">
+            <p class="SVnormal">Managed service accounts and virtual accounts are not supported by <span class="mc-variable OEM.ProductName variable">PcVue</span> (Sv32.exe) running as a service. Because of this, we will not include the use of managed service accounts and virtual accounts in this book.</p>
+        </div>
+        <p class="SVnormal">When considering which account to use for a service there are two main choices.</p>
+        <ul style="list-style-type: disc;">
+            <li>A built-in service account</li>
+            <li>A local or domain user account</li>
+        </ul>
+        <p class="SVnormal">When choosing a Service Account to run <span class="mc-variable OEM.ProductName variable">PcVue</span> (or any other service) the main criteria is to use an account with the least possible privileges. This is to ensure that the service is run as securely as possible.</p>
+        <p class="SVnormal">According to Microsoft, Windows administrators should choose service accounts based upon the following hierarchy. This hierarchy is ordered from least privilege to greatest privilege:</p>
+        <ol>
+            <li value="1">The Local Service built-in service account</li>
+            <li value="2">The Network Service  built-in service account</li>
+            <li value="3">A Local or domain user account</li>
+            <li value="4">The Local System  built-in service account</li>
+            <li value="5">Local Administrator account</li>
+            <li value="6">A Domain Administrator account</li>
+        </ol>
+        <p class="SVnormal">Options 5 and 6 represent “worst-case scenarios” in which a given service or application simply will not run with a service account containing lesser privilege and permissions. Option 4, based on the Local System account, cannot be used to run <span class="mc-variable OEM.ProductName variable">PcVue</span>. For these reasons, only options 1 to 3 should be considered.</p>
+        <p class="SVnormal">It is always preferable from a security perspective to run as your own service account that has precisely the permissions you need to do what a service does and nothing else. However, the cost of this approach is setting up your service account, and managing the password. It is a balancing act that each application needs to manage.</p>
+        <h2 class="SVheading2">Using a Local Service account</h2>
+        <p class="SVnormal">Local Service is a limited service account that is very similar to Network Service and meant to run standard least-privileged services. However, unlike Network Service, it has no ability to access network resources that require Windows authentication. However, it can still access network resources that do not require Windows authentication such as a PLC using TCP/IP based communication. Therefore, if <span class="mc-variable OEM.ProductName variable">PcVue</span> is not accessing anything on the network requiring authentication at the Windows level, you should seriously consider using the Local Service account. </p>
+        <h2 class="SVheading2">Using a Network Service account</h2>
+        <p class="SVnormal">If <span class="mc-variable OEM.ProductName variable">PcVue</span> requires authenticated network access, you might need to use the Network Service account or a local user account with minimal privileges.</p>
+        <h2 class="SVheading2">Using a Local or Domain user account</h2>
+        <p class="SVnormal">If <span class="mc-variable OEM.ProductName variable">PcVue</span> must interact with network services, access domain resources such as file shares or if it uses linked server connections to other computers running SQL Server for example, you might use a minimally privileged domain account. Many server-to-server activities can be performed only with a domain user account. This account should be pre-created by domain administration in your environment.</p>
+        <p class="SVnormal">See <a href="SVC_Overview_using_builtin_service_account.htm">About using a built-in Service Account</a> and <a href="SVC_Overview_using_user_account.htm">About using a User Account as a Service Account</a> for more information related to selecting the Service Account for running <span class="mc-variable OEM.ProductName variable">PcVue</span> as a Windows Service.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Archives|Configuring archive units|Proprietary archive unit|Configuring trend data recording" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Understanding How the Trend Period Affects Recording</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Understanding How the Trend Period Affects Recording</h1>
+        <p class="SVnormal">The trend period referred to in this topic appears in both the  Trend Group dialog (Database Archive Unit) and in the Trend dialog (Proprietary Archive Unit). <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../../Resources/Images/AE/Archives/units_trend_recording_options.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <p class="SVnormal">&#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> allows the choice of on-change trend recording or periodic recording. The choice is made in the <a href="../Project/Settings_archives.htm">Archives Settings</a> dialog and applies to the entire project. This topic explains the exact behavior of the two methods.</p>
+        <p class="SVnormal">To illustrate the behavior the following variable values plotted against time are used. The Period is set to 10 seconds.</p>
+        <img src="../../Resources/Images/AE/Archives/trend_sampling.png" />
+        <div class="note">
+            <p class="SVnormal">On startup, if the station does not belong to a Historical server association, an invalid point with a timestamp of the startup, is always recorded.</p>
+        </div>
+        <h2 class="SVheading2">On-change recording</h2>
+        <ul style="list-style-type: disc;">
+            <li>If the value, timestamp, or quality of the variable <u>does not</u> change during the Period, nothing is recorded.</li>
+            <li>If the value, timestamp or quality of the variable changes during the period, the most recent value is recorded along with the time at the end of the period.<br />Value of 3 is recorded with a timestamp of hh:mm: 10<br />Value of 3 is recorded with a timestamp of hh:mm: 20<br />Value of 2 is recorded with a timestamp of hh:mm: 40</li>
+            <li>If the value, timestamp or quality of the variable changes during the period, and the source of the variable's value is a timestamped protocol (BACnet, OPC etc.), the most recent value is recorded along with the timestamp at which it changed.<br />Value of 3 is recorded with a timestamp of hh:mm: 09<br />Value of 3 is recorded with a timestamp of hh:mm: 19<br />Value of 2 is recorded with a timestamp of hh:mm: 38</li>
+        </ul>
+        <h2 class="SVheading2">Periodic (one record per period) recording </h2>
+        <ul style="list-style-type: disc;">
+            <li>The value of the variable and the time is recorded at the end of each period. This behavior is irrespective of the source of the variable.<br />Value of 3 is recorded with a timestamp of hh:mm: 10<br />Value of 3 is recorded with a timestamp of hh:mm: 20<br />Value of 3 is recorded with a timestamp of hh:mm: 30<br />Value of 2 is recorded with a timestamp of hh:mm: 40</li>
+        </ul>
+        <h2 class="SVheading2">If the Period is set to 0</h2>
+        <ul style="list-style-type: disc;">
+            <li>If the period is set to 0 the value of the variable, and the timestamp, is recorded every time that the value, timestamp or quality changes irrespective of which recording mode is selected.<br />Value of 4 is recorded with a timestamp of hh:mm: 04<br />Value of 3 is recorded with a timestamp of hh:mm: 09<br />Value of 5 is recorded with a timestamp of hh:mm: 12<br />Value of 6 is recorded with a timestamp of hh:mm: 17<br />Etc.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

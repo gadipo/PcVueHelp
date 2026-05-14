@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Examples" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>SELECTOR example</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="SELECTOR_Ex" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor29"></a>SELECTOR Example</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc369">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="SELECTOR_Instruct" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc369.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <h2 class="SVheading2">Example 1</h2>
+        <p class="SVnormal">This example exercises several modes of the SELECTOR 
+ command,</p>
+        <p class="SVnormal">It uses variables that start with "WORKS", 
+ whose 2nd branch is "BLOC" and that end with the code: WORKS.BLOC.*[0-9]$.</p>
+        <p class="SVnormal">It requires a mimic "cell" to be loaded, with 
+ a grid control whose index is "SELECTOR 1". </p>
+        <p class="SVprogramCode">SUB filling()</p>
+        <p class="SVprogramCode">DIM lngbuffer12 as long;</p>
+        <p class="SVprogramCode">lngbuffer12 = ALLOC_BUFFER (4096);</p>
+        <p class="SVprogramCode">'The file "SELECTOR .txt" holds a description of fields with</p>
+        <p class="SVprogramCode">' &#160;separators as shown here: ; for columns and \n for lines.</p>
+        <p class="SVprogramCode">lngbuffer12 = FILETOBUF ("SELECTOR .txt");</p>
+        <p class="SVprogramCode">SELECTOR ("PUTARRAY","cell","","SELECTOR 1",lngbuffer12,5,0,10,3,";\n");</p>
+        <p class="SVprogramCode">free_buffer(lngbuffer12);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GETNBLINE or Mode 1 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR getnbline()</p>
+        <p class="SVprogramCode">'Retrieve the number of lines in view</p>
+        <p class="SVprogramCode">PRINT ("Number of lines = ",SELECTOR ("GETNBLINE","cell","","SELECTOR 1"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GETNBCOL or Mode 2 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR getnbcol()</p>
+        <p class="SVprogramCode">'Retrieve the number of columns of the animation</p>
+        <p class="SVprogramCode">PRINT ("Number of columns = ",SELECTOR ("GETNBCOL","cell","","SELECTOR 1"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GETCELL or Mode 3 (syntax 2)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR getcell()</p>
+        <p class="SVprogramCode">'Retrieve the contents of cell x=3 y=1 (base 0)</p>
+        <p class="SVprogramCode">PRINT ("CELL(3,1) = ",SELECTOR ("GETCELL","cell","","SELECTOR 1",3,1));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GETLINE or Mode 4 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR getline()</p>
+        <p class="SVprogramCode">'Declare variables</p>
+        <p class="SVprogramCode">DIM lngBuffer1 as long;</p>
+        <p class="SVprogramCode">DIM lngResult as long;</p>
+        <p class="SVprogramCode">lngBuffer1 = ALLOC_BUFFER (4096);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Retrieve in buffer hdl line 3 - fields separated by: ;</p>
+        <p class="SVprogramCode">lngResult = SELECTOR ("GETLINE","cell","","SELECTOR 1",3,lngBuffer1,";");</p>
+        <p class="SVprogramCode">PRINT("GETLINE 3",CGET_BUFFER(lngBuffer1,0,200));</p>
+        <p class="SVprogramCode">free_buffer(lngBuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GETCOL or Mode 5 (syntax 4)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR getcol()</p>
+        <p class="SVprogramCode">'Declare variables</p>
+        <p class="SVprogramCode">DIM lngBuffer1 as long;</p>
+        <p class="SVprogramCode">DIM lngResult as long;</p>
+        <p class="SVprogramCode">lngBuffer1 = ALLOC_BUFFER (4096);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Retrieve column 1 (base 0) on retrieve the fields</p>
+        <p class="SVprogramCode">'separated by: ; in buffer of hdl</p>
+        <p class="SVprogramCode">lngResult = SELECTOR ("GETCOL","cell","","SELECTOR 1",1,lngBuffer1,";");</p>
+        <p class="SVprogramCode">PRINT("GETCOL 1",CGET_BUFFER(lngBuffer1,0,200));</p>
+        <p class="SVprogramCode">free_buffer(lngBuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GETARRAY or Mode 6 (syntax 5)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR getarray()</p>
+        <p class="SVprogramCode">'Declare variables</p>
+        <p class="SVprogramCode">DIM lngBuffer1 as long;</p>
+        <p class="SVprogramCode">DIM lngResult as long;</p>
+        <p class="SVprogramCode">lngBuffer1 = ALLOC_BUFFER (4096);</p>
+        <p class="SVprogramCode">'Retrieve the subset of grid contents between cell (2,0) and cell (4,2)</p>
+        <p class="SVprogramCode">' - retrieval of fields separated by ; and : in buffer hdl</p>
+        <p class="SVprogramCode">PRINT ("&gt;",SELECTOR ("GETARRAY","cell","","SELECTOR 1",lngBuffer1,2,0,4,2,";:"),"&lt;");</p>
+        <p class="SVprogramCode">PRINT ("GETARRAY 2,0-4,2",CGET_BUFFER(lngBuffer1,0,200));</p>
+        <p class="SVprogramCode">free_buffer(lngBuffer1);</p>
+        <p class="SVprogramCode">END SUB </p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode PUTCELL or Mode 7 (syntax 6)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR putcell()</p>
+        <p class="SVprogramCode">'Declare variables</p>
+        <p class="SVprogramCode">DIM intResult as integer;</p>
+        <p class="SVprogramCode">'Writing to a cell</p>
+        <p class="SVprogramCode">PRINT ("PUTCELL(3,2): ",SELECTOR ("PUTCELL","cell","","SELECTOR 1",0,0,"‚t‚ test"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode PUTLINE or Mode 8 (syntax 3)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR putline()</p>
+        <p class="SVprogramCode">'Declare variables</p>
+        <p class="SVprogramCode">DIM lngBuffer1 as long;</p>
+        <p class="SVprogramCode">DIM lngResult as long;</p>
+        <p class="SVprogramCode">lngBuffer1 = ALLOC_BUFFER (4096);</p>
+        <p class="SVprogramCode">'Retrieve in hdl line 3, fields separated by ;</p>
+        <p class="SVprogramCode">lngResult = SELECTOR ("GETLINE","cell","","SELECTOR 1",3,lngBuffer1,";");</p>
+        <p class="SVprogramCode">'Filling line 5 with contentsf hdl</p>
+        <p class="SVprogramCode">' ie the previous line 3 in this example</p>
+        <p class="SVprogramCode">PRINT (SELECTOR ("PUTLINE","cell","","SELECTOR 1",5,lngbuffer1,";"));</p>
+        <p class="SVprogramCode">PRINT("PUTLINE 3 -&gt; 5 ",CGET_BUFFER(lngBuffer1,0,200));</p>
+        <p class="SVprogramCode">free_buffer(lngBuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode PUTCOL or Mode 9 (syntax 4)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR putcol()</p>
+        <p class="SVprogramCode">'Declare variables</p>
+        <p class="SVprogramCode">DIM lngBuffer1 as long;</p>
+        <p class="SVprogramCode">DIM lngResult as long;</p>
+        <p class="SVprogramCode">lngBuffer1 = ALLOC_BUFFER (4096);</p>
+        <p class="SVprogramCode">'Retrieve column 1 (base 0) </p>
+        <p class="SVprogramCode">' - retrieval of fields separated by ; and : in buffer hdl</p>
+        <p class="SVprogramCode">lngResult = SELECTOR ("GETCOL","cell","","SELECTOR 1",1,lngBuffer1,";");</p>
+        <p class="SVprogramCode">'filling of column 3 with contents of hdl</p>
+        <p class="SVprogramCode">'ie column 1</p>
+        <p class="SVprogramCode">PRINT (SELECTOR ("PUTCOL","cell","","SELECTOR 1",3,lngbuffer1,";"));</p>
+        <p class="SVprogramCode">PRINT("PUTCOL 1 -&gt; 3 ",CGET_BUFFER(lngBuffer1,0,200));</p>
+        <p class="SVprogramCode">free_buffer(lngBuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode PUTARRAY or Mode 10 (syntax 5)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR putarray()</p>
+        <p class="SVprogramCode">'Declare variables</p>
+        <p class="SVprogramCode">DIM lngBuffer1 as long;</p>
+        <p class="SVprogramCode">DIM lngResult as long;</p>
+        <p class="SVprogramCode">lngBuffer1 = ALLOC_BUFFER (4096);</p>
+        <p class="SVprogramCode">'Retrieve the subset of grid contents between (2,0) and cell (4,2) </p>
+        <p class="SVprogramCode">' - retrieve fields separated by ; and : in buffer hdl</p>
+        <p class="SVprogramCode">PRINT ("&gt;",SELECTOR ("GETARRAY","cell","","SELECTOR 1",lngBuffer1,0,0,2,2,";\n"),"&lt;");</p>
+        <p class="SVprogramCode">'filling column 3 with contents of hdl</p>
+        <p class="SVprogramCode">'ie column 1</p>
+        <p class="SVprogramCode">lngResult = SELECTOR ("PUTARRAY","cell","","SELECTOR 1",lngBuffer1,2,0,4,2,";\n");</p>
+        <p class="SVprogramCode">PRINT("PUTARRAY 2,0-4,2 ",CGET_BUFFER(lngBuffer1,0,200));</p>
+        <p class="SVprogramCode">free_buffer(lngBuffer1);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SCROLL or Mode 11 (syntax 7)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'example of control of scrolling of the animation by forcing by program</p>
+        <p class="SVprogramCode">SUB tobegin ()</p>
+        <p class="SVprogramCode">SELECTOR ("SCROLL","cell","","SELECTOR 1","TOBEGIN");</p>
+        <p class="SVprogramCode">updatepcsel ();</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB pageup ()</p>
+        <p class="SVprogramCode">SELECTOR ("SCROLL","cell","","SELECTOR 1","PAGEUP");</p>
+        <p class="SVprogramCode">updatepcsel ();</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB lineup ()</p>
+        <p class="SVprogramCode">SELECTOR ("SCROLL","cell","","SELECTOR 1","LINEUP");</p>
+        <p class="SVprogramCode">updatepcsel ();</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB linedown ()</p>
+        <p class="SVprogramCode">SELECTOR ("SCROLL","cell","","SELECTOR 1","LINEDOWN");</p>
+        <p class="SVprogramCode">updatepcsel ();</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB pagedown ()</p>
+        <p class="SVprogramCode">SELECTOR ("SCROLL","cell","","SELECTOR 1","PAGEDOWN");</p>
+        <p class="SVprogramCode">updatepcsel ();</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB toend ()</p>
+        <p class="SVprogramCode">SELECTOR ("SCROLL","cell","","SELECTOR 1","TOEND");</p>
+        <p class="SVprogramCode">updatepcsel ();</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'to go to line line ll directly</p>
+        <p class="SVprogramCode">SUB toline (ll)</p>
+        <p class="SVprogramCode">SELECTOR ("SCROLL","cell","","SELECTOR 1","TOLINE",ll);</p>
+        <p class="SVprogramCode">updatepcsel ();</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GETLISTART or Mode 12 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR getlistart()</p>
+        <p class="SVprogramCode">'Retrieve the 1st visible line </p>
+        <p class="SVprogramCode">PRINT ("The forst line displayed is = ",SELECTOR ("GETLISTART","cell","","SELECTOR 1"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GETNBLINEMAX or Mode 13 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR getnblinemax()</p>
+        <p class="SVprogramCode">PRINT ("The total number of lines shown in the memory grid is = ",SELECTOR ("GETNBLINEMAX","cell","","SELECTOR 1"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode VARIABLE or Mode 14 (syntax 9)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR variable()</p>
+        <p class="SVprogramCode">DIM intResult as integer;</p>
+        <p class="SVprogramCode">'Showing all variables of type TEXT</p>
+        <p class="SVprogramCode">intResult = SELECTOR ("VARIABLE","cell","","SELECTOR 1",".*",8);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode VARMODE or Mode 15 (syntax 10)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR varmode()</p>
+        <p class="SVprogramCode">DIM intResult as integer;</p>
+        <p class="SVprogramCode">'Showing all variables of type TEXT</p>
+        <p class="SVprogramCode">intResult = SELECTOR ("VARMODE","cell","","SELECTOR 1",2);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SELECTLINE or Mode 16 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR selectline()</p>
+        <p class="SVprogramCode">'Retrieve the 1st visible line</p>
+        <p class="SVprogramCode">PRINT ("The selected line is : ",SELECTOR ("SELECTLINE","cell","","SELECTOR 1"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SELECTCOL or Mode 17 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR selectcol()</p>
+        <p class="SVprogramCode">'Retrieve the 1st visible line</p>
+        <p class="SVprogramCode">PRINT ("The selected column is : ",SELECTOR ("SELECTCOL","cell","","SELECTOR 1"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SELECTMODE or Mode 18 (syntax 7)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB modeoff() ' mode without selection</p>
+        <p class="SVprogramCode">SELECTOR ("SELECTMODE","cell","","SELECTOR 1","OFF");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB modemono() ' single selection mode</p>
+        <p class="SVprogramCode">SELECTOR ("SELECTMODE","cell","","SELECTOR 1","MONO");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB modemulti() ' multi-selection mode </p>
+        <p class="SVprogramCode">SELECTOR ("SELECTMODE","cell","","SELECTOR 1","MULTI");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB modeinput() ' direct selection mode</p>
+        <p class="SVprogramCode">SELECTOR ("SELECTMODE","cell","","SELECTOR 1","INPUT");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SFIRSTCELL or Mode 19 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR sfirstcell()</p>
+        <p class="SVprogramCode">'Find the first cell selected from the start of the grid (0,0).</p>
+        <p class="SVprogramCode">PRINT ("The first cell selected is : ",SELECTOR ("SFIRSTCELL","cell","","SELECTOR 1"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SNEXTCELL or Mode 20 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR snextcell()</p>
+        <p class="SVprogramCode">'Find the next cell selected from the last cell found</p>
+        <p class="SVprogramCode">PRINT ("The next cell selected is : ",SELECTOR ("SNEXTCELL","cell","","SELECTOR 1"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode ALLSELOFF or Mode 21 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR allseloff()</p>
+        <p class="SVprogramCode">SELECTOR ("ALLSELOFF","cell","","SELECTOR 1");</p>
+        <p class="SVprogramCode">END SUB </p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode CLICKCELL or Mode 22 (syntax 2)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR clickcell()</p>
+        <p class="SVprogramCode">'Retrieve of contents of cell x=3 y=1 (base 0)</p>
+        <p class="SVprogramCode">PRINT ("Select cell (3,1) = ",SELECTOR ("CLICKCELL","cell","","SELECTOR 1",3,1));</p>
+        <p class="SVprogramCode">END SUB </p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GETSEL or Mode 23 (syntax 2)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR getsel()</p>
+        <p class="SVprogramCode">'Enables you to know whether cell x=3 y=1 (base 0)is selected</p>
+        <p class="SVprogramCode">PRINT ("Selection of cell (3,1) = ",SELECTOR ("GETSEL","cell","","SELECTOR 1",3,1));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SELPROG or Mode 24 (syntax 11)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR selprog()</p>
+        <p class="SVprogramCode">'The main function of program beep.SCB is executed on selection</p>
+        <p class="SVprogramCode">SELECTOR ("SELPROG","cell","","SELECTOR 1","beep.SCB","","");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode INPUTPROG or Mode 25 (syntax 11)</p>
+        <p class="SVprogramCode">SUB SELECTOR inputprog()</p>
+        <p class="SVprogramCode">'The main function of program beep.SCB is executed on</p>
+        <p class="SVprogramCode">' confirmation of dialog box</p>
+        <p class="SVprogramCode">SELECTOR ("INPUTPROG","cell","","SELECTOR 1","beep.SCB","","");</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode CLEAR or Mode 26 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR clear()</p>
+        <p class="SVprogramCode">'Enables purging of the grid. Cells are re-initialised.</p>
+        <p class="SVprogramCode">PRINT ("Purge grid ",SELECTOR ("CLEAR","cell","","SELECTOR 1"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SETNBLINE or Mode 27 (syntax 7)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR setnbline()</p>
+        <p class="SVprogramCode">'Moves on the grid to line 10 </p>
+        <p class="SVprogramCode">SELECTOR ("SETNBLINE","cell","","SELECTOR 1",10);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode GETLASTCELL or Mode 28 (syntax 1)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR getlastcell()</p>
+        <p class="SVprogramCode">'Returns the number of lines used in the grid</p>
+        <p class="SVprogramCode">PRINT ("Number of lines used ",SELECTOR ("GETLASTCELL","cell","","SELECTOR 1"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">'Mode SORT or Mode 27 (syntax 7)</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB SELECTOR sort()</p>
+        <p class="SVprogramCode">'Sorting column 0 of the grid into ascending order</p>
+        <p class="SVprogramCode">SELECTOR ("SORT","cell","","SELECTOR 1",0,0);</p>
+        <p class="SVprogramCode">END SUB </p>
+        <h2 class="SVheading2">Example 2 </h2>
+        <p class="SVnormal">The following example displays information from a file 
+ containing data recorded in one of the disk units for a Trend Viewer. 
+ The format of the file is as follows.</p>
+        <p class="SVdataListing">940211142058, 244 <br />940211142112, 237 <br />940211142113, 230 <br />940211142127, 223 <br />940211142127, 216 <br />940211142141, 209 <br />940211142141, 202 <br />940211142155, 195</p>
+        <p class="SVnormal">The program displays data in a mimic called "cell" that contains a grid identified as "SELECTOR 1".</p>
+        <p class="SVprogramCode">' Program SEL.PVB<br />' Date 21-Mar-93<br />' Author RJM<br /><br />SUB Main ()<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' Load data into Grid. Note the use of \n as a line delimiter.<br />SUB LoadGrid ()<br />DIM hdl2 As Long;<br />hdl2 = Filetobuf ("trend.dat");<br />SELECTOR ("PUTARRAY", "cell", "", "SELECTOR 1",hdl2,0,0, 35, 1, ", \n");<br />Free_Buffer(hdl2);<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' Provides scroll facility.<br />SUB PageUp ()<br />SELECTOR ("SCROLL", "cell", "", "SELECTOR 1", "PAGEUP");<br />UPDATE ();<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB PageDown ()<br />SELECTOR ("SCROLL", "cell", "", "SELECTOR 1","PAGEDOWN");<br />UPDATE ();<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB LineUp ()<br />SELECTOR ("SCROLL", "cell", "","SELECTOR 1","LINEUP");<br />UPDATE ();<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB LineDown ()<br />SELECTOR ("SCROLL", "cell", "", "SELECTOR 1","LINEDOWN");<br />UPDATE ();<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB ToStart ()<br />SELECTOR ("SCROLL", "cell", "", "SELECTOR 1","TOBEGIN");<br />UPDATE ();<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB ToEnd ()<br />SELECTOR ("SCROLL", "cell", "", "SELECTOR 1","TOEND");<br />UPDATE ();<br />END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' Function to update a variable indicating the current position </p>
+        <p class="SVprogramCode">' of the file within the Grid.<br />SUB Update ()<br />DIM LStart As Integer;<br />DIM NblMax As Integer;<br />DIM Nbl As Integer;<br />LStart = SELECTOR ("GETLISTART", "cell", "", "SELECTOR 1");<br />Nblmax = SELECTOR ("GETNBLINEMAX", "cell", "", "SELECTOR 1");<br />Nbl = SELECTOR ("GETNBLINE", "cell", "", "SELECTOR 1");<br />pcsel = TOS((LStart*100)/(Nblmax - nbl));<br />END SUB</p>
+        <p class="SVprogramCode">SUB deselect()<br />SELECTOR ("ALLSELOFF", "cell", "", "SELECTOR 1");<br />END SUB</p>
+        <p class="SVprogramCode">SUB modeoff() 'mode without selection<br />SELECTOR ("SELECTMODE", "cell", "", "SELECTOR 1","OFF");<br />END SUB</p>
+        <p class="SVprogramCode">SUB modemono() 'mode mono selection<br />SELECTOR ("SELECTMODE", "cell","", "SELECTOR 1", "MONO");<br />END SUB</p>
+        <p class="SVprogramCode">SUB modemulti() 'mode multi selection<br />SELECTOR ("SELECTMODE", "cell", "","SELECTOR 1","MULTI");<br />END SUB</p>
+        <p class="SVprogramCode">SUB modeinput() 'direct entry mode <br />SELECTOR ("SELECTMODE", "cell", "", "SELECTOR 1", "INPUT");<br />END SUB </p>
+        <h2 class="SVheading2">Example 3</h2>
+        <p class="SVprogramCode">‘Set the text and background color of a set of cells (from cell 0,0 to 2,2)</p>
+        <p class="SVprogramCode">SUB PUTCOLOR()</p>
+        <p class="SVprogramCode">&#160; dim col as Long;</p>
+        <p class="SVprogramCode">&#160; dim red as Long;</p>
+        <p class="SVprogramCode">&#160; dim green as Long;</p>
+        <p class="SVprogramCode">&#160; dim blue as Long;</p>
+        <p class="SVprogramCode">' Set the background color. Calculate the color using the values of the RGB components of a color <br />' (each from 0 to 255)</p>
+        <p class="SVprogramCode">&#160; red = TOL(@VARCOL.RED);</p>
+        <p class="SVprogramCode">&#160; green = LOGICAL("SHIFT_LEFT", TOL(@VARCOL.GREEN), 8);</p>
+        <p class="SVprogramCode">&#160; blue = LOGICAL("SHIFT_LEFT", TOL(@VARCOL.BLUE), 16);</p>
+        <p class="SVprogramCode">&#160; col = red + green + blue;</p>
+        <p class="SVprogramCode">&#160; SELECTOR("PUTBACKCOLOR", "GRIDS", "", "GRIDNEW", 0, 0, 2,2, col);</p>
+        <p class="SVprogramCode">' Set the text color (opposite color of the background). <br />' Calculate the color using the values of the RGB components of the color (each from 0 to 255)</p>
+        <p class="SVprogramCode">&#160; red = 255 - TOL(@VARCOL.RED);</p>
+        <p class="SVprogramCode">&#160; green = LOGICAL("SHIFT_LEFT", 255 - TOL(@VARCOL.GREEN), 8);</p>
+        <p class="SVprogramCode">&#160; blue = LOGICAL("SHIFT_LEFT", 255 - TOL(@VARCOL.BLUE), 16);</p>
+        <p class="SVprogramCode">&#160; col = red + green + blue;</p>
+        <p class="SVprogramCode">&#160; SELECTOR("PUTTEXTCOLOR", "GRIDS", "", "GRIDNEW", 0, 0, 2,2, col);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' Read the background color of a cell (0, 0)</p>
+        <p class="SVprogramCode">SUB GETCOLOR()</p>
+        <p class="SVprogramCode">&#160; dim col as long;</p>
+        <p class="SVprogramCode">&#160; col = SELECTOR("GETCELLBACKCOLOR", "GRIDS", "", "GRIDNEW", 0, 0);</p>
+        <p class="SVprogramCode">' Retrieve the RGB components of the color</p>
+        <p class="SVprogramCode">&#160; @VARCOL.RED = TOD(LOGICAL("AND", col, 255));</p>
+        <p class="SVprogramCode">&#160; @VARCOL.GREEN = TOD(LOGICAL("AND", LOGICAL("SHIFT_RIGHT", col, 8), 255));</p>
+        <p class="SVprogramCode">&#160; @VARCOL.BLUE = TOD(LOGICAL("AND", LOGICAL("SHIFT_RIGHT", col, 16), 255));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">' Retrieve the variable name of the row currently selected (GRID in "Variable tracking" mode).</p>
+        <p class="SVprogramCode">SUB GETVARIABLENAME()</p>
+        <p class="SVprogramCode">&#160; @TEXT1= SELECTOR("GETVARNAME", "GRIDS", "", "GRIDNEW", SELECTOR("SELECTLINE", "GRIDS", "", "GRIDNEW"));</p>
+        <p class="SVprogramCode">END SUB</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

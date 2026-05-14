@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|Dynamic Busbar Coloring" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Dynamic Busbar Coloring How to use the Add-on in your project</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">How to use the Add-on in Your Project</h1>
+        <p class="SVnormal">This topic describes the steps you will have to follow in order to use the Dynamic Busbar Coloring Add-on in your own application. Each step is briefly described and includes references to subsequent sections where installation and configuration are explained in detail.</p>
+        <p class="SVnormal">The necessary entry point is the description of the network topology – a single line diagram is usually available and sufficient.</p>
+        <p class="SVnormal">In addition, the following elements are necessary for using the Add-on in your project.</p>
+        <ul style="list-style-type: disc;">
+            <li>The dedicated configuration tool – It allows you to create the topology configuration files,</li>
+            <li>The SH_ELEC and SH_ELEC_COLO libraries ,</li>
+            <li>Your project.</li>
+        </ul>
+        <p class="SVnormal">In order to become familiar with the different configuration items, a sample project is available. It is a good starting point before you go through the configuration and set-up of your own project. </p>
+        <h2 class="SVheading2">Step 1 Preparatory work</h2>
+        <p class="SVnormal">Using the single line diagram identify the list of topology items, their properties, and their dependencies.</p>
+        <p class="SVnormal">First, identify the list of switches and transformers, then the nodes that are instrumented (with field variables), those that have a static value (earth, static input) and feeders.</p>
+        <p class="SVnormal">Next, complete the list with the nodes that are used to connect the devices (bus, connection between a switch and a transformer…)</p>
+        <p class="SVnormal">Finally, associate them with the required variables that may already exist in your project. If not, it is time to define the variable hierarchy and branches.</p>
+        <h2 class="SVheading2">Step 2 Configure the topology engine</h2>
+        <p class="SVnormal">Create the Topology Engine configuration files in C folder of your project either manually or using the dedicated configuration tool. The files required to run the Configuration Tool must be copied in the BIN directory of <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <p class="SVnormal">Creating and maintaining a Topology Engine configuration using the Configuration Tool requires that you have the SH_ELEC_COLO library available.</p>
+        <p class="SVnormal">See <a href="Busbar_config_tool_overview.htm">The configuration tool</a> for more information on the configuration tool.</p>
+        <h2 class="SVheading2">Step 3 Configure the variables</h2>
+        <p class="SVnormal">The configuration tool is able to create all configuration items required for the Topology Engine to calculate and maintain data related to dynamic coloring. This is mainly sets of internal variables used for calculation and graphic animations. These variables are generated based on templates and instances automatically created by the configuration tool. It is up to you to use the Application Architect to modify the templates and add the extra variables necessary to handle data coming from the field (switch positions, injection…) or to ensure that the necessary variables are in the project.</p>
+        <h2 class="SVheading2">Step 4 Install the Topology Engine</h2>
+        <p class="SVnormal">To activate the svmgrTopology.dll, add the following lines in the file BIN\Usrmgr.dat :</p>
+        <p class="SVprogramCode">[USRMGR\svmgrTopology]<br />DLL=svmgrTopology.dll</p>
+        <h2 class="SVheading2">Step 5 First tests</h2>
+        <p class="SVnormal">This is all that is required to run the Topology Engine regardless of anything else in the project.</p>
+        <p class="SVnormal">Launch <span class="mc-variable OEM.ProductName variable">PcVue</span> with your own project. Using the Event viewer, make sure the svmgrTopology.dll and your configuration are loaded successfully. See <a href="Busbar_traces.htm">Traces</a> for more information about the messages and errors raised by the Topology Engine Runtime.</p>
+        <p class="SVnormal">Once any loading errors are fixed, it is time to develop the mimics and symbols to visualize voltage levels across your network.</p>
+        <h2 class="SVheading2">Step 6 Mimic design</h2>
+        <p>See <a href="Busbar_using_node_voltages.htm">Using node voltages in the application</a> for more information.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

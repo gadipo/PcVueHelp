@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Servers|IEC 60870-5-104 Server" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>IEC 60870-5-104 Server settings</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor332"></a>IEC 60870-5-104 Server Settings</h1>
+        <p class="SVnormal">The IEC 60870-5-104 Server settings can be displayed by using the <u>Settings</u> task when the IEC 60870-5-104 Server node is selected in the Application Explorer's configuration tree. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <img src="../../Resources/Images/AE/Comm_Servers/servers_iec104_settings.png" MadCap:targetName="t3" style="display: none;" />
+        </p>
+        <ul style="list-style-type: disc;">
+            <li>Client connections<ul style="list-style-type: disc;"><li>Max number of connections - The maximum number of concurrent connections the IEC 60870-5-104 server will accept from clients. The default is five.</li></ul></li>
+            <li>Spontaneous event queue - The behavior of the queue in <span class="mc-variable OEM.ProductName variable">PcVue</span> that is used to buffer spontaneous (unsolicited) events before they are sent to a client. <ul style="list-style-type: disc;"><li>When the event queue if full<ul style="list-style-type: disc;"><li>Delete the oldest</li><li>Keep the oldest and ignore new events</li></ul></li><li>Default values - The following setting are used by default. They can be overridden by the properties of specific sectors or information objects. <ul style="list-style-type: disc;"><li>Max number of spontaneous events queued - The default is 100.</li><li>For a given point if the value changes<ul style="list-style-type: disc;"><li>Buffer all changes</li><li>Keep only the last value change</li></ul></li><li>Timestamp format<ul style="list-style-type: disc;"><li>No timestamp</li><li>24 bit format</li><li>54 bit format</li></ul></li></ul></li></ul></li>
+            <li>Select Before Operate - Settings that affect the server behavior when receiving a select before operate command from a client.<ul style="list-style-type: disc;"><li>Select command timeout - The SBO command timeout. Default 5 seconds.</li></ul></li>
+            <li>IOA definition - Settings that affect the way in which the IO are addressed.<ul style="list-style-type: disc;"><li>Address format<ul style="list-style-type: disc;"><li>Unstructured</li><li>Structured 3 bytes (MSB first)</li></ul></li><li>Starting addresses - The start address for each of the supported Information Object type.</li></ul></li>
+            <li>Interoperability issues<ul style="list-style-type: disc;"><li>Ack time sync request from clients - If enabled, the IEC 104 outstation will acknowledge positively the reception of clock synchronization requests.<br />The clock synch should be based on a system-wide master clock. Because setting the Microsoft Windows system clock requires privileges higher than those usually given to the account used to run <span class="mc-variable OEM.ProductName variable">PcVue</span>, the IEC 104 outstation never sets the system clock upon reception of such a clock synch command.</li><li>Timestamp<ul style="list-style-type: disc;"><li>UTC - If enabled, all timestamps send by the selected sector are expressed in UTC.</li><li>Local - If enabled, all timestamps send by the selected sector are expressed in the Local time zone.</li></ul></li></ul></li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">While the IEC 104 standard assumes the use of timestamps expressed in the local time zone, many devices supports the use of either local or UTC timestamps. The Timestamp interop setting allows you to set how the IEC104outstation should interpret timestamps. This setting must be carefully set in accordance with the behavior of the installed devices.</p>
+            <p class="SVnormal">In case of a discrepancy on this setting, and in addition to monitored data being wrongly timestamped, any received time-tagged command will be ignored if the timestamp is in the past compared to the current time. This occurs if there is a behavior discrepancy between the devices and the IEC 104 outstation and can be fixed by changing the Timestamp setting.</p>
+        </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

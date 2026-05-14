@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Application Architect|Examples|Parameters" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Global parameter examples</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Global Parameter Examples</h1>
+        <h2 class="SVheading2">Example 1</h2>
+        <p class="SVnormal">The requirement is to set the Domain property of all variables to a value based on their location within the top-level branch  of the topology. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t0"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/AA/param_ex3_0.png" MadCap:targetName="t0" style="display: none;" /></p>
+        <p class="SVnormal">The most efficient way to do this is to create a global parameter that is linked to the Domain property. By positioning the global parameter at the building level in the topology, we can also take advantage of using an expression to automatically calculate the Domain property using the name of the instance.</p>
+        <ol>
+            <li value="1">Create the global parameter gDomain. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/AA/param_ex3_1.png" MadCap:targetName="t1" style="display: none;" /></li>
+            <li value="2">Position the global parameter gDomain assigning it to the Building template. The value, which is the result of the expression <u>Me.Name</u>, automatically takes the Name property of the Building template.  
+By configuring the assignation of the parameter to have a <u>Topology scope</u>, it applies not only to the variables of the Building template but also to the variables of all sub-ordinate templates. Thus, all variables sub-ordinate to Building01 will have the Domain Building01, all variables sub-ordinate to Building02 will have the Domain Building02, etc. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/AA/param_ex3_2.png" MadCap:targetName="t2" style="display: none;" /></li>
+            <li value="3">When the Building template is instantiated, the resulting values of the gDomain parameter can be seen. As its value is the result of an expression, it cannot be manually entered. Had the global parameter been an input type, the user could have entered a value (or overwritten it if it had a default value).<a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/AA/param_ex3_3.png" MadCap:targetName="t3" style="display: none;" /></li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">Note that the icon representing the Building nodes has changed to indicate the use of a global parameter at this level.</p>
+        </div>
+        <h2 class="SVheading2">Example 2</h2>
+        <p class="SVnormal">The requirement is to assign the same server list to all element instances. This can be simply achieved by positioning, at the top level of the instantiation tree, a global parameter  gServerList impacting the property <u>Server station list</u> of all elements.</p>
+        <ol>
+            <li value="1">Create the global parameter gServerList. As the parameter is to affect all elements that have the <u>Server station list</u> property, the <u>Element type</u> is set to Any. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t11"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/AA/param_ex4_1.png" MadCap:targetName="t11" style="display: none;" /></li>
+            <li value="2">The global parameter gServerList is added directly to the Instances Tree at the top level and using <u>Topology scope</u>. All elements having the <u>ServerList</u> property take the value entered for the parameter at the top level. Note the plus sign adjacent to the global parameter icon, which indicates the parameter has been added at the instances level, not at the template level. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t12"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/AA/param_ex4_2.png" MadCap:targetName="t12" style="display: none;" /></li>
+        </ol>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

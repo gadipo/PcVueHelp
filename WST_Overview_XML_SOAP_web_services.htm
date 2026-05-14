@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Web and mobile client applications|Web Services Toolkit" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Overview of the XML SOAP Web Services</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor27"></a>Overview of the XML SOAP Web Services</h1>
+        <h2 class="SVheading2">Session management service</h2>
+        <p class="SVnormal">Session management is provided by the SessionContext
+ service. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t4"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t4" style="display: none;">
+            <br />
+            <img src="../Resources/Images/WebApps/webtools_SessionManagement.png" />
+            <br />
+        </div>
+        <p class="SVnormal">Opening a session using the SessionContext service is
+ a mandatory operation that must be processed before any other call to
+ the Web Services Toolkit. Opening a session allows the <span class="mc-variable OEM.ProductName variable">PcVue</span> Web
+ Server to perform the following actions.</p>
+        <ul>
+            <li class="SVbulleted">Identify and authenticate
+ the client by checking the user's access rights within the application.
+ To open a session, the client must provide a valid username and password.</li>
+            <li class="SVbulleted">Allocate resources
+ (a context) to store persistent information. </li>
+            <li class="SVbulleted">Manage simultaneous
+ connections taking into account the number of WebVue connections permitted
+ by the <span class="mc-variable OEM.ProductName variable">PcVue</span> license.</li>
+        </ul>
+        <p class="SVnormal">If identification and authentication are successful,
+ a SessionID is returned to the client. This SessionID is then used by
+ all other requests to the server for the duration of the session.</p>
+        <p class="SVnormal">If no request is received from a client then, after a
+ time-out period, allocated resources are freed by the server and the SessionId
+ is no longer valid. Any further requests using the SessionID will return
+ an error to the client.</p>
+        <p class="SVnormal">The time-out period is defined by the Client
+ Session Time-out property in the WebVue Server's configuration.</p>
+        <h2 class="SVheading2">Real time data access service</h2>
+        <p class="SVnormal">Real time data access is provided by the RealTimeData
+ service. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t3" style="display: none;">
+            <br />
+            <img src="../Resources/Images/WebApps/webtools_RealTimeData.png" />
+            <br />
+        </div>
+        <p class="SVnormal">This  provides access to the real
+ time value, timestamp and quality (VTQ) of the variables.
+ It also provides access to the static properties of variables (Title etc.).
+ The following actions are supported.</p>
+        <ul>
+            <li class="SVbulleted">Read value - A single
+ read of the VTQ of one or more variables.</li>
+            <li class="SVbulleted">Write value - A single
+ write to the value of one or more variables.</li>
+            <li class="SVbulleted">Read properties -
+ To read one or more properties of one or more variables.</li>
+            <li class="SVbulleted">New properties for variables (format and Unit properties for analogic value).</li>
+            <li class="SVbulleted">Browsing variables is in relation to the browsing level defined on the Server side. </li>
+            <li class="SVbulleted">Subscribe values
+ - To subscribe to changes in value of one or more variables. On receipt of
+ a subscription request, the server creates a buffer in which the VTQ of the
+ subscribed variables is saved each time it changes. The saved values can
+ be retrieved periodically by the client. When the client no longer requires
+ the values, the subscription is canceled.</li>
+        </ul>
+        <h2 class="SVheading2">Real time alarm access service</h2>
+        <p class="SVnormal">Real time alarm access is provided by the RealTimeAlarm
+ service. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t2" style="display: none;">
+            <br />
+            <img src="../Resources/Images/WebApps/webtools_RealTimeAlarm.png" />
+            <br />
+        </div>
+        <p class="SVnormal">The RealTimeAlarm service provides access to the real
+ time status and timestamp of alarms. The following actions
+ are supported.</p>
+        <ul>
+            <li class="SVbulleted">Subscribe alarms
+ - To subscribe to changes in value of alarms using an alarm filter. On receipt
+ of a Subscribe request, the server creates a buffer in which the status
+ of alarms passing the filter criteria is saved each time it changes. The
+ saved status values can be periodically retrieved by the client. When
+ the client no longer requires the alarms, the subscription is canceled.</li>
+        </ul>
+        <h2 class="SVheading2">Properties that can be accessed as variables</h2>
+        <table style="border-collapse: collapse;width:100%">
+            <col style="width: 400px;" />
+            <col style="width: 400px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Token</td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Threshold1Value to Threshold4Value</td>
+                    <td class="SVtable">Threshold values 1 to 4.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">BinAttr</td>
+                    <td class="SVtable">Extended binary attributes (as a long).</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TextAttr01 to TextAttr16</td>
+                    <td class="SVtable">Extended text attributes 1 to 16.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">DeferredTextAttr01 to DeferredTextAttr16</td>
+                    <td class="SVtable">Deferred extended text attributes 1 to 16.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">Examples:</p>
+        <ul>
+            <li>To access the first threshold REGISTER1 you would use REGISTER1.Threshold1Value.</li>
+            <li>To access extended text attribute 3 of REGISTER1 you would use REGISTER1.TextAttr03.</li>
+        </ul>
+        <h2 class="SVheading2">Historical data access service</h2>
+        <p class="SVnormal">Historical data access is provided by the HistoricalData
+ service. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <br />
+            <img src="../Resources/Images/WebApps/webtools_HistoricalData.png" />
+            <br />
+        </div>
+        <p class="SVnormal">The HistoricalData service provides access to archive units for the retrieval of Trend and Log data. The following actions
+ are supported.</p>
+        <ul>
+            <li class="SVbulleted">Create a log request
+ - Provides a set of parameters that define the scope of the request (log
+ list name, filter and properties to retrieve). On receiving this request,
+ the server allocates resources to handle the request.</li>
+            <li class="SVbulleted">Query log - On demand,
+ the client requests a set of logged events for the defined log request
+ and a specified period of time.</li>
+            <li class="SVbulleted">Close log - When
+ the client no longer requires access to the log data, the log request is
+ canceled.</li>
+        </ul>
+        <p class="SVnormal">This multi-step log request handling allows the design
+ of a log client similar in operation to the <span class="mc-variable OEM.ProductName variable">PcVue</span> Log Viewer. In
+ particular, once the filter is set up you can then make multiple requests
+ for data with different time periods.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

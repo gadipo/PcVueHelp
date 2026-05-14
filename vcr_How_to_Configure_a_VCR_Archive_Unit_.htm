@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|The VCR Facility" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>How to configure a VCR archive unit</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor124"></a><a name="kanchor125"></a>How to Configure a VCR Archive Unit</h1>
+        <p class="SVnormal">A VCR archive unit must exist in the project configuration, produced by the intended recording 
+ station and consumed by the playback station. You cannot create more than 
+ one VCR archive unit in a project, and there is no support for server redundancy.</p>
+        <p class="SVnormal" style="color: #000000;"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+        </p>
+        <div MadCap:targetName="t1" style="display: none;">
+            <p>
+                <img src="../Resources/Images/Extras/vcr_unit_general_tab.png" />
+            </p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">The archive unit on the replay station can take more disk space than that on the recording station as the playback station downloads and stores locally new archives from the recording station each time the VCR player is started.</p>
+            <p class="SVnormal">A round buffer mechanism is in place on the recording station that limit the quantity of data that is retained. Such a mechanism does not exist on the playback station.</p>
+        </div>
+        <div class="tip">
+            <p class="SVnormal">For details of how to configure data recording in general, 
+					see the Help book on Archives.</p>
+        </div>
+        <h2 class="SVheading2">Creating a VCR archive unit</h2>
+        <ol>
+            <li class="SVnumbered" value="1">Open the Application Explorer. In the center pane, expand the Archives node.</li>
+            <li class="SVnumbered" value="2">Right-click on <u>Archives Units</u> to select <u>Add an archive unit</u> then <u>Add a VCR unit</u>.</li>
+            <li class="SVnumbered" value="3">The Archive Unit Creation dialog opens with a pre-configured name. You can accept that name or choose one of your own.</li>
+            <li class="SVnumbered" value="4">Optionally, enter 
+ text in the Description property. </li>
+            <li class="SVnumbered" value="5">Configure the other 
+ properties as described below. </li>
+            <li class="SVnumbered" value="6">Select the <u>OK</u> 
+ button. </li>
+            <li class="SVnumbered" value="7">If the settings
+ are accepted, the dialog will close and an icon representing the VCR unit will appear in the configuration tree. Close the Archives configuration explorer.</li>
+        </ol>
+        <div class="note">
+            <p class="SVnormal">You can only create one VCR archive unit in a given project. 
+ Once it has been created, its properties cannot be changed, although you 
+ can delete and re-create it with different properties.</p>
+        </div>
+        <h2 class="SVheading2">Configuring the archive file cache (General tab)</h2>
+        <p class="SVnormal">The archive file is provided with a memory-based cache 
+ that buffers data before it is written to the hard disk. Using a memory 
+ buffer reduces the amount of disk activity and hence the load on the host 
+ computer. Unless the project has any special requirements, it is recommended 
+ that these properties be left at their default settings.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 189px;" />
+            <col />
+            <tr>
+                <td>
+                    <p class="SVtableHeading">Property</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Settings</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Memory size (KB)</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">The size of the memory buffer in which data is stored 
+ before being written to disk. Default value 32KB.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Write period</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">The period at which the contents of the memory buffer 
+ is written to disk. If set to zero the buffer will only be written when 
+ it is full. Default value 120 seconds.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Configuring a time-ordered buffer (General tab)</h2>
+        <p class="SVnormal">
+            &#160;<span class="mc-variable OEM.ProductName variable">PcVue</span> supports some communication protocols 
+ where the data is timestamped at the source, which is in the equipment. 
+ When using a timestamped protocol and communicating with more than one 
+ item of equipment, it is quite likely that data will arrive at the VCR 
+ Archive Unit not in chronological order. To overcome this problem each 
+ VCR Archive Unit has an optional buffer in which data may be sorted before 
+ being saved.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 188px;" />
+            <col />
+            <tr>
+                <td>
+                    <p class="SVtableHeading">Property</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Settings</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Memory size (KB)</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">The size of the memory buffer used to sort data into chronological 
+ order before it is copied to disk. This must be sufficiently large to 
+ store the amount of data expected to arrive during the sorting period. 
+ Default value 32KB.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Period</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">The period for which data is temporarily stored whilst 
+ it is sorted. The period must be equal to or greater than the maximum 
+ expected difference between the local time and the timestamp of the data. 
+ If this is set at the default value of zero then no sorting takes place.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Configuring the capacity and number of files generated (Details tab)</h2>
+        <p class="SVnormal">The VCR Archive Unit capacity is determined by two properties, 
+ the Day Capacity and the Max Archive Capacity. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Extras/vcr_unit_details_tab.png" MadCap:targetName="t2" style="display: none;" /></p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 188px;" />
+            <col />
+            <tr>
+                <td>
+                    <p class="SVtableHeading">Property</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Settings</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Max archive capacity</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">A limit, in megabytes, to the archive unit capacity. If 
+ this limit is exceeded the oldest record is discarded even if the Day 
+ capacity has not been reached. The VCR Archive Unit is limited to a maximum 
+ size of 50GB (default).</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Day capacity</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Selects the maximum number of days for which records are 
+ kept. Records that are older than the specified Day capacity are discarded. 
+ The default value is 20 days.</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Photo period</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">The time period for which each archive file can record. 
+ When the period is reached, a new file is created. Each file is known as 
+ a photo. The default value is 10 minutes.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Configuring the archive file format</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 187px;" />
+            <col />
+            <tr>
+                <td>
+                    <p class="SVtableHeading">Property</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Settings</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Date format </p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">The date format for the timestamp of each entry in an 
+ archive file. The default is <span>yyyymmdd</span>, 
+ where:</p>
+                    <p class="SVtable"><i>yyyy</i> is the year as four digits<br /><i>mm</i> is the month as two digits</p>
+                    <p class="SVtable"><i>dd</i> is the day of the month as two 
+ digits.<br /></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Stored attributes</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">A string specifying which of a variable's extended attributes 
+ to record (in addition to the value and timestamp). Default value: null. 
+ </p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">The attributes are selected by using the substitution 
+ strings #A1 to #A16. Each attribute is separated by a comma. The attributes 
+ #A1 and #A2 represent the variable's Domain and Nature respectively. </p>
+        <h2 class="SVheading2">Selecting the path where the archive files may be found</h2>
+        <p class="SVnormal">You must specify a valid path to a connected storage 
+ location.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 186px;" />
+            <col />
+            <tr>
+                <td>
+                    <p class="SVtableHeading">Property</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Settings</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">Path to files ...</p>
+                </td>
+                <td colspan="1" rowspan="1" valign="top">
+                    <p class="SVtable">For the archive unit on the playback station, it is the 
+ location of the files it will synchronize. It is not used for the archive 
+ unit on the recording station although it must still be entered for proper operations of the playback station.</p>
+                    <p class="SVdataListing">\\<i>ComputerName</i>\...\<i>ProjectName</i>\TH\<i>MyVCRArchiveUnitName</i></p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Configuring the networking behavior</h2>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 120px;" />
+            <col />
+            <tr valign="top">
+                <td style="width: 120px;" valign="top" width="120px">
+                    <p class="SVtableHeading">Property</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Description</p>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td>Historical servers</td>
+                <td>The name of a server station list (historical server list). Used on multi-station applications to define on which stations data will be recorded for the archive unit. See the Networking book for further information.</td>
+            </tr>
+            <tr valign="top">
+                <td>Clients</td>
+                <td>
+                    <p>The name of a client station list. Used on multi-station applications to define which stations will be able to request records for the archive unit. See the Networking book for further information.</p>
+                    <p>It should contain the list of stations that will be used for replay.</p>
+                </td>
+            </tr>
+        </table>
+        <div class="note">
+            <p class="SVnormal">It is recommended that only client stations be used as playback stations.</p>
+            <p class="SVnormal">Because variables on playback stations are simulated, their value no longer reflect the current process state. No station requiring availability of live data should be used as playback station. In particular, a data acquisition server, an archive server or any other station due to distribute live data to other sub-systems (web back end, OPC server...) must not be used as playback station.</p>
+        </div>
+        <div class="warning">
+            <p class="SVnormal">In most cases, the list of servers producing a VCR archive unit is a list that only contains one station. In some cases, if you want to archive a set of data in local archives on several stations, it contains a list of stations where these local archives should be managed.</p>
+            <p class="SVnormal">Using a server list that contains an association of servers is not recommended, as it implies performing redundant operations that are not supported by VCR archive units. With such a configuration, depending on which station of the association was active or passive at some point in time, you would end up with gaps in your archived data, and no mean for consolidating them.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

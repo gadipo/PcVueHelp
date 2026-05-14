@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|MQTT Add-on" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Installation and configuration</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Installation and Configuration</h1>
+        <p class="SVnormal">The MQTT Add-on of <span class="mc-variable OEM.ProductName variable">PcVue</span> comprises of a single dll file that must be copied to the \Bin folder. The file is named:</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p>svmgrMQTT.dll</p>
+            </li>
+        </ul>
+        <p class="SVnormal">The Add-on was developed using the SV Manager Toolkit. In order for <span class="mc-variable OEM.ProductName variable">PcVue</span> to load the Add-on at startup, a text file USRMGR.DAT must also be added to the \Bin folder. The file must contain the following lines.</p>
+        <p class="SVprogramCode">[USRMGR\svmgrMQTT]</p>
+        <p class="SVprogramCode">DLL=svmgrMQTT.dll</p>
+        <h2 class="SVheading2">MQTT Add-on configuration file</h2>
+        <p class="SVnormal">The Add-on is configured using a file called svmgrMQTT.ini that must be created in the C folder of the project. The file has the following structure.</p>
+        <p class="SVnormal">Please note that if an entry is omitted or if the file is not present in the project then its default value will be applied by the task. The file format is:</p>
+        <p class="SVdataListing">[TaskParameters]</p>
+        <p class="SVdataListing">AttributeNumber = 16</p>
+        <p class="SVdataListing">AttributeSeparator = #</p>
+        <p class="SVdataListing">InitialPublishNS = No</p>
+        <p class="SVdataListing">LastPublishNS = No</p>
+        <p class="SVdataListing">AssociationName = Association01</p>
+        <p class="SVdataListing">WaitForInitialSub = No</p>
+        <p class="SVdataListing">DefaultDecimalPlaces = 3</p>
+        <p class="SVdataListing">UserName =</p>
+        <p class="SVdataListing">[Broker1]</p>
+        <p class="SVdataListing">Name = mydevice</p>
+        <p class="SVdataListing">HostAddress = mqtt-broker.example.com</p>
+        <p class="SVdataListing">ListeningPort = 1883</p>
+        <p class="SVdataListing">KeepAlive = 60</p>
+        <p class="SVdataListing">ReconnectionPeriod = 30</p>
+        <p class="SVdataListing">GenericRootTopic = devices/mydevice/messages/devicebound/#</p>
+        <p class="SVdataListing">BrokerStateVarName = </p>
+        <p class="SVdataListing">VerboseTraces = Yes</p>
+        <p class="SVdataListing">VarNameVerboseTrigger = VerboseActivate</p>
+        <p class="SVdataListing">CleanSession = Yes</p>
+        <p class="SVdataListing">[Broker1/Security]</p>
+        <p class="SVdataListing">Login = MyLogin</p>
+        <p class="SVdataListing">Password = MyPwd</p>
+        <p class="SVdataListing">ClientId = </p>
+        <p class="SVdataListing">CertificateAuthorityFileName = E:\Certificates\root_cert.pem</p>
+        <p class="SVdataListing">ClientCertificateFileName = E:\Certificates\client_cert.pem</p>
+        <p class="SVdataListing">ClientKeyFileName = E:\Certificates\client_key.key</p>
+        <p class="SVdataListing">[Extractors]</p>
+        <p class="SVdataListing">Extractor1 = StrExtract(value, '=', 8)</p>
+        <p class="SVdataListing">Extractor2 = HexStrToInt16(StrExtract(value, '=', 8),10)</p>
+        <p class="SVdataListing">[Filters]</p>
+        <p class="SVdataListing">Filter1 = StrEqualNoCase(StrLeft(StrExtract(value, '=', 8), 2), 49)</p>
+        <p class="SVdataListing">Filter2 = StrEqualNoCase(StrLeft(StrExtract(value, '=', 3), 2), 02)</p>
+        <p class="SVdataListing">Filter3 = StrEqualNoCase(StrLeft(StrExtract(value, '=', 3), 2), 01)</p>
+        <p class="SVdataListing">[Timestamps]</p>
+        <p class="SVdataListing">Timestamp1 = JsonGetValue(value, 'metrics[0].timestamp')</p>
+        <p class="SVdataListing">[Qualities]</p>
+        <p class="SVdataListing">Quality1 = JsonGetValue(value, 'metrics[0].quality')</p>
+        <p class="SVdataListing">[PublishFormats]</p>
+        <p class="SVdataListing">PublishFormat1 = unit#description#source</p>
+        <ul style="list-style-type: disc;">
+            <li>[TaskParameters]
+				<ul style="list-style-type: disc;"><li><p>AttributeNumber: Specify the extended attribute used for the configuration of a MQTT variable.<br />Type: Integer from 3 to 16. If omitted, default value is 16.</p></li><li><p>AttributeSeparator: Specify the character used to separate the extended attribute parameters of a MQTT variable.<br />Type: char. If omitted, default value is ‘|’.</p></li><li><p>InitialPublishNS: Enable to send messages with quality = 0 (valid) for every PUB variable when starting <span class="mc-variable OEM.ProductName variable">PcVue</span>.<br />Type: String. Must be Yes or No. If omitted, default value is No.</p></li><li><p>LastPublishNS: Enable to send messages with quality = 129 (invalid) for every PUB variable when stopping <span class="mc-variable OEM.ProductName variable">PcVue</span>.<br />Type: String. Must be Yes or No. If omitted, default value is No.</p></li><li><p>AssociationName: Specify the association name in a redundant architecture.<br />Type: String. If omitted, default is an empty string.<br /></p><p>The task is active on all servers of the specified association, they subscribe to topics and consume the received MQTT messages. But only active servers distribute the received values to variables. Passive servers do not distribute the received values to variables.</p></li><li><p>WaitForInitialSub: Applicable to PUB-SUB variables only. Disable any publication as long as no value is received on the variable.<br />Type: String. Must be Yes or No. If omitted, default value is No.</p></li><li><p>DefaultDecimalPlaces: Specify the default number of decimal places when publishing register variables.<br />Type: Integer from 1 to 9. If omitted, default value is 3.</p></li><li><p>UserName: Specify the string that will be used as user name for logging command user actions.<br />Type: String. Max length 20 characters. If omitted, default value is an empty string.<br />When a value change is received by the MQTT subscriber for a variable with the Command property set, then the value change is processed as a command. It includes user command logging if a log list is configured to log user commands, and sending the new value as a command to the underlying data acquisition driver if it is an I/O variable.</p></li></ul></li>
+            <li>
+                <p>[BrokerX]: Definition of the parameters of broker X. <br />X: Number. If multiples brokers are configured, the values must be contiguous starting from 1.</p>
+                <ul style="list-style-type: disc;">
+                    <li>
+                        <p>Name: Optional parameter. Specify the broker name.<br />Type: String. If omitted from the file, the broker’s name is BrokerX.</p>
+                    </li>
+                    <li>
+                        <p>HostAddress: Specify the address of the MQTT broker. The address can be either an IP address or a host name.<br />Type: String. If omitted from the file, default value is an empty string.</p>
+                    </li>
+                    <li>
+                        <p>ListenningPort: Specify the TCP port used to communicate with the broker.<br />Type: Integer. If entry omitted from the file, default value is 1883. If MQTT over TLS, default value is 8883.</p>
+                    </li>
+                    <li>
+                        <p>KeepAlive: Specify the keep alive period in seconds. Keep alive ensures that the connection in between the broker and client remains open.<br />Type: Integer from 1 to 65535. If omitted, default value is 60.</p>
+                    </li>
+                    <li>
+                        <p>ReconnectionPeriod: Specify the time to wait between each reconnection attempt if a connection is lost (in seconds).<br />Type: Integer from 1 to 65535. If omitted, default value is 30.</p>
+                    </li>
+                    <li>
+                        <p>GenericRootTopic: Specify the generic root topic name. It can be seen as a topic prefix for both publish and subscribe operations. See the topic <a href="mqtt_topic.htm">Using MQTT topics</a> for more information on how to configure and use topics.<br />Type: String. If omitted from the file, default value is an empty string.</p>
+                    </li>
+                    <li>
+                        <p>BrokerStateVarName: Specify the name of the register variable used to reflect the connection status between <span class="mc-variable OEM.ProductName variable">PcVue</span> and the broker. See the topic <a href="mqtt_traces.htm">MQTT Add-on traces</a> for more information on error codes.</p>
+                    </li>
+                    <li>
+                        <p>VerboseTraces: Enable to display verbose traces in the event viewer.<br />Type: String. Must be Yes or No. If omitted, default value is No.</p>
+                    </li>
+                    <li>
+                        <p>VarNameVerboseTrigger: Specify the name of the bit variable that can turn on or off verbose traces.<br />Type: String. If omitted, default is an empty string.</p>
+                    </li>
+                    <li>
+                        <p>CleanSession: Enable the clean session mode. Yes = clean session. No = persistent session. With a clean session, the broker does not store any subscription information or undelivered messages for the subscriber. This mode is ideal when the Add-on only publishes messages. If set to No, topics are not unsubscribed when the Add-on stops.<br />Type: String. Must be Yes or No. If omitted, default value is Yes.</p>
+                    </li>
+                </ul>
+            </li>
+            <li>[BrokerX/Security]: Definition of the security parameters of broker X in case the broker requires specific security. See below for more information.
+				<ul style="list-style-type: disc;"><li><p>Login: Specify the login to connect to the MQTT broker.<br />Type: String. If omitted from the file, default value is an empty string.</p></li><li><p>Password: Specify the password to connect to the MQTT broker.<br />Type: String. If omitted from the file, default value is an empty string.</p></li><li><p>ClientId: Specify the Id of the MQTT Add-on to be sent to the broker upon connection.<br />Type: String. If omitted from the file, default value is an empty string.<br />The predefined value <u>ComputerName</u> can be used to send the hostname of the computer where the Add-on is running.</p></li><li><p>CertificateAuthorityFileName: Used for secure TLS connection. Specify the full path and filename of the Certificate Authority (CA) file for the server certificate (broker).<br />Type: String. If omitted from the file, default value is an empty string.</p></li><li><p>ClientCertificateFileName: Used for secure TLS connection with client certificate validation by the server (broker). Specify the full path and filename of the client certificate file (the Add-on itself).<br />Type: String. If omitted from the file, default value is an empty string.</p></li><li><p>ClientKeyFileName: Used for secure TLS connection with client certificate validation by the server (broker). Specify the full path and filename of the client certificate key file.<br />Type: String. If omitted from the file, default value is an empty string.</p></li></ul></li>
+            <li>
+                <p>[Extractors] Extractors are used in the variable definition.</p>
+                <ul style="list-style-type: disc;">
+                    <li>
+                        <p>ExtractorX: Applicable to SUB and PUB-SUB variables. Optional parameter used to define how to extract a data value out of the message payload and apply it to a mapped variable. The syntax of the extraction formula follows the Expression engine specification. See <a href="mqtt_Json_parsing.htm">Json parsing reference</a> and refer to the  Expression Engine book in the Application Explorer help for details about the available functions and operators.<br />Type: String. If omitted, default value is an empty string.</p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>[Filters] Filters used in the variable definition.</p>
+                <ul style="list-style-type: disc;">
+                    <li>
+                        <p>FilterX: Applicable to SUB and PUB-SUB variables. Optional parameter used to check a specific part of the message payload. The filter condition must return a boolean value. If the filter condition is true, the payload will be extracted as specified in the extractor formula. If the condition is false, the payload will not be processed.<br />The syntax of the filter follows the Expression engine specification. See <a href="mqtt_Json_parsing.htm">Json parsing reference</a> and refer to the  Expression Engine book in the Application Explorer help for details about the available functions and operators.<br />The If () function cannot be used as a filter condition as it may not return a boolean. For example, using <i>If((StrEqualNoCase(JsonGetValue(value, 'sensorID'),A8F5L9B3Z5)),True, False)</i> is ineffective. You should directly use the condition <i>StrEqualNoCase(JsonGetValue(value, 'sensorID'),A8F5L9B3Z5)</i> instead.<br />Type: String. If omitted, default value is an empty string.</p>
+                    </li>
+                </ul>
+            </li>
+            <li>[Timestamps]<ul style="list-style-type: disc;"><li>TimestampX: Applicable to SUB and PUB-SUB variables. Optional parameter used to extract a data timestamp out of the message payload and apply it to a mapped variable.<br />Type: String. If omitted from the file, default value is an empty string.</li></ul></li>
+            <li>[Qualities]<ul style="list-style-type: disc;"><li>QualityX: Applicable to SUB and PUB-SUB variables. Optional parameter used to extract a data quality out of the message payload and apply it to a mapped variable.<br />Type: String. If omitted from the file, default value is an empty string.</li></ul></li>
+            <li>[PublishFormats]<ul style="list-style-type: disc;"><li>PublishFormatX: Applicable to PUB and PUB-SUB variables. Optional parameter used to specify the list of additional properties to publish in each message sent to the broker. Each property must be separated by the “#” character. See <a href="mqtt_publish_format.htm">How to customize the MQTT publish format</a> for more information about the syntax.<br />Type: String. If omitted from the file, default value is an empty string.</li></ul></li>
+        </ul>
+        <h2 class="SVheading2">MQTT security</h2>
+        <p>MQTT supports security of the transport layer, as well as client authentication. Security is set-up in the [BrokerX/Security] section, which includes the following provisions:</p>
+        <ul style="list-style-type: disc;">
+            <li>
+                <p>Transport confidentiality and integrity are based on TLS, and require the broker to be set-up with a server certificate.<br />Validation of such a certificate by the Add-on requires that the following parameter is properly defined in the .ini file:</p>
+                <ul style="list-style-type: disc;">
+                    <li><i style="font-style: normal; text-decoration: underline;">CertificateAuthorityFileName</i>: The broker (server) .pem certificate file</li>
+                </ul>
+            </li>
+            <li>Authentication is based on:
+				<ul style="list-style-type: disc;"><li>Either a client login &amp; password provided with parameters <u>Login</u> and <u>Password</u>.</li><li>Or a client certificate defined with parameters <u>ClientCertificateFileName</u> (.pem certificate file) and <u>ClientKeyFileName</u> (.key certificate file)</li></ul></li>
+        </ul>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" class="" MadCap:tocPath="Express mode" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="DBImport.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuration file format</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor5"></a>Configuration File Format</h1>
+        <p class="SVnormal">The file used with the Database Import Tool when used in Express mode is in XML format. For those familiar with XML and with access to an XML editor the Schema is provided below. For those not familiar with XML it is possible to take the example shown below, copy and paste it into a text editor, carefully make the changes required and save it as a file with a .XML extension.</p>
+        <p class="SVnormal">The configuration file defines an import task in the following terms.</p>
+        <ul>
+            <li>Source directory - The folder containing the files to be imported.</li>
+            <li>Destination connection string - The SQL connection string including the SQL Server name, database name and table name.</li>
+            <li>Purge task - To purge or not purge the table before import.</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">A single configuration file can define one  import task or several.</p>
+        </div>
+        <h2 class="SVheading2">Example of a Configuration file</h2>
+        <p class="SVnormal">This example defines the source folder, the destination connection string and table. A purge of the destination table precedes the import.</p>
+        <p class="SVprogramCode">&lt;?xml version="1.0" ?&gt;<br />&lt;!-- DB Import : Express mode configuration file --&gt;<br />&lt;ExpressModeConfiguration&gt;<br />&lt;ImportElements&gt;<br />&lt;ImportElement&gt;<br />&lt;Source Directory = "C:\Program Files\SV 8.2\Databases\Export\DB_IMPORT_DB1\TRENDTABLE1"/&gt;<br />&lt;Destination ConnectionString="Data Source=.\SQLEXPRESS;<br /> Initial Catalog=DB_IMPORT_DB1;<br /> Integrated Security=True;<br /> Persist Security Info=False"<br /> TableName="TRENDTABLE2" /&gt;<br />&lt;Tasks Purge="True" /&gt;<br /> &lt;/ImportElement&gt;<br />&lt;/ImportElements&gt;<br />&lt;/ExpressModeConfiguration&gt;</p>
+        <h2 class="SVheading2">Schema</h2>
+        <p class="SVnormal">If you want to generate the configuration file using an XML editor it must comply with  the following  schema: <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <p class="SVnormal">
+            <img src="../Resources/Images/DBImport/Sample_XSD.png" title="Schema for the Configuration file." MadCap:targetName="t1" style="display: none;" />
+        </p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Introduction to VBA in PcVue|Understanding Objects, Properties, Methods and Events" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_VBA.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Understanding Objects, Properties, Methods and Events</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Understanding Objects, Properties, Methods and Events</h1>
+        <p class="SVnormal">Objects are the building blocks of VBA-style scripting languages. Almost everything you do involves modifying objects. Most of the elements of the HMI, the project, and the variables are represented as objects in VBA.</p>
+        <h2 class="SVheading2">Objects and Collections</h2>
+        <p class="SVnormal">An object represents an element such as a window or a drawing element.<br />A collection is an object that contains several other objects, all of the same type. Using properties and methods, you can modify an object or an entire collection of objects.<br />Most objects are obtained by returning a single object from a collection. For example, the Windows collection contains the open windows, objects of type Window. You use the Windows property of the ActiveProject object to return the Windows collection.<br />After you have accessed the collection, you can return a single object by using an index value in parentheses (similar to the way you work with arrays).<br />The index value is usually a number or a name.</p>
+        <p class="SVnormal">The following example displays the position properties of the first window opened in a message box:</p>
+        <p class="SVprogramCode">Dim objWindows As Object</p>
+        <p class="SVprogramCode">Dim sTitle As String</p>
+        <p class="SVprogramCode">Const IconInformation = 64</p>
+        <p class="SVprogramCode">sTitle = "Position of Window 1"</p>
+        <p class="SVprogramCode">Set objWindows = ThisProject.Windows</p>
+        <p class="SVprogramCode">MsgBox "Left = " &amp; objWindows.Item(1).Left &amp; " Top = " &amp; _</p>
+        <p class="SVprogramCode"> &#160;&#160;&#160;&#160;&#160;&#160;objWindows.Item(1).Top, IconInformation, sTitle</p>
+        <p class="SVprogramCode">Note the use of the underscore as a line continuation character.</p>
+        <p class="SVnormal">You can loop through the elements of a collection in different ways. However, the recommended method for looping on a collection is to use the <i>For Each...Next</i> loop.<br />In this structure, the script repeats a block of statements for each object in the collection.</p>
+        <p class="SVnormal">The following example displays the Name property of each mimic in the Mimics collection:</p>
+        <p class="SVprogramCode">Dim objMimic As Object</p>
+        <p class="SVprogramCode">Dim sTitle As String</p>
+        <p class="SVprogramCode">Const IconInformation = 64</p>
+        <p class="SVprogramCode">sTitle = "Opened mimics"</p>
+        <p class="SVprogramCode">For Each objMimic In ThisProject.Mimics</p>
+        <p class="SVprogramCode">MsgBox objMimic.Name &amp; " " &amp; objMimic.Caption, IconInformation, sTitle</p>
+        <p class="SVprogramCode">Next</p>
+        <h2 class="SVheading2">Properties</h2>
+        <p class="SVnormal">A property is an attribute of an object or an aspect of its behavior. For example, properties of a window include its name, size and position. To change the characteristics of an object, you change the values of its properties.</p>
+        <p class="SVnormal">The following example changes the color of the drawing element 'Shape_Red'.</p>
+        <p class="SVprogramCode">Shape_Red.BackColorPrimary = RGB(255, 0, 0)</p>
+        <p class="SVnormal">You can also retrieve information about an object by returning the value of one of its properties. The following example returns the height of a drawing object.</p>
+        <p class="SVprogramCode">ObjHeight = Object_Truck.Height</p>
+        <p class="SVnormal">In this example, Object_Truck refers to a drawing element. The height of that drawing element is assigned to the variable ObjHeight.</p>
+        <div class="note">
+            <p class="SVnormal">Not all properties can be set – some are read-only.</p>
+        </div>
+        <h2 class="SVheading2">Methods</h2>
+        <p class="SVnormal">A method is an action that an object can perform. For example, a drawing element can be moved by using its Move method. Methods normally have arguments that qualify how the action is performed. The following example moves the image <i>Bitmap1</i> to a new location within its window.</p>
+        <p class="SVprogramCode">Bitmap1.Move NewXPos, NewYPos</p>
+        <p class="SVnormal">In most cases, methods are actions and properties are qualities. Using a method causes something to happen to an object, whereas using a property returns information about the object or it causes a quality of the object to change.</p>
+        <h2 class="SVheading2">Events</h2>
+        <p class="SVnormal">An event is an action recognized by an object, such as clicking the mouse or pressing a key, for which you can write code to respond. Events can occur for a number of reasons:</p>
+        <ul>
+            <li>A user action such as clicking a mouse or pressing a key</li>
+            <li>A subscribed variable changing value</li>
+            <li>Because of other program code</li>
+            <li>Something happening in the system</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

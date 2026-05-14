@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Project diagnostics &amp; settings|Audit &amp; diagnostics|The counters tab" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Flow counters</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">  Flow Counters<a name="kanchor327"></a></h1>
+        <div class="warning">
+            <p class="SVnormal">To reduce the amount of information displayed in the Audit dialog, flow counters for which all values are zero when the dialog is opened are hidden. If they become non-zero while the dialog is open, you must use the  Refresh button to reveal them.</p>
+        </div>
+        <p class="SVnormal">Each flow counter contains the immediate value plus the highest five values and their timestamp's. The flow is the number of new instances of an object per second calculated using a 10-second rolling average. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t5"><img style="border: none;margin-right: 5px;" src="../../SkinSupport/toggle_closed.gif" MadCap:altsrc="../../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a></p>
+        <div MadCap:targetName="t5" style="display: none;">
+            <p>
+                <img src="../../Resources/Images/AE/Project/audit_flow_counters.png" />
+            </p>
+        </div>
+        <p class="SVnormal">The flow counters generally reflect the activity of the variable manager and represent:</p>
+        <ul>
+            <li> The flow of messages or values,</li>
+            <li> Sent by the variable manager (to other managers),</li>
+            <li>Or received by the variable manager (from other managers).</li>
+        </ul>
+        <p class="SVnormal">&lt;Source&gt; can be one of the following. Flow counters for which all values are zero are not displayed so at any one time only some of the flow counter sources will be displayed.</p>
+        <ul style="list-style-type: disc;">
+            <li>All</li>
+            <li>Internal</li>
+            <li>External</li>
+            <li>Equipment</li>
+            <li>DDE</li>
+            <li>OPC Client</li>
+            <li>LonWorks</li>
+            <li>BACnet</li>
+            <li>IEC 61850</li>
+            <li>IEC 60870-5</li>
+            <li>DNP3</li>
+            <li>SNMP Manager</li>
+            <li>Sql variables</li>
+            <li>OPC UA</li>
+        </ul>
+        <p class="SVnormal">&lt;Manager&gt; can be one of the following. </p>
+        <ul style="list-style-type: disc;">
+            <li>All</li>
+            <li>User Interface - Includes SCADA Basic, VBA, Expression, Recipes, Associated action, and the User Interface itself.</li>
+            <li>Alarm</li>
+            <li>Historical</li>
+            <li>Lan</li>
+            <li>OPC Server</li>
+            <li>SV Manager Toolkit&lt;X&gt; with X in the range of 1 to 8</li>
+            <li>Interop manager</li>
+            <li>IEC 104 server</li>
+        </ul>
+        <h2 class="SVheading2">Flow on data acquisition from &lt;Source&gt; source of variable</h2>
+        <p class="SVnormal">The data flow in the Variable Manager for variable values being acquired and to be sent to other managers.</p>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Object</td>
+                    <td class="SVtableHeading">Definition</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Input packet item</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of data packets to the Variable Manager from a particular data source. The contents of the packet depends on the source. For example, for an OPC server (source = OPC Client) it is the number of item arrays per second, for another driver (source = Equipment) it is the number of frames per second.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Input single item</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single data items to the Variable Manager from a particular data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Detected data change</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of variable changes (after processing such as the application of a dead-band for register variables) detected by the Variable Manager from a particular data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Global dispatch - quality good</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of variable changes with good quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Global dispatch - quality bad</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of variable changes with bad quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Global dispatch bits</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of bit variable changes with good quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Global dispatch alarms</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of alarm variable changes with good quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Global dispatch registers</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of register variable changes with good quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Global dispatch texts</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of text variable changes with good quality sent by the Variable Manager to all consuming local and remote managers from a particular data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Global dispatch per packet</td>
+                    <td class="SVtable" style="vertical-align: top;">Flow of variable changes  sent by packet by the Variable Manager to all consuming local and remote managers from a particular data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Dispatch to &lt;Manager&gt;</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of variable changes received by a particular manager from a particular data source.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Flow on data command from &lt;Source&gt; source of variable</h2>
+        <p class="SVnormal">The data flows in the Variable Manager for variable values generated by the other managers.</p>
+        <p class="SVnormal"> There is one category of flow counters per source, and flows are given with a breakdown by sending manager.</p>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Object</td>
+                    <td class="SVtableHeading">Definition</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Writing by packet of variable from &lt;Manager&gt; to Var</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of packet variable writes sent to the Variable Manager by a particular manager.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Variables written by packet from &lt;Manager&gt; to Var</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single variable writes (inside packets) sent to the Variable Manager by a particular manager.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Writing of single variable from &lt;Manager&gt; to Var</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single variable writes sent to the Variable Manager by a particular manager.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Flow of item data command outgoing from var to  &lt;Source&gt;</h2>
+        <p class="SVnormal">The write item data flows by the Variable Manager to the particular data source.</p>
+        <p class="SVnormal"> There is one category of flow counters per source.</p>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Object</td>
+                    <td class="SVtableHeading">Definition</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Writing by packet of items</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of packet item writes from the Variable Manager to the particular data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Writing of single item</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single item writes from the Variable Manager to the particular data source.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Flow on single variable data command by type of variable</h2>
+        <p class="SVnormal">The data flows in the Variable Manager for variable values generated by the other managers using write commands.</p>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Object</td>
+                    <td class="SVtableHeading">Definition</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Bit writing</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single bit variable writes to the Variable Manager, from all managers, to all  types of data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Alarm writing</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single alarm variable writes to the Variable Manager, from all managers, to all  types of data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Register writing</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single register variable writes to the Variable Manager, from all managers, to all  types of data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Text writing</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single text variable writes to the Variable Manager, from all managers, to all  types of data source.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Flow on single variable data command by type of variable</h2>
+        <p class="SVnormal">The data flows in the Variable Manager for variable values generated by the other managers using set commands.</p>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Object</td>
+                    <td class="SVtableHeading">Definition</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Bit setting</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single bit variable writes to the Variable Manager, from SCADA Basic or the Manager Toolkit, to all types of data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Alarm setting</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single alarm variable writes to the Variable Manager, from SCADA Basic or the Manager Toolkit, to all types of data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Register setting</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single register variable writes to the Variable Manager, from SCADA Basic or the Manager Toolkit, to all types of data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Text setting</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single text variable writes to the Variable Manager, from SCADA Basic or the Manager Toolkit, to all types of data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Bit setting from SV Manager Toolkits</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single bit variable writes to the Variable Manager, from one of the manager toolkit, to all types of data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Alarm setting from SV Manager Toolkits</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single alarm variable writes to the Variable Manager, from one of the manager toolkit, to all types of data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Register setting from SV Manager Toolkits</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single register variable writes to the Variable Manager, from one of the manager toolkit, to all types of data source.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Text setting from SV Manager Toolkits</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of single text variable writes to the Variable Manager, from one of the manager toolkit, to all types of data source.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Flow on global dispatch of variable property change</h2>
+        <p class="SVnormal">The data flow in the Variable Manager for variable properties sent to other managers.</p>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Object</td>
+                    <td class="SVtableHeading">Definition</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Dispatch extended properties</td>
+                    <td class="SVtable" style="vertical-align: top;">Flow of dispatching all variable's extended properties.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Dispatch extended text properties</td>
+                    <td class="SVtable" style="vertical-align: top;">Flow of dispatching variable's extended text properties.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Dispatch extended binary properties</td>
+                    <td class="SVtable" style="vertical-align: top;">Flow of dispatching variable's extended binary properties.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Dispatch properties</td>
+                    <td class="SVtable" style="vertical-align: top;">Flow of dispatching variable's properties.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">LAN flow counter from/to all stations</h2>
+        <p class="SVnormal">The data flow in the LAN Manager required to manage distributed variables.</p>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Object</td>
+                    <td class="SVtableHeading">Definition</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Packets sent </td>
+                    <td class="SVtable" style="vertical-align: top;">Flow of packets sent to all remote stations. A packet contains a number of messages.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Messages sent</td>
+                    <td class="SVtable" style="vertical-align: top;">Flow of messages sent to all remote stations.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;font-weight: normal;">Bytes sent</td>
+                    <td class="SVtable" style="vertical-align: top;">Flow of bytes sent to all remote stations. Along with the <u>Bytes received</u> counter, it can be used to calculate the network bandwidth.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Packets received</td>
+                    <td class="SVtable" style="vertical-align: top;">Flow of packets received from all remote stations. A packet contains a number of messages.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Messages received</td>
+                    <td class="SVtable" style="vertical-align: top;">Flow of messages received from all remote stations.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Bytes received</td>
+                    <td class="SVtable" style="vertical-align: top;">Flow of bytes received from all remote stations. Along with the <u>Bytes sent</u> counter, it can be used to calculate the network bandwidth.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Messages between managers</h2>
+        <p class="SVnormal">These counters represent the total message flow between the all of <span class="mc-variable OEM.ProductName variable">PcVue</span>'s managers.</p>
+        <table style="border-collapse: collapse;width: 100%;">
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Object</td>
+                    <td class="SVtableHeading">Definition</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">All messages</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of all types of message between managers. A message is a general term for the communication mechanism used between managers.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Request messages</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of Request type message between managers. When you send a Request, the target (recipient) manager must always return a response. The response can be an Ack or Nack message.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Mail messages</td>
+                    <td class="SVtable" style="vertical-align: top;">The flow of Mail message between managers. A Mail message is similar to a Request message except that the message is not acknowledgment by the target manager. For example, a mail message is used to notify an event log to the Historical Manager.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Flow of requests to SNMP source</h2>
+        <p class="SVnormal">Flow of requests sent to the SNMP Manager module. This includes:</p>
+        <ul>
+            <li>Request pending: Total</li>
+            <li>Request pending: Get</li>
+            <li>Request pending: Ping</li>
+            <li>Request pending: Set</li>
+            <li>Request pending: GetBulk</li>
+            <li>Request pending: Probe</li>
+            <li>Request in queue: Total</li>
+            <li>Request in queue: Get</li>
+            <li>Request in queue: Ping</li>
+            <li>Request in queue: Set</li>
+            <li>Request in queue: GetBulk</li>
+            <li>Request in queue: Probe</li>
+        </ul>
+        <h2 class="SVheading2">Flow around Historical Manager for archiving</h2>
+        <p class="SVnormal">Flow related to archiving in proprietary, ODBC or free units, including:</p>
+        <ul>
+            <li>Global record events</li>
+            <li>Local record events</li>
+        </ul>
+        <p>Flow related to archiving in database units, including:</p>
+        <ul>
+            <li>Dispatch HDS Trends</li>
+            <li>Global record events</li>
+            <li>Local record events</li>
+        </ul>
+        <h2 class="SVheading2">Flow around Historical Manager for DbConnect</h2>
+        <p class="SVnormal">Flow of commands for the DbConnect service.</p>
+        <table style="border-collapse: collapse;width: 100%">
+            <col style="width: 320px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Object</td>
+                    <td class="SVtableHeading">Definition</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Global Execute command: Total</td>
+                    <td class="SVtable" style="vertical-align: top;">Counter of requests send to remote station and executed locally.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Local Execute command: Total</td>
+                    <td class="SVtable" style="vertical-align: top;">Counter of requests executed locally.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Local Execute command: TestConnection</td>
+                    <td class="SVtable" style="vertical-align: top;">Counter of TestConnection requests executed locally.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Local Execute command: DataReader</td>
+                    <td class="SVtable" style="vertical-align: top;">Counter of DataReader requests executed locally.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Local Execute command: Scalar</td>
+                    <td class="SVtable" style="vertical-align: top;">Counter of Scalar requests executed locally.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Local Execute command: NonQuery</td>
+                    <td class="SVtable" style="vertical-align: top;">Counter of NonQuery requests executed locally.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Local Execute command failed: Total</td>
+                    <td class="SVtable" style="vertical-align: top;">Counter of requests failed locally.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Local Execute command failed: TestConnection</td>
+                    <td class="SVtable" style="vertical-align: top;">Counter of TestConnection requests failed locally.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Local Execute command failed: DataReader</td>
+                    <td class="SVtable" style="vertical-align: top;">Counter of DataReader requests failed locally.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Local Execute command failed: Scalar</td>
+                    <td class="SVtable" style="vertical-align: top;">Counter of Scalar requests failed locally.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="vertical-align: top;">Local Execute command failed: NonQuery</td>
+                    <td class="SVtable" style="vertical-align: top;">Counter of NonQuery requests failed locally.</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

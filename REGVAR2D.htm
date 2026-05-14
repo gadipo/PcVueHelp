@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Instructions|Instruction reference A to Z|R" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>REGVAR2D</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="REGVAR2D_Instruct" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor324"></a>REGVAR2D</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc209">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="Declaration_InstbyCat" />
+            </object><a class="MCConceptLink_seealso_0" href="javascript:mc209.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />See also</a>
+        </p>
+        <p class="SVnormal">Control the use of register variables as type DOUBLE 
+ in a program.</p>
+        <p class="SVnormal">WebVue support - Yes.</p>
+        <h2 class="SVheading2">Syntax</h2>
+        <p class="SVnormal">REGVAR2D([<span style="font-style: italic;">Flag</span>]);</p>
+        <p class="SVnormal">There is no return type.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="100%">
+            <col style="width: 100px;" />
+            <col />
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Argument</p>
+                </td>
+                <td>
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable" style="font-style: italic;">Flag</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">A flag to control register variable value conversions.</p>
+                    <p class="SVtable">0 - Value of register variables are processed as type SINGLE in 
+ a program.</p>
+                    <p class="SVtable">1 - Value of register variables are processed as type DOUBLE in 
+ a program. (default)</p>
+                </td>
+            </tr>
+        </table>
+        <h3 class="SVheading3">Execution</h3>
+        <p class="SVnormal">Change the way value of register variables is processed. It is recommended to use type DOUBLE to avoid truncation of numeric values.</p>
+        <p class="SVnormal">The option to process these values as SINGLE is only offered to ensure compatibility of projects requiring it.</p>
+        <h2 class="SVheading2">Example 1</h2>
+        <p class="SVprogramCode">'Variables</p>
+        <p class="SVprogramCode">'@REGISTER01: Register type</p>
+        <p class="SVprogramCode">'@REGISTER02: Register type</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">SUB Main()</p>
+        <p class="SVprogramCode">REGVAR2D(1);</p>
+        <p class="SVprogramCode">'The register variable is now type Double</p>
+        <p class="SVprogramCode">'so this assignment works correctly:</p>
+        <p class="SVprogramCode">@REGISTER01 = COS(45);</p>
+        <p class="SVprogramCode">&#160;</p>
+        <p class="SVprogramCode">REGVAR2D(0);</p>
+        <p class="SVprogramCode">'Automatic conversion to Double is disabled.</p>
+        <p class="SVprogramCode">'The next line causes a runtime error </p>
+        <p class="SVprogramCode">'because the Register variable is now Single:</p>
+        <p class="SVprogramCode">@REGISTER02 = COS(45);</p>
+        <p class="SVprogramCode">END SUB</p>
+        <h2 class="SVheading2">Example 2</h2>
+        <p class="SVprogramCode">Allow to display a number with 8 digits and more: DVAL, TOD...</p>
+        <p class="SVprogramCode">REGVAR2D(1);</p>
+        <p class="SVprogramCode">@reg_double = DVAL("12345678901");</p>
+        <p class="SVprogramCode">'Go back to single number: SVAL, TOS...</p>
+        <p class="SVprogramCode">REGVAR2D(0);</p>
+        <p class="SVprogramCode">@reg_single = SVAL("1234567");</p>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

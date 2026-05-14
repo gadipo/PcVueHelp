@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Communication|Data acquisition|Equipment|Driver references" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Yokogawa Ip</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Yokogawa Ip</h1>
+        <p class="SVnormal">This driver supports communication over Ip with Yokogawa  PLCS, including the FA-M3 series.</p>
+        <p class="SVnormal">Communication is via the Ethernet interface module (F3SP05, F3SP21, F3SP25 and F3SP35).</p>
+        <h2 class="SVheading2">Supported functions</h2>
+        <p class="SVnormal">The functions implemented by the driver are:</p>
+        <ul>
+            <li>Read/ Write multiple bits (1 to 256 bits)</li>
+            <li>Read/ Write multiple words (1 to 64 words)</li>
+        </ul>
+        <h2 class="SVheading2">Prerequisites</h2>
+        <p class="SVnormal">To establish the connection, you have to configure the Ethernet module using switch settings before <a href="equipment_configure_comm_objects.htm">configuring an equipment</a>.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 100px;" />
+            <col style="width: 300px;" />
+            <col style="width: 283px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Switch</td>
+                    <td class="SVtableHeading">Description</td>
+                    <td class="SVtableHeading">Position</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">01</td>
+                    <td class="SVtable">Data code (binary) </td>
+                    <td class="SVtable">ON</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">02</td>
+                    <td class="SVtable">Write protect (conducts writing from the remote node when the PC CPU is running)</td>
+                    <td class="SVtable">OFF</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">03 – 06</td>
+                    <td class="SVtable">Always set OFF</td>
+                    <td class="SVtable">OFF</td>
+                </tr>
+                <tr>
+                    <td class="SVtable"> 07</td>
+                    <td class="SVtable">TCP connection on timeout error (Closes the line on timeout error)</td>
+                    <td class="SVtable">OFF</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">08</td>
+                    <td class="SVtable">Loopback test</td>
+                    <td class="SVtable">OFF</td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="SVnormal">To set the equipment IP address, configure the hexadecimal switches. For example:</p>
+        <p>
+            <img src="../../Resources/Images/AE/Comm_DataAcq/equipment_yokogawaip_address_schema.png" />
+        </p>
+        <table style="border-collapse: collapse; margin-left: 0; margin-right: auto;">
+            <col style="width: 195px;" />
+            <col style="width: 89px;" />
+            <col style="width: 78px;" />
+            <col style="width: 134px;" />
+            <col style="width: 182px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">&#160;</td>
+                    <td class="SVtableHeading" colspan="4">IP Address</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Hexadecimal</td>
+                    <td class="SVtable">85</td>
+                    <td class="SVtable">8C</td>
+                    <td class="SVtable">0B</td>
+                    <td class="SVtable">39</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Decimal</td>
+                    <td class="SVtable">133</td>
+                    <td class="SVtable">140</td>
+                    <td class="SVtable">11</td>
+                    <td class="SVtable">57</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Network properties</h2>
+        <p class="SVnormal">This topic only includes a reference of objects' properties.<br /></p>
+        <p class="SVnormal">See the topic <a href="equipment_configure_comm_objects.htm">How to configure networks devices and frames</a> for more information about how to configure communication objects.</p>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the network</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the network (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the network will start upon Equipment communication start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Use default value</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Networking</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Servers</p>
+                </td>
+                <td class="SVtable">
+                    <p>The list of <span class="mc-variable OEM.ProductName variable">PcVue</span> stations where the network will be active</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Device properties</h2>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td colspan="2" class="SVtableHeading" style="font-weight: bold;">General properties</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Name</td>
+                    <td class="SVtable">The name of the device</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Description</td>
+                    <td class="SVtable">The description of the device (optional)</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Equipment type</td>
+                    <td class="SVtable">Select the type of equipment that best suits the field device you want  communicate with.<br />The list of frame types and address ranges depend on the equipment type.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Address</td>
+                    <td class="SVtable">The Ip address of the field device.<br />Some drivers also support configuration by host name.</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%;">
+            <col style="width: 20%;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtable">Activate at start-up</td>
+                    <td class="SVtable">If enabled, the device will start upon network start-up</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Advanced properties</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>&#160;</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Connection</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Timeout</p>
+                </td>
+                <td class="SVtable">
+                    <p>Maximum waiting time between a request and the reply from the equipment</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtable">
+                    <p>CPU number</p>
+                </td>
+                <td class="SVtable">
+                    <p>CPU number of the field device. Range [0..4].</p>
+                </td>
+            </tr>
+        </table>
+        <table style="width: 100%">
+            <col style="width: 20%;" />
+            <col />
+            <tr>
+                <td class="SVtableHeading" colspan="2">
+                    <p>Miscellaneous</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">
+                    <p>Virtual</p>
+                </td>
+                <td class="SVtable">
+                    <p>Reserved. Do not select.</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="SVtable">Message delay</td>
+                <td class="SVtable">Reserved. Leave default value 0.</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Frame addressing</h2>
+        <p class="SVnormal">Depending on the equipment type you have selected when configuring the device, you have access to the following type of frames.</p>
+        <p class="SVnormal">The Starting address
+ and Quantity properties define the memory address range for each frame, how it
+ is read from and written to, and how it is interpreted in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <table style="width: 100%;">
+            <col />
+            <col />
+            <col style="width: 128px;" />
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Data type</td>
+                    <td class="SVtableHeading">Access</td>
+                    <td class="SVtableHeading">Max quantity</td>
+                    <td class="SVtableHeading">Starting address </td>
+                    <td class="SVtableHeading">Description</td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold;text-align: left;" colspan="5" class="SVtableHeading">Bit</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">X</td>
+                    <td class="SVtable">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable">64</td>
+                    <td class="SVtable">1..64</td>
+                    <td class="SVtable">Input relays</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Y</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">64</td>
+                    <td class="SVtable">1..64</td>
+                    <td class="SVtable">Output relays</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">I</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">2048</td>
+                    <td class="SVtable">1..65535</td>
+                    <td class="SVtable">Internal relays</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">E</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">2048</td>
+                    <td class="SVtable">1..2048</td>
+                    <td class="SVtable">Shared relays</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Extended E</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">480</td>
+                    <td class="SVtable">2049..4096</td>
+                    <td class="SVtable">Shared relays extended</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">L</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">2048</td>
+                    <td class="SVtable">1..8192</td>
+                    <td class="SVtable">Link relays</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">M</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">2048</td>
+                    <td class="SVtable">1..9984</td>
+                    <td class="SVtable">Special relays</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">T</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">2048</td>
+                    <td class="SVtable" rowspan="2">1..3072</td>
+                    <td class="SVtable">Timer relays</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">C</td>
+                    <td class="SVtable">Counter relays</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="font-weight: bold;text-align: left;" class="SVtableHeading">Word</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">D</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">64</td>
+                    <td class="SVtable">1..65535</td>
+                    <td class="SVtable">Data registers</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">B</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">64</td>
+                    <td class="SVtable">1..3262144</td>
+                    <td class="SVtable">File registers</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">W</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">64</td>
+                    <td class="SVtable">1..8192</td>
+                    <td class="SVtable">Link registers</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Z</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">64</td>
+                    <td class="SVtable" rowspan="2">1..1024</td>
+                    <td class="SVtable">Special registers</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">R</td>
+                    <td class="SVtable">Shared registers</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">V</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">64</td>
+                    <td class="SVtable">1..256</td>
+                    <td class="SVtable">Index registers</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Extended R</td>
+                    <td class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable">64</td>
+                    <td class="SVtable">1025..4096</td>
+                    <td class="SVtable">Shared registers extended</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TS</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">64</td>
+                    <td class="SVtable" rowspan="2">1..3072</td>
+                    <td class="SVtable">Timer status</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">CS </td>
+                    <td class="SVtable">Counter status</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TP</td>
+                    <td class="SVtable" rowspan="2">
+                        <p>Read/Write</p>
+                    </td>
+                    <td class="SVtable" rowspan="2">64</td>
+                    <td class="SVtable" rowspan="2">1..3072</td>
+                    <td class="SVtable">Timer setpoint values</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">TI</td>
+                    <td class="SVtable">Timer current values</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">CP</td>
+                    <td rowspan="2" class="SVtable">
+                        <p>Read/Write</p> </td>
+                    <td class="SVtable" rowspan="2">64</td>
+                    <td class="SVtable" rowspan="2">1..3072</td>
+                    <td class="SVtable">Counter setpoint values</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">CI</td>
+                    <td class="SVtable">Counter current values</td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="font-weight: bold;text-align: left;" class="SVtableHeading">Double Word</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Double D</td>
+                    <td rowspan="2" class="SVtable">
+                        <p>Read/Write</p>
+                    </td>
+                    <td rowspan="2" class="SVtable">16</td>
+                    <td class="SVtable" rowspan="2">1..65535</td>
+                    <td class="SVtable">Data registers</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">Double B</td>
+                    <td class="SVtable">File registers</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3 class="SVheading3">Addressing for X and Y frames</h3>
+        <p class="SVnormal">The slot number is composed of a unit number and a slot location: <i>imm</i> where:</p>
+        <ul>
+            <li><i>i</i>	: unit number 	= 0 : main unit ; = 1 to 7 : sub-units</li>
+            <li><i>mm</i> : slot location (01-13) (from the right end of the power supply module to the right end of the base module)</li>
+            <li>Starting address = Terminal number (1-64)</li>
+        </ul>
+        <p class="SVnormal">Example:</p>
+        <p class="SVnormal">To access the Terminal number 12 of the X device on the main unit:</p>
+        <ul>
+            <li>Slot number = 02 (<i>i</i>=0, <i>mm</i>=2)</li>
+            <li>Starting address = 12</li>
+        </ul>
+        <p>
+            <img src="../../Resources/Images/AE/Comm_DataAcq/equipment_yokogawaip_address_slotnumber.png" />
+        </p>
+        <h3 class="SVheading3">Addressing for W and L frames</h3>
+        <p class="SVnormal">FA-link module number = FA link module number (0-7)</p>
+        <p class="SVnormal">Starting address = link relay Number (1-1024)</p>
+        <p class="SVnormal">Example:</p>
+        <p class="SVnormal">To access the FA-link module 1 at the address 12:</p>
+        <ul>
+            <li>FA-link module number = 1</li>
+            <li>Starting address = 12</li>
+        </ul>
+        <h2 class="SVheading2">Driver status</h2>
+        <p class="SVnormal">The driver status provides driver-specific 
+ information to supplement the <b>frame general status</b>. For more information 
+ on status in general, refer to the topic <a href="equipment_comm_status.htm">General communication status</a>.</p>
+        <table style="width: 100%;border-spacing: 0px;border-spacing: 0px;border-collapse: collapse;" cellspacing="0" width="100%">
+            <col style="width: 122px;" />
+            <col />
+            <col />
+            <tr valign="top">
+                <td class="SVtableHeading">
+                    <p>Driver status</p>
+                </td>
+                <td class="SVtableHeading">
+                    <p>Description</p>
+                </td>
+                <td class="SVtableHeading">Corrective Action</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">
+                    <p>0x03</p>
+                </td>
+                <td class="SVtable">
+                    <p>Connection close</p>
+                </td>
+                <td class="SVtable">Check the equipment IP address </td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0x04</td>
+                <td class="SVtable">Timeout</td>
+                <td class="SVtable">Check the cable  and CPU number</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0x05</td>
+                <td class="SVtable">Cannot open the connection</td>
+                <td class="SVtable">Check the equipment IP address</td>
+            </tr>
+            <tr valign="top">
+                <td class="SVtable">0x06</td>
+                <td class="SVtable">
+                    <p>CPU processing error</p>
+                </td>
+                <td class="SVtable">Check if the device type exists in the PLC,
+Check if the switch No 2 (Write protection) is set to OFF,
+Check the Slot number for X,Y devices and the module number for W and L devices.
+</td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">SCADA Basic scripting</h2>
+        <p class="SVnormal">You can control communication with this driver in SCADA Basic scripts with the CIMWAY instruction.</p>
+        <div class="note">See the topic <a href="equipment_msg_exchange.htm">Message exchange mechanisms in <span class="mc-variable OEM.ProductName variable">PcVue</span></a> for more information about what to optimize and how you can send commands from scripts. </div>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

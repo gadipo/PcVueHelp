@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying desktop applications|Deploying PcVue on a RDS host|Configuring PcVue to run in a RDS Session Host session|Configuring user permissions for PcVue's folders" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Configuring user permissions for PcVue's folders</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuring User Permissions for <span class="mc-variable OEM.ProductName variable">PcVue</span>'s Folders When Running on an RD Session Host Session</h1>
+        <p class="SVnormal">The Windows user account that runs <span class="mc-variable OEM.ProductName variable">PcVue</span> must have the <u>Modify Permission</u> for the installation folders, including:</p>
+        <ul>
+            <li>The root folder of BIN, ETC, USR and LIB. That is the topmost folder of the &lt;<span class="mc-variable OEM.ProductName variable">PcVue</span> Path&gt;</li>
+            <li>The topmost folder of the &lt;ProjectPath&gt; if the -b&lt;ProjectPath&gt; command line argument is used</li>
+            <li>The Central Versions folder if Central Project Management is being used</li>
+        </ul>
+        <p class="SVnormal">You can change the permissions for individual users but the recommended method of doing this is to configure permissions for the user group <u>Remote Desktop Users</u> that includes all Remote Desktop users.</p>
+        <div class="note">
+            <p class="SVnormal">When you change the user permissions of a folder, the permissions of all sub-ordinate folders are also changed.</p>
+        </div>
+        <p class="SVnormal">See the topic <a href="../Install/Operating_System_Considerations.htm">Operating system related considerations</a> for more information about general requirements related to user permissions.</p>
+        <h2 class="SVheading2">How to configure the permissions</h2>
+        <ol>
+            <li value="1">Using Windows Explorer, locate the <span class="mc-variable OEM.ProductName variable">PcVue</span> folder. Right-click on it and select Properties. The Properties dialog is displayed. Select the Sharing tab. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t1" style="display: none;"><br /><img src="../Resources/Images/Deployment/wts_folderproperties_sharetab.png" /><br /></div></li>
+            <li value="2"> Click the <u>Share</u> button to open the File Sharing dialog. Enter the name Remote Desktop Users and click the <u>Add</u> button. The name appears in the list of names. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t2" style="display: none;"><br /><img src="../Resources/Images/Deployment/wts_file_sharing.png" /><br /></div></li>
+            <li value="3">Change the permissions to <u>Read/Write</u> and then click <u>Share</u>. Assuming the process is successful the dialog will close and will be replaced by a dialog displaying the message <b>Your folder is shared</b>. Click the <u>Done</u> button to close it.</li>
+            <li value="4">Select the <u>Advanced Sharing</u> button in the Properties dialog and, in the Advanced Sharing dialog, check that the <u>Share this folder</u> property is ticked. Close the Advanced Sharing dialog.</li>
+            <li value="5">Select the Security tab of the Properties dialog. Check that the entry for Remote Desktop Users has <u>Full control</u> allowed. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t3"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><div MadCap:targetName="t3" style="display: none;"><br /><img src="../Resources/Images/Deployment/wts_folderproperties_securitytab.png" /><br /></div></li>
+            <li value="6">Click <u>Close</u> to confirm the configuration.</li>
+            <li value="7">Repeat the steps for all folders that require the permissions changing.</li>
+        </ol>
+        <div class="tip">
+            <p class="SVnormal">You can find more information about configuring the Remote Desktop Users Group on the Microsoft website using the following Url: <a href="http://technet.microsoft.com/library/cc743161.aspx" target="_blank">http://technet.microsoft.com/library/cc743161.aspx</a>.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

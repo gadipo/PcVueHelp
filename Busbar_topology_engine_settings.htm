@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Extras and Add-ons|Dynamic Busbar Coloring" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Dynamic Busbar Coloring Topology Engine settings and .ini file</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Topology Engine Settings and .ini File</h1>
+        <p class="SVnormal">The Topology Engine .ini file is named Topology.ini and is located in C directory of your project. This file allows you to change some of the Topology Engine settings. </p>
+        <p class="SVbulleted" style="margin-left: 40px;color: #0070c0;">[Config]</p>
+        <p class="SVbulleted" style="margin-left: 40px;color: #0070c0;">ServerVarName=System.Association.Localhost</p>
+        <p class="SVbulleted" style="margin-left: 40px;color: #0070c0;">LogMessageLevel=2</p>
+        <p class="SVbulleted" style="margin-left: 40px;color: #0070c0;">GenerateReport=1</p>
+        <p class="SVbulleted" style="margin-left: 40px;color: #0070c0;">NodeNSvalue=previous</p>
+        <p class="SVbulleted" style="margin-left: 40px;color: #0070c0;">SwitchNSvalue=previous</p>
+        <p class="SVbulleted" style="margin-left: 40px;color: #0070c0;">NodeProbAsReal=1</p>
+        <p class="SVbulleted" style="margin-left: 40px;color: #0070c0;">SwitchProbAsReal=0</p>
+        <p class="SVbulleted" style="margin-left: 40px;color: #0070c0;">IgnoreProbVsRealConflict=0</p>
+        <p class="SVnormal">The Topology.ini file is optional. In case of absence, the Topology Engine will use default settings.</p>
+        <h2 class="SVheading2">The ServerVarName setting</h2>
+        <p class="SVnormal">It specifies the name of a bit variable which will enable the engine to run or not. If its value is 1, then the Topology Engine output is sent to the variables. If its value is 0, then the Topology Engine output is not sent to the variables.</p>
+        <p class="SVnormal">If no variable is specified, then the Topology Engine output is sent to the variables. If the specified variable does not exist, then the Topology Engine output is not sent to the variables.</p>
+        <p class="SVnormal">For example, to support an architecture where calculations are to be done only on the active server of an association named &lt;AssocName&gt;, this setting could be set to “SYSTEM.&lt;AssocName&gt;.LOCALHOST”.</p>
+        <h2 class="SVheading2">The LogMessageLevel setting</h2>
+        <p class="SVnormal">Specifies the level of log messages in the Event Viewer. There are 4 levels.</p>
+        <p class="SVbulleted" style="margin-left: 40px;"> 0 = Error</p>
+        <p class="SVbulleted" style="margin-left: 40px;">1 = Warning</p>
+        <p class="SVbulleted" style="margin-left: 40px;">2 = Info</p>
+        <p class="SVbulleted" style="margin-left: 40px;">3 = Debug.</p>
+        <p class="SVnormal">Each level includes messages from any sub-ordinate levels, e.g. Error messages are also logged if level is Warning, Info or Debug.</p>
+        <p class="SVnormal">The default value is <u>2 (Log Level: INFO)</u>. With this level, the Topology Engine will log the minimum necessary information associated with the loading its configuration and detecting major events.</p>
+        <p class="SVnormal">Sometimes, due to an error in the topology configuration, or due to lack of corresponding variables, the topology calculation results may not be as expected. In such a case, it is useful to set the log level to <u>3 (Log Level: DEBUG)</u>. However, particularly with a high number of topology items, there will be a large volume of log messages.</p>
+        <h2 class="SVheading2">The NodeNSValue setting</h2>
+        <p class="SVnormal">Specifies the behavior of the Topology Engine when a Node value becomes NS. There are 3 values.</p>
+        <p class="SVbulleted" style="margin-left: 40px;">Previous - Keeps the previous value and sets it as uncertain</p>
+        <p class="SVbulleted" style="margin-left: 40px;">Default - Uses the “Default Injection” value as uncertain</p>
+        <p class="SVbulleted" style="margin-left: 40px;">V0 - Uses the V0 level (or Absence of Voltage).</p>
+        <p class="SVnormal">The default value is Previous.</p>
+        <h2 class="SVheading2">The SwitchNSValue setting</h2>
+        <p class="SVnormal">Specifies the behavior of the Topology Engine when a Switch position value becomes NS. There are 4 values:</p>
+        <p class="SVbulleted" style="margin-left: 40px;">Previous - Keeps the previous value and sets it as uncertain.</p>
+        <p class="SVbulleted" style="margin-left: 40px;">Default - Uses the “Default Position” value as uncertain.</p>
+        <p class="SVbulleted" style="margin-left: 40px;">Close -  Considers the switch as probably open.</p>
+        <p class="SVbulleted" style="margin-left: 40px;">Open - Considers the switch as probably close.</p>
+        <p class="SVnormal">The default value is Previous.</p>
+        <h2 class="SVheading2">The NodeProbAsReal setting</h2>
+        <p class="SVnormal">Specifies the behavior of the Topology Engine when a Node is in an uncertain state. The default value is <u>0 (Uncertain values as Significant: NO)</u>. With this value, the Topology Engine will use both uncertain and significant values.</p>
+        <p class="SVnormal">If you want to ignore Node uncertain values, you must specify <u>1 (Uncertain values as Significant: YES)</u>. For example, if a calculation gives a node at voltage level V2’, then the result is output as voltage level V2.</p>
+        <h2 class="SVheading2">The SwitchProbAsReal setting</h2>
+        <p class="SVnormal">It specifies the behavior of the Topology Engine when a Switch is in an uncertain state. The default value is <u>0 (Uncertain values as Significant: NO)</u>. With this value, the Topology Engine will use both uncertain and significant values.</p>
+        <p class="SVnormal">If you want to ignore Switch uncertain values, you must specify <u>1 (Uncertain values as Significant: YES)</u>.</p>
+        <h2 class="SVheading2">The IgnoreProbVsRealConflict setting</h2>
+        <p class="SVnormal">It specifies the behavior of the Topology Engine when there are both Significant and Uncertain Voltage on a Node. The default value is <u>0 (Ignore Uncertain Voltage in case of Significant Voltage: NO)</u>. With this value, the Topology Engine will use both uncertain and significant values in every case.</p>
+        <p class="SVnormal">If you want to ignore uncertain values when there is a significant value on a node, you must specify <u>1 (Ignore Uncertain Voltage in case of Significant Voltage: YES)</u>. In that case, uncertain values will be kept only if there is no significant voltage on the node. For example, if a calculation gives a node at voltage level (V1+V2’), then the result is output as voltage level V1.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying server applications|Running PcVue as a Windows service|Using the SV Core Management Console to run PcVue as a Windows Service" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Using the SV Core Management Console to run PcVue as a Windows Service</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor19"></a>Using the Core Management Console to run <span class="mc-variable OEM.ProductName variable">PcVue</span> as a Windows Service</h1>
+        <p class="SVnormal">By default, <span class="mc-variable OEM.ProductName variable">PcVue</span> installation installs the components and generates the configuration required to run <span class="mc-variable OEM.ProductName variable">PcVue</span> as a service. The main components are:</p>
+        <ul style="list-style-type: disc;">
+            <li>SV Core Daemon - The service that manages <span class="mc-variable OEM.ProductName variable">PcVue</span>, and the HDS, when running as a service.</li>
+            <li>SV Core Management Console - A desktop application that collects together, in one easy to use tool, all the configuration elements required to run the software as a service.</li>
+        </ul>
+        <h3 class="SVheading3">Prerequisites:</h3>
+        <ul>
+            <li>
+                <p>The SV Core Management Console requires Administrator privileges.</p>
+            </li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">The SV Core Management Console must not be used to change the run mode whilst <span class="mc-variable OEM.ProductName variable">PcVue</span> is running.</p>
+        </div>
+        <div class="note">
+            <p class="SVnormal">Running the Component Registration Utility resets all system settings associated with <span class="mc-variable OEM.ProductName variable">PcVue</span> processes to their installation defaults. This includes:</p>
+            <ul>
+                <li>
+                    <p class="SVbulleted">Settings associated to the SV Core Daemon, SV DbConnect and SV Core Session Host services: Startup type, Recovery mode, Service account, Service dependencies.</p>
+                </li>
+                <li>
+                    <p class="SVbulleted">Configuration of the 3 DCOM applications associated to <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+                </li>
+            </ul>
+            <p class="SVnormal">We recommend you to document these settings as part of your project documentation so that you are able to set them again each time you update the <span class="mc-variable OEM.ProductName variable">PcVue</span> version, replace a computer or in any other situation requiring that you run the Component Registration Utility. </p>
+        </div>
+        <h2 class="SVheading2"><a name="Overview_tab"></a>Using the SV Core Management Console</h2>
+        <p class="SVnormal">The Management Console is started from a shortcut in the <span class="mc-variable OEM.ProductName variable">PcVue</span> program group in the Start menu.  The following screenshot shows the Management Console in its default configuration. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/mgmt_console_overview.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <p class="SVnormal">The <u>Overview</u> tab collects together the main configuration settings in a read only format and provides tools to start and stop the service manually.  Most of the settings do not need to be changed for default operation as a service. The settings are grouped as follows.</p>
+        <ul style="list-style-type: disc;">
+            <li>Service - Settings applicable to the SV Core Daemon service.<ul style="list-style-type: disc;"><li>Startup type - The startup as configured in the Service Properties tab. The default of Manual means a user has to start the service.</li><li>Log on as - The Service Account used to run the service. Configured in the User Accounts tab.</li><li>Start, Stop and Restart buttons - Tools for the user to manually start the service.</li></ul></li>
+            <li>Other setting<ul style="list-style-type: disc;"><li>Startup arguments for the Sv32 application - Configured in the General Properties tab. The syntax is described in the <a href="Command_Line_Arguments.htm">Command Line Arguments</a> topic. Only arguments that do not require input by the user can be used.</li><li>User account specified to run the DCOM application - The User Account used for DCOM.</li></ul></li>
+            <li>Mode to run SV core - Set to <u>Desktop Application</u> by default, can be changed to <u>Service Application</u> to run <span class="mc-variable OEM.ProductName variable">PcVue</span> as a service.</li>
+            <li>Processes - Information about <span class="mc-variable OEM.ProductName variable">PcVue</span> running processes. The Session Id is 0 when running as a service and non-zero when running as a desktop application. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t2"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/Deployment/processes1.png" MadCap:targetName="t2" style="display: none;" /></li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">The SV Core Management Console also provides convenient access to several related Windows configuration tools.</p>
+        </div>
+        <h2 class="SVheading2"><a name="General_Properties_tab"></a>General Properties tab </h2>
+        <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sv-core"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+            <br />
+            <img src="../Resources/Images/Deployment/mgmt_general_tab.png" MadCap:targetName="sv-core" style="display: none;" />
+        </p>
+        <ul style="list-style-type: disc;">
+            <li>Startup arguments - Startup arguments for <span class="mc-variable OEM.ProductName variable">PcVue</span> core program Sv32.exe. The syntax is  described in the <a href="Command_Line_Arguments.htm">Command Line Arguments</a> topic. Only arguments that do not require input by the user can be used.</li>
+            <li>Upon process exit - Behavior if the Sv32.exe process terminates intentionally or unexpectedly.<ul style="list-style-type: disc;"><li>Disabled (no report)	- Process monitoring is disabled, and no reporting is performed.</li><li>Report the termination -	The failure will be noted in the Windows Event Log and also visible in the Log Monitor.</li><li>Stop the service	- The SV Core Daemon service will terminate gracefully. This is the default option.</li><li>Terminate the service (hard exit)	- The SV Core Daemon service will hard exit. This allows control to be handed back to the Service Control Manager and for a restart to be performed by it in preference. See the Recovery tab of the Service Control Manager.</li></ul></li>
+            <li>Maximum shutdown delay - The period that the SV Core Daemon waits while the Sv32.exe and HDS.exe processes attempt to shutdown gracefully. If the processes are still running after this period the SV Core Daemon will force their shutdown.</li>
+        </ul>
+        <h2 class="SVheading2"><a name="User_Accounts_tab"></a>User Accounts tab</h2>
+        <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sv-core-user"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+            <br />
+            <img src="../Resources/Images/Deployment/mgmt_accounts_tab.png" MadCap:targetName="sv-core-user" style="display: none;" />
+        </p>
+        <p class="SVnormal">Used to select the account which is used to run <span class="mc-variable OEM.ProductName variable">PcVue</span> SV Core Daemon service and the DCOM application - Defaults to <u>Local Service</u>. It is mandatory to use the same account for both.</p>
+        <h2 class="SVheading2"><a name="Service_Properties_tab"></a>Service Properties tab</h2>
+        <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sv-core-service"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+            <br />
+            <img src="../Resources/Images/Deployment/mgmt_service_tab.png" MadCap:targetName="sv-core-service" style="display: none;" />
+        </p>
+        <p class="SVnormal">Used to configure the startup of <span class="mc-variable OEM.ProductName variable">PcVue</span> SV Core Daemon and to select any dependent services.</p>
+        <p class="SVnormal">The startup type can be selected from:</p>
+        <ul style="list-style-type: disc;">
+            <li>Automatic - The service starts automatically during the startup of the operating system.</li>
+            <li>Automatic (delayed startup) - The Service Control Manager starts services that are configured for delayed automatic start after all of the automatic-start services have finished starting.
+On some older computers, it may get necessary to delay the loading of a specific Windows service for the computer to boot properly. At other times, you may want to be sure that a particular Service has started, and is available for troubleshooting purposes, before the other Service is started. This is where the Automatic (delayed start) option can help.</li>
+            <li>Manual - The service must be started manually.</li>
+            <li>Disabled - The service is disabled (cannot be started). Can be used to reduce the risk of malicious use if <span class="mc-variable OEM.ProductName variable">PcVue</span> is installed but not in use.</li>
+        </ul>
+        <p class="SVnormal">A dependent service is one that must already be running before <span class="mc-variable OEM.ProductName variable">PcVue</span> SV Core Daemon can start. The installed services are displayed in a drop down list box from where they can be selected and added to the list.</p>
+        <div class="warning">
+            <p class="SVnormal">In particular, you will want to configure the following dependencies to make sure they are started in due time:</p>
+            <ul>
+                <li> If you use a local SQL Server instance with the HDS, the SQL Server service must be included as a dependency.</li>
+                <li>If you use Sql connections to connect to 3<sup>rd</sup> party DBMS, the SV DbConnect service should be included as a dependency.</li>
+            </ul>
+        </div>
+        <h2 class="SVheading2"><a name="DCOM_Applications_tab"></a>DCOM applications tab</h2>
+        <p class="SVnormal"><a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="sv-core-dcom"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a>
+            <br />
+            <img src="../Resources/Images/Deployment/mgmt_dcom_tab.png" MadCap:targetName="sv-core-dcom" style="display: none;" />
+        </p>
+        <p class="SVnormal">The <u>DCOM applications</u> tab displays current DCOM settings for the 3 COM applications included in <span class="mc-variable OEM.ProductName variable">PcVue</span>.</p>
+        <div class="note">
+            <p class="SVnormal">DCOM settings for SV Application and SV Historical Data Server are important only if running <span class="mc-variable OEM.ProductName variable">PcVue</span> as a desktop application. They do not apply when running it as a Windows service.</p>
+            <p class="SVnormal">DCOM settings for SV Services are important only if running <span class="mc-variable OEM.ProductName variable">PcVue</span> as a Windows service. They do not apply when running it as a desktop application.</p>
+        </div>
+        <p class="SVnormal">DCOM settings cannot be modified directly from within the SV Core Management Console. Click on the Component Services link to access the system DCOM Config.</p>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:conditions="" MadCap:tocPath="Reference topics" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ScadaBasic.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Transitions on Variables</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+        <meta name="MS-HAID" content="CondOfVars_Ref" />
+    </head>
+    <body>
+        <h1 class="SVheading1"><a name="kanchor247"></a>Transitions on Variables</h1>
+        <p class="SVnormal">
+            <object classid="clsid:ADB880A6-D8FF-11CF-9377-00AA003B7A11" type="application/x-oleobject" id="mc395">
+                <param name="Command" value="ALink,MENU" />
+                <param name="Item1" value="" />
+                <param name="Item2" value="EVENT_Instruct" />
+                <param name="Item3" value="VARIABLE_Instruct" />
+                <param name="Item4" value="VariablesTree_Concept" />
+            </object><a class="MCConceptLink_applies_0" href="javascript:mc395.Click()"><img src="../../SkinSupport/ConceptLink.gif" style="border: none;margin-right: 5px;" alt="Concept Link Icon" />Applies to</a>
+        </p>
+        <p class="SVnormal">This topic lists the available transitions for each type 
+ of variable.</p>
+        <h2 class="SVheading2">Bit or Alarm Variables</h2>
+        <p class="SVnormal">The expression for bit and alarm variables may contain 
+ a number of transitions under which the event may be triggered. The syntax 
+ used is as follows:</p>
+        <p class="SVnormal" style="margin-left: 40px;">State<span style="vertical-align: sub;font-size: 6pt;">1</span> 
+ &gt; State<span style="vertical-align: sub;font-size: 6pt;">2</span>, 
+ State<span style="vertical-align: sub;font-size: 6pt;">3</span> &gt; 
+ State<span style="vertical-align: sub;font-size: 6pt;">4</span>, .....State<span style="vertical-align: sub;font-size: 6pt;">N-1</span> &gt; State<span style="vertical-align: sub;font-size: 6pt;">N</span></p>
+        <p class="SVnormal">where 'State<span style="vertical-align: sub;font-size: 6pt;">N-1</span> 
+ &gt; State<span style="vertical-align: sub;font-size: 6pt;">N</span>' 
+ defines a transition from one state to another.</p>
+        <p class="SVnormal">For bits, the states available are:</p>
+        <table wrapperparagraphselector="P" style="width: 642px;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="642">
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">State</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">&#160;0</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">false</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">&#160;1</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">true</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">&#160;S</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">significant (valid)</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">NS</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">non-significant (invalid)</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">ALL</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">any State</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">For example,: ALL&gt;NS, ALL&gt;1.</p>
+        <p class="SVnormal">For alarms, the available states are:</p>
+        <table wrapperparagraphselector="P" style="width: 642px;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="642">
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">State</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">S</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">significant (valid)</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">NS</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">non-significant (invalid)</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">ALL</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">any state</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">ACKON</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">on and acknowledged</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">ACKOFF</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">off</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">NOACKON</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">on and not acknowledged</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">NOACKOFF</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">off and not acknowledged</p>
+                </td>
+            </tr>
+        </table>
+        <p class="SVnormal">For example,: ACKON&gt;ALL, ACKOFF&gt;ALL.</p>
+        <h2 class="SVheading2">Text Variables</h2>
+        <p class="SVnormal">The expression for a text variable may contain only one 
+ transition.</p>
+        <table wrapperparagraphselector="P" style="width: 642px;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="642">
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Transition</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">ALL&gt;S</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Transition from any state to a significant (Valid) value.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">NS &gt; S</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Transition from a non-significant (Invalid) value to a 
+ significant value.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">S &gt; S</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">All changes of significant value.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">S&gt;ALL</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Transition from a significant (Valid) value to any other 
+ state.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">S &gt; NS</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Transition from a significant value to non-significant 
+ (Invalid).</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">= <span style="font-style: italic;">string</span></p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Equal to the given string.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">&gt; <span style="font-style: italic;">string</span></p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The ASCII value of the text variable is greater than that 
+ of <span style="font-style: italic;">string</span>.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">&lt; <span style="font-style: italic;">string</span></p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The ASCII value of the text variable is less than that 
+ of <span style="font-style: italic;">string</span>.</p>
+                </td>
+            </tr>
+        </table>
+        <h2 class="SVheading2">Register Variables</h2>
+        <p class="SVnormal">The expression for a register variable may contain only 
+ one transition.</p>
+        <table wrapperparagraphselector="P" style="width: 642px;margin-top: 14pt;border-spacing: 0px;border-spacing: 0px;" cellspacing="0" width="642">
+            <tr>
+                <td valign="top">
+                    <p class="SVtableHeading">Transition</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtableHeading">Meaning</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">ALL&gt;S</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Transition from any state to a significant (Valid) value.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">NS &gt; S</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Transition from a non-significant (Invalid) value to a 
+ significant value.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">S &gt; S</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">All changes of significant value.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">S&gt;ALL</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Transition from a significant (Valid) value to any other 
+ state.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">S &gt; NS</p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Transition from a significant value to non-significant 
+ (Invalid).</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">= <span style="font-style: italic;">value</span></p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">Equal to "value".</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">+ <span style="font-style: italic;">value</span></p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The variable increases by an amount equal or greater than 
+ <span style="font-style: italic;">value</span>.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">- <span style="font-style: italic;">value</span></p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The variable decreases by an amount equal or greater than 
+ <span style="font-style: italic;">value</span>.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">&gt; <span style="font-style: italic;">value</span></p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The variable is greater than <span style="font-style: italic;">value</span>.</p>
+                </td>
+            </tr>
+            <tr>
+                <td valign="top">
+                    <p class="SVtable">&lt; <span style="font-style: italic;">value</span></p>
+                </td>
+                <td valign="top">
+                    <p class="SVtable">The variable is less than <span style="font-style: italic;">value</span>.</p>
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

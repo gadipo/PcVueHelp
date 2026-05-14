@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Deployment|Deploying desktop applications|Deploying PcVue on a RDS host|Why use Central Project Management when deploying PcVue using a RDS host?" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Why use Central Project Management when deploying PcVue using a RDS host?</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Why Use Central Project Management When Deploying <span class="mc-variable OEM.ProductName variable">PcVue</span> Using a RDS Host?</h1>
+        <p class="SVnormal">The following text explains why the use of Central Project Management is essential when deploying <span class="mc-variable OEM.ProductName variable">PcVue</span> on a RDS Host and using the recommended option <u>Use a different working folder for all Remote Desktop Sessions</u> in the station configuration.</p>
+        <h2 class="SVheading2">With Central Project Management</h2>
+        <p class="SVnormal">If Central Project Management is used one of the command line arguments -r, -x or -d is added to the command line that starts <span class="mc-variable OEM.ProductName variable">PcVue</span>. The command line argument controls the behavior at startup.</p>
+        <ul>
+            <li>The -r command line argument causes the Reference versions (REF) of the project and libraries to be automatically loaded. </li>
+            <li>The -x and -d command line arguments cause a dialog to be displayed at startup from where you can select the version before starting.</li>
+        </ul>
+        <p class="SVnormal">In either case the project folder specific to the station, the common library, and the shared libraries are automatically updated with the selected version of the project before <span class="mc-variable OEM.ProductName variable">PcVue</span> starts.</p>
+        <ul style="list-style-type: disc;">
+            <li>Project folder - USR\WTS\&lt;ProjectName&gt;_&lt;StationName&gt;</li>
+            <li>Common library - WTS_LIBS\&lt;ProjectName&gt;_&lt;StationName&gt;\BMP, PRG, SYM, WIN, WTP &amp; TEMPLATES</li>
+            <li>Shared libraries - WTS_LIBS\&lt;ProjectName&gt;_&lt;StationName&gt;\LIB</li>
+        </ul>
+        <h2 class="SVheading2">Without Central Project Management</h2>
+        <p class="SVnormal">If you do not use Central Project Management then the project folders and files, and library folders and files, must be manually copied from the base project folder to the project folders specific to each station. As there is nothing to indicate which folders are in use this can only be done safely with all instances of <span class="mc-variable OEM.ProductName variable">PcVue</span> shut down. Moreover, this must be repeated after any modifications to the project or libraries.</p>
+        <h2 class="SVheading2">Conclusion</h2>
+        <p class="SVnormal">Without using Central Project Management:</p>
+        <ul>
+            <li>It is necessary to duplicate the project for every instance of networking station. </li>
+            <li>It is necessary to duplicate the project before startup of the individual clients. 
+</li>
+            <li>It is necessary to duplicate the project after every modification.</li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">Using Central Version Management should be considered essential to avoid errors managing the project in this environment.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

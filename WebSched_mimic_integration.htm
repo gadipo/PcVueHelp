@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Web and mobile client applications|WebScheduler" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../" MadCap:HelpSystemFileName="SV.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" />
+        <link href="../SkinSupport/Slideshow.css" rel="stylesheet" type="text/css" MadCap:generated="True" />
+        <link href="../SkinSupport/MadCap.css" rel="stylesheet" type="text/css" MadCap:generated="True" /><title>Integrating the Web Scheduler in a mimic</title>
+        <link href="../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffects.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapEffectsMenu.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Integrating the Web Scheduler in a Mimic</h1>
+        <p class="SVnormal">The WebScheduler can be displayed in a mimic by inserting a Web Browser ActiveX into the mimic and setting the browser Url to the WebScheduler using a VBA script. You can set the Url by using the Navigate2 method. <a href="javascript:void(0);" onclick="FMCToggler( this ); return false;" class="MCToggler_0" MadCap:targets="t1"><img style="border: none;margin-right: 5px;" src="../SkinSupport/toggle_closed.gif" MadCap:altsrc="../SkinSupport/toggle_open.gif" onload="if ( typeof( FMCPreloadImage ) == 'function' ) { FMCPreloadImage( '../SkinSupport/toggle_open.gif' ); }" alt="Closed" MadCap:alt2="Open" class="MCTogglerIcon" />Show picture</a><br /><img src="../Resources/Images/WebApps/websched_sched_mimic.png" MadCap:targetName="t1" style="display: none;" /></p>
+        <p class="SVnormal">For information on how to insert an ActiveX into a mimic see the topic Using an ActiveX Control in a Mimic.</p>
+        <div class="note">
+            <p class="SVnormal">The WebScheduler may have minor differences in look and feel when displayed in an ActiveX and manipulated programmatically.</p>
+        </div>
+        <h2 class="SVheading2">WebScheduler Url shortcuts</h2>
+        <p class="SVnormal">The following Url shortcuts have been provided  to directly access individual pages of the WebScheduler. Some modes also require a parameter, or parameters, appended to the mode. When accessing the WebScheduler in this manner the User Rights (permissions) of the user are still taken into account.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 200px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Mode</td>
+                    <td class="SVtableHeading">For access to</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">default</td>
+                    <td class="SVtable">The Overview page.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">schedulescollection</td>
+                    <td class="SVtable">The Schedules Collection page. Similar to the Overview but just displaying the schedules.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">specialdayscollection</td>
+                    <td class="SVtable">The Special Days Collection page. Similar to the Overview but just displaying the special days.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">specialdays</td>
+                    <td class="SVtable">A Special Days. The name of the Special Days must be supplied as parameter 'id'.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">singleviewcalendar</td>
+                    <td class="SVtable">A Calendar.  The name of the schedule must be supplied as parameter 'id'.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">singleviewstandardweek</td>
+                    <td class="SVtable">A Standard Week.  The name of the schedule must be supplied as parameter 'id'.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">singleviewspecialdays</td>
+                    <td class="SVtable">A Special Days Behavior.  The name of the schedule must be supplied as parameter 'id'.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">singlevieweffectiveperiod</td>
+                    <td class="SVtable">An Effective Period.  The name of the schedule must be supplied as parameter 'id'.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">multiviewcalendar</td>
+                    <td class="SVtable">Several Calendars in multi view mode. The names of the schedules must be supplied as parameters named 'id'.</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">multiviewstandardweek</td>
+                    <td class="SVtable">Several Standard Weeks in multi view mode. The names of the schedules must be supplied as parameters named 'id'.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Url examples</h2>
+        <ul style="list-style-type: disc;">
+            <li>Display the Overview page.<br />https://&lt;hostname or IP&gt;/WebScheduler/?mode=default</li>
+            <li>Display the calendar of the Heating Profile schedule<br />https://&lt;hostname or IP&gt;/WebScheduler/?mode=singleviewcalendar&amp;id=Heating%20profile</li>
+            <li>Display the calendar for both the Heating Profile and Lighting schedules in multiview<br />https://&lt;hostname or IP&gt;/WebScheduler/?mode=multiviewcalendar&amp;id=Heating%20profile&amp;id=Lighting</li>
+        </ul>
+        <div class="note">
+            <p class="SVnormal">Depending on the ActiveX used, special characters the Url may have to be replaced by a % sign followed by the ASCII code of the character. For example, a space is replaced with "%20".</p>
+        </div>
+        <h2 class="SVheading2">Using the WebScheduler without manually logging in</h2>
+        <p class="SVnormal">You must log in to the WebScheduler before you can use it. However, this may not always be convenient or even required when using it from within a mimic as it is likely that the User has already logged into <span class="mc-variable OEM.ProductName variable">PcVue</span>. To avoid the User having to log in to the scheduler each time, you can use the <u>Remember me on this machine</u> option on the Login page the first time that the WebScheduler is opened. See the <a href="WebSched_page_login.htm">Login page</a> topic. Subsequently, the User will be able to navigate directly to the required page  without having to log in first.</p>
+        <div class="warning">
+            <p class="SVnormal">No distinction of user rights is possible when using this option.</p>
+        </div>
+        <script type="text/javascript" src="../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

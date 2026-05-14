@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|The Expression Engine" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Expression functions for referencing an Excel file</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Expression functions for Referencing an Excel File</h1>
+        <p class="SVnormal">The expression engine is able to access the cells of an Excel spreadsheet using the following syntax. To use a spreadsheet in this manner a File Reference must be configured in the Application Explorer. The File Reference configures how the file is managed and specifies the alias <u>Name</u>,  which is used to reference the spreadsheet in an expression.</p>
+        <p class="SVnormal">The supported Excel file formats are Xls, Xlsx, Xlsm. Cells are accessed using their numerical address. Addresses such as A1 and A1:E5 are not supported. The cell index is 1 based.</p>
+        <div class="tip">
+            <p class="SVnormal">It is recommended to enclose text values with quotation marks, and it is mandatory for the expression to work as expected if the value contains a special character such as a space, a comma or a quotation mark. For example: StrRemove('ab,cdefgh', 3, 2).</p>
+        </div>
+        <h2 class="SVheading2">Functions</h2>
+        <p class="SVnormal">See  section below for a detailed explanation of the parameters.</p>
+        <div class="note">
+            <p class="SVnormal">If the optional parameters oNullData, szSeparator or svHSeparator are not specified the defaults from the File Reference are used.</p>
+        </div>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 300px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Function and syntax</td>
+                    <td class="SVtableHeading">Operation</td>
+                </tr>
+                <tr>
+                    <td>ExcelGetCell(szReference, szSheetname, iRow, iCol[, oNullData])</td>
+                    <td>Return the contents of the specified cell.</td>
+                </tr>
+                <tr>
+                    <td>ExcelHTextJoin(szReference, szSheetname, iRow[, iFirstCol, iLastCol, szSeparator, oNullData, szEnclosureChar])</td>
+                    <td>Return a string containing the contents of a row cells. If the cell values include characters normally used as cell separators, the szEnclosureChar parameter can be used to enclose the cell values. If iFirstCol is not set or set to zero, the join starts at the first column. If the iLastCol is not set or set to zero, the join ends at the  last cell containing a value.</td>
+                </tr>
+                <tr>
+                    <td>ExcelVTextJoin(szReference, szSheetname, iCol[, iFirstRow, iLastRow, szSeparator, oNullData, szEnclosureChar])</td>
+                    <td>Return a string containing the contents of a column of cells. If the cell values include characters normally used as cell separators, the szEnclosureChar parameter can be used to enclose the cell values.  If iFirstRow is not set or set to zero, the join starts at the first row. If the iLastRow is not set or set to zero, the join ends at the  last cell containing a value.</td>
+                </tr>
+                <tr>
+                    <td>ExcelTextJoin(szReference, szSheetname, iFirstRow, iFirstCol, iLastRow, iLastCol[, szHSeparator, szVSeparator, bVertical, oNullData, szEnclosureChar])</td>
+                    <td>Return a string containing the contents of an area of cells. If the cell values include characters normally used as cell separators, the szEnclosureChar parameter can be used to enclose the cell values.</td>
+                </tr>
+                <tr>
+                    <td>ExcelHLookup(szReference, szSheetname, iHLookupIndex, szHLookupValue, iHValueIndex[, iOptimise, oNullData])</td>
+                    <td>Search a given row of an array and returns the value of the indicated cell. If iOptimise is set to 0 or not specified, there is no optimization. If iOptimise is set to 1 then column optimization is used (the column retains the same value).</td>
+                </tr>
+                <tr>
+                    <td>ExcelVLookup(szReference, szSheetname, iVLookupIndex, szVLookupValue, iVValueIndex[, iOptimise, oNullData])</td>
+                    <td>Search a given column of an array and returns the value of the indicated cell.  If iOptimise is set to 0 or not specified, there is no optimization. If iOptimise is set to 1 then row optimization is used (the row retains the same value).</td>
+                </tr>
+                <tr>
+                    <td>ExcelLookup(szReference, szSheetname,  iHLookupIndex, szHLookupValue,  iVLookupIndex, szVLookupValue[, iOptimise, oNullData])</td>
+                    <td>Return the contents of a cell from an array by searching for a key value in a row and column.   If iOptimise is set to 0 or not specified, there is no optimization. If iOptimise is set to 1 then row optimization is used (the row retains the same value). If iOptimise is set to 2 then column optimization is used (the column retains the same value).</td>
+                </tr>
+                <tr>
+                    <td>ExcelHMatch(szReference, szSheetname,  iHLookupIndex, szHLookupValue)</td>
+                    <td>Look up a value in a row and returns the cell index or 0 if no match.</td>
+                </tr>
+                <tr>
+                    <td>ExcelVMatch(szReference, szSheetname,  iVLookupIndex, szVLookupValue)</td>
+                    <td>Look up a value in a column and returns the cell index or 0 if no match.</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Parameters</h2>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 150px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top;">bVertical</td>
+                    <td style="vertical-align: top;">
+                        <p>Area scan type.</p>
+                        <p> 0 or not specified = horizontal scan.<br />1 = vertical scan.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">iCol</td>
+                    <td style="vertical-align: top;">Index of column to retrieve.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">iFirstCol</td>
+                    <td style="vertical-align: top;">Index of the first column to retrieve.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">iFirstRow</td>
+                    <td style="vertical-align: top;">Index of the first row to retrieve.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">iHLookupIndex</td>
+                    <td style="vertical-align: top;">Index of the row to search.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">iHValueIndex</td>
+                    <td style="vertical-align: top;">Index of the row for which the corresponding value is to be returned.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">iLastCol</td>
+                    <td style="vertical-align: top;">Index of the last column to retrieve.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">iLastRow</td>
+                    <td style="vertical-align: top;">Index of the last row to retrieve.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">iOptimise</td>
+                    <td style="vertical-align: top;">Search optimization.<br />0 or not specified = no optimization.<br />1 = column optimization (the col retains the same value).</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">iRow</td>
+                    <td style="vertical-align: top;">Index of the line to retrieve.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">iVLookupIndex</td>
+                    <td style="vertical-align: top;">Index of the row / column to search.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">iVValueIndex</td>
+                    <td style="vertical-align: top;">Index of the column for which the value is to be returned.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">oNullData</td>
+                    <td style="vertical-align: top;">Optional parameter containing the value to return if a cell is empty. If not specified, and a cell is empty, the characters from the <u>Default substitution characters for empty cells</u> property in the File Reference are used.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">szEnclosureChar</td>
+                    <td style="vertical-align: top;">The character used to enclose cells’ values in the return string.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">szHLookupValue</td>
+                    <td style="vertical-align: top;">The value to search for.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">svHSeparator</td>
+                    <td style="vertical-align: top;">Cell separator. If not specified the character from <u>Default row separator</u> property in the File Reference is used.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">szReference</td>
+                    <td style="vertical-align: top;">Identifier (name) of the file.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">szSeparator</td>
+                    <td style="vertical-align: top;">Cell separator. If not specified the character from <u>Default column separator</u> property in the File Reference is used.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">szSheetName</td>
+                    <td style="vertical-align: top;">The sheet name.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">szVLookupValue</td>
+                    <td style="vertical-align: top;">The value to search for.</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">szVSeparator</td>
+                    <td style="vertical-align: top;">0, 'NULL', '\''</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2 class="SVheading2">Excel File Referencing Examples</h2>
+        <p class="SVnormal">The following table represents the Excel sheet used in the examples.</p>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;">
+            <col style="width: 50px;" />
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <col style="width: 80px;" />
+            <tbody>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">1</td>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">2</td>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">3</td>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">4</td>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">5</td>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">6</td>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">7</td>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">8</td>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">9</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">1</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">2</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">3</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Property01</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Property02</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Property03</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Property04</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Property05</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Property06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">4</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Var01</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V01-P01</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V01-P02</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V01-P03</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V01-P04</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V01-P05</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V01-P06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">5</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Var02</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V02-P01</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V02-P02</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V02-P03</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V02-P04</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V02-P05</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V02-P06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">6</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Var03</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V03-P01</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V03-P02</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V03-P03</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V03-P04</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V03-P05</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V03-P06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">7</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Var04</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V04-P01</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V04-P02</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V04-P03</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V04-P04</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V04-P05</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V04-P06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">8</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Var05</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V05-P01</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V05-P02</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V05-P03</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V05-P04</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V05-P05</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V05-P06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">9</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Var06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V06-P01</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V06-P02</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V06-P03</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V06-P04</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V06-P05</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V06-P06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">10</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Var07</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V07-P01</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V07-P02</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V07-P03</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V07-P04</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V07-P05</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V07-P06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">11</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Var08</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V08-P01</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V08-P02</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V08-P03</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V08-P04</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V08-P05</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V08-P06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">12</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Var09</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V09-P01</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V09-P02</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V09-P03</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V09-P04</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V09-P05</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V09-P06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">13</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="background-color: #dcdcdc;font-weight: normal;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">Var10</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V10-P01</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V10-P02</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V10-P03</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V10-P04</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V10-P05</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">V10-P06</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">14</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+                <tr>
+                    <td class="SVtable" style="text-align: center;background-color: #dcdcdc;border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">15</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                    <td class="SVtable" style="border-left-style: solid;border-left-width: 1px;border-right-style: solid;border-right-width: 1px;border-top-style: solid;border-top-width: 1px;border-bottom-style: solid;border-bottom-width: 1px;">&#160;</td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="border-collapse: collapse;margin-left: 0;margin-right: auto;width: 100%;">
+            <col style="width: 500px;" />
+            <col />
+            <tbody>
+                <tr>
+                    <td class="SVtableHeading">Expression</td>
+                    <td class="SVtableHeading">Result</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">=ExcelGetCell('FileRef01', 'Sheet1', 7, 3)</td>
+                    <td class="SVtable">V04-P01</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">=ExcelHTextJoin('FileRef01', 'Sheet1', 4)</td>
+                    <td class="SVtable">NULL:Var01:V01-P01:V01-P02:V01-P03:V01-P04:V01-P05:V01-P06</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">=ExcelVTextJoin('FileRef01', 'Sheet1', 2, 4)</td>
+                    <td class="SVtable">Var01:Var02:Var03:Var04:Var05:Var06:Var07:Var08:Var09:Var10</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">=ExcelTextJoin('FileRef01', 'Sheet1', 4, 3, 6, 5, ':', '\\', 0, 'NULL', '\'')</td>
+                    <td class="SVtable">'V01-P01':'V01-P02':'V01-P03'\'V02-P01':'V02-P02':'V02-P03'\'V03-P01':'V03-P02':'V03-P03'</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">=ExcelHLookup('FileRef01', 'Sheet1', 3, 'Property02', 8)</td>
+                    <td class="SVtable">V05-P02</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">=ExcelVLookup('FileRef01', 'Sheet1', 2, 'Var03', 4)</td>
+                    <td class="SVtable">V03-P02</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">=ExcelLookup('FileRef01', 'Sheet1', 3, 'Property02', 2, 'Var04', 1)</td>
+                    <td class="SVtable">V04-P02</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">=ExcelHMatch('FileRef01', 'Sheet1', 3, 'Property02')</td>
+                    <td class="SVtable">4</td>
+                </tr>
+                <tr>
+                    <td class="SVtable">=ExcelVmatch('FileRef01', 'Sheet1', 2, 'Var03')</td>
+                    <td class="SVtable">6</td>
+                </tr>
+            </tbody>
+        </table>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>

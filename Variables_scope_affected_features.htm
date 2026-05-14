@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" MadCap:tocPath="Variables|The Variables Tree|Overview" MadCap:InPreviewMode="false" MadCap:PreloadImages="false" MadCap:RuntimeFileType="Topic" MadCap:TargetType="HtmlHelp" MadCap:PathToHelpSystem="../../" MadCap:HelpSystemFileName="SV_ApplicationExplorer.xml" MadCap:SearchType="Stem">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=Windows-1252" /><title>Configuration items affected by scope</title>
+        <link href="../../Resources/Stylesheets/Sv-PcVue.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="../../SkinSupport/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapGlobal.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapSlideshow.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapMerging.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapAliasFile.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapUtilities.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBody.js">
+        </script>
+        <script type="text/javascript" src="../../SkinSupport/MadCapHighlighter.js">
+        </script>
+    </head>
+    <body>
+        <h1 class="SVheading1">Configuration Items Affected by Scope</h1>
+        <p class="SVnormal">The majority of configuration items affected by scope are either variables, or associated with variables. Some have a <u>Scope</u> property, others inherit the scope from the variable with which they are associated.</p>
+        <h2 class="SVheading2">Variables</h2>
+        <p class="SVnormal">The scope of both variables is defined by its <u>Scope</u> property. The scope affects how a variable's value, timestamp and quality (VTQ) are distributed.</p>
+        <ul style="list-style-type: disc;">
+            <li>If the scope is Shared, then the VTQ will be the same for all sessions opened on that station and it is distributed across stations according to the variable's server and client lists.</li>
+            <li>If the scope is Local Station, then the VTQ exists on each running station and is managed locally. The VTQ will be the same for all sessions opened on a given station, and the same variable may have another VTQ on another station.</li>
+            <li>If the scope is Session Context, then the VTQ exists inside a Session. The VTQ will be different in different sessions on a given station.</li>
+            <li>If the scope is Client Context, then the VTQ exists inside a Client Context. The VTQ will be different in different client contexts, even if attached to the same session.</li>
+        </ul>
+        <p class="SVnormal">Variables support all four scopes. HMI variables cannot be distributed across stations, they only support Session Context, Client Context and Local Station scopes.</p>
+        <p class="SVnormal"> For information about how scope affects other variable properties and behaviors, see the topic <a href="Variables_properties_common.htm">Properties common to all variable types</a>.</p>
+        <h2 class="SVheading2">Alarm synthesis</h2>
+        <p class="SVnormal">The scope of an alarm synthesis is automatically defined using the following rule:</p>
+        <ul style="list-style-type: disc;">
+            <li>If the property <u>Take the applied population into account</u> is ticked, then the scope is set to Session Context because the currently applied population can be different from one session to the other.</li>
+            <li>If one or more alarms in the synthesis are of scope Session Context, then the scope is set to Session Context.</li>
+            <li>Else, the scope is set to Shared.</li>
+        </ul>
+        <p class="SVnormal">The scope of all result variables are inherited from the alarm syntheses.</p>
+        <p class="SVnormal">If a population is modified in a session then alarm syntheses with the scope Session Context automatically take this into account.</p>
+        <h2 class="SVheading2">Events</h2>
+        <p class="SVnormal">The scope of an event is inherited from the triggering variable.</p>
+        <ul style="list-style-type: disc;">
+            <li>If the scope of the triggering variable is Shared, then the event triggers an action in all sessions of all stations defined in server list of the variable on which it is triggered.</li>
+            <li>If the scope of the triggering variable is Local Station, then the event triggers an action in all sessions of the station where the condition is true.</li>
+            <li>If the scope of the triggering variable is Session Context, then the event triggers an action only inside the session handling the event, on the station handling the session.</li>
+            <li>If the scope of the triggering variable is Client Context, then the event triggers an action only inside the client context handling the event, on the station handling the session corresponding to the client context.</li>
+        </ul>
+        <p class="SVnormal">The scope of an event action created by SCADA Basic is inherited from the execution context.</p>
+        <p class="SVnormal">It is not possible to delete a session context or client context event from a different session.</p>
+        <h2 class="SVheading2">Cyclic actions</h2>
+        <p class="SVnormal">The scope a cyclic action created by configuration is defined by its <u>Scope</u> property.</p>
+        <p class="SVnormal">The scope of a cyclic action created by SCADA Basic is inherited from the execution context.</p>
+        <p class="SVnormal">It is not possible to delete a session context or client context cyclic from a different  session.</p>
+        <h2 class="SVheading2">SCADA Basic functions</h2>
+        <p class="SVnormal">The scope of a SCADA Basic function is inherited from the context it is called from. It can have Session Context, Client Context or Local Station context.</p>
+        <ul style="list-style-type: disc;">
+            <li>When a function is run from an animation, its context is inherited from the mimic context (Client Context or Local Station).</li>
+            <li>When a function is run from an event, its context is inherited from the scope of the variable from which the event is triggered.</li>
+            <li>When a function is run from a cyclic action, its context is inherited from the cyclic action scope.</li>
+            <li>When a function is run from the SCADA Basic program manager, Timetable or Function key, its context is Local Station.</li>
+        </ul>
+        <div class="warning">
+            <p class="SVnormal">Working variables declared in the SCADA Basic global program have a Local Station scope. Be careful using this type of variable with WebVue as the value will be the same for <span class="mc-variable OEM.ProductName variable">PcVue</span> station that is the web back end and all connected WebVue instances.</p>
+        </div>
+        <h2 class="SVheading2">Expressions on variable</h2>
+        <p class="SVnormal">The scope of an expression is inherited from the result variable. If one or more variables in an expression are of scope Session context or Client context, the scope of the result variable must match.</p>
+        <h2 class="SVheading2">Sql queries</h2>
+        <p class="SVnormal">The <u style="text-decoration: none;">scope</u> of a Sql query is used to control the distribution of the Sql query results across user sessions, allowing shared data to be processed in any user context and preventing user-specific data to be accessible to other user sessions.</p>
+        <p class="SVnormal">When using Sql variable mapping, the scope of the Sql query and the scope of the mapped variables must match. The scope of the Sql query also constrains the scope of variables that can be used as input parameters.</p>
+        <h2 class="SVheading2">Mimics</h2>
+        <p class="SVnormal">The scope of a mimic is always inherited. It can be either Client Context or Local Station.</p>
+        <ul style="list-style-type: disc;">
+            <li>When a mimic is opened from <span class="mc-variable OEM.ProductName variable">PcVue</span>, its context is Local Station.</li>
+            <li>When a mimic is opened from WebVue, its context is Client Context.</li>
+            <li>When a mimic is opened from another mimic, its context is the same as the one calling it.</li>
+            <li>When a mimic is open by SCADA Basic, its context is that of the calling SCADA Basic function.</li>
+        </ul>
+        <script type="text/javascript" src="../../SkinSupport/MadCapBodyEnd.js">
+        </script>
+    </body>
+</html>
